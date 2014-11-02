@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Sha1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/sha1.js"></script>
+        <style>
+            input { width:300px }
+        </style>
+        <script>
+            $(document).ready(function(){
+                $('#myButton').click(function(){
+                    
+                    var myInput = $('#myInput').val();
+                    var myHash = CryptoJS.SHA1(myInput);
+                    $('#myOutput').val(myHash);
+                    
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>Test</div>
+        <div>
+            Input: <input id="myInput">
+            <br>
+            Sha1: <input id="myOutput">
+            <br>
+            <button id="myButton">Generate hash</button>
+        </div>
+    </body>
+</html>

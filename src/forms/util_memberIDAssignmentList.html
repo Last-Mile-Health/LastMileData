@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>FHW Tool (MID) - Member ID Assignment List</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
+        <script src="/LastMileData/src/js/memberIDAssignmentList_v20140929.js"></script>
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            .memID { float:left; width:75px; margin-left:11px; margin-right:11px; margin-top:3px; margin-bottom:3px; }
+            
+            .dataManager {
+                background-color:yellow;
+                padding:5px;
+                margin-bottom:10px
+            }
+            
+            @media print {
+                .dataManager { display:none; }
+            }
+            
+            #listBody {
+                position:relative;
+                top:-10px;
+            }
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: PAGE 1 -->
+        <div class="page">
+            
+            
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
+                <span class="h2">FHW: Member ID Assignment List</span>
+                <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <div class="dataManager">
+                <div style="margin:5px">
+                    <b>Database manager instructions: fill out the five boxes below (Village ID/name, FHW ID/name, first member ID). Then, click the "Generate List" button to update the list. Hit CTRL+P to print.</b>
+                </div>
+                <div style="text-align:center">
+                    First member ID: <input style="text-align:center" id="memberID">
+                    <button id="generateMemIDs">Generate List</button>
+                </div>
+            </div>
+            
+            <div class="thickBox">
+                <div style="float:left; width:120px; margin:2px; margin-left:20px;">Village ID:</div>
+                <div style="float:left; width:200px; margin:2px"><input style="text-align:center" id="villageID"></div>
+                <div style="float:left; width:120px; margin:2px">FHW ID:</div>
+                <div style="float:left; width:200px; margin:2px"><input style="text-align:center"></div>
+                <div style="clear:both"></div>
+                <div style="float:left; width:120px; margin:2px; margin-left:20px;">Village Name:</div>
+                <div style="float:left; width:200px; margin:2px"><input style="text-align:center"></div>
+                <div style="float:left; width:120px; margin:2px">FHW Name:</div>
+                <div style="float:left; width:200px; margin:2px"><input style="text-align:center"></div>
+                <div style="clear:both"></div>
+                <hr>
+                <div>
+                    <b>Instructions: Use this list to assign member IDs to community members. Member IDs should be assigned: (1) during household registration, (2) to newborn babies, and (3) to anyone who moves in from another community. Each time you assign a member ID, use a pen to cross it off this list.</b>
+                </div>
+            </div>
+            <!-- END: FORM HEADER -->
+            
+            
+            
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="listBody">
+                
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                <div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div><div class="memID"></div>
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            
+            
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        
+        
+        <!-- START: "Done" Button -->
+        <div class="formButtons">
+            <button id="lmd_cancel" class="btn btn-success">Done</button>
+        </div>
+        <!-- END: "Done" Button -->
+        
+    </body>
+    
+</html>

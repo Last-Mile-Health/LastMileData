@@ -1,0 +1,12 @@
+# Note: this file should go in the same directory as the LastMileData folder
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^lastmiledata\.org$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.lastmiledata\.org$
+RewriteRule ^/?$ "http\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^lastmiledata\.org$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.lastmiledata\.org$
+RewriteRule ^offline$ "http\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_deqa\.html" [R=301,L]
+
+LimitRequestBody 0

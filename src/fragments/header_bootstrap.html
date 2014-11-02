@@ -1,0 +1,68 @@
+<!-- START: header / navigation bar -->
+<nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        
+        <div class="navbar-header">
+            <a class="navbar-brand pull-left" href="/LastMileData/src/pages/page_home.php"><img src="/LastMileData/res/logo_LMH_invert_v20140916.png" style="height:90%;"></a>
+            <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li id="page_home"><a href="/LastMileData/src/pages/page_home.php">Home</a></li>
+                <li id="page_dataportal"><a href="/LastMileData/src/pages/page_dataportal.php#overview">Data Portal</a></li>
+                <li id="page_medocs"><a href="/LastMileData/src/pages/page_medocs.php?folder=uploads">M&E Documents</a></li>
+                <li id="page_deqa"><a href="/LastMileData/src/pages/page_deqa.html">Data Entry / QA</a></li>
+                <!--<li id="page_ptr"><a href="/LastMileData/src/pages/page_ptr.php">Tools + Reports</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" data-toggle="modal" data-target="#modal_changePW">Change PW</a></li>
+                <li><a href="/LastMileData/src/php/logout.php">Logout</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<!-- END: header / navigation bar -->
+
+
+
+<!-- START: modal "Change PW" form -->
+<div id="modal_changePW" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h1 class="text-center">Change Password</h1>
+            </div>
+            <div class="modal-body">
+                <form class="form col-md-12 center-block">
+                    <h3 id="modal_text" class="text-center"></h3>
+                    <div class="form-group">
+                        <input id="pw_old" type="password" class="form-control input-lg" placeholder="Old password">
+                    </div>
+                    <div class="form-group">
+                        <input id="pw_new_1" type="password" class="form-control input-lg" placeholder="New password">
+                    </div>
+                    <div class="form-group">
+                        <input id="pw_new_2" type="password" class="form-control input-lg" placeholder="New password (confirm)">
+                    </div>
+                    <div class="form-group">
+                        <a id="submit_changePW" class="btn btn-success btn-lg btn-block">Submit</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12">
+                    <button id="cancelModal" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>        
+<!-- END: modal "Change PW" form -->

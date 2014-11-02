@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+    </head>
+    
+    <body>
+        <script>
+            $(document).ready(function(){
+                $('#myInput').change(function(){
+                    
+                    var input = $(this).val();
+                    
+                    // Allow only alphanumeric characters, hyphens, underscores, and spaces
+                    if (input.search(/^[A-Za-z0-9_-\s]+$/) == 0)
+                    {
+                        alert('valid: ' + input.search(/^[a-z0-9]+$/));
+                    }
+                    else
+                    {
+                        alert('invalid: ' + input.search(/^[a-z0-9]+$/));
+                    }
+                });
+            });
+        </script>
+    
+        <input id="myInput"></input>
+    </body>
+</html>

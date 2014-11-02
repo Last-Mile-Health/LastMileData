@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            #nav {
+                z-index: 10;
+                background-color: #2a2a2a;
+                color: white;
+                position: fixed;
+                height:40px;
+                width:1960px;
+                margin: 0 auto;
+                vertical-align:middle;
+                box-shadow: 0px 1px 10px #888888;
+            }
+            
+            body {
+                margin: 0;
+                background-color: #fafafa;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+            }
+            
+            .navlink {
+                z-index: 9;
+                width:100px;        /* fix this */
+                height:40px;
+                vertical-align:middle;
+                text-align:center;
+                float:left;
+                line-height:35px;
+            }
+            
+            .navicon {
+                width:80px;
+                height:40px;
+                float:left;
+                position:relative;
+                left:5px;
+            }
+            
+            .subnav {
+                display:none;
+                float:left;
+                background-color:#2a2a2a;
+                position:relative;
+                padding-left:5px;
+                padding-right:5px;
+                top:5px;
+                width:200px;        /* !!!!! make this automatic */
+                height:40px;
+                vertical-align:middle;
+                text-align:left;
+                line-height:35px;
+            }
+            
+            .navicon:hover {
+                cursor:pointer;
+            }
+            
+            .navlink:hover, .subnav:hover {
+                background-color: #3f3f3f;
+                cursor:pointer;
+            }
+            
+            .navlink:hover .subnav {
+                 display:block;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="nav">
+            <div class="navicon"><img src="/LastMileData/res/logo_LMH_invert_v20140916.png" style="height:90%;"></div>
+            <div class="navlink">Data</div>
+            <div class="navlink">Resources</div>
+            <div class="navlink">Data Entry &#x25BE;
+                <div class="subnav">FHW 1: Registration</div>
+                <div class="subnav">FHW 2: KPI Assessment</div>
+            </div>
+            <div class="navlink">Quality Assurance &#x25BE;
+                <div class="subnav">FHW 1: Registration</div>
+                <div class="subnav">FHW 2: KPI Assessment</div>
+            </div>
+        </div>
+        
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div style="width:100px; height:100px; background-color:red; text-align:center; vertical-align:middle; display: table-cell">You</div>
+        <div style="width:100px; height:100px; background-color:blue; text-align:center; vertical-align:middle; box-shadow: 3px 3px 5px #888888;">You</div>
+        <div style="width:100px; height:100px; background-color:red; text-align:center; vertical-align:middle; display: table-cell">You</div>
+        <div style="width:100px; height:100px; background-color:blue; text-align:center; vertical-align:middle; box-shadow: 3px 3px 5px #888888;">You</div>
+        <div style="width:100px; height:100px; background-color:blue; text-align:center; vertical-align:middle; box-shadow: 3px 3px 5px #888888;">You</div>
+        <div style="width:100px; height:100px; background-color:red; text-align:center; vertical-align:middle; display: table-cell">You</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+        <div>Hey</div><div>Hey</div><div>Hey</div><div>Hey</div>
+    </body>
+</html>

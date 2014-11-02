@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+
+<html>
+<!--<html manifest="/LastMileData/src/lastmiledata.appcache">-->
+    
+    <head>
+        
+        <title>FHW7 - Sick Child</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            .meBox { position:relative; top:-5px; }
+            
+            .supBox {
+                position:relative;
+                top:-10px;
+                border:2px solid black;
+                padding:5px;
+                margin-bottom:15px;
+                text-align:center;
+            }
+            
+            .supBox input[type='text'] {
+                width:60px;
+                margin-right:10px;
+            }
+            
+            .scTable td {
+                border: 1px solid black;
+                padding: 2px;
+                font-size:12px;
+                overflow:hidden;
+            }
+            
+            .scTable .NB {
+                border:none;
+            }
+            
+            .scTable .C1 { width:175px; max-width:175px; }
+            .scTable .C2 { width:175px; max-width:175px; }
+            .scTable .C3 { width:175px; max-width:175px; padding-left:5px; }
+            .scTable .C4 { width:175px; max-width:175px; padding-left:5px; }
+            .C12 { width:350px; max-width:350px; }
+            
+            .box1 { float:left; width:160px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
+            .box2 { float:left; width:470px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
+            .box3 { float:left; width:160px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
+            .box4 { float:left; width:470px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
+            .rightArrow { float:left; width:55px; padding:2px; }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: PAGE 1 -->
+        <div class="page">
+            
+            
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
+                <span class="h2">FHW 7: Sick Child</span>
+                <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <div class="thickBox">
+                
+                <div>
+                    <b>COMPLETE THIS FORM EVERY TIME YOU TREAT A SICK CHILD (0 - 5 YRS)</b>
+                </div>
+                
+                <hr>
+                
+                <div class="headField" style="width:1.2in">FHW ID:</div>
+                <div class="headField" style="width:2.5in"><input class="stored" id="id"></div>
+                <div class="headField" style="width:0.8in">Visit date:</div>
+                <div class="headField" style="width:2.4in"><input class="stored" id="id" style="width:1.0in"> (d/m/y)</div>
+                <div style="clear:both; height:3px;"></div>
+                
+                <div class="headField" style="width:1.2in">Child name:</div>
+                <div class="headField" style="width:2.5in"><input class="stored" id="id"></div>
+                <div class="headField" style="width:0.8in">Child age:</div>
+                <div class="headField" style="width:2.4in">
+                    <input class="stored" id="id" style="width:0.5in"> (years)&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="stored" id="id" style="width:0.5in"> (months)
+                </div>
+                <div style="clear:both; height:3px;"></div>
+                
+                <div class="headField" style="width:1.2in">Child member ID:</div>
+                <div class="headField" style="width:2.5in"><input class="stored" id="id"></div>
+                <div class="headField" style="width:0.8in">Source:</div>
+                <div class="headField" style="width:2.5in; font-size:10px">
+                    <div style="float:left; width:120px;"><input class="stored" id="id" type="checkbox">Parent came to me</div>
+                    <div style="float:left; width:120px;"><input class="stored" id="id" type="checkbox">Noticed child was sick</div>
+                    <br>
+                    <div style="float:left; width:120px;"><input class="stored" id="id" type="checkbox">Well child visit</div>
+                    <div style="float:left; width:120px;"><input class="stored" id="id" type="checkbox">Other</div>
+                </div>
+                <div style="clear:both"></div>
+                
+            </div>
+            <!-- END: FORM HEADER -->
+            
+            
+            
+            <!-- START: SECTION A -->
+            <b>A. Identify problems</b>
+            &nbsp;
+            <span class="blackBox">Look. Do not touch child.</span>
+            <div style="height:3px"></div>
+            <div>
+                
+                <table class="scTable">
+                    
+                    <!-- Row 01 -->
+                    <tr>
+                        <td colspan="2" class="NB"></td>
+                        <td style="text-align:center"><b>Danger signs</b></td>
+                        <td style="text-align:center"><b>Sick</b></td>
+                    </tr>
+                    
+                    <!-- Row 02 -->
+                    <td colspan="4" style="font-size:14px"><b>Ask about each symptom.</b></td>
+                    
+                    <tr>
+                        <!--<td style="width:90px">-->
+                        <td class="C1">
+                            <div style="float:left; width:70px">Cough?</div>
+                            <div style="float:left">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                        </td>
+                        <td class="C2">
+                            IF YES, how long?&nbsp;
+                            <input style="width:25px" type="text" class="stored" id="id">
+                            (days)
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Cough (21 days or more)
+                        </td>
+                        <td class="C4">
+                            <input type="checkbox" class="stored" id="id">Cough (less than 21 days)
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 03 -->
+                    <tr>
+                        <td class="C1">
+                            <div style="float:left; width:70px">Fever?</div>
+                            <div style="float:left">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                            <div style="clear:both"></div>
+                            <div><span class="blackBox">Do not take temp</span></div>
+                        </td>
+                        <td class="C2">
+                            IF YES, how long?&nbsp;
+                            <input style="width:25px" type="text" class="stored" id="id">
+                            (days)
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Fever (7 days or more)
+                        </td>
+                        <td class="C4">
+                            <input type="checkbox" class="stored" id="id">Fever (less than 7 days)
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 04 -->
+                    <tr>
+                        <td class="C1">
+                            <div style="float:left; width:70px">Diarrhea?</div>
+                            <div style="float:left">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                        </td>
+                        <td class="C2">
+                            IF YES, how long?&nbsp;
+                            <input style="width:25px" type="text" class="stored" id="id">
+                            (days)
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Diarrhea (14 days or more)
+                        </td>
+                        <td class="C4" rowspan="2">
+                            <input type="checkbox" class="stored" id="id">Diarrhea (less than 14 days)
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 05 -->
+                    <tr>
+                        <td class="C12" colspan="2">
+                            <div style="float:left; width:230px">IF YES, any blood in stool (poo poo)?</div>
+                            <div style="float:left">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Blood in stool
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 06 -->
+                    <tr>
+                        <td class="C12" colspan="2">
+                            <div style="float:left; width:230px">Convulsions (jerking) in the last month?</div>
+                            <div style="float:left">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Convulsions
+                        </td>
+                        <td></td>
+                    </tr>
+                    
+                    <!-- Row 07 -->
+                    <tr>
+                        <td class="C1">
+                            Problem drinking or feeding?&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td class="C2">
+                            IF YES, not able to drink or eat anything?&nbsp;
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Not able to drink or eat anything
+                        </td>
+                        <td></td>
+                    </tr>
+                    
+                    <!-- Row 08 -->
+                    <tr>
+                        <td class="C1">
+                            <div style="float:left; width:70px">Vomiting?</div>
+                            <div style="float:left">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                        </td>
+                        <td class="C2">
+                            IF YES, vomits everything?&nbsp;
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Vomits everything
+                        </td>
+                        <td></td>
+                    </tr>
+                    
+                    <!-- Row 09 -->
+                    <tr>
+                        <td colspan="4" style="font-size:14px"><b>Look.</b></td>
+                    </tr>
+                    
+                    <!-- Row 10 -->
+                    <tr>
+                        <td class="C12" colspan="2">
+                            Chest indrawing?&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Chest indrawing
+                        </td>
+                        <td></td>
+                    </tr>
+                    
+                    <!-- Row 11 -->
+                    <tr>
+                        <td class="C12" colspan="2">
+                            <span class="blackBox">Do not touch child</span><br>
+                            IF COUGH, count breaths in one minute:&nbsp;&nbsp;
+                            <input style="width:25px" type="text" class="stored" id="id">
+                            (BPM)<br>
+                            Check for fast breathing:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Above 50 BPM (age 2-11 months)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Above 40 BPM (age 1-5 years)<br>
+                            Fast breathing?&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                            &nbsp;&nbsp;&nbsp;&nbsp;IF YES, count breaths again<br>
+                            Second check: 
+                            <input style="width:25px" type="text" class="stored" id="id">
+                            (BPM)<br>
+                            Fast breathing on the second check?&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td></td>
+                        <td class="C4">
+                            <input type="checkbox" class="stored" id="id">Fast breathing
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 12 -->
+                    <tr>
+                        <td class="C12" colspan="2">
+                            <div style="float:left; width:180px">Very sleepy or unconscious?</div>
+                            <div style="float:left; width:100px">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Very sleepy or unconscious
+                        </td>
+                        <td></td>
+                    </tr>
+                    
+                    <!-- Row 13 -->
+                    <tr>
+                        <td colspan="4">
+                            <span class="blackBox">Do not perform MUAC</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 14 -->
+                    <tr>
+                        <td class="C12" colspan="2">
+                            <div style="float:left; width:180px">Swelling of both feet?</div>
+                            <div style="float:left; width:100px">
+                                <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                                <input type="checkbox" class="stored" id="id">No
+                            </div>
+                            <div style="clear:both"></div>
+                            <div><span class="blackBox">Look. Do not touch child.</span></div>
+                        </td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id">Swelling of both feet
+                        </td>
+                        <td></td>
+                    </tr>
+                    
+                    <!-- Row 15 -->
+                    <tr>
+                        <td class="C12 NB" colspan="2">
+                        </td>
+                        <td class="C3 NB" style="text-align:center">
+                            <img src="/LastMileData/res/arrow_down_v20140916.png">
+                        </td>
+                        <td class="C4 NB" style="text-align:center">
+                            <img src="/LastMileData/res/arrow_down_v20140916.png">
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 16 -->
+                    <tr>
+                        <td class="C12 NB" colspan="2"><b style="font-size:14px">B. Decision, REFER or TREAT</b></td>
+                        <td class="C3">
+                            <input type="checkbox" class="stored" id="id"> <b>REFER</b>. IF ANY danger signs, refer to facility (go to section C).
+                        </td>
+                        <td class="C4">
+                            <input type="checkbox" class="stored" id="id"> <b>TREAT</b>. IF NO danger signs, treat at home (go to section D).
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+                
+            </div>
+            <!-- END: SECTION B -->
+            
+            
+            
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        
+        
+        <!-- START: PAGE 2 -->
+        <div class="page">
+            
+            
+            
+            <!-- START: SECTION C -->
+            <b>C. Refer to health facility</b>
+            <div class="thickBox">
+                
+                <div style="margin-bottom:5px">
+                    <input type="checkbox" class="stored" id="id"> Explain why the child needs to go to the health facility and give first dose of treatment.
+                    &nbsp;<span class="blackBox">Do not touch child.</span>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <div class="box1">
+                        IF DIARRHEA (14 days or more OR blood in stool)
+                    </div>
+                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
+                    <div class="box2">
+                        <input type="checkbox" class="stored" id="id"> If child can drink, give ORS right away
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <div class="box1">
+                        IF FEVER (7 days or more)
+                    </div>
+                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
+                    <div class="box2">
+                        <input type="checkbox" class="stored" id="id"> Give 1 dose of paracetamol (see dose card).<br>
+                        <input type="checkbox" class="stored" id="id"> Give 1 dose of oral antimalarial (ACT) (see dose card).<br>
+                        <input type="checkbox" class="stored" id="id"> Teach caregiver to give first dose of ACT now. Advise to give next doses for 2 more days.<br>
+                        <input type="checkbox" class="stored" id="id"> Advise a sponge bath and keep child as cool as possible.
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <div class="box1">
+                        IF CHEST INDRAWING
+                    </div>
+                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
+                    <div class="box2">
+                        <input type="checkbox" class="stored" id="id"> If child can drink, give first dose of oral antibiotics (amoxicillin) (see dose card)
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <input type="checkbox" class="stored" id="id"> For any sick child who can drink, advise to give fluids and keep feeding.
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <input type="checkbox" class="stored" id="id"> Advise to keep child warm, if no fever.
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <input type="checkbox" class="stored" id="id"> Complete "FHW Form 3: Referral". Arrange transport and referral.
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Does child go to health center?
+                    &nbsp;
+                    <input type="checkbox" class="stored" id="id">Yes 
+                    &nbsp;&nbsp;
+                    <input type="checkbox" class="stored" id="id">No
+                </div>
+                
+            </div>
+            <!-- END: SECTION C -->
+            
+            
+            
+            <!-- START: SECTION D -->
+            <b>D. Treat at home and advise caregiver</b>
+            <div class="thickBox">
+                
+                <div style="margin-bottom:5px">
+                    <div class="box3">
+                        IF DIARRHEA (less than 14 days and no blood in stool)
+                    </div>
+                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
+                    <div class="box4">
+                        <input type="checkbox" class="stored" id="id"> Give ORS. Help caregiver to give child ORS in front of you until child is not thirsty.<br>
+                        <input type="checkbox" class="stored" id="id"> Give caregiver 2 ORS packets to use at home. Advise to give as much as the child wants, but at least 1/2 cup ORS solution after each stool (poo poo).<br>
+                        <input type="checkbox" class="stored" id="id"> Give 1 dose of zinc supplement daily for 10 days (see dose card). Help caregiver give first dose now.
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <div class="box3">
+                        IF FEVER (less than 7 days)
+                    </div>
+                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
+                    <div class="box4">
+                        <div style="height:20px"><span class="blackBox">Do not take temp. Do not do RDT. Do not give paracetamol.</span><br></div>
+                        <input type="checkbox" class="stored" id="id"> Give one dose antimalarial (ACT) for fever (see dose card).<br>
+                        <input type="checkbox" class="stored" id="id"> Teach caregiver to give first dose now. Advise to give next dose for 2 more days.<br>
+                        <input type="checkbox" class="stored" id="id"> Advise sponge bath and keep child as cool as possible.
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <div class="box3">
+                        IF FAST BREATHING (pneumonia)
+                    </div>
+                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
+                    <div class="box4">
+                        <input type="checkbox" class="stored" id="id"> Give oral antibiotic (amoxicillin) two times a day for five days (see dose card). Teach caregiver to give first dose now.
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                <div style="margin-bottom:5px">
+                    <input type="checkbox" class="stored" id="id"> Advise the caregiver to give more fluids and continue feeding.
+                </div>
+                
+                
+            </div>
+            <!-- END: SECTION D -->
+
+            
+            
+            <!-- START: SECTION E -->
+            <div style="margin-bottom:5px">
+                <b>E. If OTHER PROBLEM you cannot treat, refer child to facility. Complete "FHW Form 3: Referral"</b>
+            </div>
+            <!-- END: SECTION E -->
+            
+            
+            
+            <!-- START: SECTION F -->
+            <b>F. Return for follow-up for three days and re-assess.</b>
+            <span class="blackBox">Do Ebola screening tool first. Do not touch child.</span>
+            <div class="thickBox" style="margin-top:3px">
+                
+                <table class="scTable">
+                    <tr>
+                        <td>&nbsp;Review assessment at each visit. Visit date:</td>
+                        <td>
+                            Day 1:
+                            <input style="width:75px" type="text" class="stored" id="id">
+                        </td>
+                        <td>
+                            Day 2:
+                            <input style="width:75px" type="text" class="stored" id="id">
+                        </td>
+                        <td>
+                            Day 3:
+                            <input style="width:75px" type="text" class="stored" id="id">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;Child becomes more sick or has danger signs?</td>
+                        <td style="text-align:center">
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td style="text-align:center">
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td style="text-align:center">
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;Child develops new symptoms?</td>
+                        <td style="text-align:center">
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td style="text-align:center">
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                        <td style="text-align:center">
+                            <input type="checkbox" class="stored" id="id">Yes&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" id="id">No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            &nbsp;<input type="checkbox" class="stored" id="id"> IF ANY danger signs OR child becomes more sick, REFER immediately. Complete "FHW Form 3: Referral".
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            &nbsp;<input type="checkbox" class="stored" id="id"> IF child has not improved after 3 days, REFER. Complete "FHW Form 3: Referral".
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+            <!-- END: SECTION F -->
+            
+            
+            
+            <!-- START: M&E Box -->
+            <div class="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">V.02</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" id="de_init">
+                DE Date: <input class="stored" id="de_date">
+                QA Initials: <input class="stored" id="qa_init">
+                QA Date: <input class="stored" id="qa_date">
+            </div>
+            <!-- END: M&E Box -->
+            
+            
+            
+            <!-- START: SUP Box -->
+            <div class="supBox">
+                <span class="blackBox">SUP</span>
+                Initials: <input type="text" class="stored" id="de_init">
+                Date: <input type="text" class="stored" id="de_date">|
+                Recording?
+                <input type="checkbox" class="stored" id="qa_init">Y
+                <input type="checkbox" class="stored" id="qa_init">N
+                &nbsp;|
+                Diagnosis?
+                <input type="checkbox" class="stored" id="qa_init">Y
+                <input type="checkbox" class="stored" id="qa_init">N
+                &nbsp;|
+                Treatment?
+                <input type="checkbox" class="stored" id="qa_init">Y
+                <input type="checkbox" class="stored" id="qa_init">N
+                &nbsp;|
+            </div>
+            <!-- END: SUP Box -->
+            
+            
+            
+        </div>
+        <!-- END: PAGE 2 -->
+        
+        
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-success">Submit</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-success">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" id="table" value="tbl_data_fhw7_sickchild">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>

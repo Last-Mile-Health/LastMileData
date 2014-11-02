@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/LastMileData/lib/d3.min.js"></script>
+        <script src="/LastMileData/lib/dimple.v2.1.0.min.js"></script>
+    </head>
+    <body>
+        
+        <div id="chartContainer">
+            <script type="text/javascript">
+                
+                var svg = dimple.newSvg("#chartContainer", 600, 400);
+                
+                // Data (!!!!! fill manually for now !!!!!)
+                var data = [
+                    { "Month":"Jan", "Value":2000, "Order":1 },
+                    { "Month":"Feb", "Value":3000, "Order":2 },
+                    { "Month":"Mar", "Value":4000, "Order":3 },
+                    { "Month":"Apr", "Value":1000, "Order":4 },
+                    { "Month":"May", "Value":3000, "Order":5 },
+                    { "Month":"Jun", "Value":4000, "Order":6 },
+                    { "Month":"Jul", "Value":5000, "Order":7 }
+                ];
+
+                var myChart = new dimple.chart(svg, data);
+                myChart.setBounds(60, 30, 510, 305);
+                var x = myChart.addCategoryAxis("x", "Month");
+                x.addOrderRule("Order");
+                myChart.addMeasureAxis("y", "Value");
+                myChart.addSeries(null, dimple.plot.bar);
+                myChart.draw();
+
+            </script>
+        </div>
+        
+        <div id="dashboard_1">
+            <script type="text/javascript">
+                
+                var svg = dimple.newSvg("#dashboard_1", 600, 400);
+                
+                // Data (!!!!! fill manually for now !!!!!)
+                var data = [
+                    { "Month":"Jan", "Value":2000, "Order":1 },
+                    { "Month":"Feb", "Value":3000, "Order":2 },
+                    { "Month":"Mar", "Value":4000, "Order":3 },
+                    { "Month":"Apr", "Value":1000, "Order":4 },
+                    { "Month":"May", "Value":3000, "Order":5 },
+                    { "Month":"Jun", "Value":4000, "Order":6 },
+                    { "Month":"Jul", "Value":5000, "Order":7 }
+                ];
+
+                var myChart = new dimple.chart(svg, data);
+                myChart.setBounds(60, 30, 510, 305);
+                var x = myChart.addCategoryAxis("x", "Month");
+                x.addOrderRule("Order");
+                myChart.addMeasureAxis("y", "Value");
+                myChart.addSeries(null, dimple.plot.bar);
+                myChart.draw();
+
+            </script>
+        </div>
+      
+      
+    </body>
+</html>
