@@ -1,6 +1,7 @@
 CACHE MANIFEST
-# Version:      00230
-# Last updated: 2014-10-29 by Avi Kenny
+# Version:      00231
+# Author:       Avi Kenny, Last Mile Health
+# Last updated: 2014-11-03
 
 # Resources for offline functioning of LastMileData.org data entry and quality assurance (DEQA) application
 # Increment version number to trigger application updating
@@ -62,7 +63,7 @@ CACHE:
 /LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html
 /LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html
 /LastMileData/src/forms/fhw_bdm02_movements.html
-/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
+/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html 
 /LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html
 /LastMileData/src/forms/fhw_kpi02_kpiassessment.html
 /LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html
@@ -76,7 +77,7 @@ CACHE:
 # src >> forms (old)
 /LastMileData/src/forms_old/fhw_esc02_ebolascreening.html
 /LastMileData/src/forms_old/fhw_esc03_ebolascreening.html
-/LastMileData/src/forms/fhw_sst04_ebolascreening.html
+/LastMileData/src/forms_old/fhw_sst04_ebolascreening.html
 
 # src >> fragments
 /LastMileData/src/fragments/header_bootstrap.html

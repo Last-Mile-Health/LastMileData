@@ -83,17 +83,15 @@
                 <div style="float:left; width:160px">
                     <b>(A)</b> Probable case
                     <br>
-                    <b>(D)</b> Asymptomatic
+                    <b>(B)</b> Suspect case
                 </div>
                 <div style="float:left; width:180px">
-                    <b>(B)</b> Wet suspect
+                    <b>(C)</b> Possible malaria
                     <br>
-                    <b>(E)</b> Possible malaria
+                    <b>(D)</b> Contact risk
                 </div>
                 <div style="float:left">
-                    <b>(C)</b> Dry suspect
-                    <br>
-                    <b>(F)</b> Not a case
+                    <b>(E)</b> Not a case
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -104,15 +102,15 @@
                 <div style="float:left; width:160px">
                     <b>(A)</b> Signs of Ebola
                     <br>
-                    <b>(D)</b> Ebola treatment
+                    <b>(B)</b> Ebola treatment
                 </div>
                 <div style="float:left; width:180px">
-                    <b>(B)</b> Transmission
+                    <b>(C)</b> Transmission
                     <br>
-                    <b>(E)</b> Handling Ebola cases
+                    <b>(D)</b> Handling Ebola cases
                 </div>
                 <div style="float:left">
-                    <b>(C)</b> Ebola rumors
+                    <b>(E)</b> Ebola rumors
                 </div>
                 <div style="clear:both"></div>
                 
@@ -215,4 +213,3 @@
     </body>
     
 </html>
-    

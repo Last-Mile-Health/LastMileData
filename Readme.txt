@@ -4,6 +4,8 @@ Last Mile Data -- README
 
 AUTHOR:         Avi Kenny
 LAST UPDATED:   2014-11-02
+COPYRIGHT:      Copyright 2014 Avi Kenny, Last Mile Health
+LICENSE:        Distributed under the terms of the GNU General Public License
 
 
 I. Overview

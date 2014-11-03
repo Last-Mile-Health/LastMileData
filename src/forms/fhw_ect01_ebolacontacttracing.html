@@ -4,7 +4,7 @@
     
     <head>
         
-        <title>FHW Form (ECT) - Ebola Contact Tracing</title>
+        <title>FHW Form (ECT) - Contact Tracing</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -28,12 +28,12 @@
             #sectionD { position:relative; top:-15px; }
             
             .meBox { position:relative; top:-25px; }
-            @media print { .meBox { position:relative; top:-45px; } }   // To correct for a formatting bug
+            @media print { .meBox { position:relative; top:-45px; } }   // To correct for a possible CSS bug
             
-            .contactTable { margin:0px; padding:3px; position:relative; left:10px }
-            .contactTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
-            .contactTable td { border: 1px solid black; padding:0px; text-align:center; }
-            .contactTable .col1 { text-align:left; padding-left:3px; padding-right:30px; }
+            #contactTable {  }
+            #contactTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            #contactTable td { border: 1px solid black; padding:0px; text-align:center; }
+            #contactTable .col1 { text-align:left; padding-left:3px; padding-right:30px; }
             
             .thickBox { padding:3px; }
             
@@ -59,7 +59,7 @@
             <!-- START: FORM HEADER -->
             <div class="formHeader">
                 <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
-                <span class="h2">FHW: Ebola Contact Tracing</span>
+                <span class="h2">FHW: Contact Tracing</span>
                 <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
                 <div style="clear:both"></div>
             </div>
@@ -132,8 +132,8 @@
                 <div class="thickBox">
 
                     <!-- START: Contact Tracing table -->
-                    <table class='contactTable'>
-
+                    <table id='contactTable' style='position:relative; left:10px;'>
+                        
                         <!-- Table header -->
                         <tr>
                             <th class="col1" style="border-top:none; border-left:none">Day:</th>
