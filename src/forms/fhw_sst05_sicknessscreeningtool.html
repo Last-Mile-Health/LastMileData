@@ -37,10 +37,10 @@
             .symptomTable { padding:3px; }
             .symptomTable td { padding-left:10px; }
             
-            #sectionA { position:relative; top:10px; }
-            #sectionB { position:relative; top:20px; }
-            #sectionC { position:relative; top:30px; }
-            #sectionD { position:relative; top:40px; }
+            /*#sectionA { position:relative; top:10px; }*/
+            /*#sectionB { position:relative; top:20px; }*/
+            /*#sectionC { position:relative; top:30px; }*/
+            /*#sectionD { position:relative; top:40px; }*/
             /*.meBox { position:relative; top:-55px; }*/
             /*@media print { .meBox { position:relative; top:-50px; } }    !!!!! bug fix; delete if fixed !!!!! */
             
@@ -123,7 +123,7 @@
                     </div>
                     <div style="clear:both"></div>
                     <hr>
-
+                    
                     <!-- Question 02 -->
                     <div class="inner_L L4">
                         2. In the last three weeks, have you attended a burial or funeral, and did you participate in ceremony where you had contact with body or body fluids?
@@ -138,7 +138,7 @@
                     </div>
                     <div style="clear:both"></div>
                     <hr>
-
+                    
                     <!-- Question 03 -->
                     <div class="inner_L L4">
                         3. In the last three weeks, have you cared for anyone who was very ill - nausea, vomiting, bleeding?
@@ -152,10 +152,9 @@
                         <div class="caOption">Patient is not contact. Skip to box C</div>
                     </div>
                     <div style="clear:both"></div>
-
-
+                    
                 </div>
-
+                
             </div>
             <!-- END: SECTION A -->
             
@@ -166,7 +165,7 @@
                 
                 <b>B. Patient has contact risk</b>
                 <div class="thickBox">
-
+                    
                     <!-- Question 04 -->
                     <div class="inner_L L4">
                         4. Do you have fever or have you had fever in the last 3 weeks?
@@ -181,7 +180,7 @@
                     </div>
                     <div style="clear:both"></div>
                     <hr>
-
+                    
                     <!-- Question 05 -->
                     <div class="inner_L L4">
                         5. Have you had any of these symptoms in the last 3 weeks?<br>
@@ -223,7 +222,7 @@
                     </div>
                     <div style="clear:both"></div>
                     <hr>
-
+                    
                     <!-- Question 06 -->
                     <div class="inner_L L4">
                         6. Have you had any unexplained bleeding in the last 3 weeks?
@@ -237,7 +236,7 @@
                         <div class="caOption">CONTACT RISK. Skip to box D</div>
                     </div>
                     <div style="clear:both"></div>
-
+                    
                 </div>
                 
             </div>
@@ -280,17 +279,17 @@
                     </div>
                     <div style="clear:both"></div>
                     <hr>
-
+                    
                     <!-- Question 09 -->
                     <div class="inner_L L4">
-                        9. <i>Is patient a child under five years?</i> 
+                        9. Have you had any unexplained bleeding in the last 3 weeks?
                     </div>
                     <div class="inner_C C4">
                         <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
                         <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
-                        <div class="caOption blackAction">NOT A CASE. Start sick child form.</div>
+                        <div class="caOption">SUSPECT CASE. Skip to box D</div>
                         <div class="caOption">Go to next question</div>
 <!--                        <div class="caOption blackAction">NOT A CASE. Proceed normally.</div>-->
                     </div>
@@ -299,16 +298,22 @@
 
                     <!-- Question 10 -->
                     <div class="inner_L L4">
-                        10. Have you had any of these symptoms in the last 3 weeks?<br>
-                        <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:355px">
-                            <table class="symptomTable">
-                                <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="id">Unexplained bleeding&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_vomiting_yes">Vomiting&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_diarrhea_yes">Diarrhea</div></td>
-                                </tr>
-                            </table>
-                        </div>
+                        10. <i>Is patient a child under five years?</i> 
+                    </div>
+                    <div class="inner_C C4">
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class="caOption blackAction">NOT A CASE. Start sick child form.</div>
+                        <div class="caOption">Go to next question</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question 11 -->
+                    <div class="inner_L L4">
+                        11. Have you had any vomiting or diarrhea in the last 3 weeks?
                     </div>
                     <div class="inner_C C4">
                         <div class="checkOption"><input type="checkbox" class="stored" id="C10_3OrMore_yes">Yes -------------------------------------------------------</div>
@@ -333,9 +338,9 @@
                 <b>D. Ebola case management</b>
                 <div class="thickBox">
                     
-                    <!-- Question 08 -->
+                    <!-- Question 12 -->
                     <div class="inner_L L4">
-                        11. <i>Mark type of case. Copy down the results from the "Sickness Screening Tool" onto paper.</i>
+                        12. <i>Mark type of case. Copy down the results from the "Sickness Screening Tool" onto paper.</i>
                     </div>
                     <div class="inner_C C4">
                         <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">Probable case -------------------------------------------------------</div>

@@ -114,7 +114,7 @@ $(document).ready(function() {
         var notStored = ['table', 'type'];
         
         // Use FileSystem API; request persistent storage
-        window.webkitStorageInfo.requestQuota(PERSISTENT, 50.03*1024*1024, function(grantedBytes) {
+        window.webkitStorageInfo.requestQuota(PERSISTENT, 50*1024*1024, function(grantedBytes) {
             window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
             window.requestFileSystem(PERSISTENT, grantedBytes,
                 // Success handler
@@ -321,7 +321,7 @@ $(document).ready(function() {
             });
             
             // Use FileSystem API; request persistent storage
-            window.webkitStorageInfo.requestQuota(PERSISTENT, 50.03*1024*1024, function(grantedBytes) {
+            window.webkitStorageInfo.requestQuota(PERSISTENT, 50*1024*1024, function(grantedBytes) {
                 window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
                 window.requestFileSystem(PERSISTENT, grantedBytes,
                     // Success handler
