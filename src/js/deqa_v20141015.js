@@ -180,7 +180,8 @@ $(document).ready(function(){
         
     });
     
-
+    
+    
     // (2) QA Buttons !!!!! finish this !!!!!
     
         $('#qa_TST').click(function() {
@@ -420,6 +421,7 @@ $(document).ready(function(){
         // !!!!! write to filestream (only files of type='form')
         
         // !!!!! download file (send appropriate headers)
+//        window.location.href = "/LastMileData/src/php/downloadDataFile.php"       // !!!!! delete these files !!!!!
         
         // !!!!! When download is complete, run the following...
             // Close Modal and Reset DOM
@@ -589,10 +591,14 @@ function ajaxRefresh() {
         dataType: "json",
         success: function(data) {
             
+            // !!!!! all storage currently done in localStorage should be done using FIleSystem API !!!!!
+            // !!!!! this code is WET (with refreshData.php); refactor !!!!!
+            
             // Update localStorage.deqaUsers
             localStorage.initialized = "yes";
             localStorage.deqaUsers = JSON.stringify(data['deqaUsers']);
             localStorage.villages = JSON.stringify(data['villages']);
+            localStorage.fhws = JSON.stringify(data['fhws']);
             
             // Manipulate DOM
             $('#refreshData_text').text('Data was successfully refreshed.');
@@ -602,7 +608,7 @@ function ajaxRefresh() {
             setTimeout( function() {
                 location.reload();
             }, 1000 );
-
+            
         },
         error: function(request, status, error) {
             // Display error message
@@ -611,8 +617,8 @@ function ajaxRefresh() {
             
             // Redirect to home page
             setTimeout( function() {
-                // !!!!! build in more comprehensive error handler; e.g., alert if no internet conncetion is present
-                window.location.assign('/LastMileData/');
+                // !!!!! build in more comprehensive error handler; e.g., alert if no internet conncetion is present !!!!!
+                location.reload();
             }, 1000 );
         }
     });

@@ -19,31 +19,27 @@
         <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
         
         <style>
-            .inner_L { width: 3.0in; }
-            .inner_C { width: 2.3in; }
-            .inner_R { width: 2.0in; }
+            #sectionA { position:relative; top:-7px; }
+            #sectionB { position:relative; top:-14px; }
+            #sectionC { position:relative; top:-21px; }
+            .meBox { position:relative; top:-28px; }
             
-            .meBox { position:relative; top:15px; }
-            
-            .mvmtTable { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
-            .mvmtTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; height:100px; }
-            .mvmtTable td { border: 1px solid black; padding:0px; text-align:center; }
-            
-            .rotate div { position:absolute; }
-            .rotate {
-                position:absolute;
-                font-weight:bold;
-                -webkit-transform:rotate(90deg);
+            @media print {
+                .meBox { position:relative; top:-48px; }
             }
             
-            .c1 { width:0.3in; }
+            .bdmTable { border-collapse:collapse; margin:0px; padding:3px; }
+            .bdmTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            .bdmTable td { border: 1px solid black; padding:0px; text-align:center; height:28px; }
+            
+            .c1 { width:0.9in; border:none; margin-right:1px; margin-left:1px; }
             .c2 { width:0.7in; border:none; margin-right:1px; margin-left:1px; }
-            .c3 { width:0.7in; border:none; margin-right:1px; margin-left:1px; }
-            .c4 { width:0.97in; border:none; margin-right:1px; margin-left:1px; }
-            .c5-8 { width:25px; }
-            .c9 { width:1.0in; border:none; margin-right:1px; margin-left:1px; }
-            .c10 { width:0.8in; }
-            .c11 { width:0.5in; border:none; margin-right:1px; margin-left:1px; }
+            .c3 { width:1.35in; border:none; margin-right:1px; margin-left:1px; }
+            .c4 { width:1.35in; border:none; margin-right:1px; margin-left:1px; }
+            .c5 { width:0.75in; margin-right:1px; margin-left:1px; }
+            .c6 { width:1.0in; border:none; margin-right:1px; margin-left:1px; }
+            .c7 { width:1.0in; margin-right:1px; margin-left:1px; }
+            
         </style>
         
     </head>
@@ -73,534 +69,308 @@
             <div class="thickBox">
                 
                 <div>
-                    <b>Use this form to record every birth, death, and movement in your community. For births and community members moving in, assign a new member ID using "FHW: Member ID Assignment List". For new houesholds, assign a new household ID using "FHW: Household ID Assignment List".</b>
+                    <b>Use this form to record every birth, death, and movement in your community. For births and community members moving in, assign a new member ID using "FHW: Member ID Assignment List".</b>
                 </div>
                 
                 <hr>
                 
                 <div class="headField" style="width:1.05in">FHW name/ID:</div>
-                <div class="headField" style="width:1.37in"><input class="stored" id="fhwName" data-lmd-valid-required="yes" style="width:120px"> / </div>
-                <div class="headField" style="width:1.0in"><input class="stored" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div class="headField" style="width:1.37in"><input class="stored autocomplete" id="fhwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:120px"> / </div>
+                <div class="headField" style="width:1.5in"><input class="stored integer" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div class="headField" style="width:0.4in">Date:</div>
+                <div class="headField" style="width:1.4in"><input class="stored datepicker" id="bdmDate" data-lmd-valid-required="yes" style="width:120px"></div>
                 <div style="clear:both; height:3px;"></div>
                 
             </div>
             <!-- END: FORM HEADER -->
-
+            
             
             
             <!-- START: SECTION A -->
-            <div class="thickBox" style="position:relative">
+            <div id="sectionA">
                 
-                <!-- Rotated columns 5-8 -->
-                <div class="rotate" style="top:45px; left:373px;">Birth</div>
-                <div class="rotate" style="top:45px; left:395px;">Death</div>
-                <div class="rotate" style="top:45px; left:406px;">Moved IN</div>
-                <div class="rotate" style="top:45px; left:424px;">Moved OUT</div>
-                
-                <!-- START: Registration table -->
-                <table class='mvmtTable'>
+                <b>A. Births</b>
+                <div class="thickBox">
                     
-                    <!-- Table header -->
-                    <tr>
-                        <th></th>
-                        <th>Household ID</th>
-                        <th>Member<br>ID</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Date of birth,<br>death, or<br>movement<br>(d/m/y)</th>
-                        <th>Sex</th>
-                        <th>Age</th>
-                    </tr>
+                    <table class="bdmTable">
+                        <tr>
+                            <th>Member ID</th>
+                            <th>HH ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th class='c5'>Sex</th>
+                            <th>Date of birth<br>(d/m/y)</th>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='birth_memID_1'></td>
+                            <td><input class='stored c2 integer' id='birth_hhID_1'></td>
+                            <td><input class='stored c3' id='birth_firstName_1'></td>
+                            <td><input class='stored c4' id='birth_lastName_1'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='birth_sex_M_1'>M&nbsp;
+                                <input type='checkbox' class='stored' id='birth_sex_F_1'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='birth_dob_1'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='birth_memID_2'></td>
+                            <td><input class='stored c2 integer' id='birth_hhID_2'></td>
+                            <td><input class='stored c3' id='birth_firstName_2'></td>
+                            <td><input class='stored c4' id='birth_lastName_2'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='birth_sex_M_2'>M&nbsp;
+                                <input type='checkbox' class='stored' id='birth_sex_F_2'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='birth_dob_2'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='birth_memID_3'></td>
+                            <td><input class='stored c2 integer' id='birth_hhID_3'></td>
+                            <td><input class='stored c3' id='birth_firstName_3'></td>
+                            <td><input class='stored c4' id='birth_lastName_3'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='birth_sex_M_3'>M&nbsp;
+                                <input type='checkbox' class='stored' id='birth_sex_F_3'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='birth_dob_3'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='birth_memID_4'></td>
+                            <td><input class='stored c2 integer' id='birth_hhID_4'></td>
+                            <td><input class='stored c3' id='birth_firstName_4'></td>
+                            <td><input class='stored c4' id='birth_lastName_4'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='birth_sex_M_4'>M&nbsp;
+                                <input type='checkbox' class='stored' id='birth_sex_F_4'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='birth_dob_4'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='birth_memID_5'></td>
+                            <td><input class='stored c2 integer' id='birth_hhID_5'></td>
+                            <td><input class='stored c3' id='birth_firstName_5'></td>
+                            <td><input class='stored c4' id='birth_lastName_5'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='birth_sex_M_5'>M&nbsp;
+                                <input type='checkbox' class='stored' id='birth_sex_F_5'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='birth_dob_5'></td>
+                        </tr>
+                    </table>
                     
+                </div>
 
-                    <!-- Row 1 of 25 -->
-                    <tr>
-                        <td class='c1'>1</td>
-                        <td><input class='stored c2 integer' id='hhID_1'></td>
-                        <td><input class='stored c3' id='memID_1' data-lmd-valid-required='yes'></td>
-                        <td><input class='stored c4' id='firstName_1'></td>
-                        <td><input class='stored c4' id='lastName_1'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_1'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_1'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_1'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_1'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_1' data-lmd-valid-required='yes'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_1'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_1'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_1'></td>
-                    </tr>
-
-                    <!-- Row 2 of 25 -->
-                    <tr>
-                        <td class='c1'>2</td>
-                        <td><input class='stored c2 integer' id='hhID_2'></td>
-                        <td><input class='stored c3' id='memID_2' ></td>
-                        <td><input class='stored c4' id='firstName_2'></td>
-                        <td><input class='stored c4' id='lastName_2'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_2'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_2'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_2'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_2'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_2'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_2'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_2'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_2'></td>
-                    </tr>
-
-                    <!-- Row 3 of 25 -->
-                    <tr>
-                        <td class='c1'>3</td>
-                        <td><input class='stored c2 integer' id='hhID_3'></td>
-                        <td><input class='stored c3' id='memID_3' ></td>
-                        <td><input class='stored c4' id='firstName_3'></td>
-                        <td><input class='stored c4' id='lastName_3'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_3'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_3'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_3'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_3'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_3'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_3'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_3'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_3'></td>
-                    </tr>
-
-                    <!-- Row 4 of 25 -->
-                    <tr>
-                        <td class='c1'>4</td>
-                        <td><input class='stored c2 integer' id='hhID_4'></td>
-                        <td><input class='stored c3' id='memID_4' ></td>
-                        <td><input class='stored c4' id='firstName_4'></td>
-                        <td><input class='stored c4' id='lastName_4'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_4'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_4'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_4'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_4'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_4'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_4'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_4'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_4'></td>
-                    </tr>
-
-                    <!-- Row 5 of 25 -->
-                    <tr>
-                        <td class='c1'>5</td>
-                        <td><input class='stored c2 integer' id='hhID_5'></td>
-                        <td><input class='stored c3' id='memID_5' ></td>
-                        <td><input class='stored c4' id='firstName_5'></td>
-                        <td><input class='stored c4' id='lastName_5'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_5'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_5'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_5'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_5'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_5'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_5'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_5'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_5'></td>
-                    </tr>
-
-                    <!-- Row 6 of 25 -->
-                    <tr>
-                        <td class='c1'>6</td>
-                        <td><input class='stored c2 integer' id='hhID_6'></td>
-                        <td><input class='stored c3' id='memID_6' ></td>
-                        <td><input class='stored c4' id='firstName_6'></td>
-                        <td><input class='stored c4' id='lastName_6'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_6'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_6'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_6'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_6'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_6'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_6'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_6'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_6'></td>
-                    </tr>
-
-                    <!-- Row 7 of 25 -->
-                    <tr>
-                        <td class='c1'>7</td>
-                        <td><input class='stored c2 integer' id='hhID_7'></td>
-                        <td><input class='stored c3' id='memID_7' ></td>
-                        <td><input class='stored c4' id='firstName_7'></td>
-                        <td><input class='stored c4' id='lastName_7'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_7'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_7'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_7'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_7'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_7'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_7'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_7'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_7'></td>
-                    </tr>
-
-                    <!-- Row 8 of 25 -->
-                    <tr>
-                        <td class='c1'>8</td>
-                        <td><input class='stored c2 integer' id='hhID_8'></td>
-                        <td><input class='stored c3' id='memID_8' ></td>
-                        <td><input class='stored c4' id='firstName_8'></td>
-                        <td><input class='stored c4' id='lastName_8'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_8'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_8'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_8'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_8'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_8'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_8'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_8'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_8'></td>
-                    </tr>
-
-                    <!-- Row 9 of 25 -->
-                    <tr>
-                        <td class='c1'>9</td>
-                        <td><input class='stored c2 integer' id='hhID_9'></td>
-                        <td><input class='stored c3' id='memID_9' ></td>
-                        <td><input class='stored c4' id='firstName_9'></td>
-                        <td><input class='stored c4' id='lastName_9'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_9'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_9'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_9'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_9'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_9'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_9'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_9'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_9'></td>
-                    </tr>
-
-                    <!-- Row 10 of 25 -->
-                    <tr>
-                        <td class='c1'>10</td>
-                        <td><input class='stored c2 integer' id='hhID_10'></td>
-                        <td><input class='stored c3' id='memID_10' ></td>
-                        <td><input class='stored c4' id='firstName_10'></td>
-                        <td><input class='stored c4' id='lastName_10'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_10'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_10'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_10'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_10'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_10'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_10'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_10'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_10'></td>
-                    </tr>
-
-                    <!-- Row 11 of 25 -->
-                    <tr>
-                        <td class='c1'>11</td>
-                        <td><input class='stored c2 integer' id='hhID_11'></td>
-                        <td><input class='stored c3' id='memID_11' ></td>
-                        <td><input class='stored c4' id='firstName_11'></td>
-                        <td><input class='stored c4' id='lastName_11'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_11'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_11'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_11'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_11'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_11'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_11'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_11'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_11'></td>
-                    </tr>
-
-                    <!-- Row 12 of 25 -->
-                    <tr>
-                        <td class='c1'>12</td>
-                        <td><input class='stored c2 integer' id='hhID_12'></td>
-                        <td><input class='stored c3' id='memID_12' ></td>
-                        <td><input class='stored c4' id='firstName_12'></td>
-                        <td><input class='stored c4' id='lastName_12'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_12'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_12'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_12'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_12'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_12'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_12'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_12'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_12'></td>
-                    </tr>
-
-                    <!-- Row 13 of 25 -->
-                    <tr>
-                        <td class='c1'>13</td>
-                        <td><input class='stored c2 integer' id='hhID_13'></td>
-                        <td><input class='stored c3' id='memID_13' ></td>
-                        <td><input class='stored c4' id='firstName_13'></td>
-                        <td><input class='stored c4' id='lastName_13'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_13'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_13'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_13'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_13'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_13'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_13'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_13'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_13'></td>
-                    </tr>
-
-                    <!-- Row 14 of 25 -->
-                    <tr>
-                        <td class='c1'>14</td>
-                        <td><input class='stored c2 integer' id='hhID_14'></td>
-                        <td><input class='stored c3' id='memID_14' ></td>
-                        <td><input class='stored c4' id='firstName_14'></td>
-                        <td><input class='stored c4' id='lastName_14'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_14'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_14'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_14'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_14'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_14'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_14'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_14'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_14'></td>
-                    </tr>
-
-                    <!-- Row 15 of 25 -->
-                    <tr>
-                        <td class='c1'>15</td>
-                        <td><input class='stored c2 integer' id='hhID_15'></td>
-                        <td><input class='stored c3' id='memID_15' ></td>
-                        <td><input class='stored c4' id='firstName_15'></td>
-                        <td><input class='stored c4' id='lastName_15'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_15'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_15'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_15'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_15'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_15'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_15'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_15'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_15'></td>
-                    </tr>
-
-                    <!-- Row 16 of 25 -->
-                    <tr>
-                        <td class='c1'>16</td>
-                        <td><input class='stored c2 integer' id='hhID_16'></td>
-                        <td><input class='stored c3' id='memID_16' ></td>
-                        <td><input class='stored c4' id='firstName_16'></td>
-                        <td><input class='stored c4' id='lastName_16'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_16'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_16'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_16'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_16'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_16'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_16'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_16'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_16'></td>
-                    </tr>
-
-                    <!-- Row 17 of 25 -->
-                    <tr>
-                        <td class='c1'>17</td>
-                        <td><input class='stored c2 integer' id='hhID_17'></td>
-                        <td><input class='stored c3' id='memID_17' ></td>
-                        <td><input class='stored c4' id='firstName_17'></td>
-                        <td><input class='stored c4' id='lastName_17'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_17'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_17'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_17'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_17'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_17'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_17'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_17'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_17'></td>
-                    </tr>
-
-                    <!-- Row 18 of 25 -->
-                    <tr>
-                        <td class='c1'>18</td>
-                        <td><input class='stored c2 integer' id='hhID_18'></td>
-                        <td><input class='stored c3' id='memID_18' ></td>
-                        <td><input class='stored c4' id='firstName_18'></td>
-                        <td><input class='stored c4' id='lastName_18'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_18'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_18'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_18'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_18'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_18'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_18'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_18'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_18'></td>
-                    </tr>
-
-                    <!-- Row 19 of 25 -->
-                    <tr>
-                        <td class='c1'>19</td>
-                        <td><input class='stored c2 integer' id='hhID_19'></td>
-                        <td><input class='stored c3' id='memID_19' ></td>
-                        <td><input class='stored c4' id='firstName_19'></td>
-                        <td><input class='stored c4' id='lastName_19'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_19'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_19'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_19'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_19'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_19'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_19'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_19'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_19'></td>
-                    </tr>
-
-                    <!-- Row 20 of 25 -->
-                    <tr>
-                        <td class='c1'>20</td>
-                        <td><input class='stored c2 integer' id='hhID_20'></td>
-                        <td><input class='stored c3' id='memID_20' ></td>
-                        <td><input class='stored c4' id='firstName_20'></td>
-                        <td><input class='stored c4' id='lastName_20'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_20'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_20'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_20'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_20'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_20'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_20'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_20'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_20'></td>
-                    </tr>
-
-                    <!-- Row 21 of 25 -->
-                    <tr>
-                        <td class='c1'>21</td>
-                        <td><input class='stored c2 integer' id='hhID_21'></td>
-                        <td><input class='stored c3' id='memID_21' ></td>
-                        <td><input class='stored c4' id='firstName_21'></td>
-                        <td><input class='stored c4' id='lastName_21'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_21'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_21'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_21'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_21'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_21'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_21'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_21'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_21'></td>
-                    </tr>
-
-                    <!-- Row 22 of 25 -->
-                    <tr>
-                        <td class='c1'>22</td>
-                        <td><input class='stored c2 integer' id='hhID_22'></td>
-                        <td><input class='stored c3' id='memID_22' ></td>
-                        <td><input class='stored c4' id='firstName_22'></td>
-                        <td><input class='stored c4' id='lastName_22'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_22'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_22'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_22'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_22'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_22'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_22'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_22'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_22'></td>
-                    </tr>
-
-                    <!-- Row 23 of 25 -->
-                    <tr>
-                        <td class='c1'>23</td>
-                        <td><input class='stored c2 integer' id='hhID_23'></td>
-                        <td><input class='stored c3' id='memID_23' ></td>
-                        <td><input class='stored c4' id='firstName_23'></td>
-                        <td><input class='stored c4' id='lastName_23'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_23'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_23'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_23'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_23'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_23'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_23'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_23'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_23'></td>
-                    </tr>
-
-                    <!-- Row 24 of 25 -->
-                    <tr>
-                        <td class='c1'>24</td>
-                        <td><input class='stored c2 integer' id='hhID_24'></td>
-                        <td><input class='stored c3' id='memID_24' ></td>
-                        <td><input class='stored c4' id='firstName_24'></td>
-                        <td><input class='stored c4' id='lastName_24'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_24'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_24'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_24'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_24'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_24'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_24'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_24'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_24'></td>
-                    </tr>
-
-                    <!-- Row 25 of 25 -->
-                    <tr>
-                        <td class='c1'>25</td>
-                        <td><input class='stored c2 integer' id='hhID_25'></td>
-                        <td><input class='stored c3' id='memID_25' ></td>
-                        <td><input class='stored c4' id='firstName_25'></td>
-                        <td><input class='stored c4' id='lastName_25'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_25'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='death_25'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_25'></td>
-                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_25'></td>
-                        <td><input class='stored c9 datepicker' id='bdmDate_25'></td>
-                        <td class='c10'>
-                            <input type='checkbox' class='stored' id='sex_M_25'>M&nbsp;
-                            <input type='checkbox' class='stored' id='sex_F_25'>F&nbsp;
-                        </td>
-                        <td><input class='stored c11 integer' id='ageOrYOB_25'></td>
-                    </tr>
-
-
-                    
-                </table>
-                <!-- END: Registration table -->
-                
-                
-                
             </div>
             <!-- END: SECTION A -->
+            
+            
+            
+            <!-- START: SECTION B -->
+            <div id="sectionB">
+                
+                <b>B. Deaths</b>
+                <div class="thickBox">
+                    
+                    <table class="bdmTable">
+                        <tr>
+                            <th>Member ID</th>
+                            <th>HH ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th class='c5'>Sex</th>
+                            <th>Date of death<br>(d/m/y)</th>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='death_memID_1'></td>
+                            <td><input class='stored c2 integer' id='death_hhID_1'></td>
+                            <td><input class='stored c3' id='death_firstName_1'></td>
+                            <td><input class='stored c4' id='death_lastName_1'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='death_sex_M_1'>M&nbsp;
+                                <input type='checkbox' class='stored' id='death_sex_F_1'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='death_deathdate_1'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='death_memID_2'></td>
+                            <td><input class='stored c2 integer' id='death_hhID_2'></td>
+                            <td><input class='stored c3' id='death_firstName_2'></td>
+                            <td><input class='stored c4' id='death_lastName_2'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='death_sex_M_2'>M&nbsp;
+                                <input type='checkbox' class='stored' id='death_sex_F_2'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='death_deathdate_2'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='death_memID_3'></td>
+                            <td><input class='stored c2 integer' id='death_hhID_3'></td>
+                            <td><input class='stored c3' id='death_firstName_3'></td>
+                            <td><input class='stored c4' id='death_lastName_3'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='death_sex_M_3'>M&nbsp;
+                                <input type='checkbox' class='stored' id='death_sex_F_3'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='death_deathdate_3'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='death_memID_4'></td>
+                            <td><input class='stored c2 integer' id='death_hhID_4'></td>
+                            <td><input class='stored c3' id='death_firstName_4'></td>
+                            <td><input class='stored c4' id='death_lastName_4'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='death_sex_M_4'>M&nbsp;
+                                <input type='checkbox' class='stored' id='death_sex_F_4'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='death_deathdate_4'></td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='death_memID_5'></td>
+                            <td><input class='stored c2 integer' id='death_hhID_5'></td>
+                            <td><input class='stored c3' id='death_firstName_5'></td>
+                            <td><input class='stored c4' id='death_lastName_5'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='death_sex_M_5'>M&nbsp;
+                                <input type='checkbox' class='stored' id='death_sex_F_5'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='death_deathdate_5'></td>
+                        </tr>
+                    </table>
+                    
+                </div>
+
+            </div>
+            <!-- END: SECTION B -->
+            
+            
+            
+            <!-- START: SECTION C -->
+            <div id="sectionC">
+                
+                <b>C. Movements</b>
+                <div class="thickBox">
+                    
+                    <table class="bdmTable">
+                        <tr>
+                            <th>Member ID</th>
+                            <th>HH ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th class='c5'>Sex</th>
+                            <th>Date of birth<br>(d/m/y)</th>
+                            <th class='c7'>Move in/out</th>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_1'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_1'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_1'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_1'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_1'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_1'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_1'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_1'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_1'>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_2'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_2'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_2'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_2'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_2'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_2'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_2'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_2'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_2'>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_3'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_3'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_3'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_3'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_3'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_3'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_3'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_3'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_3'>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_4'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_4'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_4'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_4'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_4'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_4'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_4'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_4'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_4'>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_5'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_5'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_5'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_5'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_5'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_5'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_5'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_5'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_5'>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_6'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_6'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_6'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_6'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_6'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_6'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_6'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_6'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_6'>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class='stored c1' id='mvmt_memID_7'></td>
+                            <td><input class='stored c2 integer' id='mvmt_hhID_7'></td>
+                            <td><input class='stored c3' id='mvmt_firstName_7'></td>
+                            <td><input class='stored c4' id='mvmt_lastName_7'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_sex_M_7'>M&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_sex_F_7'>F
+                            </td>
+                            <td><input class='stored c6 datepicker' id='mvmt_dob_7'></td>
+                            <td>
+                                <input type='checkbox' class='stored' id='mvmt_moveIn_7'>In&nbsp;&nbsp;&nbsp;
+                                <input type='checkbox' class='stored' id='mvmt_moveOut_7'>Out
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+
+            </div>
+            <!-- END: SECTION C -->
             
             
             

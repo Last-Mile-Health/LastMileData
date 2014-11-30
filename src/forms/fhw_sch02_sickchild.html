@@ -94,8 +94,8 @@
                 <hr>
                 
                 <div class="headField" style="width:1.2in">FHW name/ID:</div>
-                <div class="headField" style="width:1.37in"><input class="stored" id="fhwName" data-lmd-valid-required="yes" style="width:120px"> / </div>
-                <div class="headField" style="width:1.12in"><input class="stored" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div class="headField" style="width:1.37in"><input class="stored autocomplete" id="fhwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:120px"> / </div>
+                <div class="headField" style="width:1.12in"><input class="stored integer" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
                 <div class="headField" style="width:0.8in">Visit date:</div>
                 <div class="headField" style="width:2.4in"><input class="stored datepicker" id="visitDate" data-lmd-valid-required="yes" style="width:1.0in"> (d/m/y)</div>
                 <div style="clear:both; height:3px;"></div>
@@ -104,8 +104,8 @@
                 <div class="headField" style="width:2.5in"><input class="stored" id="childName" style="width:1.99in"></div>
                 <div class="headField" style="width:0.8in">Child age:</div>
                 <div class="headField" style="width:2.4in">
-                    <input class="stored" id="childAge_years" style="width:0.5in"> (years)&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="stored" id="childAge_months" style="width:0.5in"> (months)
+                    <input class="stored integer" id="childAge_years" style="width:0.5in"> (years)&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="stored integer" id="childAge_months" style="width:0.5in"> (months)
                 </div>
                 <div style="clear:both; height:3px;"></div>
                 
@@ -156,7 +156,7 @@
                         </td>
                         <td class="C2">
                             IF YES, how long?&nbsp;
-                            <input style="width:25px" type="text" class="A_cough_howLong" id="id">
+                            <input style="width:25px" type="text" class="stored integer" id="A_cough_howLong">
                             (days)
                         </td>
                         <td class="C3">
@@ -180,7 +180,7 @@
                         </td>
                         <td class="C2">
                             IF YES, how long?&nbsp;
-                            <input style="width:25px" type="text" class="stored" id="A_fever_howLong">
+                            <input style="width:25px" type="text" class="stored integer" id="A_fever_howLong">
                             (days)
                         </td>
                         <td class="C3">
@@ -202,7 +202,7 @@
                         </td>
                         <td class="C2">
                             IF YES, how long?&nbsp;
-                            <input style="width:25px" type="text" class="stored" id="A_diarrhea_howLong">
+                            <input style="width:25px" type="text" class="stored integer" id="A_diarrhea_howLong">
                             (days)
                         </td>
                         <td class="C3">
@@ -299,7 +299,7 @@
                         <td class="C12" colspan="2">
                             <span class="blackBox">Do not touch child</span><br>
                             IF COUGH, count breaths in one minute:&nbsp;&nbsp;
-                            <input style="width:25px" type="text" class="stored" id="A_bpm_firstCheck">
+                            <input style="width:25px" type="text" class="stored integer" id="A_bpm_firstCheck">
                             (BPM)<br>
                             Check for fast breathing:<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;Above 50 BPM (age 2-11 months)<br>
@@ -309,7 +309,7 @@
                             <input type="checkbox" class="stored" id="A_fastBreathing_first_no">No
                             &nbsp;&nbsp;&nbsp;&nbsp;IF YES, count breaths again<br>
                             Second check: 
-                            <input style="width:25px" type="text" class="stored" id="A_bpm_secondCheck">
+                            <input style="width:25px" type="text" class="stored integer" id="A_bpm_secondCheck">
                             (BPM)<br>
                             Fast breathing on the second check?&nbsp;&nbsp;
                             <input type="checkbox" class="stored" id="A_fastBreathing_second_yes">Yes&nbsp;&nbsp;

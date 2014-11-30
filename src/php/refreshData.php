@@ -22,7 +22,7 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
 }
 
 // 2. Update "villages" (array)
-$query = "SELECT villageName FROM tbl_data_village WHERE 1";
+$query = "SELECT villageName FROM tbl_data_village";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_villages = array();
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
@@ -32,12 +32,26 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
     array_push($json_villages,$villageName);
 }
 
+// 3. Update "fhws" (array)
+$query = "SELECT staffName FROM tbl_data_staff WHERE staffType='F'";
+$result = mysqli_query($cxn, $query) or die("failure");
+$json_fhws = array();
+for ($i=1;$i<=mysqli_num_rows($result);$i++)
+{
+    $row = mysqli_fetch_assoc($result);
+    extract($row);
+    array_push($json_fhws,$staffName);
+}
+
 // !!!!! build error handler !!!!!
+
+// !!!!! this code is WET (with deqa.js); refactor !!!!!
 
 // Return results
 echo '{' ;
 echo '"deqaUsers":' . json_encode($json_deqaUsers) . ", " ;
-echo '"villages":' . json_encode($json_villages) ;
+echo '"villages":' . json_encode($json_villages) . ", " ;
+echo '"fhws":' . json_encode($json_fhws) ;
 echo '}' ;
 
 ?>

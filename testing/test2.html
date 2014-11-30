@@ -4,7 +4,7 @@
     
     <head>
         
-        <title>FHW Form (SCH) - Sick Child</title>
+        <title>FHW Form (BDM) - Births, Deaths, Movements</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -19,46 +19,31 @@
         <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
         
         <style>
+            .inner_L { width: 3.0in; }
+            .inner_C { width: 2.3in; }
+            .inner_R { width: 2.0in; }
             
-            .meBox { position:relative; top:-5px; }
+            .meBox { position:relative; top:15px; }
             
-            .supBox {
-                position:relative;
-                top:-10px;
-                border:2px solid black;
-                padding:5px;
-                margin-bottom:15px;
-                text-align:center;
+            .mvmtTable { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
+            .mvmtTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; height:100px; }
+            .mvmtTable td { border: 1px solid black; padding:0px; text-align:center; }
+            
+            .rotate div { position:absolute; }
+            .rotate {
+                position:absolute;
+                font-weight:bold;
+                -webkit-transform:rotate(90deg);
             }
             
-            .supBox input[type='text'] {
-                width:60px;
-                margin-right:10px;
-            }
-            
-            .scTable td {
-                border: 1px solid black;
-                padding: 3px;
-                font-size:12px;
-                overflow:hidden;
-            }
-            
-            .scTable .NB {
-                border:none;
-            }
-            
-            .scTable .C1 { width:175px; max-width:175px; }
-            .scTable .C2 { width:175px; max-width:175px; }
-            .scTable .C3 { width:175px; max-width:175px; padding-left:5px; }
-            .scTable .C4 { width:175px; max-width:175px; padding-left:5px; }
-            .C12 { width:350px; max-width:350px; }
-            
-            .box1 { float:left; width:160px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
-            .box2 { float:left; width:470px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
-            .box3 { float:left; width:160px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
-            .box4 { float:left; width:470px; border:1px solid black; padding:2px; font-size:12px; padding-left:5px; }
-            .rightArrow { float:left; width:55px; padding:2px; }
-            
+            .c1 { width:0.3in; }
+            .c2 { width:0.7in; border:none; margin-right:1px; margin-left:1px; }
+            .c3 { width:0.7in; border:none; margin-right:1px; margin-left:1px; }
+            .c4 { width:0.97in; border:none; margin-right:1px; margin-left:1px; }
+            .c5-8 { width:25px; }
+            .c9 { width:1.0in; border:none; margin-right:1px; margin-left:1px; }
+            .c10 { width:0.8in; }
+            .c11 { width:0.5in; border:none; margin-right:1px; margin-left:1px; }
         </style>
         
     </head>
@@ -79,7 +64,7 @@
             <!-- START: FORM HEADER -->
             <div class="formHeader">
                 <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
-                <span class="h2">FHW: Sick Child</span>
+                <span class="h2">FHW: Births, Deaths, Movements</span>
                 <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
                 <div style="clear:both"></div>
             </div>
@@ -88,547 +73,553 @@
             <div class="thickBox">
                 
                 <div>
-                    <b>Complete this form every time you treat a sick child (2 months - 5 years).</b>
+                    <b>Use this form to record every birth, death, and movement in your community. For births and community members moving in, assign a new member ID using "FHW: Member ID Assignment List". For new houesholds, assign a new household ID using "FHW: Household ID Assignment List".</b>
                 </div>
                 
                 <hr>
                 
-                <div class="headField" style="width:1.2in">FHW name/ID:</div>
+                <div class="headField" style="width:1.05in">FHW name/ID:</div>
                 <div class="headField" style="width:1.37in"><input class="stored" id="fhwName" data-lmd-valid-required="yes" style="width:120px"> / </div>
-                <div class="headField" style="width:1.12in"><input class="stored" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
-                <div class="headField" style="width:0.8in">Visit date:</div>
-                <div class="headField" style="width:2.4in"><input class="stored datepicker" id="visitDate" data-lmd-valid-required="yes" style="width:1.0in"> (d/m/y)</div>
+                <div class="headField" style="width:1.0in"><input class="stored" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
                 <div style="clear:both; height:3px;"></div>
-                
-                <div class="headField" style="width:1.2in">Child name:</div>
-                <div class="headField" style="width:2.5in"><input class="stored" id="childName" style="width:1.99in"></div>
-                <div class="headField" style="width:0.8in">Child age:</div>
-                <div class="headField" style="width:2.4in">
-                    <input class="stored" id="childAge_years" style="width:0.5in"> (years)&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="stored" id="childAge_months" style="width:0.5in"> (months)
-                </div>
-                <div style="clear:both; height:3px;"></div>
-                
-                <div class="headField" style="width:1.2in">Child member ID:</div>
-                <div class="headField" style="width:2.5in"><input class="stored" id="memberID" style="width:1.99in" data-lmd-valid-required="yes"></div>
-                <div class="headField" style="width:0.8in">Source:</div>
-                <div class="headField" style="width:2.5in; font-size:10px">
-                    <div style="float:left; width:120px;"><input class="stored" id="source_parentCameToMe" type="checkbox">Parent came to me</div>
-                    <div style="float:left; width:120px;"><input class="stored" id="source_noticedChildWasSick" type="checkbox">Noticed child was sick</div>
-                    <br>
-                    <div style="float:left; width:120px;"><input class="stored" id="source_wellChildVisit" type="checkbox">Well child visit</div>
-                    <div style="float:left; width:120px;"><input class="stored" id="source_other" type="checkbox">Other</div>
-                </div>
-                <div style="clear:both"></div>
                 
             </div>
             <!-- END: FORM HEADER -->
-            
-            
-            
-            <!-- START: SECTION A -->
-            <b>A. Identify problems</b>
-            &nbsp;
-            <span class="blackBox">Look. Do not touch child.</span>
-            <div style="height:3px"></div>
-            <div>
-                
-                <table class="scTable">
-                    
-                    <!-- Row 01 -->
-                    <tr>
-                        <td colspan="2" class="NB"></td>
-                        <td style="text-align:center"><b>Danger signs</b></td>
-                        <td style="text-align:center"><b>Sick</b></td>
-                    </tr>
-                    
-                    <!-- Row 02 -->
-                    <td colspan="4" style="font-size:14px"><b>Ask about each symptom.</b></td>
-                    
-                    <tr>
-                        <!--<td style="width:90px">-->
-                        <td class="C1">
-                            <div style="float:left; width:70px">Cough?</div>
-                            <div style="float:left">
-                                <input type="checkbox" class="stored" id="A_cough_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_cough_no">No
-                            </div>
-                        </td>
-                        <td class="C2">
-                            IF YES, how long?&nbsp;
-                            <input style="width:25px" type="text" class="A_cough_howLong" id="id">
-                            (days)
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_cough_dangerSign">Cough (21 days or more)
-                        </td>
-                        <td class="C4">
-                            <input type="checkbox" class="stored" id="A_cough_sick">Cough (less than 21 days)
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 03 -->
-                    <tr>
-                        <td class="C1">
-                            <div style="float:left; width:70px">Fever?</div>
-                            <div style="float:left">
-                                <input type="checkbox" class="stored" id="A_fever_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_fever_no">No
-                            </div>
-                            <div style="clear:both"></div>
-                            <div><span class="blackBox">Do not take temp</span></div>
-                        </td>
-                        <td class="C2">
-                            IF YES, how long?&nbsp;
-                            <input style="width:25px" type="text" class="stored" id="A_fever_howLong">
-                            (days)
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_fever_dangerSign">Fever (7 days or more)
-                        </td>
-                        <td class="C4">
-                            <input type="checkbox" class="stored" id="A_fever_sick">Fever (less than 7 days)
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 04 -->
-                    <tr>
-                        <td class="C1">
-                            <div style="float:left; width:70px">Diarrhea?</div>
-                            <div style="float:left">
-                                <input type="checkbox" class="stored" id="A_diarrhea_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_diarrhea_no">No
-                            </div>
-                        </td>
-                        <td class="C2">
-                            IF YES, how long?&nbsp;
-                            <input style="width:25px" type="text" class="stored" id="A_diarrhea_howLong">
-                            (days)
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_diarrhea_dangerSign">Diarrhea (14 days or more)
-                        </td>
-                        <td class="C4" rowspan="2">
-                            <input type="checkbox" class="stored" id="A_diarrhea_sick">Diarrhea (less than 14 days)
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 05 -->
-                    <tr>
-                        <td class="C12" colspan="2">
-                            <div style="float:left; width:230px">IF YES, any blood in stool (poo poo)?</div>
-                            <div style="float:left">
-                                <input type="checkbox" class="stored" id="A_bloodInStool_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_bloodInStool_no">No
-                            </div>
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_bloodInStool_dangerSign">Blood in stool
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 06 -->
-                    <tr>
-                        <td class="C12" colspan="2">
-                            <div style="float:left; width:230px">Convulsions (jerking) in the last month?</div>
-                            <div style="float:left">
-                                <input type="checkbox" class="stored" id="A_convulsions_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_convulsions_no">No
-                            </div>
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_convulsions_dangerSign">Convulsions
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <!-- Row 07 -->
-                    <tr>
-                        <td class="C1">
-                            Problem drinking or feeding?&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_problemDrinkingOrFeeding_yes">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_problemDrinkingOrFeeding_no">No
-                        </td>
-                        <td class="C2">
-                            IF YES, not able to drink or eat anything?&nbsp;
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_problemDrinkingOrFeeding_dangerSign">Not able to drink or eat anything
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <!-- Row 08 -->
-                    <tr>
-                        <td class="C1">
-                            <div style="float:left; width:70px">Vomiting?</div>
-                            <div style="float:left">
-                                <input type="checkbox" class="stored" id="A_vomiting_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_vomiting_no">No
-                            </div>
-                        </td>
-                        <td class="C2">
-                            IF YES, vomits everything?&nbsp;
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_vomiting_dangerSign">Vomits everything
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <!-- Row 09 -->
-                    <tr>
-                        <td colspan="4" style="font-size:14px"><b>Look.</b></td>
-                    </tr>
-                    
-                    <!-- Row 10 -->
-                    <tr>
-                        <td class="C12" colspan="2">
-                            Chest indrawing?&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_chestIndrawing_yes">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_chestIndrawing_no">No
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_chestIndrawing_dangerSign">Chest indrawing
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <!-- Row 11 -->
-                    <tr>
-                        <td class="C12" colspan="2">
-                            <span class="blackBox">Do not touch child</span><br>
-                            IF COUGH, count breaths in one minute:&nbsp;&nbsp;
-                            <input style="width:25px" type="text" class="stored" id="A_bpm_firstCheck">
-                            (BPM)<br>
-                            Check for fast breathing:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;Above 50 BPM (age 2-11 months)<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;Above 40 BPM (age 1-5 years)<br>
-                            Fast breathing?&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_fastBreathing_first_yes">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_fastBreathing_first_no">No
-                            &nbsp;&nbsp;&nbsp;&nbsp;IF YES, count breaths again<br>
-                            Second check: 
-                            <input style="width:25px" type="text" class="stored" id="A_bpm_secondCheck">
-                            (BPM)<br>
-                            Fast breathing on the second check?&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_fastBreathing_second_yes">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="A_fastBreathing_second_no">No
-                        </td>
-                        <td></td>
-                        <td class="C4">
-                            <input type="checkbox" class="stored" id="A_fastBreathing_sick">Fast breathing
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 12 -->
-                    <tr>
-                        <td class="C12" colspan="2">
-                            <div style="float:left; width:180px">Very sleepy or unconscious?</div>
-                            <div style="float:left; width:100px">
-                                <input type="checkbox" class="stored" id="A_verySleepy_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_verySleepy_no">No
-                            </div>
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_verySleepy_dangerSign">Very sleepy or unconscious
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <!-- Row 13 -->
-                    <tr>
-                        <td colspan="4">
-                            <span class="blackBox">Do not perform MUAC</span>
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 14 -->
-                    <tr>
-                        <td class="C12" colspan="2">
-                            <div style="float:left; width:180px">Swelling of both feet?</div>
-                            <div style="float:left; width:100px">
-                                <input type="checkbox" class="stored" id="A_swellingOfBothFeet_yes">Yes&nbsp;&nbsp;
-                                <input type="checkbox" class="stored" id="A_swellingOfBothFeet_no">No
-                            </div>
-                            <div style="clear:both"></div>
-                            <div><span class="blackBox">Look. Do not touch child.</span></div>
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_swellingOfBothFeet_dangerSign">Swelling of both feet
-                        </td>
-                        <td></td>
-                    </tr>
-                    
-                    <!-- Row 15 -->
-                    <tr>
-                        <td class="C12 NB" colspan="2">
-                        </td>
-                        <td class="C3 NB" style="text-align:center">
-                            <img src="/LastMileData/res/arrow_down_v20140916.png">
-                        </td>
-                        <td class="C4 NB" style="text-align:center">
-                            <img src="/LastMileData/res/arrow_down_v20140916.png">
-                        </td>
-                    </tr>
-            <!-- END: SECTION A -->
-            
-            
-            
-            <!-- START: SECTION B -->
-            
-                    <!-- Row 16 -->
-                    <tr>
-                        <td class="C12 NB" colspan="2"><b style="font-size:14px">B. Decision, REFER or TREAT</b></td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="B_refer"> <b>REFER</b>. IF ANY danger signs, refer to facility (go to section C).
-                        </td>
-                        <td class="C4">
-                            <input type="checkbox" class="stored" id="B_treat"> <b>TREAT</b>. IF NO danger signs, treat at home (go to section D).
-                        </td>
-                    </tr>
-                    
-                </table>
-                
-                
-            </div>
-            <!-- END: SECTION B -->
-            
-            
-            
-        </div>
-        <!-- END: PAGE 1 -->
-        
-        
-        
-        <!-- START: PAGE 2 -->
-        <div class="page">
-            
-            
-            
-            <!-- START: SECTION C -->
-            <b>C. Refer to health facility</b>
-            <div class="thickBox">
-                
-                <div style="margin-bottom:5px">
-                    <input type="checkbox" class="stored" id="C_explain"> Explain why the child needs to go to the health facility. Give first dose of treatment.
-                    &nbsp;<span class="blackBox">Do not touch child.</span>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <div class="box1">
-                        IF DIARRHEA (14 days or more OR blood in stool)
-                    </div>
-                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
-                    <div class="box2">
-                        <input type="checkbox" class="stored" id="C_diarrhea_giveORS"> If child can drink, give ORS right away
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <div class="box1">
-                        IF FEVER (7 days or more)
-                    </div>
-                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
-                    <div class="box2">
-                        <input type="checkbox" class="stored" id="C_fever_giveACT"> Give one dose of paracetamol for fever.<br>
-                        <input type="checkbox" class="stored" id="C_fever_giveACT"> Give one dose of oral antimalarial (ACT) (see dose card).<br>
-                        <input type="checkbox" class="stored" id="C_fever_teach"> Teach caregiver to give first dose of ACT now. Advise to give next doses for 2 more days if unable to refer to facility.<br>
-                        <input type="checkbox" class="stored" id="C_fever_advise"> Advise a sponge bath and keep child as cool as possible.
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <div class="box1">
-                        IF CHEST INDRAWING
-                    </div>
-                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
-                    <div class="box2">
-                        <input type="checkbox" class="stored" id="C_ari_giveAmox"> If child can drink, give first dose of oral antibiotics (amoxicillin) (see dose card)
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <input type="checkbox" class="stored" id="C_giveFluids"> For any sick child who can drink, advise to give fluids and keep feeding.
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <input type="checkbox" class="stored" id="C_keepWarm"> Advise to keep child warm, if no fever.
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <input type="checkbox" class="stored" id="C_completeReferralForm"> Complete "FHW Form: Referral". Arrange transport and referral.
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Does child go to health center?
-                    &nbsp;
-                    <input type="checkbox" class="stored" id="C_childGoes_yes">Yes 
-                    &nbsp;&nbsp;
-                    <input type="checkbox" class="stored" id="C_childGoes_no">No
-                </div>
-                
-            </div>
-            <!-- END: SECTION C -->
-            
-            
-            
-            <!-- START: SECTION D -->
-            <b>D. Treat at home and advise caregiver</b>
-            <div class="thickBox">
-                
-                <div style="margin-bottom:5px">
-                    <div class="box3">
-                        IF DIARRHEA (less than 14 days and no blood in stool)
-                    </div>
-                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
-                    <div class="box4">
-                        <input type="checkbox" class="stored" id="D_diarrhea_giveORS"> Give ORS. Help caregiver to give child ORS in front of you until child is not thirsty.<br>
-                        <input type="checkbox" class="stored" id="D_diarrhea_givePackets"> Give caregiver 2 ORS packets to use at home. Advise to give as much as the child wants, but at least 1/2 cup ORS solution after each stool (poo poo).<br>
-                        <input type="checkbox" class="stored" id="D_diarrhea_giveZinc"> Give 1 dose of zinc supplement daily for 10 days (see dose card). Help caregiver give first dose now.
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <div class="box3">
-                        IF FEVER (less than 7 days)
-                    </div>
-                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
-                    <div class="box4">
-                        <div style="height:20px"><span class="blackBox">Do not take temp. Do not do RDT.</span><br></div>
-                        <input type="checkbox" class="stored" id="D_fever_giveACT"> Give one dose of paracetamol for fever.<br>
-                        <input type="checkbox" class="stored" id="D_fever_giveACT"> Give one dose antimalarial (ACT) for fever (see dose card).<br>
-                        <input type="checkbox" class="stored" id="D_fever_teach"> Teach caregiver to give first dose now. Advise to give next dose for 2 more days.<br>
-                        <input type="checkbox" class="stored" id="D_fever_advise"> Advise sponge bath and keep child as cool as possible.
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <div class="box3">
-                        IF FAST BREATHING (pneumonia)
-                    </div>
-                    <div class="rightArrow"><img src="/LastMileData/res/arrow_right_v20140916.png"></div>
-                    <div class="box4">
-                        <input type="checkbox" class="stored" id="D_ari_giveAmox"> Give oral antibiotic (amoxicillin) two times a day for five days (see dose card).<br>
-                        <input type="checkbox" class="stored" id="D_ari_teach"> Teach caregiver to give first dose now.
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-                
-                <div style="margin-bottom:5px">
-                    <input type="checkbox" class="stored" id="D_advise"> Advise the caregiver to give more fluids and continue feeding.
-                </div>
-                
-                
-            </div>
-            <!-- END: SECTION D -->
 
             
             
-            <!-- START: SECTION E -->
-            <div style="margin-bottom:5px">
-                <b>E. If OTHER PROBLEM you cannot treat, refer child to facility. Complete "FHW Form: Referral"</b>
-            </div>
-            <!-- END: SECTION E -->
-            
-            
-            
-            <!-- START: SECTION F -->
-            <b>F. Return for follow-up for three days and re-assess.</b>
-            <span class="blackBox">Do Ebola screening tool first. Do not touch child.</span>
-            <div class="thickBox" style="margin-top:3px">
+            <!-- START: SECTION A -->
+            <div class="thickBox" style="position:relative">
                 
-                <table class="scTable">
+                <!-- Rotated columns 5-8 -->
+                <div class="rotate" style="top:45px; left:373px;">Birth</div>
+                <div class="rotate" style="top:45px; left:395px;">Death</div>
+                <div class="rotate" style="top:45px; left:406px;">Moved IN</div>
+                <div class="rotate" style="top:45px; left:424px;">Moved OUT</div>
+                
+                <!-- START: Registration table -->
+                <table class='mvmtTable'>
+                    
+                    <!-- Table header -->
                     <tr>
-                        <td>&nbsp;Review assessment at each visit. Visit date:</td>
-                        <td>
-                            Day 1:
-                            <input style="width:75px" type="text" class="stored datepicker" id="F_followup_date_1">
-                        </td>
-                        <td>
-                            Day 2:
-                            <input style="width:75px" type="text" class="stored datepicker" id="F_followup_date_2">
-                        </td>
-                        <td>
-                            Day 3:
-                            <input style="width:75px" type="text" class="stored datepicker" id="F_followup_date_3">
-                        </td>
+                        <th></th>
+                        <th>Household ID</th>
+                        <th>Member<br>ID</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Date of birth,<br>death, or<br>movement<br>(d/m/y)</th>
+                        <th>Sex</th>
+                        <th>Age</th>
                     </tr>
+                    
+
+                    <!-- Row 1 of 25 -->
                     <tr>
-                        <td>&nbsp;Child becomes more sick or has danger signs?</td>
-                        <td style="text-align:center">
-                            <input type="checkbox" class="stored" id="F_followup_yes_1">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="F_followup_no_1">No
+                        <td class='c1'>1</td>
+                        <td><input class='stored c2 integer' id='hhID_1'></td>
+                        <td><input class='stored c3' id='memID_1' data-lmd-valid-required='yes'></td>
+                        <td><input class='stored c4' id='firstName_1'></td>
+                        <td><input class='stored c4' id='lastName_1'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_1'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_1'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_1'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_1'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_1' data-lmd-valid-required='yes'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_1'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_1'>F&nbsp;
                         </td>
-                        <td style="text-align:center">
-                            <input type="checkbox" class="stored" id="F_followup_yes_2">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="F_followup_no_2">No
-                        </td>
-                        <td style="text-align:center">
-                            <input type="checkbox" class="stored" id="F_followup_yes_3">Yes&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" id="F_followup_no_3">No
-                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_1'></td>
                     </tr>
+
+                    <!-- Row 2 of 25 -->
                     <tr>
-                        <td colspan="4">
-                            &nbsp;<input type="checkbox" class="stored" id="F_ifAnyDangerSigns"> IF ANY danger signs OR child becomes more sick, REFER immediately. Complete "FHW Form: Referral".
+                        <td class='c1'>2</td>
+                        <td><input class='stored c2 integer' id='hhID_2'></td>
+                        <td><input class='stored c3' id='memID_2' ></td>
+                        <td><input class='stored c4' id='firstName_2'></td>
+                        <td><input class='stored c4' id='lastName_2'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_2'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_2'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_2'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_2'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_2'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_2'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_2'>F&nbsp;
                         </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_2'></td>
                     </tr>
+
+                    <!-- Row 3 of 25 -->
                     <tr>
-                        <td colspan="4">
-                            &nbsp;<input type="checkbox" class="stored" id="F_ifChildNotImproved"> IF child has not improved after 3 days, REFER. Complete "FHW Form: Referral".
+                        <td class='c1'>3</td>
+                        <td><input class='stored c2 integer' id='hhID_3'></td>
+                        <td><input class='stored c3' id='memID_3' ></td>
+                        <td><input class='stored c4' id='firstName_3'></td>
+                        <td><input class='stored c4' id='lastName_3'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_3'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_3'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_3'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_3'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_3'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_3'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_3'>F&nbsp;
                         </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_3'></td>
                     </tr>
+
+                    <!-- Row 4 of 25 -->
+                    <tr>
+                        <td class='c1'>4</td>
+                        <td><input class='stored c2 integer' id='hhID_4'></td>
+                        <td><input class='stored c3' id='memID_4' ></td>
+                        <td><input class='stored c4' id='firstName_4'></td>
+                        <td><input class='stored c4' id='lastName_4'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_4'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_4'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_4'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_4'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_4'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_4'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_4'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_4'></td>
+                    </tr>
+
+                    <!-- Row 5 of 25 -->
+                    <tr>
+                        <td class='c1'>5</td>
+                        <td><input class='stored c2 integer' id='hhID_5'></td>
+                        <td><input class='stored c3' id='memID_5' ></td>
+                        <td><input class='stored c4' id='firstName_5'></td>
+                        <td><input class='stored c4' id='lastName_5'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_5'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_5'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_5'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_5'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_5'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_5'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_5'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_5'></td>
+                    </tr>
+
+                    <!-- Row 6 of 25 -->
+                    <tr>
+                        <td class='c1'>6</td>
+                        <td><input class='stored c2 integer' id='hhID_6'></td>
+                        <td><input class='stored c3' id='memID_6' ></td>
+                        <td><input class='stored c4' id='firstName_6'></td>
+                        <td><input class='stored c4' id='lastName_6'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_6'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_6'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_6'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_6'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_6'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_6'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_6'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_6'></td>
+                    </tr>
+
+                    <!-- Row 7 of 25 -->
+                    <tr>
+                        <td class='c1'>7</td>
+                        <td><input class='stored c2 integer' id='hhID_7'></td>
+                        <td><input class='stored c3' id='memID_7' ></td>
+                        <td><input class='stored c4' id='firstName_7'></td>
+                        <td><input class='stored c4' id='lastName_7'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_7'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_7'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_7'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_7'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_7'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_7'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_7'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_7'></td>
+                    </tr>
+
+                    <!-- Row 8 of 25 -->
+                    <tr>
+                        <td class='c1'>8</td>
+                        <td><input class='stored c2 integer' id='hhID_8'></td>
+                        <td><input class='stored c3' id='memID_8' ></td>
+                        <td><input class='stored c4' id='firstName_8'></td>
+                        <td><input class='stored c4' id='lastName_8'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_8'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_8'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_8'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_8'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_8'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_8'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_8'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_8'></td>
+                    </tr>
+
+                    <!-- Row 9 of 25 -->
+                    <tr>
+                        <td class='c1'>9</td>
+                        <td><input class='stored c2 integer' id='hhID_9'></td>
+                        <td><input class='stored c3' id='memID_9' ></td>
+                        <td><input class='stored c4' id='firstName_9'></td>
+                        <td><input class='stored c4' id='lastName_9'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_9'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_9'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_9'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_9'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_9'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_9'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_9'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_9'></td>
+                    </tr>
+
+                    <!-- Row 10 of 25 -->
+                    <tr>
+                        <td class='c1'>10</td>
+                        <td><input class='stored c2 integer' id='hhID_10'></td>
+                        <td><input class='stored c3' id='memID_10' ></td>
+                        <td><input class='stored c4' id='firstName_10'></td>
+                        <td><input class='stored c4' id='lastName_10'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_10'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_10'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_10'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_10'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_10'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_10'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_10'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_10'></td>
+                    </tr>
+
+                    <!-- Row 11 of 25 -->
+                    <tr>
+                        <td class='c1'>11</td>
+                        <td><input class='stored c2 integer' id='hhID_11'></td>
+                        <td><input class='stored c3' id='memID_11' ></td>
+                        <td><input class='stored c4' id='firstName_11'></td>
+                        <td><input class='stored c4' id='lastName_11'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_11'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_11'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_11'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_11'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_11'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_11'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_11'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_11'></td>
+                    </tr>
+
+                    <!-- Row 12 of 25 -->
+                    <tr>
+                        <td class='c1'>12</td>
+                        <td><input class='stored c2 integer' id='hhID_12'></td>
+                        <td><input class='stored c3' id='memID_12' ></td>
+                        <td><input class='stored c4' id='firstName_12'></td>
+                        <td><input class='stored c4' id='lastName_12'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_12'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_12'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_12'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_12'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_12'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_12'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_12'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_12'></td>
+                    </tr>
+
+                    <!-- Row 13 of 25 -->
+                    <tr>
+                        <td class='c1'>13</td>
+                        <td><input class='stored c2 integer' id='hhID_13'></td>
+                        <td><input class='stored c3' id='memID_13' ></td>
+                        <td><input class='stored c4' id='firstName_13'></td>
+                        <td><input class='stored c4' id='lastName_13'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_13'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_13'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_13'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_13'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_13'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_13'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_13'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_13'></td>
+                    </tr>
+
+                    <!-- Row 14 of 25 -->
+                    <tr>
+                        <td class='c1'>14</td>
+                        <td><input class='stored c2 integer' id='hhID_14'></td>
+                        <td><input class='stored c3' id='memID_14' ></td>
+                        <td><input class='stored c4' id='firstName_14'></td>
+                        <td><input class='stored c4' id='lastName_14'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_14'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_14'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_14'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_14'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_14'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_14'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_14'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_14'></td>
+                    </tr>
+
+                    <!-- Row 15 of 25 -->
+                    <tr>
+                        <td class='c1'>15</td>
+                        <td><input class='stored c2 integer' id='hhID_15'></td>
+                        <td><input class='stored c3' id='memID_15' ></td>
+                        <td><input class='stored c4' id='firstName_15'></td>
+                        <td><input class='stored c4' id='lastName_15'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_15'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_15'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_15'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_15'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_15'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_15'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_15'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_15'></td>
+                    </tr>
+
+                    <!-- Row 16 of 25 -->
+                    <tr>
+                        <td class='c1'>16</td>
+                        <td><input class='stored c2 integer' id='hhID_16'></td>
+                        <td><input class='stored c3' id='memID_16' ></td>
+                        <td><input class='stored c4' id='firstName_16'></td>
+                        <td><input class='stored c4' id='lastName_16'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_16'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_16'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_16'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_16'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_16'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_16'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_16'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_16'></td>
+                    </tr>
+
+                    <!-- Row 17 of 25 -->
+                    <tr>
+                        <td class='c1'>17</td>
+                        <td><input class='stored c2 integer' id='hhID_17'></td>
+                        <td><input class='stored c3' id='memID_17' ></td>
+                        <td><input class='stored c4' id='firstName_17'></td>
+                        <td><input class='stored c4' id='lastName_17'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_17'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_17'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_17'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_17'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_17'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_17'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_17'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_17'></td>
+                    </tr>
+
+                    <!-- Row 18 of 25 -->
+                    <tr>
+                        <td class='c1'>18</td>
+                        <td><input class='stored c2 integer' id='hhID_18'></td>
+                        <td><input class='stored c3' id='memID_18' ></td>
+                        <td><input class='stored c4' id='firstName_18'></td>
+                        <td><input class='stored c4' id='lastName_18'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_18'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_18'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_18'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_18'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_18'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_18'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_18'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_18'></td>
+                    </tr>
+
+                    <!-- Row 19 of 25 -->
+                    <tr>
+                        <td class='c1'>19</td>
+                        <td><input class='stored c2 integer' id='hhID_19'></td>
+                        <td><input class='stored c3' id='memID_19' ></td>
+                        <td><input class='stored c4' id='firstName_19'></td>
+                        <td><input class='stored c4' id='lastName_19'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_19'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_19'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_19'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_19'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_19'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_19'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_19'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_19'></td>
+                    </tr>
+
+                    <!-- Row 20 of 25 -->
+                    <tr>
+                        <td class='c1'>20</td>
+                        <td><input class='stored c2 integer' id='hhID_20'></td>
+                        <td><input class='stored c3' id='memID_20' ></td>
+                        <td><input class='stored c4' id='firstName_20'></td>
+                        <td><input class='stored c4' id='lastName_20'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_20'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_20'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_20'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_20'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_20'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_20'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_20'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_20'></td>
+                    </tr>
+
+                    <!-- Row 21 of 25 -->
+                    <tr>
+                        <td class='c1'>21</td>
+                        <td><input class='stored c2 integer' id='hhID_21'></td>
+                        <td><input class='stored c3' id='memID_21' ></td>
+                        <td><input class='stored c4' id='firstName_21'></td>
+                        <td><input class='stored c4' id='lastName_21'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_21'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_21'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_21'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_21'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_21'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_21'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_21'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_21'></td>
+                    </tr>
+
+                    <!-- Row 22 of 25 -->
+                    <tr>
+                        <td class='c1'>22</td>
+                        <td><input class='stored c2 integer' id='hhID_22'></td>
+                        <td><input class='stored c3' id='memID_22' ></td>
+                        <td><input class='stored c4' id='firstName_22'></td>
+                        <td><input class='stored c4' id='lastName_22'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_22'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_22'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_22'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_22'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_22'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_22'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_22'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_22'></td>
+                    </tr>
+
+                    <!-- Row 23 of 25 -->
+                    <tr>
+                        <td class='c1'>23</td>
+                        <td><input class='stored c2 integer' id='hhID_23'></td>
+                        <td><input class='stored c3' id='memID_23' ></td>
+                        <td><input class='stored c4' id='firstName_23'></td>
+                        <td><input class='stored c4' id='lastName_23'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_23'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_23'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_23'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_23'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_23'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_23'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_23'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_23'></td>
+                    </tr>
+
+                    <!-- Row 24 of 25 -->
+                    <tr>
+                        <td class='c1'>24</td>
+                        <td><input class='stored c2 integer' id='hhID_24'></td>
+                        <td><input class='stored c3' id='memID_24' ></td>
+                        <td><input class='stored c4' id='firstName_24'></td>
+                        <td><input class='stored c4' id='lastName_24'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_24'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_24'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_24'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_24'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_24'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_24'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_24'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_24'></td>
+                    </tr>
+
+                    <!-- Row 25 of 25 -->
+                    <tr>
+                        <td class='c1'>25</td>
+                        <td><input class='stored c2 integer' id='hhID_25'></td>
+                        <td><input class='stored c3' id='memID_25' ></td>
+                        <td><input class='stored c4' id='firstName_25'></td>
+                        <td><input class='stored c4' id='lastName_25'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='birth_25'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='death_25'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedIn_25'></td>
+                        <td class='c5-8'><input type='checkbox' class='stored' id='movedOut_25'></td>
+                        <td><input class='stored c9 datepicker' id='bdmDate_25'></td>
+                        <td class='c10'>
+                            <input type='checkbox' class='stored' id='sex_M_25'>M&nbsp;
+                            <input type='checkbox' class='stored' id='sex_F_25'>F&nbsp;
+                        </td>
+                        <td><input class='stored c11 integer' id='ageOrYOB_25'></td>
+                    </tr>
+
+
+                    
                 </table>
+                <!-- END: Registration table -->
+                
+                
                 
             </div>
-            <!-- END: SECTION F -->
+            <!-- END: SECTION A -->
             
             
             
             <!-- START: M&E Box -->
             <div class="meBox">
                 <span class="blackBox">M&E</span>
-                <span class="blackBox">SCH.02</span>
+                <span class="blackBox">BDM.02</span>
                 &nbsp;&nbsp;&nbsp;
                 DE Initials: <input class="stored" id="de_init">
                 DE Date: <input class="stored" id="de_date">
                 QA Initials: <input class="stored" id="qa_init">
                 QA Date: <input class="stored" id="qa_date">
             </div>
-            <!-- END: M&E Box -->
-            
-            
-            
-            <!-- START: SUP Box -->
-            <div class="supBox">
-                <span class="blackBox">SUP</span>
-                Initials: <input type="text" class="stored" id="sup_init">
-                Date: <input type="text" class="stored datepicker" id="sup_date">
-                Recording?
-                <input type="checkbox" class="stored" id="sup_recording_yes">Y
-                <input type="checkbox" class="stored" id="sup_recording_no">N
-                &nbsp;|
-                Diagnosis?
-                <input type="checkbox" class="stored" id="sup_diagnosis_yes">Y
-                <input type="checkbox" class="stored" id="sup_diagnosis_no">N
-                &nbsp;|
-                Treatment?
-                <input type="checkbox" class="stored" id="sup_treatment_yes">Y
-                <input type="checkbox" class="stored" id="sup_treatment_no">N
-            </div>
-            <!-- END: SUP Box -->
+            <!-- START: M&E Box -->
             
             
             
         </div>
-        <!-- END: PAGE 2 -->
+        <!-- END: PAGE 1 -->
         
         
         
@@ -642,7 +633,7 @@
         
         
         <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_sch_sickchild">
+        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_bdm_movements">
         <!-- END: Hidden fields -->
         
     </body>
