@@ -9,7 +9,7 @@
     
     <head>
         
-        <title>FHW Tool (EES) - Ebola Education + Screening Ledger</title>
+        <title>FHW Tool (EES 02) - Ebola Education + Screening Ledger</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>

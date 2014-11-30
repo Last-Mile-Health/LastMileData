@@ -63,18 +63,23 @@ CACHE:
 /LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html
 /LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html
 /LastMileData/src/forms/fhw_bdm02_movements.html
-/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html 
+/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html
 /LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html
+/LastMileData/src/forms/fhw_ees02_ebolaeducationscreeningledger.php
 /LastMileData/src/forms/fhw_kpi02_kpiassessment.html
+/LastMileData/src/forms/fhw_mat01_malariaassessment.html
 /LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html
 /LastMileData/src/forms/fhw_pni02_postnatalinitial.html
 /LastMileData/src/forms/fhw_ref02_referral.html
 /LastMileData/src/forms/fhw_reg02_registration.html
 /LastMileData/src/forms/fhw_sch02_sickchild.html
+/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
+/LastMileData/src/forms/prg_trl01_trainingledger.html
 /LastMileData/src/forms/util_householdIDAssignmentList.html
 /LastMileData/src/forms/util_memberIDAssignmentList.html
 
 # src >> forms (old)
+/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html
 /LastMileData/src/forms_old/fhw_esc02_ebolascreening.html
 /LastMileData/src/forms_old/fhw_esc03_ebolascreening.html
 /LastMileData/src/forms_old/fhw_sst04_ebolascreening.html
