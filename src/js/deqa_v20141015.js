@@ -354,15 +354,15 @@ $(document).ready(function(){
         
         // QA (FHW: Ebola Education + Screening Ledger)
         $('#qa_EES_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreeningledger.php";
+            targetForm = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.html";
             qaFormName = "FHW: Ebola Education + Screening Ledger";
-            pKey1_name = "";
-            pKey2_name = "";
+            pKey1_name = "memberID_1";
+            pKey2_name = "visitDate_1";
             pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
+            pKey1_label = "First Member ID";
+            pKey2_label = "First Visit Date";
             pKey3_label = "";
-            pKey_date = ""
+            pKey_date = "pKey2"
             launchQAModal();
         });
         
@@ -384,13 +384,13 @@ $(document).ready(function(){
         $('#qa_SST_05').click(function() {
             targetForm = "/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html";
             qaFormName = "FHW: Sickness Screening Tool";
-            pKey1_name = "";
-            pKey2_name = "";
+            pKey1_name = "memberID";
+            pKey2_name = "visitDate";
             pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
+            pKey1_label = "Member ID";
+            pKey2_label = "Visit Date";
             pKey3_label = "";
-            pKey_date = ""
+            pKey_date = "pKey2"
             launchQAModal();
         });
         

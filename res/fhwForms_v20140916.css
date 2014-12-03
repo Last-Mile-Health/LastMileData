@@ -1,6 +1,6 @@
 /* 
     Description:    Used for all FHW Forms
-    Last updated:   7-21-2014
+    Last updated:   2014-12-03
     By:             Avi
 */
 
@@ -47,6 +47,16 @@ input {
     width:9.9in;
     height:7.45in;
     page-break-after:always;
+}
+
+/* container for a single printer page */
+.deBox {
+    border:2px solid black;
+    margin:auto;
+    margin-top:30px;
+    padding:5px;
+    width:7.5in;
+    background-color:yellow;
 }
 
 /* Form headers */
@@ -181,6 +191,9 @@ input {
         display:none;
     }
     
+    /* Hide "data entry box" */
+    .deBox { display:none; }
+    
     /* Hide DE_Date and DE_Init inputs; these are replaced with dummy inputs #de_print_init and #de_print_date */
     #de_date, #de_init { display:none; }
     #de_print_init { display:inline; width:45px; }
@@ -205,7 +218,6 @@ input {
     input[type='checkbox'] {
         margin:0px;
     }
-    
     
     /* Show SUBMIT / CANCEL Buttons */
     .formButtons {

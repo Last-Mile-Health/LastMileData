@@ -174,7 +174,7 @@ $(document).ready(function() {
         // Reset errorMessages and errorFields; set disallowed characters RegExp
         var errorMessages = [];
         var errorFields = [];
-        var disallowed = new RegExp(/[`~#\$%\^&\*\+;\\\|<>]+/);
+        var disallowed = /[`~#\$%\^&\*\+;\\\|<>]+/;
         
         // Reset field background colors
         $('.stored[type!="checkbox"]').each(function() {
@@ -253,7 +253,25 @@ $(document).ready(function() {
                 }
             }
             
-            // Test third condition !!!!! build character limit here !!!!!
+            // Test: regex
+            // !!!!! Note: this may have problems if the regexp contains a single-quote (') or double-quote (") character !!!!!
+            if ($(this).attr('data-lmd-valid-regex')) {
+                
+                myRegEx = new RegExp($(this).attr('data-lmd-valid-regex'));
+                
+                if (!myRegEx.test(myValue)) {
+                    errorFields.push(myField);
+                    if ($(this).attr('data-lmd-valid-errormessage')) {
+                        errorMessages.push('Field "' + myField + '" ' + $(this).attr('data-lmd-valid-errormessage'));
+                    }
+                    else {
+                        errorMessages.push('Field "' + myField + '" must conform to the regex pattern: /' + $(this).attr('data-lmd-valid-regex') + '/');
+                    }
+                }
+                
+            }
+            
+            // Test: !!!!! build character limit here !!!!!
             if (1==0) {
                 errorFields.push(myField);
                 errorMessages.push('Field "' + myField + '" EM');
