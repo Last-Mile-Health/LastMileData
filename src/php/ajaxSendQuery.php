@@ -13,6 +13,9 @@ require_once("cxn.php");
 $queryString = $_POST['queryString'] ;
 $rKey = $_POST['rKey'] ;
 
+// Uncomment this line to debug queries
+//mysqli_query($cxn, 'INSERT INTO test (col_1) VALUES ("' . $queryString . '")');
+
 // Run query
 if ( $result = mysqli_query($cxn, $queryString) ) {
     // Send JSON back to AJAX success handler

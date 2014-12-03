@@ -10,8 +10,7 @@ $(document).ready(function(){
         var numRecords = 0;
         var numAjax_success = 0;
         var numAjax_fail = 0;
-        var ajaxRequests = [];
-        var ajaxErrorStatus = ""; // Possible values: "no records sent", "some records sent", or "all records sent"
+//        var ajaxErrorStatus = ""; // Possible values: "no records sent", "some records sent", or "all records sent"
         
         // Manipulate DOM; show "loading" GIF
         $('#sendRecords,#cancelModal_2').css('display','none');
@@ -78,97 +77,97 @@ $(document).ready(function(){
                                             var myData = {'queryString': queryString, 'rKey': rKey} ;
                                             
                                             // Create an AJAX request and push to ajaxRequests array
-                                            ajaxRequests.push(
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "/LastMileData/src/php/ajaxSendQuery.php",
-                                                    // !!!!! add a timeout !!!!!
-                                                    data: myData,
-                                                    dataType: "json",
-                                                    success: function(data) {
-                                                        
-                                                        // !!!!! Update DOM !!!!!
-                                                        // !!!!! Fill out the "RYG matrix" code !!!!!
-                                                        // !!!!! Test further using a simulated slow network connection !!!!!
-                                                        
-                                                        // Remove record from myRecordset
-                                                        numAjax_success++;
-                                                        delete myRecordset[data.rKeyDelete];
-                                                        console.log('ajax success!');
-                                                        
-                                                    },
-                                                    error: function(request, status, error) {
-                                                        
-                                                        // !!!!! Update DOM !!!!!
-                                                        
-                                                        // Increment AJAX respones counter
-                                                        numAjax_fail++;
-                                                        console.log('ajax error:');
-                                                        console.log(error);
-                                                    }
-                                                })
-                                            );
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "/LastMileData/src/php/ajaxSendQuery.php",
+                                                data: myData,
+                                                dataType: "json",
+                                                success: function(data) {
+
+                                                    // !!!!! Update DOM !!!!!
+                                                    // !!!!! Fill out the "RYG matrix" code !!!!!
+                                                    
+                                                    // Log success; remove record from myRecordset; increment AJAX success counter
+                                                    console.log('ajax success!');
+                                                    delete myRecordset[data.rKeyDelete];
+                                                    numAjax_success++;
+
+                                                },
+                                                error: function(request, status, error) {
+
+                                                    // !!!!! Update DOM !!!!!
+
+                                                    // Log failure; increment AJAX failure counter
+                                                    console.log('ajax error :/');
+                                                    numAjax_fail++;
+                                                }
+                                            })
                                         }
                                         
                                     }
                                     
-                                    // Send AJAX requests and apply done function when all are complete
-                                    var defer = $.when.apply($, ajaxRequests);
-                                    defer.then(function(){
+                                    var myTimer = setInterval(function(){
                                         
-                                        // The following two lines removes the file data.lmd
-                                            fs.root.getFile('data.lmd', {create: false}, function(fileEntry) {
-                                                fileEntry.remove(function() {
-                                                    
-                                                    // Write the "data.lmd" file with stringified myRecordset object (from which inserted records were removed)
-                                                    fs.root.getFile('data.lmd', {create:true}, function(fileEntry) {
-                                                        // Create a FileWriter object for our FileEntry (data.lmd)
-                                                        fileEntry.createWriter(function(fileWriter) {
-                                                            fileWriter.onwriteend = function(e) {
+                                        if(numRecords == numAjax_success + numAjax_fail) {
+                                            
+                                            // The following two lines removes the file data.lmd
+                                                fs.root.getFile('data.lmd', {create: false}, function(fileEntry) {
+                                                    fileEntry.remove(function() {
+
+                                                        // Write the "data.lmd" file with stringified myRecordset object (from which inserted records were removed)
+                                                        fs.root.getFile('data.lmd', {create:true}, function(fileEntry) {
+                                                            // Create a FileWriter object for our FileEntry (data.lmd)
+                                                            fileEntry.createWriter(function(fileWriter) {
+                                                                fileWriter.onwriteend = function(e) {
+
+                                                                    if (numRecords == numAjax_success) {
+                                                                        // Display success message
+                                                                        $('#sendRecords_text').html('Data upload complete.');
+                                                                    }
+                                                                    
+                                                                    else if (numRecords == numAjax_fail) {
+                                                                        // Display "full error" message
+                                                                        $('#sendRecords_text').html('No records were successfully sent.<br>Please try again later.');
+                                                                    }
+                                                                    
+                                                                    else if (numRecords == numAjax_success + numAjax_fail) {
+                                                                        // Display "partial error" message
+                                                                        $('#sendRecords_text').html('Only some records were sent successfully.<br>Please try again to send the remaining records.');
+                                                                    }
+                                                                    
+                                                                    else {
+                                                                        // Display "full error" message
+                                                                        $('#sendRecords_text').html('An unknown error occurred.<br>Please contact the database manager for support');
+                                                                    }
+                                                                    
+                                                                    // Close and reset modal box
+                                                                    closeAndResetModal();
+                                                                    
+                                                                };
+                                                                fileWriter.onerror = logError;
                                                                 
-                                                                if (numRecords == numAjax_success) {
-                                                                    // Display success message
-                                                                    $('#sendRecords_text').html('Data upload complete.');
-                                                                }
+                                                                // Create a new Blob and write it to data.lmd
+                                                                var blob = new Blob([JSON.stringify(myRecordset)], {type: 'text/plain'});
+                                                                fileWriter.write(blob);
                                                                 
-                                                                else if (numRecords == numAjax_success + numAjax_fail) {
-                                                                    // Display "partial error" message
-                                                                    $('#sendRecords_text').html('Only some records were sent successfully. Please try again to send the remaining records.');
-                                                                }
-                                                                
-                                                                else if (numRecords == numAjax_fail) {
-                                                                    // Display "full error" message
-                                                                    $('#sendRecords_text').html('No records were successfully sent. Please try again later.');
-                                                                }
-                                                                
-                                                                else {
-                                                                    // Display "full error" message
-                                                                    $('#sendRecords_text').html('An unknown error occurred. Please contact the database manager for support');
-                                                                }
-                                                                
-                                                                // Close and reset modal box
-                                                                closeAndResetModal();
-                                                                
-                                                            };
-                                                            fileWriter.onerror = logError;
-                                                            // Create a new Blob and write it to data.lmd
-                                                            var blob = new Blob([JSON.stringify(myRecordset)], {type: 'text/plain'});
-                                                            fileWriter.write(blob);
+                                                            }, logError);
                                                         }, logError);
+                                                        
+                                                        // C. if failCounter==0, display success message
+
+                                                        // D. Display "no records" message in DOM !!!!! build this out !!!!!
+//                                                      $('#sendRecords_text').html('Building this out 2...');
+
+                                                        // D. Close modal box
+//                                                      closeAndResetModal();
+
                                                     }, logError);
-                                                    
-                                                    // C. if failCounter==0, display success message
-                                                    
-                                                    // D. Display "no records" message in DOM !!!!! build this out !!!!!
-//                                                    $('#sendRecords_text').html('Building this out 2...');
-                                                    
-                                                    // D. Close modal box
-//                                                    closeAndResetModal();
-                                                    
                                                 }, logError);
-                                            }, logError);
+                                            
+                                            clearInterval(myTimer);
+                                        }
                                         
-                                    });
+                                    },500)
                                     
                                 }
                             };

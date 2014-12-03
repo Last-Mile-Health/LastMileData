@@ -1,16 +1,20 @@
 <?php
 
-for($i=1;$i<=23;$i++) {
-Echo "                    <tr>\n";
-Echo "                        <td><input id='memberName_$i' class='stored c1'></td>\n";
-Echo "                        <td><input disabled class='c2'></td>\n";
-Echo "                        <td><input disabled class='c3'></td>\n";
-Echo "                        <td><input disabled class='c4'></td>\n";
-Echo "                        <td><input id='memberID_$i' class='stored c5'></td>\n";
-Echo "                        <td><input id='visitDate_$i' class='stored datepicker c6'></td>\n";
-Echo "                        <td><input id='screedingCodes_$i' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>\n";
-Echo "                        <td><input id='educationCodes_$i' class='stored c8' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>\n";
-Echo "                    </tr>\n";
+for($i=1;$i<=15;$i++) {
+Echo "                        <!-- Row $i of 15 -->\n";
+Echo "                        <tr>\n";
+Echo "                            <td>$i</td>\n";
+Echo "                            <td><input class='stored c2' id='firstName_$i'></td>\n";
+Echo "                            <td><input class='stored c3' id='lastName_$i'></td>\n";
+Echo "                            <td><input class='stored c4' id='staffID_$i'></td>\n";
+Echo "                            <td>\n";
+Echo "                                <input type='checkbox' class='stored' id='sex_M_$i'>M&nbsp;\n";
+Echo "                                <input type='checkbox' class='stored' id='sex_F_$i'>F&nbsp;\n";
+Echo "                            </td>\n";
+Echo "                            <td><input class='stored c6' id='organization_$i' data-lmd-valid-select='[" . '"Last Mile Health","County Health Team","Partners In Health"' . "]'></td>\n";
+Echo "                            <td><input class='stored c7' id='location_$i' data-lmd-valid-select='[" . '"Grand Gedeh","Rivercess","Monrovia"' . "]'></td>\n";
+Echo "                            <td><input class='stored c8' id='role_$i' data-lmd-valid-select='[" . '"Frontline Health Worker","FHW Leader","Clinical Mentor","OIC","Physician Assistant","Nurse Aide","Nurse","Lab Technician"' . "]'></td>\n";
+Echo "                        </tr>\n\n";
     
 }
 ?>

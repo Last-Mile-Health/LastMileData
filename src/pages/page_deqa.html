@@ -58,25 +58,11 @@
                 <p>This section is meant to be used by our M&E staff. This section can be accessed offline when no internet connection is present.</p>
             </div>
             
-            <!-- Header -->
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>Data Entry</h2>
-                    <p>Click on one of the buttons below to perform data entry.</p>
-                </div>
-                <div class="col-md-4">
-                    <h2>Quality Assurance</h2>
-                    <p>Click on one of the buttons below to perform data QA.</p>
-                </div>
-                <div class="col-md-4">
-                    <h2>Database Management</h2>
-                    <p>Functions to be used only by the database manager.</p>
-                </div>
-            </div>
-            
             <!-- Current forms -->
             <div id="currentVersions_div" class="row">
                 <div class="col-md-4">
+                    <h2>Data Entry</h2>
+                    <p>Click on one of the buttons below to perform data entry.</p>
                     <p><a href="/LastMileData/src/forms/0_testDE.html" class="btn btn-success">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_reg02_registration.html" class="btn btn-success">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_kpi02_kpiassessment.html" class="btn btn-success">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.02]</b></a></p>
@@ -95,6 +81,8 @@
                     <p><a href="/LastMileData/src/forms/prg_trl01_trainingledger.html" class="btn btn-success">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
                 </div>
                 <div class="col-md-4">
+                    <h2>Quality Assurance</h2>
+                    <p>Click on one of the buttons below to perform data QA.</p>
                     <p><a id="qa_TST" href="#" class="btn btn-primary">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
                     <p><a id="qa_REG_02" href="#" class="btn btn-primary">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
                     <p><a id="qa_KPI_02" href="#" class="btn btn-primary">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.02]</b></a></p>
@@ -113,6 +101,8 @@
                     <p><a id="qa_TRL_01" href="#" class="btn btn-primary">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
                 </div>
                 <div class="col-md-4">
+                    <h2>Database Management</h2>
+                    <p>Functions to be used only by the database manager.</p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sendRecordsModal" title="Click here to send records to the MySQL Database. Requires an active internet connection. This should ideally be done after data quality assurance has been performed.">Send Records</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#refreshDataModal" title="Click here to refresh system data. Should be done at least once a month. Requires an active internet connection.">Refresh system data</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#downloadDataFileModal" title="Click here to download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
@@ -133,16 +123,22 @@
             <!-- Old versions of forms -->
             <div id="oldVersions_div" class="row" style="display:none">
                 <div class="col-md-4">
+                    <h2>Data Entry</h2>
+                    <p>Click on one of the buttons below to perform data entry.</p>
                     <p><a href="/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html" class="btn btn-success">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.01]</b></a></p>
                     <p><a href="/LastMileData/src/forms_old/fhw_esc02_ebolascreening.html" class="btn btn-success">FHW: Ebola Screening Tool &nbsp;&nbsp;<b>[ESC.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms_old/fhw_esc03_ebolascreening.html" class="btn btn-success">FHW: Ebola Screening Tool &nbsp;&nbsp;<b>[ESC.03]</b></a></p>
                     <p><a href="/LastMileData/src/forms_old/fhw_sst04_ebolascreening.html" class="btn btn-success">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.04]</b></a></p>
+                    <br><br>
                 </div>
                 <div class="col-md-4"> <!-- !!!!! modify; cross-check this code with DEQA.js !!!!! -->
+                    <h2>Quality Assurance</h2>
+                    <p>Click on one of the buttons below to perform data QA.</p>
                     <p><a id="qa_ECM_01" href="#" class="btn btn-primary">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.01]</b></a></p>
                     <p><a id="qa_ESC_02" href="#" class="btn btn-primary">FHW: Ebola Screening Tool &nbsp;&nbsp;<b>[ESC.02]</b></a></p>
                     <p><a id="qa_ESC_03" href="#" class="btn btn-primary">FHW: Ebola Screening Tool &nbsp;&nbsp;<b>[ESC.03]</b></a></p>
                     <p><a id="qa_SST_04" href="#" class="btn btn-primary">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.04]</b></a></p>
+                    <br><br>
                 </div>
             </div>
         </div>        
