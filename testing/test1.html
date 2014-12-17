@@ -4,36 +4,87 @@
     
     <head>
         
-        <title>Program Form (TRL 01) - Training Ledger</title>
+        <title>Test page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
-        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
         <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/reusables/js/assert.js"></script>
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        
+        <style>
+            
+            body {
+                background-color:#333333;
+                font-size:16px;
+                font-weight:bold;
+            }
+            
+            #myDiv {
+                position:relative;
+                /*top:50px;*/
+                background-color:white;
+                width:600px;
+                height:400px;
+                margin:auto;
+                padding:3px;
+            }
+            
+        </style>
         
         <script>
-            $(document).ready(function(){
-                var i = 0
-                var myTimer = setInterval(function(){
-                    $('#myInput').val(i);
-                    i++;
-                },100)
-                
-                $('#myButton').click(function(){
-                    clearInterval(myTimer);
-                });
-                
+        $(document).ready(function(){
+            
+            myObj = {};
+            myObj.prop1 = 'hey';
+            var ct = 1;
+            myObj.prop2 = function myFunc1(){
+                if (ct<=3) {
+                    console.log('rep' + ct);
+                    ct++;
+                    myFunc1();
+                }
+            };
+            myObj.prop3 = function(){ console.log('logged 2'); };
+//            myObj.prop4 = myFunc2;
+            
+            
+            $('#innerDiv').html('you');
+            
+            $('#clickMe1').click(function(){
+                myObj.prop2();
+                myObj.prop3();
+//                myObj.prop4();
+//                myObj.prop5();
             });
+            
+        });
+        
+        function myFunc2(){
+            console.log('logged 3');
+        }
+        
         </script>
         
     </head>
     
-    <body>
+    <body id="myBody">
         
-        <br><br>
-        <button id='myButton'>Click Me</button>
-        <br><br>
-        <input id='myInput'>
+        <div style="height:20px"></div>
+        
+        <div id="myDiv">
+            <div id="innerDiv">
+                Hey
+            </div>
+            <button id="clickMe1" style="width:400px; height:50px">
+                Click me 1
+            </button>
+        </div>
+        
         
     </body>
     

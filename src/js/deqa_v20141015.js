@@ -201,7 +201,7 @@ $(document).ready(function(){
         $('#qa_REG_02').click(function() {
             targetForm = "/LastMileData/src/forms/fhw_reg02_registration.html";
             qaFormName = "FHW: Registration";
-            pKey1_name = "memberID_1";
+            pKey1_name = "memID_1";
             pKey2_name = "";
             pKey3_name = "";
             pKey1_label = "First Member ID";
@@ -310,8 +310,8 @@ $(document).ready(function(){
         });
         
         // QA (FHW: Sick Child)
-        $('#qa_SCH_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_sch02_sickchild.html";
+        $('#qa_SCH_03').click(function() {
+            targetForm = "/LastMileData/src/forms/fhw_sch03_sickchild.html";
             qaFormName = "FHW: Sick Child";
             pKey1_name = "Member ID";
             pKey2_name = "Visit date";
@@ -369,13 +369,13 @@ $(document).ready(function(){
         $('#qa_MAT_01').click(function() {
             targetForm = "/LastMileData/src/forms/fhw_mat01_malariaassessment.html";
             qaFormName = "FHW: Malaria Assessment Tool";
-            pKey1_name = "";
-            pKey2_name = "";
+            pKey1_name = "Member ID";
+            pKey2_name = "Visit date";
             pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
+            pKey1_label = "memberID";
+            pKey2_label = "visitDate";
             pKey3_label = "";
-            pKey_date = ""
+            pKey_date = "pKey2"
             launchQAModal();
         });
         
@@ -397,6 +397,20 @@ $(document).ready(function(){
         $('#qa_TRL_01').click(function() {
             targetForm = "/LastMileData/src/forms/prg_trl01_trainingledger.html";
             qaFormName = "Program: Training Ledger";
+            pKey1_name = "facilityName";
+            pKey2_name = "visitDate";
+            pKey3_name = "county";
+            pKey1_label = "Facility Name";
+            pKey2_label = "Visit Date";
+            pKey3_label = "County";
+            pKey_date = "pKey2"
+            launchQAModal();
+        });
+        
+        // QA (Facility: IPC MESH Tool)
+        $('#qa_MSH_01').click(function() {
+            targetForm = "/LastMileData/src/forms/fac_msh01_mesh.html";
+            qaFormName = "Facility: IPC MESH Tool";
             pKey1_name = "";
             pKey2_name = "";
             pKey3_name = "";
@@ -569,6 +583,24 @@ $(document).ready(function(){
             // !!!!! delete specific records from data.lmd !!!!!
             
            }, 1000 );
+        
+    });
+    
+    
+    
+    // (999) Generate EES Ledger click handler !!!!! temporary !!!!!
+    // Run this script when eesSubmit is clicked
+    $('#eesSubmit').click(function(){
+        
+        // !!!!! Should give a warning if fhwID and fhwName don't match !!!!!
+        
+        var fhwID = $('#eesFhwID').val();
+        var fhwName = $('#eesFhwName').val();
+        var myLocation = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.php";
+        myLocation += "?fhwID=" + fhwID;
+        myLocation += "&fhwName=" + fhwName;
+        
+        location.assign(myLocation);
         
     });
     
@@ -861,7 +893,7 @@ function parseRecordIntoSQL(currentRecord) {
     var notStored = ['table', 'type'];
     
     // Begin query string
-    var qs = "INSERT INTO lastmiledata." + currentRecord.table + " SET ";
+    var qs = "INSERT INTO " + currentRecord.table + " SET ";
     
     // Add key/value pairs to query string
     for(var currKey in currentRecord) {

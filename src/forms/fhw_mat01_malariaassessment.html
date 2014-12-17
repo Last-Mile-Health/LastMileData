@@ -115,18 +115,18 @@
             <div class="thickBox">
                 
                 <div class="headField" style="width:1.3in">FHW name/ID:</div>
-                <div class="headField" style="width:1.37in"><input class="stored" id="fhwName" data-lmd-valid-required="yes" style="width:120px"> / </div>
+                    <div class="headField" style="width:1.37in"><input class="stored" id="fhwName" data-lmd-valid-required="yes" style="width:120px"> / </div>
                 <div class="headField" style="width:1.02in"><input class="stored" id="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
                 <div class="headField" style="width:0.9in">Visit date:</div>
                 <div class="headField" style="width:2.4in"><input class="stored datepicker" id="visitDate" data-lmd-valid-required="yes" style="width:1.0in"> (d/m/y)</div>
                 <div style="clear:both; height:3px;"></div>
                 
                 <div class="headField" style="width:1.3in">Patient name:</div>
-                <div class="headField" style="width:2.4in"><input class="stored" id="childName" style="width:1.99in"></div>
+                <div class="headField" style="width:2.4in"><input class="stored" id="patientName" style="width:1.99in"></div>
                 <div class="headField" style="width:0.9in">Patient age:</div>
                 <div class="headField" style="width:2.4in">
-                    <input class="stored" id="childAge_years" style="width:0.5in"> (years)&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="stored" id="childAge_months" style="width:0.5in"> (months)
+                    <input class="stored" id="patientAge_years" style="width:0.5in"> (years)&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="stored" id="patientAge_months" style="width:0.5in"> (months)
                 </div>
                 <div style="clear:both; height:3px;"></div>
                 
@@ -145,23 +145,23 @@
                 <b>A. Perform "Sickness Screening Tool", handle special cases</b>
                 <div class="thickBox">
 
-                    <!-- Question 01 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         1. <i>If you have not done so already, screen the patient for Ebola (copy results onto the screening tool stapled to this sheet).</i>
                     </div>
                     <div class="inner_C C4b">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">Patient is not a suspect or probable case</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="A1_screened">Patient is not a suspect or probable case</div>
                     </div>
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 02 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         2. Patient is less than 2 months of age?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="A2_patientLessThan2_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="A2_patientLessThan2_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -169,13 +169,13 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 03 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         3. Patient has big belly?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="A3_patientHasBigBelly_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="A3_patientHasBigBelly_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -195,12 +195,12 @@
                 <b>B. Treat with ACT</b>
                 <div class="thickBox">
 
-                    <!-- Question 01 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         4. <i>Teach caregiver to provide one dose of oral antimalarial (ACT; see dose card).</i>
                     </div>
                     <div class="inner_C C4b">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">ACT given</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="B4_provideACT">ACT given</div>
                     </div>
                     <div style="clear:both"></div>
 
@@ -217,28 +217,28 @@
                 <b>C. Danger signs assessment</b>
                 <div class="thickBox">
                     
-                    <!-- Question 06 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         5. Do you have any of these symptoms?<br>
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:345px">
                             <table class="symptomTable">
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_abdominalPain_yes">Confusion or drowsiness&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_hiccoughs_yes">Vomiting everything</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_confusion">Confusion or drowsiness&nbsp;</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_vomiting">Vomiting everything</div></td>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_difficultyBreathing_yes">Convulsions (jerking)</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_headache_yes">Can't eat or drink</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_convulsions">Convulsions (jerking)</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_cantEatOrDrink">Can't eat or drink</div></td>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_lossOfAppetite_yes">Difficulty breathing</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_difficultyBreathing">Difficulty breathing</div></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_3OrMore_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_lessThan3_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C5_hasSymptom_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -246,13 +246,13 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 07 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         6. <i>Ask patient to show palms. Are palms very pale/white?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_3OrMore_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_lessThan3_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C6_palmsWhite_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C6_palmsWhite_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -260,13 +260,13 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 08 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         7. <i>Ask patient to pull down lower eyelid. Is conjunctiva pale/white?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_3OrMore_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_lessThan3_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C7_conjunctivaPale_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="C7_conjunctivaPale_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -287,22 +287,22 @@
                 <b>D. Treat at home</b>
                 <div class="thickBox">
                     
-                    <!-- Question 08 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         8. <i>Provide caregiver two additional doses of oral antimalarial (ACT; see dose card) for the next two days.</i>
                     </div>
                     <div class="inner_C C4b">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">ACT given</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="D8_treatWithACT">ACT given</div>
                     </div>
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 09 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         9. <i>Advise caregiver to give more fluids and continue feeding.</i>
                     </div>
                     <div class="inner_C C4b">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">Done</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="D9_adviseCaregiver">Done</div>
                     </div>
                     <div style="clear:both"></div>
                     
@@ -332,13 +332,13 @@
                 <b>E. Follow-up: day 1</b>
                 <div class="thickBox">
                     
-                    <!-- Question 10 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         10. <i>Is patient a child under five years?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E10_day1_patientIsUnderFive_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E10_day1_patientIsUnderFive_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Skip to question #12</div>
@@ -346,22 +346,22 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 11 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         11. Have you had any of these symptoms in the last 3 weeks?<br>
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:355px">
                             <table class="symptomTable">
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="id">Unexplained bleeding&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_vomiting_yes">Vomiting&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_diarrhea_yes">Diarrhea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E11_day1_hasSymptom_unexplainedBleeding">Unexplained bleeding&nbsp;&nbsp;</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E11_day1_hasSymptom_vomiting">Vomiting&nbsp;&nbsp;</div></td>
+                                        <td><div class="checkOption"><input type="checkbox" class="stored" id="E11_day1_hasSymptom_diarrhea">Diarrhea</div></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_3OrMore_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_lessThan3_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E11_day1_hasSymptom_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E11_day1_hasSymptom_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption blackAction">SUSPECT CASE. Begin "Ebola Case Management" form.</div>
@@ -369,13 +369,13 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 12 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         12. <i>Screen again for danger signs in box C. Any danger signs?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E12_day1_dangerSigns_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E12_day1_dangerSigns_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -395,13 +395,13 @@
                 <b>F. Follow-up: day 2</b>
                 <div class="thickBox">
                     
-                    <!-- Question 13 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         13. <i>Is patient a child under five years?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E13_day2_patientIsUnderFive_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E13_day2_patientIsUnderFive_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Skip to question #15</div>
@@ -409,22 +409,22 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 14 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         14. Have you had any of these symptoms in the last 3 weeks?<br>
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:355px">
                             <table class="symptomTable">
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="id">Unexplained bleeding&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_vomiting_yes">Vomiting&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_diarrhea_yes">Diarrhea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E14_day2_hasSymptom_unexplainedBleeding">Unexplained bleeding&nbsp;&nbsp;</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E14_day2_hasSymptom_vomiting">Vomiting&nbsp;&nbsp;</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E14_day2_hasSymptom_diarrhea">Diarrhea</div></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_3OrMore_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_lessThan3_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E14_day2_hasSymptom_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E14_day2_hasSymptom_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption blackAction">SUSPECT CASE. Begin "Ebola Case Management" form.</div>
@@ -432,13 +432,13 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 15 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         15. <i>Screen again for danger signs in box C. Any danger signs?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E15_day2_dangerSigns_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E15_day2_dangerSigns_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -458,13 +458,13 @@
                 <b>G. Follow-up: day 3</b>
                 <div class="thickBox">
                     
-                    <!-- Question 16 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         16. <i>Is patient a child under five years?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E16_day3_patientIsUnderFive_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E16_day3_patientIsUnderFive_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Skip to question #18</div>
@@ -472,22 +472,22 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 17 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         17. Have you had any of these symptoms in the last 3 weeks?<br>
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:355px">
                             <table class="symptomTable">
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="id">Unexplained bleeding&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_vomiting_yes">Vomiting&nbsp;&nbsp;</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_diarrhea_yes">Diarrhea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E17_day3_hasSymptom_unexplainedBleeding">Unexplained bleeding&nbsp;&nbsp;</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E17_day3_hasSymptom_vomiting">Vomiting&nbsp;&nbsp;</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="E17_day3_hasSymptom_diarrhea">Diarrhea</div></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_3OrMore_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_lessThan3_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E17_day3_hasSymptom_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E17_day3_hasSymptom_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption blackAction">SUSPECT CASE. Begin "Ebola Case Management" form.</div>
@@ -495,13 +495,13 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 18 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         18. <i>Screen again for danger signs in box C. Any danger signs?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E18_day3_dangerSigns_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E18_day3_dangerSigns_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -509,13 +509,13 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 19 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         19. You still have fever?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E19_day3_stillHasFever_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" id="E19_day3_stillHasFever_no">No</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">REFER. Complete referral form..</div>
@@ -579,7 +579,7 @@
         
         
         <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_sch_sickchild">
+        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_mat_malariaassessment">
         <!-- END: Hidden fields -->
         
     </body>

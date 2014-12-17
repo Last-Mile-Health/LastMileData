@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version:      00257
+# Version:      00277
 # Author:       Avi Kenny, Last Mile Health
 # Last updated: 2014-11-09
 
@@ -68,11 +68,12 @@ CACHE:
 /LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.html
 /LastMileData/src/forms/fhw_kpi02_kpiassessment.html
 /LastMileData/src/forms/fhw_mat01_malariaassessment.html
+/LastMileData/src/forms/fac_msh01_mesh.html
 /LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html
 /LastMileData/src/forms/fhw_pni02_postnatalinitial.html
 /LastMileData/src/forms/fhw_ref02_referral.html
 /LastMileData/src/forms/fhw_reg02_registration.html
-/LastMileData/src/forms/fhw_sch02_sickchild.html
+/LastMileData/src/forms/fhw_sch03_sickchild.html
 /LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
 /LastMileData/src/forms/prg_trl01_trainingledger.html
 /LastMileData/src/forms/util_householdIDAssignmentList.html
@@ -100,6 +101,7 @@ CACHE:
 
 # src >> pages
 /LastMileData/src/pages/page_deqa.html
+#/LastMileData/src/pages/viewLocalRecords.html
 
 ########## NETWORK ##########
 NETWORK:

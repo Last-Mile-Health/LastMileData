@@ -1,10 +1,10 @@
 <?php
 
 // Set DB connection strings (!!!!! figure out how to set iunclude path with CRON !!!!!)
-$user = "lastmiledata";
+$user = "lastmile_admin";
 $password = "LastMile14";
 $host = "localhost";
-$db = "lastmiledata";
+$db = "lastmile_db";
 
 $backup_file = $db . '_' . date("Y-m-d-H-i-s") . '.sql';
 

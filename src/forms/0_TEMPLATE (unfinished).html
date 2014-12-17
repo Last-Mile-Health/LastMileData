@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 
 <!--
-        RULES FOR CREATING A NEW FORM:
+        STEPS FOR CREATING A NEW FORM:
+        
+             1) Create a new form, starting with this as a template; delete this comment section.
+                    - Naming convention is "pre_frm09_myform.html":
+                        - The "pre" prefix is the category (options: fhw, fac, moh, prg, util).
+                        - In "frm09", "frm" is the unique three-letter form code; "09" is the form version number.
+                        - "myform" is a descriptive name for the form.
+             2) Update the <title> element.
+             3) Update the <span> element within the "FORM HEADER" section.
+             4) Create the form body
+                    - <input> elements should have class="stored" if they are to be stored in MySQL
+                    - "id" attribute of the field should match the MySQL field name
+             5) Update the three-letter form code in the "M&E Box"
+             6) Update the value of the hidden <input> element with id="table"
+                    - identical to the name of the corresponding MySQL table
+                    - should be all lowercase
+             7) Add a link to the form in page_deqa, within the "DE_forms" <div> element
+             8) Add a link to the form in page_deqa, within the "QA_forms" <div> element
+             9) Add a click handler within deqa.js (under the "(2) QA Buttons" heading)
+            10) Create the MySQL table
+            11) Add a link to the application cache manifest ("lastmiledata.appcache")
+            
+            
+        STEPS FOR ARCHIVING A FORM:
 
-             1) Start with this template; delete this comment section or add any relevant notes here.
-             2) Assign a unique value to the "value" property of the hidden formmName <input> element. This should match the MySQL table name. Should be all lowercase.
-             3) Create <input> elements of the following form...
-                    <input class="stored" id="myField">
-                ...where the "id" property represents the database column name
-             4) ... QA button and script ...
-             5) ... version control (visible box and hidden field for form version #) ...
-             6) Create MySQL table...
-             7) Add to AppCache...
-             8) Link to it on DEQA page...
-             9) ...
+            1) Move the form into ...
 -->
 
 <html></html>

@@ -14,7 +14,8 @@ $queryString = $_POST['queryString'] ;
 $rKey = $_POST['rKey'] ;
 
 // Uncomment this line to debug queries
-//mysqli_query($cxn, 'INSERT INTO test (col_1) VALUES ("' . $queryString . '")');
+// !!!!! create a "turn debug queries on/off" switch on DEQA !!!!!
+mysqli_query($cxn, 'INSERT INTO test (col_1) VALUES ("' . $queryString . '")');
 
 // Run query
 if ( $result = mysqli_query($cxn, $queryString) ) {
@@ -23,6 +24,7 @@ if ( $result = mysqli_query($cxn, $queryString) ) {
 }
 else {
     // Send error header to trigger AJAX error handler
+    // !!!!! Can we send a "custom header" instead ?????
     header("HTTP/1.1 404 Not Found");
 }
 

@@ -60,7 +60,7 @@
             
             <!-- Current forms -->
             <div id="currentVersions_div" class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" id="DE_forms">
                     <h2>Data Entry</h2>
                     <p>Click on one of the buttons below to perform data entry.</p>
                     <p><a href="/LastMileData/src/forms/0_testDE.html" class="btn btn-success">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
@@ -72,15 +72,16 @@
                     <p><a href="/LastMileData/src/forms/fhw_pni02_postnatalinitial.html" class="btn btn-success">FHW: Postnatal (initial) &nbsp;&nbsp;<b>[PNI.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html" class="btn btn-success">FHW: Postnatal (follow-up) &nbsp;&nbsp;<b>[PNF.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_bdm02_movements.html" class="btn btn-success">FHW: Births, Deaths, Movements &nbsp;&nbsp;<b>[BDM.02]</b></a></p>
-                    <p><a href="/LastMileData/src/forms/fhw_sch02_sickchild.html" class="btn btn-success">FHW: Sick Child &nbsp;&nbsp;<b>[SCH.02]</b></a></p>
-                    <p><a href="/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html" class="btn btn-success">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.02]</b></a></p>
-                    <p><a href="/LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html" class="btn btn-success">FHW: Ebola Contact Tracing &nbsp;&nbsp;<b>[ECT.01]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/fhw_sch03_sickchild.html" class="btn btn-success">FHW: Sick Child &nbsp;&nbsp;<b>[SCH.03]</b></a></p>
+                    <!--<p><a href="/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html" class="btn btn-success">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.02]</b></a></p>-->
+                    <!--<p><a href="/LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html" class="btn btn-success">FHW: Ebola Contact Tracing &nbsp;&nbsp;<b>[ECT.01]</b></a></p>-->
                     <p><a href="/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.html" class="btn btn-success">FHW: Ebola Education + Screening Ledger &nbsp;&nbsp;<b>[EES.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_mat01_malariaassessment.html" class="btn btn-success">FHW: Malaria Assessment Tool &nbsp;&nbsp;<b>[MAT.01]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html" class="btn btn-success">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.05]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/fac_msh01_mesh.html" class="btn btn-success">Facility: IPC MESH Tool &nbsp;&nbsp;<b>[MSH.01]</b></a></p>
                     <p><a href="/LastMileData/src/forms/prg_trl01_trainingledger.html" class="btn btn-success">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" id="QA_forms">
                     <h2>Quality Assurance</h2>
                     <p>Click on one of the buttons below to perform data QA.</p>
                     <p><a id="qa_TST" href="#" class="btn btn-primary">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
@@ -92,21 +93,28 @@
                     <p><a id="qa_PNI_02" href="#" class="btn btn-primary">FHW: Postnatal (initial) &nbsp;&nbsp;<b>[PNI.02]</b></a></p>
                     <p><a id="qa_PNF_02" href="#" class="btn btn-primary">FHW: Postnatal (follow-up) &nbsp;&nbsp;<b>[PNF.02]</b></a></p>
                     <p><a id="qa_BDM_02" href="#" class="btn btn-primary">FHW: Births, Deaths, Movements &nbsp;&nbsp;<b>[BDM.02]</b></a></p>
-                    <p><a id="qa_SCH_02" href="#" class="btn btn-primary">FHW: Sick Child &nbsp;&nbsp;<b>[SCH.02]</b></a></p>
-                    <p><a id="qa_ECM_02" href="#" class="btn btn-primary">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.02]</b></a></p>
-                    <p><a id="qa_ECT_01" href="#" class="btn btn-primary">FHW: Ebola Contact Tracing &nbsp;&nbsp;<b>[ECT.01]</b></a></p>
+                    <p><a id="qa_SCH_03" href="#" class="btn btn-primary">FHW: Sick Child &nbsp;&nbsp;<b>[SCH.03]</b></a></p>
+                    <!--<p><a id="qa_ECM_02" href="#" class="btn btn-primary">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.02]</b></a></p>-->
+                    <!--<p><a id="qa_ECT_01" href="#" class="btn btn-primary">FHW: Ebola Contact Tracing &nbsp;&nbsp;<b>[ECT.01]</b></a></p>-->
                     <p><a id="qa_EES_02" href="#" class="btn btn-primary">FHW: Ebola Education + Screening Ledger &nbsp;&nbsp;<b>[EES.02]</b></a></p>
                     <p><a id="qa_MAT_01" href="#" class="btn btn-primary">FHW: Malaria Assessment Tool &nbsp;&nbsp;<b>[MAT.01]</b></a></p>
                     <p><a id="qa_SST_05" href="#" class="btn btn-primary">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.05]</b></a></p>
+                    <p><a id="qa_MSH_01" href="#" class="btn btn-primary">Facility: IPC MESH Tool &nbsp;&nbsp;<b>[MSH.01]</b></a></p>
                     <p><a id="qa_TRL_01" href="#" class="btn btn-primary">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Database Management</h2>
                     <p>Functions to be used only by the database manager.</p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sendRecordsModal" title="Click here to send records to the MySQL Database. Requires an active internet connection. This should ideally be done after data quality assurance has been performed.">Send Records</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#refreshDataModal" title="Click here to refresh system data. Should be done at least once a month. Requires an active internet connection.">Refresh system data</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#downloadDataFileModal" title="Click here to download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#uploadDataFileModal" title="Use this to upload a data file from someone else's M&E laptop. Does not requires an internet connection, although an internet connection is required to send files to the MySQL database.">Upload data file</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sendRecordsModal" title="Send records to the MySQL Database. Requires an active internet connection. This should ideally be done after data quality assurance has been performed.">Send Records</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#refreshDataModal" title="Refresh system data. Should be done at least once a month. Requires an active internet connection.">Refresh system data</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#downloadDataFileModal" title="Download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#uploadDataFileModal" title="Upload a data file from someone else's M&E laptop. Does not requires an internet connection, although an internet connection is required to send files to the MySQL database.">Upload data file</a></p>
+                    <p><a href="/LastMileData/src/pages/viewLocalRecords.html" class="btn btn-danger" title="View all locally-stored records.">View local records</a></p>
+                    <p><a href="/LastMileData/src/pages/viewSentRecords.php" class="btn btn-danger" title="View aggregate record counts of records that have been sent to the database.">Data entry summary</a></p>
+                    <p><a href="/LastMileData/src/pages/report_sickChild.php" class="btn btn-danger" title="View DRAFT sick child report.">Sick child report</a></p>
+                    <p><a href="/LastMileData/src/pages/idNumbers.php" class="btn btn-danger" title="View ID Numbers (Villages, FHWs, Supervisors).">View ID numbers</a></p>
+                    <p><a href="/LastMileData/src/forms/util_memberIDAssignmentList.html" class="btn btn-danger" title="Create Member ID Assignment Lists.">Member ID Assignment List</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#generateEESLedgerModal" title="Generate the 'FHW EES Ledger'">Generate "FHW EES Ledger"</a></p>
                 </div>
             </div>
             
@@ -195,6 +203,34 @@
             </div>
         </div>        
         <!-- END "INITIALIZE" (MODAL) -->
+        
+        
+        
+        <!-- START !!!!! TEMP !!!!! "Generate EES Ledger" (MODAL) -->
+        <div id="generateEESLedgerModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">Generate the "FHW EES Ledger"</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="eesFhwID" type="text" class="form-control input-lg" placeholder="FHW ID">
+                        </div>
+                        <div class="form-group">
+                            <input id="eesFhwName" type="text" class="form-control input-lg" placeholder="FHW Name">
+                        </div>
+                        <div class="form-group">
+                            <button id="eesSubmit" class="btn btn-success btn-lg btn-block">Submit</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+
+            </div>
+        </div>        
+        <!-- END !!!!! TEMP !!!!! "Generate EES Ledger" (MODAL) -->
         
         
         

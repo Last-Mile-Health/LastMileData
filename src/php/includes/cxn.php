@@ -1,10 +1,8 @@
 <?php
 
-// For localhost
-$host = "localhost"; $user = "root"; $password = ""; $db = "lastmiledata";
-
-// For GoDaddy host
-//$host = "localhost"; $user = "lastmiledata"; $password = "LastMile14"; $db = "lastmiledata";
+// For both XAMPP localhost and GoDaddy localhost
+$host = "localhost"; $user = "lastmile_admin"; $password = "LastMile14"; $db = "lastmile_db";
+//$host = "localhost"; $user = "root"; $password = "LastMile14"; $db = "lastmile_db"; // !!!!! DEBUG; not secure !!!!!
 
 // Set connection variable
 // !!!!! Handle errors differently (test for no DB access); set warnings off !!!!!
