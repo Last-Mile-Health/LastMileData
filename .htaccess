@@ -1,12 +1,16 @@
 # Note: this file should go in the same directory as the LastMileData folder
 
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^lastmiledata\.org$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.lastmiledata\.org$
-RewriteRule ^/?$ "http\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^lastmiledata\.org$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.lastmiledata\.org$
-RewriteRule ^offline$ "http\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_deqa\.html" [R=301,L]
+# Redirect lastmiledata.org --> lastmiledata.org/LastMileData/
+RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+RewriteRule ^/?$ "https\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
 
-LimitRequestBody 0
+# Redirect lastmiledata.org/offline --> DEQA page
+RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+RewriteRule ^offline$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_deqa\.html" [R=301,L]
+
+# Redirect all HTTP requests to HTTPS
+RewriteCond %{SERVER_PORT} !=443
+RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+RewriteRule ^$ https://www.lastmiledata.org/%{REQUEST_URI} [R,L]

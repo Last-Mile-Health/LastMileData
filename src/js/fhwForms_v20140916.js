@@ -1,3 +1,4 @@
+// Dependencies: jQuery, jQueryUI, LMD_fileSystemHelpers.js
 
 // If user has not logged into DEQA section, redirect to DEQA home page
 if (!sessionStorage.username) {
@@ -32,14 +33,14 @@ $(document).ready(function() {
         myDate = $(this).val();
         dateRegExp = /[12]\d\d\d-[0-1]\d-[0-3]\d/;
         if ( !dateRegExp.test(myDate) && myDate!="" ) {
-            mySel = $(this);
-            mySel.val( "" );
-            mySel.attr( "title", "Dates must be in yyyy-mm-dd format." );
-            mySel.tooltip( "show" );
+            var $mySel = $(this);
+            $mySel.val( "" );
+            $mySel.attr( "title", "Dates must be in yyyy-mm-dd format." );
+            $mySel.tooltip( "show" );
             setTimeout(function(){
-                mySel.tooltip( "destroy" );
+                $mySel.tooltip( "destroy" );
             }, 2000);
-            mySel.focus();
+            $mySel.focus();
         }
     });
     
@@ -57,6 +58,13 @@ $(document).ready(function() {
         else {
             // Parse "dynamic" (localStorage) arrays
             myList = JSON.parse(localStorage[mySource]);
+            
+            // !!!!! START: smartData !!!!!
+            if (typeof localStorage[mySource] !== "undefined" && localStorage[mySource] !== "undefined") {
+                myList = JSON.parse(localStorage[mySource]);
+            }
+            // !!!!! END: smartData !!!!!
+            
         }
         if ($(this).attr('data-lmd-valid-sortList')=='yes') {
             // Sort list alphabetically
@@ -86,6 +94,13 @@ $(document).ready(function() {
             else {
                 // Parse "dynamic" (localStorage) arrays
                 myList = JSON.parse(localStorage[mySource]);
+                
+                // !!!!! START: smartData !!!!!
+                if (typeof localStorage[mySource] !== "undefined" && localStorage[mySource] !== "undefined") {
+                    myList = JSON.parse(localStorage[mySource]);
+                }
+                // !!!!! END: smartData !!!!!
+
             }
             if ($(this).attr('data-lmd-valid-sortList')=='yes') {
                 // Sort list alphabetically
@@ -110,58 +125,46 @@ $(document).ready(function() {
     // If using "QA mode" (i.e. GET parameter with key 'QA' is not undefined), populate field values
     if ( getParameterByName('QA') ) {
         
+        // Hide "Next form" button
+        $('#lmd_next').hide();
+        
         // Set array of currentRecord properties that are not stored
         var notStored = ['table', 'type'];
         
-        // Use FileSystem API; request persistent storage
-        window.webkitStorageInfo.requestQuota(PERSISTENT, 50*1024*1024, function(grantedBytes) {
-            window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-            window.requestFileSystem(PERSISTENT, grantedBytes,
-                // Success handler
-                function(fs) {
-                    // Read in file
-                    fs.root.getFile('data.lmd', {}, function(fileEntry) {
-                        // Get a File object representing the file, then use FileReader to read its contents.
-                        fileEntry.file(function(file) {
-                            var reader = new FileReader();
-                            reader.onloadend = function(e) {
-                                
-                                // Read in myRecordset
-                                myRecordset = JSON.parse(this.result);
-                                
-                                // Assign record object to currentRecord
-                                currentRecord = JSON.parse(myRecordset[getParameterByName('QA')]);
-                                
-                                // Populate fields from key/value pairs
-                                for(var key in currentRecord) {
-                                    
-                                    // if key isn't in "notStored"array, add it to query string
-                                    if ( notStored.indexOf(key) == -1) {
-                                        
-                                        // Set checkboxes
-                                        if ( $('#' + key).prop('type') == 'checkbox' ) {
-                                            
-                                            if (currentRecord[key]) {
-                                                $('#' + key).prop('checked', true);
-                                            }
-                                        }
-                                        
-                                        // Set text inputs
-                                        else {
-                                            $('#' + key).val(currentRecord[key]);
-                                        }
-                                    }
-                                }
-                                
-                                // Set qa_date; set field to readonly
-                                $('#qa_date').val(mysql_date());
-                                $('#qa_date').attr('readonly','readonly');
-                                
-                            };
-                            reader.readAsText(file);
-                        }, logError);
-                    }, logError);
-                }, logError);
+        // Read in file and run callback
+        LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+            
+            // Read in myRecordset
+            myRecordset = JSON.parse(result);
+            
+            // Assign record object to currentRecord
+            currentRecord = JSON.parse(myRecordset[getParameterByName('QA')]);
+            
+            // Populate fields from key/value pairs
+            for(var key in currentRecord) {
+                
+                // if key isn't in "notStored"array, add it to query string
+                if ( notStored.indexOf(key) == -1) {
+                    
+                    // Set checkboxes
+                    if ( $('#' + key).prop('type') == 'checkbox' ) {
+                        
+                        if (currentRecord[key]) {
+                            $('#' + key).prop('checked', true);
+                        }
+                    }
+                    
+                    // Set text inputs
+                    else {
+                        $('#' + key).val(currentRecord[key]);
+                    }
+                }
+            }
+            
+            // Set qa_date; set to readonly
+            $('#qa_date').val(mysql_date());
+            $('#qa_date').attr('readonly','readonly');
+            
         });
         
     }
@@ -169,7 +172,9 @@ $(document).ready(function() {
     
     
     // Submit form; store data to LocalStorage object
-    $('#lmd_submit').click(function() {
+    $("#lmd_next, #lmd_submit").click(function() {
+        
+        var clicked = $(this).attr('id');
         
         // Reset errorMessages and errorFields; set disallowed characters RegExp
         var errorMessages = [];
@@ -181,6 +186,7 @@ $(document).ready(function() {
             $(this).css('background-color','');
         });
         
+        // !!!!! turn this into an external validation module !!!!!
         // Perform data validation (for each field with class='stored')
         $('.stored').each(function() {
             
@@ -296,8 +302,8 @@ $(document).ready(function() {
             }
             
             // Scroll to top; show validationBox
-            $("html, body").animate({ scrollTop: 0 }, "slow", function() {
-                $('#validationBox').slideDown(1000);
+            $("body").animate({ scrollTop: 0 }, 500, function() {
+                $('#validationBox').slideDown(500);
             });
         }
         
@@ -338,54 +344,35 @@ $(document).ready(function() {
                 }
             });
             
-            // Use FileSystem API; request persistent storage
-            window.webkitStorageInfo.requestQuota(PERSISTENT, 50*1024*1024, function(grantedBytes) {
-                window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-                window.requestFileSystem(PERSISTENT, grantedBytes,
-                    // Success handler
-                    function(fs) {
-                        // Read in file
-                        fs.root.getFile('data.lmd', {create:true}, function(fileEntry) {
-                            // Get a File object representing the file, then use FileReader to read its contents.
-                            fileEntry.file(function(file) {
-                                var reader = new FileReader();
-                                reader.onloadend = function(e) {
-                                    if (this.result == "") {
-                                        // If myRecordset is empty, create an empty object
-                                        myRecordset = {};
-                                    }
-                                    else {
-                                        // Otherwise, parse myRecordset into object
-                                        myRecordset = JSON.parse(this.result);
-                                    }
-                                    
-                                    // If in QA mode, delete current record
-                                    if ( getParameterByName('QA') ) {
-                                        delete myRecordset[getParameterByName('QA')];
-                                    }
-
-                                    // Add myRecord to myRecordset
-                                    myRecordset[localKey] = JSON.stringify(myRecord);
-                                    
-                                    // Creates (or overwrite) the "data.lmd" file with stringified myRecordset object
-                                    fs.root.getFile('data.lmd', {}, function(fileEntry) {
-                                        // Create a FileWriter object for our FileEntry (data.lmd)
-                                        fileEntry.createWriter(function(fileWriter) {
-                                            fileWriter.onwriteend = function(e) {
-                                                // When file writing is complete, redirect back to DEQA
-                                                window.location.assign('/LastMileData/src/pages/page_deqa.html');
-                                            };
-                                            fileWriter.onerror = logError;
-                                            // Create a new Blob and write it to data.lmd
-                                            var blob = new Blob([JSON.stringify(myRecordset)], {type: 'text/plain'});
-                                            fileWriter.write(blob);
-                                        }, logError);
-                                    }, logError);
-                                };
-                                reader.readAsText(file);
-                            }, logError);
-                        }, logError);
-                    }, logError);
+            // !!!!! handle cases when file has not yet been created !!!!!
+            
+            // Read file into myRecordset, run callback
+            LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){
+                
+                // If in QA mode, delete current record
+                if ( getParameterByName('QA') ) {
+                    delete myRecordset[getParameterByName('QA')];
+                }
+                
+                // Add myRecord to myRecordset
+                myRecordset[localKey] = JSON.stringify(myRecord);
+                
+                // Creates (or overwrite) the "data.lmd" file with stringified myRecordset object
+                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(myRecordset),function(){
+                    $("body").animate({ scrollTop: 0 }, 500, function(){
+                        $("body").fadeOut(500,function(){
+                            if(clicked == 'lmd_next') {
+                                // "Next" was clicked; reload page to enter new form; scroll to top
+                                window.location.reload(true);
+                            }
+                            else {
+                                // "Submit" was clicked; redirect back to DEQA
+                                window.location.assign('/LastMileData/src/pages/page_deqa.html');
+                            }
+                        })
+                    });
+                });
+                
             });
             
         }
@@ -396,8 +383,10 @@ $(document).ready(function() {
     
     // Cancel form submission
     $('#lmd_cancel').click(function() {
-        // Redirect back to main page
-        window.location.assign('/LastMileData/src/pages/page_deqa.html');
+        $("body").fadeOut(500,function(){
+            // Redirect back to main page
+            window.location.assign('/LastMileData/src/pages/page_deqa.html');
+        });
     });
     
     
@@ -411,6 +400,7 @@ function mysql_date() {
 }
 
 // Pad numbers to two digits ( helper function for mysql_datetime() )
+// !!!!! Refeactor this function into a utility "library"; this is needed elsewhere !!!!!
 function twoDigits(d) {
     if(0 <= d && d < 10) return "0" + d.toString();
     if(-10 < d && d < 0) return "-0" + (-1*d).toString();

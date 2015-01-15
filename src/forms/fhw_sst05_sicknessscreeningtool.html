@@ -12,6 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
@@ -102,7 +103,7 @@
                 <b>A. Contact assessment</b>
                 <div class="thickBox">
                     
-                    <!-- Question 01 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         1. In the last three weeks, have you touched the body, touched body fluids, or lived in the same house with someone who got very sick or died?
                     </div>
@@ -117,7 +118,7 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 02 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         2. In the last three weeks, have you attended a burial or funeral, and did you participate in ceremony where you had contact with body or body fluids?
                     </div>
@@ -132,7 +133,7 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 03 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         3. In the last three weeks, have you cared for anyone who was very ill - nausea, vomiting, bleeding?
                     </div>
@@ -159,7 +160,7 @@
                 <b>B. Patient has contact risk</b>
                 <div class="thickBox">
                     
-                    <!-- Question 04 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         4. Do you have fever or have you had fever in the last 3 weeks?
                     </div>
@@ -174,7 +175,7 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 05 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         5. Have you had any of these symptoms in the last 3 weeks?<br>
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:345px">
@@ -214,7 +215,7 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 06 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         6. Have you had any unexplained bleeding in the last 3 weeks?
                     </div>
@@ -241,7 +242,7 @@
                 <b>C. Patient has no contact risk</b>
                 <div class="thickBox">
                     
-                    <!-- Question 07 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         7. Do you have big belly with any bleeding?
                     </div>
@@ -256,7 +257,7 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 08 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         8. Do you have fever or have you had fever in the last 3 weeks?
                     </div>
@@ -271,7 +272,7 @@
                     <div style="clear:both"></div>
                     <hr>
                     
-                    <!-- Question 09 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         9. Have you had any unexplained bleeding in the last 3 weeks?
                     </div>
@@ -286,7 +287,7 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 10 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         10. <i>Is patient a child under five years?</i> 
                     </div>
@@ -301,7 +302,7 @@
                     <div style="clear:both"></div>
                     <hr>
 
-                    <!-- Question 11 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         11. Have you had any vomiting or diarrhea in the last 3 weeks?
                     </div>
@@ -328,7 +329,7 @@
                 <b>D. Ebola case management</b>
                 <div class="thickBox">
                     
-                    <!-- Question 12 -->
+                    <!-- Question -->
                     <div class="inner_L L4">
                         12. <i>Mark type of case. Copy down the results from the "Sickness Screening Tool" onto paper.</i>
                     </div>
@@ -378,7 +379,8 @@
         
         <!-- START: S/C Buttons -->
         <div class="formButtons">
-            <button id="lmd_submit" class="btn btn-success">Submit</button>&nbsp;
+            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
             <button id="lmd_cancel" class="btn btn-success">Cancel</button>
         </div>
         <!-- END: S/C Buttons -->

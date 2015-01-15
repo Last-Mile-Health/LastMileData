@@ -33,35 +33,31 @@
 
 
 <!-- START: modal "Change PW" form -->
-<div id="modal_changePW" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="modal_changePW" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h1 class="text-center">Change Password</h1>
             </div>
             <div class="modal-body">
-                <form class="form col-md-12 center-block">
-                    <h3 id="modal_text" class="text-center"></h3>
+                <div id="modal_changePW_form" class="form col-md-12 center-block">
                     <div class="form-group">
-                        <input id="pw_old" type="password" class="form-control input-lg" placeholder="Old password">
+                        <input id="modal_changePW_pw_old" type="password" class="form-control input-lg" placeholder="Old password">
                     </div>
                     <div class="form-group">
-                        <input id="pw_new_1" type="password" class="form-control input-lg" placeholder="New password">
+                        <input id="modal_changePW_pw_new_1" type="password" class="form-control input-lg" placeholder="New password">
                     </div>
                     <div class="form-group">
-                        <input id="pw_new_2" type="password" class="form-control input-lg" placeholder="New password (confirm)">
+                        <input id="modal_changePW_pw_new_2" type="password" class="form-control input-lg" placeholder="New password (confirm)">
                     </div>
                     <div class="form-group">
-                        <a id="submit_changePW" class="btn btn-success btn-lg btn-block">Submit</a>
+                        <a id="modal_changePW_submit" class="btn btn-success btn-lg btn-block">Submit</a><br>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                     </div>
-                </form>
+                </div>
+                <h3 class="text-center" id="modal_changePW_message" style="display:none"></h3>
             </div>
-            <div class="modal-footer">
-                <div class="col-md-12">
-                    <button id="cancelModal" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                </div>    
-            </div>
+            <div class="modal-footer"></div>
         </div>
     </div>
 </div>        

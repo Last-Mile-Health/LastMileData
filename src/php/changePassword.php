@@ -3,11 +3,8 @@
 // Set include path
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
 
-// Get username
-session_start();
-$username = $_SESSION['username'];
-
 // Get passed variables
+$username = $_GET['username'];
 $pw_old = $_GET['pw_old'];
 $pw_new_1 = $_GET['pw_new_1'];
 $pw_new_2 = $_GET['pw_new_2'];

@@ -1,29 +1,28 @@
-        // Use FileSystem API; request persistent storage
-        window.webkitStorageInfo.requestQuota(PERSISTENT, 50.03*1024*1024, function(grantedBytes) {
-            window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-            window.requestFileSystem(PERSISTENT, grantedBytes,
-                // Success handler
-                function(fs) {
-                    // Read in file
-                    fs.root.getFile('data.lmd', {}, function(fileEntry) {
-                        // Get a File object representing the file, then use FileReader to read its contents.
-                        fileEntry.file(function(file) {
-                            var reader = new FileReader();
-                            reader.onloadend = function(e) {
-                                if (this.result == "" || this.result == "{}") {
-                                    console.log('empty');
-                                }
-                                else {
-                                    console.log(this.result);
-                                    
-                                }
-                            };
-                            reader.readAsText(file);
-                        }, logError);
-                    }, logError);
-                }, logError);
-        });
-
-function logError(e) {
-    console.log('logerror');
-}
+            var $elements = [$('.Task'), $('.Event'), $('.Resource')];
+            
+            $(".Task, .Event, .Resource").draggable({
+                start: function (ev, ui) {
+                    var $elem
+                    for (var i in $elements) {
+                        $elem = $elements[i];
+                        if ($elem[0] != this) {
+                            $elem.data('dragStart', $elem.offset());
+                        }
+                    }
+                },
+                drag: function (ev, ui) {
+                    var xPos, $elem,
+                    deltaX = ui.position.left - ui.originalPosition.left;
+                    deltaY = ui.position.top - ui.originalPosition.top;
+                    for (var i in $elements) {
+                        $elem = $elements[i];
+                        if ($elem[0] != this) {
+                            $elem.offset({
+//                                top: $elem.data('dragStart').top,
+                                top: Math.max($elem.data('dragStart').top + deltaY, 8),
+                                left: Math.max($elem.data('dragStart').left + deltaX, 8)
+                            });
+                        }
+                    }
+                }
+            });

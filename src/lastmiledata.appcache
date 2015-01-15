@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# Version:      00277
+# Version:      00445
 # Author:       Avi Kenny, Last Mile Health
-# Last updated: 2014-11-09
+# Last updated: 2015-01-14
 
 # Resources for offline functioning of LastMileData.org data entry and quality assurance (DEQA) application
 # Increment version number to trigger application updating
@@ -76,6 +76,7 @@ CACHE:
 /LastMileData/src/forms/fhw_sch03_sickchild.html
 /LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
 /LastMileData/src/forms/prg_trl01_trainingledger.html
+/LastMileData/src/forms/prg_chv01_gchvquestionnaire.html
 /LastMileData/src/forms/util_householdIDAssignmentList.html
 /LastMileData/src/forms/util_memberIDAssignmentList.html
 
@@ -89,7 +90,6 @@ CACHE:
 /LastMileData/src/fragments/header_bootstrap.html
 
 # src >> js
-/LastMileData/src/js/changePassword_v20140916.js
 /LastMileData/src/js/deqa_v20141015.js
 /LastMileData/src/js/fhwForms_v20140916.js
 /LastMileData/src/js/householdIDAssignmentList_v20140929.js
@@ -97,7 +97,6 @@ CACHE:
 /LastMileData/src/js/medocs_v20140916.js
 /LastMileData/src/js/memberIDAssignmentList_v20140929.js
 /LastMileData/src/js/modalFocus_v20140916.js
-/LastMileData/src/js/uploadDataFileModal_v20141003.js
 
 # src >> pages
 /LastMileData/src/pages/page_deqa.html

@@ -12,6 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
@@ -28,16 +29,14 @@
             #sectionD { position:relative; top:-15px; }
             
             .meBox { position:relative; top:-25px; }
-            @media print { .meBox { position:relative; top:-45px; } }   // To correct for a possible CSS bug
+            @media print { .meBox { position:relative; top:-45px; } }   /* To correct for a possible CSS bug */
             
-            #contactTable {  }
             #contactTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
             #contactTable td { border: 1px solid black; padding:0px; text-align:center; }
             #contactTable .col1 { text-align:left; padding-left:3px; padding-right:30px; }
             
             .thickBox { padding:3px; }
             
-            /*.cX { width:0.3in; border:none; margin-right:1px; margin-left:1px; appearance:none; -webkit-appearance:none; cursor:pointer; }*/
             .cX { position:relative; top:1px; height:18px; width:0.3in; border:none; margin-right:1px; margin-left:1px; appearance:none; -webkit-appearance:none; cursor:pointer; }
         </style>
         
@@ -155,7 +154,7 @@
                             <th>21</th>
                         </tr>
 
-                        <!-- Row 01 of 30 -->
+                        <!-- Row 1 of 13 -->
                         <tr>
                             <td class="col1">Fever</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -181,7 +180,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 2 of 13 -->
                         <tr>
                             <td class="col1">Unexplained bleeding</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -207,7 +206,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 3 of 13 -->
                         <tr>
                             <td class="col1">Stomach pain</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -233,7 +232,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 4 of 13 -->
                         <tr>
                             <td class="col1">Breathing problem</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -259,7 +258,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 5 of 13 -->
                         <tr>
                             <td class="col1">Loss of appetite</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -285,7 +284,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 6 of 13 -->
                         <tr>
                             <td class="col1">Swallowing problem</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -311,7 +310,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 7 of 13 -->
                         <tr>
                             <td class="col1">Hiccoughs</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -337,7 +336,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 8 of 13 -->
                         <tr>
                             <td class="col1">Headache</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -363,7 +362,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 9 of 13 -->
                         <tr>
                             <td class="col1">Vomiting</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -389,7 +388,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 10 of 13 -->
                         <tr>
                             <td class="col1">Body pain</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -415,7 +414,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 11 of 13 -->
                         <tr>
                             <td class="col1">Running stomach</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -441,7 +440,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 12 of 13 -->
                         <tr>
                             <td class="col1">Nausea</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -467,7 +466,7 @@
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
                         </tr>
 
-                        <!-- Row 02 of 30 -->
+                        <!-- Row 13 of 13 -->
                         <tr>
                             <td class="col1">Weakness</td>
                             <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
@@ -538,7 +537,8 @@
         
         <!-- START: S/C Buttons -->
         <div class="formButtons">
-            <button id="lmd_submit" class="btn btn-success">Submit</button>&nbsp;
+            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
             <button id="lmd_cancel" class="btn btn-success">Cancel</button>
         </div>
         <!-- END: S/C Buttons -->

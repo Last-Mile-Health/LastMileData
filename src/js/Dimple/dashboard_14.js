@@ -10,7 +10,8 @@ var data = [
     { "Month":"Dec '13", "People":5324, "Order":6 },
     { "Month":"Mar '14", "People":9173, "Order":7 },
     { "Month":"Jun '14", "People":9173, "Order":8 },
-    { "Month":"Sep '14", "People":9173, "Order":9 }
+    { "Month":"Sep '14", "People":9173, "Order":9 },
+    { "Month":"Dec '14", "People":14000, "Order":10 }
 ];
 
 var myChart = new dimple.chart(svg, data);

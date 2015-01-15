@@ -3,6 +3,7 @@
 <html manifest="/LastMileData/src/lastmiledata.appcache">
     
     <head>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
@@ -16,19 +17,23 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
         <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
-        <script src="/LastMileData/src/js/changePassword_v20140916.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/deqa_v20141015.js"></script>
         
         <style>
             .btn { width:100%; }
             
-            #ajaxContainer {
+            #modal_sendRecords_ajaxLoadIcon, #modal_sendRecords_close, #modal_sendRecords_ajaxInner {
                 display:none;
-                width:98%;
+            }
+            
+            #modal_sendRecords_ajaxInner {
+                width:100%;
                 padding:2px;
-                height:300px;
-                -webkit-box-shadow: 2px 2px 1px 1px lightgrey;
+                height:150px;
                 overflow-y:scroll;
+                background-color:white;
+                -webkit-box-shadow: 0px 0px 25px 0px #bbbbbb;
             }
             
             .ajaxBlock {
@@ -38,14 +43,12 @@
                 float:left;
                 height: 21px;
                 width: 34px;
-                background-color:orange;
+                background-color:#555555;
                 text-align:center;
                 margin: 1px;
                 -webkit-border-radius: 4px;
-                -webkit-box-shadow: 1px 1px 1px 1px lightgrey;
             }
         </style>
-        
     </head>
     
     <body style="display:none">
@@ -56,6 +59,7 @@
             <div class="jumbotron">
                 <h1>Data Entry / Quality Assurance</h1>
                 <p>This section is meant to be used by our M&E staff. This section can be accessed offline when no internet connection is present.</p>
+                <h4><b>App version: 00445</b></h4>
             </div>
             
             <!-- Current forms -->
@@ -80,6 +84,7 @@
                     <p><a href="/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html" class="btn btn-success">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.05]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fac_msh01_mesh.html" class="btn btn-success">Facility: IPC MESH Tool &nbsp;&nbsp;<b>[MSH.01]</b></a></p>
                     <p><a href="/LastMileData/src/forms/prg_trl01_trainingledger.html" class="btn btn-success">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/prg_chv01_gchvquestionnaire.html" class="btn btn-success">Program: gCHV Questionnaire &nbsp;&nbsp;<b>[CHV.01]</b></a></p>
                 </div>
                 <div class="col-md-4" id="QA_forms">
                     <h2>Quality Assurance</h2>
@@ -101,20 +106,21 @@
                     <p><a id="qa_SST_05" href="#" class="btn btn-primary">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.05]</b></a></p>
                     <p><a id="qa_MSH_01" href="#" class="btn btn-primary">Facility: IPC MESH Tool &nbsp;&nbsp;<b>[MSH.01]</b></a></p>
                     <p><a id="qa_TRL_01" href="#" class="btn btn-primary">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
+                    <p><a id="qa_CHV_01" href="#" class="btn btn-primary">Program: gCHV Questionnaire &nbsp;&nbsp;<b>[CHV.01]</b></a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Database Management</h2>
                     <p>Functions to be used only by the database manager.</p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sendRecordsModal" title="Send records to the MySQL Database. Requires an active internet connection. This should ideally be done after data quality assurance has been performed.">Send Records</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#refreshDataModal" title="Refresh system data. Should be done at least once a month. Requires an active internet connection.">Refresh system data</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#downloadDataFileModal" title="Download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#uploadDataFileModal" title="Upload a data file from someone else's M&E laptop. Does not requires an internet connection, although an internet connection is required to send files to the MySQL database.">Upload data file</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_sendRecords" title="Send records to the MySQL Database. Requires an active internet connection. This should ideally be done after data quality assurance has been performed.">Send Records</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_refreshData" title="Refresh system data. Should be done at least once a month. Requires an active internet connection.">Refresh system data</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_downloadDataFile" title="Click here to download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_uploadDataFile" title="Upload a data file from someone else's M&E laptop. Does not requires an internet connection, although an internet connection is required to send files to the MySQL database.">Upload data file</a></p>
                     <p><a href="/LastMileData/src/pages/viewLocalRecords.html" class="btn btn-danger" title="View all locally-stored records.">View local records</a></p>
                     <p><a href="/LastMileData/src/pages/viewSentRecords.php" class="btn btn-danger" title="View aggregate record counts of records that have been sent to the database.">Data entry summary</a></p>
                     <p><a href="/LastMileData/src/pages/report_sickChild.php" class="btn btn-danger" title="View DRAFT sick child report.">Sick child report</a></p>
                     <p><a href="/LastMileData/src/pages/idNumbers.php" class="btn btn-danger" title="View ID Numbers (Villages, FHWs, Supervisors).">View ID numbers</a></p>
                     <p><a href="/LastMileData/src/forms/util_memberIDAssignmentList.html" class="btn btn-danger" title="Create Member ID Assignment Lists.">Member ID Assignment List</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#generateEESLedgerModal" title="Generate the 'FHW EES Ledger'">Generate "FHW EES Ledger"</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_eesLedger" title="Generate the 'FHW EES Ledger'">Generate "FHW EES Ledger"</a></p>
                 </div>
             </div>
             
@@ -153,8 +159,8 @@
         
         
         
-        <!-- START "DEQA LOGIN" (MODAL) -->
-        <div id="deqaLogin" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- MODAL START: "DEQA LOGIN" -->
+        <div id="modal_deqaLogin" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -162,16 +168,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input id="username" type="text" class="form-control input-lg" placeholder="Username">
+                            <input id="modal_deqaLogin_username" type="text" class="form-control input-lg" placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <input id="password" type="password" class="form-control input-lg" placeholder="Password">
+                            <input id="modal_deqaLogin_password" type="password" class="form-control input-lg" placeholder="Password">
                         </div>
-                        <div id="incorrectLogin" class="form-group" style="display:none">
+                        <div id="modal_deqaLogin_incorrectLogin" class="form-group" style="display:none">
                             <span style="color:red">Incorrect login credentials. Please try again.</span>
                         </div>
                         <div class="form-group">
-                            <button id="deqaLoginSubmit" class="btn btn-success btn-lg btn-block">Submit</button>
+                            <button id="modal_deqaLogin_submit" class="btn btn-success btn-lg btn-block">Submit</button>
                             <span>Please email <a href="mailto:avi@lastmilehealth.org?subject=Access to M&E Section of LastMileData.org">Avi Kenny</a> to request access to this section.</span>
                         </div>
                     </div>
@@ -179,12 +185,12 @@
                 </div>
             </div>
         </div>        
-        <!-- END "DEQA LOGIN" (MODAL) -->
+        <!-- MODAL END: "DEQA LOGIN" -->
         
         
         
-        <!-- START "INITIALIZE" (MODAL) -->
-        <div id="deqaInitialize" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- MODAL START: "INITIALIZE" -->
+        <div id="modal_initialize" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -193,7 +199,8 @@
                     <div class="modal-body">
                         <div class="form-group text-center">
                             <img src="/LastMileData/res/ajax-loader_v20140916.gif">
-                            <h3 id="initialize_text">Initializing...</h3>
+                            <h3 id="modal_initialize_text">Initializing the Last Mile Data application. Downloading files now...</h3>
+                            <div id="modal_initialize_progress"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -202,12 +209,12 @@
 
             </div>
         </div>        
-        <!-- END "INITIALIZE" (MODAL) -->
+        <!-- MODAL END: "INITIALIZE" -->
         
         
         
-        <!-- START !!!!! TEMP !!!!! "Generate EES Ledger" (MODAL) -->
-        <div id="generateEESLedgerModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- MODAL START: "EES LEDGER" -->
+        <div id="modal_eesLedger" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -215,13 +222,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input id="eesFhwID" type="text" class="form-control input-lg" placeholder="FHW ID">
+                            <input id="modal_eesLedger_fhwID" type="text" class="form-control input-lg" placeholder="FHW ID">
                         </div>
                         <div class="form-group">
-                            <input id="eesFhwName" type="text" class="form-control input-lg" placeholder="FHW Name">
+                            <input id="modal_eesLedger_fhwName" type="text" class="form-control input-lg" placeholder="FHW Name">
                         </div>
                         <div class="form-group">
-                            <button id="eesSubmit" class="btn btn-success btn-lg btn-block">Submit</button>
+                            <button id="modal_eesLedger_submit" class="btn btn-success btn-lg btn-block">Submit</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -230,12 +237,12 @@
 
             </div>
         </div>        
-        <!-- END !!!!! TEMP !!!!! "Generate EES Ledger" (MODAL) -->
+        <!-- MODAL START: "EES LEDGER" -->
         
         
         
-        <!-- START "APPCACHE REFRESH" (MODAL) -->
-        <div id="appCacheRefresh" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- MODAL START: "APPCACHE REFRESH" -->
+        <div id="modal_appcacheRefresh" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -244,21 +251,21 @@
                     <div class="modal-body">
                         <div class="form-group text-center">
                             <img src="/LastMileData/res/ajax-loader_v20140916.gif">
-                            <h3 id="initialize_text">A new version of Last Mile Data is available. Refreshing now...</h3>
+                            <h3 id="modal_appcacheRefresh_text">A new version of the Last Mile Data application is available. Downloading files now...</h3>
+                            <div id="modal_appcacheRefresh_progress"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
                     </div>
                 </div>
-
             </div>
-        </div>        
-        <!-- END "APPCACHE REFRESH" (MODAL) -->
+        </div>
+        <!-- MODAL END: "APPCACHE REFRESH" -->
         
         
         
-        <!-- START: "REFRESH DATA" (MODAL) -->
-        <div id="refreshDataModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <!-- MODAL START: "REFRESH DATA" -->
+        <div id="modal_refreshData" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -267,7 +274,7 @@
                     <div class="modal-body">
                         <div class="form-group text-center">
                             <img src="/LastMileData/res/ajax-loader_v20140916.gif">
-                            <h3 id="refreshData_text">Refreshing...</h3>
+                            <h3 id="modal_refreshData_text">Refreshing...</h3>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -275,21 +282,26 @@
                 </div>
             </div>
         </div>
-        <!-- END: "REFRESH DATA" (MODAL) -->
+        <!-- MODAL END: "REFRESH DATA" -->
         
         
         
-        <!-- START: "DOWNLOAD DATA FILE" (MODAL) -->
-        <div id="downloadDataFileModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <!-- MODAL START: "DOWNLOAD DATA FILE" -->
+        <div id="modal_downloadDataFile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="text-center">Download data file</h1>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group text-center">
+                        <div id="modal_downloadDataFile_prompt" class="form-group text-center">
+                            <a id="modal_downloadDataFile_submit" class="btn btn-success btn-lg btn-block">Download</a>
+                            <br>
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>
+                        <div id="modal_downloadDataFile_downloading" class="form-group text-center" style="display:none">
                             <img src="/LastMileData/res/ajax-loader_v20140916.gif">
-                            <h3 id="downloadDataFile_text">Downloading data file...</h3>
+                            <h3 id="modal_downloadDataFile_text">Downloading data file...</h3>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -297,47 +309,87 @@
                 </div>
             </div>
         </div>
-        <!-- END: "DOWNLOAD DATA FILE" (MODAL) -->
+        <!-- MODAL END: "DOWNLOAD DATA FILE" -->
         
         
         
-        <!-- START: "UPLOAD DATA FILE" (MODAL) -->
-        <div id="uploadDataFileModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <!-- !!!!! build this out !!!!! -->
-        </div>
-        <!-- END: "UPLOAD DATA FILE" (MODAL) -->
-        
-        
-        
-        <!-- START: "SEND RECORDS" (MODAL) -->
-        <div id="sendRecordsModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <!-- MODAL START: "UPLOAD DATA FILE" -->
+        <div id="modal_uploadDataFile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="text-center">Send Records</h1>
+                        <h1 class="text-center">Upload data file</h1>
                     </div>
                     <div class="modal-body">
-                        <form class="form col-md-12 center-block">
-                            <div id="ajaxContainer" class="center-block text-center"></div>
-                            <div class="form-group text-center">
-                                <h3 id="sendRecords_text">Are you sure you want to send all current records to the database?</h3>
-                                <a id="sendRecords" class="btn btn-success btn-lg">Yes, send records</a>
-                                &nbsp;
-                                <button id="cancelModal_2" class="btn btn-success btn-lg" data-dismiss="modal" aria-hidden="true">No, go back</button>
+                        <div class="form-group text-center">
+                            <div id="modal_uploadDataFile_formContent">
+                                <form  method="post" enctype="multipart/form-data" role="form"> <!-- !!!!! are enctype and role attributes necessary ????? -->
+                                    <div class="form-group text-center">
+                                        <input class="form-control input-lg" type="file" id="modal_uploadDataFile_fileInput" required><br>
+                                        <p id="modal_uploadDataFile_error" class="form-group" style="display:none; color:red"></p>
+                                        <a id="modal_uploadDataFile_submit" class="btn btn-success btn-lg btn-block">Upload</a>
+                                        <br>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                            <div id="modal_uploadDataFile_status" style='display:none'>
+                                <img src='/LastMileData/res/ajax-loader_v20140916.gif'><br>
+                                <h3 id='modal_uploadDataFile_message'>Uploading and merging data file...</h3>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END: "SEND RECORDS" (MODAL) -->
+        <!-- MODAL END: "UPLOAD DATA FILE" -->
         
         
         
-        <!-- START: "QUALITY ASSURANCE" (MODAL) -->
-        <div id="qaModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- MODAL START: "SEND RECORDS" -->
+        <div id="modal_sendRecords" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">Send Records</h1>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div id="modal_sendRecords_ajaxLoadIcon" class="center-block text-center">
+                            <img src='/LastMileData/res/ajax-loader_v20140916.gif'>
+                            <br><br>
+                        </div>
+                        
+                        <div id="modal_sendRecords_ajaxInner"></div>
+                        
+                        <div class="text-center">
+                            <h3 id="modal_sendRecords_text">Are you sure you want to send all<br>current records to the database?<br><br></h3>
+                            <div id='modal_sendRecords_buttons'>
+                                <a id="modal_sendRecords_submit" class="btn btn-success btn-lg">Yes, send records</a>
+                                &nbsp;
+                                <button class="btn btn-success btn-lg" data-dismiss="modal" aria-hidden="true">No, go back</button>
+                            </div>
+                        </div>
+                        
+                        <div id="modal_sendRecords_close">
+                            <button class="btn btn-success btn-lg" data-dismiss="modal" aria-hidden="true">Close</button>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL END: "SEND RECORDS" -->
+        
+        
+        
+        <!-- MODAL START: "QUALITY ASSURANCE" -->
+        <!-- !!!!! fix all of these IDs to match standard prefixed format !!!!! -->
+        <div id="modal_QA" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -347,36 +399,36 @@
                     <div class="modal-body">
                         <h3 id="qaFormName" class="text-center">Form name</h3>
                         <form class="form col-md-12 center-block">
-                            <h3 id="modal_text" class="text-center"></h3>
-                            <div id="pKeyDiv1" class="form-group">
-                                <label for="pKey1">pKey 1:</label>
-                                <input id="pKey1" class="form-control input-lg">
+                            <h3 class="text-center"></h3>
+                            <div id="modal_QA_pKeyDiv1" class="form-group">
+                                <label for="modal_QA_pKey1">pKey 1:</label>
+                                <input id="modal_QA_pKey1" class="form-control input-lg">
                             </div>
-                            <div id="pKeyDiv2" class="form-group">
-                                <label for="pKey2">pKey 2:</label>
-                                <input id="pKey2" class="form-control input-lg">
+                            <div id="modal_QA_pKeyDiv2" class="form-group">
+                                <label for="modal_QA_pKey2">pKey 2:</label>
+                                <input id="modal_QA_pKey2" class="form-control input-lg">
                             </div>
-                            <div id="pKeyDiv3" class="form-group">
-                                <label for="pKey3">pKey 3:</label>
-                                <input id="pKey3" class="form-control input-lg">
+                            <div id="modal_QA_pKeyDiv3" class="form-group">
+                                <label for="modal_QA_pKey3">pKey 3:</label>
+                                <input id="modal_QA_pKey3" class="form-control input-lg">
                             </div>
                             <div id="qaNoMatch" class="form-group" style="display:none">
                                 <span style="color:red">No match was found in the current record set.</span>
                             </div>
                             <div class="form-group">
-                                <a id="qaModalSubmit" class="btn btn-success btn-lg btn-block">Submit</a>
+                                <a id="modal_QA_submit" class="btn btn-success btn-lg btn-block">Submit</a>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <div class="col-md-12">
-                            <button id="cancelModal_3" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                         </div>    
                     </div>
                 </div>
             </div>
         </div>        
-        <!-- END: "QUALITY ASSURANCE" (MODAL) -->
+        <!-- MODAL END: "QUALITY ASSURANCE" -->
         
         
         

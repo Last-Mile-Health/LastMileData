@@ -99,8 +99,17 @@ require_once("cxn.php");
                     
                 ";
                 
+                
                 $result = mysqli_query($cxn, $queryString);
-                while ( $row = mysqli_fetch_assoc($result) ) {
+                echo('.. version [2] ..');//DEBUG
+                echo(print_r($result));//DEBUG
+                echo('hey 2');//DEBUG
+//                while ( $row = mysqli_fetch_assoc($result) ) {
+//                if ( $row = mysqli_fetch_assoc($result) ) {//DEBUG
+                if ( 1 ) {//DEBUG
+                $row = mysqli_fetch_assoc($result);//DEBUG
+                echo('hey 3');//DEBUG
+                echo(print_r($row));//DEBUG
                     extract($row);
                     $tableRow = "<tr>";
                     $tableRow .= "<td>$de_date</td>";

@@ -33,7 +33,6 @@ $result_files = mysqli_query($cxn, $query_files) or die("failure");
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
         <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
-        <script src="/LastMileData/src/js/changePassword_v20140916.js"></script>
         <script src="/LastMileData/src/js/medocs_v20140916.js"></script>
         
         <!-- !!!!! Refactor into stylesheet !!!!! -->

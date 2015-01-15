@@ -12,6 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
@@ -178,17 +179,42 @@
         </div>
         <!-- PAGE 1 END -->
         
-        <div style="text-align:center">
-            <br>
-            <button id="lmd_submit" class="btn btn-success" style="font-size:20px; width:200px">Submit</button>
-            &nbsp;
-            <button id="lmd_cancel" class="btn btn-success" style="font-size:20px; width:200px">Cancel</button>
-            <br><br>
+        
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-success">Cancel</button>
         </div>
+        <!-- END: S/C Buttons -->
+        
+        
         
         <!-- START: Hidden fields -->
         <input type="hidden" class="stored" id="table" value="tbl_data_fhw0_testde">
         <!-- END: Hidden fields -->
+        
+        <!-- !!!!! START: smartData !!!!! -->
+        <!--Data successfully Saved-->
+        <div id="saveData" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">Data Saved</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group text-center">
+                            <img src="/LastMileData/res/ajax-loader_v20140916.gif">
+                            <h3 id="modal_initialize_text">Data Saved Successfully.</h3>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- !!!!! END: smartData !!!!! -->
         
     </body>
 </html>

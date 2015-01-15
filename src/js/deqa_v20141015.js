@@ -1,601 +1,529 @@
+// Dependencies: jQuery, jQueryUI, LMD_fileSystemHelpers.js
+
 $(document).ready(function(){
     
     
-    
-    // (1) Send Records
-    $('#sendRecords').click(function(){
+    // CLICK HANDLER: Send Records
+    $('#modal_sendRecords_submit').click(function(){
         
-        // Reset values
-        var queryString = "";
-        var numRecords = 0;
-        var numAjax_success = 0;
-        var numAjax_fail = 0;
-//        var ajaxErrorStatus = ""; // Possible values: "no records sent", "some records sent", or "all records sent"
-        
-        // Manipulate DOM; show "loading" GIF
-        $('#sendRecords,#cancelModal_2').css('display','none');
-        $('#sendRecords_text').html("<img src='/LastMileData/res/ajax-loader_v20140916.gif'>");
-//        $('#sendRecords,#cancelModal_2').slideUp(750, function(){
-//            $('#sendRecords_text').slideUp(400).html("<img src='/LastMileData/res/ajax-loader_v20140916.gif'>").slideDown(400);
-//            $('#ajaxContainer').slideDown(800);
-//        });
-        
-        // Use FileSystem API; request persistent storage
-        window.webkitStorageInfo.requestQuota(PERSISTENT, 50*1024*1024, function(grantedBytes) {
-            window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-            window.requestFileSystem(PERSISTENT, grantedBytes,
-                // Success handler
-                function(fs) {
-                    // Read in file
-                    fs.root.getFile('data.lmd', {}, function(fileEntry) {
-                        // Get a File object representing the file, then use FileReader to read its contents.
-                        fileEntry.file(function(file) {
-                            var reader = new FileReader();
-                            reader.onloadend = function(e) {
-                                if (this.result == "" || this.result == "{}") {
-                                    noRecordsMessage('one');
-                                }
-                                else {
-                                    // Otherwise, parse myRecordset into object
-                                    myRecordset = JSON.parse(this.result);
-                                    
-                                    // First loop through keys of myRecordset (set numRecords and manipulate DOM)
-                                    for (rKey in myRecordset) {
-                                        try {
-                                            // Assign record object to currentRecord
-                                            currentRecord = JSON.parse(myRecordset[rKey]);
-                                        }
-                                        catch(e) {
-                                            currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
-                                        }
-                                        
-                                        // Test to see if current localStorage record is of type "form"
-                                        if (currentRecord.type == "form") {
-                                            numRecords++;
-//                                            $('#ajaxContainer').append('<div class="ajaxBlock">' + numRecords + '</div>');
-                                        }
-                                    }
-                                    
-                                    // Second loop through keys of myRecordset (process numRecords)
-                                    for (rKey in myRecordset) {
-                                        
-                                        try {
-                                            // Assign record object to currentRecord
-                                            currentRecord = JSON.parse(myRecordset[rKey]);
-                                        }
-                                        catch(e) {
-                                            currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
-                                        }
-                                        
-                                        // Test to see if current localStorage record is of type "form"
-                                        if (currentRecord.type == "form") {
-                                            
-                                            // Parse SQL Insert query
-                                            queryString = parseRecordIntoSQL(currentRecord);
-                                            
-                                            // Send record to database via AJAX
-                                            var myData = {'queryString': queryString, 'rKey': rKey} ;
-                                            
-                                            // Create an AJAX request and push to ajaxRequests array
-                                            $.ajax({
-                                                type: "POST",
-                                                url: "/LastMileData/src/php/ajaxSendQuery.php",
-                                                data: myData,
-                                                dataType: "json",
-                                                success: function(data) {
-
-                                                    // !!!!! Update DOM !!!!!
-                                                    // !!!!! Fill out the "RYG matrix" code !!!!!
-                                                    
-                                                    // Log success; remove record from myRecordset; increment AJAX success counter
-                                                    console.log('ajax success!');
-                                                    delete myRecordset[data.rKeyDelete];
-                                                    numAjax_success++;
-
-                                                },
-                                                error: function(request, status, error) {
-
-                                                    // !!!!! Update DOM !!!!!
-
-                                                    // Log failure; increment AJAX failure counter
-                                                    console.log('ajax error :/');
-                                                    numAjax_fail++;
-                                                }
-                                            })
-                                        }
-                                        
-                                    }
-                                    
-                                    var myTimer = setInterval(function(){
-                                        
-                                        if(numRecords == numAjax_success + numAjax_fail) {
-                                            
-                                            // The following two lines removes the file data.lmd
-                                                fs.root.getFile('data.lmd', {create: false}, function(fileEntry) {
-                                                    fileEntry.remove(function() {
-
-                                                        // Write the "data.lmd" file with stringified myRecordset object (from which inserted records were removed)
-                                                        fs.root.getFile('data.lmd', {create:true}, function(fileEntry) {
-                                                            // Create a FileWriter object for our FileEntry (data.lmd)
-                                                            fileEntry.createWriter(function(fileWriter) {
-                                                                fileWriter.onwriteend = function(e) {
-
-                                                                    if (numRecords == numAjax_success) {
-                                                                        // Display success message
-                                                                        $('#sendRecords_text').html('Data upload complete.');
-                                                                    }
-                                                                    
-                                                                    else if (numRecords == numAjax_fail) {
-                                                                        // Display "full error" message
-                                                                        $('#sendRecords_text').html('No records were successfully sent.<br>Please try again later.');
-                                                                    }
-                                                                    
-                                                                    else if (numRecords == numAjax_success + numAjax_fail) {
-                                                                        // Display "partial error" message
-                                                                        $('#sendRecords_text').html('Only some records were sent successfully.<br>Please try again to send the remaining records.');
-                                                                    }
-                                                                    
-                                                                    else {
-                                                                        // Display "full error" message
-                                                                        $('#sendRecords_text').html('An unknown error occurred.<br>Please contact the database manager for support');
-                                                                    }
-                                                                    
-                                                                    // Close and reset modal box
-                                                                    closeAndResetModal();
-                                                                    
-                                                                };
-                                                                fileWriter.onerror = logError;
-                                                                
-                                                                // Create a new Blob and write it to data.lmd
-                                                                var blob = new Blob([JSON.stringify(myRecordset)], {type: 'text/plain'});
-                                                                fileWriter.write(blob);
-                                                                
-                                                            }, logError);
-                                                        }, logError);
-                                                        
-                                                        // C. if failCounter==0, display success message
-
-                                                        // D. Display "no records" message in DOM !!!!! build this out !!!!!
-//                                                      $('#sendRecords_text').html('Building this out 2...');
-
-                                                        // D. Close modal box
-//                                                      closeAndResetModal();
-
-                                                    }, logError);
-                                                }, logError);
-                                            
-                                            clearInterval(myTimer);
-                                        }
-                                        
-                                    },500)
-                                    
-                                }
-                            };
-                            reader.readAsText(file);
-                        }, logError);
-                    }, logError);
-                }, logError);
+        // Manipulate DOM
+        $('#modal_sendRecords_buttons').slideUp(600);
+        $('#modal_sendRecords_text').slideUp(800, function(){
+            sendRecordsAJAX();
         });
         
     });
     
     
+    // CLICK HANDLER: Close send Records modal
+    $('#modal_sendRecords_close').click(function(){
+        
+        // Close dialog box
+        $('.modal').modal('hide');
+        
+        // Pause, reset DOM text of "Send Records" modal box
+        setTimeout( function() {
+            $('#modal_sendRecords_buttons, #modal_sendRecords_ajaxInner, #modal_sendRecords_close').css('display','');
+            $('#modal_sendRecords_buttons').css('display','block');
+            $('#modal_sendRecords_text').html('Are you sure you want to send all current records to the database?');
+            $('#modal_sendRecords_ajaxInner').html('');
+        }, 500 );
+        
+    });
     
-    // (2) QA Buttons       !!!!! turn this into a function with constructor setting properties (instead of global vars)
+    
+    // CLICK HANDLER: Download data file
+    $("#modal_downloadDataFile_submit").click(function() {
         
-        // QA (TEST FORM)
-        $('#qa_TST').click(function() {
-            targetForm = "/LastMileData/src/forms/0_testDE.html";
-            qaFormName = "TEST FORM";
-            pKey1_name = "var1";
-            pKey2_name = "var6";
-            pKey3_name = "";
-            pKey1_label = "Var 1";
-            pKey2_label = "Var 6";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+        LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+            
+            $('#modal_downloadDataFile_prompt').slideUp(500,function(){
+                
+                if (result == "" || result == "{}") {
+                    // Display message, close and reset modal
+                    $('#modal_downloadDataFile_text').text('There are currently no locally-stored records.');
+                    $('#modal_downloadDataFile_downloading').slideDown(500,function(){
+                        setTimeout(function(){
+                            $('.modal').modal('hide');
+                            setTimeout(function(){
+                                $('#modal_downloadDataFile_prompt').show();
+                                $('#modal_downloadDataFile_downloading').hide();
+                                $('#modal_downloadDataFile_text').text('Downloading data file...');
+                            },500);
+                        },1500);
+                    });
+                } else {
+                    
+                    // Display message, close and reset modal
+                    $('#modal_downloadDataFile_downloading').slideDown(500,function(){
+                        
+                        // Construct the download link and programmatically click the link
+                        var textToWrite = result;
+                        var textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth() + 1;
+                        var yyyy = today.getFullYear();
+                        var fileNameToSaveAs = "data_" + yyyy + "-" + mm + "-" + dd + ".lmd"; // !!!!! make this a proper MySQL date (two digits for day and month) !!!!!
+                        var downloadLink = document.createElement("a");
+                        downloadLink.download = fileNameToSaveAs;
+                        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+                        downloadLink.click();
+                        
+                        // Back up the file to the "dataFileBackups" directory
+                        LMD_fileSystemHelper.createDirectory('dataFileBackups', function(){
+                            // !!!!! create an interface to access these backups !!!!!
+                            LMD_fileSystemHelper.createOrOverwriteFile('/dataFileBackups/' + fileNameToSaveAs, textToWrite, function(){
+                                // Delete file
+                                LMD_fileSystemHelper.deleteFile('data.lmd');
+                                
+                                // Close modal and reset DOM
+                                setTimeout(function(){
+                                    $('.modal').modal('hide');
+                                    setTimeout(function(){
+                                        $('#modal_downloadDataFile_prompt').show();
+                                        $('#modal_downloadDataFile_downloading').hide();
+                                    },500);
+                                },1500);
+                            });
+                        });
+                    });
+                }
+            });
         });
+    });
+    
+    
+    // CLICK HANDLER: Upload data file
+    $("#modal_uploadDataFile_submit").click(function() {
         
-        // QA (FHW: Registration)
-        $('#qa_REG_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_reg02_registration.html";
-            qaFormName = "FHW: Registration";
-            pKey1_name = "memID_1";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "First Member ID";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+        // Get file and extension
+        var fileToLoad = document.getElementById('modal_uploadDataFile_fileInput').files[0];
+        if (fileToLoad !== undefined) {
+            var sFileName = fileToLoad.name;
+            var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+        }
+        
+        // Check for errors (no file, wrong extension, corrupt file)
+        if (document.getElementById("modal_uploadDataFile_fileInput").value === "") {
+            // Error #1: No file was selected
+            $('#modal_uploadDataFile_error').text('No file was selected.');
+            flashDiv('#modal_uploadDataFile_error');
+        } else if (sFileExtension !== "lmd") {
+            // Error #2: Wrong file extension (not ".lmd")
+            $('#modal_uploadDataFile_error').text('Please select only ".lmd" files.');
+            flashDiv('#modal_uploadDataFile_error');
+        } else if (false) {
+            // !!!!! Error #3: check for corrupt files (i.e. not properly formatted as JSON) !!!!!
+        } else {
+            // No errors; proceed with upload
+            
+            // Manipulate DOM
+            $('#modal_uploadDataFile_formContent').slideUp(500, function(){
+                $('#modal_uploadDataFile_status').slideDown(500);
+            });
+            
+            // Read in file
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent) {
+                uploadedRecordset = JSON.parse(fileLoadedEvent.target.result);
+            };
+            fileReader.readAsText(fileToLoad, "UTF-8");
+            
+            // Set localKey to counter
+            // !!!!! Consider refactoring this into a module that handles operations with myRecordset !!!!!
+            if (localStorage.counter === undefined) {
+                localStorage.counter = 1;
+            }
+            localKey = localStorage.counter; // !!!!! why is this a global (see above comment re: refactoring) ?????
+            localStorage.counter++;
+            
+            var myRecord = {};
+            myRecord.type = 'form';
+            
+            LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+                
+                // Read existing file (if exists) into mergedRecordset
+                var mergedRecordset = {};
+                i = 1;
+                if (result != "") {
+                    var oldRecordset = JSON.parse(result);
+                    for (var x in oldRecordset) {
+                        mergedRecordset[i] = oldRecordset[x];
+                        i++;
+                    }
+                }
+                
+                // Add uploaded records to mergedRecordset
+                for (var x in uploadedRecordset) {
+                    mergedRecordset[i] = uploadedRecordset[x];
+                    i++;
+                }
+                
+                // Write new recordset to data.lmd
+                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(mergedRecordset), function(){
+                    
+                    setTimeout(function(){
+                        // Display success message; hide modal; reset DOM
+                        $('#modal_uploadDataFile_message').text('Upload and merge complete.');
+                        setTimeout(function(){
+                            $('.modal').modal('hide');
+                            setTimeout(function(){
+                                $('#modal_uploadDataFile_message').text('Uploading and merging data file...').hide();
+                                $('#modal_uploadDataFile_status').hide();
+                                $('#modal_uploadDataFile_formContent').show();
+                                // !!!!! clear file selection (i.e. currently, if you try to upload two files in a row, the first remains selected after the upload) !!!!!
+                                // !!!!! the above could be trivially done by refreshing the page !!!!!
+                            },1000);
+                        },1000);
+                    },2000);
+                    
+                });
+                
+            });
+            
+        }
+        
+    });
+    
+    
+    // QA (TEST FORM)
+    $('#qa_TST').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/0_testDE.html",
+            qaFormName: "TEST FORM",
+            pKey1_name: "var1",
+            pKey2_name: "var6",
+            pKey1_label: "Var 1",
+            pKey2_label: "Var 6",
+            pKey_date: "pKey2"
         });
-        
-        // QA (FHW: KPI Assessment)
-        $('#qa_KPI_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_kpi02_kpiassessment.html";
-            qaFormName = "FHW: KPI Assessment";
-            pKey1_name = "memberID";
-            pKey2_name = "visitDate";
-            pKey3_name = "";
-            pKey1_label = "Woman member ID";
-            pKey2_label = "Visit date";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Registration)
+    $('#qa_REG_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_reg02_registration.html",
+            qaFormName: "FHW: Registration",
+            pKey1_name: "memID_1",
+            pKey1_label: "First Member ID"
         });
-        
-        // QA (FHW: Referral)
-        $('#qa_REF_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_ref02_referral.html";
-            qaFormName = "FHW: Referral";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: KPI Assessment)
+    $('#qa_KPI_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_kpi02_kpiassessment.html",
+            qaFormName: "FHW: KPI Assessment",
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Woman member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
         });
-        
-        // QA (FHW: Big Belly (initial))
-        $('#qa_BBI_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html";
-            qaFormName = "FHW: Big Belly (initial)";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Referral)
+    $('#qa_REF_02').click(function() {
+        launchQAModal({
+            // !!!!!
         });
-        
-        // QA (FHW: Big Belly (follow-up))
-        $('#qa_BBF_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html";
-            qaFormName = "FHW: Big Belly (follow-up)";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Big Belly (initial))
+    $('#qa_BBI_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html",
+            qaFormName: "FHW: Big Belly (initial)",
+            // !!!!!
         });
-        
-        // QA (FHW: Postnatal (initial))
-        $('#qa_PNI_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_pni02_postnatalinitial.html";
-            qaFormName = "FHW: Postnatal (initial)";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Big Belly (follow-up))
+    $('#qa_BBF_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html",
+            qaFormName: "FHW: Big Belly (follow-up)",
+            // !!!!!
         });
-        
-        // QA (FHW: Postnatal (follow-up))
-        $('#qa_PNF_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html";
-            qaFormName = "FHW: Postnatal (follow-up)";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Postnatal (initial))
+    $('#qa_PNI_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_pni02_postnatalinitial.html",
+            qaFormName: "FHW: Postnatal (initial)",
+            // !!!!!
         });
-        
-        // QA (FHW: Births, Deaths, Movements)
-        $('#qa_BDM_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_bdm02_movements.html";
-            qaFormName = "FHW: Births, Deaths, Movements";
-            pKey1_name = "fhwID";
-            pKey2_name = "bdmDate";
-            pKey3_name = "";
-            pKey1_label = "FHW ID";
-            pKey2_label = "Form date";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Postnatal (follow-up))
+    $('#qa_PNF_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html",
+            qaFormName: "FHW: Postnatal (follow-up)",
+            // !!!!!
         });
-        
-        // QA (FHW: Sick Child)
-        $('#qa_SCH_03').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_sch03_sickchild.html";
-            qaFormName = "FHW: Sick Child";
-            pKey1_name = "Member ID";
-            pKey2_name = "Visit date";
-            pKey3_name = "";
-            pKey1_label = "memberID";
-            pKey2_label = "visitDate";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Births, Deaths, Movements)
+    $('#qa_BDM_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_bdm02_movements.html",
+            qaFormName: "FHW: Births, Deaths, Movements",
+            pKey1_name: "fhwID",
+            pKey2_name: "bdmDate",
+            pKey1_label: "FHW ID",
+            pKey2_label: "Form date",
+            pKey_date: "pKey2"
         });
-        
-        // QA (FHW: Ebola Case Management)
-        $('#qa_ECM_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html";
-            qaFormName = "FHW: Ebola Case Management";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Sick Child)
+    $('#qa_SCH_03').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_sch03_sickchild.html",
+            qaFormName: "FHW: Sick Child",
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
         });
-        
-        // QA (FHW: Ebola Contact Tracing)
-        $('#qa_ECT_01').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html";
-            qaFormName = "FHW: Ebola Contact Tracing";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Ebola Case Management)
+    $('#qa_ECM_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html",
+            qaFormName: "FHW: Ebola Case Management",
+            // !!!!!
         });
-        
-        // QA (FHW: Ebola Education + Screening Ledger)
-        $('#qa_EES_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.html";
-            qaFormName = "FHW: Ebola Education + Screening Ledger";
-            pKey1_name = "memberID_1";
-            pKey2_name = "visitDate_1";
-            pKey3_name = "";
-            pKey1_label = "First Member ID";
-            pKey2_label = "First Visit Date";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Ebola Contact Tracing)
+    $('#qa_ECT_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html",
+            qaFormName: "FHW: Ebola Contact Tracing",
+            // !!!!!
         });
-        
-        // QA (FHW: Malaria Assessment Tool)
-        $('#qa_MAT_01').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_mat01_malariaassessment.html";
-            qaFormName = "FHW: Malaria Assessment Tool";
-            pKey1_name = "Member ID";
-            pKey2_name = "Visit date";
-            pKey3_name = "";
-            pKey1_label = "memberID";
-            pKey2_label = "visitDate";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Ebola Education + Screening Ledger)
+    $('#qa_EES_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.html",
+            qaFormName: "FHW: Ebola Education + Screening Ledger",
+            pKey1_name: "memberID_1",
+            pKey2_name: "visitDate_1",
+            pKey1_label: "First member ID",
+            pKey2_label: "First visit date",
+            pKey_date: "pKey2"
         });
-        
-        // QA (FHW: Sickness Screening Tool)
-        $('#qa_SST_05').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html";
-            qaFormName = "FHW: Sickness Screening Tool";
-            pKey1_name = "memberID";
-            pKey2_name = "visitDate";
-            pKey3_name = "";
-            pKey1_label = "Member ID";
-            pKey2_label = "Visit Date";
-            pKey3_label = "";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Malaria Assessment Tool)
+    $('#qa_MAT_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_mat01_malariaassessment.html",
+            qaFormName: "FHW: Malaria Assessment Tool",
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
         });
-        
-        // QA (Program: Training Ledger)
-        $('#qa_TRL_01').click(function() {
-            targetForm = "/LastMileData/src/forms/prg_trl01_trainingledger.html";
-            qaFormName = "Program: Training Ledger";
-            pKey1_name = "facilityName";
-            pKey2_name = "visitDate";
-            pKey3_name = "county";
-            pKey1_label = "Facility Name";
-            pKey2_label = "Visit Date";
-            pKey3_label = "County";
-            pKey_date = "pKey2"
-            launchQAModal();
+    });
+    
+    
+    // QA (FHW: Sickness Screening Tool)
+    $('#qa_SST_05').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html",
+            qaFormName: "FHW: Sickness Screening Tool",
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
         });
-        
-        // QA (Facility: IPC MESH Tool)
-        $('#qa_MSH_01').click(function() {
-            targetForm = "/LastMileData/src/forms/fac_msh01_mesh.html";
-            qaFormName = "Facility: IPC MESH Tool";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (Program: Training Ledger)
+    $('#qa_TRL_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/prg_trl01_trainingledger.html",
+            qaFormName: "Program: Training Ledger",
+            pKey1_name: "facilityName",
+            pKey2_name: "visitDate",
+            pKey3_name: "county",
+            pKey1_label: "Facility name",
+            pKey2_label: "Visit date",
+            pKey3_label: "County",
+            pKey_date: "pKey2"
         });
-        
-        // QA (archive) (FHW: Ebola Case Management)
-        $('#qa_ECM_01').click(function() {
-            targetForm = "/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html";
-            qaFormName = "FHW: Ebola Case Management";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (Facility: IPC MESH Tool)
+    $('#qa_MSH_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fac_msh01_mesh.html",
+            qaFormName: "Facility: IPC MESH Tool",
+            // !!!!!
         });
-        
-        // QA (archive) (FHW: Ebola Screening Tool)
-        $('#qa_ESC_02').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_esc02_ebolascreening.html";
-            qaFormName = "FHW: Ebola Screening Tool";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (archive) (FHW: Ebola Case Management)
+    $('#qa_ECM_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html",
+            qaFormName: "FHW: Ebola Case Management",
+            // !!!!!
         });
-        
-        // QA (archive) (FHW: Ebola Screening Tool)
-        $('#qa_ESC_03').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_esc03_ebolascreening.html";
-            qaFormName = "FHW: Ebola Screening Tool";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (archive) (FHW: Ebola Screening Tool)
+    $('#qa_ESC_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_esc02_ebolascreening.html",
+            qaFormName: "FHW: Ebola Screening Tool",
+            // !!!!!
         });
-        
-        // QA (archive) (FHW: Sickness Screening Tool)
-        $('#qa_SST_04').click(function() {
-            targetForm = "/LastMileData/src/forms/fhw_sst04_ebolascreening.html";
-            qaFormName = "FHW: Sickness Screening Tool";
-            pKey1_name = "";
-            pKey2_name = "";
-            pKey3_name = "";
-            pKey1_label = "";
-            pKey2_label = "";
-            pKey3_label = "";
-            pKey_date = ""
-            launchQAModal();
+    });
+    
+    
+    // QA (archive) (FHW: Ebola Screening Tool)
+    $('#qa_ESC_03').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_esc03_ebolascreening.html",
+            qaFormName: "FHW: Ebola Screening Tool",
+            // !!!!!
         });
-        
-        
-        
-    // (3) QA Modal Submit
-    $('#qaModalSubmit').click(function() {
+    });
+    
+    
+    // QA (archive) (FHW: Sickness Screening Tool)
+    $('#qa_SST_04').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_sst04_ebolascreening.html",
+            qaFormName: "FHW: Sickness Screening Tool",
+            // !!!!!
+        });
+    });
+    
+    
+    // QA (archive) (FHW: Sickness Screening Tool)
+    $('#qa_CHV_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/prg_chv01_gchvquestionnaire.html",
+            qaFormName: "Program: gCHV Questionnaire",
+            pKey1_name: "gchvName",
+            pKey2_name: "todayDate",
+            pKey1_label: "gCHV name",
+            pKey2_label: "Date",
+            pKey_date: "pKey2"
+        });
+    });
+    
+    
+    
+    // CLICK HANDLER: QA modal
+    $('#modal_QA_submit').click(function() {
 
         // Set pKey values
-        pKey1_val = $('#pKey1').val();
-        pKey2_val = $('#pKey2').val();
-        pKey3_val = $('#pKey3').val();
+        pKey1_val = $('#modal_QA_pKey1').val();
+        pKey2_val = $('#modal_QA_pKey2').val();
+        pKey3_val = $('#modal_QA_pKey3').val();
         
         // Initialize "QA Record ID" (i.e. key of myRecordset object where desired record is contained)
         var qaRecordID = false;
         
-        // Use FileSystem API; request persistent storage
-        window.webkitStorageInfo.requestQuota(PERSISTENT, 50*1024*1024, function(grantedBytes) {
-            window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-            window.requestFileSystem(PERSISTENT, grantedBytes,
-                // Success handler
-                function(fs) {
-                    // Read in file
-                    fs.root.getFile('data.lmd', {}, function(fileEntry) {
-                        // Get a File object representing the file, then use FileReader to read its contents.
-                        fileEntry.file(function(file) {
-                            var reader = new FileReader();
-                            reader.onloadend = function(e) {
-                                if (this.result == "" || this.result == "{}") {
-                                    noMatchFound();
+        // Read in file and run callback
+        LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+            
+            if (result == "" || result == "{}") {
+                flashDiv('#qaNoMatch');
+            }
+            else {
+                // Otherwise, parse myRecordset into object
+                myRecordset = JSON.parse(result);
+                
+                // First loop through keys of myRecordset (set numRecords)
+                for (rKey in myRecordset) {
+                    try {
+                        // Assign record object to currentRecord
+                        currentRecord = JSON.parse(myRecordset[rKey]);
+                    }
+                    catch(e) {
+                        currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
+                    }
+                    
+                    // Test to see if current localStorage record is of type "form"
+                    if (currentRecord.type == "form") {
+                        // Test that pKey1 matches
+                        if ( pKey1_val == currentRecord[window.lmd_qaOptions.pKey1_name] ) {
+                            
+                            // Test that pKey2 matches (or doesn't exist)
+                            if ( window.lmd_qaOptions.pKey2_name === undefined || pKey2_val == currentRecord[window.lmd_qaOptions.pKey2_name] ) {
+                                
+                                // Test that pKey3 matches (or doesn't exist)
+                                if ( window.lmd_qaOptions.pKey3_name === undefined || pKey3_val == currentRecord[window.lmd_qaOptions.pKey3_name] ) {
+                                    // Match found; set qaRecordID
+                                    var qaRecordID = rKey;
                                 }
-                                else {
-                                    // Otherwise, parse myRecordset into object
-                                    myRecordset = JSON.parse(this.result);
+                            }
+                        }
+                    }
+                    
+                }
+                
+                // Handle: no match found
+                if (qaRecordID) {
+                    // Deactivate button
+                    // !!!!! this is broken - still allowing double-clicks which breaks target QA form; context may be wrong !!!!!
+                    $(this).css('pointer-events','none');
+                    
+                    // Parse targetForm URL; redirect
+                    qaTargetForm = window.lmd_qaOptions.targetForm + "?QA=" + qaRecordID;
+                    location.assign(qaTargetForm);
+                }
+                else {
+                    flashDiv('#qaNoMatch');
+                }
+            }
 
-                                    // First loop through keys of myRecordset (set numRecords)
-                                    for (rKey in myRecordset) {
-                                        try {
-                                            // Assign record object to currentRecord
-                                            currentRecord = JSON.parse(myRecordset[rKey]);
-                                        }
-                                        catch(e) {
-                                            currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
-                                        }
-
-                                        // Test to see if current localStorage record is of type "form"
-                                        if (currentRecord.type == "form") {
-                                            // Test that pKey1 matches
-                                            if ( pKey1_val == currentRecord[pKey1_name] ) {
-
-                                                // Test that pKey2 matches (or doesn't exist)
-                                                if ( pKey2_val == currentRecord[pKey2_name] || pKey2_name == "" ) {
-
-                                                    // Test that pKey3 matches (or doesn't exist)
-                                                    if ( pKey3_val == currentRecord[pKey3_name] || pKey3_name == "" ) {
-                                                        // Match found; set qaRecordID
-                                                        var qaRecordID = rKey;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                    }
-
-                                    // Handle: no match found
-                                    if (qaRecordID) {
-                                        // Deactivate button
-                                        $(this).css('pointer-events','none');
-
-                                        // Parse targetForm URL; redirect
-                                        targetForm = targetForm + "?QA=" + qaRecordID;
-                                        window.location.assign(targetForm);
-                                    }
-                                    else {
-                                        noMatchFound();
-                                    }
-                                }
-                            };
-                            reader.readAsText(file);
-                        }, logError);
-                    }, logError);
-                }, logError);
         });
         
     });
     
     
     
-    // (4) Download Data File Modal !!!!! finish !!!!!
-    // Run this script when refreshDataModal is shown
-    $('#downloadDataFileModal').on('shown.bs.modal', function(e) {
-        
-        // !!!!! open stream
-        
-        // !!!!! write to filestream (only files of type='form')
-        
-        // !!!!! download file (send appropriate headers)
-//        window.location.href = "/LastMileData/src/php/downloadDataFile.php"       // !!!!! delete these files !!!!!
-        
-        // !!!!! When download is complete, run the following...
-            // Close Modal and Reset DOM
-            setTimeout( function() {
-
-            // Close dialog box
-            $('.modal').modal('hide');
-            
-            // !!!!! delete specific records from data.lmd !!!!!
-            
-           }, 1000 );
-        
-    });
-    
-    
-    
-    // (999) Generate EES Ledger click handler !!!!! temporary !!!!!
-    // Run this script when eesSubmit is clicked
-    $('#eesSubmit').click(function(){
+    // CLICK HANDLER: generate EES Ledger (!!!!! temporary !!!!!)
+    // Run this script when modal_eesLedger_submit is clicked
+    $('#modal_eesLedger_submit').click(function(){
         
         // !!!!! Should give a warning if fhwID and fhwName don't match !!!!!
         
-        var fhwID = $('#eesFhwID').val();
-        var fhwName = $('#eesFhwName').val();
+        var fhwID = $('#modal_eesLedger_fhwID').val();
+        var fhwName = $('#modal_eesLedger_fhwName').val();
         var myLocation = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.php";
         myLocation += "?fhwID=" + fhwID;
         myLocation += "&fhwName=" + fhwName;
@@ -606,15 +534,16 @@ $(document).ready(function(){
     
     
     
-    // (5) Refresh Data Modal
-    // Run this script when refreshDataModal is shown
-    $('#refreshDataModal').on('shown.bs.modal', function(e) {
+    // Refresh Data Modal
+    // Run this script when modal_refreshData is shown
+    // !!!!! Change this to automatically refresh system data once per week ?????
+    $('#modal_refreshData').on('shown.bs.modal', function(e) {
         ajaxRefresh();
     });
     
     
     
-    // (5) Versions
+    // CLICK HANDLER: versions
     $('#oldVersions_link').click(function() {
         $('#currentVersions_div').slideUp(1000,function(){
             $('#oldVersions_div').slideDown(1000);
@@ -638,10 +567,11 @@ $(document).ready(function(){
 
 
 $(window).load(function(){
+// !!!!! what needs to go here versus in the document.ready section above ?????
     
     
     
-    // (6) Only allow webkit-based broswers (Safari or Chrome); !!!!! consider using browser.version propery as well (Webkit build number) !!!!!
+    // Only allow webkit-based broswers (Safari or Chrome); !!!!! consider using browser.version propery as well (Webkit build number) !!!!!
     var browser = (function() { var s = navigator.userAgent.toLowerCase(); var match = /(webkit)[ \/]([\w.]+)/.exec(s) || /(opera)(?:.*version)?[ \/]([\w.]+)/.exec(s) || /(msie) ([\w.]+)/.exec(s) || !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) || [];return { name: match[1] || "", version: match[2] || "0" }; }());
     if (browser.name != "webkit") {
         // Display error alert; redirect to home page
@@ -652,44 +582,38 @@ $(window).load(function(){
         // !!!!! Move the initialized code here !!!!!
     }
     
-    // (7) If site has been initialized, proceed to DEQA
-    if ( localStorage.initialized == "yes" ) {
+    
+    
+    // If site has been initialized, proceed to DEQA
+    if ( localStorage.initialized === "yes" ) {
         
         // If user is not logged in, show login modal; else, proceed to DEQA
         if (!sessionStorage.username) {
-            $('#deqaLogin').modal({
-                backdrop:'static',
-                keyboard:false,
-                show:true
-            });
+            $('#modal_deqaLogin').modal();
         }
     }
     // If site has NOT been initialized
     else {
         // Show initialize modal
-        $('#deqaInitialize').modal({
-            backdrop:'static',
-            keyboard:false,
-            show:true
-        });
+        $('#modal_initialize').modal();
         
         // Run when initialize modal is shown
-        $('#deqaInitialize').on('shown.bs.modal', function() {
+        $('#modal_initialize').on('shown.bs.modal', function() {
             ajaxRefresh(); // Note: showLoginModal is run on success callback of ajaxRefresh();
         });
     }
     
     
     
-    // (7) DEQA Login
-    $('#deqaLoginSubmit').click(function(event) {
+    // CLICK HANDLER: DEQA Login
+    $('#modal_deqaLogin_submit').click(function(event) {
         
         // Set usernames and passwords here; usernames should only contain lowercase letters; passwords are SHA1
         var deqaUserArray = JSON.parse(localStorage.deqaUsers);
         
         // Get username and password values from fields
-        var username = $('#username').val();
-        var password = $('#password').val();
+        var username = $('#modal_deqaLogin_username').val();
+        var password = $('#modal_deqaLogin_password').val();
         
         // Check username
         if( deqaUserArray[username] ) {
@@ -714,34 +638,64 @@ $(window).load(function(){
     
     
     
-    // (8) Submit deqaLoginModal on "enter" keypress
-    $('#password').keypress(function(event) {
+    //  KEYPRESS HANDLER: Submit deqaLoginModal on "enter" keypress
+    $('#modal_deqaLogin_password').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13') {
-            $('#deqaLoginSubmit').click();
+            $('#modal_deqaLogin_submit').click();
         }
     });
     
     
     
-    // If AppCache update is ready
+    // EVENT HANDLER: AppCache downloading
+    applicationCache.ondownloading = function() {
+        
+        if (localStorage.initialized === "yes") {
+            // Hide any existing modals; display appcacheRefresh modal
+            $('.modal').modal('hide');
+            $('#modal_appcacheRefresh').modal();
+            return false; // !!!!! why are the "return false" statements necessary (here and below) ?????
+        }
+        
+    }
+    
+    
+    
+    // EVENT HANDLER: AppCache progress
+    applicationCache.onprogress = function(ev) {
+        var progressMessage = "Progress: " + ev.loaded + " of " + ev.total + " files ("+ Math.round(100*ev.loaded/ev.total) +"%)";
+        $("#modal_appcacheRefresh_progress").text(progressMessage);
+        $("#modal_initialize_progress").text(progressMessage);
+        return false;
+    };
+    
+    
+    
+    // EVENT HANDLER: AppCache cached
+    applicationCache.oncached = function() {
+        
+        // To handle cases where the AppCache was cleared manually by the user (but localStorage remains)
+        $('#modal_appcacheRefresh_text').text('New application version has been successfully downloaded. Reloading page now...')
+        setTimeout(function(){
+            location.reload();
+        }, 1500);
+        return false;
+        
+    };
+    
+    
+    
+    // EVENT HANDLER: AppCache update ready
     applicationCache.onupdateready = function() {
         
-        $('.modal').modal('hide');
-        
-        // Show appCacheRefresh modal
-        $('#appCacheRefresh').modal({
-            backdrop:'static',
-            keyboard:false,
-            show:true
-        });
-        
-        // Run when appCacheRefresh modal is shown
-        $('#appCacheRefresh').on('shown.bs.modal', function() {
-            setTimeout( function() {
+        if (localStorage.initialized === "yes") {
+            $('#modal_appcacheRefresh_text').text('New application version has been successfully downloaded. Reloading page now...')
+            setTimeout(function(){
                 location.reload();
-            }, 1000 );
-        });
+            }, 1500);
+            return false;
+        }
     }
     
     
@@ -759,29 +713,29 @@ function ajaxRefresh() {
         dataType: "json",
         success: function(data) {
             
-            // !!!!! all storage currently done in localStorage should be done using FIleSystem API !!!!!
             // !!!!! this code is WET (with refreshData.php); refactor !!!!!
+            // !!!!! most of the data stored in localStorage should be stored in FileSystem (for scalability) !!!!!
             
-            // Update localStorage.deqaUsers
-            localStorage.initialized = "yes";
+            // Update localStorage
             localStorage.deqaUsers = JSON.stringify(data['deqaUsers']);
             localStorage.villages = JSON.stringify(data['villages']);
             localStorage.fhws = JSON.stringify(data['fhws']);
+            localStorage.initialized = "yes";
             
             // Manipulate DOM
-            $('#refreshData_text').text('Data was successfully refreshed.');
-            $('#initialize_text').text('Initialization successful.');
+            $('#modal_refreshData_text').text('Data was successfully refreshed. Reloading page now...');
+            $('#modal_initialize_text').text('Initialization successful. Reloading page now...');
             
             // Reload page
             setTimeout( function() {
                 location.reload();
-            }, 1000 );
+            }, 1500 );
             
         },
         error: function(request, status, error) {
             // Display error message
-            $('#refreshData_text').text('Data refresh was unsuccessful. Please try again later.');
-            $('#initialize_text').text('Initialization was unsuccessful. Please try again later.');
+            $('#modal_refreshData_text').text('Data refresh was unsuccessful. Please try again later. Reloading page now...');
+            $('#modal_initialize_text').text('Initialization was unsuccessful. Please try again later. Reloading page now...');
             
             // Redirect to home page
             setTimeout( function() {
@@ -796,24 +750,7 @@ function ajaxRefresh() {
 
 
 function showErrorMessage() {
-    $('#incorrectLogin').slideDown(1000).delay(1000).slideUp(1000);
-}
-
-
-
-function closeAndResetModal() {
-    setTimeout( function() {
-
-        // Close dialog box
-        $('.modal').modal('hide');
-        
-        setTimeout( function() {
-            // Reset DOM text of modal box
-            $('#sendRecords,#cancelModal_2').css('display','');
-            $('#sendRecords_text').html('Are you sure you want to send all current records to the database?');
-        }, 200 );
-        
-    }, 1000 );
+    $('#modal_deqaLogin_incorrectLogin').slideDown(1000).delay(1000).slideUp(1000);
 }
 
 
@@ -824,65 +761,65 @@ function addslashes( str ) {
 
 
 
-// !!!!! function launchQAModal() !!!!!
-function launchQAModal()
+function launchQAModal(options)
 {
-    // Reset DOM; remove datepicker; clear fields
-    $('#pKeyDiv1, #pKeyDiv2, #pKeyDiv3').css('display','');
-    $('#pKey1, #pKey2, #pKeyv3').datepicker('destroy');
-    $('#pKey1, #pKey2, #pKeyv3').val('');
+    // Set global object
+    window.lmd_qaOptions = options;
     
-    // Set form label in QA Modal box
-    $('#qaFormName').text(qaFormName);
-    
-    // Manipulate modal DOM
-    if ( pKey1_label != "" ) {
-        $('#pKeyDiv1 label').text(pKey1_label);
-    }
-    else {
-        $('#pKeyDiv1').css('display','none');
-    }
+    // Reset DOM
+    $('#modal_QA_pKeyDiv1, #modal_QA_pKeyDiv2, #modal_QA_pKeyDiv3').css('display','');
+    $('#modal_QA_pKey1, #modal_QA_pKey2, #modal_QA_pKey3').datepicker('destroy');
+    $('#modal_QA_pKey1, #modal_QA_pKey2, #modal_QA_pKey3').val('');
+    $('#qaFormName').text(options.qaFormName);
     
     // Manipulate modal DOM
-    if ( pKey2_label != "" ) {
-        $('#pKeyDiv2 label').text(pKey2_label);
+    if ( options.pKey1_label ) {
+        $('#modal_QA_pKeyDiv1 label').text(options.pKey1_label);
     }
     else {
-        $('#pKeyDiv2').css('display','none');
+        $('#modal_QA_pKeyDiv1').css('display','none');
     }
-    
-    // Manipulate modal DOM
-    if ( pKey3_label != "" ) {
-        $('#pKeyDiv3 label').text(pKey3_label);
+    if ( options.pKey2_label ) {
+        $('#modal_QA_pKeyDiv2 label').text(options.pKey2_label);
     }
     else {
-        $('#pKeyDiv3').css('display','none');
+        $('#modal_QA_pKeyDiv2').css('display','none');
+    }
+    if ( options.pKey3_label ) {
+        $('#modal_QA_pKeyDiv3 label').text(options.pKey3_label);
+    }
+    else {
+        $('#modal_QA_pKeyDiv3').css('display','none');
     }
     
     // Apply jQueryUI datepicker (MySQL date format)
-    $("#" + pKey_date).datepicker({
-        dateFormat: 'yy-mm-dd',
-    });
-    
-    // Only allow valid MySQl date format if user types into .datepicker input
-    // !!!!! Functionize this code; also used in deqa.js !!!!!
-    $("#" + pKey_date).blur(function() {
-        myDate = $(this).val();
-        dateRegExp = /[12]\d\d\d-[0-1]\d-[0-3]\d/;
-        if ( !dateRegExp.test(myDate) && myDate!="" ) {
-            mySel = $(this);
-            mySel.val( "" );
-            mySel.attr( "title", "Dates must be in yyyy-mm-dd format." );
-            mySel.tooltip( "show" );
-            setTimeout(function(){
-                mySel.tooltip( "destroy" );
-            }, 2000);
-            mySel.focus();
-        }
-    });
+    if ( options.pKey_date ) {
+        
+        $("#" + options.pKey_date).datepicker({
+            dateFormat: 'yy-mm-dd',
+        });
+        
+        // Only allow valid MySQl date format if user types into .datepicker input
+        // !!!!! Functionize this code; also used in fhwForms.js !!!!!
+        $("#" + options.pKey_date).blur(function() {
+            myDate = $(this).val();
+            dateRegExp = /[12]\d\d\d-[0-1]\d-[0-3]\d/;
+            if ( !dateRegExp.test(myDate) && myDate!="" ) {
+                var $mySel = $(this);
+                $mySel.val( "" );
+                $mySel.attr( "title", "Dates must be in yyyy-mm-dd format." );
+                $mySel.tooltip( "show" );
+                setTimeout(function(){
+                    $mySel.tooltip( "destroy" );
+                }, 2000);
+                $mySel.focus();
+            }
+        });
+        
+    }
     
     // Open modal
-    $('#qaModal').modal();
+    $('#modal_QA').modal();
 }
 
 
@@ -913,33 +850,162 @@ function parseRecordIntoSQL(currentRecord) {
 
 
 
-function noRecordsMessage() {
-    // Display "no records" message in DOM
-    $('#sendRecords_text').html('There are currently no locally-stored records.');
-    
-    // Close modal box
-    closeAndResetModal();
-}
-
-
-
-function noMatchFound() {
+function flashDiv(myDiv) {
     // Flash "no match found" message div
-    $('#qaNoMatch').slideDown(1000).delay(1000).slideUp(1000);
+    $(myDiv).slideDown(1000).delay(1000).slideUp(1000);
 }
 
 
 
-function logError(e) {
-    // Use "closures"; see http://www.howtocreate.co.uk/referencedvariables.html
-    if (e.name == 'NotFoundError') {
-        console.log('Caught error -- no records ever submitted');
-        noRecordsMessage();
-    }
-    else {
-        console.log('deqa - logError');
-        console.log(e);
-    }
+function noRecordsMessage() {
+    // Display "no records" message in DOM; reset modal
+    $('#modal_sendRecords_text').html('There are currently no locally-stored records.');
+    $('#modal_sendRecords_text').slideDown(500);
+    $('#modal_sendRecords_close').slideDown(500);
+}
+
+
+
+function sendRecordsAJAX(){
+    
+    // Reset variables
+    var queryString = "",
+        numRecords = 0,
+        numAjax_success = 0,
+        numAjax_fail = 0;
+        
+    LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+        
+        if (result == "" || result == "{}") {
+            noRecordsMessage();
+        }
+        else {
+            
+            // Manipulate DOM
+            $('#modal_sendRecords_ajaxLoadIcon').slideDown(500);
+            $('#modal_sendRecords_ajaxInner').slideDown(500,function(){
+                
+                // Otherwise, parse myRecordset into object
+                myRecordset = JSON.parse(result);
+                
+                // First loop through keys of myRecordset (set numRecords and manipulate DOM)
+                for (rKey in myRecordset) {
+                    try {
+                        // Assign record object to currentRecord
+                        currentRecord = JSON.parse(myRecordset[rKey]);
+                    }
+                    catch(e) {
+                        currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
+                    }
+                    
+                    // Test to see if current localStorage record is of type "form"
+                    if (currentRecord.type == "form") {
+                        numRecords++;
+                        $('#modal_sendRecords_ajaxInner').append('<div id="ajaxBlock_' + rKey + '" class="ajaxBlock">' + numRecords + '</div>');
+                    }
+                }
+                
+                // Second loop through keys of myRecordset (process numRecords)
+                for (rKey in myRecordset) {
+                    
+                    try {
+                        // Assign record object to currentRecord
+                        currentRecord = JSON.parse(myRecordset[rKey]);
+                    }
+                    catch(e) {
+                        currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
+                    }
+                    
+                    // Test to see if current localStorage record is of type "form"
+                    if (currentRecord.type == "form") {
+                        
+                        // Parse SQL Insert query
+                        queryString = parseRecordIntoSQL(currentRecord);
+                        
+                        // Send record to database via AJAX
+                        var myData = {'queryString': queryString, 'rKey': rKey} ;
+                        
+                        // Send AJAX request
+                        $.ajax({
+                            type: "POST",
+                            url: "/LastMileData/src/php/ajaxSendQuery.php",
+                            data: myData,
+                            dataType: "json",
+                            success: function(data) {
+                                
+                                // Change ajaxBlock to GREEN
+                                $("#ajaxBlock_" + data.rKeyAJAX).css('background-color','#5CB85C');
+                                
+                                // Log success; remove record from myRecordset; increment AJAX success counter
+                                console.log('ajax success!');
+                                delete myRecordset[data.rKeyAJAX];
+                                numAjax_success++;
+                                
+                            },
+                            error: function(request, status, error) {
+                                
+                                // Change ajaxBlock to GREEN
+                                $("#ajaxBlock_" + JSON.parse(request.responseText).rKeyAJAX).css('background-color','#C12E2A');
+                                
+                                // Log failure; increment AJAX failure counter
+                                console.log('ajax error :/');
+                                console.log(request);
+                                numAjax_fail++;
+                            }
+                        });
+                    }
+                    
+                }
+                
+                var myTimer = setInterval(function(){
+                    
+                    if(numRecords == numAjax_success + numAjax_fail) {
+                        
+                        // !!!!! Try doing this without deleting file !!!!!
+                        LMD_fileSystemHelper.deleteFile('data.lmd',function(){
+                            
+                            LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(myRecordset), function(){
+                                
+                                if (numRecords == numAjax_success) {
+                                    // Display success message
+                                    $('#modal_sendRecords_text').html('Success. All records were sent to the MySQL database.');
+                                }
+                                
+                                else if (numRecords == numAjax_fail) {
+                                    // Display "full error" message
+                                    $('#modal_sendRecords_text').html('No records were successfully sent.<br>Please try again later.');
+                                }
+                                
+                                else if (numRecords == numAjax_success + numAjax_fail) {
+                                    // Display "partial error" message
+                                    $('#modal_sendRecords_text').html('Only some records were sent successfully.<br>Please try again to send the remaining records.');
+                                }
+                                
+                                else {
+                                    // Display "unknown error" message
+                                    $('#modal_sendRecords_text').html('An unknown error occurred.<br>Please contact the database manager for support');
+                                }
+                                
+                                // Update DOM
+                                $('#modal_sendRecords_ajaxLoadIcon').slideUp(500, function(){
+                                    $('#modal_sendRecords_text, #modal_sendRecords_close').slideDown(500);
+                                });
+                                
+                            });
+                            
+                        });
+                        
+                        clearInterval(myTimer);
+                    }
+                    
+                },500);
+                
+            });
+            
+        }
+        
+    });
+    
 }
 
 

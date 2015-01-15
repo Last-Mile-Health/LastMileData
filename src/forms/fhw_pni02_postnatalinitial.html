@@ -12,6 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
@@ -79,7 +80,7 @@
             <b>A. Record child information</b>
             <div class="thickBox">
                 
-                <!-- Question 1 -->
+                <!-- Question -->
                 <div class="inner_L">
                     1. Record child name.
                 </div>
@@ -89,7 +90,7 @@
                 <div style="clear:both"></div>
                 <hr>
                 
-                <!-- Question 2 -->
+                <!-- Question -->
                 <div class="inner_L">
                     2. Record child date of birth.
                 </div>
@@ -99,7 +100,7 @@
                 <div style="clear:both"></div>
                 <hr>
                 
-                <!-- Question 3 -->
+                <!-- Question -->
                 <div class="inner_L">
                     3. Assign member ID and complete "FHW6: Births, Deaths, & Movements".
                 </div>
@@ -109,7 +110,7 @@
                 <div style="clear:both"></div>
                 <hr>
                 
-                <!-- Question 4 -->
+                <!-- Question -->
                 <div class="inner_L">
                     4. Is the child still alive?
                 </div>
@@ -123,7 +124,7 @@
                 <div style="clear:both"></div>
                 <hr>
                 
-                <!-- Question 5 -->
+                <!-- Question -->
                 <div class="inner_L">
                     5. Record child's age.
                 </div>
@@ -142,7 +143,7 @@
             <b>B. Ask about delivery</b>
             <div class="thickBox">
                 
-                <!-- Question 6 -->
+                <!-- Question -->
                 <div class="inner_L">
                     6. Ask about type of delivery and location.
                 </div>
@@ -156,7 +157,7 @@
                 <div style="clear:both"></div>
                 <hr>
                 
-                <!-- Question 7 -->
+                <!-- Question -->
                 <div class="inner_L">
                     7. When did you return to the village?
                 </div>
@@ -174,7 +175,7 @@
             <b>C. Complete follow-up form</b>
             <div class="thickBox">
                 
-                <!-- Question 8 -->
+                <!-- Question -->
                 <div class="inner_L" style="width:3.5in">
                     8. Complete "FHW Form 5b: Postnatal (follow-up)".
                 </div>
@@ -206,7 +207,8 @@
         
         <!-- START: S/C Buttons -->
         <div class="formButtons">
-            <button id="lmd_submit" class="btn btn-success">Submit</button>&nbsp;
+            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
             <button id="lmd_cancel" class="btn btn-success">Cancel</button>
         </div>
         <!-- END: S/C Buttons -->

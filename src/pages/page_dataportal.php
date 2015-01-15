@@ -22,7 +22,6 @@
         <script src="/LastMileData/lib/dimple.v2.1.0.min.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
         <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
-        <script src="/LastMileData/src/js/changePassword_v20140916.js"></script>
         <script src="/LastMileData/src/js/sendRecords_v20140916.js"></script>
         
         <script>
@@ -220,21 +219,33 @@
                         <h3>Patient Visits - Distribution</h3>
                         <div id="dashboard_9">
                             <script src="/LastMileData/src/js/Dimple/dashboard_9.js"></script>
+                            <br><br>
+                            *Note: data on patient visits for Oct/Nov is incomplete; data will be available in January.
+                            <br><br>
                         </div>
                         
                         <h3>Patient Visits - Outputs</h3>
                         <div id="dashboard_10">
                             <script src="/LastMileData/src/js/Dimple/dashboard_10.js"></script>
+                            <br><br>
+                            *Note: data on patient visits for Oct/Nov is incomplete; data will be available in January.
+                            <br><br>
                         </div>
                         
                         <h3>Patient Visits - Outputs (without IMCI)</h3>
                         <div id="dashboard_11">
                             <script src="/LastMileData/src/js/Dimple/dashboard_11.js"></script>
+                            <br><br>
+                            *Note: data on patient visits for Oct/Nov is incomplete; data will be available in January.
+                            <br><br>
                         </div>
                         
                         <h3>Treatment (IMCI)</h3>
                         <div id="dashboard_13">
                             <script src="/LastMileData/src/js/Dimple/dashboard_13.js"></script>
+                            <br><br>
+                            *Note: data on patient visits for Oct/Nov is incomplete; data will be available in January.
+                            <br><br>
                         </div>
                         
                         <hr style="border:1px solid black">
@@ -258,13 +269,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="vertical-align:middle">End-of-2014</td>
+                                <td style="vertical-align:middle">Early-2015</td>
                                 <td>
                                     <b>Scale</b>: [# of patient visits], [# of villages] (plotted against targets)
                                     <br>
                                     <b>Delivery</b>: [% access, by health intervention], [# vaccines delivered], [# of ANC visits]
                                     <br>
-                                    <b>Impact</b>: [% safe deliveries]
+                                    <b>Impact</b>: [# child deaths]
                                 </td>
                             </tr>
                             <tr>
@@ -276,7 +287,7 @@
                                     <br>
                                     [avg cost per person], [% "A"s on FHW scorecard]
                                     <br>
-                                    <b>Outcome</b>: [% safe deliveries], [under-five mortality rate]
+                                    <b>Outcome</b>: [% safe deliveries], [# child deaths]
                                 </td>
                             </tr>
                         </table>

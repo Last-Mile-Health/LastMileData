@@ -11,6 +11,7 @@ var data = [
     { "Month":"Mar '14", "Measure":"FHWs", "Scale":42, "Order":7 },
     { "Month":"Jun '14", "Measure":"FHWs", "Scale":42, "Order":8 },
     { "Month":"Sep '14", "Measure":"FHWs", "Scale":42, "Order":9 },
+    { "Month":"Dec '14", "Measure":"FHWs", "Scale":56, "Order":10 },
     { "Month":"Sep '12", "Measure":"Villages", "Scale":0, "Order":1 },
     { "Month":"Dec '12", "Measure":"Villages", "Scale":12, "Order":2 },
     { "Month":"Mar '12", "Measure":"Villages", "Scale":12, "Order":3 },
@@ -19,7 +20,8 @@ var data = [
     { "Month":"Dec '13", "Measure":"Villages", "Scale":40, "Order":6 },
     { "Month":"Mar '14", "Measure":"Villages", "Scale":40, "Order":7 },
     { "Month":"Jun '14", "Measure":"Villages", "Scale":40, "Order":8 },
-    { "Month":"Sep '14", "Measure":"Villages", "Scale":40, "Order":9 }
+    { "Month":"Sep '14", "Measure":"Villages", "Scale":40, "Order":9 },
+    { "Month":"Dec '14", "Measure":"Villages", "Scale":44, "Order":10 }
 ];
 
 var myChart = new dimple.chart(svg, data);

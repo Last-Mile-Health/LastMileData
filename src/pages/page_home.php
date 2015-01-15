@@ -18,13 +18,6 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
         <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
-        <script src="/LastMileData/src/js/changePassword_v20140916.js"></script>
-        <script>
-            $(document).ready(function(){
-                sessionStorage.username = '<?php echo $_SESSION['username']; ?>';
-                console.log(sessionStorage);
-            });
-        </script>
     </head>
     
     <body style="display:none">
