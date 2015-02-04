@@ -12,13 +12,11 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
         <!--<script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>-->
         <script src="/reusables/lib/pouchdb-3.2.0.min.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
-        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
         
         <style>
             body { font-size:200%; font-weight:bold; }
@@ -30,10 +28,9 @@
         
         <script>
         $(document).ready(function(){
-            $('#myID').slideUp(1000,function(){
-                $(this).html('woohoo').slideDown(1000);
-            })
-            console.log(JSON.parse('{"one":"two""three":"four"}'));
+            $("div[data-test]").each(function() {
+                $(this).css('color','red');
+            });
         });
         </script>
         
@@ -50,9 +47,9 @@
         <!-- !!!!! -->
         
         <div id="container">
-            <div id="myID" class="myClass">One</div>
-            <div id="clickMe" class="myClass">Two</div>
-            <div class="myClass">Three</div>
+            <div data-test="yes">One</div>
+            <div>Two</div>
+            <div data-test="yes">Three</div>
         </div>
         
     </body>

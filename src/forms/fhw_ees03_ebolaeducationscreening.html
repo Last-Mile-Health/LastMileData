@@ -4,7 +4,7 @@
     
     <head>
         
-        <title>FHW Tool (EES 02) - Ebola Education + Screening Ledger</title>
+        <title>FHW Tool (EES 03) - Ebola Education + Screening Ledger</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -14,6 +14,8 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
+        <script src="/LastMileData/src/js/formHelper.js"></script>
+        <script src="/LastMileData/src/js/formValidate.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
@@ -24,7 +26,7 @@
             .inner_C { width: 2.3in; }
             .inner_R { width: 2.0in; }
             
-            /*.meBox { position:relative; top:-17px; }*/
+            .meBox { position:relative; top:-5px; }
             
             .multiplePages {
                 overflow:hidden;
@@ -50,7 +52,7 @@
             }
             
             #ES { position:relative; top:-8px }
-            .eesTable { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; page-break-inside:auto; }
+            .eesTable { position:relative; left:70px; border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; page-break-inside:auto; }
             .eesTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
             .eesTable tr { page-break-inside:avoid; page-break-after:auto; }
             .eesTable td { border: 1px solid black; height:28px; padding:0px; text-align:center; page-break-inside: avoid; overflow:hidden; }
@@ -156,9 +158,6 @@
 
                     <tr>
                         <th>Name</th>
-                        <th>Sex</th>
-                        <th>Age</th>
-                        <th>HH ID</th>
                         <th>Member ID</th>
                         <th>Visit date<br>(d/m/y)</th>
                         <th>Screening<br>code</th>
@@ -166,9 +165,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_1' class='stored c1' data-lmd-valid-required='yes'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_1' class='stored c5' data-lmd-valid-required='yes'></td>
                         <td><input id='visitDate_1' class='stored datepicker c6' data-lmd-valid-required='yes'></td>
                         <td><input id='screedingCodes_1' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -176,9 +172,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_2' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_2' class='stored c5'></td>
                         <td><input id='visitDate_2' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_2' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -186,9 +179,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_3' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_3' class='stored c5'></td>
                         <td><input id='visitDate_3' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_3' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -196,9 +186,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_4' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_4' class='stored c5'></td>
                         <td><input id='visitDate_4' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_4' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -206,9 +193,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_5' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_5' class='stored c5'></td>
                         <td><input id='visitDate_5' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_5' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -216,9 +200,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_6' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_6' class='stored c5'></td>
                         <td><input id='visitDate_6' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_6' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -226,9 +207,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_7' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_7' class='stored c5'></td>
                         <td><input id='visitDate_7' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_7' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -236,9 +214,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_8' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_8' class='stored c5'></td>
                         <td><input id='visitDate_8' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_8' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -246,9 +221,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_9' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_9' class='stored c5'></td>
                         <td><input id='visitDate_9' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_9' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -256,9 +228,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_10' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_10' class='stored c5'></td>
                         <td><input id='visitDate_10' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_10' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -266,9 +235,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_11' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_11' class='stored c5'></td>
                         <td><input id='visitDate_11' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_11' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -276,9 +242,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_12' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_12' class='stored c5'></td>
                         <td><input id='visitDate_12' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_12' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -286,9 +249,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_13' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_13' class='stored c5'></td>
                         <td><input id='visitDate_13' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_13' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -296,9 +256,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_14' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_14' class='stored c5'></td>
                         <td><input id='visitDate_14' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_14' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -306,9 +263,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_15' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_15' class='stored c5'></td>
                         <td><input id='visitDate_15' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_15' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -316,9 +270,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_16' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_16' class='stored c5'></td>
                         <td><input id='visitDate_16' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_16' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -326,9 +277,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_17' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_17' class='stored c5'></td>
                         <td><input id='visitDate_17' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_17' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -336,9 +284,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_18' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_18' class='stored c5'></td>
                         <td><input id='visitDate_18' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_18' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -346,9 +291,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_19' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_19' class='stored c5'></td>
                         <td><input id='visitDate_19' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_19' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -356,9 +298,6 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_20' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_20' class='stored c5'></td>
                         <td><input id='visitDate_20' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_20' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
@@ -366,50 +305,20 @@
                     </tr>
                     <tr>
                         <td><input id='memberName_21' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
                         <td><input id='memberID_21' class='stored c5'></td>
                         <td><input id='visitDate_21' class='stored datepicker c6'></td>
                         <td><input id='screedingCodes_21' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
                         <td><input id='educationCodes_21' class='stored c8' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
-                    </tr>
-                    <tr>
-                        <td><input id='memberName_22' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
-                        <td><input id='memberID_22' class='stored c5'></td>
-                        <td><input id='visitDate_22' class='stored datepicker c6'></td>
-                        <td><input id='screedingCodes_22' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
-                        <td><input id='educationCodes_22' class='stored c8' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
-                    </tr>
-                    <tr>
-                        <td><input id='memberName_23' class='stored c1'></td>
-                        <td><input disabled class='c2'></td>
-                        <td><input disabled class='c3'></td>
-                        <td><input disabled class='c4'></td>
-                        <td><input id='memberID_23' class='stored c5'></td>
-                        <td><input id='visitDate_23' class='stored datepicker c6'></td>
-                        <td><input id='screedingCodes_23' class='stored c7' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
-                        <td><input id='educationCodes_23' class='stored c8' data-lmd-valid-regex='^([A-E]{0,5})$' data-lmd-valid-errormessage='must consist of characters A,B,C,D,E (no spaces, commas, etc)'></td>
                     </tr>
                     
                 </table>
 
             </div>
             
-        </div>
-        <!-- END: PAGE -->                    
-        
-        
-        
-        <!-- START: DATA-ENTRY ONLY BOX -->
-        <div class="deBox">
             <!-- START: M&E Box -->
             <div class="meBox">
                 <span class="blackBox">M&E</span>
-                <span class="blackBox">EES.02</span>
+                <span class="blackBox">EES.03</span>
                 &nbsp;&nbsp;&nbsp;
                 DE Initials: <input class="stored" id="de_init">
                 DE Date: <input class="stored" id="de_date">
@@ -417,8 +326,11 @@
                 QA Date: <input class="stored" id="qa_date">
             </div>
             <!-- END: M&E Box -->
+
+
+
         </div>
-        <!-- END: DATA-ENTRY ONLY BOX -->
+        <!-- END: PAGE -->                    
         
         
         

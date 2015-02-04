@@ -7,6 +7,10 @@ if (!sessionStorage.username) {
 
 $(document).ready(function() {
     
+    // Datepicker; enforce MySQl date format
+    $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+    $(".datepicker").blur(datepickerBlur);
+    
     // Insert checkbox image after each (for print media)
     $(":checkbox").each(function() {
         $(this).after("<img class='chk_print' src='/LastMileData/res/chk_print_v20140916.png'>")
@@ -21,106 +25,6 @@ $(document).ready(function() {
     $('#de_date').attr('readonly','readonly');
     $('#de_init').val(sessionStorage.username);
     $('#de_init').attr('readonly','readonly');
-    
-    // Apply jQueryUI datepicker (MySQL date format)
-    $(".datepicker").datepicker({
-        dateFormat: 'yy-mm-dd',
-    });
-    
-    // Only allow valid MySQL date format if user types into .datepicker input
-    // !!!!! Functionize this code; also used in deqa.js !!!!!
-    $(".datepicker").blur(function() {
-        myDate = $(this).val();
-        dateRegExp = /[12]\d\d\d-[0-1]\d-[0-3]\d/;
-        if ( !dateRegExp.test(myDate) && myDate!="" ) {
-            var $mySel = $(this);
-            $mySel.val( "" );
-            $mySel.attr( "title", "Dates must be in yyyy-mm-dd format." );
-            $mySel.tooltip( "show" );
-            setTimeout(function(){
-                $mySel.tooltip( "destroy" );
-            }, 2000);
-            $mySel.focus();
-        }
-    });
-    
-    
-    // Apply jQueryUI autocomplete (MySQL date format)
-    $(".autocomplete").each(function() {
-        
-        // Get source from data attribute
-        mySource = $(this).attr('data-lmd-valid-autoC');
-        
-        if (mySource.substring(0,1)=="[") {
-            // Parse "static" (inline) arrays
-            myList = JSON.parse(mySource);
-        }
-        else {
-            // Parse "dynamic" (localStorage) arrays
-            myList = JSON.parse(localStorage[mySource]);
-            
-            // !!!!! START: smartData !!!!!
-            if (typeof localStorage[mySource] !== "undefined" && localStorage[mySource] !== "undefined") {
-                myList = JSON.parse(localStorage[mySource]);
-            }
-            // !!!!! END: smartData !!!!!
-            
-        }
-        if ($(this).attr('data-lmd-valid-sortList')=='yes') {
-            // Sort list alphabetically
-            myList.sort();
-        }
-        
-        // Apply jQueryUI autocomplete
-        $(this).autocomplete({
-            source: myList,
-            autoFocus: true,
-            delay: 100
-        });
-    });
-    
-    // Apply dynamic select lists
-    $("input[type!='checkbox']").each(function() {
-        
-        if($(this).attr('data-lmd-valid-select')) {
-            
-            // Get source from data attribute
-            mySource = $(this).attr('data-lmd-valid-select');
-            
-            if (mySource.substring(0,1)=="[") {
-                // Parse "static" (inline) arrays
-                myList = JSON.parse(mySource);
-            }
-            else {
-                // Parse "dynamic" (localStorage) arrays
-                myList = JSON.parse(localStorage[mySource]);
-                
-                // !!!!! START: smartData !!!!!
-                if (typeof localStorage[mySource] !== "undefined" && localStorage[mySource] !== "undefined") {
-                    myList = JSON.parse(localStorage[mySource]);
-                }
-                // !!!!! END: smartData !!!!!
-
-            }
-            if ($(this).attr('data-lmd-valid-sortList')=='yes') {
-                // Sort list alphabetically
-                myList.sort();
-            }
-            
-            // Create select element
-            myNewInput = "<select class='dynamicSelect " + $(this).attr('class') + "' id='" + $(this).attr('id') + "' style='" + $(this).attr('style') + "'>";
-            myNewInput += "<option value=''></option>";
-            for (i=0; i<myList.length; i++) {
-                myNewInput += "<option value='" + myList[i] + "'>" + myList[i] + "</option>";
-            }
-            myNewInput += "</select>";
-            
-            // Insert select element after textbox; remove textbox
-            $(this).after(myNewInput);
-            $(this).remove();
-        }
-        
-    });
     
     // If using "QA mode" (i.e. GET parameter with key 'QA' is not undefined), populate field values
     if ( getParameterByName('QA') ) {
@@ -176,175 +80,50 @@ $(document).ready(function() {
         
         var clicked = $(this).attr('id');
         
-        // Reset errorMessages and errorFields; set disallowed characters RegExp
-        var errorMessages = [];
-        var errorFields = [];
-        var disallowed = /[`~#\$%\^&\*\+;\\\|<>]+/;
-        
         // Reset field background colors
         $('.stored[type!="checkbox"]').each(function() {
             $(this).css('background-color','');
         });
         
-        // !!!!! turn this into an external validation module !!!!!
         // Perform data validation (for each field with class='stored')
-        $('.stored').each(function() {
-            
-            // Get key/value pair
-            myField = $(this).attr('id');
-            myValue = $(this).val();
-            
-            // Test: disallowed characters: # & + ; ^ * |
-            if ( (disallowed.test(myValue))===true ) {
-                errorFields.push(myField);
-                errorMessages.push('Field "' + myField + '" cannot contain the following characters: `~#$%^&*+;\|<>');
-            }
-            
-            // Test: field is required (data-lmd-valid-required="yes")
-            if ( $(this).attr('data-lmd-valid-required')=="yes" && myValue=="" ) {
-                errorFields.push(myField);
-                errorMessages.push('Field "' + myField + '" is required.');
-            }
-            
-            // Test: is a (decimal) number
-            if ( $(this).hasClass('decimal') && isNaN(myValue) ) {
-                errorFields.push(myField);
-                errorMessages.push('Field "' + myField + '" must be a number');
-            }
-            
-            // Test: is an integer
-            if ( $(this).hasClass('integer') && ( isNaN(myValue) || myValue!=Math.floor(myValue) ) ) {
-                errorFields.push(myField);
-                errorMessages.push('Field "' + myField + '" must be an integer');
-            }
-            
-            // Test: is a value-restricted (decimal) number
-            myMin = Number($(this).attr('data-lmd-valid-decMin'));
-            myMax = Number($(this).attr('data-lmd-valid-decMax'));
-            if ( myMin && myValue!="" ) {
-                
-                if ( myMax && ( myValue<myMin || myValue>myMax || isNaN(myValue) ) ) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" must be a number between ' + myMin + ' and ' + myMax);
-                }
-                else if ( myValue<myMin || isNaN(myValue) ) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" must be a number greater than or equal to ' + myMin);
-                }
-            }
-            else if ( myMax && myValue!="" ) {
-                if ( myValue>myMax || isNaN(myValue) ) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" must be a number less than or equal to ' + myMax);
-                }
-            }
-            
-            // Test: is a value-restricted integer
-            myMin = Number($(this).attr('data-lmd-valid-intMin'));
-            myMax = Number($(this).attr('data-lmd-valid-intMax'));
-            if ( myMin && myValue!="" ) {
-                if ( myMax && ( myValue<myMin || myValue>myMax || isNaN(myValue) || myValue!=Math.floor(myValue) ) ) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" must be an integer between ' + myMin + ' and ' + myMax);
-                }
-                else if ( myValue<myMin || isNaN(myValue) || myValue!=Math.floor(myValue) ) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" must be an integer greater than or equal to ' + myMin);
-                }
-            }
-            else if ( myMax && myValue!="" ) {
-                if ( myValue>myMax || isNaN(myValue) || myValue!=Math.floor(myValue) ) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" must be an integer less than or equal to ' + myMax);
-                }
-            }
-            
-            // Test: regex
-            // !!!!! Note: this may have problems if the regexp contains a single-quote (') or double-quote (") character !!!!!
-            if ($(this).attr('data-lmd-valid-regex')) {
-                
-                myRegEx = new RegExp($(this).attr('data-lmd-valid-regex'));
-                
-                if (!myRegEx.test(myValue)) {
-                    errorFields.push(myField);
-                    if ($(this).attr('data-lmd-valid-errormessage')) {
-                        errorMessages.push('Field "' + myField + '" ' + $(this).attr('data-lmd-valid-errormessage'));
-                    }
-                    else {
-                        errorMessages.push('Field "' + myField + '" must conform to the regex pattern: /' + $(this).attr('data-lmd-valid-regex') + '/');
-                    }
-                }
-                
-            }
-            
-            // Test: !!!!! build character limit here !!!!!
-            if (1==0) {
-                errorFields.push(myField);
-                errorMessages.push('Field "' + myField + '" EM');
-            }
-            
-        });
+        var vResult = LMD_formValidate.validate($('.stored'));
         
-        // If the form DOES NOT passes the validation step, display error messages
-        if (errorMessages.length > 0) {
+        // If the form DOES NOT pass all validation steps, display error messages
+        if (vResult.result === "fail") {
             
             // Clear validationBox
             $('#validationBox').html('');
             
             // Write error messages to validationBox div
-            for(i=0;i<errorMessages.length;i++) {
-                $('#validationBox').append('&bull;&nbsp;' + errorMessages[i] + '<br>');
+            for(i=0;i<vResult.errorMessages.length;i++) {
+                $('#validationBox').append('&bull;&nbsp;' + vResult.errorMessages[i] + '<br>');
             }
             
             // Highlight invalid fields in red
-            for(i=0;i<errorFields.length;i++) {
-                $('#' + errorFields[i]).css('background-color','#FFCCCC');
+            for(i=0;i<vResult.errorFields.length;i++) {
+                $('#' + vResult.errorFields[i]).css('background-color','#FFCCCC');
             }
             
             // Scroll to top; show validationBox
             $("body").animate({ scrollTop: 0 }, 500, function() {
                 $('#validationBox').slideDown(500);
             });
-        }
-        
+            
         // If the form DOES pass the validation step, proceed
-        else {
+        } else {
             
             // If counter doesn't exist, set it
             if (localStorage.counter === undefined) {
                 localStorage.counter = 1;
             }
             
-            // Create record object; set localKey (localKey is the unique identifier for each record)
-            var myRecord = {};
+            // Set localKey (the unique identifier for each record); increment counter
             localKey = localStorage.counter;
-            
-            // Increment counter
             localStorage.counter++;
             
-            // Set record "type"
+            // Create record object; add key/value pairs; set record "type"
+            var myRecord = readFieldsIntoObject('.stored');
             myRecord.type = 'form';
-            
-            // Add key/value pair to myRecord (for each field with class='stored')
-            // For each control (with class='stored'), add property/value pair to myRecord
-            $('.stored').each(function() {
-                if ($(this).attr('type') == 'checkbox') {
-                    
-                    // Handle checkboxes
-                    if ($(this).is(':checked')) {
-                        myRecord[$(this).attr('id')] = 1;
-                    }
-                    else {
-                        myRecord[$(this).attr('id')] = 0;
-                    }
-                }
-                else {
-                    // Handle textboxes
-                    myRecord[$(this).attr('id')] = $(this).val();
-                }
-            });
-            
-            // !!!!! handle cases when file has not yet been created !!!!!
             
             // Read file into myRecordset, run callback
             LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){

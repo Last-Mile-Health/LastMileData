@@ -1,0 +1,2 @@
+[20-Jan-2015 18:28:47 UTC] PHP Warning:  extract() expects parameter 1 to be array, null given in /home/lastmilehealth/public_html/LastMileData/src/php/changePassword.php on line 17
+[20-Jan-2015 18:28:54 UTC] PHP Warning:  extract() expects parameter 1 to be array, null given in /home/lastmilehealth/public_html/LastMileData/src/php/changePassword.php on line 17

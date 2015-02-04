@@ -1,0 +1,41 @@
+
+A. STEPS FOR CREATING A NEW FORM:
+
+    1) Create a new form; easiest to start with an existing form as a template
+           - Naming convention for form filename is "pre_frm09_myform.html":
+               - The "pre" prefix is the category (options: fhw, fac, moh, prg, util).
+               - In "frm09", "frm" is the unique three-letter form code; "09" is the form version number.
+               - "myform" is a descriptive name for the form.
+    2) Update the <title> element.
+    3) Update the <span> element within the "FORM HEADER" section.
+    4) Create the form body
+           - <input> elements should have class="stored" if they are to be stored in MySQL
+           - "id" attribute of the field should match the MySQL field name
+    5) Update the three-letter form code in the "M&E Box" (<div class="meBox">)
+    6) Update the value of the hidden <input> element with id="table"
+           - identical to the name of the corresponding MySQL table
+           - should be all lowercase
+    7) In the page_deqa.html file:
+        a. Add a data entry link to the form in the "Current forms" section (id="currentVersions_div" element)
+        b. Add a QA link to the form in the "Current forms" section
+    9) Add a click handler in the deqa.js file
+    10) Create the MySQL table
+    11) Add a link to the application cache manifest ("lastmiledata.appcache"), under the "# src >> forms" header
+
+B. STEPS FOR UPDATING A FORM:
+
+    1) Make changes to a form
+    2) Update the MySQL table accordingly
+    3) Make a copy of the form and place it into the "forms_old" folder.
+    4) Increment the version number in the filename
+        - e.g. fhw_sch03_sickchild.html --> fhw_sch04_sickchild.html
+    5) Increment the version number in the <title> element and in the "M&E Box" (<div class="meBox">)
+    6) Update the application cache manifest ("lastmiledata.appcache"):
+        a. move the old form under the "# src >> forms (old)" header and update the filepath
+        b. add the new form under the "# src >> forms" header
+    7) In the page_deqa.html file:
+        a. Copy the data entry and QA links down to the "Archived forms" section (id="currentVersions_div" element)
+        b. Update the data entry and QA links in the "Current forms" section (id="currentVersions_div" element)
+    8) In the deqa.js file:
+        a. Add a click handler for the new form
+        b. Update the "targetForm" URL of the old form

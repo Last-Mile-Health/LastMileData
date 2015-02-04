@@ -312,6 +312,16 @@ $(document).ready(function(){
     });
     
     
+    // QA (archive) (FHW: Ebola Case Management)
+    $('#qa_ECM_01').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html",
+            qaFormName: "FHW: Ebola Case Management",
+            // !!!!!
+        });
+    });
+    
+    
     // QA (FHW: Ebola Contact Tracing)
     $('#qa_ECT_01').click(function() {
         launchQAModal({
@@ -325,7 +335,21 @@ $(document).ready(function(){
     // QA (FHW: Ebola Education + Screening Ledger)
     $('#qa_EES_02').click(function() {
         launchQAModal({
-            targetForm: "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.html",
+            targetForm: "/LastMileData/src/forms_old/fhw_ees02_ebolaeducationscreening.html",
+            qaFormName: "FHW: Ebola Education + Screening Ledger",
+            pKey1_name: "memberID_1",
+            pKey2_name: "visitDate_1",
+            pKey1_label: "First member ID",
+            pKey2_label: "First visit date",
+            pKey_date: "pKey2"
+        });
+    });
+    
+    
+    // QA (archive) (FHW: Ebola Education + Screening Ledger)
+    $('#qa_EES_03').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_ees03_ebolaeducationscreening.html",
             qaFormName: "FHW: Ebola Education + Screening Ledger",
             pKey1_name: "memberID_1",
             pKey2_name: "visitDate_1",
@@ -364,6 +388,26 @@ $(document).ready(function(){
     });
     
     
+    // QA (archive) (FHW: Ebola Screening Tool)
+    $('#qa_ESC_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_esc02_ebolascreening.html",
+            qaFormName: "FHW: Ebola Screening Tool",
+            // !!!!!
+        });
+    });
+    
+    
+    // QA (archive) (FHW: Ebola Screening Tool)
+    $('#qa_ESC_03').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_esc03_ebolascreening.html",
+            qaFormName: "FHW: Ebola Screening Tool",
+            // !!!!!
+        });
+    });
+    
+    
     // QA (Program: Training Ledger)
     $('#qa_TRL_01').click(function() {
         launchQAModal({
@@ -390,36 +434,6 @@ $(document).ready(function(){
     });
     
     
-    // QA (archive) (FHW: Ebola Case Management)
-    $('#qa_ECM_01').click(function() {
-        launchQAModal({
-            targetForm: "/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html",
-            qaFormName: "FHW: Ebola Case Management",
-            // !!!!!
-        });
-    });
-    
-    
-    // QA (archive) (FHW: Ebola Screening Tool)
-    $('#qa_ESC_02').click(function() {
-        launchQAModal({
-            targetForm: "/LastMileData/src/forms/fhw_esc02_ebolascreening.html",
-            qaFormName: "FHW: Ebola Screening Tool",
-            // !!!!!
-        });
-    });
-    
-    
-    // QA (archive) (FHW: Ebola Screening Tool)
-    $('#qa_ESC_03').click(function() {
-        launchQAModal({
-            targetForm: "/LastMileData/src/forms/fhw_esc03_ebolascreening.html",
-            qaFormName: "FHW: Ebola Screening Tool",
-            // !!!!!
-        });
-    });
-    
-    
     // QA (archive) (FHW: Sickness Screening Tool)
     $('#qa_SST_04').click(function() {
         launchQAModal({
@@ -430,7 +444,7 @@ $(document).ready(function(){
     });
     
     
-    // QA (archive) (FHW: Sickness Screening Tool)
+    // QA (Program: gCHV Questionnaire)
     $('#qa_CHV_01').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/prg_chv01_gchvquestionnaire.html",
@@ -442,7 +456,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
     
     
     // CLICK HANDLER: QA modal
@@ -525,6 +538,24 @@ $(document).ready(function(){
         var fhwID = $('#modal_eesLedger_fhwID').val();
         var fhwName = $('#modal_eesLedger_fhwName').val();
         var myLocation = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.php";
+        myLocation += "?fhwID=" + fhwID;
+        myLocation += "&fhwName=" + fhwName;
+        
+        location.assign(myLocation);
+        
+    });
+    
+    
+    
+    // CLICK HANDLER: generate Population report
+    // Run this script when modal_populationReport_submit is clicked
+    $('#modal_populationReport_submit').click(function(){
+        
+        // !!!!! Should give a warning if fhwID and fhwName don't match !!!!!
+        
+        var fhwID = $('#modal_populationReport_fhwID').val();
+        var fhwName = $('#modal_populationReport_fhwName').val();
+        var myLocation = "/LastMileData/src/forms/util_populationReport.php";
         myLocation += "?fhwID=" + fhwID;
         myLocation += "&fhwName=" + fhwName;
         
@@ -755,6 +786,7 @@ function showErrorMessage() {
 
 
 
+// WET with indicators.js
 function addslashes( str ) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
@@ -794,28 +826,9 @@ function launchQAModal(options)
     
     // Apply jQueryUI datepicker (MySQL date format)
     if ( options.pKey_date ) {
-        
-        $("#" + options.pKey_date).datepicker({
-            dateFormat: 'yy-mm-dd',
-        });
-        
-        // Only allow valid MySQl date format if user types into .datepicker input
-        // !!!!! Functionize this code; also used in fhwForms.js !!!!!
-        $("#" + options.pKey_date).blur(function() {
-            myDate = $(this).val();
-            dateRegExp = /[12]\d\d\d-[0-1]\d-[0-3]\d/;
-            if ( !dateRegExp.test(myDate) && myDate!="" ) {
-                var $mySel = $(this);
-                $mySel.val( "" );
-                $mySel.attr( "title", "Dates must be in yyyy-mm-dd format." );
-                $mySel.tooltip( "show" );
-                setTimeout(function(){
-                    $mySel.tooltip( "destroy" );
-                }, 2000);
-                $mySel.focus();
-            }
-        });
-        
+        // Datepicker; enforce MySQl date format
+        $("#" + options.pKey_date).datepicker({dateFormat: 'yy-mm-dd'});
+        $("#" + options.pKey_date).blur(datepickerBlur);
     }
     
     // Open modal

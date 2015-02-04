@@ -1,6 +1,7 @@
 // Module:          LMD_fileSystemHelper
 // Author:          Avi Kenny
 // Last update:     2014-12-21
+// Dependencies:    Chrome FileSystem API
 
 LMD_fileSystemHelper = (function(){
     

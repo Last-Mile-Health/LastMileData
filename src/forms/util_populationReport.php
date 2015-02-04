@@ -9,7 +9,7 @@
     
     <head>
         
-        <title>FHW Tool (EES 02) - Ebola Education + Screening Ledger</title>
+        <title>FHW Tool (POP 01) - Population Report</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -91,7 +91,7 @@
             <!-- START: FORM HEADER -->
             <div class="formHeader">
                 <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
-                <span class="h2">FHW: Education + Screening Ledger</span>
+                <span class="h2">FHW: Population Report</span>
                 <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
                 <div style="clear:both"></div>
             </div>
@@ -99,53 +99,10 @@
             
             <div class="thickBox">
                 
-                <div>
-                    <b>Visit each household. Screen and educate. Record information below about each visit.</b>
-                </div>
-                <hr>
-                
                 <div class="headField" style="width:1.05in">FHW name/ID:</div>
                 <div class="headField" style="width:2.2in"><input value="<?php echo @htmlspecialchars($fhwName, ENT_QUOTES); ?>" class="stored" id="fhwName" data-lmd-valid-required="yes" style="width:200px; text-align:center; font-weight:bold"> / </div>
                 <div class="headField" style="width:1.0in"><input value="<?php echo @htmlspecialchars($fhwID, ENT_QUOTES); ?>" class="stored" id="fhwID" data-lmd-valid-required="yes" style="width:60px; text-align:center; font-weight:bold"></div>
                 <div style="clear:both; height:3px;"></div>
-                <hr>
-                
-                <div style="float:left; width:160px">
-                    <b>Screening codes:</b>
-                </div>
-                <div style="float:left; width:160px">
-                    <b>(A)</b> Probable case
-                    <br>
-                    <b>(B)</b> Suspect case
-                </div>
-                <div style="float:left; width:180px">
-                    <b>(C)</b> Possible malaria
-                    <br>
-                    <b>(D)</b> Contact risk
-                </div>
-                <div style="float:left">
-                    <b>(E)</b> Not a case
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <div style="float:left; width:160px">
-                    <b>Education codes:</b>
-                </div>
-                <div style="float:left; width:160px">
-                    <b>(A)</b> Signs of Ebola
-                    <br>
-                    <b>(B)</b> Ebola treatment
-                </div>
-                <div style="float:left; width:180px">
-                    <b>(C)</b> Transmission
-                    <br>
-                    <b>(D)</b> Handling Ebola cases
-                </div>
-                <div style="float:left">
-                    <b>(E)</b> Ebola rumors
-                </div>
-                <div style="clear:both"></div>
                 
             </div>
             <!-- END: FORM HEADER -->
@@ -165,7 +122,75 @@
                         set_time_limit(120);
                         
                         // Send query to get population records
-                        $query = "SELECT * FROM `view_reg_current-population` WHERE current_fhwID=$fhwID ORDER BY abs(hhID), firstName;";
+//                        $query = "SELECT * FROM `view_reg_current-population` WHERE current_fhwID=$fhwID ORDER BY abs(hhID), firstName;";
+                        $query = "select 
+                                        `tbl_assc_staff_memberid`.`fk_staff` AS `current_fhwID`,
+                                        `view_reg_registration`.`fhwID` AS `original_fhwID`,
+                                        `view_reg_registration`.`fk_village` AS `fk_village`,
+                                        `view_reg_registration`.`memberID` AS `memberID`,
+                                        `view_reg_registration`.`hhID` AS `hhID`,
+                                        `view_reg_registration`.`firstName` AS `firstName`,
+                                        `view_reg_registration`.`lastName` AS `lastName`,
+                                        `view_reg_registration`.`sex` AS `sex`,
+                                        `view_reg_registration`.`dob` AS `dob`
+                                    from
+                                        (`view_reg_registration`
+                                        left join `tbl_assc_staff_memberid` ON ((`view_reg_registration`.`memberID` = `tbl_assc_staff_memberid`.`memberID`)))
+                                    where
+                                                fhwID=$fhwID AND
+                                        (not (`view_reg_registration`.`memberID` in (select 
+                                                `view_bdm_deaths`.`memberID`
+                                            from
+                                                `view_bdm_deaths` union select 
+                                                `view_bdm_moveouts`.`memberID`
+                                            from
+                                                `view_bdm_moveouts`))) 
+                                    union select 
+                                        `tbl_assc_staff_memberid`.`fk_staff` AS `current_fhwID`,
+                                        `view_bdm_births`.`fhwID` AS `original_fhwID`,
+                                        `view_bdm_births`.`fk_village` AS `fk_village`,
+                                        `view_bdm_births`.`memberID` AS `memberID`,
+                                        `view_bdm_births`.`hhID` AS `hhID`,
+                                        `view_bdm_births`.`firstName` AS `firstName`,
+                                        `view_bdm_births`.`lastName` AS `lastName`,
+                                        `view_bdm_births`.`sex` AS `sex`,
+                                        `view_bdm_births`.`dob` AS `dob`
+                                    from
+                                        (`view_bdm_births`
+                                        left join `tbl_assc_staff_memberid` ON ((`view_bdm_births`.`memberID` = `tbl_assc_staff_memberid`.`memberID`)))
+                                    where
+                                                fhwID=$fhwID AND
+                                        (not (`view_bdm_births`.`memberID` in (select 
+                                                `view_bdm_deaths`.`memberID`
+                                            from
+                                                `view_bdm_deaths` union select 
+                                                `view_bdm_moveouts`.`memberID`
+                                            from
+                                                `view_bdm_moveouts`))) 
+                                    union select 
+                                        `tbl_assc_staff_memberid`.`fk_staff` AS `current_fhwID`,
+                                        `view_bdm_moveins`.`fhwID` AS `original_fhwID`,
+                                        `view_bdm_moveins`.`fk_village` AS `fk_village`,
+                                        `view_bdm_moveins`.`memberID` AS `memberID`,
+                                        `view_bdm_moveins`.`hhID` AS `hhID`,
+                                        `view_bdm_moveins`.`firstName` AS `firstName`,
+                                        `view_bdm_moveins`.`lastName` AS `lastName`,
+                                        `view_bdm_moveins`.`sex` AS `sex`,
+                                        `view_bdm_moveins`.`dob` AS `dob`
+                                    from
+                                        (`view_bdm_moveins`
+                                        left join `tbl_assc_staff_memberid` ON ((`view_bdm_moveins`.`memberID` = `tbl_assc_staff_memberid`.`memberID`)))
+                                    where
+                                                fhwID=$fhwID AND
+                                        (not (`view_bdm_moveins`.`memberID` in (select 
+                                                `view_bdm_deaths`.`memberID`
+                                            from
+                                                `view_bdm_deaths` union select 
+                                                `view_bdm_moveouts`.`memberID`
+                                            from
+                                                `view_bdm_moveouts`)))
+                                            ORDER BY abs(hhID), firstName;";
+                                
                         $result = mysqli_query($cxn, $query) or die("Failed to connect to database") ;
                         
                         // Reset counter and endpoint
@@ -189,9 +214,6 @@
                                         Echo "<th>Age</th>" ."\n";
                                         Echo "<th>HH ID</th>" ."\n";
                                         Echo "<th>Member ID</th>" ."\n";
-                                        Echo "<th>Visit date<br>(d/m/y)</th>" ."\n";
-                                        Echo "<th>Screening<br>code</th>" ."\n";
-                                        Echo "<th>Education<br>codes</th>" ."\n";
                                     Echo "</tr>" . "\n\n";
                             }
                             
@@ -202,9 +224,6 @@
                                 Echo "<td><input class='c3' value='" . floor(abs(strtotime($row['dob']) - strtotime(date("Y-m-d"))) / (365.25*60*60*24)) . "'></td>" ."\n";
                                 Echo "<td><input class='c4' value='" . $row['hhID'] . "'></td>" ."\n";
                                 Echo "<td><input class='c5' value='" . $row['memberID'] . "'></td>" ."\n";
-                                Echo "<td><input class='c6'></td>" ."\n";
-                                Echo "<td><input class='c7'></td>" ."\n";
-                                Echo "<td><input class='c8'></td>" ."\n";
                             Echo "</tr>" ."\n";
                             
                             // Close table, div
@@ -220,21 +239,6 @@
                             $i++;
                         }
                     ?>
-                    
-                    
-        <!-- START: S/C Buttons -->
-        <div class="formButtons">
-            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
-            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
-            <button id="lmd_cancel" class="btn btn-success">Cancel</button>
-        </div>
-        <!-- END: S/C Buttons -->
-        
-        
-        
-        <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_reg_registration">
-        <!-- END: Hidden fields -->
         
     </body>
     
