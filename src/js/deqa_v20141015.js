@@ -169,11 +169,15 @@ $(document).ready(function(){
                         setTimeout(function(){
                             $('.modal').modal('hide');
                             setTimeout(function(){
+                                
+                                // Manipulate DOM
                                 $('#modal_uploadDataFile_message').text('Uploading and merging data file...').hide();
                                 $('#modal_uploadDataFile_status').hide();
                                 $('#modal_uploadDataFile_formContent').show();
-                                // !!!!! clear file selection (i.e. currently, if you try to upload two files in a row, the first remains selected after the upload) !!!!!
-                                // !!!!! the above could be trivially done by refreshing the page !!!!!
+                                
+                                // Clear file input
+                                $('#modal_uploadDataFile_form').get(0).reset();
+                                
                             },1000);
                         },1000);
                     },2000);
@@ -239,7 +243,11 @@ $(document).ready(function(){
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html",
             qaFormName: "FHW: Big Belly (initial)",
-            // !!!!!
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
         });
     });
     
@@ -249,7 +257,11 @@ $(document).ready(function(){
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html",
             qaFormName: "FHW: Big Belly (follow-up)",
-            // !!!!!
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
         });
     });
     
@@ -306,16 +318,6 @@ $(document).ready(function(){
     $('#qa_ECM_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html",
-            qaFormName: "FHW: Ebola Case Management",
-            // !!!!!
-        });
-    });
-    
-    
-    // QA (archive) (FHW: Ebola Case Management)
-    $('#qa_ECM_01').click(function() {
-        launchQAModal({
-            targetForm: "/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html",
             qaFormName: "FHW: Ebola Case Management",
             // !!!!!
         });
@@ -411,7 +413,23 @@ $(document).ready(function(){
     // QA (Program: Training Ledger)
     $('#qa_TRL_01').click(function() {
         launchQAModal({
-            targetForm: "/LastMileData/src/forms/prg_trl01_trainingledger.html",
+            targetForm: "/LastMileData/src/forms_old/prg_trl01_trainingledger.html",
+            qaFormName: "Program: Training Ledger",
+            pKey1_name: "facilityName",
+            pKey2_name: "visitDate",
+            pKey3_name: "county",
+            pKey1_label: "Facility name",
+            pKey2_label: "Visit date",
+            pKey3_label: "County",
+            pKey_date: "pKey2"
+        });
+    });
+    
+    
+    // QA (Program: Training Ledger)
+    $('#qa_TRL_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/prg_trl02_trainingledger.html",
             qaFormName: "Program: Training Ledger",
             pKey1_name: "facilityName",
             pKey2_name: "visitDate",
@@ -508,16 +526,13 @@ $(document).ready(function(){
                     
                 }
                 
-                // Handle: no match found
+                // Handle: match is found
                 if (qaRecordID) {
-                    // Deactivate button
-                    // !!!!! this is broken - still allowing double-clicks which breaks target QA form; context may be wrong !!!!!
-                    $(this).css('pointer-events','none');
-                    
-                    // Parse targetForm URL; redirect
-                    qaTargetForm = window.lmd_qaOptions.targetForm + "?QA=" + qaRecordID;
-                    location.assign(qaTargetForm);
+                    // Set qaRecordID; redirect
+                    localStorage.qaRecordID = qaRecordID;
+                    location.assign(window.lmd_qaOptions.targetForm);
                 }
+                // Handle: no match found
                 else {
                     flashDiv('#qaNoMatch');
                 }
@@ -555,7 +570,7 @@ $(document).ready(function(){
         
         var fhwID = $('#modal_populationReport_fhwID').val();
         var fhwName = $('#modal_populationReport_fhwName').val();
-        var myLocation = "/LastMileData/src/forms/util_populationReport.php";
+        var myLocation = "/LastMileData/src/php/util_populationReport.php";
         myLocation += "?fhwID=" + fhwID;
         myLocation += "&fhwName=" + fhwName;
         
@@ -795,7 +810,7 @@ function addslashes( str ) {
 
 function launchQAModal(options)
 {
-    // Set global object
+    // Set global qaOptions object
     window.lmd_qaOptions = options;
     
     // Reset DOM
@@ -843,22 +858,22 @@ function parseRecordIntoSQL(currentRecord) {
     var notStored = ['table', 'type'];
     
     // Begin query string
-    var qs = "INSERT INTO " + currentRecord.table + " SET ";
+    var queryString = "INSERT INTO " + currentRecord.table + " SET ";
     
     // Add key/value pairs to query string
     for(var currKey in currentRecord) {
         // if key isn't in "notStored" array, add it to query string
         if ( notStored.indexOf(currKey) == -1) {
-            qs += currKey + "='" + addslashes(currentRecord[currKey]) + "', ";
+            queryString += currKey + "='" + addslashes(currentRecord[currKey]) + "', ";
         }
     }
     
     // Finish query string segment
-    qs = qs.slice(0,-2);
-    qs += ";";
+    queryString = queryString.slice(0,-2);
+    queryString += ";";
     
     // Return query string
-    return qs;
+    return queryString;
 }
 
 

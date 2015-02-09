@@ -62,15 +62,15 @@
                 <hr>
                 
                 <div class="headField" style="width:1.0in">FHW ID:</div>
-                <div class="headField" style="width:2.5in"><input class="stored integer" id="fhwID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:2.5in"><input class="stored integer" name="fhwID" data-lmd-valid-required="yes"></div>
                 <div class="headField" style="width:1.5in">Woman name:</div>
-                <div class="headField" style="width:2.0in"><input class="stored" id="womanName"></div>
+                <div class="headField" style="width:2.0in"><input class="stored" name="womanName"></div>
                 <div style="clear:both; height:3px;"></div>
                 
                 <div class="headField" style="width:1.0in">Visit date:</div>
-                <div class="headField" style="width:2.5in"><input class="stored datepicker" id="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
+                <div class="headField" style="width:2.5in"><input class="stored datepicker" name="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
                 <div class="headField" style="width:1.5in">Woman member ID:</div>
-                <div class="headField" style="width:2.0in"><input class="stored" id="memberID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:2.0in"><input class="stored" name="memberID" data-lmd-valid-required="yes"></div>
                 <div style="clear:both"></div>
                 
             </div>
@@ -87,7 +87,7 @@
                     1. Write EDD.
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored datepicker" id="A1_EDD" style="width:1in"> (d/m/y)</div>
+                    <div class="textOption"><input class="stored datepicker" name="A1_EDD" style="width:1in"> (d/m/y)</div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -97,7 +97,7 @@
                     2. Discuss birth plan together.
                 </div>
                 <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" id="A2_discussBirthPlan">Done</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="A2_discussBirthPlan">Done</div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -107,7 +107,7 @@
                     3. Educate on infant care.
                 </div>
                 <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" id="A3_educateInfantCare">Done</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="A3_educateInfantCare">Done</div>
                 </div>
                 <div style="clear:both"></div>
                 
@@ -125,7 +125,7 @@
                     4. Check blood pressure
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored integer" id="B4_BP" style="width:1in"> (mm Hg) ----------------------------------------</div>
+                    <div class="textOption"><input class="stored integer" name="B4_BP" style="width:1in"> (mm Hg) ----------------------------------------</div>
                 </div>
                 <div class="inner_R">
                     <div class="caOption">If BP is above 140/90, refer to clinic.</div>
@@ -138,7 +138,7 @@
                     5. Check temperature
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored decimal" id="B5_temp" style="width:1in"> (C) ----------------------------------------</div>
+                    <div class="textOption"><input class="stored decimal" name="B5_temp" style="width:1in"> (C) ----------------------------------------</div>
                 </div>
                 <div class="inner_R">
                     <div class="caOption">If temp is above 38 C, refer to clinic.</div>
@@ -151,18 +151,18 @@
                     6. Check for other danger signs
                 </div>
                 <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_blurredVision">Blurred vision ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_eyesTurning">Eyes turning more than 3 days ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_headache">Headache more than 3 days ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_swollenFace">Swollen face or hands ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_waterBreaks">Water breaks or contractions ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_unusualDischarge">Unusual vaginal discharge ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_fits">Fits (convulsions) ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_stomachPain">Pain under the stomach ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_painWhileUrinating">Pain while urinating ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_vaginalBleeding">Vaginal bleeding ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_otherEmergency">Other emergency ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="B6_sign_noDangerSigns">NO DANGER SIGNS</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_blurredVision">Blurred vision ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_eyesTurning">Eyes turning more than 3 days ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_headache">Headache more than 3 days ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_swollenFace">Swollen face or hands ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_waterBreaks">Water breaks or contractions ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_unusualDischarge">Unusual vaginal discharge ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_fits">Fits (convulsions) ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_stomachPain">Pain under the stomach ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_painWhileUrinating">Pain while urinating ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_vaginalBleeding">Vaginal bleeding ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_otherEmergency">Other emergency ----------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="B6_sign_noDangerSigns">NO DANGER SIGNS</div>
                 </div>
                 <div class="inner_R">
                     <div class="caOption" style="height:210px">If YES to ANY danger signs, refer to clinic.</div>
@@ -183,9 +183,9 @@
                     7. Educate about ANC visits.
                 </div>
                 <div class="inner_C" style="width:2.8in">
-                    <div class="checkOption"><input type="checkbox" class="stored" id="C7_educate4ANC">Should have at least 4 visits during pregnancy</div>
-                    <div class="checkOption-ML"><input type="checkbox" class="stored" id="C7_educateOneClinic">At least one of these should be at a clinic; others can be through outreach</div>
-                    <div class="checkOption-ML"><input type="checkbox" class="stored" id="C7_educateMonths">One should be between months 0-4, one at month 5, one at month 7, one at month 8</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="C7_educate4ANC">Should have at least 4 visits during pregnancy</div>
+                    <div class="checkOption-ML"><input type="checkbox" class="stored" name="C7_educateOneClinic">At least one of these should be at a clinic; others can be through outreach</div>
+                    <div class="checkOption-ML"><input type="checkbox" class="stored" name="C7_educateMonths">One should be between months 0-4, one at month 5, one at month 7, one at month 8</div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -195,7 +195,7 @@
                     8. How many (outreach) ANC visits have you had?
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored integer" id="C8_outreachANC" style="width:1in"></div>
+                    <div class="textOption"><input class="stored integer" name="C8_outreachANC" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -205,7 +205,7 @@
                     9. How many (clinic) ANC visits have you had?
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored integer" id="C9_clinicANC" style="width:1in"></div>
+                    <div class="textOption"><input class="stored integer" name="C9_clinicANC" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -215,7 +215,7 @@
                     10. When was your last ANC visit?
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored datepicker" id="C10_lastANC" style="width:1in"> (d/m/y)</div>
+                    <div class="textOption"><input class="stored datepicker" name="C10_lastANC" style="width:1in"> (d/m/y)</div>
                 </div>
                 <div style="clear:both"></div>
                 
@@ -243,8 +243,8 @@
                     11. Mark if the woman had an abortion or miscarriage.
                 </div>
                 <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" id="D11_abortion">Abortion</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" id="D11_miscarriage">Miscarriage</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D11_abortionOrMiscarriage" value="abortion">Abortion</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D11_abortionOrMiscarriage" value="miscarriage">Miscarriage</div>
                 </div>
                 <div style="clear:both"></div>
                 
@@ -262,7 +262,7 @@
                     12. Schedule follow-up visit for one month from<br>today. Mark in FHW calendar.
                 </div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored datepicker" id="E12_followUpVisitDate" style="width:1in"> (d/m/y)</div>
+                    <div class="textOption"><input class="stored datepicker" name="E12_followUpVisitDate" style="width:1in"> (d/m/y)</div>
                 </div>
                 <div style="clear:both"></div>
                 
@@ -276,10 +276,10 @@
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">BBF.02</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" id="de_init">
-                DE Date: <input class="stored" id="de_date">
-                QA Initials: <input class="stored" id="qa_init">
-                QA Date: <input class="stored" id="qa_date">
+                DE Initials: <input class="stored" name="de_init">
+                DE Date: <input class="stored" name="de_date">
+                QA Initials: <input class="stored" name="qa_init">
+                QA Date: <input class="stored" name="qa_date">
             </div>
             <!-- START: M&E Box -->
             
@@ -301,7 +301,7 @@
         
         
         <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_bbf_bigbellyfollowup">
+        <input type="hidden" class="stored" name="table" value="tbl_data_fhw_bbf_bigbellyfollowup">
         <!-- END: Hidden fields -->
         
     </body>

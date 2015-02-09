@@ -96,105 +96,16 @@
                 <hr>-->
                 
                 <div class="headField" style="width:1.0in">FHW ID:</div>
-                <div class="headField" style="width:2.5in"><input class="stored integer" id="fhwID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:2.5in"><input class="stored integer" name="fhwID" data-lmd-valid-required="yes"></div>
                 <div class="headField" style="width:1.0in">Visit date:</div>
-                <div class="headField" style="width:2.5in"><input class="stored datepicker" id="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
+                <div class="headField" style="width:2.5in"><input class="stored datepicker" name="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
                 <div style="clear:both; height:3px"></div>
                 <div class="headField" style="width:1.0in">Member ID:</div>
-                <div class="headField" style="width:2.5in"><input class="stored integer" id="fhwID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:2.5in"><input class="stored integer" name="fhwID" data-lmd-valid-required="yes"></div>
                 <div class="headField" style="width:1.0in">Patient name:</div>
-                <div class="headField" style="width:2.5in"><input class="stored" id="visitDate" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:2.5in"><input class="stored" name="visitDate" data-lmd-valid-required="yes"></div>
             </div>
             <!-- END: FORM HEADER -->
-            
-            
-            
-            <!-- START: SECTION A -->
-<!--            <div id="sectionA">
-            <b>A. Contact assessment</b>
-                
-                <table class="contactTable">
-                    
-                     Row 01 
-                    <tr>
-                        <td class="C1">
-                            1. Have you touched the body, touched body fluids, or lived in the same house with someone who got very sick or died?
-                        </td>
-                        <td class="C2">
-                            <input type="checkbox" class="stored" id="A1_yes"> Yes
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A1_no"> No
-                        </td>
-                    </tr>
-                    
-                     Row 02 
-                    <tr>
-                        <td class="C1">
-                            2. Have you attended a burial or funeral, and did you participate in ceremony where you had contact with body or body fluids?
-                        </td>
-                        <td class="C2">
-                            <input type="checkbox" class="stored" id="A2_yes"> Yes
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A2_no"> No
-                        </td>
-                    </tr>
-                    
-                     Row 03 
-                    <tr>
-                        <td class="C1">
-                            3. Have you cared for anyone who was very ill (nausea, vomiting, bleeding) within the last 3 weeks?
-                        </td>
-                        <td class="C2">
-                            <input type="checkbox" class="stored" id="A3_yes"> Yes
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A3_no"> No
-                        </td>
-                    </tr>
-                    
-                     Row 04 
-                    <tr>
-                        <td class="C1">
-                            4. Have you had contact with anyone suspected of having Ebola?
-                        </td>
-                        <td class="C2">
-                            <input type="checkbox" class="stored" id="A4_yes"> Yes
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A4_no"> No
-                        </td>
-                    </tr>
-                    
-                     Row 05 
-                    <tr>
-                        <td class="C1 NB">
-                        </td>
-                        <td class="C2 NB" style="text-align:center">
-                            <img src="/LastMileData/res/arrow_down_sm_v20140916.png">
-                        </td>
-                        <td class="C3 NB" style="text-align:center">
-                            <img src="/LastMileData/res/arrow_down_sm_v20140916.png">
-                        </td>
-                    </tr>
-                    
-                     Row 06 
-                    <tr>
-                        <td class="C1 NB"></td>
-                        <td class="C2">
-                            <input type="checkbox" class="stored" id="A_ifYesToAny"> <b>IF YES TO ANY, go to Section B</b>
-                        </td>
-                        <td class="C3">
-                            <input type="checkbox" class="stored" id="A_ifNoToAll"> <b>IF NO TO ALL, go to Section C</b>
-                        </td>
-                    </tr>
-                    
-                </table>
-                
-                
-            </div>-->
-            <!-- END: SECTION A -->
             
             
             
@@ -209,8 +120,8 @@
                         1. Have you touched the body, touched body fluids, or lived in the same house with someone who got very sick or died?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Patient is a contact. Skip to box B</div>
@@ -224,8 +135,8 @@
                         2. Have you attended a burial or funeral, and did you participate in ceremony where you had contact with body or body fluids?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Patient is a contact. Skip to box B</div>
@@ -239,8 +150,8 @@
                         3. Have you cared for anyone who was very ill (nausea, vomiting, bleeding) within the last 3 weeks?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Patient is a contact. Skip to box B</div>
@@ -254,8 +165,8 @@
                         4. Have you had contact with anyone suspected of having Ebola?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Patient is a contact. Skip to box B</div>
@@ -282,8 +193,8 @@
                         5. Have you had hot body (fever)?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B5_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">PROBABLE CASE. Skip to box D</div>
@@ -298,25 +209,25 @@
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:345px">
                             <table class="symptomTable">
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_abdominalPain_yes">Abdominal pain</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_hiccoughs_yes">Hiccoughs</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_diarrhea_yes">Diarrhea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_abdominalPain_yes">Abdominal pain</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_hiccoughs_yes">Hiccoughs</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_diarrhea_yes">Diarrhea</div></td>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_difficultyBreathing_yes">Difficulty breathing</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_headache_yes">Headache</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_nausea_yes">Nausea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_difficultyBreathing_yes">Difficulty breathing</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_headache_yes">Headache</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_nausea_yes">Nausea</div></td>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_lossOfAppetite_yes">Loss of appetite</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_vomiting_yes">Vomiting</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_intenseFatigue_yes">Intense fatigue</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_lossOfAppetite_yes">Loss of appetite</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_vomiting_yes">Vomiting</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_intenseFatigue_yes">Intense fatigue</div></td>
                                 </tr>
                                 <tr>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="B6_difficultySwallowing_yes">Difficulty swallowing</div></td>
-                                    <td colspan="2"><div class="checkOption"><input type="checkbox" class="stored" id="B6_muscularPain_yes">Muscular pain</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="B6_difficultySwallowing_yes">Difficulty swallowing</div></td>
+                                    <td colspan="2"><div class="checkOption"><input type="checkbox" class="stored" name="B6_muscularPain_yes">Muscular pain</div></td>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -324,8 +235,8 @@
                         </div>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_3OrMore_yes">Yes (3 or more) -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B6_lessThan3_no">No (less than 3) -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B6_3OrMore_yes">Yes (3 or more) -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B6_lessThan3_no">No (less than 3) -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">PROBABLE CASE. Skip to box D</div>
@@ -339,8 +250,8 @@
                         7. Are you pregnant?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="id">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="id">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Go to next question</div>
@@ -354,8 +265,8 @@
                         8. <i>Did patient report one or more symptoms in question 6?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="id">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="id">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="id">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">PROBABLE CASE. Skip to box D</div>
@@ -369,8 +280,8 @@
                         9. Have you had any unexplained bleeding?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B7_unexplainedBleeding_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="B7_unexplainedBleeding_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B7_unexplainedBleeding_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B7_unexplainedBleeding_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">PROBABLE CASE. Skip to box D</div>
@@ -406,8 +317,8 @@
                         10. Have you had hot body (fever)?
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Go to next question</div>
@@ -422,26 +333,26 @@
                         <div style="margin-left:5px; border:1px solid black; padding-top:3px; width:355px">
                             <table class="symptomTable">
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_abdominalPain_yes">Abdominal pain</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_hiccoughs_yes">Hiccoughs</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_muscularPain_yes">Muscular pain</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_abdominalPain_yes">Abdominal pain</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_hiccoughs_yes">Hiccoughs</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_muscularPain_yes">Muscular pain</div></td>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_difficultyBreathing_yes">Difficulty breathing</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_headache_yes">Headache</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_nausea_yes">Nausea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_difficultyBreathing_yes">Difficulty breathing</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_headache_yes">Headache</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_nausea_yes">Nausea</div></td>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="id">Unexplained bleeding</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_vomiting_yes">Vomiting</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_intenseFatigue_yes">Intense fatigue</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="id">Unexplained bleeding</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_vomiting_yes">Vomiting</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_intenseFatigue_yes">Intense fatigue</div></td>
                                 </tr>
                                 <tr>
                                 </tr>
                                 <tr>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_difficultySwallowing_yes">Difficulty swallowing</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_diarrhea_yes">Diarrhea</div></td>
-                                    <td><div class="checkOption"><input type="checkbox" class="stored" id="C10_lossOfAppetite_yes">Loss of appetite</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_difficultySwallowing_yes">Difficulty swallowing</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_diarrhea_yes">Diarrhea</div></td>
+                                    <td><div class="checkOption"><input type="checkbox" class="stored" name="C10_lossOfAppetite_yes">Loss of appetite</div></td>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -449,8 +360,8 @@
                         </div>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_3OrMore_yes">Yes (3 or more) -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C10_lessThan3_no">No (less than 3) -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C10_3OrMore_yes">Yes (3 or more) -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C10_lessThan3_no">No (less than 3) -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">Go to next question</div>
@@ -464,8 +375,8 @@
                         12. <i>Did patient report any "wet" symptoms (vomiting or diarrhea) in question 11?</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Yes -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">No -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_yes">Yes -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_no">No -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption">WET SUSPECT. Skip to box D</div>
@@ -491,9 +402,9 @@
                         11. <i>Mark type of case.</i>
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_no">Probable case -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Wet suspect case -------------------------------------------------------</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" id="C8_hotBody_yes">Dry suspect case -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_no">Probable case -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_yes">Wet suspect case -------------------------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C8_hotBody_yes">Dry suspect case -------------------------------------------------------</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption blackAction" style="height:51px"><br>&nbsp;Fill out case management form</div>
@@ -530,10 +441,10 @@
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">ESC.03</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" id="de_init">
-                DE Date: <input class="stored" id="de_date">
-                QA Initials: <input class="stored" id="qa_init">
-                QA Date: <input class="stored" id="qa_date">
+                DE Initials: <input class="stored" name="de_init">
+                DE Date: <input class="stored" name="de_date">
+                QA Initials: <input class="stored" name="qa_init">
+                QA Date: <input class="stored" name="qa_date">
             </div>
             <!-- END: M&E Box -->
             
@@ -554,7 +465,7 @@
         
         
         <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" id="table" value="tbl_data_fhw_esc_ebolascreening">
+        <input type="hidden" class="stored" name="table" value="tbl_data_fhw_esc_ebolascreening">
         <!-- END: Hidden fields -->
         
     </body>

@@ -11,7 +11,6 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/reusables/js/assert.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
@@ -38,36 +37,12 @@
         
         <script>
         $(document).ready(function(){
-            
-            myObj = {};
-            myObj.prop1 = 'hey';
-            var ct = 1;
-            myObj.prop2 = function myFunc1(){
-                if (ct<=3) {
-                    console.log('rep' + ct);
-                    ct++;
-                    myFunc1();
-                }
-            };
-            myObj.prop3 = function(){ console.log('logged 2'); };
-//            myObj.prop4 = myFunc2;
-            
-            
-            $('#innerDiv').html('you');
-            
             $('#clickMe1').click(function(){
-                myObj.prop2();
-                myObj.prop3();
-//                myObj.prop4();
-//                myObj.prop5();
+                var x = $('#one').attr('value')!==undefined ? 1 : 0;
+//                alert(x);
+                alert($('#two').attr('value'));
             });
-            
         });
-        
-        function myFunc2(){
-            console.log('logged 3');
-        }
-        
         </script>
         
     </head>
@@ -83,6 +58,10 @@
             <button id="clickMe1" style="width:400px; height:50px">
                 Click me 1
             </button>
+            <br><br>
+            <input id="one" type='checkbox' name='myCheck' value='opt1'>Opt 1<br>
+            <input id="two" type='checkbox' name='myCheck'>Opt 2<br>
+            <input id="three" type='checkbox' name='myCheck' value='opt3'>Opt 3<br>
         </div>
         
         

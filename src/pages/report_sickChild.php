@@ -89,8 +89,8 @@
                 echo "Treated at home (malaria): <b>$treat_malaria</b><br>";
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
-                // Parse queryString; run query; extract data (Ages 1-4)
-                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((childAge_years*12)+childAge_months) >= 12 && ((childAge_years*12)+childAge_months) < 60;";
+                // Parse queryString; run query; extract data (Ages 1-5)
+                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((childAge_years*12)+childAge_months) >= 12 && ((childAge_years*12)+childAge_months) < 72;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
                 extract($row);

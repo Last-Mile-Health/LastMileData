@@ -15,10 +15,7 @@ require_once("cxn.php");
 
 // Uncomment next line to debug queries
 //mysqli_query($cxn, 'INSERT INTO test (col_1) VALUES ("' . $queryString . '")');
-// !!!!! create a "turn debug queries on/off" switch on DEQA !!!!!
-
-// Send JSON back to AJAX handlers
-echo '{"rKeyAJAX":"' . $rKey . '"}';
+// !!!!! create a "turn debug queries on/off" configuration switch on DEQA !!!!!
 
 // If there is a connection, run query
 if ( !($cxn && $result = mysqli_query($cxn, $queryString)) ) {
@@ -26,5 +23,8 @@ if ( !($cxn && $result = mysqli_query($cxn, $queryString)) ) {
     // !!!!! Can we send a "custom header" instead ?????
     header("HTTP/1.1 404 Not Found");
 }
+
+// Send JSON back to AJAX handlers
+echo '{"rKeyAJAX":"' . $rKey . '"}';
 
 ?>

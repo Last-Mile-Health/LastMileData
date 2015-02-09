@@ -1,5 +1,0 @@
-{
-    "author": "Avi Kenny",
-    "environment" : "DEV",
-    "stateOptions" : ["DEV", "PROD"]
-}

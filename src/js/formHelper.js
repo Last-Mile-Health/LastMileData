@@ -99,22 +99,23 @@ function datepickerBlur(){
 
 
 // Read fields in selection into the return object
-// !!!!! eventually switch out the id attribute with the name attribute !!!!!
 function readFieldsIntoObject($inputs){
     
     var myRecord = {};
     
     $($inputs).each(function() {
         if ($(this).attr('type') == 'checkbox') {
-            // Handle checkboxes
-            if ($(this).is(':checked')) {
-                myRecord[$(this).attr('id')] = 1;
-            } else {
-                myRecord[$(this).attr('id')] = 0;
+            // Handle checkboxes; !!!!! if multiple checkboxes with the same name attribute are selected, only the last selected one is recorded; prevent double selection within formValidate.js !!!!!
+            if ( $(this).is(':checked') ) {
+                myRecord[$(this).attr('name')] = $(this).attr('value');
+            } else if ( myRecord[$(this).attr('name')]===undefined ) {
+                myRecord[$(this).attr('name')] = '';
             }
         } else {
-            // Handle textboxes
-            myRecord[$(this).attr('id')] = $(this).val();
+            // Handle textboxes // !!!!! check this code !!!!!
+            if ( $(this).val() !== '' && $(this).val() !== undefined && $(this).val() !== '0000-00-00' ) {
+                myRecord[$(this).attr('name')] = $(this).val();
+            }
         }
     });
     

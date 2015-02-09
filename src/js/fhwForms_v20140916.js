@@ -5,6 +5,14 @@ if (!sessionStorage.username) {
     window.location.assign('/LastMileData/src/pages/page_deqa.html');
 }
 
+// Check to see if the user is in "QA mode"
+if(localStorage.qaRecordID) {
+    qaRecordID = localStorage.qaRecordID;
+    delete localStorage.qaRecordID;
+} else {
+    qaRecordID = 0;
+}
+
 $(document).ready(function() {
     
     // Datepicker; enforce MySQl date format
@@ -16,18 +24,28 @@ $(document).ready(function() {
         $(this).after("<img class='chk_print' src='/LastMileData/res/chk_print_v20140916.png'>")
     });
     
+    // Insert default values for checkboxes
+    $('input[type=checkbox]').each(function(){
+        if ( $(this).attr('value')===undefined ) {
+            $(this).attr('value',1);
+        }
+    });
+
+    
     // Append #de_date and #de_init boxes (for printing)
-    $("#de_date").after("<input id='de_print_date'>");
-    $("#de_init").after("<input id='de_print_init'>");
+    $de_date = $("input[name=de_date]");
+    $de_init = $("input[name=de_init]");
+    $("input[name=de_date]").after("<input id='de_print_date'>");
+    $("input[name=de_init]").after("<input id='de_print_init'>");
     
     // Set de_init and de_date; set fields to readonly
-    $('#de_date').val(mysql_date());
-    $('#de_date').attr('readonly','readonly');
-    $('#de_init').val(sessionStorage.username);
-    $('#de_init').attr('readonly','readonly');
+    $de_date.val(mysql_date());
+    $de_date.attr('readonly','readonly');
+    $de_init.val(sessionStorage.username);
+    $de_init.attr('readonly','readonly');
     
-    // If using "QA mode" (i.e. GET parameter with key 'QA' is not undefined), populate field values
-    if ( getParameterByName('QA') ) {
+    // If in "QA mode", populate field values
+    if (qaRecordID) {
         
         // Hide "Next form" button
         $('#lmd_next').hide();
@@ -42,7 +60,7 @@ $(document).ready(function() {
             myRecordset = JSON.parse(result);
             
             // Assign record object to currentRecord
-            currentRecord = JSON.parse(myRecordset[getParameterByName('QA')]);
+            currentRecord = JSON.parse(myRecordset[qaRecordID]);
             
             // Populate fields from key/value pairs
             for(var key in currentRecord) {
@@ -50,24 +68,31 @@ $(document).ready(function() {
                 // if key isn't in "notStored"array, add it to query string
                 if ( notStored.indexOf(key) == -1) {
                     
+                    // !!!!! test all of this new code !!!!!
+                    
                     // Set checkboxes
-                    if ( $('#' + key).prop('type') == 'checkbox' ) {
+//                    if ( $('#' + key).prop('type') == 'checkbox' ) {
+                    if ( $("input[name=" + key + "]").prop('type') == 'checkbox' ) {
+
+                        $("input[name=" + key + "][value='" + currentRecord[key] + "']").prop('checked', true);
                         
-                        if (currentRecord[key]) {
-                            $('#' + key).prop('checked', true);
-                        }
+//                        if (currentRecord[key]) {
+//                            $('#' + key).prop('checked', true);
+//                        }
                     }
                     
                     // Set text inputs
                     else {
-                        $('#' + key).val(currentRecord[key]);
+//                        $('#' + key).val(currentRecord[key]);
+                        $("input[name=" + key + "]").val(currentRecord[key]);
                     }
                 }
             }
             
             // Set qa_date; set to readonly
-            $('#qa_date').val(mysql_date());
-            $('#qa_date').attr('readonly','readonly');
+            $qa_date = $("input[name=qa_date]");
+            $qa_date.val(mysql_date());
+            $qa_date.attr('readonly','readonly');
             
         });
         
@@ -101,7 +126,7 @@ $(document).ready(function() {
             
             // Highlight invalid fields in red
             for(i=0;i<vResult.errorFields.length;i++) {
-                $('#' + vResult.errorFields[i]).css('background-color','#FFCCCC');
+                $('input[name=' + vResult.errorFields[i] + "]").css('background-color','#FFCCCC');
             }
             
             // Scroll to top; show validationBox
@@ -129,8 +154,8 @@ $(document).ready(function() {
             LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){
                 
                 // If in QA mode, delete current record
-                if ( getParameterByName('QA') ) {
-                    delete myRecordset[getParameterByName('QA')];
+                if (qaRecordID) {
+                    delete myRecordset[qaRecordID];
                 }
                 
                 // Add myRecord to myRecordset
@@ -179,27 +204,27 @@ function mysql_date() {
 }
 
 // Pad numbers to two digits ( helper function for mysql_datetime() )
-// !!!!! Refeactor this function into a utility "library"; this is needed elsewhere !!!!!
+// !!!!! Refactor into "utility library"; this is needed elsewhere !!!!!
 function twoDigits(d) {
     if(0 <= d && d < 10) return "0" + d.toString();
     if(-10 < d && d < 0) return "-0" + (-1*d).toString();
     return d.toString();
 }
 
-// Return GET parameter
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+// Return GET parameter  !!!!! inactive but useful; Refactor into "utility library" !!!!!
+//function getParameterByName(name) {
+//    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+//    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+//        results = regex.exec(location.search);
+//    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+//}
 
-function logError(e) {
-    // modify to catch errors where access to filesystem is not granted
-    console.log('fhwForms - logError');
-    console.log(e);
-}
+//function logError(e) {
+//    // modify to catch errors where access to filesystem is not granted
+//    console.log('fhwForms - logError');
+//    console.log(e);
+//}
 
-function addRecordToObject() {
-    JSON.stringify(myRecord);
-}
+//function addRecordToObject() {
+//    JSON.stringify(myRecord);
+//}

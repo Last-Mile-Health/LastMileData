@@ -9,7 +9,6 @@ $(document).ready(function(){
         
         // PUBLIC: Validate a set of elements
         // $inputs is a jQuery selection
-        // !!!!! change: uses form name attribute !!!!!
         // !!!!! is errorFields getting pushed two twice if the same field has multiple errors ?????
         // !!!!! This currently only handles input elements; add validation rules for checkboxes ?????
         function validate($inputs) {
@@ -22,7 +21,7 @@ $(document).ready(function(){
             $($inputs).each(function() {
                 
                 // Get key/value pair
-                myField = $(this).attr('id'); // !!!!! change this to name attribute and update all forms
+                myField = $(this).attr('name');
                 myValue = $(this).val();
                 
                 // Test: disallowed characters: # & + ; ^ * |
@@ -31,7 +30,7 @@ $(document).ready(function(){
                     errorMessages.push('Field "' + myField + '" cannot contain the following characters: `~#$%^&*+;\|<>');
                 }
                 
-                // Test: field is required (data-lmd-valid-required="yes")
+                // Test: field is required (data-lmd-valid-required="yes") // !!!!! do we need "&& myValue=='0000-00-00' ?????
                 if ( $(this).attr('data-lmd-valid-required')=="yes" && myValue=="" ) {
                     errorFields.push(myField);
                     errorMessages.push('Field "' + myField + '" is required.');

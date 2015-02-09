@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version:      00452
+# Version:      00467
 # Author:       Avi Kenny, Last Mile Health
 # Last updated: 2015-01-14
 
@@ -60,39 +60,43 @@ CACHE:
 
 # src >> forms
 /LastMileData/src/forms/0_testDE.html
+/LastMileData/src/forms/fac_msh01_mesh.html
 /LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html
 /LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html
 /LastMileData/src/forms/fhw_bdm02_movements.html
 /LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html
-/LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html
+/LastMileData/src/forms/fhw_ect03_ebolacontacttracing.html
 /LastMileData/src/forms/fhw_ees03_ebolaeducationscreening.html
 /LastMileData/src/forms/fhw_kpi02_kpiassessment.html
 /LastMileData/src/forms/fhw_mat01_malariaassessment.html
-/LastMileData/src/forms/fac_msh01_mesh.html
 /LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html
 /LastMileData/src/forms/fhw_pni02_postnatalinitial.html
 /LastMileData/src/forms/fhw_ref02_referral.html
 /LastMileData/src/forms/fhw_reg02_registration.html
 /LastMileData/src/forms/fhw_sch03_sickchild.html
 /LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
-/LastMileData/src/forms/prg_trl01_trainingledger.html
 /LastMileData/src/forms/prg_chv01_gchvquestionnaire.html
+/LastMileData/src/forms/prg_trl02_trainingledger.html
 /LastMileData/src/forms/util_householdIDAssignmentList.html
 /LastMileData/src/forms/util_memberIDAssignmentList.html
 
 # src >> forms (old)
-/LastMileData/src/forms_old/fhw_ecm01_ebolacasemanagement.html
 /LastMileData/src/forms_old/fhw_ees02_ebolaeducationscreening.html
 /LastMileData/src/forms_old/fhw_esc02_ebolascreening.html
 /LastMileData/src/forms_old/fhw_esc03_ebolascreening.html
 /LastMileData/src/forms_old/fhw_sst04_ebolascreening.html
+/LastMileData/src/forms_old/prg_trl01_trainingledger.html
 
 # src >> fragments
 /LastMileData/src/fragments/header_bootstrap.html
 
 # src >> js
+/LastMileData/src/js/LMD_fileSystemHelper.js
+/LastMileData/src/js/changePassword_v20140916.js
 /LastMileData/src/js/deqa_v20141015.js
 /LastMileData/src/js/fhwForms_v20140916.js
+/LastMileData/src/js/formHelper.js
+/LastMileData/src/js/formValidate.js
 /LastMileData/src/js/householdIDAssignmentList_v20140929.js
 /LastMileData/src/js/loadContents_v20140916.js
 /LastMileData/src/js/medocs_v20140916.js

@@ -118,12 +118,12 @@ input {
     text-align:center;
 }
 .meBox input { margin-right:10px; }
-#de_init { width:45px; }
-#de_date { width:75px; }
-#qa_init { width:45px; }
-#qa_date { width:75px; }
-#sup_init { width:45px; }
-#sup_date { width:75px; }
+input[name=de_init] { width:45px; }
+input[name=de_date] { width:75px; }
+input[name=qa_init] { width:45px; }
+input[name=qa_date] { width:75px; }
+input[name=sup_init] { width:45px; }
+input[name=sup_date] { width:75px; }
 
 /* For "dynamic selects" (implemented in fhwForms.js) */
 .dynamicSelect {
@@ -195,7 +195,7 @@ input {
     .deBox { display:none; }
     
     /* Hide DE_Date and DE_Init inputs; these are replaced with dummy inputs #de_print_init and #de_print_date */
-    #de_date, #de_init { display:none; }
+    input[name=de_date], input[name=de_init] { display:none; }
     #de_print_init { display:inline; width:45px; }
     #de_print_date { display:inline; width:75px; }
     
