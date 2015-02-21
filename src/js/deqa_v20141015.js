@@ -944,7 +944,7 @@ function sendRecordsAJAX(){
                         currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
                     }
                     
-                    // Test to see if current localStorage record is of type "form"
+                    // Test to see if current record is of type "form"
                     if (currentRecord.type == "form") {
                         
                         // Parse SQL Insert query

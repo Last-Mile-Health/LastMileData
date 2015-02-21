@@ -132,11 +132,11 @@
                         3. The triage person is wearing (check all that apply):
                     </div>
                     <div class="inner_C C4">
-                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonIsWearing" value="No PPE"> No PPE</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonIsWearing" value="Gloves"> Gloves</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonIsWearing" value="Gown"> Gown</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonIsWearing" value="Mask"> Mask</div>
-                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonIsWearing" value="Face shield"> Face shield</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonWearing_noPPE"> No PPE</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonWearing_gloves"> Gloves</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonWearing_gown"> Gown</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonWearing_mask"> Mask</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_triagePersonWearing_faceShield"> Face shield</div>
                     </div>
                     <div class="inner_R R4">
                         <div class="caOption commentBox" style="height:90px">Comments</div>
@@ -519,7 +519,7 @@
                     </div>
                     <div class="checkOption">
                         <input type="checkbox" class="stored" name="C24_measuringTools_other" value="1"> Yes&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="checkbox" class="stored" name="idC24_measuringTools_other" value="0"> No
+                        <input type="checkbox" class="stored" name="C24_measuringTools_other" value="0"> No
                     </div>
                 </div>
                 <div class="inner_R R3">
@@ -686,11 +686,11 @@
                     34. Ask cleaner: what do you wear when taking out trash? (mark all that are listed)
                 </div>
                 <div class="inner_C C4">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear" value="Gloves"> Gloves</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear" value="Face shield"> Face shield</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear" value="Apron"> Apron</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear" value="Gown"> Gown</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear" value="Boots"> Boots</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear_gloves"> Gloves</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear_faceShield"> Face shield</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear_apron"> Apron</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear_gown"> Gown</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D34_cleanerWhatYouWear_boots"> Boots</div>
                 </div>
                 <div class="inner_R R4">
                     <div class="caOption commentBox commentBox" style="height:70px">Comments</div>
@@ -703,10 +703,10 @@
                     35. What supplies are used for waste removal?
                 </div>
                 <div class="inner_C C4">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste" value="Plastic bags"> Plastic bags</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste" value="Direct from trash cans"> Direct from trash cans</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste" value="Transfer to buckets"> Transfer to buckets</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste" value="Other"> Other</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste_plasticBags"> Plastic bags</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste_trashCans"> Direct from trash cans</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste_buckets"> Transfer to buckets</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="D35_suppliesForWaste_other"> Other</div>
                 </div>
                 <div class="inner_R R4">
                     <div class="caOption commentBox commentBox" style="height:70px">Comments</div>
@@ -791,7 +791,7 @@
                             <td>What is the condition?</td>
                             <td>
                                 <input type="checkbox" class="stored" name="D38_condition_wastePit" value="Not full"> Not full<br>
-                                <input type="checkbox" class="stored" name="D38_condition_wastePit" value="Full (<1m space)"> Full (<1m space)
+                                <input type="checkbox" class="stored" name="D38_condition_wastePit" value="Full"> Full (<1m space)
                             </td>
                             <td>
                                 <input type="checkbox" class="stored" name="D38_condition_incinerator" value="Working"> Working<br>
@@ -799,7 +799,7 @@
                             </td>
                             <td>
                                 <input type="checkbox" class="stored" name="D38_condition_placentaPit" value="Not full"> Not full<br>
-                                <input type="checkbox" class="stored" name="D38_condition_placentaPit" value="Full (<1m space)"> Full (<1m space)
+                                <input type="checkbox" class="stored" name="D38_condition_placentaPit" value="Full"> Full (<1m space)
                             </td>
                             <td>
                                 <input type="checkbox" class="stored" name="D38_condition_latrine" value="Working"> Working<br>
@@ -1098,9 +1098,9 @@
                     56. What training did you get on advanced PPE?
                 </div>
                 <div class="inner_C C1" style="width:1.3in">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="G56_whatTraining" value="Didactics only"> Didactics only</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="G56_whatTraining" value="Hands on don doff"> Hands on don/doff</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="G56_whatTraining" value="Neither"> Neither</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="G56_whatTraining_didactics"> Didactics only</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="G56_whatTraining_handsOn"> Hands on don/doff</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="G56_whatTraining_neither"> Neither</div>
                 </div>
                 <div class="inner_R R1" style="width:2.3in">
                     <div class="caOption commentBox" style="height:50px">Comments</div>

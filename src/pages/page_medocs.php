@@ -1,6 +1,9 @@
 <?php
     session_start();
-    if( !isset($_SESSION['username']) ) { Header('Location:/LastMileData/'); }
+    if( !isset($_SESSION['username']) ) {
+        $URL = $_SERVER['PHP_SELF'];
+        Header('Location:/LastMileData/index.php?redirect=' . urlencode($URL));
+    }
 ?>
 <!DOCTYPE html>
 

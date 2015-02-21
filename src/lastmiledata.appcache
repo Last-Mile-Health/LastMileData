@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version:      00471
+# Version:      00474
 # Author:       Avi Kenny, Last Mile Health
 # Last updated: 2015-01-14
 
@@ -99,7 +99,6 @@ CACHE:
 /LastMileData/src/js/formValidate.js
 /LastMileData/src/js/householdIDAssignmentList_v20140929.js
 /LastMileData/src/js/loadContents_v20140916.js
-/LastMileData/src/js/medocs_v20140916.js
 /LastMileData/src/js/memberIDAssignmentList_v20140929.js
 /LastMileData/src/js/modalFocus_v20140916.js
 

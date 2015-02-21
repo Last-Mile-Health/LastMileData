@@ -108,12 +108,10 @@ function readFieldsIntoObject($inputs){
             // Handle checkboxes; !!!!! if multiple checkboxes with the same name attribute are selected, only the last selected one is recorded; prevent double selection within formValidate.js !!!!!
             if ( $(this).is(':checked') ) {
                 myRecord[$(this).attr('name')] = $(this).attr('value');
-            } else if ( myRecord[$(this).attr('name')]===undefined ) {
-                myRecord[$(this).attr('name')] = '';
             }
         } else {
-            // Handle textboxes // !!!!! check this code !!!!!
-            if ( $(this).val() !== '' && $(this).val() !== undefined && $(this).val() !== '0000-00-00' ) {
+            // Handle textboxes
+            if ( $(this).val() !== '' && $(this).val() !== undefined ) {
                 myRecord[$(this).attr('name')] = $(this).val();
             }
         }

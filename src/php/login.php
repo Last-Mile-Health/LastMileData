@@ -6,6 +6,7 @@ set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'
 // Extract POST vars
 $input_username = $_POST['username'];
 $input_password = $_POST['password'];
+$redirect = $_POST['redirect'];
 
 // Query password hash from database
 require_once("cxn.php");
@@ -18,30 +19,40 @@ if( $input_username <> " AND $input_password <> " AND sha1($input_password) == $
 {
     // Start session; set $_SESSION vars
     Session_start() ;
-    $_SESSION['username'] = $row['username'] ;
-    $_SESSION['usertype'] = $row['usertype'] ;
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['usertype'] = $row['usertype'];
     
-    // Update login table; redirect to page_home
-    updateLoginTable($input_username, $cxn) ;
-    Header("Location:/LastMileData/src/pages/page_home.php") ;
+    // Update login table
+    updateLoginTable($input_username, $cxn);
+    
+    // Redirect
+    if ( $redirect == "" ) {
+        Header("Location:/LastMileData/src/pages/page_home.php");
+    } else {
+        Header("Location:" . $redirect);
+    }
 }
 
 // Test credentials: failure
 else
 {
-    // Redirect to index; display "retry" message
-    Header("Location:/LastMileData/index.php?retry=1") ;
+    // Redirect; display "retry" message
+    if ( $redirect == "" ) {
+        Header("Location:/LastMileData/index.php?retry=1");
+    } else {
+        Header("Location:/LastMileData/index.php?retry=1&redirect=" . urlencode($redirect));
+    }
 }
 
 function updateLoginTable($username, $cxn)
 {
     // Set time zone; set loginTime
-    date_default_timezone_set("America/New_York") ;
-    $loginTime = date('Y-m-d H:i:s') ;
+    date_default_timezone_set("America/New_York");
+    $loginTime = date('Y-m-d H:i:s');
     
     // Run query to update login table
-    $query = "INSERT INTO tbl_utility_logins (username, loginTime) VALUES ('$username', '$loginTime');" ;
-    mysqli_query($cxn, $query) or die("failure") ;
+    $query = "INSERT INTO tbl_utility_logins (username, loginTime) VALUES ('$username', '$loginTime');";
+    mysqli_query($cxn, $query) or die("failure");
 }
 
 ?>

@@ -1,6 +1,9 @@
 <?php
     session_start();
-    if( !isset($_SESSION['username']) ) { Header('Location:/LastMileData/'); }
+    if( !isset($_SESSION['username']) ) {
+        $URL = $_SERVER['PHP_SELF'];
+        Header('Location:/LastMileData/index.php?redirect=' . urlencode($URL));
+    }
 ?>
 
 <!-- !!!!! BUILD OUT THIS ENTIRE PAGE !!!!! -->
@@ -252,12 +255,15 @@
                         
                         <h1>Scale Data <span style="font-size:60%">(updated: 2/19/2015)</span></h1>
                         <hr>
+<div>
+    <?php echo $_SERVER['REQUEST_URI']; ?>
+</div>
                         
                         <h3>FHWs</h3>
                         <table class="table table-striped table-hover">
                             <tr>
                                 <th>County</th>
-                                <th>District</th>
+                                <th>Health District</th>
                                 <th># FHWs</th>
                                 <th># trained<br>in FHW1</th>
                                 <th># trained<br>in IMCI</th>
@@ -266,7 +272,7 @@
                                 <th># trained<br>in NCDs</th>
                             </tr>
                             <tr>
-                                <td rowspan="3" style="vertical-align:middle">Grand Gedeh</td>
+                                <td>Grand Gedeh</td>
                                 <td>Konobo</td>
                                 <td>55</td>
                                 <td>55</td>
@@ -276,6 +282,7 @@
                                 <td>10</td>
                             </tr>
                             <tr>
+                                <td>Grand Gedeh</td>
                                 <td>Gboe-Ploe</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -285,7 +292,7 @@
                                 <td>0</td>
                             </tr>
                             <tr>
-                                <td rowspan="3" style="vertical-align:middle">Rivercess</td>
+                                <td>Rivercess</td>
                                 <td>Central C</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -295,6 +302,7 @@
                                 <td>0</td>
                             </tr>
                             <tr>
+                                <td>Rivercess</td>
                                 <td>Yarnee</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -408,7 +416,7 @@
                         <table class="table table-striped table-hover">
                             <tr>
                                 <th>County</th>
-                                <th>District</th>
+                                <th>Admin District</th>
                                 <th># People</th>
                                 <th># Households</th>
                                 <th># Villages</th>
