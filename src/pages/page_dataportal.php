@@ -242,133 +242,6 @@
                             <script src="/LastMileData/src/js/Dimple/dashboard_13.js"></script>
                         </div>
                         
-<!--                        <hr style="border:1px solid black">
-                        
-                        <h3>Indicator progression</h3>
-                        <table class="table table-striped table-hover">
-                            <tr>
-                                <th>Dashboard Version</th>
-                                <th>Indicators</th>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">Current</td>
-                                <td>
-                                    <b>Scale</b>: [# of FHWs], [# of villages], [# of people]
-                                    <br>
-                                    <b>Delivery</b>: [% access, by health intervention], [patient visits, by health intervention],
-                                    <br>
-                                    [# treated, by condition]
-                                    <br>
-                                    <b>Outcome</b>: none
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">Early-2015</td>
-                                <td>
-                                    <b>Scale</b>: [# of patient visits], [# of villages] (plotted against targets)
-                                    <br>
-                                    <b>Delivery</b>: [% access, by health intervention], [# vaccines delivered], [# of ANC visits]
-                                    <br>
-                                    <b>Impact</b>: [# child deaths]
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:middle">Mid-2015</td>
-                                <td>
-                                    <b>Scale</b>: [# of patient visits], [# of villages] (plotted against targets)
-                                    <br>
-                                    <b>Delivery</b>: [% full immunization], [% FP unmet need], [% in active care for HIV, TB, or NCDs],
-                                    <br>
-                                    [avg cost per person], [% "A"s on FHW scorecard]
-                                    <br>
-                                    <b>Outcome</b>: [% safe deliveries], [# child deaths]
-                                </td>
-                            </tr>
-                        </table>
-                        
-                        <hr style="border:1px solid black">
-                        
-                        <h3>KPI Descriptions</h3>
-                        <table class="table table-striped table-hover">
-                            <tr>
-                                <th style="">Category</th>
-                                <th style="">Indicator</th>
-                                <th style="">Calculation</th>
-                            </tr>
-                            <tr>
-                                <td rowspan="2" style="vertical-align:middle">Scale</td>
-                                <td>Total number of patient visits</td>
-                                <td>Facility-based visits + Outreach visits + FHW visits</td>
-                            </tr>
-                            <tr>
-                                <td>Total number of villages served</td>
-                                <td>Villages served by clinic + Villages served by FHW</td>
-                            </tr>
-                            <tr></tr>
-                            <tr>
-                                <td rowspan="5" style="vertical-align:middle">Delivery</td>
-                                <td>Proportion of children who are fully immunized</td>
-                                <td>Percentage of living children, age 12–23 months, who have received all WHO-specified vaccines</td>
-                            </tr>
-                            <tr>
-                                <td>Percent of women with unmet need for family planning</td>
-                                <td>Percentage of women of reproductive age who are fecund and sexually active but are not using any method of contraception, and report not wanting any more children or wanting to delay the next child</td>
-                            </tr>
-                            <tr>
-                                <td>Percent of patients in active care for HIV, TB, or NCDs</td>
-                                <td>Percentage of patients diagnosed with a condition who are actively receiving care (medication, counseling, and monitoring)</td>
-                            </tr>
-                            <tr>
-                                <td>Average cost per person served</td>
-                                <td>Total programmatic costs / total number of people served</td>
-                            </tr>
-                            <tr>
-                                <td>Percent of FHWs who scored an "A" on FHW scorecard</td>
-                                <td>Percentage of FHWs who scored an "A" on his/her scorecard, defined as an aggregate score of 85 or above, with no less than a 70 in any one category</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="5" style="vertical-align:middle">Impact</td>
-                                <td>Proportion of safe (facility-based) deliveries</td>
-                                <td>Percentage of live births that occurred in a government or private health facility</td>
-                            </tr>
-                            <tr>
-                                <td>Under-five mortality rate</td>
-                                <td>Probability of dying between birth and exactly five years of age, expressed per 1,000 live births</td>
-                            </tr>
-                        </table>-->
-                        
-<!--                        <h3>Patient Visits</h3>
-                        <div id="dashboard_1">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_1.js"></script>
-                        </div>
-                        
-                        <h3>Number of Children Treated</h3>
-                        <div id="dashboard_2">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_2.js"></script>
-                        </div>
-                        
-                        <h3>Pie chart</h3>
-                        <div id="dashboard_3">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_3.js"></script>
-                        </div>
-                        
-                        <h3>Pie Matrix</h3>
-                        <div id="dashboard_4">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_4.js"></script>
-                        </div>
-                        
-                        <h3>Line graph (single)</h3>
-                        <div id="dashboard_5">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_5.js"></script>
-                        </div>
-                        
-                        <h3>Line graph (multiple)</h3>
-                        <div id="dashboard_6">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_6.js"></script>
-                        </div>-->
-                        
-                        <!--<div class="whitespace"></div>-->
-                        
                     </div>
                     <!-- END: Pane -->
                     
@@ -377,7 +250,7 @@
                     <!-- START: Pane-->
                     <div id="pane_scaledata" class="pane col-md-10">
                         
-                        <h1>Scale Data</h1>
+                        <h1>Scale Data <span style="font-size:60%">(updated: 2/19/2015)</span></h1>
                         <hr>
                         
                         <h3>FHWs</h3>
@@ -395,24 +268,15 @@
                             <tr>
                                 <td rowspan="3" style="vertical-align:middle">Grand Gedeh</td>
                                 <td>Konobo</td>
-                                <td>42</td>
-                                <td>42</td>
+                                <td>55</td>
+                                <td>55</td>
                                 <td>42</td>
                                 <td>26</td>
                                 <td>10</td>
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>Glio-Twarbo</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>---</td>
-                            </tr>
-                            <tr>
-                                <td>Gboe</td>
+                                <td>Gboe-Ploe</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -422,7 +286,7 @@
                             </tr>
                             <tr>
                                 <td rowspan="3" style="vertical-align:middle">Rivercess</td>
-                                <td>Central Rivercess</td>
+                                <td>Central C</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -431,16 +295,7 @@
                                 <td>0</td>
                             </tr>
                             <tr>
-                                <td>Beawor</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sam Gbalor</td>
+                                <td>Yarnee</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -461,10 +316,10 @@
                     <!-- START: Pane-->
                     <div id="pane_populationdata" class="pane col-md-10">
                         
-                        <h1>Population Data</h1>
+                        <h1>Liberia Population Data <span style="font-size:60%">(updated: 2/19/2015)</span></h1>
                         <hr>
                         
-                        <h3>Population, by county</h3>
+                        <h3>Liberia population, by county</h3>
                         <table class="table table-striped table-hover">
                             <tr>
                                 <th>County</th>
@@ -549,7 +404,7 @@
                         </table>
                         <br>
                         
-                        <h3>Population, by district (southeast only)</h3>
+                        <h3>Liberia population, by district (southeast only)</h3>
                         <table class="table table-striped table-hover">
                             <tr>
                                 <th>County</th>

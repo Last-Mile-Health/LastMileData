@@ -39,7 +39,7 @@
                 <div class="col-md-4">
                     <h2>M&E Documents</h2>
                     <p>This section of the site contains all key documents relevant to the M&E team, including strategy memos, program forms, survey reports, active/pending publications, team bios, and more.</p>
-                    <p><a href="/LastMileData/src/pages/page_medocs.php?folder=uploads" class="btn btn-success">Go to M&E Documents &raquo;</a></p>
+                    <p><a href="/LastMileData/src/pages/page_medocs.php" class="btn btn-success">Go to M&E Documents &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Data Entry / QA</h2>

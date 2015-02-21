@@ -48,7 +48,15 @@
         
         <div id="container">
             <div data-test="yes">One</div>
-            <div>Two</div>
+            <div contentEditable="true" style="border:1px solid black">Two</div>
+<div id="example-one" contenteditable="true">
+<style scoped>
+  #example-one { margin-bottom: 10px; }
+  [contenteditable="true"] { padding: 10px; outline: 2px dashed #CCC; }
+  [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
+</style>
+<p>Everything contained within this div is editable in browsers that support <code>HTML5</code>. Go on, give it a try: click it and start typing.</p>
+</div>            
             <div data-test="yes">Three</div>
         </div>
         
