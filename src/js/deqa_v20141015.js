@@ -114,7 +114,7 @@ $(document).ready(function(){
             $('#modal_uploadDataFile_error').text('Please select only ".lmd" files.');
             flashDiv('#modal_uploadDataFile_error');
         } else if (false) {
-            // !!!!! Error #3: check for corrupt files (i.e. not properly formatted as JSON) !!!!!
+            // !!!!! Error #3: check for corrupt files (i.e. not formatted as proper JSON) !!!!!
         } else {
             // No errors; proceed with upload
             
