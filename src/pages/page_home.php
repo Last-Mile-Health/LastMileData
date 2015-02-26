@@ -37,7 +37,7 @@
                 <div class="col-md-4">
                     <h2>Data Portal</h2>
                     <p>The <i>Data Portal</i> is where all staff can go to access up-to-date information. Currently, data is uploaded manually on a monthly basis, but in the future, we will provide "real time" access to programmatic data.</p>
-                    <p><a class="fadeLink btn btn-success" href="/LastMileData/src/pages/page_dataportal.php#overview">Go to Data Portal &raquo;</a></p>
+                    <p><a class="fadeLink btn btn-success" href="/LastMileData/src/pages/page_dataportal.php">Go to Data Portal &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>M&E Documents</h2>

@@ -6,7 +6,6 @@
     }
 ?>
 
-<!-- !!!!! BUILD OUT THIS ENTIRE PAGE !!!!! -->
 <!DOCTYPE html>
 
 <html>
@@ -36,7 +35,7 @@
                 });
                 
                 // Get initial value of currentPane; fade it in; highlight list item in sidebar
-                var currentPane = window.location.hash.substring(1);
+                var currentPane = window.location.hash.substring(1) || "overview";
                 $('#pane_' + currentPane + ', #footer').fadeIn(1000);
                 $('a[href="#' + currentPane + '"]').parent().addClass('active');
                 
@@ -140,6 +139,48 @@
                 color: #fff;
                 background-color: green;
             }
+            
+            // !!!!! Unused "hover for edfinition" button !!!!!
+            // !!!!! <span class="definition">D</span> !!!!!
+            .definition {
+                cursor:pointer;
+                font-weight:bold;
+                color:white!important;                  /* overrides boostrap.min.css */
+                background-color:#336600!important;     /* overrides boostrap.min.css */
+                padding-top:3px;
+                border-radius:10px;
+                padding-bottom:2px;
+                padding-left:4px;
+                padding-right:4px;
+                padding-top:2px;
+                -webkit-print-color-adjust:exact;
+            }
+            
+            .definition:hover {
+                position:relative;
+                top:1px;
+            }
+            
+            table.ptg_data th {
+                border: 1px solid white;
+                text-align:center;
+                padding: 3px;
+                font-size:100%;
+                color:white;
+                background-color: #E26B0A;
+            }
+            
+            table.ptg_data td {
+                border: 1px solid white;
+                text-align:center;
+                padding: 3px;
+                background-color: #eeeeee;
+            }
+            
+            .smallHR {
+                margin-bottom:0px
+            }
+            
         </style>
     </head>
     
@@ -162,10 +203,10 @@
                 <div class="sidebar">
                     <ul class="nav nav-sidebar">
                         <li><a href="#overview">Overview</a></li>
-                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#execDashboard">Executive Dashboard</a></li>
+                        <li><a href="#treatment">Treatment data</a></li>
                         <li><a href="#scaledata">Scale data</a></li>
                         <li><a href="#populationdata">Population data</a></li>
-                        <!--<li><a href="#treatmentdata">Treatment data</a></li>-->
                     </ul>
                 </div>
                 
@@ -177,25 +218,29 @@
                         <h1>Overview</h1>
                         <hr>
                         
-                        <h3>Dashboard</h3>
                         <div>
-                            Our current programmatic dashboard.
+                            <b>Note: The <i>Data Portal</i> requires a minimum screen resolution of 1024x768 to function properly.</b>
+                        </div>
+                        
+                        <h3>Executive Dashboard</h3>
+                        <div>
+                            Cross-team executive dashboard.
+                        </div>
+                        
+                        <h3>Treatment data</h3>
+                        <div>
+                            Treatment data for iCCM (malaria, diarrhea, and pneumonia)
                         </div>
                         
                         <h3>Scale data</h3>
                         <div>
-                            Number of FHWs, broken down by trainings received.
+                            Number of FHWs, broken down by training level.
                         </div>
                         
                         <h3>Population data</h3>
                         <div>
                             Population data for the communities in Liberia
                         </div>
-                        
-<!--                        <h3>Treatment data</h3>
-                        <div>
-                            Data on the treatment that we administer through our program.
-                        </div>-->
                         
                         <div class="whitespace"></div>
                         
@@ -205,15 +250,385 @@
                     
                     
                     <!-- START: Pane -->
-                    <div id="pane_dashboard" class="pane col-md-10">
+                    <div id="pane_execDashboard" class="pane col-md-10">
                         
-                        <h1>Dashboard <span style="font-size:60%">(updated: 2/1/2015)</span></h1>
+                        <h1>Executive Dashboard <span style="font-size:60%">(updated: 2/1/2015)</span></h1>
                         <hr>
                         
-                        <h3><b>Scale</b>: Number of FHWs, Number of villages served</h4>
-                        <div id="dashboard_8">
-                            <script src="/LastMileData/src/js/Dimple/dashboard_8.js"></script>
+                        <!-- START: Dashboard row 1 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>1</b>. Number of FHWs deployed</h3>
+                                <p><b>Definition</b>: A deployed Frontline Health Worker (FHW) is receiving a monetary incentive, has received LMH training in at least one healthcare module, and is actively visiting patients within his or her community</p>
+                                <p><b>FY15 Target</b>: 378</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>55</td>
+                                        <td>55</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numFHWs">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numFHWs.js"></script>
+                                </div>
+                            </div>
                         </div>
+                        <hr>
+                        <!-- END: Dashboard row 1 -->
+                        
+                        <!-- START: Dashboard row 2 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>2</b>. Number of FHW supervisors</h3>
+                                <p><b>Definition</b>: Number of active FHW leaders and Clinical Mentors (on payroll)</p>
+                                <p><b>FY15 Target</b>: 42</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>5</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numSupervisors">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numSupervisors.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 2 -->
+                        
+                        <!-- START: Dashboard row 3 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>3</b>. Number of people served</h3>
+                                <p><b>Definition</b>: Number of people living in a village with an active FHW, based on LMH registration data</p>
+                                <p><b>FY15 Target</b>: 92,919</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>15,000</td>
+                                        <td>15,000</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numPeopleServed">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numPeopleServed.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 3 -->
+                        
+                        <!-- START: Dashboard row 4 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>4</b>. Number of villages served</h3>
+                                <p><b>Definition</b>: Number of villages (geographically distinct rural communities) that have an active FHW</p>
+                                <p><b>FY15 Target</b>: 400</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>52</td>
+                                        <td>52</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numVillagesServed">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numVillagesServed.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 4 -->
+                        
+                        <!-- START: Dashboard row 5 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>5</b>. Number of health workers trained in Ebola-specific services</h3>
+                                <p><b>Definition</b>: Number of health workers/volunteers (FHWs, gCHVs, facility staff, community members) who received training in one or more of the following: contact tracing, surveillance, IPC, education, case management</p>
+                                <p><b>FY15 Target</b>: 518</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>XX</td>
+                                        <td>XX</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_YYY">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_YYY.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 5 -->
+                        
+                        <!-- START: Dashboard row 6 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>6</b>. Number of health centers trained to respond to Ebola</h3>
+                                <p><b>Definition</b>: Number of health facilities (PHC-1, PHC-2, or PHC-3) that received an infection prevention and control (IPC) training organized by LMH</p>
+                                <p><b>FY15 Target</b>: 35 (100%)</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>35</td>
+                                        <td>35</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numFacilitiesIPC">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numFacilitiesIPC.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 6 -->
+                        
+                        <!-- START: Dashboard row 7 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>7</b>. Total number of staff in Liberia</h3>
+                                <p><b>Definition</b>: Total number of full-time staff in Liberia (excludes Frontline Health Workers)</p>
+                                <p><b>FY15 Target</b>: n/a</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>XX</td>
+                                        <td>143</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numStaffLiberia">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numStaffLiberia.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 7 -->
+                        
+                        <!-- START: Dashboard row 8 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>8</b>. Total number of staff in U.S.</h3>
+                                <p><b>Definition</b>: Total number of full and part-time staff in USA (excludes consultants)</p>
+                                <p><b>FY15 Target</b>: n/a</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>17</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_numStaffUS">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_numStaffUS.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 8 -->
+                        
+                        <!-- START: Dashboard row 9 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>9</b>. Total funds received</h3>
+                                <p><b>Definition</b>: Total money received</p>
+                                <p><b>FY15 Target</b>: $8,500,000</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>$5,929,485</td>
+                                        <td>$6,529,994</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_fundsReceived">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_fundsReceived.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 9 -->
+                        
+                        <!-- START: Dashboard row 10 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>10</b>. Total funds received and committed</h3>
+                                <p><b>Definition</b>: Total money received and committed</p>
+                                <p><b>FY15 Target</b>: $8,500,000</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>$7,916,371</td>
+                                        <td>$8,359,411</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_fundsReceivedAndCommitted">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_fundsReceivedAndCommitted.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 10 -->
+                        
+                        <!-- START: Dashboard row 11 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>11</b>. Percent of FY15 budget raised to date</h3>
+                                <p><b>Definition</b>: Total percent of FY15 budget raised based on funds received to date</p>
+                                <p><b>FY15 Target</b>: $6,978,616 (100%)</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>85%</td>
+                                        <td>94%</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_percentOfBudgetRaised">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_percentOfBudgetRaised.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 11 -->
+                        
+                        <!-- START: Dashboard row 12 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>12</b>. Cash on hand</h3>
+                                <p><b>Definition</b>: The amount of money in the form of cash that LMH has on hand after it has covered its costs</p>
+                                <p><b>FY15 Target</b>: n/a</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>$4,305,484</td>
+                                        <td>$4,623,701</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_cashOnHand">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_cashOnHand.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 12 -->
+                        
+                        <!-- START: Dashboard row 13 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><b>13</b>. Cash burn rate</h3>
+                                <p><b>Definition</b>: Average monthly cash spent</p>
+                                <p><b>FY15 Target</b>: n/a</p>
+                                <table class='ptg_data'>
+                                    <tr>
+                                        <th>Dec '14</th>
+                                        <th>Jan '15</th>
+                                    </tr>
+                                    <tr>
+                                        <td>$329,000</td>
+                                        <td>XX</td>
+                                    </tr>
+                                </table>
+                                <hr class='smallHR'>
+                                <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dataportal_dashboard_cashBurnRate">
+                                    <script src="/LastMileData/src/js/Dimple/dataportal_dashboard_cashBurnRate.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- END: Dashboard row 13 -->
+                        
+                    </div>
+                    <!-- END: Pane -->
+                    
+                    
+                    
+                    <!-- START: Pane -->
+                    <div id="pane_treatment" class="pane col-md-10">
+                        
+                        <h1>Treatment data <span style="font-size:60%">(updated: 2/1/2015)</span></h1>
+                        <hr>
                         
                         <h3><b>Scale</b>: Number of people served by FHWs</h3>
                         <div id="dashboard_14">
