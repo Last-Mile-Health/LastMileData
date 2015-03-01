@@ -1,10 +1,10 @@
 // Create new dimple SVG
-var svg = dimple.newSvg("#dataportal_dashboard_fundsReceived", 500, 400);
+var svg = dimple.newSvg("#dataportal_dashboard_fy15Expenses", 500, 400);
 
 // Data (!!!!! fill manually for now !!!!!)
 var data = [
-    { "Month":"2014-12-01", "USD":5929485 },
-    { "Month":"2015-01-01", "USD":6529994 }
+    { "Month":"2014-12-01", "USD":2010935 },
+    { "Month":"2015-01-01", "USD":2767124 }
 ];
 
 // Create new chart object

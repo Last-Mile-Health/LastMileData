@@ -92,7 +92,6 @@ CACHE:
 
 # src >> js
 /LastMileData/src/js/LMD_fileSystemHelper.js
-/LastMileData/src/js/changePassword_v20140916.js
 /LastMileData/src/js/deqa_v20141015.js
 /LastMileData/src/js/fhwForms_v20140916.js
 /LastMileData/src/js/formHelper.js

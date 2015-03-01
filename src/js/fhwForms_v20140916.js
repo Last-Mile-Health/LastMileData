@@ -198,13 +198,18 @@ $(document).ready(function() {
 });
 
 // Return MySQL-formatted "DATETIME" string of current date/time
-function mysql_date() {
-    var now = new Date();
-    return ( now.getUTCFullYear() + "-" + twoDigits(1 + now.getUTCMonth()) + "-" + twoDigits(now.getUTCDate()) );
+// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
+function mysql_date(inputDate) {
+    if (arguments.length === 0) {
+        var myDate = new Date();
+    } else {
+        var myDate = new Date(inputDate);
+    }
+    return ( myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate()) );
 }
 
 // Pad numbers to two digits ( helper function for mysql_datetime() )
-// !!!!! Refactor into "utility library"; this is needed elsewhere !!!!!
+// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
 function twoDigits(d) {
     if(0 <= d && d < 10) return "0" + d.toString();
     if(-10 < d && d < 0) return "-0" + (-1*d).toString();

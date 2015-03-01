@@ -5,11 +5,15 @@
         Header('Location:/LastMileData/index.php?redirect=' . urlencode($URL));
     }
 ?>
-
 <!DOCTYPE html>
 <html>
     
     <head>
+        <?php
+            if( isset($_SESSION['username']) ) {
+                echo "<script>sessionStorage.username = '" . $_SESSION['username'] . "'</script>";
+            }
+        ?>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
@@ -30,23 +34,23 @@
         <div class="container main">
             <div class="jumbotron">
                 <h1>Last Mile Data</h1>
-                <p><i>Last Mile Data</i> is the new centralized database platform for Last Mile Health. It can be used by all staff (development, communications, programs, etc) to access up-to-date data and information about our programs (as well as assorted M&E team documents), and will be used by our M&E staff to enter and quality-check data. It is currently an internal site, but in the future, it can potentially be used to share data and information with external partners.</p>
+                <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It is designed to be used by staff on all teams to access up-to-date data and information about our programs, and is used by our M&E staff to enter and quality-check data.</p>
                 <p><b>Welcome, <span style="color:green"><?php echo $_SESSION['username']; ?></span>. </b></p>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <h2>Data Portal</h2>
-                    <p>The <i>Data Portal</i> is where all staff can go to access up-to-date information. Currently, data is uploaded manually on a monthly basis, but in the future, we will provide "real time" access to programmatic data.</p>
+                    <p>The <i>Data Portal</i> is where all staff can go to access up-to-date data and information about our programs. Data is updated monthly on the 10th of each month.</p>
                     <p><a class="fadeLink btn btn-success" href="/LastMileData/src/pages/page_dataportal.php">Go to Data Portal &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>M&E Documents</h2>
-                    <p>This section of the site contains all key documents relevant to the M&E team, including strategy memos, program forms, survey reports, active/pending publications, team bios, and more.</p>
+                    <p>This section contains all key documents relevant to the M&E team, including program forms, strategy memos, and survey reports.</p>
                     <p><a href="/LastMileData/src/pages/page_medocs.php" class="btn btn-success">Go to M&E Documents &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Data Entry / QA</h2>
-                    <p>This section is meant to be used by our M&E staff. This section can be accessed offline when no internet connection is present. For access to this section of the site, please email <a href='mailto:avi@lastmilehealth.org'>Avi Kenny</a>.</p>
+                    <p>This section of the site is used by our M&E staff, and can be accessed offline when no internet connection is present.</p>
                     <p><a href="/LastMileData/src/pages/page_deqa.html" class="btn btn-success">Go to Data Entry / QA &raquo;</a></p>
                 </div>
             </div>

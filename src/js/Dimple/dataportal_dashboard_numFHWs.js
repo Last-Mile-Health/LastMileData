@@ -1,55 +1,40 @@
-var svg = dimple.newSvg("#dataportal_dashboard_numFHWs", 575, 400);
+// Create new dimple SVG
+var svg = dimple.newSvg("#dataportal_dashboard_numFHWs", 500, 400);
 
 // Data (!!!!! fill manually for now !!!!!)
 var data = [
-    { "Month":"Sep '12", "Measure":"FHWs", "Number":0, "Order":1 },
-    { "Month":"Oct '12", "Measure":"FHWs", "Number":10, "Order":2 },
-    { "Month":"Nov '12", "Measure":"FHWs", "Number":10, "Order":3 },
-    { "Month":"Dec '12", "Measure":"FHWs", "Number":10, "Order":4 },
-    { "Month":"Jan '13", "Measure":"FHWs", "Number":10, "Order":5 },
-    { "Month":"Feb '13", "Measure":"FHWs", "Number":10, "Order":6 },
-    { "Month":"Mar '13", "Measure":"FHWs", "Number":10, "Order":7 },
-    { "Month":"Apr '13", "Measure":"FHWs", "Number":10, "Order":8 },
-    { "Month":"May '13", "Measure":"FHWs", "Number":10, "Order":9 },
-    { "Month":"Jun '13", "Measure":"FHWs", "Number":26, "Order":10 },
-    { "Month":"Jul '13", "Measure":"FHWs", "Number":26, "Order":11 },
-    { "Month":"Aug '13", "Measure":"FHWs", "Number":26, "Order":12 },
-    { "Month":"Sep '13", "Measure":"FHWs", "Number":26, "Order":13 },
-    { "Month":"Oct '13", "Measure":"FHWs", "Number":26, "Order":14 },
-    { "Month":"Nov '13", "Measure":"FHWs", "Number":26, "Order":15 },
-    { "Month":"Dec '13", "Measure":"FHWs", "Number":42, "Order":16 },
-    { "Month":"Jan '14", "Measure":"FHWs", "Number":42, "Order":17 },
-    { "Month":"Feb '14", "Measure":"FHWs", "Number":42, "Order":18 },
-    { "Month":"Mar '14", "Measure":"FHWs", "Number":42, "Order":19 },
-    { "Month":"Apr '14", "Measure":"FHWs", "Number":42, "Order":20 },
-    { "Month":"May '14", "Measure":"FHWs", "Number":42, "Order":21 },
-    { "Month":"Jun '14", "Measure":"FHWs", "Number":42, "Order":22 },
-    { "Month":"Jul '14", "Measure":"FHWs", "Number":42, "Order":23 },
-    { "Month":"Aug '14", "Measure":"FHWs", "Number":42, "Order":24 },
-    { "Month":"Sep '14", "Measure":"FHWs", "Number":42, "Order":25 },
-    { "Month":"Oct '14", "Measure":"FHWs", "Number":42, "Order":26 },
-    { "Month":"Nov '14", "Measure":"FHWs", "Number":42, "Order":27 },
-    { "Month":"Dec '14", "Measure":"FHWs", "Number":56, "Order":28 },
-    { "Month":"Jan '15", "Measure":"FHWs", "Number":56, "Order":29 },
+    { "Month":"2012-09-01", "FHWs":0 },
+    { "Month":"2012-10-01", "FHWs":10 },
+    { "Month":"2012-11-01", "FHWs":10 },
+    { "Month":"2012-12-01", "FHWs":10 },
+    { "Month":"2013-01-01", "FHWs":10 },
+    { "Month":"2013-02-01", "FHWs":10 },
+    { "Month":"2013-03-01", "FHWs":10 },
+    { "Month":"2013-04-01", "FHWs":10 },
+    { "Month":"2013-05-01", "FHWs":10 },
+    { "Month":"2013-06-01", "FHWs":26 },
+    { "Month":"2013-07-01", "FHWs":26 },
+    { "Month":"2013-08-01", "FHWs":26 },
+    { "Month":"2013-09-01", "FHWs":26 },
+    { "Month":"2013-10-01", "FHWs":26 },
+    { "Month":"2013-11-01", "FHWs":26 },
+    { "Month":"2013-12-01", "FHWs":42 },
+    { "Month":"2014-01-01", "FHWs":42 },
+    { "Month":"2014-02-01", "FHWs":42 },
+    { "Month":"2014-03-01", "FHWs":42 },
+    { "Month":"2014-04-01", "FHWs":42 },
+    { "Month":"2014-05-01", "FHWs":42 },
+    { "Month":"2014-06-01", "FHWs":42 },
+    { "Month":"2014-07-01", "FHWs":42 },
+    { "Month":"2014-08-01", "FHWs":42 },
+    { "Month":"2014-09-01", "FHWs":42 },
+    { "Month":"2014-10-01", "FHWs":42 },
+    { "Month":"2014-11-01", "FHWs":42 },
+    { "Month":"2014-12-01", "FHWs":55 },
+    { "Month":"2015-01-01", "FHWs":55 }
 ];
 
-
-
-//var data = [
-//    { "Month":"2012-09-01", "Measure":"FHWs", "Number":0, "Order":1 },
-//    { "Month":"2012-10-01", "Measure":"FHWs", "Number":10, "Order":2 },
-//    { "Month":"2012-11-01", "Measure":"FHWs", "Number":10, "Order":3 },
-//    { "Month":"2012-12-01", "Measure":"FHWs", "Number":10, "Order":4 },
-//    { "Month":"2013-01-01", "Measure":"FHWs", "Number":10, "Order":5 },
-//    { "Month":"2013-02-01", "Measure":"FHWs", "Number":10, "Order":6 },
-//    { "Month":"2012-09-01", "Measure":"Villages", "Number":0, "Order":1 },
-//    { "Month":"2012-10-01", "Measure":"Villages", "Number":12, "Order":2 },
-//    { "Month":"2012-11-01", "Measure":"Villages", "Number":12, "Order":3 },
-//    { "Month":"2012-12-01", "Measure":"Villages", "Number":12, "Order":4 },
-//    { "Month":"2013-01-01", "Measure":"Villages", "Number":12, "Order":5 },
-//    { "Month":"2013-02-01", "Measure":"Villages", "Number":12, "Order":6 }
-//];
-
+// Create new chart object
 var myChart = new dimple.chart(svg, data);
 
 // Set color scheme: orange
@@ -57,15 +42,13 @@ myChart.defaultColors = [
     new dimple.color("#F79646")
 ];
 
-myChart.setBounds(40, 30, 430, 305);
-var x = myChart.addCategoryAxis("x", "Month");
-x.addOrderRule("Order");
-//x.timeField = "Date";
-//x.dateParseFormat = "%Y-%m-%d";
-//x.tickFormat = "%m/%Y";
-//x.ticks=20;
-//x.timePeriod = d3.time.months;
-//x.timeInterval = 4;
-myChart.addMeasureAxis("y", "Number");
-myChart.addSeries("Measure", dimple.plot.line);
+// Format chart
+myChart.setBounds(50, 30, 430, 305);
+var x = myChart.addTimeAxis("x", "Month", "%Y-%m-%d", "%b '%y");
+x.timePeriod = d3.time.months;
+x.timeInterval = 3;
+var y = myChart.addMeasureAxis("y", "FHWs");
+
+// Add series; draw chart
+myChart.addSeries("", dimple.plot.line);
 myChart.draw();

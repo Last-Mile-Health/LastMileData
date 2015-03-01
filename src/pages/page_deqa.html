@@ -113,6 +113,7 @@
                     <h2>Database Management</h2>
                     <p>Functions to be used only by the database manager.</p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_sendRecords" title="Send records to the MySQL Database. Requires an active internet connection. This should ideally be done after data quality assurance has been performed.">Send Records</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_uploadODK" title="Upload ODK data">Upload ODK data</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_refreshData" title="Refresh system data. Should be done at least once a month. Requires an active internet connection.">Refresh system data</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_downloadDataFile" title="Click here to download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_uploadDataFile" title="Upload a data file from someone else's M&E laptop. Does not requires an internet connection, although an internet connection is required to send files to the MySQL database.">Upload data file</a></p>
@@ -347,6 +348,41 @@
         
         
         
+        <!-- MODAL START: "UPLOAD ODK DATA" -->
+        <div id="modal_uploadODK" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">Upload ODK data</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group text-center">
+                            <div id="modal_uploadODK_formContent">
+                                <form id="modal_uploadODK_form">
+                                    <div class="form-group text-center">
+                                        <input class="form-control input-lg" type="file" id="modal_uploadODK_fileInput" multiple><br>
+                                        <p id="modal_uploadODK_error" class="form-group" style="display:none; color:red"></p>
+                                        <a id="modal_uploadODK_submit" class="btn btn-success btn-lg btn-block">Upload</a>
+                                        <br>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="modal_uploadODK_status" style='display:none'>
+                                <img src='/LastMileData/res/ajax-loader_v20140916.gif'><br>
+                                <h3 id='modal_uploadODK_message'>Uploading and merging data file...</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL END: "UPLOAD ODK DATA" -->
+        
+        
+        
         <!-- MODAL START: "UPLOAD DATA FILE" -->
         <div id="modal_uploadDataFile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
@@ -357,9 +393,9 @@
                     <div class="modal-body">
                         <div class="form-group text-center">
                             <div id="modal_uploadDataFile_formContent">
-                                <form id="modal_uploadDataFile_form" method="post" enctype="multipart/form-data" role="form"> <!-- !!!!! are enctype and role attributes necessary ????? -->
+                                <form id="modal_uploadDataFile_form">
                                     <div class="form-group text-center">
-                                        <input class="form-control input-lg" type="file" id="modal_uploadDataFile_fileInput" required><br>
+                                        <input class="form-control input-lg" type="file" id="modal_uploadDataFile_fileInput"><br>
                                         <p id="modal_uploadDataFile_error" class="form-group" style="display:none; color:red"></p>
                                         <a id="modal_uploadDataFile_submit" class="btn btn-success btn-lg btn-block">Upload</a>
                                         <br>

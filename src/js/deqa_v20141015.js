@@ -109,7 +109,7 @@ $(document).ready(function(){
             // Error #1: No file was selected
             $('#modal_uploadDataFile_error').text('No file was selected.');
             flashDiv('#modal_uploadDataFile_error');
-        } else if (sFileExtension !== "lmd") {
+        } else if (sFileExtension.toLowerCase() !== "lmd") {
             // Error #2: Wrong file extension (not ".lmd")
             $('#modal_uploadDataFile_error').text('Please select only ".lmd" files.');
             flashDiv('#modal_uploadDataFile_error');
@@ -126,17 +126,10 @@ $(document).ready(function(){
             // Read in file
             var fileReader = new FileReader();
             fileReader.onload = function(fileLoadedEvent) {
+                // !!!!! currently using global; either namspace or make this local !!!!!
                 uploadedRecordset = JSON.parse(fileLoadedEvent.target.result);
             };
             fileReader.readAsText(fileToLoad, "UTF-8");
-            
-            // Set localKey to counter
-            // !!!!! Consider refactoring this into a module that handles operations with myRecordset !!!!!
-            if (localStorage.counter === undefined) {
-                localStorage.counter = 1;
-            }
-            localKey = localStorage.counter; // !!!!! why is this a global (see above comment re: refactoring) ?????
-            localStorage.counter++;
             
             var myRecord = {};
             myRecord.type = 'form';
@@ -185,6 +178,165 @@ $(document).ready(function(){
                 });
                 
             });
+            
+        }
+        
+    });
+    
+    
+    // CLICK HANDLER: Upload ODK data
+    // !!!!! some code here may be redundant with the code above !!!!!
+    $("#modal_uploadODK_submit").click(function() {
+        
+        var anyErrors = false;
+        
+        // Get fileinput
+        var myInput = document.getElementById('modal_uploadODK_fileInput');
+        
+        // Check for errors (no file, wrong extension, corrupt file)
+        if (myInput === "") {
+            // Error #1: No file was selected
+            $('#modal_uploadODK_error').text('No file was selected.');
+            anyErrors = true;
+            flashDiv('#modal_uploadODK_error');
+        }
+        
+        if (!anyErrors) {
+            // Loop through files to check for non-XML extensions
+            for(var i = 0; i < myInput.files.length ; i++) {
+                if (!anyErrors) {
+                    
+                    // Get file and extension
+                    var fileToLoad = myInput.files[i];
+                    if (fileToLoad !== undefined) {
+                        var sFileName = fileToLoad.name;
+                        var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+                    }
+                    
+                    if (sFileExtension.toLowerCase() !== "xml") {
+                        // Error #2: Wrong file extension (not ".xml")
+                        $('#modal_uploadODK_error').text('Please select only ".xml" files.');
+                        anyErrors = true;
+                        flashDiv('#modal_uploadODK_error');
+                    }
+                    
+                }
+            }
+        }
+        
+        if (!anyErrors) {
+            // No errors; proceed with upload
+
+            // Manipulate DOM
+            $('#modal_uploadODK_formContent').slideUp(500, function(){
+                $('#modal_uploadODK_status').slideDown(500);
+            });
+            
+            // Initialize uploadedRecordset !!!!! currently using global; either namspace or make this local !!!!!
+            uploadedRecordset = {};
+            
+            // Loop through files and parse data
+            for(var i = 0; i < myInput.files.length ; i++) {
+                (function(i){
+                    
+                    uploadedRecordset[i] = {};
+                    
+                    var file = myInput.files[i];
+                    var reader = new FileReader();
+                    reader.onload = function() {
+
+                        // Get string; parse into XML object
+                        var filecontent = reader.result;
+                        var myJQXML = $.parseXML(filecontent);
+                        var $myJQXML = $(myJQXML);
+                        
+                        extractODK($myJQXML);
+                        
+                        function extractODK($XML) {
+
+                            var fieldName, fieldType;
+                            
+                            $XML.each(function(){
+                                if ($XML.children().length === 0 && $XML.prop("tagName").substr(0,4) === "LMD-") {
+                                    fieldName = $XML.prop("tagName").substr(8);
+                                    fieldType = $XML.prop("tagName").substr(4,3);
+
+                                    if (fieldType === 'TAB') {
+                                        uploadedRecordset[i].table = $XML.text();
+                                    } else if (fieldType === 'VAL') {
+                                        uploadedRecordset[i][fieldName] = $XML.text();
+                                    } else if (fieldType === 'TIM') {
+                                        uploadedRecordset[i][fieldName] = $XML.text().substr(0,$XML.text().indexOf("."));
+                                    } else if (fieldType === 'DAT') {
+                                        uploadedRecordset[i][fieldName] = mysql_date(86400000*Math.floor($XML.text()));
+                                    }
+                                    
+                                } else {
+                                    $XML.children().each(function(){
+                                        extractODK($(this));
+                                    });
+                                }
+                            });
+                        }
+
+                    };
+                    reader.readAsText(file);
+                })(i);
+            }
+            
+            // !!!!! merge with data file here !!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
+            var myRecord = {};
+            myRecord.type = 'form';
+            
+            LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+                
+                // Read existing file (if exists) into mergedRecordset
+                var mergedRecordset = {};
+                i = 1;
+                if (result != "") {
+                    var oldRecordset = JSON.parse(result);
+                    for (var x in oldRecordset) {
+                        mergedRecordset[i] = oldRecordset[x];
+                        i++;
+                    }
+                }
+                
+                // Add uploaded records to mergedRecordset
+                for (var x in uploadedRecordset) {
+                    mergedRecordset[i] = JSON.stringify(uploadedRecordset[x]);
+                    i++;
+                }
+                
+                // Write new recordset to data.lmd
+                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(mergedRecordset), function(){
+                    
+                    setTimeout(function(){
+                        // Display success message; hide modal; reset DOM
+                        $('#modal_uploadODK_message').text('Upload and merge complete.');
+                        setTimeout(function(){
+                            $('.modal').modal('hide');
+                            setTimeout(function(){
+                                
+                                // Manipulate DOM
+                                $('#modal_uploadODK_message').text('Uploading and merging data file...').hide();
+                                $('#modal_uploadODK_status').hide();
+                                $('#modal_uploadODK_formContent').show();
+                                
+                                // Clear file input
+                                $('#modal_uploadODK_form').get(0).reset();
+                                
+                            },1000);
+                        },1000);
+                    },2000);
+                });
+            });
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             
         }
         
@@ -850,6 +1002,26 @@ function launchQAModal(options)
     $('#modal_QA').modal();
 }
 
+
+
+// Return MySQL-formatted "DATETIME" string of current date/time
+// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
+function mysql_date(inputDate) {
+    if (arguments.length === 0) {
+        var myDate = new Date();
+    } else {
+        var myDate = new Date(inputDate);
+    }
+    return ( myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate()) );
+}
+
+// Pad numbers to two digits ( helper function for mysql_datetime() )
+// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
 
 
 function parseRecordIntoSQL(currentRecord) {

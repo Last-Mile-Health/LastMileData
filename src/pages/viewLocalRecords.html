@@ -39,14 +39,15 @@
                 }
 
                 // Test to see if current localStorage record is of type "form"
-                if (currentRecord.type == "form") {
+                // !!!!! consider using type = "ODK" !!!!!
+//                if (currentRecord.type == "form") {
                     var row = '<tr><td>' + currentRecord.table + '</td>';
                     row += '<td>' + currentRecord.de_date + '</td>';
                     row += '<td>' + currentRecord.de_init + '</td>';
                     row += '<td>' + currentRecord.qa_date + '</td>';
                     row += '<td>' + currentRecord.qa_init + '</td></tr>';
                     $('#myTable').append(row);
-                }
+//                }
             }
         };
         
