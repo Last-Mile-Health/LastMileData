@@ -34,8 +34,8 @@
         <div class="container main">
             <div class="jumbotron">
                 <h1>Last Mile Data</h1>
-                <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It is designed to be used by staff on all teams to access up-to-date data and information about our programs, and is used by our M&E staff to enter and quality-check data.</p>
-                <p><b>Welcome, <span style="color:green"><?php echo $_SESSION['username']; ?></span>. </b></p>
+                <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It can be used by all staff across teams to access up-to-date data and information about our programs, as well as access critical M&E team documents. It is used by our M&E team to enter, aggregate, and quality-check data from both paper forms and mobile health forms.</p>
+                <p><b>Welcome, <span style="color:green"><?php echo $_SESSION['username']; ?></span>.</b></p>
             </div>
             <div class="row">
                 <div class="col-md-4">

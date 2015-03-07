@@ -48,8 +48,9 @@
         <div class="container">
             <div class="jumbotron">
                 <h1>M&E Documents</h1>
-                <p>This section of the site contains all key documents relevant to the M&E team, including program forms, strategy documents, and reports.</p>
-                <p><b>Updated: Feb 21, 2015</b></p>
+                <p>This section of the site contains key documents relevant to the M&E team, including program forms, strategy documents, and reports.</p>
+                <p>Note: If you wish to use data from within any of these documents, please consult the M&E team first.</p>
+                <p><b>Updated: Mar 6, 2015</b></p>
             </div>
             
             <div class="row">

@@ -1,3 +1,145 @@
+<script src="/LastMileData/src/js/data_execDashboard.js"></script>
+<script>
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numFHWs",
+        data: myData.numFHWs,
+        colors: ["#F79646"],
+        timeInterval: 3,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"FHWs"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numSupervisors",
+        data: myData.numSupervisors,
+        colors: ["#F79646"],
+        timeInterval: 3,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Supervisors"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numPeopleServed",
+        data: myData.numPeopleServed,
+        colors: ["#F79646"],
+        timeInterval: 3,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"People"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numVillagesServed",
+        data: myData.numVillagesServed,
+        colors: ["#F79646"],
+        timeInterval: 3,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Villages"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numHealthWorkersTrainedEbola",
+        data: myData.numHealthWorkersTrainedEbola,
+        colors: ["#F79646"],
+        timeInterval: 3,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Health workers"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numFacilitiesIPC",
+        data: myData.numFacilitiesIPC,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Facilities"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numStaffLiberia",
+        data: myData.numStaffLiberia,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Staff"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_numStaffUS",
+        data: myData.numStaffUS,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Staff"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_fundsReceived",
+        data: myData.fundsReceived,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"USD"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_fundsReceivedAndCommitted",
+        data: myData.fundsReceivedAndCommitted,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"USD"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_percentOfBudgetRaised",
+        data: myData.percentOfBudgetRaised,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Percent"},
+        tickFormat: {y:"%"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_fy15Expenses",
+        data: myData.fy15Expenses,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"USD"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_fy15Spent",
+        data: myData.fy15Spent,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"Percent"},
+        tickFormat: {y:"%"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_cashOnHand",
+        data: myData.cashOnHand,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"USD"}
+    });
+
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dashboard_cashBurnRate",
+        data: myData.cashBurnRate,
+        colors: ["#F79646"],
+        timeInterval: 1,
+        size: {x:505, y:400},
+        xyVars: {x:"Month", y:"USD"}
+    });
+
+</script>
+
 <h1>Executive Dashboard <span style="font-size:60%">(updated: 3/1/2015)</span></h1>
 <hr>
 
@@ -18,14 +160,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: OFF TRACK. Project planning process underway to produce revised projections for FY15, CY15, and FY16 by April 1.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numFHWs">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numFHWs.js");
-            </script>
-        </div>
+        <div id="dashboard_numFHWs"></div>
     </div>
 </div>
 <hr>
@@ -48,14 +186,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: OFF TRACK. Project planning process underway to produce revised projections for FY15, CY15, and FY16 by April 1.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numSupervisors">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numSupervisors.js");
-            </script>
-        </div>
+        <div id="dashboard_numSupervisors"></div>
     </div>
 </div>
 <hr>
@@ -78,14 +212,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: OFF TRACK. Project planning process underway to produce revised projections for FY15, CY15, and FY16 by April 1.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numPeopleServed">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numPeopleServed.js");
-            </script>
-        </div>
+        <div id="dashboard_numPeopleServed"></div>
     </div>
 </div>
 <hr>
@@ -103,19 +233,17 @@
                 <th>Jan '15</th>
             </tr>
             <tr>
-                <td>54</td>
-                <td>54</td>
+                <td>52</td>
+                <td>52</td>
+                <!--<td>54</td>-->
+                <!--<td>54</td>-->
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: OFF TRACK. Project planning process underway to produce revised projections for FY15, CY15, and FY16 by April 1.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numVillagesServed">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numVillagesServed.js");
-            </script>
-        </div>
+        <div id="dashboard_numVillagesServed"></div>
     </div>
 </div>
 <hr>
@@ -138,14 +266,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. Target exceeded, due to larger-than-expected number of facility staff, gCHVs, and CHC members who were trained.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numHealthWorkersTrainedEbola">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numHealthWorkersTrainedEbola.js");
-            </script>
-        </div>
+        <div id="dashboard_numHealthWorkersTrainedEbola"></div>
     </div>
 </div>
 <hr>
@@ -168,14 +292,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. Target of 100% of health facilities was reached in December.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numFacilitiesIPC">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numFacilitiesIPC.js");
-            </script>
-        </div>
+        <div id="dashboard_numFacilitiesIPC"></div>
     </div>
 </div>
 <hr>
@@ -189,23 +309,17 @@
         <p><b>FY15 Target</b>: n/a</p>
         <table class='ptg_data'>
             <tr>
-                <th>Dec '14</th>
                 <th>Jan '15</th>
             </tr>
             <tr>
-                <td>XX</td>
                 <td>143</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numStaffLiberia">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numStaffLiberia.js");
-            </script>
-        </div>
+        <div id="dashboard_numStaffLiberia"></div>
     </div>
 </div>
 <hr>
@@ -228,14 +342,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_numStaffUS">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_numStaffUS.js");
-            </script>
-        </div>
+        <div id="dashboard_numStaffUS"></div>
     </div>
 </div>
 <hr>
@@ -258,14 +368,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: LMH is on track to achieve goal. In addition to the $6.5m in financing that has been received to date, approximately $1.8m in committed financing can be counted as receivables.</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. In addition to the $6.5m in financing that has been received to date, approximately $1.8m in committed financing can be counted as receivables.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_fundsReceived">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_fundsReceived.js");
-            </script>
-        </div>
+        <div id="dashboard_fundsReceived"></div>
     </div>
 </div>
 <hr>
@@ -288,14 +394,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: LMH is on track to achieve this goal. In addition to the $8.3 million funds received and committed, approximately $600,000 in highly likely philanthropy is currently pipelined.</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. In addition to the $8.3 million funds received and committed, approximately $600,000 in highly likely philanthropy is currently pipelined.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_fundsReceivedAndCommitted">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_fundsReceivedAndCommitted.js");
-            </script>
-        </div>
+        <div id="dashboard_fundsReceivedAndCommitted"></div>
     </div>
 </div>
 <hr>
@@ -318,14 +420,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: LMH is on track to achieve this goal based upon $1.8m in receivables and $600,000 in highly likely philanthropy pending.</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. LMH is on track to achieve this goal based upon $1.8m in receivables and $600,000 in highly likely philanthropy pending.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_percentOfBudgetRaised">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_percentOfBudgetRaised.js");
-            </script>
-        </div>
+        <div id="dashboard_percentOfBudgetRaised"></div>
     </div>
 </div>
 <hr>
@@ -348,14 +446,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <p><b>Progress-to-goal</b>: OFF TRACK. $2,767,124 is below budget due to deferred spending.  As part of FY16 planing - teams are reviewing and updating activities/expenses for the remainder of FY15.</p>
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_fy15Expenses">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_fy15Expenses.js");
-            </script>
-        </div>
+        <div id="dashboard_fy15Expenses"></div>
     </div>
 </div>
 <hr>
@@ -378,14 +472,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_fy15Spent">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_fy15Spent.js");
-            </script>
-        </div>
+        <div id="dashboard_fy15Spent"></div>
     </div>
 </div>
 <hr>
@@ -408,14 +498,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_cashOnHand">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_cashOnHand.js");
-            </script>
-        </div>
+        <div id="dashboard_cashOnHand"></div>
     </div>
 </div>
 <hr>
@@ -438,14 +524,10 @@
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: Narrative goes here...</p>
+        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
     </div>
     <div class="col-md-7">
-        <div id="dataportal_dashboard_cashBurnRate">
-            <script>
-                $.getScript("/LastMileData/src/js/Dimple/dataportal_dashboard_cashBurnRate.js");
-            </script>
-        </div>
+        <div id="dashboard_cashBurnRate"></div>
     </div>
 </div>
 <hr>

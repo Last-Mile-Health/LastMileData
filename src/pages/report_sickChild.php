@@ -75,7 +75,7 @@
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
                 // Parse queryString; run query; extract data (Ages 0-1)
-                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((childAge_years*12)+childAge_months) < 12;";
+                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) < 12;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
                 extract($row);
@@ -90,13 +90,13 @@
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
                 // Parse queryString; run query; extract data (Ages 1-5)
-                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((childAge_years*12)+childAge_months) >= 12 && ((childAge_years*12)+childAge_months) < 72;";
+                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) >= 12 && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) < 72;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
                 extract($row);
                 
                 // Parse into results
-                echo "<b>Children 1-4 years:</b><br>";
+                echo "<b>Children 1-5 years:</b><br>";
                 echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (malaria): <b>$refer_malaria</b><br>";
                 echo "Referred (ARI): <b>$refer_ARI</b><br>";

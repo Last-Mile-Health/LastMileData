@@ -25,6 +25,7 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/lib/d3.min.js"></script>
         <script src="/LastMileData/lib/dimple.v2.1.0.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_dimpleHelper.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
         <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
         
@@ -33,6 +34,7 @@
             
             // Fade in overview pane by default
             $('#mainContainer').load('/LastMileData/src/fragments/dataportal_overview.html',function(){
+                // These need to happen AFTER navbar loads
                 $('#mainContainer').fadeIn(1000);
                 $('#mySidebar').fadeIn(1000);
             });
@@ -45,8 +47,11 @@
                 
                 // Fade out current mainContainer
                 $('#whitespaceContainer').fadeIn(500, function(){
+                    window.scrollTo(0,0);
                     $('#mainContainer').load('/LastMileData/src/fragments/dataportal_' + newPane + '.html', function(){
-                        $('#whitespaceContainer').fadeOut(500);
+                        setTimeout(function(){
+                            $('#whitespaceContainer').fadeOut(500);
+                        },500);
                     });
                 });
 

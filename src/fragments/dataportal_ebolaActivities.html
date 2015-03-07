@@ -1,12 +1,23 @@
+<script>
+    
+    LMD_dimpleHelper.lineGraph_monthly({
+        targetDiv: "dataportal_ebolaActivities_screenAndEducate",
+        data: [ { "Month":"2014-11-01", "Activity":"Screened", "People reached":378 }, { "Month":"2014-11-01", "Activity":"Educated", "People reached":416 }, { "Month":"2014-12-01", "Activity":"Screened", "People reached":709 }, { "Month":"2014-12-01", "Activity":"Educated", "People reached":775 }, { "Month":"2015-01-01", "Activity":"Screened", "People reached":495 }, { "Month":"2015-01-01", "Activity":"Educated", "People reached":519 }, { "Month":"2015-02-01", "Activity":"Screened", "People reached":1108 }, { "Month":"2015-02-01", "Activity":"Educated", "People reached":1217 } ],
+        colors: ["#9BBB59", "#4BACC6", "#F79646", "#C0504D", "#8064A2"],
+        timeInterval: 1,
+        size: {x:590, y:380},
+        xyVars: {x:"Month", y:"People reached"},
+        multLine: "Activity",
+        legend: "right"
+    });
+
+</script>
+
 <h1>Ebola activities <span style="font-size:60%">(updated: 3/1/2015)</span></h1>
 <hr>
 
 <h3>Screening and education (Konobo)</h3>
-<div id="dataportal_ebolaActivities_screenAndEducate">
-    <script>
-        $.getScript("/LastMileData/src/js/Dimple/dataportal_ebolaActivities_screenAndEducate.js");
-    </script>
-</div>
+<div id="dataportal_ebolaActivities_screenAndEducate"></div>
 <hr>
 
 <h3>Ebola health worker trainings</h3>

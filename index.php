@@ -57,7 +57,7 @@
     <div class="container">
         <div class="jumbotron">
             <h1>Last Mile Data</h1>
-            <p><i>Last Mile Data</i> is the new centralized database platform for Last Mile Health. It can be used by all staff (development, communications, programs, etc) to access up-to-date data and information about our programs (as well as assorted M&E team documents), and will be used by our M&E staff to enter and quality-check data. It is currently an internal site, but in the future, it can potentially be used to share data and information with external partners.</p>
+            <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It can be used by all staff across teams to access up-to-date data and information about our programs, as well as access critical M&E team documents. It is used by our M&E team to enter, aggregate, and quality-check data from both paper forms and mobile health forms.</p>
             <p><a href="#" class="btn btn-success btn-lg" data-toggle="modal" data-target="#loginModal">Login</a></p>
             <?php
                 if ( isset($_GET['retry']) ) {
