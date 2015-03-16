@@ -37,7 +37,7 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-success btn-lg btn-block">Sign In</button>
-                                <span>Please email <a href="mailto:avi@lastmilehealth.org?subject=Access to LastMileData.org">Avi Kenny</a> to request access to this site.</span>
+                                <span>Please email <a href="mailto:LMD@lastmilehealth.org?subject=Access to LastMileData.org">LMD@lastmilehealth.org</a> to request access to this site.</span>
                             </div>
                         </form>
                     </div>

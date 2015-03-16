@@ -1,146 +1,150 @@
-<script src="/LastMileData/src/js/data_execDashboard.js"></script>
 <script>
+    
+    // Asynchronously load data, then generate charts
+    $.getScript("/LastMileData/src/js/data_execDashboard.js", function(){
+        
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numFHWs",
+            data: myData.numFHWs,
+            colors: ["#F79646"],
+            timeInterval: 3,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"FHWs"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numFHWs",
-        data: myData.numFHWs,
-        colors: ["#F79646"],
-        timeInterval: 3,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"FHWs"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numSupervisors",
+            data: myData.numSupervisors,
+            colors: ["#F79646"],
+            timeInterval: 3,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Supervisors"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numSupervisors",
-        data: myData.numSupervisors,
-        colors: ["#F79646"],
-        timeInterval: 3,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Supervisors"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numPeopleServed",
+            data: myData.numPeopleServed,
+            colors: ["#F79646"],
+            timeInterval: 3,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"People"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numPeopleServed",
-        data: myData.numPeopleServed,
-        colors: ["#F79646"],
-        timeInterval: 3,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"People"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numVillagesServed",
+            data: myData.numVillagesServed,
+            colors: ["#F79646"],
+            timeInterval: 3,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Villages"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numVillagesServed",
-        data: myData.numVillagesServed,
-        colors: ["#F79646"],
-        timeInterval: 3,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Villages"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numHealthWorkersTrainedEbola",
+            data: myData.numHealthWorkersTrainedEbola,
+            colors: ["#F79646"],
+            timeInterval: 3,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Health workers"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numHealthWorkersTrainedEbola",
-        data: myData.numHealthWorkersTrainedEbola,
-        colors: ["#F79646"],
-        timeInterval: 3,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Health workers"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numFacilitiesIPC",
+            data: myData.numFacilitiesIPC,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Facilities"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numFacilitiesIPC",
-        data: myData.numFacilitiesIPC,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Facilities"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numStaffLiberia",
+            data: myData.numStaffLiberia,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Staff"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numStaffLiberia",
-        data: myData.numStaffLiberia,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Staff"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_numStaffUS",
+            data: myData.numStaffUS,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Staff"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_numStaffUS",
-        data: myData.numStaffUS,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Staff"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_fundsReceived",
+            data: myData.fundsReceived,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"USD"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_fundsReceived",
-        data: myData.fundsReceived,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"USD"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_fundsReceivedAndCommitted",
+            data: myData.fundsReceivedAndCommitted,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"USD"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_fundsReceivedAndCommitted",
-        data: myData.fundsReceivedAndCommitted,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"USD"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_percentOfBudgetRaised",
+            data: myData.percentOfBudgetRaised,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Percent"},
+            tickFormat: {y:"%"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_percentOfBudgetRaised",
-        data: myData.percentOfBudgetRaised,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Percent"},
-        tickFormat: {y:"%"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_fy15Expenses",
+            data: myData.fy15Expenses,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"USD"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_fy15Expenses",
-        data: myData.fy15Expenses,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"USD"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_fy15Spent",
+            data: myData.fy15Spent,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"Percent"},
+            tickFormat: {y:"%"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_fy15Spent",
-        data: myData.fy15Spent,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"Percent"},
-        tickFormat: {y:"%"}
-    });
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_cashOnHand",
+            data: myData.cashOnHand,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"USD"}
+        });
 
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_cashOnHand",
-        data: myData.cashOnHand,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"USD"}
-    });
-
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dashboard_cashBurnRate",
-        data: myData.cashBurnRate,
-        colors: ["#F79646"],
-        timeInterval: 1,
-        size: {x:505, y:400},
-        xyVars: {x:"Month", y:"USD"}
+        LMD_dimpleHelper.lineGraph_monthly({
+            targetDiv: "dashboard_cashBurnRate",
+            data: myData.cashBurnRate,
+            colors: ["#F79646"],
+            timeInterval: 1,
+            size: {x:505, y:400},
+            xyVars: {x:"Month", y:"USD"}
+        });
+        
     });
 
 </script>
 
-<h1>Executive Dashboard <span style="font-size:60%">(updated: 3/1/2015)</span></h1>
+<h1>Executive Dashboard <span style="font-size:60%">(updated: 3/12/2015)</span></h1>
 <hr>
 
 <!-- START: Dashboard row 1 -->
@@ -153,8 +157,10 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
+                <td>55</td>
                 <td>55</td>
                 <td>55</td>
             </tr>
@@ -179,8 +185,10 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
+                <td>5</td>
                 <td>5</td>
                 <td>5</td>
             </tr>
@@ -205,10 +213,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>14,217</td>
                 <td>14,298</td>
+                <td>14,397</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -231,8 +241,10 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
+                <td>52</td>
                 <td>52</td>
                 <td>52</td>
                 <!--<td>54</td>-->
@@ -259,10 +271,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>577</td>
                 <td>734</td>
+                <td>1,307</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -285,8 +299,10 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
+                <td>36</td>
                 <td>36</td>
                 <td>36</td>
             </tr>
@@ -310,9 +326,11 @@
         <table class='ptg_data'>
             <tr>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>143</td>
+                <td>149</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -335,9 +353,11 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>12</td>
+                <td>13</td>
                 <td>13</td>
             </tr>
         </table>
@@ -361,10 +381,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>$5,929,485</td>
                 <td>$6,529,994</td>
+                <td>$7,424,971</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -387,10 +409,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>$7,916,371</td>
                 <td>$8,359,411</td>
+                <td>$8,561,521</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -413,10 +437,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>85%</td>
                 <td>94%</td>
+                <td>100%</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -439,10 +465,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>$2,010,935</td>
                 <td>$2,767,124</td>
+                <td>$3,268,932</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -465,10 +493,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>29%</td>
                 <td>40%</td>
+                <td>49%</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -491,10 +521,12 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Feb '15</th>
             </tr>
             <tr>
                 <td>$4,305,484</td>
                 <td>$4,623,701</td>
+                <td>$4,791,627</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -513,6 +545,7 @@
         <h3><b>15</b>. Cash burn rate</h3>
         <p><b>Definition</b>: Average monthly cash spent</p>
         <p><b>FY15 Target</b>: n/a</p>
+        <p style="color:maroon">(updated quarterly)</p>
         <table class='ptg_data'>
             <tr>
                 <th>Dec '14</th>
