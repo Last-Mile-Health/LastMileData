@@ -194,7 +194,7 @@ $(document).ready(function(){
         var myInput = document.getElementById('modal_uploadODK_fileInput');
         
         // Check for errors (no file, wrong extension, corrupt file)
-        if (myInput === "") {
+        if (myInput.files.length === 0) {
             // Error #1: No file was selected
             $('#modal_uploadODK_error').text('No file was selected.');
             anyErrors = true;
@@ -343,7 +343,7 @@ $(document).ready(function(){
     });
     
     
-    // QA (TEST FORM)
+    // QA Click handlers
     $('#qa_TST').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/0_testDE.html",
@@ -355,9 +355,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Registration)
     $('#qa_REG_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_reg02_registration.html",
@@ -366,12 +363,9 @@ $(document).ready(function(){
             pKey1_label: "First Member ID"
         });
     });
-    
-    
-    // QA (FHW: KPI Assessment)
     $('#qa_KPI_02').click(function() {
         launchQAModal({
-            targetForm: "/LastMileData/src/forms/fhw_kpi02_kpiassessment.html",
+            targetForm: "/LastMileData/src/forms_old/fhw_kpi02_kpiassessment.html",
             qaFormName: "FHW: KPI Assessment",
             pKey1_name: "memberID",
             pKey2_name: "visitDate",
@@ -380,17 +374,22 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Referral)
+    $('#qa_KPI_02').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_kpi03_kpiassessment.html",
+            qaFormName: "FHW: KPI Assessment",
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Woman member ID",
+            pKey2_label: "Visit date",
+            pKey_date: "pKey2"
+        });
+    });
     $('#qa_REF_02').click(function() {
         launchQAModal({
             // !!!!!
         });
     });
-    
-    
-    // QA (FHW: Big Belly (initial))
     $('#qa_BBI_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html",
@@ -402,9 +401,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Big Belly (follow-up))
     $('#qa_BBF_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html",
@@ -416,9 +412,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Postnatal (initial))
     $('#qa_PNI_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_pni02_postnatalinitial.html",
@@ -426,9 +419,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (FHW: Postnatal (follow-up))
     $('#qa_PNF_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html",
@@ -436,9 +426,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (FHW: Births, Deaths, Movements)
     $('#qa_BDM_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_bdm02_movements.html",
@@ -450,9 +437,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Sick Child)
     $('#qa_SCH_03').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_sch03_sickchild.html",
@@ -464,9 +448,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Ebola Case Management)
     $('#qa_ECM_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html",
@@ -474,9 +455,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (FHW: Ebola Contact Tracing)
     $('#qa_ECT_01').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_ect01_ebolacontacttracing.html",
@@ -484,9 +462,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (FHW: Ebola Education + Screening Ledger)
     $('#qa_EES_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms_old/fhw_ees02_ebolaeducationscreening.html",
@@ -498,9 +473,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (archive) (FHW: Ebola Education + Screening Ledger)
     $('#qa_EES_03').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_ees03_ebolaeducationscreening.html",
@@ -512,9 +484,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Malaria Assessment Tool)
     $('#qa_MAT_01').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_mat01_malariaassessment.html",
@@ -526,9 +495,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (FHW: Sickness Screening Tool)
     $('#qa_SST_05').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html",
@@ -540,9 +506,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (archive) (FHW: Ebola Screening Tool)
     $('#qa_ESC_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_esc02_ebolascreening.html",
@@ -550,9 +513,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (archive) (FHW: Ebola Screening Tool)
     $('#qa_ESC_03').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_esc03_ebolascreening.html",
@@ -560,9 +520,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (Program: Training Ledger)
     $('#qa_TRL_01').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms_old/prg_trl01_trainingledger.html",
@@ -576,9 +533,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (Program: Training Ledger)
     $('#qa_TRL_02').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/prg_trl02_trainingledger.html",
@@ -592,9 +546,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
-    
-    // QA (Facility: IPC MESH Tool)
     $('#qa_MSH_01').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fac_msh01_mesh.html",
@@ -602,9 +553,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (archive) (FHW: Sickness Screening Tool)
     $('#qa_SST_04').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/fhw_sst04_ebolascreening.html",
@@ -612,9 +560,6 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
-    
-    // QA (Program: gCHV Questionnaire)
     $('#qa_CHV_01').click(function() {
         launchQAModal({
             targetForm: "/LastMileData/src/forms/prg_chv01_gchvquestionnaire.html",

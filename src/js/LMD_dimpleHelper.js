@@ -4,7 +4,7 @@ var LMD_dimpleHelper = (function(){
     // !!!!! 3. Connect to MySQL (multi-series graph) !!!!!
 
 
-    // Monthly single line graph
+    // Monthly line graph
     var lineGraph_monthly = function(params){
 
         // Create new dimple SVG; set data; create new chart object
@@ -51,7 +51,8 @@ var LMD_dimpleHelper = (function(){
 
     // Description
     return {
-        lineGraph_monthly: lineGraph_monthly
+        lineGraph_monthly: lineGraph_monthly,
+//        pieGraph_monthly: pieGraph_monthly
     }
 
 })();

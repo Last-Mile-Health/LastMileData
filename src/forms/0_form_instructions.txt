@@ -24,9 +24,9 @@ A. STEPS FOR CREATING A NEW FORM:
 
 B. STEPS FOR UPDATING A FORM:
 
-    1) Make changes to a form
-    2) Update the MySQL table accordingly
-    3) Make a copy of the form and place it into the "forms_old" folder.
+    1) Make a copy of the form and place it into the "forms_old" folder.
+    2) Make changes to the form
+    3) Update the MySQL table accordingly
     4) Increment the version number in the filename
         - e.g. fhw_sch03_sickchild.html --> fhw_sch04_sickchild.html
     5) Increment the version number in the <title> element and in the "M&E Box" (<div class="meBox">)

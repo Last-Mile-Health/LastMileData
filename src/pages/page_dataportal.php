@@ -196,10 +196,10 @@
                     <ul class="nav nav-sidebar">
                         <li id="li_overview" class="active"><a>Overview</a></li>
                         <li id="li_execDashboard"><a>Executive dashboard</a></li>
-                        <li id="li_treatment"><a>Treatment</a></li>
                         <li id="li_ebolaActivities"><a>Ebola activities</a></li>
                         <li id="li_fhwTraining"><a>FHW training</a></li>
                         <li id="li_liberiaPopulation"><a>Liberia population</a></li>
+                        <li id="li_konobo"><a>Konobo monthly report</a></li>
                     </ul>
                 </div>
                 

@@ -1,6 +1,6 @@
 <?php
 
-// Set DB connection strings (!!!!! figure out how to set iunclude path with CRON !!!!!)
+// Set DB connection strings (!!!!! figure out how to set include path with CRON !!!!!)
 $user = "lastmile_admin";
 $password = "LastMile14";
 $host = "localhost";
