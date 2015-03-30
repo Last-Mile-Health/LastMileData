@@ -33,8 +33,9 @@
         $(document).ready(function(){
             
             // Fade in overview pane by default
-            $('#mainContainer').load('/LastMileData/src/fragments/dataportal_overview.html',function(){
+            $('#mainContainer').load('/LastMileData/src/fragments/dataportal_overview.php',function(){
                 // These need to happen AFTER navbar loads
+                $('#dashboard_iframe').hide();
                 $('#mainContainer').fadeIn(1000);
                 $('#mySidebar').fadeIn(1000);
             });
@@ -42,19 +43,45 @@
             // Handle sidebar clicks
             $('.sidebar ul li').click(function(){
                 
-                // Get newPane
-                var newPane = $(this).attr('id').substring(3);
-                
-                // Fade out current mainContainer
-                $('#whitespaceContainer').fadeIn(500, function(){
-                    window.scrollTo(0,0);
-                    $('#mainContainer').load('/LastMileData/src/fragments/dataportal_' + newPane + '.html', function(){
-                        setTimeout(function(){
-                            $('#whitespaceContainer').fadeOut(500);
-                        },500);
-                    });
-                });
+                // Handle fragment loads
+                if ($(this).hasClass('dp_frag')) {
+                    
+                    // Get newPane
+                    var newPane = $(this).attr('id').substring(3);
 
+                    // Fade out current mainContainer
+                    $('#whitespaceContainer').fadeIn(500, function(){
+                        window.scrollTo(0,0);
+                        $('#dashboard_iframe').hide();
+                        $('#mainContainer').show();
+                        $('#mainContainer').load('/LastMileData/src/fragments/dataportal_' + newPane + '.php', function(){
+                            setTimeout(function(){
+                                $('#whitespaceContainer').fadeOut(500);
+                            },500);
+                        });
+                    });
+
+                // Handle iframe loads
+                } else if ($(this).hasClass('dp_iframe')) {
+                    
+                    // Get link URL
+                    var myLink = $(this).attr('data-link');
+                    
+                    // Fade out current mainContainer
+                    $('#whitespaceContainer').fadeIn(500, function(){
+                        window.scrollTo(0,0);
+                        $('#mainContainer').hide();
+                        $('#dashboard_iframe').show();
+                        $('#dashboard_iframe').prop('src',myLink);
+                        
+                        // Wait until iframe is loaded
+//                        setTimeout(function(){
+//                            $('#whitespaceContainer').fadeOut(500);
+//                        },500);
+                    });
+                    
+                }
+                
                 // Switch active sidebar element
                 $('.nav-sidebar li').each(function(){
                     $(this).removeClass('active');
@@ -63,6 +90,11 @@
 
             });
             
+            // Fade out whitespaceContainer when iFrame is done loading
+            document.getElementById("dashboard_iframe").onload = function() {
+                $('#whitespaceContainer').fadeOut(500);
+            };
+
         });
         </script>
         
@@ -194,17 +226,27 @@
                 <!-- Sidebar -->
                 <div id="mySidebar" class="sidebar" style="display:none">
                     <ul class="nav nav-sidebar">
-                        <li id="li_overview" class="active"><a>Overview</a></li>
-                        <li id="li_execDashboard"><a>Executive dashboard</a></li>
-                        <li id="li_ebolaActivities"><a>Ebola activities</a></li>
-                        <li id="li_fhwTraining"><a>FHW training</a></li>
-                        <li id="li_liberiaPopulation"><a>Liberia population</a></li>
-                        <li id="li_konobo"><a>Konobo monthly report</a></li>
+                        <!--
+                            1) List items with class="dp_frag" ID "li_fragmentName" correspond to document fragments in "/src/fragments/dataportal_fragmentName.html"
+                            2) List items with class="dp_iframe" loads link page into iframe
+                        -->
+                        <li class="dp_frag active" id="li_overview"><a>Overview</a></li>
+                        <li class="dp_frag" id="li_execDashboard"><a>Executive dashboard</a></li>
+                        <li class="dp_frag" id="li_ebolaActivities"><a>Ebola activities</a></li>
+                        <li class="dp_frag" id="li_fhwTraining"><a>FHW training</a></li>
+                        <li class="dp_frag" id="li_liberiaPopulation"><a>Liberia population</a></li>
+                        <li class="dp_frag" id="li_konobo"><a>Konobo monthly report</a></li>
+                        <li class="dp_iframe" data-link="/LastMileData/src/pages/report_ebola.php"><a>iframe test 1 (ebola)</a></li>
+                        <li class="dp_iframe" data-link="/LastMileData/src/pages/report_sickChild.php"><a>iframe test 2 (sick child)</a></li>
+                        <li class="dp_iframe" data-link="http://www.bbc.com"><a>iframe test 3 (BBC)</a></li>
                     </ul>
                 </div>
                 
                 <!-- Main container -->
-                <div id="mainContainer" class="pane col-md-10"></div>
+                <div class="pane col-md-10">
+                    <div id="mainContainer"></div>
+                    <iframe id="dashboard_iframe" style="border:none; position:relative; top:20px; height:3000px; width:100%" name="dashboard_iframe"></iframe>
+                </div>
                 
                 <!-- Whitespace container for fade in/out effects -->
                 <div id="whitespaceContainer" class="pane col-md-10"><br>

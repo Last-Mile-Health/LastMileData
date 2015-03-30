@@ -4,8 +4,8 @@
 $host = "localhost"; $user = "lastmile_admin"; $password = "LastMile14"; $db = "lastmile_db";
 
 // Set connection variable
-// !!!!! Handle errors differently (test for no DB access); set warnings off !!!!!
+// !!!!! Need to gracefully handle errors (e.g. test for no DB access); set warnings off !!!!!
 // !!!!! Need global configuration file !!!!!
-$cxn = mysqli_connect($host,$user,$password,$db) or die("Error " . mysqli_error($cxn));
+$cxn = mysqli_connect($host,$user,$password,$db) or die("Error");
 
 ?>

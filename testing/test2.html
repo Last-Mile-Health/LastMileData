@@ -27,9 +27,8 @@
         
         <script>
         $(document).ready(function(){
-            $("div[data-test]").each(function() {
-                $(this).css('color','red');
-            });
+            var myObj = [{"0":"2014-11-01","month":"2014-11-01","1":"378","ebola_screened":"378","2":"416","ebola_educated":"416","3":"Ebola Screening","Activity":"Ebola Screening"}, {"0":"2014-12-01","month":"2014-12-01","1":"709","ebola_screened":"709","2":"775","ebola_educated":"775","3":"Ebola Screening","Activity":"Ebola Screening"}, {"0":"2015-01-01","month":"2015-01-01","1":"495","ebola_screened":"495","2":"519","ebola_educated":"519","3":"Ebola Screening","Activity":"Ebola Screening"}, {"0":"2015-02-01","month":"2015-02-01","1":"1871","ebola_screened":"1871","2":"2053","ebola_educated":"2053","3":"Ebola Screening","Activity":"Ebola Screening"}];
+            console.log(myObj);
         });
         </script>
         
@@ -56,7 +55,13 @@
 </style>
 <p>Everything contained within this div is editable in browsers that support <code>HTML5</code>. Go on, give it a try: click it and start typing.</p>
 </div>            
-            <div data-test="yes">Three</div>
+            <div data-test="yes">
+                <a href="navbar.html" target="myFrame">Click me</a> Three
+                <a href="DCT2.html" target="myFrame">Click me</a> Four
+            </div>
+            <div style="text-align:center">
+                <!--<iframe name="myFrame" style="width:90%; height:300px" src="http://www.google.com"></iframe>-->
+            </div>
         </div>
         
     </body>

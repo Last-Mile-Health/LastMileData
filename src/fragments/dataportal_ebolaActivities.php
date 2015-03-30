@@ -1,13 +1,20 @@
+<?php
+    // Set include path, set require file, define query string
+    set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
+    require_once("dataPortal.php");
+?>
+
 <script>
     
     LMD_dimpleHelper.lineGraph_monthly({
         targetDiv: "dataportal_ebolaActivities_screenAndEducate",
-        data: [ { "Month":"2014-11-01", "Activity":"Screened", "People reached":378 }, { "Month":"2014-11-01", "Activity":"Educated", "People reached":416 }, { "Month":"2014-12-01", "Activity":"Screened", "People reached":709 }, { "Month":"2014-12-01", "Activity":"Educated", "People reached":775 }, { "Month":"2015-01-01", "Activity":"Screened", "People reached":495 }, { "Month":"2015-01-01", "Activity":"Educated", "People reached":519 }, { "Month":"2015-02-01", "Activity":"Screened", "People reached":1871 }, { "Month":"2015-02-01", "Activity":"Educated", "People reached":2053 } ],
+        data: JSON.parse(<?php echoJSON2($cxn, "test_mart", "month", ["ebola_screened","ebola_educated"],["Screened","Educated"]); ?>),
         colors: ["#9BBB59", "#4BACC6", "#F79646", "#C0504D", "#8064A2"],
         timeInterval: 1,
         size: {x:590, y:380},
-        xyVars: {x:"Month", y:"People reached"},
-        multLine: "Activity",
+        xyVars: {x:"Month", y:"Value"}, // !!!!! potentially refactor standard names into LMD_dimpleHelper !!!!!
+        axisTitles: {x:"Month", y:"People reached"},
+        multLine: "Split", // !!!!! potentially refactor standard names into LMD_dimpleHelper !!!!!
         legend: "right"
     });
 

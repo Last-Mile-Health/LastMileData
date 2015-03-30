@@ -1,9 +1,5 @@
 var LMD_dimpleHelper = (function(){
 
-    // !!!!! 2. Connect to MySQL (single-series graph) !!!!!
-    // !!!!! 3. Connect to MySQL (multi-series graph) !!!!!
-
-
     // Monthly line graph
     var lineGraph_monthly = function(params){
 

@@ -33,9 +33,10 @@
             .R3 { width: 1.2in }
             .C4 { width: 3.0in }
             
-            .meBox { position:relative; top:15px; }
+            .meBox { position:relative; top:175px; }
             
             /* use CSS child selectors so that these styles don't hit the last column */
+            .vaccTable { margin: 10px; }
             .vaccTable th { border: 1px solid black; text-align:center; font-weight:bold; }
             .vaccTable td { border: 1px solid black; padding-left:3px; padding-right:5px; padding-top:1px; padding-bottom:1px; }
             .vaccTable input { border:none; }
@@ -109,37 +110,45 @@
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    1. You ever get belly within the past five years?
+                    1. From five years up to now, you ever born a child?
                 </div>
                 <div class="inner_C C1">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v1_no_bellyInLastFiveYears">No ----------------------------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v1_yes_bellyInLastFiveYears">Yes</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v1_no_gaveBirthLastFiveYears">No ----------------------------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v1_yes_gaveBirthLastFiveYears">Yes</div>
                 </div>
                 <div class="inner_R R1">
-                    <div class="caOption">Skip to # 4</div>
+                    <div class="caOption">Skip to section B</div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    2. During your last belly, how many times a doctor or nurse check you to see how you are coming on?
+                    2. When was your last birth?
                 </div>
                 <div class="inner_C C1">
-                    <div class="textOption"><input class="stored integer" name="v2_numCheckups" style="width:1in"> --------------------------------------</div>
-                </div>
-                <div class="inner_R R1">
-                    <div class="caOption">If zero times, skip to # 4</div>
+                    <div class="textOption"><input class="stored integer" name="v2_lastBirth_month" style="width:1in"> (mth)</div>
+                    <div class="textOption"><input class="stored integer" name="v2_lastBirth_year" style="width:1in"> (year)</div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    3. How many times you go to the big belly clinic?
+                    3. During your last belly, how many times you go to the clinic for a doctor or nurse to check on you?
                 </div>
                 <div class="inner_C C1">
-                    <div class="textOption"><input class="stored integer" name="v3_numBigBellyClinic" style="width:1in"></div>
+                    <div class="textOption"><input class="stored integer" name="v3_numANC_clinic" style="width:1in"></div>
+                </div>
+                <div style="clear:both"></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L L1">
+                    4. During your last belly, how many times a doctor or nurse check on you in your own town here?
+                </div>
+                <div class="inner_C C1">
+                    <div class="textOption"><input class="stored integer" name="v4_numANC_home" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div>
                 
@@ -162,11 +171,11 @@
                     <!-- Table header -->
                     <tr style='font-size:12px'>
                         <th></th>
-                        <th style='width:145px'>4. What is the name of your (first/next) child?</th>
-                        <th style='width:145px'>5. In what month and year was [NAME] born?</th>
-                        <th style='width:100px'>6. Was [NAME] born in a clinic?</th>
-                        <th style='width:100px'>7. Is [NAME] still living?</th>
-                        <th style='width:150px'>8. How old was [NAME] when he/she died?</th>
+                        <th style='width:145px'>5. What is the name of your (first/next) child?</th>
+                        <th style='width:145px'>6. In what month and year was [NAME] born?</th>
+                        <th style='width:100px'>7. Was [NAME] born in a clinic?</th>
+                        <th style='width:100px'>8. Is [NAME] still living?</th>
+                        <th style='width:150px'>9. How old was [NAME] when he/she died?</th>
                     </tr>
                     
                     
@@ -174,27 +183,27 @@
                     <!-- Row 1 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>1</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_1'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_1'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_1'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_1'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_1'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_1'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_1'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_1'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_1'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_1'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_1'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_1'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_1'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_1'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_1'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_1'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_1'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_1'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_1'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_1'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_1'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_1'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -202,27 +211,27 @@
                     <!-- Row 2 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>2</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_2'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_2'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_2'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_2'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_2'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_2'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_2'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_2'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_2'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_2'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_2'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_2'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_2'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_2'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_2'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_2'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_2'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_2'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_2'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_2'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_2'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_2'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -230,27 +239,27 @@
                     <!-- Row 3 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>3</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_3'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_3'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_3'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_3'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_3'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_3'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_3'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_3'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_3'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_3'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_3'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_3'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_3'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_3'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_3'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_3'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_3'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_3'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_3'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_3'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_3'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_3'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -258,27 +267,27 @@
                     <!-- Row 4 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>4</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_4'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_4'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_4'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_4'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_4'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_4'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_4'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_4'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_4'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_4'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_4'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_4'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_4'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_4'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_4'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_4'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_4'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_4'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_4'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_4'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_4'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_4'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -286,27 +295,27 @@
                     <!-- Row 5 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>5</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_5'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_5'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_5'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_5'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_5'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_5'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_5'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_5'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_5'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_5'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_5'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_5'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_5'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_5'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_5'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_5'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_5'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_5'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_5'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_5'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_5'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_5'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -314,88 +323,32 @@
                     <!-- Row 6 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>6</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_6'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_6'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_6'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_6'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_6'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_6'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_6'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_6'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_6'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_6'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_6'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_6'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_6'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_6'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_6'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_6'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_6'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_6'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_6'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_6'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_6'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_6'>Days</div>
                             </div>
                         </td>
                     </tr>
                     
-                    <!-- Row 7 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>7</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_7'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_7'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_7'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_7'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_7'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_7'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_7'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_7'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_7'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_7'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_7'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 8 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>8</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_8'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_8'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_8'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_8'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_8'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_8'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_8'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_8'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_8'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_8'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_8'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                </table><br>
+                </table><br><br><br><br>
                 <!-- CONTINUE: MORTALITY TABLE -->
                 
                 
@@ -433,30 +386,86 @@
                         <th style='width:150px'></th>
                     </tr>
                     
-                    <!-- Row 9 of 20 -->
+                    <!-- Row 7 of 20 -->
                     <tr>
-                        <td class='cmTable-rownum'>9</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_9'></td>
+                        <td class='cmTable-rownum'>7</td>
+                        <td><input class='stored cmTable-20' name='v5_childName_7'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_9'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_9'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_7'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_7'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_9'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_9'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_7'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_7'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_9'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_9'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_7'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_7'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_9'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_7'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_9'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_9'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_9'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_7'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_7'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_7'>Days</div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 8 of 20 -->
+                    <tr>
+                        <td class='cmTable-rownum'>8</td>
+                        <td><input class='stored cmTable-20' name='v5_childName_8'></td>
+                        <td class='left'>
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_8'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_8'> (year)
+                        </td>
+                        <td class='left'>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_8'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_8'>No</div>
+                        </td>
+                        <td class='left'>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_8'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_8'>No</div>
+                        </td>
+                        <td class='left'>
+                            <div class='cmTable-23-container-1'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_8'>
+                            </div>
+                            <div class='cmTable-23-container-2'>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_8'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_8'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_8'>Days</div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Row 9 of 20 -->
+                    <tr>
+                        <td class='cmTable-rownum'>9</td>
+                        <td><input class='stored cmTable-20' name='v5_childName_9'></td>
+                        <td class='left'>
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_9'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_9'> (year)
+                        </td>
+                        <td class='left'>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_9'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_9'>No</div>
+                        </td>
+                        <td class='left'>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_9'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_9'>No</div>
+                        </td>
+                        <td class='left'>
+                            <div class='cmTable-23-container-1'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_9'>
+                            </div>
+                            <div class='cmTable-23-container-2'>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_9'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_9'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_9'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -464,27 +473,27 @@
                     <!-- Row 10 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>10</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_10'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_10'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_10'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_10'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_10'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_10'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_10'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_10'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_10'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_10'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_10'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_10'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_10'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_10'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_10'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_10'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_10'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_10'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_10'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_10'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_10'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_10'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -492,27 +501,27 @@
                     <!-- Row 11 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>11</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_11'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_11'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_11'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_11'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_11'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_11'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_11'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_11'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_11'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_11'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_11'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_11'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_11'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_11'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_11'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_11'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_11'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_11'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_11'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_11'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_11'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_11'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -520,27 +529,27 @@
                     <!-- Row 12 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>12</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_12'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_12'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_12'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_12'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_12'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_12'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_12'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_12'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_12'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_12'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_12'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_12'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_12'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_12'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_12'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_12'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_12'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_12'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_12'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_12'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_12'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_12'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -548,27 +557,27 @@
                     <!-- Row 13 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>13</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_13'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_13'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_13'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_13'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_13'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_13'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_13'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_13'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_13'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_13'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_13'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_13'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_13'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_13'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_13'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_13'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_13'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_13'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_13'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_13'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_13'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_13'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -576,27 +585,27 @@
                     <!-- Row 14 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>14</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_14'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_14'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_14'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_14'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_14'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_14'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_14'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_14'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_14'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_14'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_14'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_14'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_14'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_14'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_14'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_14'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_14'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_14'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_14'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_14'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_14'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_14'>Days</div>
                             </div>
                         </td>
                     </tr>
@@ -604,172 +613,32 @@
                     <!-- Row 15 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>15</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_15'></td>
+                        <td><input class='stored cmTable-20' name='v5_childName_15'></td>
                         <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_15'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_15'> (year)
+                            <input class='stored integer cmTable-21' name='v6_birthMonth_15'> (mth)
+                            <input class='stored integer cmTable-21' name='v6_birthYear_15'> (year)
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_15'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_15'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_yes_15'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_bornInClinic_no_15'>No</div>
                         </td>
                         <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_15'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_15'>No</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_yes_15'>Yes</div>
+                            <div class='checkOption'><input type='checkbox' class='stored' name='v8_stillLiving_no_15'>No</div>
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_15'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_15'>
                             </div>
                             <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_15'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_15'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_15'>Days</div>
+                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_15'>Years</div>
+                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v9_ageAtDeath_months_15'>Months</div>
+                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v9_ageAtDeath_days_15'>Days</div>
                             </div>
                         </td>
                     </tr>
                     
-                    <!-- Row 16 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>16</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_16'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_16'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_16'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_16'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_16'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_16'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_16'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_16'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_16'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_16'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_16'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 17 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>17</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_17'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_17'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_17'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_17'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_17'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_17'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_17'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_17'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_17'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_17'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_17'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 18 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>18</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_18'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_18'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_18'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_18'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_18'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_18'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_18'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_18'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_18'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_18'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_18'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 19 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>19</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_19'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_19'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_19'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_19'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_19'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_19'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_19'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_19'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_19'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_19'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_19'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Row 20 of 20 -->
-                    <tr>
-                        <td class='cmTable-rownum'>20</td>
-                        <td><input class='stored cmTable-20' name='v4_childName_20'></td>
-                        <td class='left'>
-                            <input class='stored integer cmTable-21' name='v5_birthMonth_20'> (mth)
-                            <input class='stored integer cmTable-21' name='v5_birthYear_20'> (year)
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_yes_20'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v6_bornInClinic_no_20'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_yes_20'>Yes</div>
-                            <div class='checkOption'><input type='checkbox' class='stored' name='v7_stillLiving_no_20'>No</div>
-                        </td>
-                        <td class='left'>
-                            <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v8_ageAtDeath_num_20'>
-                            </div>
-                            <div class='cmTable-23-container-2'>
-                                <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v8_ageAtDeath_years_20'>Years</div>
-                                <div class='cmTable-mths'><input type='checkbox' class='stored' name='v8_ageAtDeath_months_20'>Months</div>
-                                <div class='cmTable-days'><input type='checkbox' class='stored' name='v8_ageAtDeath_days_20'>Days</div>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                </table><br>
+                </table>
                 <!-- END: MORTALITY TABLE -->
                 
                     
@@ -783,7 +652,7 @@
         <!-- END: PAGE 2 -->
         
         
-                    
+        
         <!-- START: PAGE 3 -->
         <div class="page">
             
@@ -794,40 +663,26 @@
             <div class="thickBox">
                 
                 <!-- Instruction lines -->
-                <div><b>Ask these questions for each living child between 0 - 23 months that the woman has born.</b></div>
+                <div><b>Ask questions 10a - 12a if the woman has a living child between 0 - 23 months that she born herself.</b></div>
                 <hr>
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    9a. Write down the child's name.
+                    10a. Write down the child's name.
                 </div>
                 <div class="inner_C C1">
-                    <div class="textOption"><input class="stored" name="v9_childName_a"></div>
+                    <div class="textOption"><input class="stored" name="v10_childName_a"></div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    10a. You get vaccine card for (NAME)?
+                    11a. You get vaccine card for (NAME)?
                 </div>
                 <div class="inner_C C1">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v10_hasVaccineCard_no_a">No -------------------------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v10_hasVaccineCard_yes_a">Yes</div>
-                </div>
-                <div class="inner_R R1">
-                    <div class="caOption">Skip to # 15a</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L1">
-                    11a. I can please see it?
-                </div>
-                <div class="inner_C C1">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_canFindVaccineCard_no_a">No / can't find card -------------------------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_canFindVaccineCard_yes_a">Yes</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_no_a">No / can't find card -------------------------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_yes_a">Yes</div>
                 </div>
                 <div class="inner_R R1">
                     <div class="caOption">Skip to # 15a</div>
@@ -841,7 +696,8 @@
                 </div>
                 <div style="clear:both"></div>
                 <div style="font-size:12px">
-                    <table class='vaccTable'>   <!-- !!!!! redo style for this table -->
+                    
+                    <table class='vaccTable'>
                         <tr>
                             <td style="font-weight:bold">Vaccine:</td>
                             <td>BCG</td>
@@ -913,202 +769,100 @@
                         </tr>
                     </table>
                     
+                    <table class='vaccTable'>
+                        <tr>
+                            <td style="font-weight:bold">Vaccine:</td>
+                            <td>Rota 1</td>
+                            <td>Rota 2</td>
+                            <td>Rota 3</td>
+                            <td>Pneumo 1</td>
+                            <td>Pneumo 2</td>
+                            <td>Pneumo 3</td>
+                            <td>IPV 1</td>
+                            <td>IPV 2</td>
+                            <td>IPV 3</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Received?&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_no_a">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Date:</td>
+                            <td><input class="stored datepicker" name="v12_card_rota1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota3_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo3_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv3_date_a" style="width:0.5in"></td>
+                        </tr>
+                    </table>
+                    
                 </div>
                 <div style="clear:both"></div>
-                
-                <!-- Question -->
-                <hr>
-                <div class="inner_L L2">
-                    13a. [NAME] ever take any other vaccine that they didn't write on the vaccine card? Like those ones they can give all over the the country?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v13_otherVaccines_yes_a">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v13_otherVaccines_no_a">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Skip to next page</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L3">
-                    14a. Which ones?
-                </div>
-                <div class="inner_C C3">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_bcg_a">BCG</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_penta1_a">Penta 1</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_penta2_a">Penta 2</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_penta3_a">Penta 3</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv0_a">Polio 0</div>
-                </div>
-                <div class="inner_C C3">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv1_a">Polio 1</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv2_a">Polio 2</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv3_a">Polio 3</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_measles_a">Measles</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_yf_a">Yellow Fever</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    15a. [NAME] ever take any vaccine to prevent him/her from getting diseases, at the clinic or like those ones they can give all over the the country?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v15_reportVaccines_any_yes_a">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v15_reportVaccines_any_no_a">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Skip to next page</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    16a. [NAME] ever take the TB vaccine that can make a mark on the child's arm or shoulder?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v16_reportVaccines_tb_yes_a">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v16_reportVaccines_tb_no_a">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    17a. [NAME] ever take the vaccine for the sickness that can make children cripple they call polio? That the vaccine they can drop in the child's mouth.
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v17_reportVaccines_opv_yes_a">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v17_reportVaccines_opv_no_a">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Skip to # 20a</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    18a. How old was [NAME] when they give him/her the first vaccine in the mouth? It was in the first two weeks after he/she was born or it was more than two weeks?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v18_reportVaccines_opv_howOld_first2wks_a">First two weeks</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v18_reportVaccines_opv_howOld_later_a">Later</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v18_reportVaccines_opv_howOld_dontKnow_a">Don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    19a. How many times they now put the polio vaccine in [NAME] mouth since he/she was born?
-                </div>
-                <div class="inner_C C2">
-                    <div class="textOption"><input class="stored integer" name="v19_reportVaccines_opv_howManyTimes_num_a" style="width:0.5in"></div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v19_reportVaccines_opv_howManyTimes_dontKnow_a">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    20a. They ever give [NAME] the pentavalent vaccine injection on the thigh? They sometimes give it the same time they can put the polio vaccine in the mouth.
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_penta_yes_a">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_penta_no_a">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Skip to # 22a</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    21a. How many times they ever give [NAME] vaccine injection on the thigh?
-                </div>
-                <div class="inner_C C2">
-                    <div class="textOption"><input class="stored integer" name="v21_reportVaccines_penta_howManyTimes_num_a" style="width:0.5in"></div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v21_reportVaccines_penta_howManyTimes_dontKnow_a">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    22a. They ever give [NAME] vaccine for Measles sickness? That the vaccine injection they can give the children in the arm when they are 9 months or more.
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_measles_yes_a">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_measles_no_a">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                
-            </div>
-            <!-- END: SECTION B -->
-            
-            
-            
-        </div>
-        <!-- END: PAGE 2 -->
-        
-        
-        
-        <!-- START: PAGE 3 -->
-        <div class="page">
-            
-            
-            
-            <!-- START: SECTION C -->
-            <div class="thickBox">
+                <br><hr>
                 
                 <!-- Instruction lines -->
-                <div><b>Complete this page if the woman has a second living child between 0 - 23 months.</b></div>
+                <div><b>Ask questions 10b - 12b if the woman has a second living child between 0 - 23 months.</b></div>
                 <hr>
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    9b. Write down the child's name.
+                    10b. Write down the child's name.
                 </div>
                 <div class="inner_C C1">
-                    <div class="textOption"><input class="stored" name="v9_childName_b"></div>
+                    <div class="textOption"><input class="stored" name="v10_childName_b"></div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
                 
                 <!-- Question -->
                 <div class="inner_L L1">
-                    10b. You get vaccine card for (NAME)?
+                    11b. You get vaccine card for (NAME)?
                 </div>
                 <div class="inner_C C1">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v10_hasVaccineCard_no_b">No -------------------------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v10_hasVaccineCard_yes_b">Yes</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_no_b">No / can't find card -------------------------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_yes_b">Yes</div>
                 </div>
                 <div class="inner_R R1">
-                    <div class="caOption">Skip to # 15b</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L1">
-                    11b. I can please see it?
-                </div>
-                <div class="inner_C C1">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_canFindVaccineCard_no_b">No / can't find card -------------------------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_canFindVaccineCard_yes_b">Yes</div>
-                </div>
-                <div class="inner_R R1">
-                    <div class="caOption">Skip to # 15b</div>
+                    <div class="caOption">Skip to # 15a</div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -1119,7 +873,8 @@
                 </div>
                 <div style="clear:both"></div>
                 <div style="font-size:12px">
-                    <table class='vaccTable'>   <!-- !!!!! redo style for this table -->
+                    
+                    <table class='vaccTable'>
                         <tr>
                             <td style="font-weight:bold">Vaccine:</td>
                             <td>BCG</td>
@@ -1191,148 +946,77 @@
                         </tr>
                     </table>
                     
-                </div>
-                <div style="clear:both"></div>
-                
-                <!-- Question -->
-                <hr>
-                <div class="inner_L L2">
-                    13b. [NAME] ever take any other vaccine that they didn't write on the vaccine card? Like those ones they can give all over the the country?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v13_otherVaccines_yes_b">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v13_otherVaccines_no_b">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Finish</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L3">
-                    14b. Which ones?
-                </div>
-                <div class="inner_C C3">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_bcg_b">BCG</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_penta1_b">Penta 1</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_penta2_b">Penta 2</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_penta3_b">Penta 3</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv0_b">Polio 0</div>
-                </div>
-                <div class="inner_C C3">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv1_b">Polio 1</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv2_b">Polio 2</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_opv3_b">Polio 3</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_measles_b">Measles</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v14_whichOtherVaccines_yf_b">Yellow Fever</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    15b. [NAME] ever take any vaccine to prevent him/her from getting diseases, at the clinic or like those ones they can give all over the the country?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v15_reportVaccines_any_yes_b">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v15_reportVaccines_any_no_b">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Finish</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    16b. [NAME] ever take the TB vaccine that can make a mark on the child's arm or shoulder?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v16_reportVaccines_tb_yes_b">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v16_reportVaccines_tb_no_b">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    17b. [NAME] ever take the vaccine for the sickness that can make children cripple they call polio? That the vaccine they can drop in the child's mouth.
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v17_reportVaccines_opv_yes_b">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v17_reportVaccines_opv_no_b">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Skip to # 20b</div>
-                    <div style="clear:both; height:15px"></div>
-               </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    18b. How old was [NAME] when they give him/her the first vaccine in the mouth? It was in the first two weeks after he/she was born or it was more than two weeks?
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v18_reportVaccines_opv_howOld_first2wks_b">First two weeks</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v18_reportVaccines_opv_howOld_later_b">Later</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v18_reportVaccines_opv_howOld_dontKnow_b">Don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    19b. How many times they now put the polio vaccine in [NAME] mouth since he/she was born?
-                </div>
-                <div class="inner_C C2">
-                    <div class="textOption"><input class="stored integer" name="v19_reportVaccines_opv_howManyTimes_num_b" style="width:0.5in"></div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v19_reportVaccines_opv_howManyTimes_dontKnow_b">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    20b. They ever give [NAME] the pentavalent vaccine injection on the thigh? They sometimes give it the same time they can put the polio vaccine in the mouth.
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_penta_yes_b">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_penta_no_b">No / don't know -------------------------------------------------------</div>
-                </div>
-                <div class="inner_R R2">
-                    <div class="caOption" style="height:18px; position:relative; top:17px">Skip to # 22b</div>
-                    <div style="clear:both; height:15px"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    21b. How many times they ever give [NAME] vaccine injection on the thigh?
-                </div>
-                <div class="inner_C C2">
-                    <div class="textOption"><input class="stored integer" name="v21_reportVaccines_penta_howManyTimes_num_b" style="width:0.5in"></div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v21_reportVaccines_penta_howManyTimes_dontKnow_b">No / don't know</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L L2">
-                    22b. They ever give [NAME] vaccine for Measles sickness? That the vaccine injection they can give the children in the arm when they are 9 months or more.
-                </div>
-                <div class="inner_C C2">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_measles_yes_b">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="v20_reportVaccines_measles_no_b">No / don't know</div>
+                    <table class='vaccTable'>
+                        <tr>
+                            <td style="font-weight:bold">Vaccine:</td>
+                            <td>Rota 1</td>
+                            <td>Rota 2</td>
+                            <td>Rota 3</td>
+                            <td>Pneumo 1</td>
+                            <td>Pneumo 2</td>
+                            <td>Pneumo 3</td>
+                            <td>IPV 1</td>
+                            <td>IPV 2</td>
+                            <td>IPV 3</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Received?&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_no_b">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Date:</td>
+                            <td><input class="stored datepicker" name="v12_card_rota1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota3_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo3_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv3_date_b" style="width:0.5in"></td>
+                        </tr>
+                    </table>
+                    
                 </div>
                 <div style="clear:both"></div>
                 
             </div>
-            <!-- END: SECTION C (2) -->
+            <!-- END: SECTION B -->
             
             
             
@@ -1351,7 +1035,7 @@
             
                 
         </div>
-        <!-- END: PAGE 4 -->
+        <!-- END: PAGE 2 -->
         
         
         
