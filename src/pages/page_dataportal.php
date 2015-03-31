@@ -73,11 +73,6 @@
                         $('#mainContainer').hide();
                         $('#dashboard_iframe').show();
                         $('#dashboard_iframe').prop('src',myLink);
-                        
-                        // Wait until iframe is loaded
-//                        setTimeout(function(){
-//                            $('#whitespaceContainer').fadeOut(500);
-//                        },500);
                     });
                     
                 }

@@ -8,7 +8,7 @@
     
     LMD_dimpleHelper.lineGraph_monthly({
         targetDiv: "dataportal_ebolaActivities_screenAndEducate",
-        data: JSON.parse(<?php echoJSON2($cxn, "test_mart", "month", ["ebola_screened","ebola_educated"],["Screened","Educated"]); ?>),
+        data: JSON.parse(<?php echoJSON($cxn, "test_mart", "month", ["ebola_screened","ebola_educated"],["Screened","Educated"]); ?>),
         colors: ["#9BBB59", "#4BACC6", "#F79646", "#C0504D", "#8064A2"],
         timeInterval: 1,
         size: {x:590, y:380},

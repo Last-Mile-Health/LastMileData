@@ -4,7 +4,7 @@
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
 require_once("cxn.php");
 
-function echoJSON2($cxn, $table, $x, $yList, $yNames) {
+function echoJSON($cxn, $table, $x, $yList, $yNames) {
     
     $query = "SELECT ";
     for($i=0; $i<count($yList); $i++) {
