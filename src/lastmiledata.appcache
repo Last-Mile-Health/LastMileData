@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version:      00476
+# Version:      00485
 # Author:       Avi Kenny, Last Mile Health
 # Last updated: 2015-01-14
 
@@ -53,6 +53,7 @@ CACHE:
 /LastMileData/res/arrow_right_v20140916.png
 /LastMileData/res/chk_print_v20140916.png
 /LastMileData/res/fhwForms_v20140916.css
+/LastMileData/res/page_deqa.css
 /LastMileData/res/lmd_icon_v20140916.png
 /LastMileData/res/logo_LMH_invert_v20140916.png
 /LastMileData/res/logo_LMH_v20140916.png
@@ -64,6 +65,7 @@ CACHE:
 /LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html
 /LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html
 /LastMileData/src/forms/fhw_bdm02_movements.html
+/LastMileData/src/forms/fhw_bdm03_movements.html
 /LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html
 /LastMileData/src/forms/fhw_ect03_ebolacontacttracing.html
 /LastMileData/src/forms/fhw_ees03_ebolaeducationscreening.html
@@ -77,8 +79,8 @@ CACHE:
 /LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
 /LastMileData/src/forms/prg_chv01_gchvquestionnaire.html
 /LastMileData/src/forms/prg_trl02_trainingledger.html
-/LastMileData/src/forms/util_householdIDAssignmentList.html
-/LastMileData/src/forms/util_memberIDAssignmentList.html
+/LastMileData/src/forms/util_memberIDAssignmentTool.html
+/LastMileData/src/forms/util_householdIDAssignmentTool.html
 
 # src >> forms (old)
 /LastMileData/src/forms_old/fhw_ees02_ebolaeducationscreening.html
@@ -93,13 +95,12 @@ CACHE:
 
 # src >> js
 /LastMileData/src/js/LMD_fileSystemHelper.js
+/LastMileData/src/js/LMD_accessControl.js
 /LastMileData/src/js/deqa_v20141015.js
 /LastMileData/src/js/fhwForms_v20140916.js
 /LastMileData/src/js/formHelper.js
 /LastMileData/src/js/formValidate.js
-/LastMileData/src/js/householdIDAssignmentList_v20140929.js
 /LastMileData/src/js/loadContents_v20140916.js
-/LastMileData/src/js/memberIDAssignmentList_v20140929.js
 /LastMileData/src/js/modalFocus_v20140916.js
 
 # src >> pages

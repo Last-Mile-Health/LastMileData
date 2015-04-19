@@ -4,7 +4,7 @@
     
     <head>
         
-        <title>CHW Form (HSV 03) - Health Survey</title>
+        <title>FHW Form (KPI 03) - KPI Assessment</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -33,7 +33,7 @@
             .R3 { width: 1.2in }
             .C4 { width: 3.0in }
             
-            .meBox { position:relative; top:340px; }
+            .meBox { position:relative; top:175px; }
             
             /* use CSS child selectors so that these styles don't hit the last column */
             .vaccTable { margin: 10px; }
@@ -72,9 +72,9 @@
             
             <!-- START: FORM HEADER -->
             <div class="formHeader">
-                <img style="float:left" src="/LastMileData/res/logo_liberia.png">
-                <span class="h2">CHW: Health Survey</span>
-                <img style="float:right" src="/LastMileData/res/logo_flag.png">
+                <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
+                <span class="h2">FHW: KPI Assessment</span>
+                <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
                 <div style="clear:both"></div>
             </div>
             <hr>
@@ -82,23 +82,21 @@
             <div class="thickBox">
                 
                 <div>
-                    <b>Complete this form once per year for every woman between age 15 - 49.</b>
+                    <b>Complete this form once per year for every woman between age 18 - 49.</b>
                 </div>
                 
                 <hr>
                 
-                <div class="headField" style="width:1.05in">Woman name:</div>
-                <div class="headField" style="width:3.35in"><input style="width:3.05in" class="stored" name="womanName"></div>
-                <div class="headField" style="width:0.85in">Visit date:</div>
-                <div class="headField" style="width:1.80in"><input style="width:1.0in" class="stored datepicker" name="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
+                <div class="headField" style="width:1.0in">FHW ID:</div>
+                <div class="headField" style="width:2.5in"><input class="stored autocomplete" name="fhwID" data-lmd-valid-required="yes" data-lmd-valid-autoC='["Aaron Garley","Abel Doe","Alexander Nyanway","Alice M. Davis","Anthhony Garlo","Armstrog Tweh","Cynthia Tarley","Daniel Pyne","Ephesian Gedekar","Evelyn G. Kataka","Felecia Weah","G. Markson Barleh","Harrison Taryon","Isaac C. Dorbor","Jerome Tarlue","John Biala","K. Victor Youe","Kelvin Jellah","Markson Farley","Mary Youlo","Michael Morris","Miller Z. Karnual","Moses B Chealey","Moses S. Cheh","Patience Suzar","Pazarro Cooper","Prekins N. Dorbah","Prince Wayle","Raymond B. Chea","Rennie Dennis","Ruth Mitchell","Sam Roberts Jr.","Stanley Quiah","Tarley Dweh","Teta Sluwar","Theophilius Micgill","Ubo George","Wulu Gaye","Yarley Krayou","Youdesco Youbo","Zarkpa Yeoh"]'></div>
+                <div class="headField" style="width:1.5in">Woman name:</div>
+                <div class="headField" style="width:2.0in"><input class="stored" name="womanName"></div>
                 <div style="clear:both; height:3px;"></div>
                 
-                <div class="headField" style="width:1.05in">CHW ID:</div>
-                <div class="headField" style="width:1.30in"><input style="width:1.0in" class="stored autocomplete" name="fhwID" data-lmd-valid-required="yes" data-lmd-valid-autoC='["Aaron Garley","Abel Doe","Alexander Nyanway","Alice M. Davis","Anthhony Garlo","Armstrog Tweh","Cynthia Tarley","Daniel Pyne","Ephesian Gedekar","Evelyn G. Kataka","Felecia Weah","G. Markson Barleh","Harrison Taryon","Isaac C. Dorbor","Jerome Tarlue","John Biala","K. Victor Youe","Kelvin Jellah","Markson Farley","Mary Youlo","Michael Morris","Miller Z. Karnual","Moses B Chealey","Moses S. Cheh","Patience Suzar","Pazarro Cooper","Prekins N. Dorbah","Prince Wayle","Raymond B. Chea","Rennie Dennis","Ruth Mitchell","Sam Roberts Jr.","Stanley Quiah","Tarley Dweh","Teta Sluwar","Theophilius Micgill","Ubo George","Wulu Gaye","Yarley Krayou","Youdesco Youbo","Zarkpa Yeoh"]'></div>
-                <div class="headField" style="width:0.75in">Village ID:</div>
-                <div class="headField" style="width:1.30in"><input style="width:1.0in" class="stored" name="vID" data-lmd-valid-required="yes"></div>
-                <div class="headField" style="width:0.85in">Member ID:</div>
-                <div class="headField" style="width:1.20in"><input style="width:1.0in" class="stored" name="memberID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:1.0in">Visit date:</div>
+                <div class="headField" style="width:2.5in"><input class="stored datepicker" name="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
+                <div class="headField" style="width:1.5in">Woman member ID:</div>
+                <div class="headField" style="width:2.0in"><input class="stored" name="memberID" data-lmd-valid-required="yes"></div>
                 <div style="clear:both"></div>
                 
             </div>
@@ -650,10 +648,382 @@
             
             
             
+        </div>
+        <!-- END: PAGE 2 -->
+        
+        
+        
+        <!-- START: PAGE 3 -->
+        <div class="page">
+            
+            
+            
+            <!-- START: SECTION C -->
+            <b>C. Vaccination coverage</b>
+            <div class="thickBox">
+                
+                <!-- Instruction lines -->
+                <div><b>Ask questions 10a - 12a if the woman has a living child between 0 - 23 months that she born herself.</b></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L L1">
+                    10a. Write down the child's name.
+                </div>
+                <div class="inner_C C1">
+                    <div class="textOption"><input class="stored" name="v10_childName_a"></div>
+                </div>
+                <div style="clear:both"></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L L1">
+                    11a. You get vaccine card for (NAME)?
+                </div>
+                <div class="inner_C C1">
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_no_a">No / can't find card -------------------------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_yes_a">Yes</div>
+                </div>
+                <div class="inner_R R1">
+                    <div class="caOption">Skip to # 15a</div>
+                </div>
+                <div style="clear:both"></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L" style="width:4.8in">
+                    12a. Copy down all vaccines received, and record dates.
+                </div>
+                <div style="clear:both"></div>
+                <div style="font-size:12px">
+                    
+                    <table class='vaccTable'>
+                        <tr>
+                            <td style="font-weight:bold">Vaccine:</td>
+                            <td>BCG</td>
+                            <td>Penta 1</td>
+                            <td>Penta 2</td>
+                            <td>Penta 3</td>
+                            <td>Polio 0</td>
+                            <td>Polio 1</td>
+                            <td>Polio 2</td>
+                            <td>Polio 3</td>
+                            <td>Measles</td>
+                            <td>Yellow Fever</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Received?&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_bcg_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_bcg_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_penta1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_penta1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_penta2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_penta2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_penta3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_penta3_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv0_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv0_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv3_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_measles_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_measles_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_yf_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_yf_no_a">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Date:</td>
+                            <td><input class="stored datepicker" name="v12_card_bcg_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_penta1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_penta2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_penta3_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv0_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv3_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_measles_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_yf_date_a" style="width:0.5in"></td>
+                        </tr>
+                    </table>
+                    
+                    <table class='vaccTable'>
+                        <tr>
+                            <td style="font-weight:bold">Vaccine:</td>
+                            <td>Rota 1</td>
+                            <td>Rota 2</td>
+                            <td>Rota 3</td>
+                            <td>Pneumo 1</td>
+                            <td>Pneumo 2</td>
+                            <td>Pneumo 3</td>
+                            <td>IPV 1</td>
+                            <td>IPV 2</td>
+                            <td>IPV 3</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Received?&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_no_a">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_yes_a">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_no_a">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Date:</td>
+                            <td><input class="stored datepicker" name="v12_card_rota1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota3_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo3_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv1_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv2_date_a" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv3_date_a" style="width:0.5in"></td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div style="clear:both"></div>
+                <br><hr>
+                
+                <!-- Instruction lines -->
+                <div><b>Ask questions 10b - 12b if the woman has a second living child between 0 - 23 months.</b></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L L1">
+                    10b. Write down the child's name.
+                </div>
+                <div class="inner_C C1">
+                    <div class="textOption"><input class="stored" name="v10_childName_b"></div>
+                </div>
+                <div style="clear:both"></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L L1">
+                    11b. You get vaccine card for (NAME)?
+                </div>
+                <div class="inner_C C1">
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_no_b">No / can't find card -------------------------------------------------------</div>
+                    <div class="checkOption"><input type="checkbox" class="stored" name="v11_hasVaccineCard_yes_b">Yes</div>
+                </div>
+                <div class="inner_R R1">
+                    <div class="caOption">Skip to # 15a</div>
+                </div>
+                <div style="clear:both"></div>
+                <hr>
+                
+                <!-- Question -->
+                <div class="inner_L" style="width:4.8in">
+                    12b. Copy down all vaccines received, and record dates.
+                </div>
+                <div style="clear:both"></div>
+                <div style="font-size:12px">
+                    
+                    <table class='vaccTable'>
+                        <tr>
+                            <td style="font-weight:bold">Vaccine:</td>
+                            <td>BCG</td>
+                            <td>Penta 1</td>
+                            <td>Penta 2</td>
+                            <td>Penta 3</td>
+                            <td>Polio 0</td>
+                            <td>Polio 1</td>
+                            <td>Polio 2</td>
+                            <td>Polio 3</td>
+                            <td>Measles</td>
+                            <td>Yellow Fever</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Received?&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_bcg_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_bcg_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_penta1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_penta1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_penta2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_penta2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_penta3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_penta3_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv0_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv0_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_opv3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_opv3_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_measles_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_measles_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_yf_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_yf_no_b">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Date:</td>
+                            <td><input class="stored datepicker" name="v12_card_bcg_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_penta1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_penta2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_penta3_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv0_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_opv3_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_measles_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_yf_date_b" style="width:0.5in"></td>
+                        </tr>
+                    </table>
+                    
+                    <table class='vaccTable'>
+                        <tr>
+                            <td style="font-weight:bold">Vaccine:</td>
+                            <td>Rota 1</td>
+                            <td>Rota 2</td>
+                            <td>Rota 3</td>
+                            <td>Pneumo 1</td>
+                            <td>Pneumo 2</td>
+                            <td>Pneumo 3</td>
+                            <td>IPV 1</td>
+                            <td>IPV 2</td>
+                            <td>IPV 3</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Received?&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_rota3_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_pneumo3_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv1_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv2_no_b">No
+                            </td>
+                            <td>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_yes_b">Yes<br>
+                                <input type="checkbox" class="stored" name="v12_card_ipv3_no_b">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Date:</td>
+                            <td><input class="stored datepicker" name="v12_card_rota1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_rota3_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_pneumo3_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv1_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv2_date_b" style="width:0.5in"></td>
+                            <td><input class="stored datepicker" name="v12_card_ipv3_date_b" style="width:0.5in"></td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div style="clear:both"></div>
+                
+            </div>
+            <!-- END: SECTION B -->
+            
+            
+            
             <!-- START: M&E Box -->
             <div class="meBox">
                 <span class="blackBox">M&E</span>
-                <span class="blackBox">HSV.03</span>
+                <span class="blackBox">KPI.03</span>
                 &nbsp;&nbsp;&nbsp;
                 DE Initials: <input class="stored" name="de_init">
                 DE Date: <input class="stored" name="de_date">

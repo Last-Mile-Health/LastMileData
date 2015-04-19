@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2>Data Portal</h2>
-                    <p>The <i>Data Portal</i> is where all staff can go to access up-to-date data and information about our programs. Data is updated monthly on the 10th of each month.</p>
+                    <p>The <i>Data Portal</i> is where all staff can go to access up-to-date data and information about our programs. Data is updated monthly on the 12th of each month.</p>
                     <p><a class="fadeLink btn btn-success" href="/LastMileData/src/pages/page_dataportal.php">Go to Data Portal &raquo;</a></p>
                 </div>
                 <div class="col-md-4">

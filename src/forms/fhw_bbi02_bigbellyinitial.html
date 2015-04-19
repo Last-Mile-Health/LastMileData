@@ -26,7 +26,12 @@
             .inner_C { width: 2.3in }
             .inner_R { width: 2.0in }
             
-            .meBox { position:relative; top:830px; }
+            #sectionA { position:relative; top:-5px; }
+            #sectionB { position:relative; top:-10px; }
+            #sectionC { position:relative; top:-15px; }
+            #sectionD { position:relative; top:-20px; }
+            
+            .meBox { position:relative; top:-30px; }
         </style>
         
     </head>
@@ -79,51 +84,33 @@
             
             
             <!-- START: SECTION A -->
-            <b>A. Screen for high risk</b>
-            <div class="thickBox">
+            <div id="sectionA">
                 
-                <!-- Question -->
-                <div class="inner_L">
-                    1. How did you learn the woman was pregnant?
+                <b>A. Source</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        1. How did you learn the woman was pregnant?
+                    </div>
+                    <div style="font-size:12px;">
+                        <div class="checkOption" style="float:left; width:2in">
+                            <input type="checkbox" class="stored" name="A1_pregnancySource" value="came to me">She came to me
+                        </div>
+                        <div class="checkOption" style="float:left; width:2in">
+                            <input type="checkbox" class="stored" name="A1_pregnancySource" value="outreach">She came to outreach
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="checkOption" style="float:left; width:2in">
+                            <input type="checkbox" class="stored" name="A1_pregnancySource" value="family planning">During family planning visit
+                        </div>
+                        <div class="checkOption" style="float:left; width:2in">
+                            <input type="checkbox" class="stored" name="A1_pregnancySource" value="other">Other
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+
                 </div>
-                <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A1_pregnancySource" value="came to me">She came to me</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A1_pregnancySource" value="outreach">She came to outreach</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A1_pregnancySource" value="family planning">During family planning visit</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A1_pregnancySource" value="other">Other</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    2. Have you had any big belly problems in the past, such as jerking, an operation, or some other thing?
-                </div>
-                <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A2_yes_jerking">Yes, jerking ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A2_yes_operation">Yes, operation ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A2_yes_other">Yes, other ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A2_no">No</div>
-                </div>
-                <div class="inner_R">
-                    <div class="caOption" style="height:62px">If yes to any, inform supervisor that this is a high risk pregnancy</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    3. Do you have high blood pressure or sugar sickness?
-                </div>
-                <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A3_yes_highBP">Yes, high BP ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A3_yes_sugarSickness">Yes, sugar sickness ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="A3_no">No</div>
-                </div>
-                <div class="inner_R">
-                    <div class="caOption" style="height:54px">If yes to any, inform supervisor that this is a high risk pregnancy</div>
-                </div>
-                <div style="clear:both"></div>
                 
             </div>
             <!-- END: SECTION A -->
@@ -131,112 +118,163 @@
             
 
             <!-- START: SECTION B -->
-            <b>B. Calculate expected date of delivery (EDD)</b>
-            <div class="thickBox">
+            <div id="sectionB">
                 
-                <!-- Question -->
-                <div class="inner_L">
-                    4. When was last menstrual period (LMP)?
+                <b>B. Screen for high risk</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        2. Have you had any big belly problems in the past, such as jerking, an operation, or some other thing?
+                    </div>
+                    <div class="inner_C">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A2_yes_jerking">Yes, jerking ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A2_yes_operation">Yes, operation ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A2_yes_other">Yes, other ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A2_no">No</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption" style="height:62px">If yes to any, inform supervisor that this is a high risk pregnancy</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        3. Do you have high blood pressure or sugar sickness?
+                    </div>
+                    <div class="inner_C">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_yes_highBP">Yes, high BP ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_yes_sugarSickness">Yes, sugar sickness ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A3_no">No</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption" style="height:54px">If yes to any, inform supervisor that this is a high risk pregnancy</div>
+                    </div>
+                    <div style="clear:both"></div>
+
                 </div>
-                <div class="inner_C">
-                    <div class="textOption"><input class="stored datepicker" name="B4_LMP" style="width:1in"> (d/m/y)</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    5. Use card to find EDD.
-                </div>
-                <div class="inner_C">
-                    <div class="textOption"><input class="stored datepicker" name="B5_EDD" style="width:1in"> (d/m/y)</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    6. How many months since LMP?
-                </div>
-                <div class="inner_C">
-                    <div class="textOption"><input class="stored integer" name="B6_startPregnancyTracking" style="width:1in"> ----------------------------------------</div>
-                </div>
-                <div class="inner_R">
-                    <div class="caOption">Start pregnancy tracking this month</div>
-                </div>
-                <div style="clear:both"></div>
                 
             </div>
             <!-- END: SECTION B -->
+
             
-            
-            
+
             <!-- START: SECTION C -->
-            <b>C. Create birth plan and educate</b>
-            <div class="thickBox">
+            <div id="sectionC">
                 
-                <!-- Question -->
-                <div class="inner_L">
-                    7. Will need to be transported to the clinic <br>four weeks before EDD.
+                <b>C. Calculate expected date of delivery (EDD)</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        4. When was last menstrual period (LMP)?
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored datepicker" name="B4_LMP" style="width:1in"> (d/m/y)</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        5. Use card to find EDD.
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored datepicker" name="B5_EDD" style="width:1in"> (d/m/y)</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        6. How many months since LMP?
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored integer" name="B6_startPregnancyTracking" style="width:1in"> ----------------------------------------</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption">Start pregnancy tracking this month</div>
+                    </div>
+                    <div style="clear:both"></div>
+
                 </div>
-                <div class="inner_C" style="width:3in">
-                    <div class="textOption"><input class="stored datepicker" name="C7_dateToGetToClinic" style="width:1in"> date to get to clinic (d/m/y)</div>
-                    <div class="textOption"><input disabled="disabled" name="C7_clinicLocation" style="width:1in"> clinic or hospital location</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    8. How much money is needed for transport and living near clinic for 4 weeks?
-                </div>
-                <div class="inner_C" style="width:3in">
-                    <div class="textOption"><input class="stored integer" name="C8_LD_transport" style="width:1in"> LD to get transport to clinic</div>
-                    <div class="textOption"><input class="stored integer" name="C8_LD_stayNearClinic" style="width:1in"> LD to stay near clinic</div>
-                    <div class="textOption"><input class="stored integer" name="C8_LD_save" style="width:1in"> LD to save each month</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    9. Who will you stay with near the clinic?
-                </div>
-                <div class="inner_C" style="width:3.1in">
-                    <div class="textOption"><input disabled="disabled" name="C9_stayWithNearClinic" style="width:3in"></div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    10. Provide pregnancy education.
-                </div>
-                <div class="inner_C" style="width:4in">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C10_educateDangerSigns">Educate woman and family about danger signs and birth plan</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C10_discussWithTTM">Discuss pregnancy and referral with TTM</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C10_educateHygiene">Educate on hygiene and infant care</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C10adviseBreastfeeding_">Advise on breastfeeding</div>
-                </div>
-                <div style="clear:both"></div>
-                <hr>
-                
-                <!-- Question -->
-                <div class="inner_L">
-                    11. Are you using a bednet?
-                </div>
-                <div class="inner_C">
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C11_usingBednet" value="yes">Yes</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C11_usingBednet" value="no, don't have one">No, I don't have one ----------------------------------------</div>
-                    <div class="checkOption"><input type="checkbox" class="stored" name="C11_usingBednet" value="no, but has one">No, but I have one ----------------------------------------</div>
-                </div>
-                <div class="inner_R">
-                    <div class="caOption" style="height:54px">Educate woman on proper bednet usage. If available, distribute a bednet.</div>
-                </div>
-                <div style="clear:both"></div>
-                
+
             </div>
             <!-- END: SECTION C -->
+            
+            
+            
+            <!-- START: SECTION D -->
+            <div id="sectionD">
+                
+                <b>D. Create birth plan and educate</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        7. Will need to be transported to the clinic <br>four weeks before EDD.
+                    </div>
+                    <div class="inner_C" style="width:3in">
+                        <div class="textOption"><input class="stored datepicker" name="C7_dateToGetToClinic" style="width:1in"> date to get to clinic (d/m/y)</div>
+                        <div class="textOption"><input disabled="disabled" name="C7_clinicLocation" style="width:1in"> clinic or hospital location</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        8. How much money is needed for transport and living near clinic for 4 weeks?
+                    </div>
+                    <div class="inner_C" style="width:3in">
+                        <div class="textOption"><input class="stored integer" name="C8_LD_transport" style="width:1in"> LD to get transport to clinic</div>
+                        <div class="textOption"><input class="stored integer" name="C8_LD_stayNearClinic" style="width:1in"> LD to stay near clinic</div>
+                        <div class="textOption"><input class="stored integer" name="C8_LD_save" style="width:1in"> LD to save each month</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        9. Who will you stay with near the clinic?
+                    </div>
+                    <div class="inner_C" style="width:3.1in">
+                        <div class="textOption"><input disabled="disabled" name="C9_stayWithNearClinic" style="width:3in"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        10. Provide pregnancy education.
+                    </div>
+                    <div class="inner_C" style="width:4in">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C10_educateDangerSigns">Educate woman and family about danger signs and birth plan</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C10_discussWithTTM">Discuss pregnancy and referral with TTM</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C10_educateHygiene">Educate on hygiene and infant care</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C10adviseBreastfeeding_">Advise on breastfeeding</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        11. Are you using a bednet?
+                    </div>
+                    <div class="inner_C">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C11_usingBednet" value="yes">Yes</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C11_usingBednet" value="no, don't have one">No, I don't have one ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C11_usingBednet" value="no, but has one">No, but I have one ----------------------------------------</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption" style="height:54px">Educate woman on proper bednet usage. If available, distribute a bednet.</div>
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+                
+            </div>
+            <!-- END: SECTION D -->
             
             
             
@@ -250,22 +288,145 @@
             
             
             
-            <!-- START: SECTION D -->
-            <b>D. Complete follow-up form</b>
-            <div class="thickBox">
+            <!-- START: SECTION A -->
+            <div id="sectionA">
                 
-                <!-- Question -->
-                <div class="inner_L" style="width:4.5in">
-                    12. Complete "FHW Form 4b: Big Belly (follow-up)". Skip section A.
+                <b>A. Discuss birth plan and educate</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        2. Educate on infant care.
+                    </div>
+                    <div class="inner_C">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="A2_educateInfantCare">Done</div>
+                    </div>
+                    <div style="clear:both"></div>
+
                 </div>
-                <div style="clear:both"></div>
                 
             </div>
-            <!-- END: SECTION D -->
+            <!-- END: SECTION A -->
+
+            
+
+            <!-- START: SECTION B -->
+            <div id="sectionB">
+                
+                <b>B. Check for danger signs</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        3. Check blood pressure
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored integer" name="B3_BP" style="width:1in"> (mm Hg) ----------------------------------------</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption">If BP is above 140/90, refer to clinic.</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        4. Check temperature
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored decimal" name="B4_temp" style="width:1in"> (C) ----------------------------------------</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption">If temp is above 38 C, refer to clinic.</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L">
+                        5. Check for other danger signs
+                    </div>
+                    <div class="inner_C">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_blurredVision">Blurred vision ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_eyesTurning">Eyes turning more than 3 days ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_headache">Headache more than 3 days ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_swollenFace">Swollen face or hands ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_fits">Fits (convulsions) ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_stomachPain">Pain under the stomach ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_painWhileUrinating">Pain while urinating ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_vaginalBleeding">Vaginal bleeding ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_unusualDischarge">Unusual vaginal discharge ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_waterBreaks">Water breaks or contractions ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_otherEmergency">Other emergency ----------------------------------------</div>
+                        <div class="checkOption"><input type="checkbox" class="stored" name="B5_sign_noDangerSigns">NO DANGER SIGNS</div>
+                    </div>
+                    <div class="inner_R">
+                        <div class="caOption" style="height:210px">If YES to ANY danger signs, refer to clinic.</div>
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+                
+            </div>
+            <!-- END: SECTION B -->
             
             
             
-            <!-- START: M&E Box -->
+            <!-- START: SECTION C -->
+            <div id="sectionC">
+                
+                <b>C. Discuss ANC visits</b>
+                <div class="thickBox">
+
+                    <!-- Question -->
+                    <div class="inner_L" style="width:3.5in">
+                        6. Educate about ANC visits.
+                    </div>
+                    <div class="inner_C" style="width:2.8in">
+                        <div class="checkOption"><input type="checkbox" class="stored" name="C6_educate4ANC">Should have at least 4 visits during pregnancy</div>
+                        <div class="checkOption-ML"><input type="checkbox" class="stored" name="C6_educateOneClinic">At least one of these should be at a clinic; others can be through outreach</div>
+                        <div class="checkOption-ML"><input type="checkbox" class="stored" name="C6_educateMonths">One should be between months 0-4, one at month 5, one at month 7, one at month 8</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L" style="width:3.5in">
+                        7. How many (outreach) ANC visits have you had?
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored integer" name="C7_outreachANC" style="width:1in"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L" style="width:3.5in">
+                        8. How many (clinic) ANC visits have you had?
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored integer" name="C8_clinicANC" style="width:1in"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <hr>
+
+                    <!-- Question -->
+                    <div class="inner_L" style="width:3.5in">
+                        9. When was your last ANC visit?
+                    </div>
+                    <div class="inner_C">
+                        <div class="textOption"><input class="stored datepicker" name="C9_lastANC" style="width:1in"> (d/m/y)</div>
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+                
+            </div>
+            <!-- END: SECTION C -->
+            
+            
+            
+           <!-- START: M&E Box -->
             <div class="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">BBI.02</span>
@@ -276,7 +437,7 @@
                 QA Date: <input class="stored" name="qa_date">
             </div>
             <!-- START: M&E Box -->
-            
+             
             
             
         </div>

@@ -158,9 +158,7 @@ LMD_fileSystemHelper = (function(){
     
     
     // LMD_fileSystemHelper API
-    // !!!!! set order !!!!!
     return {
-//        checkForFile: checkForFile, // !!!!! ADD THIS; possibly use it to handle "no records ever submitted" errors
         readAndUseFile: readAndUseFile,
         readFileIntoObject: readFileIntoObject,
         deleteFile: deleteFile,

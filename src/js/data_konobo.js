@@ -7,7 +7,8 @@ myData_Konobo.dataEntryQA = [
     { "Month":"2014-11-01", "% QA'd":0.029 },
     { "Month":"2014-12-01", "% QA'd":0.089 },
     { "Month":"2015-01-01", "% QA'd":0.011 },
-    { "Month":"2015-02-01", "% QA'd":0.096 }
+    { "Month":"2015-02-01", "% QA'd":0.095 },
+    { "Month":"2015-03-01", "% QA'd":0.073 }
 ];
 
 // Data: % of records entered
@@ -16,31 +17,43 @@ myData_Konobo.numRecordsEntered = [
     { "Month":"2014-11-01", "Records":1557 },
     { "Month":"2014-12-01", "Records":135 },
     { "Month":"2015-01-01", "Records":1080 },
-    { "Month":"2015-02-01", "Records":1003 }
+    { "Month":"2015-02-01", "Records":1051 },
+    { "Month":"2015-03-01", "Records":2372 }
 ];
 
+// Data: facility delivery
+myData_Konobo.facilityDelivery = [
+    { "Month":"2015-03-01", "Facility Delivery":.684 }
+];
+
+// Data: ANC visitation
+myData_Konobo.ancVisitation = [
+    { "Month":"2015-03-01", "Rate":"ANC-1", "Percent":0.913 },
+    { "Month":"2015-03-01", "Rate":"ANC-4", "Percent":0.435 }
+];
+    
 // Data: sick child source
 myData_Konobo.sickChildSource = [
-    { "Month":"2014-10-01", "Source":"Parent came to me", "Percent":0.419 },
-    { "Month":"2014-10-01", "Source":"Well child visit", "Percent":0.126 },
-    { "Month":"2014-10-01", "Source":"Noticed child was sick", "Percent":0.188 },
-    { "Month":"2014-10-01", "Source":"Other", "Percent":0.267 },
-    { "Month":"2014-11-01", "Source":"Parent came to me", "Percent":0.528 },
-    { "Month":"2014-11-01", "Source":"Well child visit", "Percent":0.101 },
-    { "Month":"2014-11-01", "Source":"Noticed child was sick", "Percent":0.197 },
-    { "Month":"2014-11-01", "Source":"Other", "Percent":0.174 },
-    { "Month":"2014-12-01", "Source":"Parent came to me", "Percent":0.496 },
-    { "Month":"2014-12-01", "Source":"Well child visit", "Percent":0.121 },
-    { "Month":"2014-12-01", "Source":"Noticed child was sick", "Percent":0.204 },
-    { "Month":"2014-12-01", "Source":"Other", "Percent":0.179 },
-    { "Month":"2015-01-01", "Source":"Parent came to me", "Percent":0.484 },
-    { "Month":"2015-01-01", "Source":"Well child visit", "Percent":0.087 },
-    { "Month":"2015-01-01", "Source":"Noticed child was sick", "Percent":0.249 },
-    { "Month":"2015-01-01", "Source":"Other", "Percent":0.181 },
-    { "Month":"2015-02-01", "Source":"Parent came to me", "Percent":0.555 },
-    { "Month":"2015-02-01", "Source":"Well child visit", "Percent":0.046 },
-    { "Month":"2015-02-01", "Source":"Noticed child was sick", "Percent":0.177 },
-    { "Month":"2015-02-01", "Source":"Other", "Percent":0.223 }
+    { "Month":"2014-11-01", "Source":"Parent came to me", "Value":116 },
+    { "Month":"2014-11-01", "Source":"Well child visit", "Value":23 },
+    { "Month":"2014-11-01", "Source":"Noticed child was sick", "Value":46 },
+    { "Month":"2014-11-01", "Source":"Other", "Value":40 },
+    { "Month":"2014-12-01", "Source":"Parent came to me", "Value":140 },
+    { "Month":"2014-12-01", "Source":"Well child visit", "Value":34 },
+    { "Month":"2014-12-01", "Source":"Noticed child was sick", "Value":57 },
+    { "Month":"2014-12-01", "Source":"Other", "Value":51 },
+    { "Month":"2015-01-01", "Source":"Parent came to me", "Value":147 },
+    { "Month":"2015-01-01", "Source":"Well child visit", "Value":26 },
+    { "Month":"2015-01-01", "Source":"Noticed child was sick", "Value":70 },
+    { "Month":"2015-01-01", "Source":"Other", "Value":55 },
+    { "Month":"2015-02-01", "Source":"Parent came to me", "Value":209 },
+    { "Month":"2015-02-01", "Source":"Well child visit", "Value":17 },
+    { "Month":"2015-02-01", "Source":"Noticed child was sick", "Value":67 },
+    { "Month":"2015-02-01", "Source":"Other", "Value":100 },
+    { "Month":"2015-03-01", "Source":"Parent came to me", "Value":191 },
+    { "Month":"2015-03-01", "Source":"Well child visit", "Value":12 },
+    { "Month":"2015-03-01", "Source":"Noticed child was sick", "Value":52 },
+    { "Month":"2015-03-01", "Source":"Other", "Value":75 }
 ];
 
 // Data: sick child source
@@ -48,17 +61,19 @@ myData_Konobo.sickChildFollowupRate = [
     { "Month":"2014-10-01", "Follow Up Rate":0.975 },
     { "Month":"2014-11-01", "Follow Up Rate":0.986 },
     { "Month":"2014-12-01", "Follow Up Rate":1.000 },
-    { "Month":"2015-01-01", "Follow Up Rate":0.996 },
-    { "Month":"2015-02-01", "Follow Up Rate":1.000 }
+    { "Month":"2015-01-01", "Follow Up Rate":0.993 },
+    { "Month":"2015-02-01", "Follow Up Rate":1.000 },
+    { "Month":"2015-03-01", "Follow Up Rate":0.994 }
 ];
 
 // Data: sick children treated
 myData_Konobo.sickChildrenTreated = [
-    { "Month":"2014-10-01", "Visits":430 },
-    { "Month":"2014-11-01", "Visits":204 },
-    { "Month":"2014-12-01", "Visits":264 },
-    { "Month":"2015-01-01", "Visits":252 },
-    { "Month":"2015-02-01", "Visits":255 }
+    { "Month":"2014-10-01", "Visits":429 },
+    { "Month":"2014-11-01", "Visits":207 },
+    { "Month":"2014-12-01", "Visits":241 },
+    { "Month":"2015-01-01", "Visits":255 },
+    { "Month":"2015-02-01", "Visits":350 },
+    { "Month":"2015-03-01", "Visits":295 }
 ];
 
 // Data: sick children treated, by condition
@@ -132,15 +147,18 @@ myData_Konobo.sickChildrenTreated_condition = [
     { "Month":"2014-11-01", "Condition":"Malaria", "Treated":201 },
     { "Month":"2014-11-01", "Condition":"Diarrhea", "Treated":58 },
     { "Month":"2014-11-01", "Condition":"ARI", "Treated":78 },
-    { "Month":"2014-12-01", "Condition":"Malaria", "Treated":184 },
-    { "Month":"2014-12-01", "Condition":"Diarrhea", "Treated":89 },
+    { "Month":"2014-12-01", "Condition":"Malaria", "Treated":187 },
+    { "Month":"2014-12-01", "Condition":"Diarrhea", "Treated":91 },
     { "Month":"2014-12-01", "Condition":"ARI", "Treated":113 },
-    { "Month":"2015-01-01", "Condition":"Malaria", "Treated":232 },
-    { "Month":"2015-01-01", "Condition":"Diarrhea", "Treated":92 },
-    { "Month":"2015-01-01", "Condition":"ARI", "Treated":162 },
-    { "Month":"2015-02-01", "Condition":"Malaria", "Treated":326 },
-    { "Month":"2015-02-01", "Condition":"Diarrhea", "Treated":134 },
-    { "Month":"2015-02-01", "Condition":"ARI", "Treated":139 }
+    { "Month":"2015-01-01", "Condition":"Malaria", "Treated":253 },
+    { "Month":"2015-01-01", "Condition":"Diarrhea", "Treated":97 },
+    { "Month":"2015-01-01", "Condition":"ARI", "Treated":173 },
+    { "Month":"2015-02-01", "Condition":"Malaria", "Treated":360 },
+    { "Month":"2015-02-01", "Condition":"Diarrhea", "Treated":143 },
+    { "Month":"2015-02-01", "Condition":"ARI", "Treated":152 },
+    { "Month":"2015-03-01", "Condition":"Malaria", "Treated":297 },
+    { "Month":"2015-03-01", "Condition":"Diarrhea", "Treated":90 },
+    { "Month":"2015-03-01", "Condition":"ARI", "Treated":143 }
 ];
 
 // Data: sick children treated, per 10,000 population
@@ -214,14 +232,16 @@ myData_Konobo.sickChildrenTreated_perPop = [
     { "Month":"2014-11-01", "Condition":"Malaria", "TreatedPerPop":145 },
     { "Month":"2014-11-01", "Condition":"Diarrhea", "TreatedPerPop":42 },
     { "Month":"2014-11-01", "Condition":"ARI", "TreatedPerPop":56 },
-    { "Month":"2014-12-01", "Condition":"Malaria", "TreatedPerPop":129 },
-    { "Month":"2014-12-01", "Condition":"Diarrhea", "TreatedPerPop":63 },
+    { "Month":"2014-12-01", "Condition":"Malaria", "TreatedPerPop":132 },
+    { "Month":"2014-12-01", "Condition":"Diarrhea", "TreatedPerPop":64 },
     { "Month":"2014-12-01", "Condition":"ARI", "TreatedPerPop":79 },
-    { "Month":"2015-01-01", "Condition":"Malaria", "TreatedPerPop":162 },
-    { "Month":"2015-01-01", "Condition":"Diarrhea", "TreatedPerPop":64 },
-    { "Month":"2015-01-01", "Condition":"ARI", "TreatedPerPop":113 },
-    { "Month":"2015-02-01", "Condition":"Malaria", "TreatedPerPop":226 },
-    { "Month":"2015-02-01", "Condition":"Diarrhea", "TreatedPerPop":93 },
-    { "Month":"2015-02-01", "Condition":"ARI", "TreatedPerPop":97 }
+    { "Month":"2015-01-01", "Condition":"Malaria", "TreatedPerPop":177 },
+    { "Month":"2015-01-01", "Condition":"Diarrhea", "TreatedPerPop":68 },
+    { "Month":"2015-01-01", "Condition":"ARI", "TreatedPerPop":121 },
+    { "Month":"2015-02-01", "Condition":"Malaria", "TreatedPerPop":250 },
+    { "Month":"2015-02-01", "Condition":"Diarrhea", "TreatedPerPop":99 },
+    { "Month":"2015-02-01", "Condition":"ARI", "TreatedPerPop":106 },
+    { "Month":"2015-03-01", "Condition":"Malaria", "TreatedPerPop":205 },
+    { "Month":"2015-03-01", "Condition":"Diarrhea", "TreatedPerPop":62 },
+    { "Month":"2015-03-01", "Condition":"ARI", "TreatedPerPop":99 }
 ];
-

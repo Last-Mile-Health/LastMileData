@@ -144,10 +144,10 @@
 
 </script>
 
-<h1>Executive Dashboard <span style="font-size:60%">(updated: 3/12/2015)</span></h1>
+<h1>Executive Dashboard <span style="font-size:60%">(updated: 4/12/2015)</span></h1>
 <hr>
 
-<!-- START: Dashboard row 1 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>1</b>. Number of FHWs deployed</h3>
@@ -158,11 +158,13 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>55</td>
                 <td>55</td>
                 <td>55</td>
+                <td>58</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -173,9 +175,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 1 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 2 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>2</b>. Number of FHW supervisors</h3>
@@ -186,8 +188,10 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
+                <td>5</td>
                 <td>5</td>
                 <td>5</td>
                 <td>5</td>
@@ -201,9 +205,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 2 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 3 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>3</b>. Number of people served</h3>
@@ -214,11 +218,13 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>14,217</td>
                 <td>14,298</td>
                 <td>14,397</td>
+                <td>14,517</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -229,9 +235,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 3 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 4 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>4</b>. Number of villages served</h3>
@@ -242,13 +248,13 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>52</td>
                 <td>52</td>
                 <td>52</td>
-                <!--<td>54</td>-->
-                <!--<td>54</td>-->
+                <td>55</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -259,9 +265,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 4 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 5 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>5</b>. Number of health workers trained in Ebola-specific services</h3>
@@ -272,11 +278,13 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>577</td>
                 <td>734</td>
                 <td>1,307</td>
+                <td>1,367</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -287,9 +295,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 5 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 6 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>6</b>. Number of health centers trained to respond to Ebola</h3>
@@ -300,8 +308,10 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
+                <td>36</td>
                 <td>36</td>
                 <td>36</td>
                 <td>36</td>
@@ -315,9 +325,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 6 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 7 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>7</b>. Total number of staff in Liberia</h3>
@@ -327,10 +337,12 @@
             <tr>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>143</td>
                 <td>149</td>
+                <td>160</td>
             </tr>
         </table>
         <hr class='smallHR'>
@@ -341,9 +353,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 7 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 8 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>8</b>. Total number of staff in U.S.</h3>
@@ -354,9 +366,11 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>12</td>
+                <td>13</td>
                 <td>13</td>
                 <td>13</td>
             </tr>
@@ -369,9 +383,9 @@
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 8 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 9 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>9</b>. Total funds received</h3>
@@ -382,24 +396,26 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>$5,929,485</td>
                 <td>$6,529,994</td>
                 <td>$7,424,971</td>
+                <td>$8,404,584</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: ON TRACK. In addition to the $6.5m in financing that has been received to date, approximately $1.8m in committed financing can be counted as receivables.</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. LMH is on track to acheive goal. In addtion to the $8.4m in financing that has been received to date, approximately $600,000 in committed financing can be counted as FY15 receivables, with an additional $1.7m in receivables for FY17 & FY18.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_fundsReceived"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 9 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 10 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>10</b>. Total funds received and committed</h3>
@@ -410,24 +426,26 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>$7,916,371</td>
                 <td>$8,359,411</td>
                 <td>$8,561,521</td>
+                <td>$9,133,923</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: ON TRACK. In addition to the $8.3 million funds received and committed, approximately $600,000 in highly likely philanthropy is currently pipelined.</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. LMH has exceeded goal. In addition to the $9.1 million funds received and committed, approximately $200,000 in highly likely philanthropy is currently pipelined.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_fundsReceivedAndCommitted"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 10 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 11 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>11</b>. Percent of FY15 budget raised to date</h3>
@@ -438,24 +456,26 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>85%</td>
                 <td>94%</td>
-                <td>100%</td>
+                <td>106%</td>
+                <td>120%</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: ON TRACK. LMH is on track to achieve this goal based upon $1.8m in receivables and $600,000 in highly likely philanthropy pending.</p>
+        <p><b>Progress-to-goal</b>: ON TRACK. LMH has achieved this goal.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_percentOfBudgetRaised"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 11 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 12 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>12</b>. Total FY15 expenses</h3>
@@ -466,24 +486,26 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>$2,010,935</td>
                 <td>$2,767,124</td>
                 <td>$3,268,932</td>
+                <td>$4,290,787</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <p><b>Progress-to-goal</b>: OFF TRACK. $2,767,124 is below budget due to deferred spending.  As part of FY16 planing - teams are reviewing and updating activities/expenses for the remainder of FY15.</p>
+        <p><b>Progress-to-goal</b>: OFF TRACK. Likely to be under budget by end of FY due to deferred expenses in Q3.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_fy15Expenses"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 12 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 13 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>13</b>. Percent of FY15 budget spent</h3>
@@ -494,24 +516,26 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>29%</td>
                 <td>40%</td>
                 <td>49%</td>
+                <td>61%</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
+        <p><b>Progress-to-goal</b>: OFF TRACK. Likely to be under budget by end of FY due to defferred expenses in Q3.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_fy15Spent"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 13 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 14 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>14</b>. Cash on hand</h3>
@@ -522,24 +546,26 @@
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>$4,305,484</td>
                 <td>$4,623,701</td>
                 <td>$4,791,627</td>
+                <td>$4,245,777</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
+        <p><b>Progress-to-goal</b>: Represents 10 months' worth operating cash.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_cashOnHand"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 14 -->
+<!-- END: Dashboard row -->
 
-<!-- START: Dashboard row 15 -->
+<!-- START: Dashboard row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>15</b>. Cash burn rate</h3>
@@ -550,18 +576,20 @@
             <tr>
                 <th>Dec '14</th>
                 <th>Jan '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>$329,000</td>
                 <td>$420,000</td>
+                <td>$667,000</td>
             </tr>
         </table>
         <hr class='smallHR'>
-        <!--<p><b>Progress-to-goal</b>: Narrative goes here...</p>-->
+        <p><b>Progress-to-goal</b>: Spike due to quarterly procurements.</p>
     </div>
     <div class="col-md-7">
         <div id="dashboard_cashBurnRate"></div>
     </div>
 </div>
 <hr>
-<!-- END: Dashboard row 15 -->
+<!-- END: Dashboard row -->

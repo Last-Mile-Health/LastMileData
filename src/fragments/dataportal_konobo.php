@@ -62,6 +62,27 @@
               });
 
             LMD_dimpleHelper.lineGraph_monthly({
+                targetDiv: "konobo_facilityDelivery",
+                data: myData_Konobo.facilityDelivery,
+                colors: ["#F79646"],
+                timeInterval: 1,
+                size: {x:505, y:400},
+                xyVars: {x:"Month", y:"Facility Delivery"},
+              });
+
+            LMD_dimpleHelper.lineGraph_monthly({
+                targetDiv: "konobo_anc",
+                data: myData_Konobo.ancVisitation,
+                colors: ["#9BBB59", "#4BACC6", "#F79646", "#C0504D", "#8064A2"],
+                timeInterval: 1,
+                size: {x:590, y:380},
+                xyVars: {x:"Month", y:"Percent"},
+                axisTitles: {y:"Percent of women"},
+                multLine: "Rate",
+                legend: "right"
+              });
+
+            LMD_dimpleHelper.lineGraph_monthly({
                 targetDiv: "konobo_sickChildFollowupRate",
                 data: myData_Konobo.sickChildFollowupRate,
                 colors: ["#F79646"],
@@ -106,10 +127,10 @@
 // !!!!!
 var svg = dimple.newSvg("#konobo_sickChildSource", 545, 300);
 var myChart = new dimple.chart(svg, myData_Konobo.sickChildSource);
-myChart.setBounds(55, 30, 430, 235)
+myChart.setBounds(55, 30, 430, 235);
 myChart.addCategoryAxis("x", "Month");
 myChart.addCategoryAxis("y", "");
-myChart.addMeasureAxis("p", "Percent");
+myChart.addMeasureAxis("p", "Value");
 var pies = myChart.addSeries("Source", dimple.plot.pie);
 pies.radius = 25;
 myChart.addLegend(140, 10, 330, 20, "right");
@@ -122,10 +143,10 @@ myChart.draw();
 
 </script>
 
-<h1>Konobo Monthly Report <span style="font-size:60%">(updated: 3/18/2015)</span></h1>
+<h1>Konobo Monthly Report <span style="font-size:60%">(updated: 4/12/2015)</span></h1>
 <hr>
 
-<!-- START: Konobo row 1 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>Scale</b>. Number of FHWs deployed</h3>
@@ -135,11 +156,13 @@ myChart.draw();
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>55</td>
                 <td>55</td>
                 <td>55</td>
+                <td>58</td>
             </tr>
         </table>
     </div>
@@ -148,9 +171,9 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 1 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 2 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>Scale</b>. Number of people served</h3>
@@ -160,11 +183,13 @@ myChart.draw();
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>14,217</td>
                 <td>14,298</td>
                 <td>14,397</td>
+                <td>14,517</td>
             </tr>
         </table>
     </div>
@@ -173,9 +198,9 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 2 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 3 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>Scale</b>. Number of villages served</h3>
@@ -185,13 +210,13 @@ myChart.draw();
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>52</td>
                 <td>52</td>
                 <td>52</td>
-                <!--<td>54</td>-->
-                <!--<td>54</td>-->
+                <td>55</td>
             </tr>
         </table>
     </div>
@@ -200,67 +225,55 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 3 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 4 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
-        <h3><b>M&E</b>. # of records entered</h3>
-        <p><b>Definition</b>: Number of paper records entered into the database by data clerks</p>
+        <h3><b>Impact</b>. Facility delivery</h3>
+        <p><b>Definition</b>: Percentage of women who delivered in a health facility (out of all women who delivered in the past month)</p>
         <table class='ptg_data'>
             <tr>
-                <th>Oct '14</th>
-                <th>Nov '14</th>
-                <th>Dec '14</th>
-                <th>Jan '15</th>
-                <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
-                <td>1629</td>
-                <td>1557</td>
-                <td>135</td>
-                <td>1080</td>
-                <td>1003</td>
+                <td>68.4%</td>
             </tr>
         </table>
     </div>
     <div class="col-md-7">
-        <div id="konobo_numRecordsEntered"></div>
+        <div id="konobo_facilityDelivery"></div>
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 4 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 5 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
-        <h3><b>M&E</b>. % of records QA'd</h3>
-        <p><b>Definition</b>: Percentage of paper records entered by a data clerk that underwent data quality assurance with a supervisor</p>
+        <h3><b>Impact</b>. Antenatal care rates</h3>
+        <p><b>Definition</b>: Percentage of women who received at least {one, four} ANC visits during the course of their pregnancy (out of all women who delivered in the past month)</p>
         <table class='ptg_data'>
             <tr>
-                <th>Oct '14</th>
-                <th>Nov '14</th>
-                <th>Dec '14</th>
-                <th>Jan '15</th>
-                <th>Feb '15</th>
+                <th></th>
+                <th>ANC-1</th>
+                <th>ANC-4</th>
             </tr>
             <tr>
-                <td>5.6%</td>
-                <td>2.9%</td>
-                <td>8.9%</td>
-                <td>1.1%</td>
-                <td>9.6%</td>
+                <td>Mar '15</td>
+                <td>91.3%</td>
+                <td>43.5%</td>
             </tr>
         </table>
     </div>
     <div class="col-md-7">
-        <div id="konobo_dataEntryQA"></div>
+        <div id="konobo_anc"></div>
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 5 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 6 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>iCCM</b>. Sick child visit source</h3>
@@ -268,12 +281,12 @@ myChart.draw();
         <table class='ptg_data'>
             <tr>
                 <th>Source</th>
-                <th>Percent (Feb '15)</th>
+                <th>Percent (Mar '15)</th>
             </tr>
-            <tr><td style='text-align:left'>Parent came to me</td><td>55.5%</td></tr>
-            <tr><td style='text-align:left'>Well child visit</td><td>4.6%</td></tr>
-            <tr><td style='text-align:left'>Noticed child was sick</td><td>17.7%</td></tr>
-            <tr><td style='text-align:left'>Other</td><td>22.3%</td></tr>
+            <tr><td style='text-align:left'>Parent came to me</td><td>57.9%</td></tr>
+            <tr><td style='text-align:left'>Well child visit</td><td>3.6%</td></tr>
+            <tr><td style='text-align:left'>Noticed child was sick</td><td>15.8%</td></tr>
+            <tr><td style='text-align:left'>Other</td><td>22.7%</td></tr>
         </table>
     </div>
     <div class="col-md-7">
@@ -281,12 +294,12 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 6 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 7 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
-        <h3><b>iCCM</b>. Followup Rate</h3>
+        <h3><b>iCCM</b>. Sick child follow-up Rate</h3>
         <p><b>Definition</b>: % of sick child cases treated within community that received 3 days of follow-up</p>
         <table class='ptg_data'>
             <tr>
@@ -295,13 +308,15 @@ myChart.draw();
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
                 <td>97.5%</td>
                 <td>98.6%</td>
                 <td>100.0%</td>
-                <td>99.6%</td>
+                <td>99.3%</td>
                 <td>100.0%</td>
+                <td>99.4%</td>
             </tr>
         </table>
     </div>
@@ -310,9 +325,9 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 7 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 8 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>iCCM</b>. Number of sick children treated</h3>
@@ -324,13 +339,15 @@ myChart.draw();
                 <th>Dec '14</th>
                 <th>Jan '15</th>
                 <th>Feb '15</th>
+                <th>Mar '15</th>
             </tr>
             <tr>
-                <td>430</td>
-                <td>204</td>
-                <td>264</td>
-                <td>252</td>
+                <td>429</td>
+                <td>207</td>
+                <td>241</td>
                 <td>255</td>
+                <td>350</td>
+                <td>295</td>
             </tr>
         </table>
     </div>
@@ -339,9 +356,9 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 8 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 9 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>iCCM</b>. Number of sick children treated, by condition</h3>
@@ -354,10 +371,10 @@ myChart.draw();
                 <th>ARI</th>
             </tr>
             <tr>
-                <td>Feb '15</td>
-                <td>326</td>
-                <td>134</td>
-                <td>139</td>
+                <td>Mar '15</td>
+                <td>297</td>
+                <td>90</td>
+                <td>143</td>
             </tr>
         </table>
     </div>
@@ -366,9 +383,9 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 9 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row 10 -->
+<!-- START: Konobo row -->
 <div class="row">
     <div class="col-md-4">
         <h3><b>iCCM</b>. Number of sick children treated, per 10,000 population</h3>
@@ -381,10 +398,10 @@ myChart.draw();
                 <th>ARI</th>
             </tr>
             <tr>
-                <td>Feb '15</td>
-                <td>226</td>
-                <td>93</td>
-                <td>97</td>
+                <td>Mar '15</td>
+                <td>205</td>
+                <td>62</td>
+                <td>99</td>
             </tr>
         </table>
     </div>
@@ -393,9 +410,71 @@ myChart.draw();
     </div>
 </div>
 <hr>
-<!-- END: Konobo row 10 -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row X -->
+<!-- START: Konobo row -->
+<div class="row">
+    <div class="col-md-4">
+        <h3><b>M&E</b>. # of records entered</h3>
+        <p><b>Definition</b>: Number of paper records entered into the database by data clerks</p>
+        <table class='ptg_data'>
+            <tr>
+                <th>Oct '14</th>
+                <th>Nov '14</th>
+                <th>Dec '14</th>
+                <th>Jan '15</th>
+                <th>Feb '15</th>
+                <th>Mar '15</th>
+            </tr>
+            <tr>
+                <td>1629</td>
+                <td>1557</td>
+                <td>135</td>
+                <td>1080</td>
+                <td>1051</td>
+                <td>2372</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-7">
+        <div id="konobo_numRecordsEntered"></div>
+    </div>
+</div>
+<hr>
+<!-- END: Konobo row -->
+
+<!-- START: Konobo row -->
+<div class="row">
+    <div class="col-md-4">
+        <h3><b>M&E</b>. % of records QA'd</h3>
+        <p><b>Definition</b>: Percentage of paper records entered by a data clerk that underwent data quality assurance with a supervisor</p>
+        <table class='ptg_data'>
+            <tr>
+                <th>Oct '14</th>
+                <th>Nov '14</th>
+                <th>Dec '14</th>
+                <th>Jan '15</th>
+                <th>Feb '15</th>
+                <th>Mar '15</th>
+            </tr>
+            <tr>
+                <td>5.6%</td>
+                <td>2.9%</td>
+                <td>8.9%</td>
+                <td>1.1%</td>
+                <td>9.5%</td>
+                <td>7.3%</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-7">
+        <div id="konobo_dataEntryQA"></div>
+    </div>
+</div>
+<hr>
+<!-- END: Konobo row -->
+
+<!-- START: Konobo row -->
 <!--<div class="row">
     <div class="col-md-4">
         <h3><b>Scale</b>. Indicator name</h3>
@@ -418,9 +497,9 @@ myChart.draw();
     </div>
 </div>
 <hr>-->
-<!-- END: Konobo row X -->
+<!-- END: Konobo row -->
 
-<!-- START: Konobo row X -->
+<!-- START: Konobo row -->
 <!--<div class="row">
     <div class="col-md-4">
         <h3><b>Scale</b>. Indicator name</h3>
@@ -443,5 +522,4 @@ myChart.draw();
     </div>
 </div>
 <hr>-->
-<!-- END: Konobo row X -->
-
+<!-- END: Konobo row -->

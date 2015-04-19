@@ -12,44 +12,27 @@
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/res/page_deqa.css"  type="text/css" />
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
         <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
         <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
+        <script src="/LastMileData/src/js/LMD_accessControl.js"></script>
         <script src="/LastMileData/src/js/deqa_v20141015.js"></script>
         <script src="/LastMileData/src/js/formHelper.js"></script>
         
-        <style>
-            .btn { width:100%; }
-            
-            #modal_sendRecords_ajaxLoadIcon, #modal_sendRecords_close, #modal_sendRecords_ajaxInner {
-                display:none;
-            }
-            
-            #modal_sendRecords_ajaxInner {
-                width:100%;
-                padding:2px;
-                height:150px;
-                overflow-y:scroll;
-                background-color:white;
-                -webkit-box-shadow: 0px 0px 25px 0px #bbbbbb;
-            }
-            
-            .ajaxBlock {
-                color:white;
-                font-weight:bold;
-                font-size:16px;
-                float:left;
-                height: 21px;
-                width: 34px;
-                background-color:#555555;
-                text-align:center;
-                margin: 1px;
-                -webkit-border-radius: 4px;
-            }
-        </style>
+        <script>
+        $(document).ready(function(){
+            // Apply access control settings
+            // Set permissions in LMD_accessControl.js file
+            LMD_accessControl.setPage('deqa');
+            LMD_accessControl.setUserType('deqa'); // !!!!! ?????
+            LMD_accessControl.go();
+        });
+        </script>
+        
     </head>
     
     <body style="display:none">
@@ -60,7 +43,7 @@
             <div class="jumbotron">
                 <h1>Data Entry / Quality Assurance</h1>
                 <p>This section is meant to be used by our M&E staff. This section can be accessed offline when no internet connection is present.</p>
-                <h4><b>App version: 00476</b></h4>
+                <h4><b>App version: 00485</b></h4>
             </div>
             
             <!-- Current forms -->
@@ -70,7 +53,7 @@
                     <p>Click on one of the buttons below to perform data entry.</p>
                     <p><a href="/LastMileData/src/forms/0_testDE.html" class="btn btn-success">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_reg02_registration.html" class="btn btn-success">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
-                    <p><a href="/LastMileData/src/forms/fhw_kpi03_kpiassessment.html" class="btn btn-success">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.02]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/fhw_kpi03_kpiassessment.html" class="btn btn-success">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.03]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_ref02_referral.html" class="btn btn-success">FHW: Referral &nbsp;&nbsp;<b>[REF.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html" class="btn btn-success">FHW: Big Belly (initial) &nbsp;&nbsp;<b>[BBI.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html" class="btn btn-success">FHW: Big Belly (follow-up) &nbsp;&nbsp;<b>[BBF.02]</b></a></p>
@@ -118,11 +101,8 @@
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_downloadDataFile" title="Click here to download all data entry forms onto local disk. This is useful if there is no internet connection, and you need to transfer the files on a thumb drive to someone else's computer to send to the MySQL databasse.">Download data file</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_uploadDataFile" title="Upload a data file from someone else's M&E laptop. Does not requires an internet connection, although an internet connection is required to send files to the MySQL database.">Upload data file</a></p>
                     <p><a href="/LastMileData/src/pages/viewLocalRecords.html" class="btn btn-danger" title="View all locally-stored records.">View local records</a></p>
-                    <p><a href="/LastMileData/src/pages/viewSentRecords.php" class="btn btn-danger" title="View aggregate record counts of records that have been sent to the database.">Data entry summary</a></p>
-                    <p><a href="/LastMileData/src/pages/report_sickChild.php" class="btn btn-danger" title="View sick child report.">Sick child report</a></p>
-                    <p><a href="/LastMileData/src/pages/report_ebola.php" class="btn btn-danger" title="View ebola report.">Ebola report</a></p>
-                    <p><a href="/LastMileData/src/pages/idNumbers.php" class="btn btn-danger" title="View ID Numbers (Villages, FHWs, Supervisors).">View ID numbers</a></p>
-                    <p><a href="/LastMileData/src/forms/util_memberIDAssignmentList.html" class="btn btn-danger" title="Create Member ID Assignment Lists.">Member ID Assignment List</a></p>
+                    <p><a href="/LastMileData/src/forms/util_memberIDAssignmentTool.html" class="btn btn-danger" title="Generate Member ID Assignment Tools.">Member ID Assignment Tool</a></p>
+                    <p><a href="/LastMileData/src/forms/util_householdIDAssignmentTool.html" class="btn btn-danger" title="Generate Household ID Assignment Tools.">Household ID Assignment Tool</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_eesLedger" title="Generate the 'FHW EES Ledger'">Generate "FHW EES Ledger"</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_populationReport" title="Generate the 'FHW Population Report'">Generate "FHW Population Report"</a></p>
                 </div>
@@ -483,6 +463,10 @@
                             <div id="modal_QA_pKeyDiv3" class="form-group">
                                 <label for="modal_QA_pKey3">pKey 3:</label>
                                 <input id="modal_QA_pKey3" class="form-control input-lg">
+                            </div>
+                            <div id="modal_QA_pKeyDiv4" class="form-group">
+                                <label for="modal_QA_pKey4">pKey 4:</label>
+                                <input id="modal_QA_pKey4" class="form-control input-lg">
                             </div>
                             <div id="qaNoMatch" class="form-group" style="display:none">
                                 <span style="color:red">No match was found in the current record set.</span>

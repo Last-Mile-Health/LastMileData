@@ -77,7 +77,5 @@
             }
             
         ?>
-        <br>
-        <a href="/LastMileData/src/pages/page_deqa.html">Return to DEQA page.</a>
     </body>
 </html>

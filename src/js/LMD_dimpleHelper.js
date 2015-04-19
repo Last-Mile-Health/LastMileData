@@ -1,7 +1,7 @@
 var LMD_dimpleHelper = (function(){
 
     // Monthly line graph
-    var lineGraph_monthly = function(params){
+    function lineGraph_monthly(params){
 
         // Create new dimple SVG; set data; create new chart object
         var svg = dimple.newSvg("#" + params.targetDiv, params.size.x, params.size.y);
@@ -47,8 +47,8 @@ var LMD_dimpleHelper = (function(){
 
     // Description
     return {
-        lineGraph_monthly: lineGraph_monthly,
+        lineGraph_monthly: lineGraph_monthly
 //        pieGraph_monthly: pieGraph_monthly
-    }
+    };
 
 })();

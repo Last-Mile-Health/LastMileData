@@ -1,4 +1,4 @@
-<h1>FHW Training <span style="font-size:60%">(updated: 3/12/2015)</span></h1>
+<h1>FHW Training <span style="font-size:60%">(updated: 4/12/2015)</span></h1>
 <hr>
 
 <h3>FHWs</h3>
@@ -18,8 +18,8 @@
         <td>Grand Gedeh</td>
         <td>Konobo</td>
         <td>Konobo</td>
-        <td>45</td>
-        <td>45</td>
+        <td>48</td>
+        <td>48</td>
         <td>31</td>
         <td>14</td>
         <td>5</td>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHW Form (RVI 01) - Routine Visit Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
+        <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
+        <script src="/LastMileData/src/js/formHelper.js"></script>
+        <script src="/LastMileData/src/js/formValidate.js"></script>
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            .inner_L { width: 3.0in; }
+            .inner_C { width: 2.3in; }
+            .inner_R { width: 2.0in; }
+            
+            .meBox { position:relative; top:-17px; }
+            
+            #RT { position:relative; top:-10px }
+            .rvTable { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; position:relative; left:6px; }
+            .rvTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            .rvTable td { border: 1px solid black; height:28px; padding:0px; text-align:center; }
+            
+            #rvHeaders { position:absolute; top:-130px; left:377px; height:450px; width:180px; font-weight:bold; -webkit-transform:rotate(270deg); }
+            #rvHeadersTable td { text-align:center; height:34px; }
+            
+            .c1 { width:0.4in; }
+            .c2 { width:0.5in; border:none; margin-right:1px; margin-left:1px; }
+            .c3 { width:0.93in; border:none; margin-right:1px; margin-left:1px; }
+            .c4 { width:0.32in; border:none; margin-right:1px; margin-left:1px; }
+            .c5 { width:1.0in; }
+            .c6 { width:1.0in; border:none; margin-right:1px; margin-left:1px; }
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        
+        
+        <!-- START: PAGE 1 -->
+        <div class="page">
+            
+            
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="/LastMileData/res/logo_liberia.png">
+                <span class="h2">CHW: Routine Visit</span>
+                <img style="float:right" src="/LastMileData/res/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <div class="thickBox">
+                
+                <div>
+                    <b>IF birth, death, or movement, start "Births, Deaths, & Movements Form".</b><br>
+                    <b>IF infant under-1, check vaccine card.</b>
+                </div>
+                
+                <hr>
+                <div class="headField" style="width:1.05in">CHW name/ID:</div>
+                <div class="headField" style="width:1.37in"><input class="stored autocomplete" name="fhwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:120px"> / </div>
+                <div class="headField" style="width:1.0in"><input class="stored integer" name="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div class="headField" style="width:0.7in">Village ID:</div>
+                <div class="headField" style="width:0.8in"><input class="stored integer" name="fk_village" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div style="clear:both; height:3px;"></div>
+                
+            </div>
+            <!-- END: FORM HEADER -->
+
+            
+            
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="RT">
+                
+                <!-- Vertically-rotated headers -->
+                <div id="rvHeaders">
+                    <table id="rvHeadersTable">
+                        <tr><td># Births</td></tr>
+                        <tr><td># Deaths</td></tr>
+                        <tr><td># Movements</td></tr>
+                        <tr><td># Big bellies</td></tr>
+                        <tr><td># Infants (under 1)</td></tr>
+                        <tr><td># Vaccine cards seen</td></tr>
+                        <tr><td>Ebola education (Y/N)</td></tr>
+                        <tr><td># Big belly visits</td></tr>
+                        <tr><td># Sick child visits</td></tr>
+                        <tr><td># Mebers on FP</td></tr>
+                        <tr><td># FP visits</td></tr>
+                        <tr><td># Well child visits</td></tr>
+                        <tr><td># Well adult visits</td></tr>
+                    </table>
+                </div>
+
+                <!-- START: Registration table -->
+                <table class='rvTable'>
+                    
+                    <!-- Table header (1) -->
+                    <tr>
+                        <th style="border-color:white">&nbsp;</th>
+                        <th style="border-left-color:white; border-top-color:white;">&nbsp;</th>
+                        <th colspan="7">Every visit</th>
+                        <th colspan="7">Only use if trained</th>
+                    </tr>
+                    
+                    <!-- Table header (2) -->
+                    <tr>
+                        <th class="c1" style="border-left-color:white; border-top-color:white;"></th>
+                        <th style="height:160px">HH<br>ID</th>
+                        <th>Visit Date</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                </table>
+                <!-- END: Registration table -->
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            
+            
+            <!-- START: M&E Box -->
+            <div class="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">RVI.01</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="de_init">
+                DE Date: <input class="stored" name="de_date">
+                QA Initials: <input class="stored" name="qa_init">
+                QA Date: <input class="stored" name="qa_date">
+            </div>
+            <!-- START: M&E Box -->
+            
+            
+            
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-success">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="table" value="tbl_data_fhw_reg_registration">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
