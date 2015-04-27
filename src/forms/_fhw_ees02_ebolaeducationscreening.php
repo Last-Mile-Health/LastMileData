@@ -31,7 +31,7 @@
             .inner_C { width: 2.3in; }
             .inner_R { width: 2.0in; }
             
-            /*.meBox { position:relative; top:-17px; }*/
+            /*#meBox { position:relative; top:-17px; }*/
             
             .multiplePages {
                 overflow:hidden;

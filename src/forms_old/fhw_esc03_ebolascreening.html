@@ -44,8 +44,8 @@
             /*#sectionB { position:relative; top:-22px; }*/
             /*#sectionC { position:relative; top:-33px; }*/
             /*#sectionD { position:relative; top:-44px; }*/
-            /*.meBox { position:relative; top:-55px; }*/
-            /*@media print { .meBox { position:relative; top:-50px; } }    !!!!! bug fix; delete if fixed !!!!! */
+            /* #meBox { position:relative; top:-55px; }*/
+            /* @media print { #meBox { position:relative; top:-50px; } }    !!!!! bug fix; delete if fixed !!!!! */
             
             .L4 { width: 4.0in }
             .C4 { width: 1.3in }
@@ -437,14 +437,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">ESC.03</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='3'>
             </div>
             <!-- END: M&E Box -->
             

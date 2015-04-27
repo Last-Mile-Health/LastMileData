@@ -25,10 +25,10 @@
             #sectionA { position:relative; top:-7px; }
             #sectionB { position:relative; top:-14px; }
             #sectionC { position:relative; top:-21px; }
-            .meBox { position:relative; top:-28px; }
+            #meBox { position:relative; top:-28px; }
             
             @media print {
-                .meBox { position:relative; top:-48px; }
+                #meBox { position:relative; top:-48px; }
             }
             
             .bdmTable { border-collapse:collapse; margin:0px; padding:3px; }
@@ -378,14 +378,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">BDM.02</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='2'>
             </div>
             <!-- START: M&E Box -->
             

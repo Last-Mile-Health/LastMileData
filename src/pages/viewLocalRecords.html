@@ -31,10 +31,12 @@
             // Loop through keys of myRecordset
             for (rKey in myRecordset) {
                 try {
+//console.log(myRecordset[rKey]);
                     // Assign record object to currentRecord
                     currentRecord = JSON.parse(myRecordset[rKey]);
                 }
                 catch(e) {
+//console.log("error");
                     currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
                 }
 
@@ -42,10 +44,10 @@
                 // !!!!! consider using type = "ODK" !!!!!
 //                if (currentRecord.type == "form") {
                     var row = '<tr><td>' + currentRecord.table + '</td>';
-                    row += '<td>' + currentRecord.de_date + '</td>';
-                    row += '<td>' + currentRecord.de_init + '</td>';
-                    row += '<td>' + currentRecord.qa_date + '</td>';
-                    row += '<td>' + currentRecord.qa_init + '</td></tr>';
+                    row += '<td>' + currentRecord.meta_DE_date + '</td>';
+                    row += '<td>' + currentRecord.meta_DE_init + '</td>';
+                    row += '<td>' + currentRecord.meta_QA_date + '</td>';
+                    row += '<td>' + currentRecord.meta_QA_init + '</td></tr>';
                     $('#myTable').append(row);
 //                }
             }

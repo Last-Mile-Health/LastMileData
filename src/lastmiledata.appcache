@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version:      00485
+# Version:      00487
 # Author:       Avi Kenny, Last Mile Health
 # Last updated: 2015-01-14
 
@@ -105,7 +105,7 @@ CACHE:
 
 # src >> pages
 /LastMileData/src/pages/page_deqa.html
-#/LastMileData/src/pages/viewLocalRecords.html
+/LastMileData/src/pages/viewLocalRecords.html
 
 ########## NETWORK ##########
 NETWORK:

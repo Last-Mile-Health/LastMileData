@@ -111,17 +111,17 @@ input {
 }
 
 /* For M&E box at bottom of each form */
-.meBox {
+#meBox {
     border:2px solid black;
     padding:5px;
     margin-bottom:15px;
     text-align:center;
 }
-.meBox input { margin-right:10px; }
-input[name=de_init] { width:45px; }
-input[name=de_date] { width:75px; }
-input[name=qa_init] { width:45px; }
-input[name=qa_date] { width:75px; }
+#meBox input { margin-right:10px; }
+input[name=meta_DE_init] { width:45px; }
+input[name=meta_DE_date] { width:75px; }
+input[name=meta_QA_init] { width:45px; }
+input[name=meta_QA_date] { width:75px; }
 input[name=sup_init] { width:45px; }
 input[name=sup_date] { width:75px; }
 

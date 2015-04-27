@@ -30,8 +30,8 @@
             #sectionC { position:relative; top:-10px; }
             #sectionD { position:relative; top:-15px; }
             
-            .meBox { position:relative; top:-25px; }
-            @media print { .meBox { position:relative; top:-45px; } }   /* To correct for a possible CSS bug */
+            #meBox { position:relative; top:-25px; }
+            @media print { #meBox { position:relative; top:-45px; } }   /* To correct for a possible CSS bug */
             
             #contactTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
             #contactTable td { border: 1px solid black; padding:0px; text-align:center; }
@@ -538,14 +538,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">ECT.03</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='3'>
             </div>
             <!-- START: M&E Box -->
             

@@ -33,16 +33,22 @@ $(document).ready(function() {
 
     
     // Append #de_date and #de_init boxes (for printing)
-    $de_date = $("input[name=de_date]");
-    $de_init = $("input[name=de_init]");
-    $("input[name=de_date]").after("<input id='de_print_date'>");
-    $("input[name=de_init]").after("<input id='de_print_init'>");
+    $de_date = $("input[name=meta_DE_date]");
+    $de_init = $("input[name=meta_DE_init]");
+    $de_date.after("<input id='de_print_date'>");
+    $de_init.after("<input id='de_print_init'>");
     
     // Set de_init and de_date; set fields to readonly
     $de_date.val(mysql_date());
     $de_date.attr('readonly','readonly');
     $de_init.val(sessionStorage.username);
     $de_init.attr('readonly','readonly');
+    
+    // Set timestamps
+    $("#meBox").append("<input name='meta_DE_startTime' class='stored' type='hidden'>");
+    $("#meBox").append("<input name='meta_DE_endTime' class='stored' type='hidden'>");
+    $("#meBox").append("<input name='meta_dataSource' class='stored' type='hidden' value='paper'>");
+    $("input[name=meta_DE_startTime]").val(mysql_time());
     
     // If in "QA mode", populate field values
     if (qaRecordID) {
@@ -137,50 +143,54 @@ $(document).ready(function() {
         // If the form DOES pass the validation step, proceed
         } else {
             
-            // If counter doesn't exist, set it
-            if (localStorage.counter === undefined) {
-                localStorage.counter = 1;
-            }
+            // Set "form end" timestamp
+            $("input[name=meta_DE_endTime]").val(mysql_time());
             
-            // Set localKey (the unique identifier for each record); increment counter
-            localKey = localStorage.counter;
-            localStorage.counter++;
-            
-            // Create record object; add key/value pairs; set record "type"
-            var myRecord = readFieldsIntoObject('.stored');
-            myRecord.type = 'form';
-            
+            // Initialize nextKey
+            var nextKey = 0;
+
             // Read file into myRecordset, run callback
             LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){
-                
-                // If in QA mode, delete current record
-                if (qaRecordID) {
-                    delete myRecordset[qaRecordID];
+
+                // Find highest key in myRecordset; assign to nextKey
+                for (key in myRecordset) { // !!!!! test for no data.lmd file ever created !!!!!
+                    if (Number(key) > nextKey) { nextKey = Number(key); }
                 }
-                
-                // Add myRecord to myRecordset
-                myRecordset[localKey] = JSON.stringify(myRecord);
-                
-                // Creates (or overwrite) the "data.lmd" file with stringified myRecordset object
-                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(myRecordset),function(){
-                    $("body").animate({ scrollTop: 0 }, 500, function(){
-                        $("body").fadeOut(500,function(){
-                            if(clicked == 'lmd_next') {
-                                // "Next" was clicked; reload page to enter new form; scroll to top
-                                window.location.reload(true);
-                            }
-                            else {
-                                // "Submit" was clicked; redirect back to DEQA
-                                window.location.assign('/LastMileData/src/pages/page_deqa.html');
-                            }
-                        })
+                nextKey++;
+
+                // Create record object; add key/value pairs; set record "type"
+                var myRecord = readFieldsIntoObject('.stored');
+                myRecord.type = 'form';
+
+                // Read file into myRecordset, run callback
+                LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){
+
+                    // If in QA mode, delete current record
+                    if (qaRecordID) {
+                        delete myRecordset[qaRecordID];
+                    }
+
+                    // Add myRecord to myRecordset
+                    myRecordset[nextKey] = JSON.stringify(myRecord);
+
+                    // Creates (or overwrite) the "data.lmd" file with stringified myRecordset object
+                    LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(myRecordset),function(){
+                        $("body").animate({ scrollTop: 0 }, 500, function(){
+                            $("body").fadeOut(500,function(){
+                                if(clicked == 'lmd_next') {
+                                    // "Next" was clicked; reload page to enter new form; scroll to top
+                                    window.location.reload(true);
+                                }
+                                else {
+                                    // "Submit" was clicked; redirect back to DEQA
+                                    window.location.assign('/LastMileData/src/pages/page_deqa.html');
+                                }
+                            })
+                        });
                     });
                 });
-                
             });
-            
         }
-        
     });
     
     
@@ -197,7 +207,8 @@ $(document).ready(function() {
     
 });
 
-// Return MySQL-formatted "DATETIME" string of current date/time
+
+// Returns MySQL-formatted date
 // !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
 function mysql_date(inputDate) {
     if (arguments.length === 0) {
@@ -205,8 +216,21 @@ function mysql_date(inputDate) {
     } else {
         var myDate = new Date(inputDate);
     }
-    return ( myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate()) );
+    return myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate());
 }
+
+
+// Returns MySQL-formatted time
+// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
+function mysql_time(inputDate) {
+    if (arguments.length === 0) {
+        var myDate = new Date();
+    } else {
+        var myDate = new Date(inputDate);
+    }
+    return myDate.toTimeString().substring(0,8);
+}
+
 
 // Pad numbers to two digits ( helper function for mysql_datetime() )
 // !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!

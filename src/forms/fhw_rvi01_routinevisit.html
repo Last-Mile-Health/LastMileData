@@ -26,9 +26,12 @@
             .inner_C { width: 2.3in; }
             .inner_R { width: 2.0in; }
             
-            .meBox { position:relative; top:-17px; }
+            #meBox { position:relative; top:-31px; }
+            #instrBox { position:relative; top:-3px; }
+            #RT { position:relative; top:-17px }
             
-            #RT { position:relative; top:-10px }
+            @media print { #meBox { position:relative; top:-44px; } } /* To correct for a possible CSS bug */
+            
             .rvTable { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; position:relative; left:6px; }
             .rvTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
             .rvTable td { border: 1px solid black; height:28px; padding:0px; text-align:center; }
@@ -68,7 +71,7 @@
             </div>
             <hr>
             
-            <div class="thickBox">
+            <div class="thickBox" id="instrBox">
                 
                 <div>
                     <b>IF birth, death, or movement, start "Births, Deaths, & Movements Form".</b><br>
@@ -103,7 +106,7 @@
                         <tr><td>Ebola education (Y/N)</td></tr>
                         <tr><td># Big belly visits</td></tr>
                         <tr><td># Sick child visits</td></tr>
-                        <tr><td># Mebers on FP</td></tr>
+                        <tr><td># Members on FP</td></tr>
                         <tr><td># FP visits</td></tr>
                         <tr><td># Well child visits</td></tr>
                         <tr><td># Well adult visits</td></tr>
@@ -118,7 +121,7 @@
                         <th style="border-color:white">&nbsp;</th>
                         <th style="border-left-color:white; border-top-color:white;">&nbsp;</th>
                         <th colspan="7">Every visit</th>
-                        <th colspan="7">Only use if trained</th>
+                        <th colspan="7" style="border-left:3px solid black">Only use if trained</th>
                     </tr>
                     
                     <!-- Table header (2) -->
@@ -132,13 +135,13 @@
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th style="border-left:3px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                     
                     <!-- Row 01 of 25 -->
@@ -163,7 +166,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>2</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -183,7 +186,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>3</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -203,7 +206,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>4</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -223,7 +226,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>5</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -243,7 +246,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>6</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -263,7 +266,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>7</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -283,7 +286,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>8</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -303,7 +306,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>9</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -323,7 +326,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>10</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -343,7 +346,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>11</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -363,7 +366,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>12</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -383,7 +386,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>13</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -403,7 +406,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>14</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -423,7 +426,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>15</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -443,7 +446,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>16</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -463,7 +466,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>17</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -483,7 +486,7 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>18</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -503,7 +506,27 @@
                     
                     <!-- Row 01 of 25 -->
                     <tr>
-                        <td>1</td>
+                        <td>19</td>
+                        <td><input class="stored c3" name="memID_1"></td>
+                        <td><input class="stored c6 datepicker" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                        <td><input class="stored c4" name="x"></td>
+                    </tr>
+                    
+                    <!-- Row 01 of 25 -->
+                    <tr>
+                        <td>20</td>
                         <td><input class="stored c3" name="memID_1"></td>
                         <td><input class="stored c6 datepicker" name="x"></td>
                         <td><input class="stored c4" name="x"></td>
@@ -530,14 +553,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">RVI.01</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='1'>
             </div>
             <!-- START: M&E Box -->
             

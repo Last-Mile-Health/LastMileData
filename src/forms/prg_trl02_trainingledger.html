@@ -28,7 +28,7 @@
             
             #sectionA { position:relative; top:-5px; }
             #sectionB { position:relative; top:-10px; }
-            .meBox { position:relative; top:-15px; }
+            #meBox { position:relative; top:-15px; }
             
             .c1 { width:0.25in; }
             .c2 { width:1.3in; border:none; margin-right:1px; margin-left:1px; }
@@ -385,14 +385,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">TRL.02</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='2'>
             </div>
             <!-- START: M&E Box -->
             

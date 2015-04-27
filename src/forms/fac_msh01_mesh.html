@@ -35,7 +35,7 @@
             .commentBox { height:40px; font-size:75% }
             .commentBox_sm { height:25px; font-size:75% }
             
-            .meBox { position:relative; top:40px; }
+            #meBox { position:relative; top:40px; }
             
             .wasteTable th { border: 1px solid black; padding:5px; text-align:center; font-weight:bold }
             .wasteTable td { border: 1px solid black; padding:5px; font-size:13px }
@@ -1544,14 +1544,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">MSH.02</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='2'>
             </div>
             <!-- END: M&E Box -->
             

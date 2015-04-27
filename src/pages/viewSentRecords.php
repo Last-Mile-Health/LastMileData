@@ -20,66 +20,66 @@ require_once("cxn.php");
         $queryString = "
 
             SELECT 'tbl_data_fhw_bbf_bigbellyfollowup' AS myTable,
-            de_init, de_date, COUNT(pk) AS recordCount, SUM(qa_init<>'') AS qaCount
+            meta_DE_init, meta_DE_date, COUNT(pk) AS recordCount, SUM(qa_init<>'') AS qaCount
             FROM tbl_data_fhw_bbf_bigbellyfollowup
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_bbi_bigbellyinitial',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_bbi_bigbellyinitial
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_bdm_movements',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_bdm_movements
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_ees_ebolaeducationscreening',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_ees_ebolaeducationscreening
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_kpi_kpiassessment',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_kpi_kpiassessment
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_pnf_postnatalfollowup',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_pnf_postnatalfollowup
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_pni_postnatalinitial',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_pni_postnatalinitial
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_ref_referral',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_ref_referral
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_reg_registration',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_reg_registration
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_sch_sickchild',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_sch_sickchild
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_sst_sicknessscreening',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_fhw_sst_sicknessscreening
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_prg_trl_trainingledger',
-            de_init, de_date, COUNT(pk), SUM(qa_init<>'')
+            meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
             FROM tbl_data_prg_trl_trainingledger
-            GROUP BY de_init, de_date
+            GROUP BY meta_DE_init, meta_DE_date
 
-            ORDER BY de_date DESC, de_init, myTable;
+            ORDER BY meta_DE_date DESC, meta_DE_init, myTable;
 
         ";
 
@@ -88,8 +88,8 @@ require_once("cxn.php");
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $tableRow = "<tr>";
-            $tableRow .= "<td>$de_date</td>";
-            $tableRow .= "<td>$de_init</td>";
+            $tableRow .= "<td>$meta_DE_date</td>";
+            $tableRow .= "<td>$meta_DE_init</td>";
             $tableRow .= "<td>$myTable</td>";
             $tableRow .= "<td>$recordCount</td>";
             $tableRow .= "<td>$qaCount</td>";

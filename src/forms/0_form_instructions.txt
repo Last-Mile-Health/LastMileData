@@ -11,7 +11,7 @@ A. STEPS FOR CREATING A NEW FORM:
     4) Create the form body
            - <input> elements should have class="stored" if they are to be stored in MySQL
            - "id" attribute of the field should match the MySQL field name
-    5) Update the three-letter form code in the "M&E Box" (<div class="meBox">)
+    5) In the "M&E Box" (<div id="meBox">), update the three-letter form code and the hidden 'meta_formVersion' field
     6) Update the value of the hidden <input> element with id="table"
            - identical to the name of the corresponding MySQL table
            - should be all lowercase
@@ -29,7 +29,7 @@ B. STEPS FOR UPDATING A FORM:
     3) Update the MySQL table accordingly
     4) Increment the version number in the filename
         - e.g. fhw_sch03_sickchild.html --> fhw_sch04_sickchild.html
-    5) Increment the version number in the <title> element and in the "M&E Box" (<div class="meBox">)
+    5) Increment the version number in the <title> element and in the "M&E Box" (<div id="meBox">)
     6) Update the application cache manifest ("lastmiledata.appcache"):
         a. move the old form under the "# src >> forms (old)" header and update the filepath
         b. add the new form under the "# src >> forms" header

@@ -33,7 +33,7 @@
             .R3 { width: 1.2in }
             .C4 { width: 3.0in }
             
-            .meBox { position:relative; top:175px; }
+            #meBox { position:relative; top:175px; }
             
             /* use CSS child selectors so that these styles don't hit the last column */
             .vaccTable { margin: 10px; }
@@ -1021,14 +1021,14 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">KPI.03</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
             </div>
             <!-- END: M&E Box -->
             

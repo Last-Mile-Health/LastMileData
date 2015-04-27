@@ -95,114 +95,22 @@ $(document).ready(function(){
     
     
     // CLICK HANDLER: Upload data file
-    $("#modal_uploadDataFile_submit").click(function() {
+    // Data is either ".LMD" files (which are either JSON or concatenated XML documents delimited with "<LMD_delimiter>") or ".XML" files
+    $("#modal_uploadLMD_submit").click(function() {
         
-        // Get file and extension
-        var fileToLoad = document.getElementById('modal_uploadDataFile_fileInput').files[0];
-        if (fileToLoad !== undefined) {
-            var sFileName = fileToLoad.name;
-            var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
-        }
-        
-        // Check for errors (no file, wrong extension, corrupt file)
-        if (document.getElementById("modal_uploadDataFile_fileInput").value === "") {
-            // Error #1: No file was selected
-            $('#modal_uploadDataFile_error').text('No file was selected.');
-            flashDiv('#modal_uploadDataFile_error');
-        } else if (sFileExtension.toLowerCase() !== "lmd") {
-            // Error #2: Wrong file extension (not ".lmd")
-            $('#modal_uploadDataFile_error').text('Please select only ".lmd" files.');
-            flashDiv('#modal_uploadDataFile_error');
-        } else if (false) {
-            // !!!!! Error #3: check for corrupt files (i.e. not formatted as proper JSON) !!!!!
-        } else {
-            // No errors; proceed with upload
-            
-            // Manipulate DOM
-            $('#modal_uploadDataFile_formContent').slideUp(500, function(){
-                $('#modal_uploadDataFile_status').slideDown(500);
-            });
-            
-            // Read in file
-            var fileReader = new FileReader();
-            fileReader.onload = function(fileLoadedEvent) {
-                // !!!!! currently using global; either namspace or make this local !!!!!
-                uploadedRecordset = JSON.parse(fileLoadedEvent.target.result);
-            };
-            fileReader.readAsText(fileToLoad, "UTF-8");
-            
-            var myRecord = {};
-            myRecord.type = 'form';
-            
-            LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
-                
-                // Read existing file (if exists) into mergedRecordset
-                var mergedRecordset = {};
-                i = 1;
-                if (result != "") {
-                    var oldRecordset = JSON.parse(result);
-                    for (var x in oldRecordset) {
-                        mergedRecordset[i] = oldRecordset[x];
-                        i++;
-                    }
-                }
-                
-                // Add uploaded records to mergedRecordset
-                for (var x in uploadedRecordset) {
-                    mergedRecordset[i] = uploadedRecordset[x];
-                    i++;
-                }
-                
-                // Write new recordset to data.lmd
-                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(mergedRecordset), function(){
-                    
-                    setTimeout(function(){
-                        // Display success message; hide modal; reset DOM
-                        $('#modal_uploadDataFile_message').text('Upload and merge complete.');
-                        setTimeout(function(){
-                            $('.modal').modal('hide');
-                            setTimeout(function(){
-                                
-                                // Manipulate DOM
-                                $('#modal_uploadDataFile_message').text('Uploading and merging data file...').hide();
-                                $('#modal_uploadDataFile_status').hide();
-                                $('#modal_uploadDataFile_formContent').show();
-                                
-                                // Clear file input
-                                $('#modal_uploadDataFile_form').get(0).reset();
-                                
-                            },1000);
-                        },1000);
-                    },2000);
-                    
-                });
-                
-            });
-            
-        }
-        
-    });
-    
-    
-    // CLICK HANDLER: Upload ODK data
-    // !!!!! some code here may be redundant with the code above !!!!!
-    $("#modal_uploadODK_submit").click(function() {
-        
+        // Reset error flag; get file input contents
         var anyErrors = false;
+        var myInput = document.getElementById('modal_uploadLMD_fileInput');
         
-        // Get fileinput
-        var myInput = document.getElementById('modal_uploadODK_fileInput');
-        
-        // Check for errors (no file, wrong extension, corrupt file)
+        // Error check #1: No file was selected
         if (myInput.files.length === 0) {
-            // Error #1: No file was selected
-            $('#modal_uploadODK_error').text('No file was selected.');
+            $('#modal_uploadLMD_error').text('No file was selected.');
+            flashDiv('#modal_uploadLMD_error');
             anyErrors = true;
-            flashDiv('#modal_uploadODK_error');
         }
         
+        // Error check #2: incorret file extension(s)
         if (!anyErrors) {
-            // Loop through files to check for non-XML extensions
             for(var i = 0; i < myInput.files.length ; i++) {
                 if (!anyErrors) {
                     
@@ -213,89 +121,148 @@ $(document).ready(function(){
                         var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
                     }
                     
-                    if (sFileExtension.toLowerCase() !== "xml") {
-                        // Error #2: Wrong file extension (not ".xml")
-                        $('#modal_uploadODK_error').text('Please select only ".xml" files.');
+                    if (['xml','lmd'].indexOf(sFileExtension.toLowerCase()) === -1) {
+                        // Incorrect file extension (not ".lmd" or ".xml")
+                        // User is NOT notified that he/she can select XML files; this is a feature for advanced users only
+                        $('#modal_uploadLMD_error').text('Please select only ".lmd" files.');
                         anyErrors = true;
-                        flashDiv('#modal_uploadODK_error');
+                        flashDiv('#modal_uploadLMD_error');
                     }
                     
                 }
             }
         }
         
+        // No errors; proceed with upload
         if (!anyErrors) {
-            // No errors; proceed with upload
-
+            
             // Manipulate DOM
-            $('#modal_uploadODK_formContent').slideUp(500, function(){
-                $('#modal_uploadODK_status').slideDown(500);
+            $('#modal_uploadLMD_formContent').slideUp(500, function(){
+                $('#modal_uploadLMD_status').slideDown(500);
             });
             
-            // Initialize uploadedRecordset !!!!! currently using global; either namspace or make this local !!!!!
-            uploadedRecordset = {};
-            
+            // Reset uploadedRecordset global object
+            uploadedRecordset = {
+                counter: 0,
+                records: {},
+                addRecord: function(myRecord){
+                    this.records[this.counter] = myRecord;
+                    this.counter++;
+                },
+                clear: function(){ this.records = {}; }
+            };
+
             // Loop through files and parse data
             for(var i = 0; i < myInput.files.length ; i++) {
                 (function(i){
-                    
-                    uploadedRecordset[i] = {};
                     
                     var file = myInput.files[i];
                     var reader = new FileReader();
                     reader.onload = function() {
 
-                        // Get string; parse into XML object
-                        var filecontent = reader.result;
-                        
-                        // !!!!! This is where the ".LMD" file generated by .NET Windows app will be split into components (each of which is a valid XML "file")
-                        // !!!!! filecontent.split("<?xml"); !!!!!
-                        
-                        var myJQXML = $.parseXML(filecontent);
-                        var $myJQXML = $(myJQXML);
-                        
-                        extractODK($myJQXML);
-                        
-                        function extractODK($XML) {
-
-                            var fieldName, fieldType;
-                            
-                            $XML.each(function(){
-                                if ($XML.children().length === 0 && $XML.prop("tagName").substr(0,4) === "LMD-") {
-                                    fieldName = $XML.prop("tagName").substr(8);
-                                    fieldType = $XML.prop("tagName").substr(4,3);
-
-                                    if (fieldType === 'TAB') {
-                                        uploadedRecordset[i].table = $XML.text();
-                                    } else if (fieldType === 'VAL') {
-                                        uploadedRecordset[i][fieldName] = $XML.text();
-                                    } else if (fieldType === 'TIM') {
-                                        uploadedRecordset[i][fieldName] = $XML.text().substr(0,$XML.text().indexOf("."));
-                                    } else if (fieldType === 'DAT') {
-                                        uploadedRecordset[i][fieldName] = mysql_date(86400000*Math.floor($XML.text()));
-                                    }
-                                    
-                                } else {
-                                    $XML.children().each(function(){
-                                        extractODK($(this));
-                                    });
-                                }
-                            });
+                        // Get file contents; test if XML or JSON
+                        var fileContents = reader.result;
+                        var xmlOrJson;
+                        var snippet = fileContents.substring(0,20).trim();
+                        if (snippet.substring(0,1) === "{") {
+                            var xmlOrJson = "json";
+                        } else if (snippet.substring(0,1) === "<") {
+                            var xmlOrJson = "xml";
                         }
-
+                        
+                        // Proceed if JSON
+                        if (xmlOrJson === "json") {
+                            
+                            // Add records to uploadedRecordset object
+                            var myRecords = JSON.parse(fileContents);
+                            for (x in myRecords) {
+                                uploadedRecordset.addRecord(myRecords[x]);
+                            }
+                            
+                        // Proceed if XML
+                        } else if (xmlOrJson === "xml") {
+                            
+                            // Split LMD files into components
+                            var fileContentArray = fileContents.split("<LMD_delimiter>");
+                            
+                            // Parse individual XML files
+                            for (j=0;j<fileContentArray.length;j++) {
+                                
+                                var myJQXML = $.parseXML(fileContentArray[j].trim());
+                                // !!!!! Need to build an error catcher for invalid XML
+                                var $myJQXML = $(myJQXML);
+                                
+                                // Extract sub-records
+                                var $subRecords = $myJQXML.find('*').filter(function(){return /^LMD\-GRP/i.test(this.nodeName);}).remove();
+                                
+                                // Process main XML file ($myJQXML)
+                                var xmlKey, xmlValue, xmlRecord = {}, xmlSubrecord = {}, chkArray, pullString = "";
+                                // !!!!! (A) the code here can be consolidated with the code (B) below !!!!!
+                                var $elementSet = $myJQXML.find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
+                                $elementSet.each(function(){
+                                    xmlPair = processLMD($(this).prop("tagName"),$(this).text());
+                                    if (xmlPair.key === "CHK") {
+                                        chkArray = xmlPair.value.split(" ");
+                                        for (opt=0; opt<chkArray.length; opt++) {
+                                            if (chkArray[opt] !== "") {
+                                                chkKey = chkArray[opt].slice(8);
+                                                xmlRecord[chkKey] = 1;
+                                            }
+                                        }
+                                    } else {
+                                        xmlRecord[xmlPair.key] = xmlPair.value;
+                                    }
+                                });
+                                uploadedRecordset.addRecord(JSON.stringify(xmlRecord));
+                                
+                                // Process subgroups ($subRecords)
+                                for(k=0;k<$subRecords.length;k++) {
+                                    
+                                    var xmlSubrecord = { table: $subRecords[k].tagName.slice(8) };
+                                    // !!!!! (B) the code here can be consolidated with the code (A) above !!!!!
+                                    $elementSet = $($subRecords[k]).find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
+                                    $elementSet.each(function(){
+                                        if ($(this).prop("tagName")==='LMD-PULL') {
+                                            pullString = $(this).text();
+                                            var pullFieldsBulky = pullString.split(",");
+                                            var pullFields = $.map(pullFieldsBulky,function(val){return val.trim().slice(8);});
+                                        } else {
+                                            xmlPair = processLMD($(this).prop("tagName"),$(this).text());
+                                            if (xmlPair.key === "CHK") {
+                                                chkArray = xmlPair.value.split(" ");
+                                                for (opt=0; opt<chkArray.length; opt++) {
+                                                    if (chkArray[opt] !== "") {
+                                                        chkKey = chkArray[opt].slice(8);
+                                                        xmlRecord[chkKey] = 1;
+                                                    }
+                                                }
+                                            } else {
+                                                xmlSubrecord[xmlPair.key] = xmlPair.value;
+                                            }
+                                        }
+                                    });
+                                    
+                                    // Pull fields from xmlRecord into sub-record
+                                    if (pullString !== "") {
+                                        for(l=0;l<pullFields.length;l++) {
+                                            xmlSubrecord[pullFields[l]] = xmlRecord[pullFields[l]];
+                                        }
+                                    }
+                                    uploadedRecordset.addRecord(JSON.stringify(xmlSubrecord));
+                                }
+                            }
+                        } else {
+                            // !!!!! Build out this error handler !!!!!
+                            alert('Error. Invalid file contents.');
+                        }
                     };
                     reader.readAsText(file);
                 })(i);
             }
             
-            // !!!!! merge with data file here !!!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
+            // Merge new records with old records
             var myRecord = {};
             myRecord.type = 'form';
-            
             LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
                 
                 // Read existing file (if exists) into mergedRecordset
@@ -310,8 +277,8 @@ $(document).ready(function(){
                 }
                 
                 // Add uploaded records to mergedRecordset
-                for (var x in uploadedRecordset) {
-                    mergedRecordset[i] = JSON.stringify(uploadedRecordset[x]);
+                for (var x in uploadedRecordset.records) {
+                    mergedRecordset[i] = uploadedRecordset.records[x];
                     i++;
                 }
                 
@@ -320,31 +287,27 @@ $(document).ready(function(){
                     
                     setTimeout(function(){
                         // Display success message; hide modal; reset DOM
-                        $('#modal_uploadODK_message').text('Upload and merge complete.');
+                        $('#modal_uploadLMD_message').text('Upload and merge complete.');
                         setTimeout(function(){
                             $('.modal').modal('hide');
                             setTimeout(function(){
                                 
                                 // Manipulate DOM
-                                $('#modal_uploadODK_message').text('Uploading and merging data file...').hide();
-                                $('#modal_uploadODK_status').hide();
-                                $('#modal_uploadODK_formContent').show();
+                                $('#modal_uploadLMD_message').text('Uploading and merging data file...').hide();
+                                $('#modal_uploadLMD_status').hide();
+                                $('#modal_uploadLMD_formContent').show();
                                 
                                 // Clear file input
-                                $('#modal_uploadODK_form').get(0).reset();
+                                $('#modal_uploadLMD_form').get(0).reset();
                                 
                             },1000);
                         },1000);
                     },2000);
                 });
             });
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
         }
-        
     });
+    
     
     
     // QA Click handlers
@@ -734,34 +697,28 @@ $(window).load(function(){
     
     // Only allow webkit-based broswers (Safari or Chrome); !!!!! consider using browser.version propery as well (Webkit build number) !!!!!
     var browser = (function() { var s = navigator.userAgent.toLowerCase(); var match = /(webkit)[ \/]([\w.]+)/.exec(s) || /(opera)(?:.*version)?[ \/]([\w.]+)/.exec(s) || /(msie) ([\w.]+)/.exec(s) || !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) || [];return { name: match[1] || "", version: match[2] || "0" }; }());
-    if (browser.name != "webkit") {
+    if (browser.name !== "webkit") {
         // Display error alert; redirect to home page
         alert("The LastMileData.org \"Data Entry / Quality Assurance\" application only works in Google Chrome or Safari.");
         window.location.assign('/LastMileData');
     }
     else {
-        // !!!!! Move the initialized code here !!!!!
-    }
-    
-    
-    
-    // If site has been initialized, proceed to DEQA
-    if ( localStorage.initialized === "yes" ) {
-        
-        // If user is not logged in, show login modal; else, proceed to DEQA
-        if (!sessionStorage.username) {
-            $('#modal_deqaLogin').modal();
+        // If site has been initialized, proceed to DEQA
+        if ( localStorage.initialized === "yes" ) {
+            // If user is not logged in, show login modal; else, proceed to DEQA
+            if (!sessionStorage.username) {
+                $('#modal_deqaLogin').modal();
+            }
+        // If site has NOT been initialized
+        } else {
+            // Show initialize modal
+            $('#modal_initialize').modal();
+
+            // Run when initialize modal is shown
+            $('#modal_initialize').on('shown.bs.modal', function() {
+                ajaxRefresh(); // Note: showLoginModal is run on success callback of ajaxRefresh();
+            });
         }
-    }
-    // If site has NOT been initialized
-    else {
-        // Show initialize modal
-        $('#modal_initialize').modal();
-        
-        // Run when initialize modal is shown
-        $('#modal_initialize').on('shown.bs.modal', function() {
-            ajaxRefresh(); // Note: showLoginModal is run on success callback of ajaxRefresh();
-        });
     }
     
     
@@ -862,6 +819,38 @@ $(window).load(function(){
     
     
 });
+
+
+
+// !!!!! Need to create documentation on ODK naming convention scheme !!!!!
+function processLMD(inputKey, inputValue) {
+    
+    var outputKey, outputValue;
+    var fieldType = inputKey.slice(4,7);
+    
+    if (fieldType === 'TAB') {
+        outputKey = "table";
+        outputValue = inputValue;
+    } else if (fieldType === 'VAL') {
+        outputKey = inputKey.slice(8);
+        outputValue = inputValue;
+    } else if (fieldType === 'TIM') {
+        outputKey = inputKey.slice(8);
+        outputValue = inputValue.substr(0,inputString.indexOf("."));
+    } else if (fieldType === 'DAT') {
+        outputKey = inputKey.slice(8);
+        outputValue = mysql_date(86400000*Math.floor(inputValue));
+    } else if (fieldType === 'CHK') {
+        outputKey = "CHK";
+        outputValue = inputValue;
+    }
+    
+    return {
+        key: outputKey,
+        value: outputValue
+    };
+
+}
 
 
 

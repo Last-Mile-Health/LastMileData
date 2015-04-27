@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>DCT Data Tool</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        
+        <style>
+            
+            table, th, td { border: 1px solid black; padding: 3px; }
+            
+            td { min-width:200px; }
+            
+            hr { border: 1px solid black; }
+            
+            body {
+                font-size:16px;
+                font-weight:bold;
+            }
+            
+            #myDiv {
+                position:relative;
+                background-color:white;
+                margin:auto;
+                padding:3px;
+            }
+            
+        </style>
+        
+        <script>
+        $(document).ready(function(){
+            
+            $('#uploadB').click(function(){
+                
+                // Choose SCF or SST
+                whichForm = $('input[name=whichForm]:checked').val();
+                switch (whichForm) {
+                    case 'DEF':
+                        // generate columnNames
+                        break;
+                    case 'DATA':
+                        // code
+                        break;
+                }
+                
+                // Create table headers
+                var $myTable = $('#myTable');
+                var myRow = "<tr>";
+                for (j in columnNames) {
+                    myRow += "<th>" + columnNames[j] + "</th>";
+                }
+                myRow += "</tr>";
+                $myTable.append(myRow);
+                
+                // Get fileinput
+                var myInput = document.getElementById('myFileInput');
+                
+                for(var i = 0; i < myInput.files.length ; i++) {
+                    (function(i){
+                        var file = myInput.files[i];
+                        var reader = new FileReader();
+                        reader.onload = function() {
+                            
+                            // Get string; parse into XML object
+                            var filecontent = reader.result;
+                                
+                                // Create table rows
+                                myRow = "<tr>";
+                                for (j in columnNames) {
+                                    myRow += "<td>" + $myJQXML.find(columnNames[j]).text() + "</td>";
+                                }
+                                myRow += "</tr>";
+                                $myTable.append(myRow);
+                                
+                            }
+                            
+                        }
+                        reader.readAsText(file);
+                    })(i);
+                }
+
+            });
+            
+            $('#downloadB').click(function(){
+                
+                var tableContents = $('#tableContents').html();
+                
+                // Construct the download link and programmatically click the link
+                var textToWrite = tableContents;
+                var textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                var fileNameToSaveAs = "data_" + yyyy + "-" + mm + "-" + dd + ".xls"; // !!!!! make this a proper MySQL date (two digits for day and month) !!!!!
+                var downloadLink = document.createElement("a");
+                downloadLink.download = fileNameToSaveAs;
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+                downloadLink.click();
+                
+            });
+            
+        });
+        </script>
+        
+    </head>
+    
+    <body id="myBody">
+        
+        <div id="myDiv">
+            <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="DEF">Definition&nbsp;&nbsp;</div>
+            <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="DATA">Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div style="float:left"><input id="myFileInput" type='file'></div>
+            <div style="float:left"><button id="uploadB" style="width:150px">Upload</button>&nbsp;&nbsp;</div>
+            <div style="float:left"><button id="downloadB" style="width:150px">Download XLS</button></div>
+            <br><hr>
+            <div id="tableContents">
+                <table><tbody id='myTable'></tbody></table>                
+            </div>
+            <div id="temp"></div>
+        </div>
+        
+        
+    </body>
+    
+</html>

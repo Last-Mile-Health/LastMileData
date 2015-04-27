@@ -69,7 +69,7 @@
             .symptomTable { padding:3px; }
             .symptomTable td { padding-left:10px; }
             
-            .meBox { position:relative; top:225px; }
+            #meBox { position:relative; top:225px; }
             
             .supBox {
                 position:relative;
@@ -910,14 +910,15 @@
             
             
             <!-- START: M&E Box -->
-            <div class="meBox">
+            <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">ECM.02</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials: <input class="stored" name="de_init">
-                DE Date: <input class="stored" name="de_date">
-                QA Initials: <input class="stored" name="qa_init">
-                QA Date: <input class="stored" name="qa_date">
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='2'>
             </div>
             <!-- END: M&E Box -->
             
