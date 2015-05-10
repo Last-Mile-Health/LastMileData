@@ -10,6 +10,10 @@ RewriteRule ^/?$ "https\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
 RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
 RewriteRule ^offline$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_deqa\.html" [R=301,L]
 
+# Redirect lastmiledata.org/portal --> DEQA page
+RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+RewriteRule ^portal$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_dataportal\.php" [R=301,L]
+
 # Redirect all HTTP requests to HTTPS
 RewriteCond %{SERVER_PORT} !=443
 RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]

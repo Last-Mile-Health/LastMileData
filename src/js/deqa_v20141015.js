@@ -836,10 +836,13 @@ function processLMD(inputKey, inputValue) {
         outputValue = inputValue;
     } else if (fieldType === 'TIM') {
         outputKey = inputKey.slice(8);
-        outputValue = inputValue.substr(0,inputString.indexOf("."));
-    } else if (fieldType === 'DAT') {
+        outputValue = inputValue.substr(0,inputKey.indexOf("."));
+    } else if (fieldType === 'DAT') { // !!!!! phase out; 'DAT' is now equivalent to 'VAL'
         outputKey = inputKey.slice(8);
-        outputValue = mysql_date(86400000*Math.floor(inputValue));
+        outputValue = inputValue;
+//    } else if (fieldType === 'DAT') {
+//        outputKey = inputKey.slice(8);
+//        outputValue = mysql_date(86400000*Math.floor(inputValue));
     } else if (fieldType === 'CHK') {
         outputKey = "CHK";
         outputValue = inputValue;
