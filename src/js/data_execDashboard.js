@@ -33,7 +33,8 @@ myData.numFHWs = [
     { "Month":"2014-12-01", "FHWs":55 },
     { "Month":"2015-01-01", "FHWs":55 },
     { "Month":"2015-02-01", "FHWs":55 },
-    { "Month":"2015-03-01", "FHWs":58 }
+    { "Month":"2015-03-01", "FHWs":58 },
+    { "Month":"2015-04-01", "FHWs":71 }
 ];
 
 // Data: numSupervisors
@@ -68,7 +69,8 @@ myData.numSupervisors = [
     { "Month":"2014-12-01", "Supervisors":5 },
     { "Month":"2015-01-01", "Supervisors":5 },
     { "Month":"2015-02-01", "Supervisors":5 },
-    { "Month":"2015-03-01", "Supervisors":5 }
+    { "Month":"2015-03-01", "Supervisors":5 },
+    { "Month":"2015-04-01", "Supervisors":7 }
 ];
 
 // Data: numPeopleServed
@@ -103,7 +105,8 @@ myData.numPeopleServed = [
     { "Month":"2014-12-01", "People":14217 },
     { "Month":"2015-01-01", "People":14298 },
     { "Month":"2015-02-01", "People":14397 },
-    { "Month":"2015-03-01", "People":14517 }
+    { "Month":"2015-03-01", "People":14517 },
+    { "Month":"2015-04-01", "People":14673 }
 ];
 
 // Data: numVillagesServed
@@ -138,7 +141,8 @@ myData.numVillagesServed = [
     { "Month":"2014-12-01", "Villages":52 },
     { "Month":"2015-01-01", "Villages":52 },
     { "Month":"2015-02-01", "Villages":52 },
-    { "Month":"2015-03-01", "Villages":55 }
+    { "Month":"2015-03-01", "Villages":55 },
+    { "Month":"2015-04-01", "Villages":64 }
 ];
 
 // Data: numHealthWorkersTrainedEbola
@@ -146,7 +150,8 @@ myData.numHealthWorkersTrainedEbola = [
     { "Month":"2014-12-01", "Health workers":577 },
     { "Month":"2015-01-01", "Health workers":734 },
     { "Month":"2015-02-01", "Health workers":1307 },
-    { "Month":"2015-03-01", "Health workers":1367 }
+    { "Month":"2015-03-01", "Health workers":1367 },
+    { "Month":"2015-04-01", "Health workers":1382 }
 ];
 
 // Data: numFacilitiesIPC
@@ -154,14 +159,16 @@ myData.numFacilitiesIPC = [
     { "Month":"2014-12-01", "Facilities":36 },
     { "Month":"2015-01-01", "Facilities":36 },
     { "Month":"2015-02-01", "Facilities":36 },
-    { "Month":"2015-03-01", "Facilities":36 }
+    { "Month":"2015-03-01", "Facilities":36 },
+    { "Month":"2015-04-01", "Facilities":36 }
 ];
 
 // Data: numStaffLiberia
 myData.numStaffLiberia = [
     { "Month":"2015-01-01", "Staff":143 },
     { "Month":"2015-02-01", "Staff":149 },
-    { "Month":"2015-03-01", "Staff":160 }
+    { "Month":"2015-03-01", "Staff":160 },
+    { "Month":"2015-04-01", "Staff":170 }
 ];
 
 // Data: numStaffUS
@@ -169,7 +176,8 @@ myData.numStaffUS = [
     { "Month":"2014-12-01", "Staff":12 },
     { "Month":"2015-01-01", "Staff":13 },
     { "Month":"2015-02-01", "Staff":13 },
-    { "Month":"2015-03-01", "Staff":13 }
+    { "Month":"2015-03-01", "Staff":13 },
+    { "Month":"2015-04-01", "Staff":13 }
 ];
 
 // Data: fundsReceived
@@ -177,7 +185,8 @@ myData.fundsReceived = [
     { "Month":"2014-12-01", "USD":5929485 },
     { "Month":"2015-01-01", "USD":6529994 },
     { "Month":"2015-02-01", "USD":7424971 },
-    { "Month":"2015-03-01", "USD":8404584 }
+    { "Month":"2015-03-01", "USD":8404584 },
+    { "Month":"2015-04-01", "USD":8500808 }
 ];
 
 // Data: fundsReceivedAndCommitted
@@ -185,7 +194,8 @@ myData.fundsReceivedAndCommitted = [
     { "Month":"2014-12-01", "USD":7916371 },
     { "Month":"2015-01-01", "USD":8359411 },
     { "Month":"2015-02-01", "USD":8561521 },
-    { "Month":"2015-03-01", "USD":9133923 }
+    { "Month":"2015-03-01", "USD":9133923 },
+    { "Month":"2015-04-01", "USD":9202778 }
 ];
 
 // Data: percentOfBudgetRaised
@@ -193,7 +203,8 @@ myData.percentOfBudgetRaised = [
     { "Month":"2014-12-01", "Percent":.85 },
     { "Month":"2015-01-01", "Percent":.94 },
     { "Month":"2015-02-01", "Percent":1.06 },
-    { "Month":"2015-03-01", "Percent":1.20 }
+    { "Month":"2015-03-01", "Percent":1.20 },
+    { "Month":"2015-04-01", "Percent":1.22 }
 ];
 
 // Data: fy15Expenses
@@ -201,7 +212,8 @@ myData.fy15Expenses = [
     { "Month":"2014-12-01", "USD":2010935 },
     { "Month":"2015-01-01", "USD":2767124 },
     { "Month":"2015-02-01", "USD":3268932 },
-    { "Month":"2015-03-01", "USD":4290787 }
+    { "Month":"2015-03-01", "USD":4290787 },
+    { "Month":"2015-04-01", "USD":5197595 }
 ];
 
 // Data: fy15Spent
@@ -209,7 +221,8 @@ myData.fy15Spent = [
     { "Month":"2014-12-01", "Percent":.29 },
     { "Month":"2015-01-01", "Percent":.40 },
     { "Month":"2015-02-01", "Percent":.49 },
-    { "Month":"2015-03-01", "Percent":.61 }
+    { "Month":"2015-03-01", "Percent":.61 },
+    { "Month":"2015-04-01", "Percent":.74 }
 ];
 
 // Data: cashOnHand
@@ -217,7 +230,8 @@ myData.cashOnHand = [
     { "Month":"2014-12-01", "USD":4305484 },
     { "Month":"2015-01-01", "USD":4623701 },
     { "Month":"2015-02-01", "USD":4791627 },
-    { "Month":"2015-03-01", "USD":4245777 }
+    { "Month":"2015-03-01", "USD":4245777 },
+    { "Month":"2015-04-01", "USD":3954646 }
 ];
 
 // Data: cashBurnRate

@@ -21,7 +21,7 @@
         <td>48</td>
         <td>48</td>
         <td>31</td>
-        <td>14</td>
+        <td>31</td>
         <td>5</td>
         <td>5</td>
     </tr>
@@ -40,8 +40,8 @@
         <td>Grand Gedeh</td>
         <td>Gbarzon</td>
         <td>Gboe-Ploe</td>
-        <td>0</td>
-        <td>0</td>
+        <td>13</td>
+        <td>13</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
@@ -51,6 +51,17 @@
         <td>Rivercess</td>
         <td>Central Rivercess</td>
         <td>Central C</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>Rivercess</td>
+        <td>Jo River</td>
+        <td>Jowein</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>

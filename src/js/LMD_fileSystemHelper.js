@@ -26,7 +26,6 @@ LMD_fileSystemHelper = (function(){
         } else {
             successCallback();
         }
-        
     }
     
     
@@ -48,9 +47,7 @@ LMD_fileSystemHelper = (function(){
                     
                 }, logError);
             }, logError);
-            
         });
-        
     }
     
     
@@ -73,12 +70,9 @@ LMD_fileSystemHelper = (function(){
                         fileWriter.onwriteend = successCallback;
                     }
                     fileWriter.onerror = logError;
-                    
                 }, logError);
             }, logError);
-            
         });
-        
     }
     
     
@@ -94,9 +88,7 @@ LMD_fileSystemHelper = (function(){
                     successCallback(dirEntry);
                 }
             });
-            
         });
-        
     }
     
     
@@ -108,14 +100,12 @@ LMD_fileSystemHelper = (function(){
             // The following two lines removes the file data.lmd
             fs.root.getFile(fileName, {create:true}, function(fileEntry) {
                 fileEntry.remove(function() {
-                if (successCallback) {
-                    successCallback();
-                }
+                    if (successCallback) {
+                        successCallback();
+                    }
                 }, logError);
             }, logError);
-            
         });
-        
     }
     
     
@@ -137,7 +127,6 @@ LMD_fileSystemHelper = (function(){
             // Run callback
             successCallback(newObject);
         });
-        
     }
     
     

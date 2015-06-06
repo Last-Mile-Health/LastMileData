@@ -27,23 +27,19 @@
     <ul>
         <li>
             <b>Monthly dashboards.</b>
-            Cross-team executive dashboard, with data from programs, HR, development, and finance. Ebola education/screening numbers, training data.
+            Contains a number of reports that are updated on a monthly basis.
         </li>
         <li>
             <b>KPI Assessment.</b>
             Data from the KPI Assessment, a short survey administered by FHWs in August of 2014 in Konobo.
         </li>
         <li>
-            <b>FHW training.</b>
-            Number of FHWs, broken down by training level.
-        </li>
-        <li>
             <b>Liberia stats.</b>
-            Population data for the communities in Liberia.
+            Population data for the communities in Liberia, and selections of data from the 2013 Demographic and Health Survey (DHS) of Liberia.
         </li>
         <li>
             <b>M&E team tools</b>
-            Monthly data from our Konobo site on scale, M&E, and iCCM
+            Tools for use by our Monitoring & Evaluation team.
         </li>
     </ul>
     

@@ -10,7 +10,7 @@ var LMD_dimpleHelper = (function(){
 
         // Set color scheme
         myChart.defaultColors = [];
-        for (i=0; i<params.colors.length; i++) {
+        for (var i=0; i<params.colors.length; i++) {
             myChart.defaultColors.push(new dimple.color(params.colors[i]));
         }
 

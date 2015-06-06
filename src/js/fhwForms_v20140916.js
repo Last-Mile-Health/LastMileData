@@ -30,7 +30,6 @@ $(document).ready(function() {
             $(this).attr('value',1);
         }
     });
-
     
     // Append #de_date and #de_init boxes (for printing)
     $de_date = $("input[name=meta_DE_date]");
@@ -44,11 +43,13 @@ $(document).ready(function() {
     $de_init.val(sessionStorage.username);
     $de_init.attr('readonly','readonly');
     
-    // Set timestamps
+    // Set timestamps, data source, UUID
     $("#meBox").append("<input name='meta_DE_startTime' class='stored' type='hidden'>");
     $("#meBox").append("<input name='meta_DE_endTime' class='stored' type='hidden'>");
     $("#meBox").append("<input name='meta_dataSource' class='stored' type='hidden' value='paper'>");
+    $("#meBox").append("<input name='meta_UUID' class='stored' type='hidden'>");
     $("input[name=meta_DE_startTime]").val(mysql_time());
+    $("input[name=meta_UUID]").val(getUUID());
     
     // If in "QA mode", populate field values
     if (qaRecordID) {
@@ -57,7 +58,7 @@ $(document).ready(function() {
         $('#lmd_next').hide();
         
         // Set array of currentRecord properties that are not stored
-        var notStored = ['table', 'type'];
+        var notStored = ['table', 'database'];
         
         // Read in file and run callback
         LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
@@ -70,26 +71,13 @@ $(document).ready(function() {
             
             // Populate fields from key/value pairs
             for(var key in currentRecord) {
-                
                 // if key isn't in "notStored"array, add it to query string
                 if ( notStored.indexOf(key) == -1) {
-                    
-                    // !!!!! test all of this new code !!!!!
-                    
                     // Set checkboxes
-//                    if ( $('#' + key).prop('type') == 'checkbox' ) {
                     if ( $("input[name=" + key + "]").prop('type') == 'checkbox' ) {
-
                         $("input[name=" + key + "][value='" + currentRecord[key] + "']").prop('checked', true);
-                        
-//                        if (currentRecord[key]) {
-//                            $('#' + key).prop('checked', true);
-//                        }
-                    }
-                    
                     // Set text inputs
-                    else {
-//                        $('#' + key).val(currentRecord[key]);
+                    } else {
                         $("input[name=" + key + "]").val(currentRecord[key]);
                     }
                 }
@@ -126,12 +114,12 @@ $(document).ready(function() {
             $('#validationBox').html('');
             
             // Write error messages to validationBox div
-            for(i=0;i<vResult.errorMessages.length;i++) {
+            for(var i=0; i<vResult.errorMessages.length; i++) {
                 $('#validationBox').append('&bull;&nbsp;' + vResult.errorMessages[i] + '<br>');
             }
             
             // Highlight invalid fields in red
-            for(i=0;i<vResult.errorFields.length;i++) {
+            for(var i=0; i<vResult.errorFields.length; i++) {
                 $('input[name=' + vResult.errorFields[i] + "]").css('background-color','#FFCCCC');
             }
             
@@ -153,14 +141,13 @@ $(document).ready(function() {
             LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){
 
                 // Find highest key in myRecordset; assign to nextKey
-                for (key in myRecordset) { // !!!!! test for no data.lmd file ever created !!!!!
+                for (var key in myRecordset) { // !!!!! test for no data.lmd file ever created !!!!!
                     if (Number(key) > nextKey) { nextKey = Number(key); }
                 }
                 nextKey++;
 
-                // Create record object; add key/value pairs; set record "type"
+                // Create record object; add key/value pairs
                 var myRecord = readFieldsIntoObject('.stored');
-                myRecord.type = 'form';
 
                 // Read file into myRecordset, run callback
                 LMD_fileSystemHelper.readFileIntoObject('data.lmd', function(myRecordset){
@@ -219,6 +206,16 @@ function mysql_date(inputDate) {
     return myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate());
 }
 
+
+// Returns a Universally-unique identifier (UUID)
+// !!!!! Refactor into "utility library"
+function getUUID() {
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+    return uuid;
+}
 
 // Returns MySQL-formatted time
 // !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!

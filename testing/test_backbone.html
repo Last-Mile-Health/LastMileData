@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test: backbone</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <!--<script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>-->
+        <!--<script src="/LastMileData/lib/rivets.bundled.min.js"></script>-->
+        <!--<script src="/LastMileData/lib/d3.min.js"></script>-->
+        <!--<script src="/LastMileData/lib/dimple.v2.1.0.min.js"></script>-->
+        <script src="/reusables/lib/underscore.min.js"></script>
+        <script src="/reusables/lib/backbone.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            
+            var User = Backbone.Model.extend({
+                idAttribute: "user_id",
+                defaults: {
+                    user_id: '123',
+                    username:'username 123',
+                    name:'name 123',
+                    age: 1234
+                }
+             });
+            
+            var UserCollection = Backbone.Collection.extend({
+                model: User,
+                url: '/LastMileData/testing/test_rest.php/users'
+            });
+            
+//            var myUser = new User({ user_id:"3", username:"test user 1", name:"test name 1" });
+            var myUserCollection = new UserCollection();
+//            myUserCollection.add(myUser);
+//            myUser.save();
+            
+            
+//            var myUser = new User({ user_id:"3", username:"test user 1", name:"test name 1" });
+//            var myUserCollection = new UserCollection();
+//            myUserCollection.add(myUser);
+//            myUser.save();
+            
+            
+            
+            myUserCollection.fetch({
+                success: function(data){
+                    console.log('collection fetch success!');
+                    console.log(data);
+                    myUserCollection.each(function(data){
+                        data.set('username', data.get('username') + "W");
+                        data.save({},{
+                            success: function(model, response, options){
+                                console.log('save success!');
+                                console.log(model);
+                                console.log(response);
+                                console.log(options);
+                            },
+                            error: function(model, response, options){
+                                console.log('save error :/');
+                                console.log(model);
+                                console.log(response);
+                                console.log(options);
+                            }
+                        });
+                    });
+                }
+            });
+            
+            
+            
+//            myUserCollection.add(myUser);
+            
+            
+            
+//            myUserCollection.fetch({
+//                success: function(data){
+//                    console.log('fetch success (UserCollection)!');
+//                    console.log(data);
+//                    console.log("username: " + data.get('username'));
+//                }
+//            });
+            
+//            var myUser = new User();
+//            console.log("username: " + myUser.get('username'));
+            
+            
+            
+//            myUser.fetch({
+//                success: function(data){
+//                    console.log('fetch success (User)!');
+//                    console.log("username: " + data.get('username'));
+//                }
+//            });
+            
+//            myNewUser.save({},{
+//                success: function(model, respose, options){
+//                    console.log('save success!');
+//                },
+//                failure: function(model, xhr, options){
+//                    console.log('save failure :/');
+//                }
+//            });
+            
+            
+        });
+        </script>
+    </head>
+    <body>
+        <div>Hey</div>
+    </body>
+</html>

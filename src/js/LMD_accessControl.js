@@ -14,19 +14,19 @@ var LMD_accessControl = (function(){
     // PRIVATE: Set permissions, based on user type
     // !!!!! these should be queried from a database table !!!!!
     // For dpAccessList, list the IDs of headers or iFrame/fragment links that you want to give users access to
-    // For meAccessList, ... !!!!!
+    // For meAccessList, list the IDs of "headers" or "items" to give access to
     // For deqaAccessList, ... !!!!!
     function setPermissions(userType){
         switch (userType) {
             case 'admin':
-                dpAccessList = ['header_overview','header_monthlyDashboards','header_kpia','header_liberiaStats','header_meTools','header_staging'];
-                meAccessList = ['header_programForms','header_strategy','header_reports','header_mHealthTraining','header_xForms'];
+                dpAccessList = ['header_overview','header_monthlyDashboards','header_kpia','header_liberiaStats','header_meTools','header_staging','header_admin'];
+                meAccessList = ['header_programForms','header_strategy','header_reports','header_mHealthTraining','header_xForms','header_litReviews','header_qualityAssessments'];
                 deqaAccessList = [''];
                 break;
             case 'deqa':
             case 'user':
                 dpAccessList = ['header_overview','header_monthlyDashboards','header_kpia','header_liberiaStats','header_meTools'];
-                meAccessList = ['header_programForms','header_strategy','header_reports','header_mHealthTraining','header_xForms'];
+                meAccessList = ['header_programForms','header_strategy','header_reports','header_mHealthTraining','header_xForms','header_litReviews','header_qualityAssessments'];
                 deqaAccessList = [''];
                 break;
             case 'cht_gg':

@@ -7,6 +7,22 @@
 
 <div id="overview">
     
+    <h3>May 2015</h3>
+    <ul>
+        <li>
+            <b>Access control.</b>
+            Created an “access control” system, whereby different users see different subsets of Data Portal reports based on their role. For example, members of the Rivercess County Health Team (CHT) will be able to see data from Rivercess, but not from Grand Gedeh.
+        </li>
+        <li>
+            <b>Konobo Monthly Report.</b>
+            Expanded report with data on births, deaths, and movements.
+        </li>
+        <li>
+            <b>Short link.</b>
+            Go to LastMileData.org/portal to access the Data Portal.
+        </li>
+    </ul>
+    
     <h3>April 2015</h3>
     <ul>
         <li>

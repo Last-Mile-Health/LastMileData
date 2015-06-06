@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Demo - Rivets</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
+        
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        
+        <style>
+            .blockHeader {
+                background:#ddd;
+                float:left;
+                width:1240px; 
+                height:50px;
+                margin:10px;
+                padding:5px;
+                padding-left:20px;
+                font-weight:bold;
+                font-size:200%;
+            }
+            .block {
+                float:left;
+                width:400px;
+                height:165px;
+                margin:10px;
+                padding:20px;
+                font-weight:bold;
+                font-size:200%;
+                overflow:hidden;
+            }
+            input { width:45%; }
+            .myclass1 { color:blue; }
+            .myDynamicClass { color:green; }
+            #myIdentifier1 { color:turquoise; }
+            #myIdentifier2 { color:purple; }
+        </style>
+        
+        <script>
+        $(document).ready(function(){
+            
+            rivets.configure({
+                templateDelimiters: ['{{', '}}']
+            });
+            
+            myObject = {
+                start: 12,
+                end: 24,
+                time: function() {
+                    return this.end - this.start;
+                },
+                text: "hey",
+                cash: 45.67,
+                cash2: 89.30,
+                cash3: 10.07,
+                bool:true,
+                bool2:true,
+                bool3:true,
+                bool4:true,
+                bool5:true,
+                myID: "myIdentifier1",
+                myClass: "myDynamicClass",
+                myFormat: "round",
+                myArray: ['one','two','three'],
+                binderHTML: "<hr><i>HTML!</i>"
+            };
+            
+            rivets.formatters.money = function(x){
+                return "$" + x;
+            }
+            
+            rivets.formatters.format = function(x, type) {
+                switch(type) {
+                    case 'percent':
+                        return (x*100).toFixed(1) + "%";
+                        break;
+                    case 'round':
+                        return x.toFixed(0);
+                        break;
+                }
+            };
+            rivets.formatters.currency = {
+                read: function(value) {
+                  return (value / 100).toFixed(2);
+                },
+                publish: function(value) {
+                  return Math.round(parseFloat(value) * 100);
+                }
+            };
+            
+            // Binding should come after definition of formatters
+            rivets.bind($('#myContainer'), {myObject: myObject});
+            
+            $('#btn_click').click(function(){ myObject.end++; });
+            $('#btn_reset').click(function(){ myObject.text = "hey"; });
+            $('#btn_val').click(function(){ alert(myObject.cash3); });
+            $('#btn_class1').click(function(){ myObject.bool = !myObject.bool; });
+            $('#btn_class2').click(function(){ myObject.myClass = myObject.myClass==="myDynamicClass" ? "NOTmyDynamicClass" : "myDynamicClass"; });
+            $('#btn_id').click(function(){ myObject.myID = myObject.myID==="myIdentifier1" ? "myIdentifier2" : "myIdentifier1"; });
+            $('#btn_showhide').click(function(){ myObject.bool2 = !myObject.bool2; });
+            $('#btn_enabledisable').click(function(){ myObject.bool3 = !myObject.bool3; });
+            $('#btn_ifunless').click(function(){ myObject.bool4 = !myObject.bool4; });
+            $('#btn_checkedunchecked').click(function(){ myObject.bool5 = !myObject.bool5; });
+            
+        });
+        </script>
+        
+    </head>
+    
+    <body>
+        
+        <div id="myContainer">
+            <div class="blockHeader">Rivets.js (DEMO)</div>
+            <div class="block" style="background:#B8CCE4">
+                Computed property
+                <button id="btn_click">Click me</button> : {{myObject.time < start end}}
+            </div>
+            <div class="block" style="background:#E6B8B7">
+                Bound input: {{myObject.text}}<br>
+                Type here: <input id="myInput" rv-value="myObject.text"><br>
+                <button id="btn_reset">Reset</button>
+            </div>
+            <div class="block" style="background:#D8E4BC">
+                Static formatter: {{myObject.cash | money}}<br>
+                Type here: <input rv-value="myObject.cash">
+            </div>
+            <div class="block" style="background:#CCC0DA">
+                Dynamic formatter: {{myObject.cash2 | format myObject.myFormat}}<br>
+                ???: <input rv-value="myObject.cash2">
+            </div>
+            <div class="block" style="background:#B7DEE8">
+                Repeating group:<br>
+                <span rv-each-obj="myObject.myArray">{{obj}}; </span>
+            </div>
+            <div class="block" style="background:#FCD5B4">
+                Two-way formatter: {{myObject.cash3 | currency}}<br>
+                Type here: <input rv-value="myObject.cash3">
+                <button id="btn_val">Value</button>
+            </div>
+            <div class="block" style="background:#B8CCE4">
+                Class (on/off)<br> <!-- class name must be all lowercase -->
+                <span rv-class-myclass1="myObject.bool" class="hey">Inspect me</span><br>
+                <button id="btn_class1">Toggle class</button>
+            </div>
+            <div class="block" style="background:#E6B8B7">
+                Class (dynamic)<br>
+                <span rv-class="myObject.myClass">Inspect me</span><br>
+                <button id="btn_class2">Toggle class</button>
+            </div>
+            <div class="block" style="background:#D8E4BC">
+                Attribute: ID (dynamic)<br>
+                <span rv-id="myObject.myID">Inspect me</span>
+                <button id="btn_id">Toggle attribute</button>
+            </div>
+            <div class="block" style="background:#CCC0DA">
+                Binder: html<br>
+                <span rv-html="myObject.binderHTML"></span>
+            </div>
+            <div class="block" style="background:#B7DEE8">
+                Binder: show/hide
+                <span style="font-size:80%">(css only)</span><br>
+                <span rv-show="myObject.bool2">SHOW</span>
+                <span rv-hide="myObject.bool2">HIDE</span><br>
+                <button id="btn_showhide">Toggle show/hide</button>
+            </div>
+            <div class="block" style="background:#FCD5B4">
+                Binder: enabled/disabled<br>
+                <input rv-enabled="myObject.bool3">
+                <input rv-disabled="myObject.bool3" style="margin-bottom:5px;">
+                <button id="btn_enabledisable">Toggle enabled/disabled</button>
+            </div>
+            <div class="block" style="background:#B8CCE4">
+                Binder: if/unless
+                <span style="font-size:80%">(css+bind)</span><br>
+                <span rv-if="myObject.bool4">IF</span>
+                <span rv-unless="myObject.bool4">UNLESS</span><br>
+                <button id="btn_ifunless">Toggle if/unless</button>
+            </div>
+            <div class="block" style="background:#E6B8B7">
+                Binder: check/uncheck<br>
+                <input type="checkbox" rv-checked="myObject.bool5">Checked
+                ???<input type="checkbox" rv-unchecked="myObject.bool5">Unchecked
+                <button id="btn_checkedunchecked">Toggle checked/unchecked</button>
+            </div>
+            <div class="block" style="background:#D8E4BC">
+                
+            </div>
+        </div>
+        
+    </body>
+    
+</html>

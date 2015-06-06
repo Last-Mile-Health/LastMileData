@@ -131,10 +131,12 @@
                         var nodeArray = ['ODK-FHW_ID','ODK-Date','ODK-FHW_Present','ODK-ExcusedAbsence','ODK-WarningLetter','ODK-Probation','ODK-Termination','Number_of_Births','Number_of_Deaths','Number_of_Movements','Number_of_Big_Bellies','Number_of_Infants','HomeVisits','ODK-RV_Ebola_Score','ODK-BigBelly','ODK-ICCM_Score','ODK-InfantTracking_Score','ODK-WellChild_Score','ODK-FamilyPlanning_Score','ODK-WellAdult_Score','ODK-BirthsInMonth','ODK-NumberOfBirths','ODK-HomeBirths','ODK-FacilityBirths','ODK-NoANCVisits','ODK-1to3ANCVisits','ODK-4OrMoreANCVisits','ODK-CheckIn_Completed','ODK-CAP_Completed','ODK-NumberofCHCMeetings','ODK-NumberOfCommunityMeetings','ODK-NumberOfBigBellies','ODK-NumberOfInfants','ODK-NumberOfDeaths','ODK-AuditDate','ODK-Visit_Type','ODK-Audit_MemberID','ODK-AuditCorrectTreatment','ODK-RestockWeek'];
                         var formName = 'FHW Supervision Report';
                         break;
-//                    case 'SUP-LMD':
-//                        var nodeArray = ['LMD-VAL-FhwID','LMD-DAT-StartTime','LMD-VAL-FhwPresent','LMD-VAL-ExcusedAbsence','LMD-VAL-WarningLetter','LMD-VAL-Probation','LMD-VAL-Termination','Number_of_Births','Number_of_Deaths','Number_of_Movements','Number_of_Big_Bellies','Number_of_Infants','HomeVisits','LMD-VAL-RV_Ebola_Score','LMD-VAL-BigBelly','LMD-VAL-ICCM_Score','LMD-VAL-InfantTracking_Score','LMD-VAL-WellChild_Score','LMD-VAL-FamilyPlanning_Score','LMD-VAL-WellAdult_Score','LMD-VAL-BirthsInMonth','LMD-VAL-NumberOfBirths','LMD-VAL-HomeBirths','LMD-VAL-FacilityBirths','LMD-VAL-NoANCVisits','LMD-VAL-1to3ANCVisits','LMD-VAL-4OrMoreANCVisits','LMD-VAL-CheckIn_Completed','LMD-VAL-CAP_Completed','LMD-VAL-NumberofCHCMeetings','LMD-VAL-NumberOfCommunityMeetings','LMD-VAL-NumberOfBigBellies','LMD-VAL-NumberOfInfants','LMD-VAL-NumberOfDeaths','LMD-VAL-AuditDate','LMD-VAL-Visit_Type','LMD-VAL-Audit_MemberID','LMD-VAL-AuditCorrectTreatment','LMD-VAL-RestockWeek'];
-//                        var formName = 'FHW Supervision Report';
-//                        break;
+                    case 'SUP-LMD':
+                        var nodeArray = ['LMD-VAL-FhwID','LMD-DAT-StartTime','LMD-VAL-FhwPresent','LMD-VAL-ExcusedAbsence','LMD-VAL-WarningLetter','LMD-VAL-Probation','LMD-VAL-Termination','LMD-VAL-Births','LMD-VAL-Deaths','LMD-VAL-Movements','LMD-VAL-BigBellies','LMD-VAL-Infants','LMD-CHK-HomeVisits',
+//                            'LMD-VAL-RV_Ebola_Score','LMD-VAL-BigBelly','LMD-VAL-ICCM_Score','LMD-VAL-InfantTracking_Score','LMD-VAL-WellChild_Score','LMD-VAL-FamilyPlanning_Score','LMD-VAL-WellAdult_Score',
+                            'LMD-VAL-BirthsInMonth','LMD-VAL-NumberOfBirths','LMD-VAL-HomeBirths','LMD-VAL-FacilityBirths','LMD-VAL-NoANCVisits','LMD-VAL-OneToThreeAncVisits','LMD-VAL-FourOrMoreANCVisits','LMD-VAL-CheckInCompleted','LMD-VAL_Completed','LMD-VAL-NumberofCHCMeetings','LMD-VAL-NumberOfCommunityMeetings','LMD-VAL-NumberOfBigBelliesCHC','LMD-VAL-NumberOfInfantsCHC','LMD-VAL-NumberOfDeathsCHC','LMD-DAT-AuditDate','LMD-VAL-Visit_Type','LMD-VAL-AuditMemberID','LMD-VAL-AuditCorrectTreatment','LMD-VAL-RestockWeek'];
+                        var formName = 'FHW Supervision Report';
+                        break;
                     case 'DCL':
                         var nodeArray = ['ODK-PlateNumber','ODK-Date','ODK-SupervisionSupplies','ODK-MotorbikeCheck1','ODK-MotorbikeCheck2','ODK-fuelfilled','ODK-Fuel_Ammt','ODK-TimeOfDeparture'];
                         var formName = 'Departure Check Log';
@@ -228,7 +230,7 @@
         
         <div id="myDiv">
             <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="SUP">SUP</div>
-            <!--<div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="SUP-LMD">SUP-LMD</div>-->
+            <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="SUP-LMD">SUP-LMD</div>
             <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="DCL">DCL</div>
             <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="ACL">ACL</div>
             <div style="float:left">&nbsp;&nbsp;<input type="radio" name="whichForm" value="RES">RES</div>

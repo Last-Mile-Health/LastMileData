@@ -31,23 +31,26 @@
 <table class="table table-striped table-hover">
     <tr>
         <th rowspan='2'>Health Worker</th>
-        <th colspan='4'>Grand Gedeh</th>
-        <th colspan='4'>Rivercess</th>
-        <th colspan='4'>Cumulative Total</th>
+        <th colspan='5'>Grand Gedeh</th>
+        <th colspan='5'>Rivercess</th>
+        <th colspan='5'>Cumulative Total</th>
     </tr>
     <tr>
         <th>Dec '14</th>
         <th>Jan '15</th>
         <th>Feb '15</th>
         <th>Mar '15</th>
+        <th>Apr '15</th>
         <th>Dec '14</th>
         <th>Jan '15</th>
         <th>Feb '15</th>
         <th>Mar '15</th>
+        <th>Apr '15</th>
         <th>Dec '14</th>
         <th>Jan '15</th>
         <th>Feb '15</th>
         <th>Mar '15</th>
+        <th>Apr '15</th>
     </tr>
     <tr>
         <td>FHWs</td>
@@ -55,6 +58,8 @@
         <td></td>
         <td></td>
         <td></td>
+        <td>13</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -63,6 +68,7 @@
         <td>55</td>
         <td>55</td>
         <td>55</td>
+        <td>68</td>
     </tr>
     <tr>
         <td>FHW Leaders</td>
@@ -70,6 +76,8 @@
         <td></td>
         <td></td>
         <td></td>
+        <td>2</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -78,6 +86,7 @@
         <td>4</td>
         <td>4</td>
         <td>4</td>
+        <td>6</td>
     </tr>
     <tr>
         <td>Clinical Mentors</td>
@@ -89,6 +98,9 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
+        <td></td>
+        <td>2</td>
         <td>2</td>
         <td>2</td>
         <td>2</td>
@@ -100,11 +112,14 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>77</td>
         <td>36</td>
         <td></td>
         <td></td>
+        <td></td>
         <td>77</td>
+        <td>113</td>
         <td>113</td>
         <td>113</td>
         <td>113</td>
@@ -118,10 +133,13 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>60</td>
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
+        <td>60</td>
         <td>60</td>
     </tr>
     <tr>
@@ -130,11 +148,14 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>10</td>
         <td>8</td>
         <td></td>
         <td></td>
+        <td></td>
         <td>10</td>
+        <td>18</td>
         <td>18</td>
         <td>18</td>
         <td>18</td>
@@ -145,10 +166,13 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>222</td>
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
+        <td>340</td>
         <td>340</td>
         <td>340</td>
         <td>340</td>
@@ -160,10 +184,13 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>11</td>
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
+        <td>11</td>
         <td>11</td>
         <td>11</td>
         <td>11</td>
@@ -177,10 +204,13 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>573</td>
+        <td></td>
         <td></td>
         <td>46</td>
         <td>154</td>
+        <td>727</td>
         <td>727</td>
         <td>727</td>
     </tr>
@@ -190,21 +220,25 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>32</td>
         <td>5</td>
         <td></td>
         <td></td>
+        <td></td>
         <td>32</td>
+        <td>37</td>
         <td>37</td>
         <td>37</td>
         <td>37</td>
     </tr>
     <tr>
-        <td colspan='9'><b>TOTAL: </b></td>
+        <td colspan='11'><b>TOTAL: </b></td>
         <td><b>577</b></td>
         <td><b>734</b></td>
         <td><b>1,307</b></td>
         <td><b>1,367</b></td>
+        <td><b>1,382</b></td>
     </tr>
 </table>
 <hr>

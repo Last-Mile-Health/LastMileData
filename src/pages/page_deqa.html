@@ -103,8 +103,6 @@
                     <p><a href="/LastMileData/src/pages/viewLocalRecords.html" class="btn btn-danger" title="View all locally-stored records.">View local records</a></p>
                     <p><a href="/LastMileData/src/forms/util_memberIDAssignmentTool.html" class="btn btn-danger" title="Generate Member ID Assignment Tools.">Member ID Assignment Tool</a></p>
                     <p><a href="/LastMileData/src/forms/util_householdIDAssignmentTool.html" class="btn btn-danger" title="Generate Household ID Assignment Tools.">Household ID Assignment Tool</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_eesLedger" title="Generate the 'FHW EES Ledger'">Generate "FHW EES Ledger"</a></p>
-                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_populationReport" title="Generate the 'FHW Population Report'">Generate "FHW Population Report"</a></p>
                 </div>
             </div>
             
@@ -198,63 +196,6 @@
             </div>
         </div>        
         <!-- MODAL END: "INITIALIZE" -->
-        
-        
-        
-        <!-- !!!!! temporary code; to be replaced with mHealth !!!!! -->
-        <!-- MODAL START: "EES LEDGER" -->
-        <div id="modal_eesLedger" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="text-center">Generate the "FHW EES Ledger"</h1>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input id="modal_eesLedger_fhwID" type="text" class="form-control input-lg" placeholder="FHW ID">
-                        </div>
-                        <div class="form-group">
-                            <input id="modal_eesLedger_fhwName" type="text" class="form-control input-lg" placeholder="FHW Name">
-                        </div>
-                        <div class="form-group">
-                            <button id="modal_eesLedger_submit" class="btn btn-success btn-lg btn-block">Submit</button>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-
-            </div>
-        </div>        
-        <!-- MODAL START: "EES LEDGER" -->
-        
-        
-        
-        <!-- MODAL START: "POPULATION REPORT" -->
-        <div id="modal_populationReport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="text-center">Generate "FHW Population Report"</h1>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input id="modal_populationReport_fhwID" type="text" class="form-control input-lg" placeholder="FHW ID">
-                        </div>
-                        <div class="form-group">
-                            <input id="modal_populationReport_fhwName" type="text" class="form-control input-lg" placeholder="FHW Name">
-                        </div>
-                        <div class="form-group">
-                            <button id="modal_populationReport_submit" class="btn btn-success btn-lg btn-block">Submit</button>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-
-            </div>
-        </div>        
-        <!-- MODAL START: "POPULATION REPORT" -->
         
         
         
@@ -353,6 +294,7 @@
                             <div id="modal_uploadLMD_status" style='display:none'>
                                 <img src='/LastMileData/res/ajax-loader_v20140916.gif'><br>
                                 <h3 id='modal_uploadLMD_message'>Uploading and merging data file...</h3>
+                                <a id="modal_uploadLMD_done" style="display:none" data-dismiss="modal" class="btn btn-success btn-lg btn-block">Done</a>
                             </div>
                         </div>
                     </div>

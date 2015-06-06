@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src='/LastMileData/lib/angular.min.js'></script>
+    <script src='/LastMileData/lib/angular-animate.min.js'></script>
+    <!--<script src='/reusables/lib/angular.v.1.1.4.min.js'></script>-->
+    <script src='/LastMileData/lib/jquery.min.js'></script>
+    <script>
+        var testModule = angular.module('testApp',['ngAnimate']);
+//        var testModule = angular.module('testApp',[]);
+        
+        testModule.controller('testController', function($scope){
+//        testModule.controller('testController', ['$scope', 'ngAnimate', function($scope, ngAnimate){
+            $scope.myProp = {text:'you'};
+            
+            $scope.toggle = true;
+            
+            $scope.songs = ['A song 1', 'A song 2', 'B song 3'];
+            
+            $scope.array = [0,1,2];
+            
+            $scope.myReportObjects = [
+                { indName:'# FHW', indPTG:'close to goal', indValues:{'jan':241,'feb':262,'mar':273} },
+                { indName:'# Leaders', indPTG:'reached goal', indValues:{'jan':34,'feb':36,'mar':37} },
+                { indName:'# Villages', indPTG:'missed goal', indValues:{'jan':140,'feb':160,'mar':170} }
+            ];
+            
+            $scope.$watch('myProp.sometext');
+            
+//        }]);
+        });
+    </script>
+    <style>
+.sample-show-hide {
+  padding:10px;
+  border:1px solid black;
+  background:white;
+}
+
+.sample-show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+}
+        
+    </style>
+</head>
+<!--<body ng-app ng-controller="MainController">-->
+<body ng-app='testApp'>
+    <div ng-controller='testController'>
+        <div ng-init="checked=true">
+        <label>
+          <input type="checkbox" ng-model="checked" style="float:left; margin-right:10px;"> Is Visible...
+        </label>
+        <div class="check-element sample-show-hide" ng-show="checked" style="clear:both;">
+          Visible...
+        </div>
+      </div>
+        <div>
+            YOU {{myProp.text}} YOU
+            <div ng-repeat='i in array'>Repeat me2</div>
+        </div>
+        <!--<div ng-controller='cont1'></div>-->
+        <div ng-repeat='i in [0,1,2,3]'>Repeat me</div>
+        <br><br>
+        <div ng-repeat='RO in myReportObjects'>
+            Indicator: {{RO.indName}}<br>
+            PTG: {{RO.indPTG}}<br>
+            $index: {{$index}}<br>
+            Values: <span ng-repeat='(key, value) in RO.indValues'>{{key}}: {{value}}{{$last ? '' : ','}} </span>
+            <hr>
+        </div>
+        <br><br>
+        <input id='myInput' type="text" ng-model="myProp.sometext" />
+        <h1>Hello, {{ myProp.sometext }}</h1>
+        <br><br><br>
+        
+        <button ng-click="toggle = !toggle">Toggle!</button>
+
+        <div class="box on" ng-show="toggle" ng-animate="'box'">On</div>
+        <div class="box off" ng-hide="toggle" ng-animate="'box'">Off</div>
+        
+    </div>
+</body>
+</html>

@@ -119,6 +119,21 @@
                         </div>
                     </div>
                     
+                    <div class="col-md-4">
+                        <h3 id="header_litReviews">Literature reviews</h3>
+                        <div>
+                            <h4 id="item_litReviews_mwh"><a target="_blank" href='#'>Maternal waiting homes</a></h4>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h3 id="header_qualityAssessments">Quality assessments</h3>
+                        <div>
+                            <h4 id="item_qualityAssessments_kpiaImplementation"><a target="_blank" href='#'>KPIA implementation quality</a></h4>
+                            <h4 id="item_qualityAssessments_mappingUtility"><a target="_blank" href='#'>Mapping utility assessment</a></h4>
+                        </div>
+                    </div>
+                    
                 </div>
 
             </div>

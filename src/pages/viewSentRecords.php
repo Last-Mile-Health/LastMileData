@@ -21,62 +21,62 @@ require_once("cxn.php");
 
             SELECT 'tbl_data_fhw_bbf_bigbellyfollowup' AS myTable,
             meta_DE_init, meta_DE_date, COUNT(pk) AS recordCount, SUM(qa_init<>'') AS qaCount
-            FROM tbl_data_fhw_bbf_bigbellyfollowup
+            FROM lastmile_db.tbl_data_fhw_bbf_bigbellyfollowup
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_bbi_bigbellyinitial',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_bbi_bigbellyinitial
+            FROM lastmile_db.tbl_data_fhw_bbi_bigbellyinitial
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_bdm_movements',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_bdm_movements
+            FROM lastmile_db.tbl_data_fhw_bdm_movements
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_ees_ebolaeducationscreening',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_ees_ebolaeducationscreening
+            FROM lastmile_db.tbl_data_fhw_ees_ebolaeducationscreening
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_kpi_kpiassessment',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_kpi_kpiassessment
+            FROM lastmile_db.tbl_data_fhw_kpi_kpiassessment
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_pnf_postnatalfollowup',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_pnf_postnatalfollowup
+            FROM lastmile_db.tbl_data_fhw_pnf_postnatalfollowup
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_pni_postnatalinitial',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_pni_postnatalinitial
+            FROM lastmile_db.tbl_data_fhw_pni_postnatalinitial
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_ref_referral',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_ref_referral
+            FROM lastmile_db.tbl_data_fhw_ref_referral
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_reg_registration',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_reg_registration
+            FROM lastmile_db.tbl_data_fhw_reg_registration
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_sch_sickchild',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_sch_sickchild
+            FROM lastmile_db.tbl_data_fhw_sch_sickchild
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_fhw_sst_sicknessscreening',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_fhw_sst_sicknessscreening
+            FROM lastmile_db.tbl_data_fhw_sst_sicknessscreening
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'tbl_data_prg_trl_trainingledger',
             meta_DE_init, meta_DE_date, COUNT(pk), SUM(qa_init<>'')
-            FROM tbl_data_prg_trl_trainingledger
+            FROM lastmile_db.tbl_data_prg_trl_trainingledger
             GROUP BY meta_DE_init, meta_DE_date
 
             ORDER BY meta_DE_date DESC, meta_DE_init, myTable;

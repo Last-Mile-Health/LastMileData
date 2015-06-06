@@ -38,7 +38,7 @@ $dateNow = date('Y-m-d');
     $table_name = "0_testde";   // DEBUG
     $backup_file  = "/home/lastmilehealth/public_html/LastMileData/testing/mytestbackup.sql";   // DEBUG
 //    $backup_file  = "/home/lastmilehealth/public_html/LastMileData/testing/backup_" . $table_name . "_" . $dateNow . ".sql";    // !!!!! change path !!!!!
-    $query = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
+    $query = "SELECT * INTO OUTFILE '$backup_file' FROM lastmile_db.$table_name";
     
     // Run query
     $retval = mysqli_query( $query, $cxn ) or die('Could not take data backup: ' . mysql_error());

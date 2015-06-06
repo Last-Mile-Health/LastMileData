@@ -165,7 +165,7 @@
                         set_time_limit(120);
                         
                         // Send query to get population records
-                        $query = "SELECT * FROM `view_reg_current-population` WHERE current_fhwID=$fhwID ORDER BY abs(hhID), firstName;";
+                        $query = "SELECT * FROM lastmile_db.`view_reg_current-population` WHERE current_fhwID=$fhwID ORDER BY abs(hhID), firstName;";
                         $result = mysqli_query($cxn, $query) or die("Failed to connect to database") ;
                         
                         // Reset counter and endpoint

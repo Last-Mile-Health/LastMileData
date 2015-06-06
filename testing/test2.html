@@ -12,7 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/reusables/lib/pouchdb-3.2.0.min.js"></script>
+        <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
@@ -27,50 +27,89 @@
         
         <script>
         $(document).ready(function(){
-            var newObject = {};
-                console.log(newObject[1] === undefined);
-            if (newObject === {}) {
-                console.log('check 1');
+            
+            rivets.configure({
+                templateDelimiters: ['{{', '}}']
+            });
+            
+            var cname = {cname: 'heyyou'};
+            
+            rivets.bind($('#myInput'), {cname: cname});
+            
+            $('#myInput').click(function(){
+                cname.cname = 'newclassYo';
+            });
+            
+            rivets.binders.addclass = function(el, value) {
+                $(el).addClass('cname');
+            };
+            
+            rivets.binders.avi = function(el, value) {
+                console.log('changing...');
+                console.log(value);
+                $(el).addClass(value);
+//                $('#auction').style.color = 'red';
+            };
+            
+            var auction = {
+                yes: true,
+                no: false,
+                product: { name:'myProduct' },
+                currentBid: 100,
+                seeMe: false
+            };
+            
+            rivets.bind($('#auction'), {auction: auction});
+            
+            
+            var list = {
+                todos: [
+                    {done:true,summary:'one',sub:[0,1,2]},
+                    {done:true,summary:'two',sub:[2,3,4]},
+                    {done:false,summary:'three',sub:[3,4,5]}
+                ]
             }
-            newObject.hey = "there";
-            if (newObject !== {}) {
-                console.log('not anymore');
-            }
+            rivets.bind($('#myList'), {list: list});
+            $('#logModel').click(function(){
+                console.log(list.todos[0].done);
+                console.log(list.todos[2].sub);
+            });
+            
             
         });
         </script>
+        
+        <style>
+            .my {background:red};
+        </style>
         
     </head>
     
     <body>
         
-        <!-- !!!!! -->
-        <div style="position:relative; background-color:blue; z-index:1">
-            <div style="position:relative; background-color:green; z-index:2">
-                <input style="width:100px;height:40px">
-            </div>
+        <div style="background:lightblue; width:300px; height:100px; margin:20px; padding:20px;">
+            Hey, <span id='mySpan'></span>
+            <input id='myInput' rv-class="cname.cname">
         </div>
-        <!-- !!!!! -->
         
-        <div id="container">
-            <div data-test="yes">One</div>
-            <div contentEditable="true" style="border:1px solid black">Two</div>
-<div id="example-one" contenteditable="true">
-<style scoped>
-  #example-one { margin-bottom: 10px; }
-  [contenteditable="true"] { padding: 10px; outline: 2px dashed #CCC; }
-  [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
-</style>
-<p>Everything contained within this div is editable in browsers that support <code>HTML5</code>. Go on, give it a try: click it and start typing.</p>
-</div>            
-            <div data-test="yes">
-                <a href="navbar.html" target="myFrame">Click me</a> Three
-                <a href="DCT2.html" target="myFrame">Click me</a> Four
-            </div>
-            <div style="text-align:center">
-                <!--<iframe name="myFrame" style="width:90%; height:300px" src="http://www.google.com"></iframe>-->
-            </div>
-        </div>
+        <!--<button rv-color="label.color">Apply</button>-->
+        <button id='logModel'>Log model</button>
+        
+        <ul id='myList'>
+            <li rv-each-myobj="list.todos">
+                <div>
+                    <input type="checkbox" rv-avi="myobj.done" rv-checked="myobj.done"> {{ myobj.summary }}: <span rv-each-obj='myobj.sub'>i(x): {{obj}}, </span>
+                    <input rv-addclass="true" rv-value="myobj.done">
+                </div>
+            </li>
+        <ul>
+        
+            
+        <section id="auction">
+          <h3 class="you" rv-class="auction.yes">{{ auction.product.name }}</h3>
+          <p>Current bid: {{ auction.currentBid | money }}</p>
+          <div rv-if="auction.seeMe">You can see me</div>
+        </section>
         
     </body>
     

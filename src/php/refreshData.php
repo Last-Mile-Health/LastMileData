@@ -12,7 +12,7 @@ set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'
 require_once("cxn.php");
 
 // 1. Update "deqaUsers" (object)
-$query = "SELECT username, password FROM tbl_utility_users WHERE usertype='admin' OR usertype='deqa'";
+$query = "SELECT username, password FROM lastmile_db.tbl_utility_users WHERE usertype='admin' OR usertype='deqa'";
 $result = mysqli_query($cxn, $query) or die("failure");
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
 {
@@ -22,7 +22,7 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
 }
 
 // 2. Update "villages" (array)
-$query = "SELECT villageName FROM tbl_data_village";
+$query = "SELECT villageName FROM lastmile_db.tbl_data_village";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_villages = array();
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
@@ -33,7 +33,7 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
 }
 
 // 3. Update "fhws" (array)
-$query = "SELECT staffName FROM tbl_data_staff WHERE staffType='F'";
+$query = "SELECT staffName FROM lastmile_db.tbl_data_staff WHERE staffType='F'";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_fhws = array();
 for ($i=1;$i<=mysqli_num_rows($result);$i++)

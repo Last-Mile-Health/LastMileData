@@ -18,7 +18,7 @@ require_once("cxn.php");
         $queryString = "
 
             SELECT districtName, villageName, pk_village
-            FROM tbl_data_village INNER JOIN tbl_data_district ON fk_district=pk_district
+            FROM lastmile_db.tbl_data_village INNER JOIN lastmile_db.tbl_data_district ON fk_district=pk_district
             ORDER BY districtName, villageName
 
         ";
@@ -48,7 +48,7 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT staffName, pk_staff FROM tbl_data_staff
+            SELECT staffName, pk_staff FROM lastmile_db.tbl_data_staff
             WHERE staffType='F' && ( quitOrReleased NOT IN ('Q','R') || ISNULL(quitOrReleased) )
             ORDER BY staffName;
 
@@ -79,7 +79,7 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT staffName, IF(staffType='C','Clinical Mentor',IF(staffType='L','FHW Leader','Unknown')) AS staffTypeFull, pk_staff FROM tbl_data_staff
+            SELECT staffName, IF(staffType='C','Clinical Mentor',IF(staffType='L','FHW Leader','Unknown')) AS staffTypeFull, pk_staff FROM lastmile_db.tbl_data_staff
             WHERE staffType IN ('C','L') && ( quitOrReleased NOT IN ('Q','R') || ISNULL(quitOrReleased) )
             ORDER BY staffType, staffName;
 
