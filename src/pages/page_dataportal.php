@@ -23,6 +23,7 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <!--<script src="/LastMileData/lib/underscore.min.js"></script>-->  <!-- !!!!! to save on bandwidth, only load these where they're needed (like Leaflet.js) !!!!! -->
         <!--<script src="/LastMileData/lib/backbone.min.js"></script>-->    <!-- !!!!! to save on bandwidth, only load these where they're needed (like Leaflet.js) !!!!! -->
+        <!--<script src="/reusables/lib/underscore.min.js"></script>-->
         <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
         <script src="/LastMileData/lib/d3.min.js"></script>
         <script src="/LastMileData/lib/dimple.v2.1.0.min.js"></script>
@@ -59,26 +60,10 @@
             // Configure rivets.js
             rivets.configure({templateDelimiters: ['{{', '}}']});
 
-            // Apply access control rules
-            var filteredSidebar = model_sidebar;
-            var userType = '<?php echo $_SESSION['usertype']; ?>';
-            for (var i=filteredSidebar.length-1; i>=0; i--) {
-
-                var tabs = filteredSidebar[i].tabs;
-                for (var j=tabs.length-1; j>=0; j--) {
-                    if (tabs[j].permissions.indexOf(userType) === -1) {
-                        tabs.splice(j,1);
-                    }
-                }
-                if ( filteredSidebar[i].tabs.length===0 ) {
-                    filteredSidebar.splice(i,1);
-                }
-            }
+            // !!!!! Make specific data portal pages "linkable" (with hash anchors); needs to interface with access control system !!!!!
 
             // Bind sidebar model to accordion DIV
             rivets.bind($('#sidebarDIV'), {model_sidebar: filteredSidebar});
-
-            // !!!!! Make specific data portal pages "linkable" (with hash anchors); needs to interface with access control system !!!!!
 
             // Fade in overview pane by default
             $('#mainContainer').load('/LastMileData/src/fragments/dataportal_overview.php',function(){
