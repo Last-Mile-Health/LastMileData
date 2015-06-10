@@ -11,7 +11,7 @@ $pw_new_2 = $_GET['pw_new_2'];
 
 // Run query to get current username, password, pk
 require_once("cxn.php");
-$query = "SELECT pk, username, password FROM tbl_utility_users WHERE username='$username';";
+$query = "SELECT pk, username, password FROM lastmile_db.tbl_utility_users WHERE username='$username';";
 $result = mysqli_query($cxn, $query) or die("failure");
 $row = mysqli_fetch_assoc($result);
 extract($row);

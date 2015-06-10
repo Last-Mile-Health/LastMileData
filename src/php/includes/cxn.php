@@ -1,11 +1,11 @@
 <?php
 
-// For both XAMPP localhost and GoDaddy localhost
-$host = "localhost"; $user = "lastmile_admin"; $password = "LastMile14"; $db = "lastmile_db";
+// !!!!! Test app throughout to ensure that DB access errors are handled gracefully !!!!!
 
 // Set connection variable
-// !!!!! Need to gracefully handle errors (e.g. test for no DB access); set warnings off !!!!!
-// !!!!! Need global configuration file !!!!!
-$cxn = mysqli_connect($host,$user,$password,$db) or die("Error");
+$cxn = mysqli_connect("localhost","lastmile_admin","LastMile14") or die("Error");
 
-?>
+function getCXN() {
+    $cxn = mysqli_connect("localhost","lastmile_admin","LastMile14") or die("Error");
+    return $cxn;
+}

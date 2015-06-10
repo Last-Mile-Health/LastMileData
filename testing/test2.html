@@ -12,7 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/reusables/lib/pouchdb-3.2.0.min.js"></script>
+        <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
@@ -27,50 +27,76 @@
         
         <script>
         $(document).ready(function(){
-            var newObject = {};
-                console.log(newObject[1] === undefined);
-            if (newObject === {}) {
-                console.log('check 1');
-            }
-            newObject.hey = "there";
-            if (newObject !== {}) {
-                console.log('not anymore');
-            }
+            
+            var d1 = $.Deferred();
+            var d2 = $.Deferred();
+
+            $.when( d1, d2 ).done(function ( v1, v2 ) {
+                console.log( v1 ); // "Fish"
+                console.log( v2 ); // "Pizza"
+            });
+
+            d1.resolve( "Fish" );
+            
+            setTimeout(function(){
+                d2.resolve( "Pizza" );
+            },1000)
+            
+            
+            
+//            var def1 = $.Deferred
+            
+            var ajax1 = $.ajax({
+                url: "http://www.yahoo.com"
+            });
+            
+            var ajax2 = $.ajax({
+                url: "http://www.google.com"
+            });
+            
+            $.when(ajax1, ajax2).done(
+                function(r1, r2){
+                    console.log(r1);
+                    console.log(r2);
+                }).fail(
+                function(){
+                    console.log("both ajax failed");
+                });
             
         });
         </script>
+        
+        <style>
+            .my {background:red};
+        </style>
         
     </head>
     
     <body>
         
-        <!-- !!!!! -->
-        <div style="position:relative; background-color:blue; z-index:1">
-            <div style="position:relative; background-color:green; z-index:2">
-                <input style="width:100px;height:40px">
-            </div>
+        <div style="background:lightblue; width:300px; height:100px; margin:20px; padding:20px;">
+            Hey, <span id='mySpan'></span>
+            <input id='myInput' rv-class="cname.cname">
         </div>
-        <!-- !!!!! -->
         
-        <div id="container">
-            <div data-test="yes">One</div>
-            <div contentEditable="true" style="border:1px solid black">Two</div>
-<div id="example-one" contenteditable="true">
-<style scoped>
-  #example-one { margin-bottom: 10px; }
-  [contenteditable="true"] { padding: 10px; outline: 2px dashed #CCC; }
-  [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
-</style>
-<p>Everything contained within this div is editable in browsers that support <code>HTML5</code>. Go on, give it a try: click it and start typing.</p>
-</div>            
-            <div data-test="yes">
-                <a href="navbar.html" target="myFrame">Click me</a> Three
-                <a href="DCT2.html" target="myFrame">Click me</a> Four
-            </div>
-            <div style="text-align:center">
-                <!--<iframe name="myFrame" style="width:90%; height:300px" src="http://www.google.com"></iframe>-->
-            </div>
-        </div>
+        <!--<button rv-color="label.color">Apply</button>-->
+        <button id='logModel'>Log model</button>
+        
+        <ul id='myList'>
+            <li rv-each-myobj="list.todos">
+                <div>
+                    <input type="checkbox" rv-avi="myobj.done" rv-checked="myobj.done"> {{ myobj.summary }}: <span rv-each-obj='myobj.sub'>i(x): {{obj}}, </span>
+                    <input rv-addclass="true" rv-value="myobj.done">
+                </div>
+            </li>
+        <ul>
+        
+            
+        <section id="auction">
+          <h3 class="you" rv-class="auction.yes">{{ auction.product.name }}</h3>
+          <p>Current bid: {{ auction.currentBid | money }}</p>
+          <div rv-if="auction.seeMe">You can see me</div>
+        </section>
         
     </body>
     

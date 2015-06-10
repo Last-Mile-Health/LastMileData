@@ -1,8 +1,8 @@
 // Dependencies: jQuery, jQueryUI, LMD_fileSystemHelpers.js
 
 $(document).ready(function(){
-    
-    
+
+
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
         
@@ -14,6 +14,22 @@ $(document).ready(function(){
         
     });
     
+    // CLICK HANDLER: Close "uploadLMD" modal
+    $('#modal_uploadLMD_done').click(function(){
+        
+        // Close dialog box
+        $('.modal').modal('hide');
+        
+        // Pause, reset DOM
+        setTimeout( function() {
+            $('#modal_uploadLMD_message').text('Uploading and merging data file...');
+            $('#modal_uploadLMD_status').hide();
+            $('#modal_uploadLMD_done').hide();
+            $('#modal_uploadLMD_formContent').show();
+            $('#modal_uploadLMD_form').get(0).reset();
+        }, 500 );
+        
+    });
     
     // CLICK HANDLER: Close send Records modal
     $('#modal_sendRecords_close').click(function(){
@@ -21,7 +37,7 @@ $(document).ready(function(){
         // Close dialog box
         $('.modal').modal('hide');
         
-        // Pause, reset DOM text of "Send Records" modal box
+        // Pause, reset DOM
         setTimeout( function() {
             $('#modal_sendRecords_buttons, #modal_sendRecords_ajaxInner, #modal_sendRecords_close').css('display','');
             $('#modal_sendRecords_buttons').css('display','block');
@@ -64,7 +80,7 @@ $(document).ready(function(){
                         var dd = today.getDate();
                         var mm = today.getMonth() + 1;
                         var yyyy = today.getFullYear();
-                        var fileNameToSaveAs = "data_" + yyyy + "-" + mm + "-" + dd + ".lmd"; // !!!!! make this a proper MySQL date (two digits for day and month) !!!!!
+                        var fileNameToSaveAs = "data_" + yyyy + "-" + mm + "-" + dd + ".lmd";
                         var downloadLink = document.createElement("a");
                         downloadLink.download = fileNameToSaveAs;
                         downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
@@ -73,7 +89,7 @@ $(document).ready(function(){
                         // Back up the file to the "dataFileBackups" directory
                         LMD_fileSystemHelper.createDirectory('dataFileBackups', function(){
                             // !!!!! create an interface to access these backups !!!!!
-                            LMD_fileSystemHelper.createOrOverwriteFile('/dataFileBackups/' + fileNameToSaveAs, textToWrite, function(){
+                            LMD_fileSystemHelper.createOrOverwriteFile('/dataFileBackups/downloadDataFileBackup_' + fileNameToSaveAs, textToWrite, function(){
                                 // Delete file
                                 LMD_fileSystemHelper.deleteFile('data.lmd');
                                 
@@ -95,7 +111,7 @@ $(document).ready(function(){
     
     
     // CLICK HANDLER: Upload data file
-    // Data is either ".LMD" files (which are either JSON or concatenated XML documents delimited with "<LMD_delimiter>") or ".XML" files
+    // Data files are either ".LMD" files (which are either JSON or concatenated XML documents delimited with "<LMD_delimiter>") or ".XML" files
     $("#modal_uploadLMD_submit").click(function() {
         
         // Reset error flag; get file input contents
@@ -109,9 +125,9 @@ $(document).ready(function(){
             anyErrors = true;
         }
         
-        // Error check #2: incorret file extension(s)
+        // Error check #2: incorrect file extension(s)
         if (!anyErrors) {
-            for(var i = 0; i < myInput.files.length ; i++) {
+            for(var i=0; i<myInput.files.length; i++) {
                 if (!anyErrors) {
                     
                     // Get file and extension
@@ -136,6 +152,9 @@ $(document).ready(function(){
         // No errors; proceed with upload
         if (!anyErrors) {
             
+            // Set counter
+            var numFilesProcessed = 0;
+            
             // Manipulate DOM
             $('#modal_uploadLMD_formContent').slideUp(500, function(){
                 $('#modal_uploadLMD_status').slideDown(500);
@@ -153,7 +172,7 @@ $(document).ready(function(){
             };
 
             // Loop through files and parse data
-            for(var i = 0; i < myInput.files.length ; i++) {
+            for(var i=0; i < myInput.files.length; i++) {
                 (function(i){
                     
                     var file = myInput.files[i];
@@ -174,142 +193,177 @@ $(document).ready(function(){
                         if (xmlOrJson === "json") {
                             
                             // Add records to uploadedRecordset object
-                            var myRecords = JSON.parse(fileContents);
-                            for (x in myRecords) {
-                                uploadedRecordset.addRecord(myRecords[x]);
+                            try {
+                                var myRecords = JSON.parse(fileContents);
+                                
+                                for (var key in myRecords) {
+                                    uploadedRecordset.addRecord(myRecords[key]);
+                                }
+                                
+                            } catch(e) {
+                                // Display error message
+                                $('#modal_uploadLMD_message').text('Error parsing file.');
+                                anyErrors = true;
+                                console.log(e);
                             }
                             
                         // Proceed if XML
                         } else if (xmlOrJson === "xml") {
                             
-                            // Split LMD files into components
-                            var fileContentArray = fileContents.split("<LMD_delimiter>");
-                            
-                            // Parse individual XML files
-                            for (j=0;j<fileContentArray.length;j++) {
-                                
-                                var myJQXML = $.parseXML(fileContentArray[j].trim());
-                                // !!!!! Need to build an error catcher for invalid XML
-                                var $myJQXML = $(myJQXML);
-                                
-                                // Extract sub-records
-                                var $subRecords = $myJQXML.find('*').filter(function(){return /^LMD\-GRP/i.test(this.nodeName);}).remove();
-                                
-                                // Process main XML file ($myJQXML)
-                                var xmlKey, xmlValue, xmlRecord = {}, xmlSubrecord = {}, chkArray, pullString = "";
-                                // !!!!! (A) the code here can be consolidated with the code (B) below !!!!!
-                                var $elementSet = $myJQXML.find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
-                                $elementSet.each(function(){
-                                    xmlPair = processLMD($(this).prop("tagName"),$(this).text());
-                                    if (xmlPair.key === "CHK") {
-                                        chkArray = xmlPair.value.split(" ");
-                                        for (opt=0; opt<chkArray.length; opt++) {
-                                            if (chkArray[opt] !== "") {
-                                                chkKey = chkArray[opt].slice(8);
-                                                xmlRecord[chkKey] = 1;
-                                            }
-                                        }
-                                    } else {
-                                        xmlRecord[xmlPair.key] = xmlPair.value;
-                                    }
-                                });
-                                uploadedRecordset.addRecord(JSON.stringify(xmlRecord));
-                                
-                                // Process subgroups ($subRecords)
-                                for(k=0;k<$subRecords.length;k++) {
-                                    
-                                    var xmlSubrecord = { table: $subRecords[k].tagName.slice(8) };
-                                    // !!!!! (B) the code here can be consolidated with the code (A) above !!!!!
-                                    $elementSet = $($subRecords[k]).find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
+                            try {
+                                // Split LMD files into components
+                                var fileContentArray = fileContents.split("<LMD_delimiter>");
+
+                                // Parse individual XML files
+                                for (var j=0; j<fileContentArray.length; j++) {
+
+                                    var myJQXML = $.parseXML(fileContentArray[j].trim());
+                                    // !!!!! Need to build an error catcher for invalid XML !!!!!
+                                    var $myJQXML = $(myJQXML);
+
+                                    // Extract database schema name
+                                    var $dbTag = $myJQXML.find('*').filter(function(){return /^LMD\-DATABASE/i.test(this.nodeName);}).remove();
+                                    var dbName = $dbTag[0].textContent;
+
+                                    // Extract sub-records (aka. "repeating groups")
+                                    var $subRecords = $myJQXML.find('*').filter(function(){return /^LMD\-RPT/i.test(this.nodeName);}).remove();
+
+                                    // Process main XML file ($myJQXML)
+                                    var xmlKey, xmlValue, chkArray, pullString = "";
+                                    var xmlRecord = { database:dbName };
+                                    var $elementSet = $myJQXML.find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
                                     $elementSet.each(function(){
-                                        if ($(this).prop("tagName")==='LMD-PULL') {
-                                            pullString = $(this).text();
-                                            var pullFieldsBulky = pullString.split(",");
-                                            var pullFields = $.map(pullFieldsBulky,function(val){return val.trim().slice(8);});
-                                        } else {
-                                            xmlPair = processLMD($(this).prop("tagName"),$(this).text());
-                                            if (xmlPair.key === "CHK") {
-                                                chkArray = xmlPair.value.split(" ");
-                                                for (opt=0; opt<chkArray.length; opt++) {
-                                                    if (chkArray[opt] !== "") {
-                                                        chkKey = chkArray[opt].slice(8);
-                                                        xmlRecord[chkKey] = 1;
-                                                    }
+                                        // !!!!! document this code !!!!!
+                                        xmlPair = processLMD($(this).prop("tagName"),$(this).text());
+                                        if (xmlPair.key === "CHK") {
+                                            chkArray = xmlPair.value.split(" ");
+                                            for (var opt=0; opt<chkArray.length; opt++) {
+                                                if (chkArray[opt] !== "") {
+                                                    chkKey = chkArray[opt].slice(8);
+                                                    xmlRecord[$(this).prop("tagName").slice(8) + "_" + chkKey] = 1;
                                                 }
-                                            } else {
-                                                xmlSubrecord[xmlPair.key] = xmlPair.value;
                                             }
+                                        } else {
+                                            xmlRecord[xmlPair.key] = xmlPair.value;
                                         }
                                     });
                                     
-                                    // Pull fields from xmlRecord into sub-record
-                                    if (pullString !== "") {
-                                        for(l=0;l<pullFields.length;l++) {
-                                            xmlSubrecord[pullFields[l]] = xmlRecord[pullFields[l]];
+                                    uploadedRecordset.addRecord(JSON.stringify(xmlRecord));
+
+                                    // Process subgroups ($subRecords)
+                                    for(var k=0; k<$subRecords.length; k++) {
+
+                                        var pullFields = [];
+                                        var xmlSubrecord = { database:dbName, table: $subRecords[k].tagName.slice(8) };
+                                        $elementSet = $($subRecords[k]).find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
+                                        $elementSet.each(function(){
+                                            // !!!!! document this code
+                                            if ($(this).prop("tagName")==='LMD-PULL') {
+                                                pullString = $(this).text();
+                                                var pullFieldsBulky = pullString.split(",");
+                                                pullFields = $.map(pullFieldsBulky,function(val){return val.trim().slice(8);});
+                                            } else {
+                                                xmlPair = processLMD($(this).prop("tagName"),$(this).text());
+                                                if (xmlPair.key === "CHK") {
+                                                    chkArray = xmlPair.value.split(" ");
+                                                    for (var opt=0; opt<chkArray.length; opt++) {
+                                                        if (chkArray[opt] !== "") {
+                                                            chkKey = chkArray[opt].slice(8);
+                                                            xmlRecord[$(this).prop("tagName").slice(8) + "_" + chkKey] = 1;
+                                                        }
+                                                    }
+                                                } else {
+                                                    xmlSubrecord[xmlPair.key] = xmlPair.value;
+                                                }
+                                            }
+                                        });
+
+                                        // Pull fields from xmlRecord into sub-record
+                                        if (pullFields.length > 0) {
+                                            for(var l=0; l<pullFields.length; l++) {
+                                                // Filter out invalid PULL fields (will have no effect for proper xForms) !!!!! remove after LMS ?????
+                                                if(xmlRecord[pullFields[l]] !== undefined) {
+                                                    xmlSubrecord[pullFields[l]] = xmlRecord[pullFields[l]];
+                                                }
+                                            }
                                         }
+                                        uploadedRecordset.addRecord(JSON.stringify(xmlSubrecord));
                                     }
-                                    uploadedRecordset.addRecord(JSON.stringify(xmlSubrecord));
                                 }
+                            } catch(e) {
+                                // Display error message
+                                $('#modal_uploadLMD_message').text('Error parsing file.');
+                                anyErrors = true;
+                                console.log(e);
                             }
+                            
                         } else {
-                            // !!!!! Build out this error handler !!!!!
-                            alert('Error. Invalid file contents.');
+                            // !!!!! Build out all error handlers !!!!!
+                            // Display error message
+                            $('#modal_uploadLMD_message').text('Error parsing file.');
+                            anyErrors = true;
+                            console.log(e);
                         }
+                        
+                        // Increment file counter
+                        numFilesProcessed++;
+                        
                     };
                     reader.readAsText(file);
                 })(i);
             }
             
-            // Merge new records with old records
-            var myRecord = {};
-            myRecord.type = 'form';
-            LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
-                
-                // Read existing file (if exists) into mergedRecordset
-                var mergedRecordset = {};
-                i = 1;
-                if (result != "") {
-                    var oldRecordset = JSON.parse(result);
-                    for (var x in oldRecordset) {
-                        mergedRecordset[i] = oldRecordset[x];
-                        i++;
+            // When all files have been processed, proceed
+            // !!!!! rewrite this using "$.when" !!!!!
+            var myTimer = setInterval(function(){
+
+                if(numFilesProcessed === myInput.files.length) {
+
+                    if (!anyErrors) {
+
+                        // Merge new records with old records
+                        var myRecord = {};
+                        LMD_fileSystemHelper.readAndUseFile('data.lmd', function(result){
+
+                            // Read existing file (if exists) into mergedRecordset
+                            var mergedRecordset = {};
+                            i = 1;
+                            if (result != "") {
+                                var oldRecordset = JSON.parse(result);
+                                for (var key in oldRecordset) {
+                                    mergedRecordset[i] = oldRecordset[key];
+                                    i++;
+                                }
+                            }
+
+                            // Add uploaded records to mergedRecordset
+                            for (var key in uploadedRecordset.records) {
+                                mergedRecordset[i] = uploadedRecordset.records[key];
+                                i++;
+                            }
+
+                            // Write new recordset to data.lmd
+                            LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(mergedRecordset), function(){
+                                setTimeout(function(){
+                                    // Handle success
+                                    $('#modal_uploadLMD_message').text('Upload and merge complete.');
+                                    $('#modal_uploadLMD_done').fadeIn();
+                                },1500);
+                            });
+                        });
                     }
+
+                    clearInterval(myTimer);
                 }
-                
-                // Add uploaded records to mergedRecordset
-                for (var x in uploadedRecordset.records) {
-                    mergedRecordset[i] = uploadedRecordset.records[x];
-                    i++;
-                }
-                
-                // Write new recordset to data.lmd
-                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(mergedRecordset), function(){
-                    
-                    setTimeout(function(){
-                        // Display success message; hide modal; reset DOM
-                        $('#modal_uploadLMD_message').text('Upload and merge complete.');
-                        setTimeout(function(){
-                            $('.modal').modal('hide');
-                            setTimeout(function(){
-                                
-                                // Manipulate DOM
-                                $('#modal_uploadLMD_message').text('Uploading and merging data file...').hide();
-                                $('#modal_uploadLMD_status').hide();
-                                $('#modal_uploadLMD_formContent').show();
-                                
-                                // Clear file input
-                                $('#modal_uploadLMD_form').get(0).reset();
-                                
-                            },1000);
-                        },1000);
-                    },2000);
-                });
-            });
-        }
+
+            },500);
+            
+            
+        } // !!!!! if (!anyErrors) {
     });
-    
-    
-    
+
+
+
     // QA Click handlers
     $('#qa_TST').click(function() {
         launchQAModal({
@@ -573,31 +627,28 @@ $(document).ready(function(){
                 myRecordset = JSON.parse(result);
                 
                 // First loop through keys of myRecordset (set numRecords)
-                for (rKey in myRecordset) {
+                for (var key in myRecordset) {
                     try {
                         // Assign record object to currentRecord
-                        currentRecord = JSON.parse(myRecordset[rKey]);
+                        currentRecord = JSON.parse(myRecordset[key]);
                     }
                     catch(e) {
                         currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
                     }
                     
-                    // Test to see if current localStorage record is of type "form"
-                    if (currentRecord.type == "form") {
-                        // Test that pKey1 matches
-                        if ( pKey1_val == currentRecord[window.lmd_qaOptions.pKey1_name] ) {
-                            
-                            // Test that pKey2 matches (or doesn't exist)
-                            if ( window.lmd_qaOptions.pKey2_name === undefined || pKey2_val == currentRecord[window.lmd_qaOptions.pKey2_name] ) {
+                    // Test that pKey1 matches
+                    if ( pKey1_val == currentRecord[window.lmd_qaOptions.pKey1_name] ) {
 
-                                // Test that pKey3 matches (or doesn't exist)
-                                if ( window.lmd_qaOptions.pKey3_name === undefined || pKey3_val == currentRecord[window.lmd_qaOptions.pKey3_name] ) {
+                        // Test that pKey2 matches (or doesn't exist)
+                        if ( window.lmd_qaOptions.pKey2_name === undefined || pKey2_val == currentRecord[window.lmd_qaOptions.pKey2_name] ) {
 
-                                    // Test that pKey4 matches (or doesn't exist)
-                                    if ( window.lmd_qaOptions.pKey4_name === undefined || pKey4_val == currentRecord[window.lmd_qaOptions.pKey4_name] ) {
-                                        // Match found; set qaRecordID
-                                        var qaRecordID = rKey;
-                                    }
+                            // Test that pKey3 matches (or doesn't exist)
+                            if ( window.lmd_qaOptions.pKey3_name === undefined || pKey3_val == currentRecord[window.lmd_qaOptions.pKey3_name] ) {
+
+                                // Test that pKey4 matches (or doesn't exist)
+                                if ( window.lmd_qaOptions.pKey4_name === undefined || pKey4_val == currentRecord[window.lmd_qaOptions.pKey4_name] ) {
+                                    // Match found; set qaRecordID
+                                    var qaRecordID = key;
                                 }
                             }
                         }
@@ -617,42 +668,6 @@ $(document).ready(function(){
             }
 
         });
-        
-    });
-    
-    
-    
-    // CLICK HANDLER: generate EES Ledger (!!!!! temporary !!!!!)
-    // Run this script when modal_eesLedger_submit is clicked
-    $('#modal_eesLedger_submit').click(function(){
-        
-        // !!!!! Should give a warning if fhwID and fhwName don't match !!!!!
-        
-        var fhwID = $('#modal_eesLedger_fhwID').val();
-        var fhwName = $('#modal_eesLedger_fhwName').val();
-        var myLocation = "/LastMileData/src/forms/fhw_ees02_ebolaeducationscreening.php";
-        myLocation += "?fhwID=" + fhwID;
-        myLocation += "&fhwName=" + fhwName;
-        
-        location.assign(myLocation);
-        
-    });
-    
-    
-    
-    // CLICK HANDLER: generate Population report
-    // Run this script when modal_populationReport_submit is clicked
-    $('#modal_populationReport_submit').click(function(){
-        
-        // !!!!! Should give a warning if fhwID and fhwName don't match !!!!!
-        
-        var fhwID = $('#modal_populationReport_fhwID').val();
-        var fhwName = $('#modal_populationReport_fhwName').val();
-        var myLocation = "/LastMileData/src/php/util_populationReport.php";
-        myLocation += "?fhwID=" + fhwID;
-        myLocation += "&fhwName=" + fhwName;
-        
-        location.assign(myLocation);
         
     });
     
@@ -827,7 +842,9 @@ function processLMD(inputKey, inputValue) {
     
     var outputKey, outputValue;
     var fieldType = inputKey.slice(4,7);
-    
+
+// !!!!! rewrite this as a switch !!!!!
+
     if (fieldType === 'TAB') {
         outputKey = "table";
         outputValue = inputValue;
@@ -836,18 +853,12 @@ function processLMD(inputKey, inputValue) {
         outputValue = inputValue;
     } else if (fieldType === 'TIM') {
         outputKey = inputKey.slice(8);
-        outputValue = inputValue.substr(0,inputKey.indexOf("."));
-    } else if (fieldType === 'DAT') { // !!!!! phase out; 'DAT' is now equivalent to 'VAL'
-        outputKey = inputKey.slice(8);
-        outputValue = inputValue;
-//    } else if (fieldType === 'DAT') {
-//        outputKey = inputKey.slice(8);
-//        outputValue = mysql_date(86400000*Math.floor(inputValue));
+        outputValue = inputValue.slice(11,19);
     } else if (fieldType === 'CHK') {
         outputKey = "CHK";
         outputValue = inputValue;
     }
-    
+
     return {
         key: outputKey,
         value: outputValue
@@ -988,16 +999,18 @@ function twoDigits(d) {
 function parseRecordIntoSQL(currentRecord) {
     
     // Set array of currentRecord properties that are not stored
-    var notStored = ['table', 'type'];
+    var notStored = ['table', 'database']; // !!!!! database property not yet being used; filter out anyways !!!!!
     
     // Begin query string
-    var queryString = "INSERT INTO " + currentRecord.table + " SET ";
+    var database = currentRecord.database || 'lastmile_db';
+    var queryString = "INSERT INTO " + database + "." + currentRecord.table + " SET ";
     
     // Add key/value pairs to query string
-    for(var currKey in currentRecord) {
+    for(var key in currentRecord) {
         // if key isn't in "notStored" array, add it to query string
-        if ( notStored.indexOf(currKey) == -1) {
-            queryString += currKey + "='" + addslashes(currentRecord[currKey]) + "', ";
+        if ( notStored.indexOf(key) == -1) {
+            // !!!!! wrap key in `` characters !!!!!
+            queryString += key + "='" + addslashes(currentRecord[key]) + "', ";
         }
     }
     
@@ -1050,72 +1063,65 @@ function sendRecordsAJAX(){
                 myRecordset = JSON.parse(result);
                 
                 // First loop through keys of myRecordset (set numRecords and manipulate DOM)
-                for (rKey in myRecordset) {
+                for (var key in myRecordset) {
                     try {
                         // Assign record object to currentRecord
-                        currentRecord = JSON.parse(myRecordset[rKey]);
+                        currentRecord = JSON.parse(myRecordset[key]);
                     }
                     catch(e) {
                         currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
                     }
                     
-                    // Test to see if current localStorage record is of type "form"
-                    if (currentRecord.type == "form") {
-                        numRecords++;
-                        $('#modal_sendRecords_ajaxInner').append('<div id="ajaxBlock_' + rKey + '" class="ajaxBlock">' + numRecords + '</div>');
-                    }
+                    // Add "color blocks" (one block represents one record)
+                    numRecords++;
+                    $('#modal_sendRecords_ajaxInner').append('<div id="ajaxBlock_' + key + '" class="ajaxBlock">' + numRecords + '</div>');
                 }
                 
                 // Second loop through keys of myRecordset (process numRecords)
-                for (rKey in myRecordset) {
+                for (var key in myRecordset) {
                     
                     try {
                         // Assign record object to currentRecord
-                        currentRecord = JSON.parse(myRecordset[rKey]);
+                        currentRecord = JSON.parse(myRecordset[key]);
                     }
                     catch(e) {
                         currentRecord = 1;  // To avoid JSON.Parse() returning an error if value variable is not valid JSON
                     }
                     
-                    // Test to see if current record is of type "form"
-                    if (currentRecord.type == "form") {
-                        
-                        // Parse SQL Insert query
-                        queryString = parseRecordIntoSQL(currentRecord);
-                        
-                        // Send record to database via AJAX
-                        var myData = {'queryString': queryString, 'rKey': rKey} ;
-                        
-                        // Send AJAX request
-                        $.ajax({
-                            type: "POST",
-                            url: "/LastMileData/src/php/ajaxSendQuery.php",
-                            data: myData,
-                            dataType: "json",
-                            success: function(data) {
-                                
-                                // Change ajaxBlock to GREEN
-                                $("#ajaxBlock_" + data.rKeyAJAX).css('background-color','#5CB85C');
-                                
-                                // Log success; remove record from myRecordset; increment AJAX success counter
-                                console.log('ajax success!');
-                                delete myRecordset[data.rKeyAJAX];
-                                numAjax_success++;
-                                
-                            },
-                            error: function(request, status, error) {
-                                
-                                // Change ajaxBlock to GREEN
-                                $("#ajaxBlock_" + JSON.parse(request.responseText).rKeyAJAX).css('background-color','#C12E2A');
-                                
-                                // Log failure; increment AJAX failure counter
-                                console.log('ajax error :/');
-                                console.log(request);
-                                numAjax_fail++;
-                            }
-                        });
-                    }
-                    
+                    // Parse SQL Insert query
+                    queryString = parseRecordIntoSQL(currentRecord);
+
+                    // Send record to database via AJAX
+                    var myData = {'queryString': queryString, 'rKey': key, 'transaction': 0} ;
+
+                    // Send AJAX request
+                    $.ajax({
+                        type: "POST",
+                        url: "/LastMileData/src/php/ajaxSendQuery.php",
+                        data: myData,
+                        dataType: "json",
+                        success: function(data) {
+
+                            // Change ajaxBlock to GREEN
+                            $("#ajaxBlock_" + data.rKeyAJAX).css('background-color','#5CB85C');
+
+                            // Log success; remove record from myRecordset; increment AJAX success counter
+                            console.log('ajax success!');
+                            delete myRecordset[data.rKeyAJAX];
+                            numAjax_success++;
+
+                        },
+                        error: function(request, status, error) {
+
+                            // Change ajaxBlock to GREEN
+                            $("#ajaxBlock_" + JSON.parse(request.responseText).rKeyAJAX).css('background-color','#C12E2A');
+
+                            // Log failure; increment AJAX failure counter
+                            console.log('ajax error :/');
+                            console.log(request);
+                            numAjax_fail++;
+                        }
+                    });
                 }
                 
                 var myTimer = setInterval(function(){

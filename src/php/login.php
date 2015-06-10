@@ -10,7 +10,7 @@ $redirect = $_POST['redirect'];
 
 // Query password hash from database
 require_once("cxn.php");
-$query = "SELECT * FROM tbl_utility_users WHERE username = '$input_username'";
+$query = "SELECT * FROM lastmile_db.tbl_utility_users WHERE username = '$input_username'";
 $result = mysqli_query($cxn, $query) or Header("Location:/LastMileData/index.php?retry=1");
 $row = mysqli_fetch_assoc($result);
 
@@ -51,7 +51,7 @@ function updateLoginTable($username, $cxn)
     $loginTime = date('Y-m-d H:i:s');
     
     // Run query to update login table
-    $query = "INSERT INTO tbl_utility_logins (username, loginTime) VALUES ('$username', '$loginTime');";
+    $query = "INSERT INTO lastmile_db.tbl_utility_logins (username, loginTime) VALUES ('$username', '$loginTime');";
     mysqli_query($cxn, $query) or die("failure");
 }
 

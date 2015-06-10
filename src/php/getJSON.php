@@ -13,7 +13,7 @@ set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'
 require_once("cxn.php");
 
 // Uncomment next line to debug queries
-//mysqli_query($cxn, 'INSERT INTO test (col_1) VALUES ("' . $queryString . '")');
+//mysqli_query($cxn, 'INSERT INTO lastmile_db.test (col_1) VALUES ("' . $queryString . '")');
 // !!!!! create a "turn debug queries on/off" switch on DEQA !!!!!
 
 // If there is a connection, run query
@@ -24,6 +24,8 @@ if ( !($cxn && $result = mysqli_query($cxn, $queryString)) ) {
 }
 
 // Parse result into JSON
+// !!!!! rewrite using mysqli_fetch_all
+// !!!!! eg: echo '{"users": ' . json_encode(mysqli_fetch_all($result,MYSQLI_ASSOC)) . '}';
 $i = 0;
 $jsonString = "{";
 while ($row = mysqli_fetch_assoc($result)) {

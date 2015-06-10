@@ -1,6 +1,150 @@
 // Create data object
 var myData_Konobo = {};
 
+// Data: numFHWs
+myData_Konobo.numFHWs = [
+    { "Month":"2012-09-01", "FHWs":0 },
+    { "Month":"2012-10-01", "FHWs":10 },
+    { "Month":"2012-11-01", "FHWs":10 },
+    { "Month":"2012-12-01", "FHWs":10 },
+    { "Month":"2013-01-01", "FHWs":10 },
+    { "Month":"2013-02-01", "FHWs":10 },
+    { "Month":"2013-03-01", "FHWs":10 },
+    { "Month":"2013-04-01", "FHWs":10 },
+    { "Month":"2013-05-01", "FHWs":10 },
+    { "Month":"2013-06-01", "FHWs":26 },
+    { "Month":"2013-07-01", "FHWs":26 },
+    { "Month":"2013-08-01", "FHWs":26 },
+    { "Month":"2013-09-01", "FHWs":26 },
+    { "Month":"2013-10-01", "FHWs":26 },
+    { "Month":"2013-11-01", "FHWs":26 },
+    { "Month":"2013-12-01", "FHWs":42 },
+    { "Month":"2014-01-01", "FHWs":42 },
+    { "Month":"2014-02-01", "FHWs":42 },
+    { "Month":"2014-03-01", "FHWs":42 },
+    { "Month":"2014-04-01", "FHWs":42 },
+    { "Month":"2014-05-01", "FHWs":42 },
+    { "Month":"2014-06-01", "FHWs":42 },
+    { "Month":"2014-07-01", "FHWs":42 },
+    { "Month":"2014-08-01", "FHWs":42 },
+    { "Month":"2014-09-01", "FHWs":42 },
+    { "Month":"2014-10-01", "FHWs":42 },
+    { "Month":"2014-11-01", "FHWs":42 },
+    { "Month":"2014-12-01", "FHWs":55 },
+    { "Month":"2015-01-01", "FHWs":55 },
+    { "Month":"2015-02-01", "FHWs":55 },
+    { "Month":"2015-03-01", "FHWs":58 },
+    { "Month":"2015-04-01", "FHWs":58 }
+];
+
+// Data: numSupervisors
+myData_Konobo.numSupervisors = [
+    { "Month":"2012-09-01", "Supervisors":0 },
+    { "Month":"2012-10-01", "Supervisors":2 },
+    { "Month":"2012-11-01", "Supervisors":2 },
+    { "Month":"2012-12-01", "Supervisors":2 },
+    { "Month":"2013-01-01", "Supervisors":2 },
+    { "Month":"2013-02-01", "Supervisors":2 },
+    { "Month":"2013-03-01", "Supervisors":2 },
+    { "Month":"2013-04-01", "Supervisors":2 },
+    { "Month":"2013-05-01", "Supervisors":2 },
+    { "Month":"2013-06-01", "Supervisors":3 },
+    { "Month":"2013-07-01", "Supervisors":3 },
+    { "Month":"2013-08-01", "Supervisors":3 },
+    { "Month":"2013-09-01", "Supervisors":3 },
+    { "Month":"2013-10-01", "Supervisors":3 },
+    { "Month":"2013-11-01", "Supervisors":3 },
+    { "Month":"2013-12-01", "Supervisors":4 },
+    { "Month":"2014-01-01", "Supervisors":4 },
+    { "Month":"2014-02-01", "Supervisors":4 },
+    { "Month":"2014-03-01", "Supervisors":4 },
+    { "Month":"2014-04-01", "Supervisors":4 },
+    { "Month":"2014-05-01", "Supervisors":4 },
+    { "Month":"2014-06-01", "Supervisors":4 },
+    { "Month":"2014-07-01", "Supervisors":4 },
+    { "Month":"2014-08-01", "Supervisors":4 },
+    { "Month":"2014-09-01", "Supervisors":4 },
+    { "Month":"2014-10-01", "Supervisors":4 },
+    { "Month":"2014-11-01", "Supervisors":4 },
+    { "Month":"2014-12-01", "Supervisors":5 },
+    { "Month":"2015-01-01", "Supervisors":5 },
+    { "Month":"2015-02-01", "Supervisors":5 },
+    { "Month":"2015-03-01", "Supervisors":5 },
+    { "Month":"2015-04-01", "Supervisors":5 }
+];
+
+// Data: numPeopleServed
+myData_Konobo.numPeopleServed = [
+    { "Month":"2012-09-01", "People":0 },
+    { "Month":"2012-10-01", "People":1300 },
+    { "Month":"2012-11-01", "People":1300 },
+    { "Month":"2012-12-01", "People":1292 },
+    { "Month":"2013-01-01", "People":1308 },
+    { "Month":"2013-02-01", "People":1321 },
+    { "Month":"2013-03-01", "People":1372 },
+    { "Month":"2013-04-01", "People":1377 },
+    { "Month":"2013-05-01", "People":1419 },
+    { "Month":"2013-06-01", "People":1434 },
+    { "Month":"2013-07-01", "People":5169 },
+    { "Month":"2013-08-01", "People":5302 },
+    { "Month":"2013-09-01", "People":5357 },
+    { "Month":"2013-10-01", "People":5383 },
+    { "Month":"2013-11-01", "People":5430 },
+    { "Month":"2013-12-01", "People":5449 },
+    { "Month":"2014-01-01", "People":7532 },
+    { "Month":"2014-02-01", "People":9280 },
+    { "Month":"2014-03-01", "People":9378 },
+    { "Month":"2014-04-01", "People":9534 },
+    { "Month":"2014-05-01", "People":9639 },
+    { "Month":"2014-06-01", "People":9971 },
+    { "Month":"2014-07-01", "People":10212 },
+    { "Month":"2014-08-01", "People":10396 },
+    { "Month":"2014-09-01", "People":10621 },
+    { "Month":"2014-10-01", "People":11027 },
+    { "Month":"2014-11-01", "People":13868 },
+    { "Month":"2014-12-01", "People":14217 },
+    { "Month":"2015-01-01", "People":14298 },
+    { "Month":"2015-02-01", "People":14397 },
+    { "Month":"2015-03-01", "People":14517 },
+    { "Month":"2015-04-01", "People":14673 }
+];
+
+// Data: numVillagesServed
+myData_Konobo.numVillagesServed = [
+    { "Month":"2012-09-01", "Villages":0 },
+    { "Month":"2012-10-01", "Villages":13 },
+    { "Month":"2012-11-01", "Villages":13 },
+    { "Month":"2012-12-01", "Villages":13 },
+    { "Month":"2013-01-01", "Villages":13 },
+    { "Month":"2013-02-01", "Villages":13 },
+    { "Month":"2013-03-01", "Villages":13 },
+    { "Month":"2013-04-01", "Villages":13 },
+    { "Month":"2013-05-01", "Villages":13 },
+    { "Month":"2013-06-01", "Villages":13 },
+    { "Month":"2013-07-01", "Villages":28 },
+    { "Month":"2013-08-01", "Villages":28 },
+    { "Month":"2013-09-01", "Villages":28 },
+    { "Month":"2013-10-01", "Villages":28 },
+    { "Month":"2013-11-01", "Villages":28 },
+    { "Month":"2013-12-01", "Villages":28 },
+    { "Month":"2014-01-01", "Villages":42 },
+    { "Month":"2014-02-01", "Villages":42 },
+    { "Month":"2014-03-01", "Villages":42 },
+    { "Month":"2014-04-01", "Villages":42 },
+    { "Month":"2014-05-01", "Villages":42 },
+    { "Month":"2014-06-01", "Villages":42 },
+    { "Month":"2014-07-01", "Villages":42 },
+    { "Month":"2014-08-01", "Villages":42 },
+    { "Month":"2014-09-01", "Villages":42 },
+    { "Month":"2014-10-01", "Villages":52 },
+    { "Month":"2014-11-01", "Villages":52 },
+    { "Month":"2014-12-01", "Villages":52 },
+    { "Month":"2015-01-01", "Villages":52 },
+    { "Month":"2015-02-01", "Villages":52 },
+    { "Month":"2015-03-01", "Villages":55 },
+    { "Month":"2015-04-01", "Villages":55 }
+];
+
 // Data: % of records QA'd
 myData_Konobo.dataEntryQA = [
     { "Month":"2014-10-01", "% QA'd":0.056 },
@@ -8,7 +152,8 @@ myData_Konobo.dataEntryQA = [
     { "Month":"2014-12-01", "% QA'd":0.089 },
     { "Month":"2015-01-01", "% QA'd":0.011 },
     { "Month":"2015-02-01", "% QA'd":0.095 },
-    { "Month":"2015-03-01", "% QA'd":0.073 }
+    { "Month":"2015-03-01", "% QA'd":0.073 },
+    { "Month":"2015-04-01", "% QA'd":0.053 }
 ];
 
 // Data: % of records entered
@@ -18,18 +163,22 @@ myData_Konobo.numRecordsEntered = [
     { "Month":"2014-12-01", "Records":135 },
     { "Month":"2015-01-01", "Records":1080 },
     { "Month":"2015-02-01", "Records":1051 },
-    { "Month":"2015-03-01", "Records":2372 }
+    { "Month":"2015-03-01", "Records":2372 },
+    { "Month":"2015-04-01", "Records":1863 }
 ];
 
 // Data: facility delivery
 myData_Konobo.facilityDelivery = [
-    { "Month":"2015-03-01", "Facility Delivery":.684 }
+    { "Month":"2015-03-01", "Facility Delivery":.684 },
+    { "Month":"2015-04-01", "Facility Delivery":.778 }
 ];
 
 // Data: ANC visitation
 myData_Konobo.ancVisitation = [
     { "Month":"2015-03-01", "Rate":"ANC-1", "Percent":0.913 },
-    { "Month":"2015-03-01", "Rate":"ANC-4", "Percent":0.435 }
+    { "Month":"2015-03-01", "Rate":"ANC-4", "Percent":0.435 },
+    { "Month":"2015-04-01", "Rate":"ANC-1", "Percent":0.875 },
+    { "Month":"2015-04-01", "Rate":"ANC-4", "Percent":0.313 }
 ];
     
 // Data: sick child source
@@ -50,10 +199,14 @@ myData_Konobo.sickChildSource = [
     { "Month":"2015-02-01", "Source":"Well child visit", "Value":17 },
     { "Month":"2015-02-01", "Source":"Noticed child was sick", "Value":67 },
     { "Month":"2015-02-01", "Source":"Other", "Value":100 },
-    { "Month":"2015-03-01", "Source":"Parent came to me", "Value":191 },
+    { "Month":"2015-03-01", "Source":"Parent came to me", "Value":223 },
     { "Month":"2015-03-01", "Source":"Well child visit", "Value":12 },
-    { "Month":"2015-03-01", "Source":"Noticed child was sick", "Value":52 },
-    { "Month":"2015-03-01", "Source":"Other", "Value":75 }
+    { "Month":"2015-03-01", "Source":"Noticed child was sick", "Value":62 },
+    { "Month":"2015-03-01", "Source":"Other", "Value":91 },
+    { "Month":"2015-04-01", "Source":"Parent came to me", "Value":165 },
+    { "Month":"2015-04-01", "Source":"Well child visit", "Value":21 },
+    { "Month":"2015-04-01", "Source":"Noticed child was sick", "Value":58 },
+    { "Month":"2015-04-01", "Source":"Other", "Value":67 }
 ];
 
 // Data: sick child source
@@ -63,7 +216,8 @@ myData_Konobo.sickChildFollowupRate = [
     { "Month":"2014-12-01", "Follow Up Rate":1.000 },
     { "Month":"2015-01-01", "Follow Up Rate":0.993 },
     { "Month":"2015-02-01", "Follow Up Rate":1.000 },
-    { "Month":"2015-03-01", "Follow Up Rate":0.994 }
+    { "Month":"2015-03-01", "Follow Up Rate":0.995 },
+    { "Month":"2015-04-01", "Follow Up Rate":0.990 }
 ];
 
 // Data: sick children treated
@@ -73,7 +227,8 @@ myData_Konobo.sickChildrenTreated = [
     { "Month":"2014-12-01", "Visits":241 },
     { "Month":"2015-01-01", "Visits":255 },
     { "Month":"2015-02-01", "Visits":350 },
-    { "Month":"2015-03-01", "Visits":295 }
+    { "Month":"2015-03-01", "Visits":338 },
+    { "Month":"2015-04-01", "Visits":279 }
 ];
 
 // Data: sick children treated, by condition
@@ -156,9 +311,12 @@ myData_Konobo.sickChildrenTreated_condition = [
     { "Month":"2015-02-01", "Condition":"Malaria", "Treated":360 },
     { "Month":"2015-02-01", "Condition":"Diarrhea", "Treated":143 },
     { "Month":"2015-02-01", "Condition":"ARI", "Treated":152 },
-    { "Month":"2015-03-01", "Condition":"Malaria", "Treated":297 },
-    { "Month":"2015-03-01", "Condition":"Diarrhea", "Treated":90 },
-    { "Month":"2015-03-01", "Condition":"ARI", "Treated":143 }
+    { "Month":"2015-03-01", "Condition":"Malaria", "Treated":346 },
+    { "Month":"2015-03-01", "Condition":"Diarrhea", "Treated":110 },
+    { "Month":"2015-03-01", "Condition":"ARI", "Treated":167 },
+    { "Month":"2015-04-01", "Condition":"Malaria", "Treated":275 },
+    { "Month":"2015-04-01", "Condition":"Diarrhea", "Treated":76 },
+    { "Month":"2015-04-01", "Condition":"ARI", "Treated":118 }
 ];
 
 // Data: sick children treated, per 10,000 population
@@ -243,5 +401,61 @@ myData_Konobo.sickChildrenTreated_perPop = [
     { "Month":"2015-02-01", "Condition":"ARI", "TreatedPerPop":106 },
     { "Month":"2015-03-01", "Condition":"Malaria", "TreatedPerPop":205 },
     { "Month":"2015-03-01", "Condition":"Diarrhea", "TreatedPerPop":62 },
-    { "Month":"2015-03-01", "Condition":"ARI", "TreatedPerPop":99 }
+    { "Month":"2015-03-01", "Condition":"ARI", "TreatedPerPop":99 },
+    { "Month":"2015-04-01", "Condition":"Malaria", "TreatedPerPop":187 },
+    { "Month":"2015-04-01", "Condition":"Diarrhea", "TreatedPerPop":52 },
+    { "Month":"2015-04-01", "Condition":"ARI", "TreatedPerPop":67 }
 ];
+
+// Data: births
+myData_Konobo.births = [
+    { "Month":"2015-01-01", "Births":1 },
+    { "Month":"2015-02-01", "Births":30 },
+    { "Month":"2015-03-01", "Births":8 },
+    { "Month":"2015-04-01", "Births":22 }
+];
+
+// Data: moves (in/out)
+myData_Konobo.moves = [
+    { "Month":"2015-01-01", "Type":"Move in", "Number":30 },
+    { "Month":"2015-01-01", "Type":"Move out", "Number":4 },
+    { "Month":"2015-02-01", "Type":"Move in", "Number":339 },
+    { "Month":"2015-02-01", "Type":"Move out", "Number":140 },
+    { "Month":"2015-03-01", "Type":"Move in", "Number":213 },
+    { "Month":"2015-03-01", "Type":"Move out", "Number":129 },
+    { "Month":"2015-04-01", "Type":"Move in", "Number":122 },
+    { "Month":"2015-04-01", "Type":"Move out", "Number":51 }
+];
+
+// Data: deaths (neonatal)
+myData_Konobo.deathsAll = [
+    { "Month":"2015-01-01", "Type":"Under-five","Deaths":0 },
+    { "Month":"2015-01-01", "Type":"Over-five","Deaths":3 },
+    { "Month":"2015-01-01", "Type":"Unknown","Deaths":0 },
+    { "Month":"2015-02-01", "Type":"Under-five","Deaths":1 },
+    { "Month":"2015-02-01", "Type":"Over-five","Deaths":3 },
+    { "Month":"2015-02-01", "Type":"Unknown","Deaths":1 },
+    { "Month":"2015-03-01", "Type":"Under-five","Deaths":0 },
+    { "Month":"2015-03-01", "Type":"Over-five","Deaths":3 },
+    { "Month":"2015-03-01", "Type":"Unknown","Deaths":1 },
+    { "Month":"2015-04-01", "Type":"Under-five","Deaths":3 },
+    { "Month":"2015-04-01", "Type":"Over-five","Deaths":5 },
+    { "Month":"2015-04-01", "Type":"Unknown","Deaths":1 },
+];
+
+// Data: deaths (neonatal)
+myData_Konobo.deathsU5 = [
+    { "Month":"2015-01-01", "Type":"Neonatal","Deaths":0 },
+    { "Month":"2015-01-01", "Type":"Post-neonatal","Deaths":0 },
+    { "Month":"2015-01-01", "Type":"Child","Deaths":0 },
+    { "Month":"2015-02-01", "Type":"Neonatal","Deaths":1 },
+    { "Month":"2015-02-01", "Type":"Post-neonatal","Deaths":0 },
+    { "Month":"2015-02-01", "Type":"Child","Deaths":0 },
+    { "Month":"2015-03-01", "Type":"Neonatal","Deaths":0 },
+    { "Month":"2015-03-01", "Type":"Post-neonatal","Deaths":0 },
+    { "Month":"2015-03-01", "Type":"Child","Deaths":0 },
+    { "Month":"2015-04-01", "Type":"Neonatal","Deaths":1 },
+    { "Month":"2015-04-01", "Type":"Post-neonatal","Deaths":1 },
+    { "Month":"2015-04-01", "Type":"Child","Deaths":1 },
+];
+
