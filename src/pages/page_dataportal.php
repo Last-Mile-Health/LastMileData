@@ -9,11 +9,6 @@
 <html>
     
     <head>
-        <?php
-            if( isset($_SESSION['username']) ) {
-                echo "<script>sessionStorage.username = '" . $_SESSION['username'] . "'</script>";
-            }
-        ?>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
@@ -41,6 +36,11 @@
 
         <?php
 
+            // Echo username (used by access control system)
+            if( isset($_SESSION['username']) ) {
+                echo "<script>sessionStorage.username = '" . $_SESSION['username'] . "'</script>";
+            }
+            
             // Initiate/configure CURL session
             $ch = curl_init();
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
@@ -59,75 +59,6 @@
             // Configure rivets.js
             rivets.configure({templateDelimiters: ['{{', '}}']});
 
-            // Set model (sidebar)
-            // tabs with type="dp_frag" will be loaded as a document fragment
-            // tabs with type="dp_iframe" will be loaded as iFrames
-            
-//            var model_sidebar = JSON.parse()
-            
-//            var model_sidebar = [
-//                {
-//                    name: "Overview",
-//                    id: "header_overview",
-//                    tabs: [
-//                        { name: "Overview", id:"item_overview", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_overview.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "Portal updates", id:"item_updates", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_updates.php", permissions:['admin','deqa','user'] }
-//                    ]
-//                },
-//                {
-//                    name: "Monthly Dashboards",
-//                    id: "header_monthlyDashboards",
-//                    tabs: [
-//                        { name: "Executive dashboard", id:"item_execDashboard", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_execDashboard.php", permissions:['admin','deqa','user'] },
-//                        { name: "Konobo monthly report", id:"item_konobo", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_konobo.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "Ebola activities", id:"item_ebolaActivities", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_ebolaActivities.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "FHW training", id:"item_fhwTraining", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_fhwTraining.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] }
-//                    ]
-//                },
-//                {
-//                    name: "KPI Assessment (2014)",
-//                    id: "header_kpia",
-//                    tabs: [
-//                        { name: "Early childhood mortality", id:"item_kpiaMortality", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_kpia_mortality.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "Facility delivery", id:"item_kpiaFacilityDelivery", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_kpia_facilityDelivery.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "Antenatal care", id:"item_kpiaANC", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_kpia_anc.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "Vaccination", id:"item_kpiaVaccination", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_kpia_vaccination.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] }
-//                    ]
-//                },
-//                {
-//                    name: "Liberia stats",
-//                    id: "header_liberiaStats",
-//                    tabs: [
-//                        { name: "Population", id:"item_liberiaPopulation", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_liberiaPopulation.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "DHS 2013", id:"item_DHS", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_dhs.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] }
-//                    ]
-//                },
-//                {
-//                    name: "M&E Team Tools",
-//                    id: "header_meTools",
-//                    tabs: [
-//                        { name: "Ebola report", id:"item_ebolaReport", type:"dp_iframe", link: "/LastMileData/src/pages/report_ebola.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] },
-//                        { name: "Sick child report", id:"item_sickChildReport", type:"dp_iframe", link: "/LastMileData/src/pages/report_sickChild.php", permissions:['admin','deqa','cht_gg','cht_rc'] },
-//                        { name: "Data entry summary", id:"item_dataEntrySummary", type:"dp_frag", link: "/LastMileData/src/pages/viewSentRecords.php", permissions:['admin','deqa','cht_gg','cht_rc'] },
-//                        { name: "ID numbers", id:"item_idNumbers", type:"dp_frag", link: "/LastMileData/src/pages/idNumbers.php", permissions:['admin','deqa','user','cht_gg','cht_rc'] }
-//                    ]
-//                },
-//                {
-//                    name: "Indicator Maps",
-//                    id: "header_staging", // !!!!! CHANGE THIS !!!!!
-//                    tabs: [
-//                        { name: "Indicator map", id:"item_leafletMap", type:"dp_frag", link: "/LastMileData/src/fragments/dataportal_leafletMap.html", permissions:['admin','deqa','user','cht_gg','cht_rc'] }
-//                    ]
-//                },
-//                {
-//                    name: "Admin Panel",
-//                    id: "header_admin",
-//                    tabs: [
-//                        { name: "Edit data", id:"item_editData", type:"dp_frag", link: "/LastMileData/src/fragments/admin_editData.php", permissions:['admin'] }
-//                    ]
-//                }
-//            ];
-            
             // Apply access control rules
             var filteredSidebar = model_sidebar;
             var userType = '<?php echo $_SESSION['usertype']; ?>';
@@ -147,18 +78,7 @@
             // Bind sidebar model to accordion DIV
             rivets.bind($('#sidebarDIV'), {model_sidebar: filteredSidebar});
 
-            // Apply access control settings
-            // Set permissions in LMD_accessControl.js file
-    //            LMD_accessControl.setPage('dataPortal');
-    //            LMD_accessControl.setUserType('<?php echo $_SESSION['usertype']; ?>');
-    //            LMD_accessControl.go();
-
-            // !!!!! This section is reserved for making specific data portal pages "linkable"; needs to interface with access control system !!!!!
-            // !!!!! use these parameters to set initial page !!!!!
-            // !!!!! below, when link changes, programmatically set URL (if possible)  !!!!!
-            // !!!!! consider using hash anchors  !!!!!
-    //            var init_fragOrFrame = "<?php // echo @$_GET['fragOrFrame']; ?>";
-    //            var init_myLink = "<?php // echo @$_GET['myLink']; ?>";
+            // !!!!! Make specific data portal pages "linkable" (with hash anchors); needs to interface with access control system !!!!!
 
             // Fade in overview pane by default
             $('#mainContainer').load('/LastMileData/src/fragments/dataportal_overview.php',function(){
@@ -169,7 +89,6 @@
                 $('#dp_sidebar').fadeIn(1000);
                 $('.dp_frag').first().addClass('dp-active');
             });
-
 
             // Handle sidebar clicks
             $('.dp_frag, .dp_iframe').click(function(){
