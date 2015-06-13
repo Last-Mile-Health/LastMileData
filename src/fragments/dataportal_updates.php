@@ -7,6 +7,18 @@
 
 <div id="overview">
     
+    <h3>June 2015</h3>
+    <ul>
+        <li>
+            <b>Konobo Supervision Report.</b>
+            Created a basic summary report on supervision activities
+        </li>
+        <li>
+            <b>Terminology.</b>
+            Updated site to reflect new terminology (FHW --> CHW, FHW Leader --> CHW Leader, Clinical Mentor --> Community Clinical Supervisor)
+        </li>
+    </ul>
+    
     <h3>May 2015</h3>
     <ul>
         <li>
@@ -14,7 +26,7 @@
             Created an “access control” system, whereby different users see different subsets of Data Portal reports based on their role. For example, members of the Rivercess County Health Team (CHT) will be able to see data from Rivercess, but not from Grand Gedeh.
         </li>
         <li>
-            <b>Konobo Monthly Report.</b>
+            <b>Konobo CHW Report.</b>
             Expanded report with data on births, deaths, and movements.
         </li>
         <li>
@@ -26,12 +38,12 @@
     <h3>April 2015</h3>
     <ul>
         <li>
-            <b>Konobo Monthly Report.</b>
+            <b>Konobo CHW Report.</b>
             Created to track monthly progress in Konobo on a variety of input, output, process, and impact indicators.
         </li>
         <li>
             <b>KPI Assessment.</b>
-            Data from the KPI Assessment, a short survey administered by Konobo FHWs in August of 2014, was migrated to the Data Portal.
+            Data from the KPI Assessment, a short survey administered by Konobo CHWs in August of 2014, was migrated to the Data Portal.
         </li>
         <li>
             <b>Organization.</b>

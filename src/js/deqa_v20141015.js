@@ -851,6 +851,9 @@ function processLMD(inputKey, inputValue) {
     } else if (fieldType === 'VAL') {
         outputKey = inputKey.slice(8);
         outputValue = inputValue;
+    } else if (fieldType === 'DAT') { // !!!!! this is an artifact of old forms and should be removed !!!!!
+        outputKey = inputKey.slice(8);
+        outputValue = inputValue;
     } else if (fieldType === 'TIM') {
         outputKey = inputKey.slice(8);
         outputValue = inputValue.slice(11,19);

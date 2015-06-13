@@ -37,7 +37,7 @@ function getSome($id) {
     try {
         $whereClause = ($id == 'all') ? 1 : "indID IN ($id)" ;
         $cxn = getCXN();
-        $query = "SELECT indID,indName,indCategory,indFormat,indDefinition,indTarget,indNarrative FROM dataportal.tbl_indicators WHERE $whereClause";
+        $query = "SELECT indID,indName,indCategory,indFormat,indDefinition,indTarget,indNarrative FROM lastmile_dataportal.tbl_indicators WHERE $whereClause";
         $result = mysqli_query($cxn, $query);
         
         if (mysqli_num_rows($result)==1 ) {
@@ -70,7 +70,7 @@ function addOne() {
         $indNarrative = $bodyDecode->indNarrative;
         
         $cxn = getCXN();
-        $query = "INSERT INTO dataportal.tbl_indicators SET `indName`='" . @$indName . "', `indCategory`='" . @$indCategory . "', `indFormat`='" . @$indFormat . "', `indDefinition`='" . @$indDefinition . "', `indTarget`='" . @$indTarget . "', `indNarrative`='" . @$indNarrative . "'";
+        $query = "INSERT INTO lastmile_dataportal.tbl_indicators SET `indName`='" . @$indName . "', `indCategory`='" . @$indCategory . "', `indFormat`='" . @$indFormat . "', `indDefinition`='" . @$indDefinition . "', `indTarget`='" . @$indTarget . "', `indNarrative`='" . @$indNarrative . "'";
         echo mysqli_query($cxn, $query) ? mysqli_insert_id($cxn) : 0;
         mysqli_close($cxn);
     }
@@ -94,7 +94,7 @@ function updateOne($id) {
         $indNarrative = $bodyDecode->indNarrative;
         
         $cxn = getCXN();
-        $query = "REPLACE INTO dataportal.tbl_indicators SET `indID`='" . @$indID . "', `indName`='" . @$indName . "', `indCategory`='" . @$indCategory . "', `indFormat`='" . @$indFormat . "', `indDefinition`='" . @$indDefinition . "', `indTarget`='" . @$indTarget . "', `indNarrative`='" . @$indNarrative . "'";
+        $query = "REPLACE INTO lastmile_dataportal.tbl_indicators SET `indID`='" . @$indID . "', `indName`='" . @$indName . "', `indCategory`='" . @$indCategory . "', `indFormat`='" . @$indFormat . "', `indDefinition`='" . @$indDefinition . "', `indTarget`='" . @$indTarget . "', `indNarrative`='" . @$indNarrative . "'";
         echo mysqli_query($cxn, $query) ? $bodyID : 0;
         mysqli_close($cxn);
     }
@@ -108,7 +108,7 @@ function updateOne($id) {
 function deleteOne($id) {
     try {
         $cxn = getCXN();
-        $query = "DELETE FROM dataportal.tbl_indicators WHERE indID=$id";
+        $query = "DELETE FROM lastmile_dataportal.tbl_indicators WHERE indID=$id";
         $result = mysqli_query($cxn, $query);
         echo mysqli_query($cxn, $query) ? $id : 0;
         mysqli_close($cxn);

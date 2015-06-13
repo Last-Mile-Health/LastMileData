@@ -38,11 +38,11 @@ require_once("cxn.php");
 </table>
 <br>
 
-<h1>FHW IDs</h1>
+<h1>CHW IDs</h1>
 <table class="table table-striped table-hover">
     <tr>
-        <th>FHW Name</th>
-        <th>FHW ID#</th>
+        <th>CHW Name</th>
+        <th>CHW ID#</th>
     </tr>
     <?php
 
@@ -79,7 +79,7 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT staffName, IF(staffType='C','Clinical Mentor',IF(staffType='L','FHW Leader','Unknown')) AS staffTypeFull, pk_staff FROM lastmile_db.tbl_data_staff
+            SELECT staffName, IF(staffType='C','Community Clinical Supervisor',IF(staffType='L','CHW Leader','Unknown')) AS staffTypeFull, pk_staff FROM lastmile_db.tbl_data_staff
             WHERE staffType IN ('C','L') && ( quitOrReleased NOT IN ('Q','R') || ISNULL(quitOrReleased) )
             ORDER BY staffType, staffName;
 

@@ -8,11 +8,7 @@ $(document).ready(function(){
     $.ajax({
         type: "POST",
         url: "/LastMileData/src/php/getJSON.php",
-<<<<<<< HEAD
-        data: {'queryString': 'SELECT `indID`, `indName`, `indCategory`, `indFormat` FROM dataportal.tbl_indicators;'},
-=======
-        data: {'queryString': 'SELECT `indID`, `indName`, `indCategory`, `indFormat` FROM lastmile_db.tbl_kpi_indicators;'},
->>>>>>> origin/master
+        data: {'queryString': 'SELECT `indID`, `indName`, `indCategory`, `indFormat` FROM lastmile_dataportal.tbl_indicators;'},
         dataType: "json",
         success: function(data){ indicatorList = data; },
         error: handleAJAXErrors
@@ -22,11 +18,7 @@ $(document).ready(function(){
     $.ajax({
         type: "POST",
         url: "/LastMileData/src/php/getJSON.php",
-<<<<<<< HEAD
-        data: {'queryString': 'SELECT `month`, `year`, `indID`, `indValue` FROM dataportal.tbl_values;'},
-=======
-        data: {'queryString': 'SELECT `month`, `year`, `indID`, `indValue` FROM lastmile_db.tbl_kpi_values;'},
->>>>>>> origin/master
+        data: {'queryString': 'SELECT `month`, `year`, `indID`, `indValue` FROM lastmile_dataportal.tbl_values;'},
         dataType: "json",
         success: function(data){ indicatorValues = data; },
         error: handleAJAXErrors
@@ -143,11 +135,7 @@ $(document).ready(function(){
         var queryString = "";
         for(key in queryData.data) {
             var x = queryData.data[key];
-<<<<<<< HEAD
-            queryString += "REPLACE INTO dataportal.tbl_values (`month`,`year`,`indID`,`indValue`) VALUES ";
-=======
-            queryString += "REPLACE INTO lastmile_db.tbl_kpi_values (`month`,`year`,`indID`,`indValue`) VALUES ";
->>>>>>> origin/master
+            queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`month`,`year`,`indID`,`indValue`) VALUES ";
             queryString += "('" + x.month + "','" + x.year + "','" + x.indID + "','" + x.value + "'" + ");";
         }
         

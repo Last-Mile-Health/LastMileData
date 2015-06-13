@@ -67,11 +67,11 @@
                 // Parse into results
                 echo "From <b>$startDate</b> to <b>$endDate</b>:<br><br>";
                 echo "<b>All ages:</b><br>";
-                echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (malaria): <b>$refer_malaria</b><br>";
+                echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (ARI): <b>$refer_ARI</b><br>";
-                echo "Treated at home (diarrhea): <b>$treat_diarrhea</b><br>";
                 echo "Treated at home (malaria): <b>$treat_malaria</b><br>";
+                echo "Treated at home (diarrhea): <b>$treat_diarrhea</b><br>";
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
                 // Parse queryString; run query; extract data (Ages 0-1)
@@ -82,11 +82,11 @@
                 
                 // Parse into results
                 echo "<b>Children 0-1 years:</b><br>";
-                echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (malaria): <b>$refer_malaria</b><br>";
+                echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (ARI): <b>$refer_ARI</b><br>";
-                echo "Treated at home (diarrhea): <b>$treat_diarrhea</b><br>";
                 echo "Treated at home (malaria): <b>$treat_malaria</b><br>";
+                echo "Treated at home (diarrhea): <b>$treat_diarrhea</b><br>";
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
                 // Parse queryString; run query; extract data (Ages 1-5)
@@ -97,11 +97,11 @@
                 
                 // Parse into results
                 echo "<b>Children 1-5 years:</b><br>";
-                echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (malaria): <b>$refer_malaria</b><br>";
+                echo "Referred (diarrhea): <b>$refer_diarrhea</b><br>";
                 echo "Referred (ARI): <b>$refer_ARI</b><br>";
-                echo "Treated at home (diarrhea): <b>$treat_diarrhea</b><br>";
                 echo "Treated at home (malaria): <b>$treat_malaria</b><br>";
+                echo "Treated at home (diarrhea): <b>$treat_diarrhea</b><br>";
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
             }

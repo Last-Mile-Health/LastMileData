@@ -41,7 +41,7 @@ function getSome($id) {
     try {
         $whereClause = ($id == 'all') ? 1 : "indID IN ($id)" ;
         $cxn = getCXN();
-        $query = "SELECT `month`, `year`, `indID`, `indValue` FROM dataportal.tbl_values WHERE $whereClause";
+        $query = "SELECT `month`, `year`, `indID`, `indValue` FROM lastmile_dataportal.tbl_values WHERE $whereClause";
         $result = mysqli_query($cxn, $query);
         
         if (mysqli_num_rows($result)==1 ) {
@@ -72,7 +72,7 @@ function addOne() {
         $indValue = $bodyDecode->indDefinition;
         
         $cxn = getCXN();
-        $query = "INSERT INTO dataportal.tbl_values SET `indName`='" . @$indName . "', `indCategory`='" . @$indCategory . "', `indFormat`='" . @$indFormat . "', `indDefinition`='" . @$indDefinition . "', `indTarget`='" . @$indTarget . "', `indNarrative`='" . @$indNarrative . "'";
+        $query = "INSERT INTO lastmile_dataportal.tbl_values SET `indName`='" . @$indName . "', `indCategory`='" . @$indCategory . "', `indFormat`='" . @$indFormat . "', `indDefinition`='" . @$indDefinition . "', `indTarget`='" . @$indTarget . "', `indNarrative`='" . @$indNarrative . "'";
         echo mysqli_query($cxn, $query) ? mysqli_insert_id($cxn) : 0;
         mysqli_close($cxn);
     }
@@ -94,7 +94,7 @@ function updateOne($id) {
         $indValue = $bodyDecode->indDefinition;
         
         $cxn = getCXN();
-        $query = "REPLACE INTO dataportal.tbl_values SET `id`='" . @$id . "', `month`='" . @$month . "', `year`='" . @$year . "', `indID`='" . @$indID . "', `indValue`='" . @$indValue . "'";
+        $query = "REPLACE INTO lastmile_dataportal.tbl_values SET `id`='" . @$id . "', `month`='" . @$month . "', `year`='" . @$year . "', `indID`='" . @$indID . "', `indValue`='" . @$indValue . "'";
         echo mysqli_query($cxn, $query) ? $bodyID : 0;
         mysqli_close($cxn);
     }
@@ -108,7 +108,7 @@ function updateOne($id) {
 function deleteOne($id) {
     try {
         $cxn = getCXN();
-        $query = "DELETE FROM dataportal.tbl_values WHERE id=$id";
+        $query = "DELETE FROM lastmile_dataportal.tbl_values WHERE id=$id";
         $result = mysqli_query($cxn, $query);
         echo mysqli_query($cxn, $query) ? $id : 0;
         mysqli_close($cxn);

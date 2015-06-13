@@ -1,33 +1,241 @@
-<?php
-    // Set include path, set require file, define query string
-    set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
-    require_once("dataPortal.php");
-?>
-
 <script>
+$(document).ready(function(){
+
+    <?php
+
+        // !!!!! User sets "$indicatorIDs" manually for now !!!!!
+        // !!!!! Figure out a way to "hoist" this from indIDs specified in "report objects" ?????
+        $indIDString = "46,47";
+        echo "var indIDString = '$indIDString';". "\n\n";
+
+        // Initiate/configure CURL session
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+        // Echo JSON (indicator METADATA)
+        $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicators/$indIDString";
+        curl_setopt($ch,CURLOPT_URL,$url1);
+        $json1 = curl_exec($ch);
+
+        // Echo JSON (indicator DATA)
+        $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicatorvalues/$indIDString";
+        curl_setopt($ch,CURLOPT_URL,$url2);
+        $json2 = curl_exec($ch);
+
+        // Close CURL session and echo JSON
+        curl_close($ch);
+        echo "var data_indicators = $json1;". "\n\n";
+        echo "var data_rawValues = $json2;". "\n\n";
+
+    ?>
+
+    // Generate indicatorData object
+    var indicatorData = {
+        add: function(indID, month, year, value) {
+            var obj = {};
+            obj.Date = year + "-" + twoDigits(month) + "-01";
+            obj.Month = Number(month);
+            obj.Year = Number(year);
+            obj.Value = Number(value);
+            this[indID] = this[indID] || [];
+            this[indID].push(obj);
+        }
+    };
+    for (var key in data_rawValues) {
+        indicatorData.add(data_rawValues[key].indID, data_rawValues[key].month, data_rawValues[key].year, data_rawValues[key].indValue);
+    }
     
-    LMD_dimpleHelper.lineGraph_monthly({
-        targetDiv: "dataportal_ebolaActivities_screenAndEducate",
-        data: JSON.parse(<?php echoJSON($cxn, "test_mart", "month", ["ebola_screened","ebola_educated"],["Screened","Educated"]); ?>),
-        colors: ["#9BBB59", "#4BACC6", "#F79646", "#C0504D", "#8064A2"],
-        timeInterval: 1,
-        size: {x:590, y:380},
-        xyVars: {x:"Month", y:"Value"}, // !!!!! potentially refactor standard names into LMD_dimpleHelper !!!!!
-        axisTitles: {x:"Month", y:"People reached"},
-        multLine: "Split", // !!!!! potentially refactor standard names into LMD_dimpleHelper !!!!!
-        legend: "right"
+    var model_ebola = [
+        {
+            id: 99,
+            indicators: [46,47],
+            type: "multipleOverTime", // !!!!!
+            tableSpecs: {
+                numMonths: 4
+            },
+            chartSpecs: {
+                type: "line",
+                size: {x:590, y:380},
+                timeInterval: 1,
+                legend: "right",
+                axisTitles: {y:"# of people"}
+            },
+            roMetadata: {
+                indName:"Ebola screening and education",
+                indFormat:"integer", // !!!!!
+                indDefinition:"Total number of people screened for Ebola and educated about Ebola"
+            },
+            displayOrder: 9,
+            reports: ['ebola'] // !!!!!
+        }
+    ];
+    
+    // Sort indicatorData by date
+    for (var key in indicatorData) {
+        if(key!=='add') {
+            indicatorData[key].sort(function(a,b){
+                if ( (a.Year*12)+a.Month > (b.Year*12)+b.Month ) {
+                    return -1;
+                }
+                if ( (a.Year*12)+a.Month < (b.Year*12)+b.Month ) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+        }
+    }
+
+    // Sort model_ebola by "displayOrder"
+    model_ebola.sort(function(a,b){
+        if (Number(a.displayOrder) < Number(b.displayOrder)) {
+            return -1;
+        }
+        else if (Number(a.displayOrder) > Number(b.displayOrder)) {
+            return 1;
+        } else {
+            return 0;
+        }
     });
 
+
+    // Replace keys of "data_indicators" with indIDs; create new object "indicatorMetadata"
+    indicatorMetadata = {};
+    for (var key in data_indicators) {
+        indicatorMetadata[data_indicators[key].indID] = data_indicators[key];
+    }
+
+    // Merge data into model_ebola
+    for (var key in model_ebola) {
+
+        var multiple = model_ebola[key].indicators.length > 1 ? true : false;
+
+        // Add blank "data" property
+        model_ebola[key].data = { multiple:multiple, points:[], dates:[], values:[] };
+        
+        // Add "chartSpecs.div" property
+        model_ebola[key].chartSpecs.div = "chart_" + model_ebola[key].id;
+        
+        // !!!!! add option to take in passed data ?????
+        
+        // If roMetadata is not specified, get metadata from indicator
+        if ( model_ebola[key].roMetadata === undefined ) {
+            model_ebola[key].roMetadata = indicatorMetadata[model_ebola[key].indicators[0]];
+        }
+
+        for (var key2 in model_ebola[key].indicators) {
+            
+            var indID = model_ebola[key].indicators[key2];
+            var dataArray = indicatorData[indID];
+            var valuesArray = [];
+
+            // Pull in recent data (for table)
+            for(var i=0; i<model_ebola[key].tableSpecs.numMonths; i++) {
+                
+                if (dataArray !== undefined && dataArray[i] !== undefined) {
+                    
+                    // Create "recent data" array
+                    valuesArray.push(dataArray[i].Value);
+                    
+                    // !!!!! this code will break if there are missing data points !!!!!
+                    // !!!!! also modify this code to manually truncate the dataset (e.g. last 12 months) !!!!!
+                    if (model_ebola[key].data.dates.indexOf(dataArray[i].Date) === -1) {
+                        
+                        // Create "recent data dates" array
+                        model_ebola[key].data.dates.push(dataArray[i].Date);
+                    }
+                    
+                }
+                
+            }
+
+            // Reverse "recent data" array
+            valuesArray.reverse();
+
+            // Populate data points array for chart
+            for(var i=0; i<dataArray.length; i++) {
+                model_ebola[key].data.points.push({
+                    Month:dataArray[i].Date,
+                    Value:dataArray[i].Value,
+                    Cut: multiple ? indicatorMetadata[indID].indShortName : 1
+                });
+            }
+            model_ebola[key].data.values.push({name:indicatorMetadata[indID].indShortName, values:valuesArray}); // !!!!!
+
+        }
+        
+        // Reverse "recent data dates" array
+        model_ebola[key].data.dates.reverse();
+
+    }
+
+    // Bind model to DIV
+    rivets.bind($('#dashboardContent'), {model_ebola: model_ebola});
+    
+    // Create charts
+    for(var key in model_ebola) {
+        if (key>=0) {
+
+            var RO = model_ebola[key];
+
+            LMD_dimpleHelper.createChart({
+                type:RO.chartSpecs.type,
+                targetDiv: RO.chartSpecs.div,
+                data: RO.data.points,
+                colors: RO.chartSpecs.colors || "default",
+                timeInterval: RO.chartSpecs.timeInterval || 1, // !!!!! calculate this automatically
+                size: RO.chartSpecs.size,
+                xyVars: {x:"Month", y:"Value"},
+                axisTitles: RO.chartSpecs.axisTitles,
+                cut: "Cut",
+                legend: RO.chartSpecs.legend || "",
+                tickFormat: RO.chartSpecs.tickFormat
+            });
+
+        }
+    }
+
+});    
+
+
+// Pad numbers to two digits ( helper function for mysql_datetime() )
+// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
 </script>
 
-<h1>Ebola activities <span style="font-size:60%">(updated: 4/12/2015)</span></h1>
-<hr>
+<h1>Ebola activities <span style="font-size:60%">(updated: 6/12/2015)</span></h1>
 
-<h3>Screening and education (Konobo)</h3>
-<div id="dataportal_ebolaActivities_screenAndEducate"></div>
-<hr>
+<div id='dashboardContent'>
+    <div class='row' rv-each-report_object="model_ebola">
+        <hr style="margin:15px; border:1px solid #eee;">
+        <div class='col-md-4'>
+            <h3><b>{{index | plusOne}}</b>. {{report_object.roMetadata.indName}}</h3>
+            <p><b>Definition</b>: {{report_object.roMetadata.indDefinition}}</p>
+            <p rv-if="report_object.roMetadata.indTarget"><b>FY15 Target</b>: {{report_object.roMetadata.indTarget | format report_object.roMetadata.indFormat}}</p>
+            <table class='ptg_data'>
+                <tr>
+                    <th rv-if="report_object.data.multiple">&nbsp;</th>
+                    <th rv-each-date="report_object.data.dates">{{date | shortDate}}</th>
+                </tr>
+                <tr rv-each-values="report_object.data.values">
+                    <td rv-if="report_object.data.multiple">{{values.name}}</td>
+                    <td rv-each-value="values.values">{{value | format report_object.roMetadata.indFormat}}</td>
+                </tr>
+            </table>
+            <hr class='smallHR'>
+            <p rv-if="report_object.roMetadata.indNarrative"><b>Progress-to-goal</b>: {{report_object.roMetadata.indNarrative}}</p>
+        </div>
+        <div class='col-md-7'>
+            <div rv-id="report_object.chartSpecs.div"></div>
+        </div>
+    </div>
+</div>
 
-<h3>Ebola health worker trainings</h3>
+<h3><b>2</b>. Ebola health worker trainings</h3>
 <table class="table table-striped table-hover">
     <tr>
         <th rowspan='2'>Health Worker</th>
@@ -53,7 +261,7 @@
         <th>Apr '15</th>
     </tr>
     <tr>
-        <td>FHWs</td>
+        <td>CHWs</td>
         <td>55</td>
         <td></td>
         <td></td>
@@ -71,7 +279,7 @@
         <td>68</td>
     </tr>
     <tr>
-        <td>FHW Leaders</td>
+        <td>CHW Leaders</td>
         <td>4</td>
         <td></td>
         <td></td>
@@ -89,7 +297,7 @@
         <td>6</td>
     </tr>
     <tr>
-        <td>Clinical Mentors</td>
+        <td>Community Clinical Supervisors</td>
         <td>2</td>
         <td></td>
         <td></td>
@@ -243,7 +451,7 @@
 </table>
 <hr>
 
-<h3>Ebola facility trainings</h3>
+<h3><b>3</b>. Ebola facility trainings</h3>
 <table class="table table-striped table-hover">
     <tr>
         <th rowspan='2'>Facility type</th>
@@ -303,6 +511,6 @@
 </table>
 <hr>
 
-<h3>Ebola IPC supplies</h3>
+<h3><b>4</b>. Ebola IPC supplies</h3>
 <p>22 tons of IPC supplies delivered to health centers in Grand Gedeh and Rivercess Counties.</p>
 <div class="whitespace"></div>

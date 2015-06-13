@@ -31,7 +31,7 @@
         </li>
         <li>
             <b>KPI Assessment.</b>
-            Data from the KPI Assessment, a short survey administered by FHWs in August of 2014 in Konobo.
+            Data from the KPI Assessment, a short survey administered by CHWs in August of 2014 in Konobo.
         </li>
         <li>
             <b>Liberia stats.</b>
@@ -40,14 +40,6 @@
         <li>
             <b>M&E team tools</b>
             Tools for use by our Monitoring & Evaluation team.
-        </li>
-    </ul>
-    
-    <h3>Coming soon..</h3>
-    <ul>
-        <li>
-            <b>Maps.</b>
-            Maps and GIS data from our new scale-up sites (Rivercess, Gboe-Ploe).
         </li>
     </ul>
     

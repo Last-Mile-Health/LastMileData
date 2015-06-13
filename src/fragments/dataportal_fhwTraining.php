@@ -1,14 +1,14 @@
-<h1>FHW Training <span style="font-size:60%">(updated: 4/12/2015)</span></h1>
+<h1>CHW Training <span style="font-size:60%">(updated: 6/12/2015)</span></h1>
 <hr>
 
-<h3>FHWs</h3>
+<h3>CHWs</h3>
 <table class="table table-striped table-hover">
     <tr>
         <th>County</th>
         <th>Health District</th>
         <th>Admin District</th>
-        <th># FHWs</th>
-        <th># trained<br>in FHW1</th>
+        <th># CHWs</th>
+        <th># trained<br>in CHW1</th>
         <th># trained<br>in IMCI</th>
         <th># trained<br>in MNH</th>
         <th># trained<br>in FP</th>

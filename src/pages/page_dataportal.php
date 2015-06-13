@@ -37,28 +37,78 @@
 
         <?php
 
-            // Echo username (used by access control system)
-            if( isset($_SESSION['username']) ) {
-                echo "<script>sessionStorage.username = '" . $_SESSION['username'] . "'</script>";
-            }
-            
+            // Echo username/usertype (used by access control system)
+            echo "sessionStorage.username = '" . $_SESSION['username'] . "';";
+            echo "sessionStorage.usertype = '" . $_SESSION['usertype'] . "';";
+
             // Initiate/configure CURL session
             $ch = curl_init();
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
             // Echo JSON (sidebar contents)
-            $url1 = "localhost/LastMileData/src/php/LMD_REST.php/json_objects/1";
+            $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/json_objects/1";
             curl_setopt($ch,CURLOPT_URL,$url1);
             $json1 = curl_exec($ch);
 
             // Close CURL session and echo JSON
             curl_close($ch);
             echo "var model_sidebar = JSON.parse($json1.objectData);". "\n\n";
+//            echo "var model_sidebar = JSON.parse($json1).objectData;". "\n\n";
 
         ?>
 
             // Configure rivets.js
             rivets.configure({templateDelimiters: ['{{', '}}']});
+
+            // Rivers formatter: numbers (one-way)
+            rivets.formatters.format = function(x, format) {
+                if (x !== undefined && x !== null) {
+                    var type = format.split("-")[0];
+                    var num = format.split("-")[1] ? format.split("-")[1] : 1;
+                    switch(type) {
+                        case 'integer':
+                            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            break;
+                        case 'percent': // !!!!! Modify for decimal places !!!!!
+                            return (x*100).toFixed(1) + "%";
+                            break;
+                        case 'decimal': // Takes "decimal-1", "decimal-2", etc.
+                            return x.toFixed(num);
+                            break;
+                        case 'dollars': // !!!!! Modify to go with/without cents by using dollars-0 or dollars-2 !!!!!
+                            return "$" + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            break;
+                        default:
+                            return x;
+                    }
+                }
+            };
+            
+            // Rivers formatter: adds one; mainly for index)
+            rivets.formatters.plusOne = function(x) {
+                return x + 1;
+            };
+            
+            // Rivers formatter: short date (example: Jan '15)
+            rivets.formatters.shortDate = function(x) {
+                var myDate = new Date(x);
+                return myDate.toString().substring(3,7) + " '" + myDate.getFullYear()%100;
+            };
+
+            // Apply access control rules
+            var filteredSidebar = model_sidebar;
+            for (var i=filteredSidebar.length-1; i>=0; i--) {
+
+                var tabs = filteredSidebar[i].tabs;
+                for (var j=tabs.length-1; j>=0; j--) {
+                    if (tabs[j].permissions.indexOf(sessionStorage.usertype) === -1) {
+                        tabs.splice(j,1);
+                    }
+                }
+                if ( filteredSidebar[i].tabs.length===0 ) {
+                    filteredSidebar.splice(i,1);
+                }
+            }
 
             // !!!!! Make specific data portal pages "linkable" (with hash anchors); needs to interface with access control system !!!!!
 

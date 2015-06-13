@@ -13,8 +13,8 @@
 
     ROUTE                           TABLE
     ---                             -----
-    LMD_REST.php/indicators/        dataportal.tbl_indicators
-    LMD_REST.php/indicatorvalues/   dataportal.tbl_indicators
+    LMD_REST.php/indicators/        lastmile_dataportal.tbl_indicators
+    LMD_REST.php/indicatorvalues/   lastmile_dataportal.tbl_indicators
 */
 
 
@@ -26,44 +26,44 @@ require_once("cxn.php");
 $app = new \Slim\Slim();
 
 
-// Route 1: (dataportal.tbl_indicators)
+// Route 1: (lastmile_dataportal.tbl_indicators)
 $app->get('/indicators/(:id)',function($id='all') {
-    LMD_get($id, "indID", "dataportal.tbl_indicators");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators");
 });
 $app->post('/indicators/', function() {
-    LMD_post("dataportal.tbl_indicators");
+    LMD_post("lastmile_dataportal.tbl_indicators");
 });
 $app->put('/indicators/:id', function($id) {
-    LMD_put($id, "indID", "dataportal.tbl_indicators");
+    LMD_put($id, "indID", "lastmile_dataportal.tbl_indicators");
 });
 $app->delete('/indicators/:id', function($id) {
-    LMD_delete($id, "indID", "dataportal.tbl_indicators");
+    LMD_delete($id, "indID", "lastmile_dataportal.tbl_indicators");
 });
 
 
-// Route 2: (dataportal.tbl_values)
+// Route 2: (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/indicatorvalues/(:id)',function($id='all') {
-    LMD_get($id, "indID", "dataportal.tbl_values");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_values");
 });
 $app->post('/indicatorvalues/', function() {
-    LMD_post("dataportal.tbl_indicators");
+    LMD_post("lastmile_dataportal.tbl_indicators");
 });
 $app->put('/indicatorvalues/:id', function($id) {
-    LMD_put($id, "id", "dataportal.tbl_values");
+    LMD_put($id, "id", "lastmile_dataportal.tbl_values");
 });
 $app->delete('/indicatorvalues/:id', function($id) {
-    LMD_delete($id, "id", "dataportal.tbl_values");
+    LMD_delete($id, "id", "lastmile_dataportal.tbl_values");
 });
 
 
-// Route 3: (dataportal.sidebar)
+// Route 3: (dataportal sidebar)
 // Note: this stores and retrieves the object representing the data portal sidebar
 $app->get('/json_objects/:id',function($id) {
-    LMD_get($id, "id", "dataportal.tbl_json_objects");
+    LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects");
 });
 $app->put('/json_objects/:id', function($id) {
-    LMD_put($id, "id", "dataportal.tbl_json_objects");
+    LMD_put($id, "id", "lastmile_dataportal.tbl_json_objects");
 });
 
 
@@ -78,13 +78,18 @@ function LMD_get($id, $idFieldName, $table) {
         $cxn = getCXN();
         $query = "SELECT * FROM $table WHERE $whereClause";
         $result = mysqli_query($cxn, $query);
+        $resultSet = array();
         
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($resultSet,$row);
+        }
+
         if (mysqli_num_rows($result)==1 ) {
             // Result set contains just one row
-            echo json_encode(mysqli_fetch_all($result,MYSQLI_ASSOC)[0]);
+            echo json_encode($resultSet[0]);
         } else {
             // Result set contains multiple rows
-            echo json_encode(mysqli_fetch_all($result,MYSQLI_ASSOC));
+            echo json_encode($resultSet);
         }
         
         mysqli_close($cxn);
