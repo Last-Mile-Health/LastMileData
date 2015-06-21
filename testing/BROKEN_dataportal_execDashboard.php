@@ -6,13 +6,30 @@ $(document).ready(function(){
         // !!!!! User sets "$indicatorIDs" manually for now !!!!!
         $indIDString = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
         echo "var indIDString = '$indIDString';". "\n\n";
-        
-        // Include file that interacts with LMD_REST.php
-        set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
-        require_once("echoIndicatorsAndValues.php");
+
+        // Initiate/configure CURL session
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+        // Echo JSON (indicator METADATA)
+        $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicators/$indIDString";
+        curl_setopt($ch,CURLOPT_URL,$url1);
+        $json1 = curl_exec($ch);
+
+        // Echo JSON (indicator DATA)
+        $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicatorvalues/$indIDString";
+        curl_setopt($ch,CURLOPT_URL,$url2);
+        $json2 = curl_exec($ch);
+
+        // Close CURL session and echo JSON
+        curl_close($ch);
+        echo "var data_indicators = $json1;". "\n\n";
+        echo "var data_rawValues = $json2;". "\n\n";
 
     ?>
     
+console.log("data_rawValues");
+console.log(data_rawValues);
     // Sort "data_indicators" by indID
     // !!!!! replace this !!!!!
     data_indicators.sort(function(a,b){
@@ -26,7 +43,8 @@ $(document).ready(function(){
         }
     });
 
-    // Create "indicatorData" object to hold data from data_rawValues
+    // Transform data_rawValues (raw indicator value data)
+    // !!!!! ENFORCE BUSINESS LOGIC HERE: filter out all dates that are before the 12th of the current month !!!!!
     var indicatorData = {
         add: function(indID, month, year, value) {
             var obj = {};
@@ -38,30 +56,11 @@ $(document).ready(function(){
             this[indID].push(obj);
         }
     };
-
-    // Add data to "indicatorData" (enforce business rule: don't display data from the previous month until the 12th of this month)
-    var today = new Date();
-    var todayYear = today.getFullYear();
-    var todayMonth = today.getMonth()+1;
-    var todayDay = today.getDate();
-    var latestTotalMonthAllowed = todayMonth + (12*todayYear) - 1;
-    if (todayDay < 12) {
-        latestTotalMonthAllowed--;
-    }
-
     for (var key in data_rawValues) {
-        
-        var indID = data_rawValues[key].indID;
-        var month = data_rawValues[key].month;
-        var year = data_rawValues[key].year;
-        var indValue = data_rawValues[key].indValue;
-        var totalMonth = Number(month) + (12*Number(year));
-        
-        if (totalMonth <= latestTotalMonthAllowed) {
-            indicatorData.add(indID, month, year, indValue);
-        }
-        
+        indicatorData.add(data_rawValues[key].indID, data_rawValues[key].month, data_rawValues[key].year, data_rawValues[key].indValue);
     }
+console.log("indicatorData");
+console.log(indicatorData);
 
     // Sort indicatorData by date
     for (var key in indicatorData) {
@@ -98,6 +97,8 @@ $(document).ready(function(){
             }
         }
         data_indicators[key].recentData.reverse();
+console.log("data_indicators[key].recentData: " + key);
+console.log(data_indicators[key].recentData);
 
     }
 
@@ -119,18 +120,28 @@ $(document).ready(function(){
         
     }
     
-    // Bind model to DIV
+    
     rivets.bind($('#dashboardContent'), {model_execDashboard: model_execDashboard});
     
+    
+    
+    // !!!!! NEW CODE END !!!!!
+
+
+    // Bind model to DIV
+//    rivets.bind($('#dashboardContent'), {data_indicators: data_indicators});
+
     // Generate D3/Dimple Line graphs
+//    for(var i=0; i<indicatorIDs.length; i++) {
     for(var key in model_execDashboard) {
         if (key>=0) {
 
+    //        var indID = indicatorIDs[i];
             var RO = model_execDashboard[key];
             
             var indID = RO.indicatorMetadata.indID;
 
-            var numDataPoints = indicatorData[indID].length || 1;
+            var numDataPoints = indicatorData[indID].length; // !!!!!
             var timeInterval = Math.ceil(numDataPoints/12);
 
             // !!!!! Temp tick format code: START !!!!!

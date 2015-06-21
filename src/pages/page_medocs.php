@@ -26,7 +26,6 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/LMD_accessControl.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
-        <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
         
         <script>
         $(document).ready(function(){

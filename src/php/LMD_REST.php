@@ -28,7 +28,7 @@ $app = new \Slim\Slim();
 
 // Route 1: (lastmile_dataportal.tbl_indicators)
 $app->get('/indicators/(:id)',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", 1);
 });
 $app->post('/indicators/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");
@@ -44,7 +44,7 @@ $app->delete('/indicators/:id', function($id) {
 // Route 2: (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/indicatorvalues/(:id)',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_values");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_values", "indValue <> ''");
 });
 $app->post('/indicatorvalues/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");
@@ -60,10 +60,26 @@ $app->delete('/indicatorvalues/:id', function($id) {
 // Route 3: (dataportal sidebar)
 // Note: this stores and retrieves the object representing the data portal sidebar
 $app->get('/json_objects/:id',function($id) {
-    LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects");
+    LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects", 1);
 });
 $app->put('/json_objects/:id', function($id) {
     LMD_put($id, "id", "lastmile_dataportal.tbl_json_objects");
+});
+
+
+// Route 4: (lastmile_dataportal.tbl_reportobjects)
+// Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
+$app->get('/reportobjects/(:id)',function($id='all') {
+    LMD_get($id, "id", "lastmile_dataportal.tbl_reportobjects", 1);
+});
+$app->post('/reportobjects/', function() {
+    LMD_post("lastmile_dataportal.tbl_reportobjects");
+});
+$app->put('/reportobjects/:id', function($id) {
+    LMD_put($id, "id", "lastmile_dataportal.tbl_reportobjects");
+});
+$app->delete('/reportobjects/:id', function($id) {
+    LMD_delete($id, "id", "lastmile_dataportal.tbl_reportobjects");
 });
 
 
@@ -72,9 +88,10 @@ $app->run();
 
 
 // Handles GET requests
-function LMD_get($id, $idFieldName, $table) {
+function LMD_get($id, $idFieldName, $table, $whereFilter) {
     try {
         $whereClause = ($id == 'all') ? 1 : "$idFieldName IN ($id)" ;
+        $whereClause .= " AND " . $whereFilter;
         $cxn = getCXN();
         $query = "SELECT * FROM $table WHERE $whereClause";
         $result = mysqli_query($cxn, $query);

@@ -72,15 +72,18 @@ $(document).ready(function() {
                                 });
                             }
                         });
-
                     },500);
-
                 });
             });
-
         });
+
+        // Focus on first element when a modal form loads
+        $('.modal').on('shown.bs.modal', function() {
+            document.activeElement.blur();
+            $(this).find(".modal-body :input:visible").first().focus();
+        });
+
     });
-    
 });
 
 

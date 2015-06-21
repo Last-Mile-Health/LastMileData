@@ -23,13 +23,15 @@
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <!--<script src="/LastMileData/lib/underscore.min.js"></script>-->  <!-- !!!!! to save on bandwidth, only load these where they're needed (like Leaflet.js) !!!!! -->
         <!--<script src="/LastMileData/lib/backbone.min.js"></script>-->    <!-- !!!!! to save on bandwidth, only load these where they're needed (like Leaflet.js) !!!!! -->
+        <!--<script src="/reusables/lib/underscore.min.js"></script>-->
         <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
         <script src="/LastMileData/lib/moment.min.js"></script>
         <script src="/LastMileData/lib/d3.min.js"></script>
         <script src="/LastMileData/lib/dimple.v2.1.0.min.js"></script>
         <script src="/LastMileData/src/js/LMD_dimpleHelper.js"></script>
-        <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
-        <script src="/LastMileData/src/js/LMD_dataPortal.js"></script>
+        <!--<script src="/LastMileData/src/js/LMD_accessControl.js"></script>-->    <!-- !!!!! DELETE AFTER REFACTORING !!!!! -->
+        <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>      <!-- !!!!! Is this needed ????? -->
+        <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>        <!-- !!!!! Is this needed ????? -->
         
         <script>
         $(document).ready(function(){
@@ -52,14 +54,10 @@
             // Close CURL session and echo JSON
             curl_close($ch);
             echo "var model_sidebar = JSON.parse($json1.objectData);". "\n\n";
+//            echo "var model_sidebar = JSON.parse($json1).objectData;". "\n\n";
 
         ?>
-            
-            // This variable is set to true if any data changes occur (currently only used by "admin_editData.php" fragment)
-            DataPortal_GLOBALS = {
-                anyChanges: false
-            };
-            
+
             // Configure rivets.js
             rivets.configure({templateDelimiters: ['{{', '}}']});
 
@@ -94,6 +92,8 @@
             
             // Rivers formatter: short date (example: Jan '15)
             rivets.formatters.shortDate = function(x) {
+console.log("rivets x");
+console.log(x);
                 return moment(x).format("MMM 'YY");
             };
 
@@ -129,59 +129,43 @@
 
             // Handle sidebar clicks
             $('.dp_frag, .dp_iframe').click(function(){
-                
-                // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she navigates to another page
-                var preventNavigation = false;
-                if(DataPortal_GLOBALS.anyChanges) {
-                    var confirm = window.confirm("You have unsaved changes to data. If you leave this page, all changes will be lost. Are you sure you want to leave this page?");
-                    if (!confirm) {
-                        preventNavigation = true;
-                    }
-                }
-                
-                // If "DataPortal_GLOBALS.anyChanges" is false or user confirms navigation, proceed
-                if (!preventNavigation) {
-                    
-                    DataPortal_GLOBALS.anyChanges = false;
-                    
-                    // Get link URL
-                    var myLink = $(this).attr('data-link');
-                    var fragOrFrame = $(this).hasClass('dp_frag') ? "frag" : "frame";
 
-                        // Fade out current mainContainer
-                        $('#whitespaceContainer').slideDown(500, function(){
+                // Get link URL
+                var myLink = $(this).attr('data-link');
+                var fragOrFrame = $(this).hasClass('dp_frag') ? "frag" : "frame";
 
-                            $('#mainContainer').scrollTop(0);
+                    // Fade out current mainContainer
+                    $('#whitespaceContainer').slideDown(500, function(){
 
-                            // Handle fragment loads
-                            if (fragOrFrame === "frag") {
-                                    $('#dashboard_iframe').hide();
-                                    $('#mainContainer').show();
-                                    $('#mainContainer').load(myLink, function(responseText, textStatus, jqXHR){
-                                        if (textStatus === "error") {
-                                            $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
-                                        }
-                                    setTimeout(function(){
-                                            $('#whitespaceContainer').slideUp(1000);
-                                        },500);
-                                    });
+                        $('#mainContainer').scrollTop(0);
 
-                            // Handle iframe loads
-                            } else if (fragOrFrame === "frame") {
-                                    $('#mainContainer').hide();
-                                    $('#dashboard_iframe').show();
-                                    $('#dashboard_iframe').prop('src',myLink);
-                            }
+                        // Handle fragment loads
+                        if (fragOrFrame === "frag") {
+                                $('#dashboard_iframe').hide();
+                                $('#mainContainer').show();
+                                $('#mainContainer').load(myLink, function(responseText, textStatus, jqXHR){
+                                    if (textStatus === "error") {
+                                        $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
+                                    }
+                                setTimeout(function(){
+                                        $('#whitespaceContainer').slideUp(1000);
+                                    },500);
+                                });
 
-                        });
+                        // Handle iframe loads
+                        } else if (fragOrFrame === "frame") {
+                                $('#mainContainer').hide();
+                                $('#dashboard_iframe').show();
+                                $('#dashboard_iframe').prop('src',myLink);
+                        }
 
-                    // Switch active sidebar element
-                    $('.dp_frag, .dp_iframe').each(function(){
-                        $(this).removeClass('dp-active');
                     });
-                    $(this).addClass('dp-active');
-                    
-                }
+
+                // Switch active sidebar element
+                $('.dp_frag, .dp_iframe').each(function(){
+                    $(this).removeClass('dp-active');
+                });
+                $(this).addClass('dp-active');
 
             });
 
@@ -196,14 +180,7 @@
                 heightStyle: "content",
                 collapsible: true
             });
-            
-            // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she leaves page
-            window.onbeforeunload = function() {
-                if(DataPortal_GLOBALS.anyChanges) {
-                    return "You have unsaved changes to data. If you leave or reload this page, all changes will be lost.";
-                }
-            };
-            
+
         });
         </script>
         

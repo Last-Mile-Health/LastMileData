@@ -11,8 +11,19 @@
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
-        <script> delete sessionStorage.username; </script>
+        <script>
+        $(document).ready(function(){
+            
+            delete sessionStorage.username;
+            
+            // Focus on first element when modal login form loads
+            $('.modal').on('shown.bs.modal', function() {
+                document.activeElement.blur();
+                $(this).find(".modal-body :input:visible").first().focus();
+            });
+            
+        });
+        </script>
     </head>
     
     <body>

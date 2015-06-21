@@ -4,367 +4,262 @@ $(document).ready(function(){
     <?php
 
         // !!!!! User sets "$indicatorIDs" manually for now !!!!!
-        // !!!!! Figure out a way to "hoist" this from indIDs specified in "report objects" ?????
         $indIDString = "16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45";
         echo "var indIDString = '$indIDString';". "\n\n";
 
-        // Initiate/configure CURL session
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-
-        // Echo JSON (indicator METADATA)
-        $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicators/$indIDString";
-        curl_setopt($ch,CURLOPT_URL,$url1);
-        $json1 = curl_exec($ch);
-
-        // Echo JSON (indicator DATA)
-        $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicatorvalues/$indIDString";
-        curl_setopt($ch,CURLOPT_URL,$url2);
-        $json2 = curl_exec($ch);
-
-        // Close CURL session and echo JSON
-        curl_close($ch);
-        echo "var data_indicators = $json1;". "\n\n";
-        echo "var data_rawValues = $json2;". "\n\n";
+        // Include file that interacts with LMD_REST.php
+        // This file assigns two javascript objects: "data_rawValues" and "data_indicators"
+        set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
+        $reportObjectString = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
+        require_once("echoIndicatorsAndValues.php");
 
     ?>
 
-    // Generate indicatorData object
-    var indicatorData = {
-        add: function(indID, month, year, value) {
-            var obj = {};
-            obj.Date = year + "-" + twoDigits(month) + "-01";
-            obj.Month = Number(month);
-            obj.Year = Number(year);
-            obj.Value = Number(value);
-            this[indID] = this[indID] || [];
-            this[indID].push(obj);
-        }
-    };
+    // Add "raw data" from data_rawValues to LMD_dataPortal
     for (var key in data_rawValues) {
-        indicatorData.add(data_rawValues[key].indID, data_rawValues[key].month, data_rawValues[key].year, data_rawValues[key].indValue);
+        var indID = data_rawValues[key].indID;
+        var month = data_rawValues[key].month;
+        var year = data_rawValues[key].year;
+        var value = data_rawValues[key].indValue;
+        LMD_dataPortal.addIndicatorData(indID, month, year, value);
     }
 
+    // Sort indicator data by date
+     LMD_dataPortal.sortByDate();
+
+    // Populate "LMD_dataPortal.indicatorMetadata"
+    for (var key in data_indicators) {
+        var indID = data_indicators[key].indID;
+        var metadata = data_indicators[key];
+        delete metadata.indID;
+        LMD_dataPortal.addIndicatorMetadata(indID, metadata);
+    }
+
+    // Transform indicator strings into arrays
+    for (var key in model_konobo) {
+        model_konobo[key].indicators = model_konobo[key].indicators.split(",");
+    }
+    
     // !!!!! Static data model for now !!!!!
-    var model_konobo = [
-        {
-            id: 100,
-            indicators: [16],
-            type: "oneOverTime", // !!!!! use this in an "rv-if" in outer blocks !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                timeInterval: 3,
-                axisTitles: {y:"Number of CHWs"} // !!!!! Replace this with "indNameShort" ?????
-            },
-            displayOrder: 1,
-            reports: ['konobo'] // !!!!! use this in REST call above !!!!!
-        },
-        {
-            id: 102,
-            indicators: [24],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                timeInterval: 3,
-                axisTitles: {y:"Number of People"}
-            },
-            displayOrder: 2,
-            reports: ['konobo']
-        },
-        {
-            id: 103,
-            indicators: [25],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                timeInterval: 3,
-                axisTitles: {y:"Number of Villages"}
-            },
-            displayOrder: 3,
-            reports: ['konobo']
-        },
-        {
-            id: 104,
-            indicators: [28],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                timeInterval: 1,
-                axisTitles: {y:"% FBD"},
-                tickFormat: {y:"%"}
-            },
-            displayOrder: 4,
-            reports: ['konobo']
-        },
-        {
-            id: 105,
-            indicators: [17,18],
-            type: "multipleOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:590, y:380},
-                legend: "right",
-                axisTitles: {y:"Percent of women"},
-                tickFormat: {y:"%"}
-            },
-            roMetadata: {
-                indName_short:"ANC", // !!!!! unused
-                indName:"Antenatal care rates",
-                indFormat:"percent",
-                indDefinition:"Percentage of women who received at least {one, four} ANC visits during the course of their pregnancy (out of all women who delivered in the past month)"
-            },
-            displayOrder: 5,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 106,
-            indicators: [19,20,21,22],
-            type: "pieOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 1
-            },
-            chartSpecs: {
-                type: "pie",
-                size: {x:545, y:300},
-                legend: "right",
-                xyVars: {x:"Month", y:"Value"},
-                axisTitles: {y:"Percent of women"},
-                cut: "Cut"
-            },
-            roMetadata: {
-                indName_short:"Source", // !!!!! unused
-                indName:"Sick child visit source",
-                indFormat:"integer",
-                indDefinition:"Percentage of sick child visits that came from each source"
-            },
-            displayOrder: 6,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 107,
-            indicators: [29],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                timeInterval: 3,
-                axisTitles: {y:"Percent"},
-                tickFormat: {y:"%"}
-            },
-            displayOrder: 7,
-            reports: ['konobo']
-        },
-        {
-            id: 108,
-            indicators: [30],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                axisTitles: {y:"# of children"}
-            },
-            displayOrder: 8,
-            reports: ['konobo']
-        },
-        {
-            id: 109,
-            indicators: [31,32,33],
-            type: "multipleOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:590, y:380},
-                timeInterval: 3,
-                legend: "right",
-                axisTitles: {y:"# of children"}
-            },
-            roMetadata: {
-                indName:"Number of sick children treated, by condition",
-                indFormat:"integer", // !!!!!
-                indDefinition:"Total number of children treated for malaria, diarrhea, or ARI"
-            },
-            displayOrder: 9,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 110,
-            indicators: [34,35,36],
-            type: "multipleOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:590, y:380},
-                timeInterval: 3,
-                legend: "right",
-                axisTitles: {y:"# of children"}
-            },
-            roMetadata: {
-                indName:"Number of sick children treated, by condition (per 10,000 population)",
-                indFormat:"integer", // !!!!!
-                indDefinition:"Total number of children treated for malaria, diarrhea, or ARI, per 10,000 population served"
-            },
-            displayOrder: 10,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 111,
-            indicators: [37],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                axisTitles: {y:"# of births"}
-            },
-            displayOrder: 11,
-            reports: ['konobo']
-        },
-        {
-            id: 112,
-            indicators: [38,39,40],
-            type: "multipleOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:590, y:380},
-                timeInterval: 1,
-                legend: "right",
-                axisTitles: {y:"# of deaths"}
-            },
-            roMetadata: {
-                indName:"Number of deaths",
-                indFormat:"integer", // !!!!!
-                indDefinition:"Total number of deaths recorded by CHWs, by age category"
-            },
-            displayOrder: 12,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 113,
-            indicators: [41,42,43],
-            type: "multipleOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:590, y:380},
-                timeInterval: 1,
-                legend: "right",
-                axisTitles: {y:"# of deaths"}
-            },
-            roMetadata: {
-                indName:"Number of deaths",
-                indFormat:"integer", // !!!!!
-                indDefinition:"Total number of under-five deaths recorded by CHWs, by age category (neonatal = 0-28 days, post-neonatal = 29-364 days, child = 1-4 years)"
-            },
-            displayOrder: 13,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 114,
-            indicators: [44,45],
-            type: "multipleOverTime", // !!!!!
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:590, y:380},
-                timeInterval: 1,
-                legend: "right",
-                axisTitles: {y:"# of deaths"}
-            },
-            roMetadata: {
-                indName:"Number of movements",
-                indFormat:"integer", // !!!!!
-                indDefinition:"Total number of people who moved in or out of a community"
-            },
-            displayOrder: 14,
-            reports: ['konobo'] // !!!!!
-        },
-        {
-            id: 115,
-            indicators: [27],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                axisTitles: {y:"# entered"}
-            },
-            displayOrder: 15,
-            reports: ['konobo']
-        },
-        {
-            id: 116,
-                indicators: [26],
-            type: "oneOverTime",
-            tableSpecs: {
-                numMonths: 4
-            },
-            chartSpecs: {
-                type: "line",
-                size: {x:505, y:400},
-                axisTitles: {y:"# QA'd"},
-                tickFormat: {y:"%"}
-            },
-            displayOrder: 16,
-            reports: ['konobo']
-        }
-    ];
-
-    // Sort indicatorData by date
-    for (var key in indicatorData) {
-        if(key!=='add') {
-            indicatorData[key].sort(function(a,b){
-                if ( (a.Year*12)+a.Month > (b.Year*12)+b.Month ) {
-                    return -1;
-                }
-                if ( (a.Year*12)+a.Month < (b.Year*12)+b.Month ) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
-        }
-    }
-
+    // !!!!! Replace this with a backbone model !!!!!
+//    var model_konobo = [
+//        {
+//            id: 100,
+//            indicators: [16],
+//            type: "oneOverTime", // !!!!! use this in an "rv-if" in outer blocks !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            chart_timeInterval: 3,
+//            displayOrder: 1,
+//            reportID: 1 // !!!!! use this in REST call above !!!!!
+//        },
+//        {
+//            id: 102,
+//            indicators: [24],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            chart_timeInterval: 3,
+//            displayOrder: 2,
+//            reportID: 1
+//        },
+//        {
+//            id: 103,
+//            indicators: [25],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            chart_timeInterval: 3,
+//            displayOrder: 3,
+//            reportID: 1
+//        },
+//        {
+//            id: 104,
+//            indicators: [28],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            chart_tickFormat: "%",
+//            displayOrder: 4,
+//            reportID: 1
+//        },
+//        {
+//            id: 105,
+//            indicators: [17,18],
+//            type: "multipleOverTime", // !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 590,
+//            chart_size_y: 380,
+//            chart_tickFormat: "%",
+//            chart_legend: "right",
+//            roMetadata_name: "Antenatal care rates",
+//            roMetadata_format: "percent",
+//            roMetadata_description: "Percentage of women who received at least {one, four} ANC visits during the course of their pregnancy (out of all women who delivered in the past month)",
+//            displayOrder: 5,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 106,
+//            indicators: [19,20,21,22],
+//            type: "pieOverTime", // !!!!!
+//            table_numMonths: 1,
+//            chart_type: "pie",
+//            chart_size_x: 545,
+//            chart_size_y: 300,
+//            chart_tickFormat: "%",
+//            chart_legend: "right",
+//            roMetadata_name: "Sick child visit source",
+//            roMetadata_format: "integer",
+//            roMetadata_description: "Percentage of sick child visits that came from each source",
+//            displayOrder: 6,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 107,
+//            indicators: [29],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            chart_timeInterval: 3,
+//            chart_tickFormat: "%",
+//            displayOrder: 7,
+//            reportID: 1
+//        },
+//        {
+//            id: 108,
+//            indicators: [30],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            displayOrder: 8,
+//            reportID: 1
+//        },
+//        {
+//            id: 109,
+//            indicators: [31,32,33],
+//            type: "multipleOverTime", // !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 590,
+//            chart_size_y: 380,
+//            chart_timeInterval: 3,
+//            chart_legend: "right",
+//            roMetadata_name: "Number of sick children treated, by condition",
+//            roMetadata_format: "integer",
+//            roMetadata_description: "Total number of children treated for malaria, diarrhea, or ARI",
+//            displayOrder: 9,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 110,
+//            indicators: [34,35,36],
+//            type: "multipleOverTime", // !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 590,
+//            chart_size_y: 380,
+//            chart_timeInterval: 3,
+//            chart_tickFormat: "%",
+//            roMetadata_name: "Number of sick children treated, by condition (per 10,000 population)",
+//            roMetadata_format: "integer",
+//            roMetadata_description: "Total number of children treated for malaria, diarrhea, or ARI, per 10,000 population served",
+//            displayOrder: 10,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 111,
+//            indicators: [37],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            displayOrder: 11,
+//            reportID: 1
+//        },
+//        {
+//            id: 112,
+//            indicators: [38,39,40],
+//            type: "multipleOverTime", // !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 590,
+//            chart_size_y: 380,
+//            chart_legend: "right",
+//            roMetadata_name: "Number of deaths",
+//            roMetadata_format: "integer",
+//            roMetadata_description: "Total number of deaths recorded by CHWs, by age category",
+//            displayOrder: 12,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 113,
+//            indicators: [41,42,43],
+//            type: "multipleOverTime", // !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 590,
+//            chart_size_y: 380,
+//            chart_legend: "right",
+//            roMetadata_name: "Number of deaths",
+//            roMetadata_format: "integer",
+//            roMetadata_description: "Total number of under-five deaths recorded by CHWs, by age category (neonatal = 0-28 days, post-neonatal = 29-364 days, child = 1-4 years)",
+//            displayOrder: 13,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 114,
+//            indicators: [44,45],
+//            type: "multipleOverTime", // !!!!!
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 590,
+//            chart_size_y: 380,
+//            chart_legend: "right",
+//            roMetadata_name: "Number of movements",
+//            roMetadata_format: "integer",
+//            roMetadata_description: "Total number of people who moved in or out of a community",
+//            displayOrder: 14,
+//            reportID: 1 // !!!!!
+//        },
+//        {
+//            id: 115,
+//            indicators: [27],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            displayOrder: 15,
+//            reportID: 1
+//        },
+//        {
+//            id: 116,
+//            indicators: [26],
+//            type: "oneOverTime",
+//            table_numMonths: 4,
+//            chart_type: "line",
+//            chart_size_x: 505,
+//            chart_size_y: 400,
+//            chart_tickFormat: "%",
+//            displayOrder: 16,
+//            reportID: 1
+//        }
+//    ];
+    
     // Sort model_konobo by "displayOrder"
     model_konobo.sort(function(a,b){
         if (Number(a.displayOrder) < Number(b.displayOrder)) {
@@ -378,12 +273,6 @@ $(document).ready(function(){
     });
 
 
-    // Replace keys of "data_indicators" with indIDs; create new object "indicatorMetadata"
-    indicatorMetadata = {};
-    for (var key in data_indicators) {
-        indicatorMetadata[data_indicators[key].indID] = data_indicators[key];
-    }
-
     // Merge data into model_konobo
     for (var key in model_konobo) {
 
@@ -392,24 +281,32 @@ $(document).ready(function(){
         // Add blank "data" property
         model_konobo[key].data = { multiple:multiple, points:[], dates:[], values:[] };
         
-        // Add "chartSpecs.div" property
-        model_konobo[key].chartSpecs.div = "chart_" + model_konobo[key].id;
+        // Add "chart_div" property
+        model_konobo[key].chart_div = "chart_" + model_konobo[key].id;
         
         // !!!!! add option to take in passed data ?????
         
-        // If roMetadata is not specified, get metadata from indicator
-        if ( model_konobo[key].roMetadata === undefined ) {
-            model_konobo[key].roMetadata = indicatorMetadata[model_konobo[key].indicators[0]];
+        // If roMetadata fields are not specified, get them from getIndicatorMetadata()
+        var indID = model_konobo[key].indicators[0];
+        var metadata = LMD_dataPortal.getIndicatorMetadata(indID);
+        if ( model_konobo[key].roMetadata_name == null || model_konobo[key].roMetadata_name == '' ) {
+            model_konobo[key].roMetadata_name = metadata.indName;
+        }
+        if ( model_konobo[key].roMetadata_format == null || model_konobo[key].roMetadata_format == '' ) {
+            model_konobo[key].roMetadata_format = metadata.indFormat;
+        }
+        if ( model_konobo[key].roMetadata_description == null || model_konobo[key].roMetadata_description == '' ) {
+            model_konobo[key].roMetadata_description = metadata.indDefinition;
         }
 
         for (var key2 in model_konobo[key].indicators) {
             
             var indID = model_konobo[key].indicators[key2];
-            var dataArray = indicatorData[indID];
+            var dataArray = LMD_dataPortal.getIndicatorData(indID);
             var valuesArray = [];
 
             // Pull in recent data (for table)
-            for(var i=0; i<model_konobo[key].tableSpecs.numMonths; i++) {
+            for(var i=0; i<model_konobo[key].table_numMonths; i++) {
                 
                 if (dataArray !== undefined && dataArray[i] !== undefined) {
                     
@@ -436,10 +333,13 @@ $(document).ready(function(){
                 model_konobo[key].data.points.push({
                     Month:dataArray[i].Date,
                     Value:dataArray[i].Value,
-                    Cut: multiple ? indicatorMetadata[indID].indShortName : 1
+                    Cut: multiple ? LMD_dataPortal.getIndicatorMetadata(indID).indShortName : 1
                 });
             }
-            model_konobo[key].data.values.push({name:indicatorMetadata[indID].indShortName, values:valuesArray}); // !!!!!
+            model_konobo[key].data.values.push({
+                name:LMD_dataPortal.getIndicatorMetadata(indID).indShortName,
+                values:valuesArray
+            });
 
         }
         
@@ -458,17 +358,17 @@ $(document).ready(function(){
             var RO = model_konobo[key];
 
             LMD_dimpleHelper.createChart({
-                type:RO.chartSpecs.type,
-                targetDiv: RO.chartSpecs.div,
+                type:RO.chart_type,
+                targetDiv: RO.chart_div,
                 data: RO.data.points,
-                colors: RO.chartSpecs.colors || "default",
-                timeInterval: RO.chartSpecs.timeInterval || 1, // !!!!! calculate this automatically
-                size: RO.chartSpecs.size,
-                xyVars: {x:"Month", y:"Value"},
-                axisTitles: RO.chartSpecs.axisTitles,
+                colors: RO.chart_colors || "default",
+                timeInterval: RO.chart_timeInterval || 1, // !!!!! calculate this automatically
+                size: { x:RO.chart_size_x, y:RO.chart_size_y },
+                xyVars: { x:"Month", y:"Value" },
+//                axisTitles: RO.chartSpecs.axisTitles, // !!!!! use indNameShort !!!!!
                 cut: "Cut",
-                legend: RO.chartSpecs.legend || "",
-                tickFormat: RO.chartSpecs.tickFormat
+                legend: RO.chart_legend || "",
+                tickFormat: { y:RO.chart_tickFormat }
             });
 
         }
@@ -491,9 +391,9 @@ function twoDigits(d) {
     <div class='row' rv-each-report_object="model_konobo">
         <hr style="margin:15px; border:1px solid #eee;">
         <div class='col-md-4'>
-            <h3><b>{{index | plusOne}}</b>. {{report_object.roMetadata.indName}}</h3>
-            <p><b>Definition</b>: {{report_object.roMetadata.indDefinition}}</p>
-            <p rv-if="report_object.roMetadata.indTarget"><b>FY15 Target</b>: {{report_object.roMetadata.indTarget | format report_object.roMetadata.indFormat}}</p>
+            <h3><b>{{index | plusOne}}</b>. {{report_object.roMetadata_name}}</h3>
+            <p><b>Definition</b>: {{report_object.roMetadata_description}}</p>
+            <p rv-if="report_object.roMetadata_target"><b>FY15 Target</b>: {{report_object.roMetadata_target | format report_object.roMetadata_format}}</p>
             <table class='ptg_data'>
                 <tr>
                     <th rv-if="report_object.data.multiple">&nbsp;</th>
@@ -501,14 +401,14 @@ function twoDigits(d) {
                 </tr>
                 <tr rv-each-values="report_object.data.values">
                     <td rv-if="report_object.data.multiple">{{values.name}}</td>
-                    <td rv-each-value="values.values">{{value | format report_object.roMetadata.indFormat}}</td>
+                    <td rv-each-value="values.values">{{value | format report_object.roMetadata_format}}</td>
                 </tr>
             </table>
             <hr class='smallHR'>
-            <p rv-if="report_object.roMetadata.indNarrative"><b>Progress-to-goal</b>: {{report_object.roMetadata.indNarrative}}</p>
+            <p rv-if="report_object.roMetadata_narrative"><b>Progress-to-goal</b>: {{report_object.roMetadata_narrative}}</p>
         </div>
         <div class='col-md-7'>
-            <div rv-id="report_object.chartSpecs.div"></div>
+            <div rv-id="report_object.chart_div"></div>
         </div>
     </div>
 </div>

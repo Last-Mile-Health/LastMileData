@@ -10,50 +10,54 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <script src="/LastMileData/lib/jquery.min.js"></script>
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="/reusables/lib/underscore.min.js"></script>
+        <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
         <style>
-            #map { height: 180px; }
-            
-            .info {
-                padding: 6px 8px;
-                font: 14px/16px Arial, Helvetica, sans-serif;
-                background: white;
-                background: rgba(255,255,255,0.8);
-                box-shadow: 0 0 15px rgba(0,0,0,0.2);
-                border-radius: 5px;
+            .box {
+                width:100px;
+                height:30px;
+                background:green;
+                padding:10px;
+                margin:10px;
+                float:left;
             }
-            .info h4 {
-                margin: 0 0 5px;
-                color: #777;
-            }
-            
-            .legend {
-                line-height: 18px;
-                color: #555;
-            }
-            .legend i {
-                width: 18px;
-                height: 18px;
-                float: left;
-                margin-right: 8px;
-                opacity: 0.7;
-            }
-            
         </style>
+        <script>
+            $(document).ready(function(){
+                
+                var myModel = {
+                    var1: "hey",
+                    var2: [2,4,6,8]
+                };
+
+                // Configure rivets.js
+                rivets.configure({templateDelimiters: ['{{', '}}']});
+
+                // Bind sidebar model to accordion DIV
+                rivets.bind($('#myDiv'), {myModel: myModel});
+                
+                $('#push').click(function(){
+                    myModel.var2.push(Math.round(Math.random()*100));
+                });
+                $('#pop').click(function(){
+                    myModel.var2.pop();
+                });
+                $('#model').click(function(){
+                    console.log(myModel.var2);
+                });
+                
+            });
+        </script>
     </head>
     <body>
-        <div id="map"></div>
-        <script>
-            
-            var format = "hey3";
-            var type = format.split("-")[0];
-            console.log("type");
-            console.log(type);
-            var num = format.split("-")[1] ? format.split("-")[1] : 1;
-            console.log("num");
-            console.log(num);
-            
-        </script>
+        <div id="myDiv">
+            <button style="float:left" id="push">Push!</button>
+            <button style="float:left" id="pop">Pop!</button>
+            <button style="float:left" id="model">Model</button>
+            <div class="box" rv-each-array="myModel.var2">{{array}}</div>
+            <br>
+            {{myModel.var1}}
+        </div>
     </body>
 </html>
+

@@ -676,7 +676,7 @@ $(document).ready(function(){
     // Refresh Data Modal
     // Run this script when modal_refreshData is shown
     // !!!!! Change this to automatically refresh system data once per week ?????
-    $('#modal_refreshData').on('shown.bs.modal', function(e) {
+    $('#modal_refreshData').on('shown.bs.modal', function() {
         ajaxRefresh();
     });
     

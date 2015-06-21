@@ -4,28 +4,12 @@ $(document).ready(function(){
     <?php
 
         // !!!!! User sets "$indicatorIDs" manually for now !!!!!
-        // !!!!! Figure out a way to "hoist" this from indIDs specified in "report objects" ?????
         $indIDString = "46,47";
         echo "var indIDString = '$indIDString';". "\n\n";
 
-        // Initiate/configure CURL session
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-
-        // Echo JSON (indicator METADATA)
-        $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicators/$indIDString";
-        curl_setopt($ch,CURLOPT_URL,$url1);
-        $json1 = curl_exec($ch);
-
-        // Echo JSON (indicator DATA)
-        $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php/LMD_REST.php/indicatorvalues/$indIDString";
-        curl_setopt($ch,CURLOPT_URL,$url2);
-        $json2 = curl_exec($ch);
-
-        // Close CURL session and echo JSON
-        curl_close($ch);
-        echo "var data_indicators = $json1;". "\n\n";
-        echo "var data_rawValues = $json2;". "\n\n";
+        // Include file that interacts with LMD_REST.php
+        set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
+        require_once("echoIndicatorsAndValues.php");
 
     ?>
 
