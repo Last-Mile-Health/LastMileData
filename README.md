@@ -24,24 +24,24 @@ III. Detailed system functioning
 
 ### The "data entry" workflow happens as such: ###
 
-1. A user (the data entry clerk) navigates to the "DEQA" page (page_deqa.html), and logs in.
-2. The user clicks on one of the green buttons to perform data entry (e.g. "TEST FORM", 0_testDE.html).
+1. A user (the data entry clerk) navigates to the "DEQA" page (`page_deqa.html`), and logs in.
+2. The user clicks on one of the green buttons to perform data entry (e.g. "TEST FORM", `0_testDE.html`).
 3. The user fills out the form fields and clicks submit.
-4. When the submit button (id: 'lmd_submit') is clicked, a script runs within fhwForms.js, that performs "form validation" and "data storage".
-5. For "form validation", the application loops through all fields with class='stored' and runs it through a series of tests, some of which correspond to the HTML attributes of that field. For example, if the field has the 'integer' class, then this script checks if it is an integer. If at least one field fails the data validation step, a series of error messages are displayed to the user at the top of the screen.
+4. When the submit button (`id='lmd_submit'`) is clicked, a script runs within `fhwForms.js`, that performs "form validation" and "data storage".
+5. For "form validation", the application loops through all fields with `class='stored'` and runs it through a series of tests, some of which correspond to the HTML attributes of that field. For example, if the field has the 'integer' class, then this script checks if it is an integer. If at least one field fails the data validation step, a series of error messages are displayed to the user at the top of the screen.
 6. If the form clears the validation step, to proceeds to the "data storage" step. Here, the application loops through all fields with class='stored' and stores it as a key-value pair within the 'myRecord' object. The key is the field id attribute (NOT the name attribute), and the value is the user-entered field value.
-7. The Filesystem API is used to read in a single file (data.lmd, a serialized JSON object) and parse it into the 'myRecordset' object. If the file is blank, 'myRecordset' is set to an empty object. The entire 'myRecord' object is serialized and stored as a value within 'myRecordset' (the key is an arbitrary numeric key).
-8. The 'myRecordset' object is serialized and written to the data.lmd file (the entire file is overwritten).
+7. The Filesystem API is used to read in a single file (`data.lmd`, a serialized JSON object) and parse it into the 'myRecordset' object. If the file is blank, 'myRecordset' is set to an empty object. The entire 'myRecord' object is serialized and stored as a value within `myRecordset` (the key is an arbitrary numeric key).
+8. The `myRecordset` object is serialized and written to the data.lmd file (the entire file is overwritten).
 9. The user is redirected to the "DEQA" page.
 
 
 ### The quality assurance workflow happens as such: ###
 
 1. A user (the supervisor) navigates to the "DEQA" page on the data entry clerk's laptop (assuming the data entry clerk already logged in).
-2. The user clicks on one of the blue buttons to perform quality assurance (e.g. "TEST FORM", 0_testDE.html).
-3. A modal form pops up with 1-3 fields. These fields represent the "primary key" of the form in question. The primary key must uniquely identify a single paper form; for example, for a "sick child form", the (composite) primary key is composed of the 'memberID' and 'visitDate' fields for a "sick child form" (where 'memberID' is the unique identifier of a single person within the system, and we assume that a single person can have no more than one visit per day). The user looks at the paper form, enters the field values, and clicks submit (id: 'qaModalSubmit').
-4. A script runs within deqa.js that checks for a "match" within the 'myRecordset' object. If no message is found, an error message is displayed to the user. If a match is found, the user is redirected to the data entry form (a query parameter is passed, with key "QA" and a value equivalent to the key in the 'myRecordset' object that identifies the record).
-5. The data entry form detects that the QA parameter is not undefined, the data.lmd is read and parsed into the 'myRecordset' object. The matching record within the myRecordset object is found, and the value is parsed into the 'currentRecord' object. The script loops through the fields of the 'currentRecord' object, and for each key/value pair in the 'currentRecord' object, the HTML form field with the id attribute equal to the 'currentRecord' key is set to the 'currentRecord' value.
+2. The user clicks on one of the blue buttons to perform quality assurance (e.g. "TEST FORM", `0_testDE.html`).
+3. A modal form pops up with 1-3 fields. These fields represent the "primary key" of the form in question. The primary key must uniquely identify a single paper form; for example, for a "sick child form", the (composite) primary key is composed of the 'memberID' and 'visitDate' fields for a "sick child form" (where 'memberID' is the unique identifier of a single person within the system, and we assume that a single person can have no more than one visit per day). The user looks at the paper form, enters the field values, and clicks submit (`id='qaModalSubmit'`).
+4. A script runs within deqa.js that checks for a "match" within the `myRecordset` object. If no message is found, an error message is displayed to the user. If a match is found, the user is redirected to the data entry form (a query parameter is passed, with key "QA" and a value equivalent to the key in the `myRecordset` object that identifies the record).
+5. The data entry form detects that the QA parameter is not undefined, the data.lmd is read and parsed into the 'myRecordset' object. The matching record within the myRecordset object is found, and the value is parsed into the 'currentRecord' object. The script loops through the fields of the `currentRecord` object, and for each key/value pair in the 'currentRecord' object, the HTML form field with the id attribute equal to the 'currentRecord' key is set to the 'currentRecord' value.
 6. If any changes are made to the field values, the user may click submit, and the record is processed just as in the data entry workflow. The only difference is that before adding the field to the 'myRecordset' object, the "old" key/value pair within the myRecordset object is deleted.
 
 
