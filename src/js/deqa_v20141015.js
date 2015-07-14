@@ -376,9 +376,19 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
+    $('#qa_REG_03').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_reg03_registration.html",
+            qaFormName: "CHW: Registration",
+            pKey1_name: "memberID_1",
+            pKey2_name: "communityID",
+            pKey1_label: "First Member ID",
+            pKey2_label: "Community ID"
+        });
+    });
     $('#qa_REG_02').click(function() {
         launchQAModal({
-            targetForm: "/LastMileData/src/forms/fhw_reg02_registration.html",
+            targetForm: "/LastMileData/src/forms_old/fhw_reg02_registration.html",
             qaFormName: "FHW: Registration",
             pKey1_name: "memID_1",
             pKey1_label: "First Member ID"
@@ -454,6 +464,17 @@ $(document).ready(function(){
             pKey1_name: "fhwID",
             pKey2_name: "bdmDate",
             pKey1_label: "FHW ID",
+            pKey2_label: "Form date",
+            pKey_date: "pKey2"
+        });
+    });
+        $('#qa_BDM_03').click(function() {
+        launchQAModal({
+            targetForm: "/LastMileData/src/forms/fhw_bdm03_movements.html",
+            qaFormName: "CHW: Births, Deaths, Movements",
+            pKey1_name: "chwID",
+            pKey2_name: "visitDate",
+            pKey1_label: "CHW ID",
             pKey2_label: "Form date",
             pKey_date: "pKey2"
         });
@@ -676,7 +697,7 @@ $(document).ready(function(){
     // Refresh Data Modal
     // Run this script when modal_refreshData is shown
     // !!!!! Change this to automatically refresh system data once per week ?????
-    $('#modal_refreshData').on('shown.bs.modal', function() {
+    $('#modal_refreshData').on('shown.bs.modal', function(e) {
         ajaxRefresh();
     });
     

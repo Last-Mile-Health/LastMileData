@@ -60,7 +60,7 @@
             <div class="formHeader">
                 <img style="float:left" src="/LastMileData/res/logo_liberia.png">
                 <span class="h2">CHW: Registration</span>
-                <img style="float:right" src="/LastMileData/res/logo_flag.png">
+                <img style="float:right" src="/LastMileData/res/logo_liberia.png">
                 <div style="clear:both"></div>
             </div>
             <hr>
@@ -72,13 +72,13 @@
                 </div>
                 
                 <hr>
-                <div class="headField" style="width:1.05in">CHW name/ID:</div>
-                <div class="headField" style="width:1.37in"><input class="stored autocomplete" name="fhwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:120px"> / </div>
-                <div class="headField" style="width:1.0in"><input class="stored integer" name="fhwID" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div class="headField" style="width:1.05in">CHW Name/ID:</div>
+                <div class="headField" style="width:1.37in"><input class="stored autocomplete" name="chwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:120px"> / </div>
+                <div class="headField" style="width:0.8in"><input class="stored integer" name="chwID" data-lmd-valid-required="yes" style="width:60px"></div>
                 <div class="headField" style="width:0.4in">Date:</div>
-                <div class="headField" style="width:1.7in"><input class="stored datepicker" name="visitDate" data-lmd-valid-required="yes" style="width:80px"> (d/m/y)</div>
-                <div class="headField" style="width:0.7in">Village ID:</div>
-                <div class="headField" style="width:0.8in"><input class="stored integer" name="fk_village" data-lmd-valid-required="yes" style="width:60px"></div>
+                <div class="headField" style="width:1.4in"><input class="stored datepicker" name="visitDate" data-lmd-valid-required="yes" style="width:80px"> (d/m/y)</div>
+                <div class="headField" style="width:1.1in">Community ID:</div>
+                <div class="headField" style="width:0.8in"><input class="stored integer" name="communityID" data-lmd-valid-required="yes" style="width:60px"></div>
                 <div style="clear:both; height:3px;"></div>
                 
             </div>
@@ -99,369 +99,368 @@
                         <th>Member ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th class="c5">Sex</th>
+                        <th class="c5">Gender</th>
                         <th>Date of Birth<br>(d/m/y)</th>
                     </tr>
                     
                     <!-- Row 01 of 25 -->
                     <tr>
                         <td>1</td>
-                        <td><input class="stored c2 integer" name="hhID_1" data-lmd-valid-required="yes"></td>
-                        <td><input class="stored c3" name="memID_1" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c2 integer" name="householdID_1" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c3" name="memberID_1" data-lmd-valid-required="yes"></td>
                         <td><input class="stored c4" name="firstName_1" data-lmd-valid-required="yes"></td>
                         <td><input class="stored c4" name="lastName_1" data-lmd-valid-required="yes"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_1" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_1" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_1" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_1" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_1" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_1" data-lmd-valid-required="yes"></td>
                     </tr>
                     
                     <!-- Row 02 of 25 -->
                     <tr>
                         <td>2</td>
-                        <td><input class="stored c2 integer" name="hhID_2"></td>
-                        <td><input class="stored c3" name="memID_2"></td>
+                        <td><input class="stored c2 integer" name="householdID_2"></td>
+                        <td><input class="stored c3" name="memberID_2"></td>
                         <td><input class="stored c4" name="firstName_2"></td>
                         <td><input class="stored c4" name="lastName_2"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_2" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_2" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_2" value="M">M&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_2" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_2"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_2"></td>
                     </tr>
                     
                     <!-- Row 03 of 25 -->
                     <tr>
                         <td>3</td>
-                        <td><input class="stored c2 integer" name="hhID_3"></td>
-                        <td><input class="stored c3" name="memID_3"></td>
+                        <td><input class="stored c2 integer" name="householdID_3"></td>
+                        <td><input class="stored c3" name="memberID_3"></td>
                         <td><input class="stored c4" name="firstName_3"></td>
                         <td><input class="stored c4" name="lastName_3"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_3" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_3" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_3" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_3" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_3"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_3"></td>
                     </tr>
                     
                     <!-- Row 04 of 25 -->
                     <tr>
                         <td>4</td>
-                        <td><input class="stored c2 integer" name="hhID_4"></td>
-                        <td><input class="stored c3" name="memID_4"></td>
+                        <td><input class="stored c2 integer" name="householdID_4"></td>
+                        <td><input class="stored c3" name="memberID_4"></td>
                         <td><input class="stored c4" name="firstName_4"></td>
                         <td><input class="stored c4" name="lastName_4"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_4" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_4" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_4" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_4" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_4"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_4"></td>
                     </tr>
                     
                     <!-- Row 05 of 25 -->
                     <tr>
                         <td>5</td>
-                        <td><input class="stored c2 integer" name="hhID_5"></td>
-                        <td><input class="stored c3" name="memID_5"></td>
+                        <td><input class="stored c2 integer" name="householdID_5"></td>
+                        <td><input class="stored c3" name="memberID_5"></td>
                         <td><input class="stored c4" name="firstName_5"></td>
                         <td><input class="stored c4" name="lastName_5"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_5" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_5" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_5" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_5" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_5"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_5"></td>
                     </tr>
                     
                     <!-- Row 06 of 25 -->
                     <tr>
                         <td>6</td>
-                        <td><input class="stored c2 integer" name="hhID_6"></td>
-                        <td><input class="stored c3" name="memID_6"></td>
+                        <td><input class="stored c2 integer" name="householdID_6"></td>
+                        <td><input class="stored c3" name="memberID_6"></td>
                         <td><input class="stored c4" name="firstName_6"></td>
                         <td><input class="stored c4" name="lastName_6"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_6" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_6" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_6" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_6" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_6"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_6"></td>
                     </tr>
                     
                     <!-- Row 07 of 25 -->
                     <tr>
                         <td>7</td>
-                        <td><input class="stored c2 integer" name="hhID_7"></td>
-                        <td><input class="stored c3" name="memID_7"></td>
+                        <td><input class="stored c2 integer" name="householdID_7"></td>
+                        <td><input class="stored c3" name="memberID_7"></td>
                         <td><input class="stored c4" name="firstName_7"></td>
                         <td><input class="stored c4" name="lastName_7"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_7" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_7" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_7" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_7" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_7"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_7"></td>
                     </tr>
                     
                     <!-- Row 08 of 25 -->
                     <tr>
                         <td>8</td>
-                        <td><input class="stored c2 integer" name="hhID_8"></td>
-                        <td><input class="stored c3" name="memID_8"></td>
+                        <td><input class="stored c2 integer" name="householdID_8"></td>
+                        <td><input class="stored c3" name="memberID_8"></td>
                         <td><input class="stored c4" name="firstName_8"></td>
                         <td><input class="stored c4" name="lastName_8"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_8" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_8" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_8" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_8" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_8"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_8"></td>
                     </tr>
                     
                     <!-- Row 09 of 25 -->
                     <tr>
                         <td>9</td>
-                        <td><input class="stored c2 integer" name="hhID_9"></td>
-                        <td><input class="stored c3" name="memID_9"></td>
+                        <td><input class="stored c2 integer" name="householdID_9"></td>
+                        <td><input class="stored c3" name="memberID_9"></td>
                         <td><input class="stored c4" name="firstName_9"></td>
                         <td><input class="stored c4" name="lastName_9"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_9" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_9" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_9" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_9" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_9"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_9"></td>
                     </tr>
                     
                     <!-- Row 10 of 25 -->
                     <tr>
                         <td>10</td>
-                        <td><input class="stored c2 integer" name="hhID_10"></td>
-                        <td><input class="stored c3" name="memID_10"></td>
+                        <td><input class="stored c2 integer" name="householdID_10"></td>
+                        <td><input class="stored c3" name="memberID_10"></td>
                         <td><input class="stored c4" name="firstName_10"></td>
                         <td><input class="stored c4" name="lastName_10"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_10" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_10" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_10" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_10" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_10"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_10"></td>
                     </tr>
                     
                     <!-- Row 11 of 25 -->
                     <tr>
                         <td>11</td>
-                        <td><input class="stored c2 integer" name="hhID_11"></td>
-                        <td><input class="stored c3" name="memID_11"></td>
+                        <td><input class="stored c2 integer" name="householdID_11"></td>
+                        <td><input class="stored c3" name="memberID_11"></td>
                         <td><input class="stored c4" name="firstName_11"></td>
                         <td><input class="stored c4" name="lastName_11"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_11" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_11" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_11" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_11" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_11"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_11"></td>
                     </tr>
                     
                     <!-- Row 12 of 25 -->
                     <tr>
                         <td>12</td>
-                        <td><input class="stored c2 integer" name="hhID_12"></td>
-                        <td><input class="stored c3" name="memID_12"></td>
+                        <td><input class="stored c2 integer" name="householdID_12"></td>
+                        <td><input class="stored c3" name="memberID_12"></td>
                         <td><input class="stored c4" name="firstName_12"></td>
                         <td><input class="stored c4" name="lastName_12"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_12" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_12" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_12" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_12" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_12"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_12"></td>
                     </tr>
                     
                     <!-- Row 13 of 25 -->
                     <tr>
                         <td>13</td>
-                        <td><input class="stored c2 integer" name="hhID_13"></td>
-                        <td><input class="stored c3" name="memID_13"></td>
+                        <td><input class="stored c2 integer" name="householdID_13"></td>
+                        <td><input class="stored c3" name="memberID_13"></td>
                         <td><input class="stored c4" name="firstName_13"></td>
                         <td><input class="stored c4" name="lastName_13"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_13" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_13" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_13" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_13" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_13"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_13"></td>
                     </tr>
                     
                     <!-- Row 14 of 25 -->
                     <tr>
                         <td>14</td>
-                        <td><input class="stored c2 integer" name="hhID_14"></td>
-                        <td><input class="stored c3" name="memID_14"></td>
+                        <td><input class="stored c2 integer" name="householdID_14"></td>
+                        <td><input class="stored c3" name="memberID_14"></td>
                         <td><input class="stored c4" name="firstName_14"></td>
                         <td><input class="stored c4" name="lastName_14"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_14" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_14" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_14" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_14" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_14"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_14"></td>
                     </tr>
                     
                     <!-- Row 15 of 25 -->
                     <tr>
                         <td>15</td>
-                        <td><input class="stored c2 integer" name="hhID_15"></td>
-                        <td><input class="stored c3" name="memID_15"></td>
+                        <td><input class="stored c2 integer" name="householdID_15"></td>
+                        <td><input class="stored c3" name="memberID_15"></td>
                         <td><input class="stored c4" name="firstName_15"></td>
                         <td><input class="stored c4" name="lastName_15"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_15" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_15" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_15" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_15" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_15"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_15"></td>
                     </tr>
                     
                     <!-- Row 16 of 25 -->
                     <tr>
                         <td>16</td>
-                        <td><input class="stored c2 integer" name="hhID_16"></td>
-                        <td><input class="stored c3" name="memID_16"></td>
+                        <td><input class="stored c2 integer" name="householdID_16"></td>
+                        <td><input class="stored c3" name="memberID_16"></td>
                         <td><input class="stored c4" name="firstName_16"></td>
                         <td><input class="stored c4" name="lastName_16"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_16" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_16" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_16" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_16" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_16"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_16"></td>
                     </tr>
                     
                     <!-- Row 17 of 25 -->
                     <tr>
                         <td>17</td>
-                        <td><input class="stored c2 integer" name="hhID_17"></td>
-                        <td><input class="stored c3" name="memID_17"></td>
+                        <td><input class="stored c2 integer" name="householdID_17"></td>
+                        <td><input class="stored c3" name="memberID_17"></td>
                         <td><input class="stored c4" name="firstName_17"></td>
                         <td><input class="stored c4" name="lastName_17"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_17" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_17" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_17" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_17" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_17"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_17"></td>
                     </tr>
                     
                     <!-- Row 18 of 25 -->
                     <tr>
                         <td>18</td>
-                        <td><input class="stored c2 integer" name="hhID_18"></td>
-                        <td><input class="stored c3" name="memID_18"></td>
+                        <td><input class="stored c2 integer" name="householdID_18"></td>
+                        <td><input class="stored c3" name="memberID_18"></td>
                         <td><input class="stored c4" name="firstName_18"></td>
                         <td><input class="stored c4" name="lastName_18"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_18" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_18" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_18" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_18" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_18"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_18"></td>
                     </tr>
                     
                     <!-- Row 19 of 25 -->
                     <tr>
                         <td>19</td>
-                        <td><input class="stored c2 integer" name="hhID_19"></td>
-                        <td><input class="stored c3" name="memID_19"></td>
+                        <td><input class="stored c2 integer" name="householdID_19"></td>
+                        <td><input class="stored c3" name="memberID_19"></td>
                         <td><input class="stored c4" name="firstName_19"></td>
                         <td><input class="stored c4" name="lastName_19"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_19" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_19" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_19" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_19" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_19"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_19"></td>
                     </tr>
                     
                     <!-- Row 20 of 25 -->
                     <tr>
                         <td>20</td>
-                        <td><input class="stored c2 integer" name="hhID_20"></td>
-                        <td><input class="stored c3" name="memID_20"></td>
+                        <td><input class="stored c2 integer" name="householdID_20"></td>
+                        <td><input class="stored c3" name="memberID_20"></td>
                         <td><input class="stored c4" name="firstName_20"></td>
                         <td><input class="stored c4" name="lastName_20"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_20" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_20" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_20" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_20" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_20"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_20"></td>
                     </tr>
                     
                     <!-- Row 21 of 25 -->
                     <tr>
                         <td>21</td>
-                        <td><input class="stored c2 integer" name="hhID_21"></td>
-                        <td><input class="stored c3" name="memID_21"></td>
+                        <td><input class="stored c2 integer" name="householdID_21"></td>
+                        <td><input class="stored c3" name="memberID_21"></td>
                         <td><input class="stored c4" name="firstName_21"></td>
                         <td><input class="stored c4" name="lastName_21"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_21" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_21" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_21" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_21" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_21"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_21"></td>
                     </tr>
                     
                     <!-- Row 22 of 25 -->
                     <tr>
                         <td>22</td>
-                        <td><input class="stored c2 integer" name="hhID_22"></td>
-                        <td><input class="stored c3" name="memID_22"></td>
+                        <td><input class="stored c2 integer" name="householdID_22"></td>
+                        <td><input class="stored c3" name="memberID_22"></td>
                         <td><input class="stored c4" name="firstName_22"></td>
                         <td><input class="stored c4" name="lastName_22"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_22" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_22" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_22" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_22" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_22"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_22"></td>
                     </tr>
                     
                     <!-- Row 23 of 25 -->
                     <tr>
                         <td>23</td>
-                        <td><input class="stored c2 integer" name="hhID_23"></td>
-                        <td><input class="stored c3" name="memID_23"></td>
+                        <td><input class="stored c2 integer" name="householdID_23"></td>
+                        <td><input class="stored c3" name="memberID_23"></td>
                         <td><input class="stored c4" name="firstName_23"></td>
                         <td><input class="stored c4" name="lastName_23"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_23" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_23" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_23" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_23" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_23"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_23"></td>
                     </tr>
                     
                     <!-- Row 24 of 25 -->
                     <tr>
                         <td>24</td>
-                        <td><input class="stored c2 integer" name="hhID_24"></td>
-                        <td><input class="stored c3" name="memID_24"></td>
+                        <td><input class="stored c2 integer" name="householdID_24"></td>
+                        <td><input class="stored c3" name="memberID_24"></td>
                         <td><input class="stored c4" name="firstName_24"></td>
                         <td><input class="stored c4" name="lastName_24"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_24" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_24" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_24" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_24" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_24"></td>
-                    </tr>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_24"></td>
+                    </tr>  
                     
                     <!-- Row 25 of 25 -->
                     <tr>
                         <td>25</td>
-                        <td><input class="stored c2 integer" name="hhID_25"></td>
-                        <td><input class="stored c3" name="memID_25"></td>
+                        <td><input class="stored c2 integer" name="householdID_25"></td>
+                        <td><input class="stored c3" name="memberID_25"></td>
                         <td><input class="stored c4" name="firstName_25"></td>
                         <td><input class="stored c4" name="lastName_25"></td>
                         <td>
-                            <input type="checkbox" class="stored" name="sex_25" value="M">M&nbsp;&nbsp;
-                            <input type="checkbox" class="stored" name="sex_25" value="F">F&nbsp;
+                            <input type="checkbox" class="stored" name="gender_25" value="M">M&nbsp;&nbsp;
+                            <input type="checkbox" class="stored" name="gender_25" value="F">F&nbsp;
                         </td>
-                        <td><input class="stored c6 datepicker" name="dob_25"></td>
+                        <td><input class="stored c6 datepicker" name="dateOfBirth_25"></td>
                     </tr>
-                    
+ 
                 </table>
                 <!-- END: Registration table -->
                 
             </div>
             <!-- END: SECTION A -->
             
-            
-            
             <!-- START: M&E Box -->
+                        
             <div id="meBox">
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">REG.03</span>
@@ -472,14 +471,10 @@
                 QA Date: <input class="stored" name="meta_QA_date">
                 <input name='meta_formVersion' class='stored' type='hidden' value='3'>
             </div>
-            <!-- START: M&E Box -->
-            
-            
-            
+            <!-- START: M&E Box -->          
+ 
         </div>
         <!-- END: PAGE 1 -->
-        
-        
         
         <!-- START: S/C Buttons -->
         <div class="formButtons">
@@ -492,8 +487,8 @@
         
         
         <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" name="database" value="lastmile_db">
-        <input type="hidden" class="stored" name="table" value="tbl_data_fhw_reg_registration">
+        <input type="hidden" class="stored" name="database" value="lastmile_chwdb">
+        <input type="hidden" class="stored" name="table" value="staging_registrationStep1">
         <!-- END: Hidden fields -->
         
     </body>
