@@ -74,7 +74,7 @@ CACHE:
 /LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html
 /LastMileData/src/forms/fhw_pni02_postnatalinitial.html
 /LastMileData/src/forms/fhw_ref02_referral.html
-/LastMileData/src/forms/fhw_reg02_registration.html
+/LastMileData/src/forms/fhw_reg03_registration.html
 /LastMileData/src/forms/fhw_sch03_sickchild.html
 /LastMileData/src/forms/fhw_sst05_sicknessscreeningtool.html
 /LastMileData/src/forms/prg_chv01_gchvquestionnaire.html
@@ -89,6 +89,7 @@ CACHE:
 /LastMileData/src/forms_old/fhw_sst04_ebolascreening.html
 /LastMileData/src/forms_old/fhw_kpi02_kpiassessment.html
 /LastMileData/src/forms_old/prg_trl01_trainingledger.html
+/LastMileData/src/forms_old/fhw_reg02_registration.html
 
 # src >> fragments
 /LastMileData/src/fragments/header_bootstrap.html
@@ -101,6 +102,7 @@ CACHE:
 /LastMileData/src/js/formHelper.js
 /LastMileData/src/js/formValidate.js
 /LastMileData/src/js/loadContents_v20140916.js
+/LastMileData/src/js/modalFocus_v20140916.js
 
 # src >> pages
 /LastMileData/src/pages/page_deqa.html
@@ -109,4 +111,3 @@ CACHE:
 ########## NETWORK ##########
 NETWORK:
 *
-
