@@ -1,20 +1,24 @@
 # Note: this file should go in the same directory as the LastMileData folder
 
-RewriteEngine on
+<IfModule mod_rewrite.c>
 
-# Redirect lastmiledata.org --> lastmiledata.org/LastMileData/
-RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
-RewriteRule ^/?$ "https\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
+    RewriteEngine on
 
-# Redirect lastmiledata.org/offline --> DEQA page
-RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
-RewriteRule ^offline$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_deqa\.html" [R=301,L]
+    # Redirect lastmiledata.org --> lastmiledata.org/LastMileData/
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^/?$ "https\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
 
-# Redirect lastmiledata.org/portal --> DEQA page
-RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
-RewriteRule ^portal$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/pages\/page_dataportal\.php" [R=301,L]
+    # Redirect lastmiledata.org/offline --> DEQA page
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^offline$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/php-html\/pages\/page_deqa\.html" [R=301,L]
 
-# Redirect all HTTP requests to HTTPS
-RewriteCond %{SERVER_PORT} !=443
-RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
-RewriteRule ^$ https://www.lastmiledata.org/%{REQUEST_URI} [R,L]
+    # Redirect lastmiledata.org/portal --> DEQA page
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^portal$ "https\:\/\/lastmiledata\.org\/LastMileData\/src\/php-html\/pages\/page_dataportal\.php" [R=301,L]
+
+    # Redirect all HTTP requests to HTTPS
+    RewriteCond %{SERVER_PORT} !=443
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^$ https://www.lastmiledata.org/%{REQUEST_URI} [R,L]
+
+</IfModule>
