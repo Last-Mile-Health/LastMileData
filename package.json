@@ -1,0 +1,32 @@
+{
+  "name": "Last-Mile-Data",
+  "version": "0.1.0",
+  "description": "Database platform for Last Mile Health",
+  "homepage": "https://www.LastMileData.org",
+  "license": "GPL-3.0",
+  "contributors": [
+    "Avi Kenny <avi@lastmilehealth.org>",
+    "Owen Eddins <oeddins@lastmilehealth.org>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Avi-Kenny/LastMileData.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-htmlmin": "^0.4.0",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-filerev": "^2.3.1",
+    "grunt-manifest": "^0.4.0",
+    "grunt-processhtml": "^0.3.8",
+    "grunt-string-replace": "^1.2.0",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-usemin": "^3.0.0",
+    "load-grunt-tasks": "^3.2.0"
+  }
+}

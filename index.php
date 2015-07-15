@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
-        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
+        <link rel='icon' type='image/png' href='/LastMileData/src/images/lmd_icon_v20140916.png'>
         <title>Last Mile Data</title>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
@@ -39,7 +39,7 @@
                         <h1 class="text-center">Login</h1>
                     </div>
                     <div class="modal-body">
-                        <form class="form col-md-12 center-block" action="/LastMileData/src/php/login.php" method="POST">
+                        <form class="form col-md-12 center-block" action="/LastMileData/src/php-html/scripts/login.php" method="POST">
                             <div class="form-group">
                                 <input name="username" type="text" class="form-control input-lg" placeholder="Username">
                             </div>

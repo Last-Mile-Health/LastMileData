@@ -83,19 +83,19 @@
 }
 
 .context-menu-item.icon { min-height: 18px; background-repeat: no-repeat; background-position: 4px 2px; }
-.context-menu-item.icon-calculator { background-image: url(/LastMileData/res/contextMenuIcons/calculator.png); }
-.context-menu-item.icon-calendar { background-image: url(/LastMileData/res/contextMenuIcons/calendar.png); }
-.context-menu-item.icon-clock { background-image: url(/LastMileData/res/contextMenuIcons/clock.png); }
-.context-menu-item.icon-copy { background-image: url(/LastMileData/res/contextMenuIcons/copy.png); }
-.context-menu-item.icon-cut { background-image: url(/LastMileData/res/contextMenuIcons/cut.png); }
-.context-menu-item.icon-delete { background-image: url(/LastMileData/res/contextMenuIcons/delete.png); }
-.context-menu-item.icon-gears { background-image: url(/LastMileData/res/contextMenuIcons/gears.png); }
-.context-menu-item.icon-lock { background-image: url(/LastMileData/res/contextMenuIcons/lock.png); }
-.context-menu-item.icon-magnify { background-image: url(/LastMileData/res/contextMenuIcons/magnify.png); }
-.context-menu-item.icon-meter { background-image: url(/LastMileData/res/contextMenuIcons/meter.png); }
-.context-menu-item.icon-paste { background-image: url(/LastMileData/res/contextMenuIcons/paste.png); }
-.context-menu-item.icon-split { background-image: url(/LastMileData/res/contextMenuIcons/split.png); }
-.context-menu-item.icon-tools { background-image: url(/LastMileData/res/contextMenuIcons/tools.png); }
+.context-menu-item.icon-calculator { background-image: url(/LastMileData/src/images/contextMenuIcons/calculator.png); }
+.context-menu-item.icon-calendar { background-image: url(/LastMileData/src/images/contextMenuIcons/calendar.png); }
+.context-menu-item.icon-clock { background-image: url(/LastMileData/src/images/contextMenuIcons/clock.png); }
+.context-menu-item.icon-copy { background-image: url(/LastMileData/src/images/contextMenuIcons/copy.png); }
+.context-menu-item.icon-cut { background-image: url(/LastMileData/src/images/contextMenuIcons/cut.png); }
+.context-menu-item.icon-delete { background-image: url(/LastMileData/src/images/contextMenuIcons/delete.png); }
+.context-menu-item.icon-gears { background-image: url(/LastMileData/src/images/contextMenuIcons/gears.png); }
+.context-menu-item.icon-lock { background-image: url(/LastMileData/src/images/contextMenuIcons/lock.png); }
+.context-menu-item.icon-magnify { background-image: url(/LastMileData/src/images/contextMenuIcons/magnify.png); }
+.context-menu-item.icon-meter { background-image: url(/LastMileData/src/images/contextMenuIcons/meter.png); }
+.context-menu-item.icon-paste { background-image: url(/LastMileData/src/images/contextMenuIcons/paste.png); }
+.context-menu-item.icon-split { background-image: url(/LastMileData/src/images/contextMenuIcons/split.png); }
+.context-menu-item.icon-tools { background-image: url(/LastMileData/src/images/contextMenuIcons/tools.png); }
 
 /* vertically align inside labels */
 .context-menu-input > label > * { vertical-align: top; }

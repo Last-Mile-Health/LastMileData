@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
-        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
+        <link rel='icon' type='image/png' href='/LastMileData/src/images/lmd_icon_v20140916.png'>
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
-        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/res/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/src/css/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
         
         <style>
             .inner_L { width: 3.0in; }
@@ -88,9 +88,9 @@
             
             <!-- START: FORM HEADER -->
             <div class="formHeader">
-                <img style="float:left" src="/LastMileData/res/logo_LMH_v20140916.png">
+                <img style="float:left" src="/LastMileData/src/images/logo_LMH_v20140916.png">
                 <span class="h2">FHW: Population Report</span>
-                <img style="float:right" src="/LastMileData/res/logo_TH_v20140916.png">
+                <img style="float:right" src="/LastMileData/src/images/logo_TH_v20140916.png">
                 <div style="clear:both"></div>
             </div>
             <hr>
@@ -112,7 +112,7 @@
                 
                     <?php
                         // Set include path; require connection strings
-                        set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php/includes" );
+                        set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php-html/includes" );
                         require_once("cxn.php");
                         
                         // !!!!! Set PHP max execution time !!!!!

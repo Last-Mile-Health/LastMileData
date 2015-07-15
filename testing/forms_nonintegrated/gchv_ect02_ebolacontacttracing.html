@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>GCHV Form (ECT 02) - Contact Tracing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='/LastMileData/src/images/lmd_icon_v20140916.png'>
+        <script src="/LastMileData/lib/jquery.min.js"></script>
+        <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
+        <script src="/LastMileData/src/js/fhwForms_v20140916.js"></script>
+        <script src="/LastMileData/src/js/formHelper.js"></script>
+        <script src="/LastMileData/src/js/formValidate.js"></script>
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='/LastMileData/src/css/fhwForms_v20140916.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            .inner_L { width: 3.0in; }
+            .inner_C { width: 2.3in; }
+            .inner_R { width: 2.0in; }
+            
+            #sectionB { position:relative; top:-5px; }
+            #sectionC { position:relative; top:-10px; }
+            #sectionD { position:relative; top:-15px; }
+            
+            #meBox { position:relative; top:-25px; }
+            @media print { #meBox { position:relative; top:-45px; } }   /* To correct for a possible CSS bug */
+            
+            #contactTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            #contactTable td { border: 1px solid black; padding:0px; text-align:center; }
+            #contactTable .col1 { text-align:left; padding-left:3px; padding-right:30px; }
+            
+            .thickBox { padding:3px; }
+            
+            .cX { position:relative; top:1px; height:18px; width:0.3in; border:none; margin-right:1px; margin-left:1px; appearance:none; -webkit-appearance:none; cursor:pointer; }
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        
+        
+        <!-- START: PAGE 1 -->
+        <div class="page_h">
+            
+            
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="/LastMileData/src/images/logo_LMH_v20140916.png">
+                <span class="h2">gCHV: Contact Tracing</span>
+                <img style="float:right" src="/LastMileData/src/images/logo_TH_v20140916.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            <!-- END: FORM HEADER -->
+            
+            
+            
+            <!-- START: SECTION A -->
+            <div id="sectionA">
+                
+                <b>A. Contact information (the patient being traced)</b>
+                <div class="thickBox">
+                    Contact name: <input class="stored" id="id3" data-lmd-valid-required="yes" style="width:180px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    Today's date: <input class="stored datepicker" id="id2" data-lmd-valid-required="yes" style="width:80px"> (d/m/y)
+                </div>
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            
+            
+            <!-- START: SECTION B -->
+            <div id="sectionB">
+                
+                <b>B. Case Information (the person with Ebola who contacted the patient)</b>
+                <div class="thickBox">
+                    <div style="height:27px">
+                        &nbsp;&nbsp;&nbsp;
+                        Case name: <input class="stored" id="id5" data-lmd-valid-required="yes" style="width:150px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Phone number: <input class="stored" id="id6" data-lmd-valid-required="yes" style="width:100px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Case number: <input class="stored" id="id7" data-lmd-valid-required="yes" style="width:100px">
+                    </div>
+                    <div>
+                        <div style="float:left">
+                            &nbsp;&nbsp;&nbsp;
+                            Date of last contact: <input class="stored datepicker" id="id8" data-lmd-valid-required="yes" style="width:80px"> (d/m/y)
+                            &nbsp;&nbsp;&nbsp;
+                            Type of contact:
+                        </div>
+                        <div style="float:left; font-size:10px; padding-left:5px">
+                            <div style="float:left; width:215px;"><input class="stored" id="id" type="checkbox"> Slept or ate in same household</div>
+                            <div style="float:left; width:180px;"><input class="stored" id="id" type="checkbox"> Touched clothes or other objects</div>
+                            <div style="float:left; width:120px;"><input class="stored" id="id" type="checkbox"> Breastfeeding of child</div>
+                            <br>
+                            <div style="float:left; width:215px;"><input class="stored" id="id" type="checkbox"> Touched body fluids (saliva, urine, feces)</div>
+                            <div style="float:left; width:180px;"><input class="stored" id="id" type="checkbox"> Direct contact with body</div>
+                            <div style="float:left; width:120px;"><input class="stored" id="id" type="checkbox"> Funeral attendance</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- END: SECTION B -->
+            
+            
+            
+            <!-- START: SECTION C -->
+            <div id="sectionC">
+                
+                <b>C. Tracing. Trace the patient for 21 days; write "Y" (yes) or "N" (no) below for each symptom.</b>
+                <div class="thickBox">
+
+                    <!-- START: Contact Tracing table -->
+                    <table id='contactTable' style='position:relative; left:10px;'>
+                        
+                        <!-- Table header -->
+                        <tr>
+                            <th class="col1" style="border-top:none; border-left:none">Day:</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                            <th>18</th>
+                            <th>19</th>
+                            <th>20</th>
+                            <th>21</th>
+                        </tr>
+
+                        <!-- Row 1 of 13 -->
+                        <tr>
+                            <td class="col1">Fever</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 2 of 13 -->
+                        <tr>
+                            <td class="col1">Unexplained bleeding</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 3 of 13 -->
+                        <tr>
+                            <td class="col1">Stomach pain</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 4 of 13 -->
+                        <tr>
+                            <td class="col1">Breathing problem</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 5 of 13 -->
+                        <tr>
+                            <td class="col1">Loss of appetite</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 6 of 13 -->
+                        <tr>
+                            <td class="col1">Swallowing problem</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 7 of 13 -->
+                        <tr>
+                            <td class="col1">Hiccoughs</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 8 of 13 -->
+                        <tr>
+                            <td class="col1">Headache</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 9 of 13 -->
+                        <tr>
+                            <td class="col1">Vomiting</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 10 of 13 -->
+                        <tr>
+                            <td class="col1">Body pain</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 11 of 13 -->
+                        <tr>
+                            <td class="col1">Running stomach</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 12 of 13 -->
+                        <tr>
+                            <td class="col1">Nausea</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+                        <!-- Row 13 of 13 -->
+                        <tr>
+                            <td class="col1">Weakness</td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                            <td><input class="stored cX" id="id" data-lmd-valid-select='["Y","N"]'></td>
+                        </tr>
+
+
+                    </table>
+                    <!-- END: Contact Tracing table -->
+
+                </div>
+                
+            </div>
+            <!-- END: SECTION C -->
+            
+            
+            
+            <!-- START: SECTION D -->
+            <div id="sectionD">
+                
+                <b>D. Actions</b>
+                <div class="thickBox">
+                    
+                    <div style="height:30px">
+                        <input class="stored" id="id" type="checkbox">
+                        If yes to any symptom, inform the case investigation team.
+                    </div>
+                    <div style="height:30px">
+                    gCHV name: <input class="stored" id="id" data-lmd-valid-required="yes" style="width:140px">
+                    &nbsp;&nbsp;&nbsp
+                    community: <input class="stored" id="id" data-lmd-valid-required="yes" style="width:140px">
+                    &nbsp;&nbsp;&nbsp
+                    facility: <input class="stored" id="id" data-lmd-valid-required="yes" style="width:140px">
+                    &nbsp;&nbsp;&nbsp
+                    health district: <input class="stored" id="id" data-lmd-valid-required="yes" style="width:140px">
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <!-- END: SECTION D -->
+            
+            
+            
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-success">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-success">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-success">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" id="table" value="tbl_data_gchv_ect_contacttracing">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>

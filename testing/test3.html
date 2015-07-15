@@ -12,6 +12,7 @@
         <script src="/LastMileData/lib/jquery.min.js"></script>
         <script src="/reusables/lib/underscore.min.js"></script>
         <script src="/LastMileData/lib/rivets.bundled.min.js"></script>
+        <script src="build/js/concatFiles.min.js"></script>
         <style>
             .box {
                 width:100px;
@@ -25,39 +26,11 @@
         <script>
             $(document).ready(function(){
                 
-                var myModel = {
-                    var1: "hey",
-                    var2: [2,4,6,8]
-                };
-
-                // Configure rivets.js
-                rivets.configure({templateDelimiters: ['{{', '}}']});
-
-                // Bind sidebar model to accordion DIV
-                rivets.bind($('#myDiv'), {myModel: myModel});
-                
-                $('#push').click(function(){
-                    myModel.var2.push(Math.round(Math.random()*100));
-                });
-                $('#pop').click(function(){
-                    myModel.var2.pop();
-                });
-                $('#model').click(function(){
-                    console.log(myModel.var2);
-                });
-                
             });
         </script>
     </head>
     <body>
-        <div id="myDiv">
-            <button style="float:left" id="push">Push!</button>
-            <button style="float:left" id="pop">Pop!</button>
-            <button style="float:left" id="model">Model</button>
-            <div class="box" rv-each-array="myModel.var2">{{array}}</div>
-            <br>
-            {{myModel.var1}}
-        </div>
+        <div id="myDiv">Hey</div>
     </body>
 </html>
 

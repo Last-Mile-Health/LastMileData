@@ -8,12 +8,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
-        <link rel='icon' type='image/png' href='/LastMileData/res/lmd_icon_v20140916.png'>
+        <link rel='icon' type='image/png' href='/LastMileData/src/images/lmd_icon_v20140916.png'>
         <title>Last Mile Data</title>
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
-        <link rel="stylesheet" href="/LastMileData/res/page_deqa.css"  type="text/css" />
+        <link rel="stylesheet" href="/LastMileData/src/css/page_deqa.css"  type="text/css" />
         
         <!-- !!!!! RELEVANT 1: START !!!!! -->
         <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
@@ -201,7 +201,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group text-center">
-                            <img src="/LastMileData/res/ajax-loader_v20140916.gif">
+                            <img src="/LastMileData/src/images/ajax-loader_v20140916.gif">
                             <h3 id="modal_initialize_text">Initializing the Last Mile Data application. Downloading files now...</h3>
                             <div id="modal_initialize_progress"></div>
                         </div>
@@ -311,7 +311,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group text-center">
-                            <img src="/LastMileData/res/ajax-loader_v20140916.gif">
+                            <img src="/LastMileData/src/images/ajax-loader_v20140916.gif">
                             <h3 id="modal_appcacheRefresh_text">A new version of the Last Mile Data application is available. Downloading files now...</h3>
                             <div id="modal_appcacheRefresh_progress"></div>
                         </div>
@@ -334,7 +334,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group text-center">
-                            <img src="/LastMileData/res/ajax-loader_v20140916.gif">
+                            <img src="/LastMileData/src/images/ajax-loader_v20140916.gif">
                             <h3 id="modal_refreshData_text">Refreshing...</h3>
                         </div>
                     </div>
@@ -361,7 +361,7 @@
                             <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                         </div>
                         <div id="modal_downloadDataFile_downloading" class="form-group text-center" style="display:none">
-                            <img src="/LastMileData/res/ajax-loader_v20140916.gif">
+                            <img src="/LastMileData/src/images/ajax-loader_v20140916.gif">
                             <h3 id="modal_downloadDataFile_text">Downloading data file...</h3>
                         </div>
                     </div>
@@ -395,7 +395,7 @@
                                 </form>
                             </div>
                             <div id="modal_uploadLMD_status" style='display:none'>
-                                <img src='/LastMileData/res/ajax-loader_v20140916.gif'><br>
+                                <img src='/LastMileData/src/images/ajax-loader_v20140916.gif'><br>
                                 <h3 id='modal_uploadLMD_message'>Uploading and merging data file...</h3>
                             </div>
                         </div>
@@ -419,7 +419,7 @@
                     <div class="modal-body">
                         
                         <div id="modal_sendRecords_ajaxLoadIcon" class="center-block text-center">
-                            <img src='/LastMileData/res/ajax-loader_v20140916.gif'>
+                            <img src='/LastMileData/src/images/ajax-loader_v20140916.gif'>
                             <br><br>
                         </div>
                         

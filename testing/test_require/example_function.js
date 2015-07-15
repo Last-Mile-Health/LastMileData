@@ -1,0 +1,10 @@
+define(function(){
+    
+    var x = 1;
+    var y = 2;
+    
+    return {
+        sum: x+y
+    };
+    
+});
