@@ -56,5 +56,3 @@ mysqli_close($cxn);
 
 // Send JSON back to AJAX handlers
 echo '{"rKeyAJAX":"' . $rKey . '"}';
-
-?>

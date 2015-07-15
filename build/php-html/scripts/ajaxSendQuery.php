@@ -16,6 +16,8 @@ require_once("cxn.php");
 
 // Uncomment next line to debug queries
 //mysqli_query($cxn, 'INSERT INTO lastmile_db.test (col_1) VALUES ("' . $queryString . '")');
+mysqli_query($cxn, 'INSERT INTO lastmile_chwdb.test (col_1) VALUES ("' . $queryString . '")');
+
 // !!!!! create a "turn debug queries on/off" configuration switch on DEQA !!!!!
 
 

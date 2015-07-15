@@ -23,6 +23,7 @@
         <script src="/LastMileData/lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="/LastMileData/src/js/loadContents_v20140916.js"></script>
+        <script src="/LastMileData/src/js/modalFocus_v20140916.js"></script>
         <script src="/LastMileData/src/js/LMD_fileSystemHelper.js"></script>
         <script src="/LastMileData/src/js/LMD_accessControl.js"></script>
         <script src="/LastMileData/src/js/deqa_v20141015.js"></script>
@@ -63,14 +64,15 @@
                     <h2>Data Entry</h2>
                     <p>Click on one of the buttons below to perform data entry.</p>
                     <p><a href="/LastMileData/src/forms/0_testDE.html" class="btn btn-success">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
-                    <p><a href="/LastMileData/src/forms/fhw_reg02_registration.html" class="btn btn-success">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/fhw_reg03_registration.html" class="btn btn-success">CHW: Registration &nbsp;&nbsp;<b>[REG.03]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_kpi03_kpiassessment.html" class="btn btn-success">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.03]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_ref02_referral.html" class="btn btn-success">FHW: Referral &nbsp;&nbsp;<b>[REF.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_bbi02_bigbellyinitial.html" class="btn btn-success">FHW: Big Belly (initial) &nbsp;&nbsp;<b>[BBI.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_bbf02_bigbellyfollowup.html" class="btn btn-success">FHW: Big Belly (follow-up) &nbsp;&nbsp;<b>[BBF.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_pni02_postnatalinitial.html" class="btn btn-success">FHW: Postnatal (initial) &nbsp;&nbsp;<b>[PNI.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_pnf02_postnatalfollowup.html" class="btn btn-success">FHW: Postnatal (follow-up) &nbsp;&nbsp;<b>[PNF.02]</b></a></p>
-                    <p><a href="/LastMileData/src/forms/fhw_bdm02_movements.html" class="btn btn-success">FHW: Births, Deaths, Movements &nbsp;&nbsp;<b>[BDM.02]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/fhw_bdm02_movements.html" class="btn btn-success">FHW: Births, Deaths, Movements <b>[BDM.02]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/fhw_bdm03_movements.html" class="btn btn-success">CHW: Births, Deaths, Movements <b>[BDM.03]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_sch03_sickchild.html" class="btn btn-success">FHW: Sick Child &nbsp;&nbsp;<b>[SCH.03]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_ecm02_ebolacasemanagement.html" class="btn btn-success">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/fhw_ect03_ebolacontacttracing.html" class="btn btn-success">FHW: Ebola Contact Tracing &nbsp;&nbsp;<b>[ECT.03]</b></a></p>
@@ -85,14 +87,15 @@
                     <h2>Quality Assurance</h2>
                     <p>Click on one of the buttons below to perform data QA.</p>
                     <p><a id="qa_TST" href="#" class="btn btn-primary">TEST FORM &nbsp;&nbsp;<b>[TST.01]</b></a></p>
-                    <p><a id="qa_REG_02" href="#" class="btn btn-primary">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
+                    <p><a id="qa_REG_03" href="#" class="btn btn-primary">CHW: Registration &nbsp;&nbsp;<b>[REG.03]</b></a></p>
                     <p><a id="qa_KPI_03" href="#" class="btn btn-primary">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.03]</b></a></p>
                     <p><a id="qa_REF_02" href="#" class="btn btn-primary">FHW: Referral &nbsp;&nbsp;<b>[REF.02]</b></a></p>
                     <p><a id="qa_BBI_02" href="#" class="btn btn-primary">FHW: Big Belly (initial) &nbsp;&nbsp;<b>[BBI.02]</b></a></p>
                     <p><a id="qa_BBF_02" href="#" class="btn btn-primary">FHW: Big Belly (follow-up) &nbsp;&nbsp;<b>[BBF.02]</b></a></p>
                     <p><a id="qa_PNI_02" href="#" class="btn btn-primary">FHW: Postnatal (initial) &nbsp;&nbsp;<b>[PNI.02]</b></a></p>
                     <p><a id="qa_PNF_02" href="#" class="btn btn-primary">FHW: Postnatal (follow-up) &nbsp;&nbsp;<b>[PNF.02]</b></a></p>
-                    <p><a id="qa_BDM_02" href="#" class="btn btn-primary">FHW: Births, Deaths, Movements &nbsp;&nbsp;<b>[BDM.02]</b></a></p>
+                    <p><a id="qa_BDM_02" href="#" class="btn btn-primary">FHW: Births, Deaths, Movements <b>[BDM.02]</b></a></p>
+                    <p><a id="qa_BDM_03" href="#" class="btn btn-primary">CHW: Births, Deaths, Movements <b>[BDM.03]</b></a></p>
                     <p><a id="qa_SCH_03" href="#" class="btn btn-primary">FHW: Sick Child &nbsp;&nbsp;<b>[SCH.03]</b></a></p>
                     <p><a id="qa_ECM_02" href="#" class="btn btn-primary">FHW: Ebola Case Management &nbsp;&nbsp;<b>[ECM.02]</b></a></p>
                     <p><a id="qa_ECT_03" href="#" class="btn btn-primary">FHW: Ebola Contact Tracing &nbsp;&nbsp;<b>[ECT.03]</b></a></p>
@@ -137,6 +140,7 @@
                     <p><a href="/LastMileData/src/forms/old/fhw_kpi02_kpiassessment.html" class="btn btn-success">FHW: KPI Assessment &nbsp;&nbsp;<b>[KPI.02]</b></a></p>
                     <p><a href="/LastMileData/src/forms/old/fhw_sst04_ebolascreening.html" class="btn btn-success">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.04]</b></a></p>
                     <p><a href="/LastMileData/src/forms/old/prg_trl01_trainingledger.html" class="btn btn-success">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
+                    <p><a href="/LastMileData/src/forms/old/fhw_reg02_registration.html" class="btn btn-success">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
                     <br><br>
                 </div>
                 <div class="col-md-4"> <!-- !!!!! modify; cross-check this code with DEQA.js !!!!! -->
@@ -148,6 +152,7 @@
                     <p><a id="qa_KPI_02" href="#" class="btn btn-primary">FHW: Ebola Screening Tool &nbsp;&nbsp;<b>[KPI.02]</b></a></p>
                     <p><a id="qa_SST_04" href="#" class="btn btn-primary">FHW: Sickness Screening Tool &nbsp;&nbsp;<b>[SST.04]</b></a></p>
                     <p><a id="qa_TRL_01" href="#" class="btn btn-primary">Program: Training Ledger &nbsp;&nbsp;<b>[TRL.01]</b></a></p>
+                    <p><a id="qa_REG_02" href="#" class="btn btn-primary">FHW: Registration &nbsp;&nbsp;<b>[REG.02]</b></a></p>
                     <br><br>
                 </div>
             </div>
