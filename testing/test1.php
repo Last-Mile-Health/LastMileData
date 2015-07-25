@@ -1,7 +1,12 @@
 <?php
 
-echo "hey<br>";
+set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/build/php-html/includes" . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php-html/includes");
 
-$string = "hello there you there";
+include('inc.php');
 
-echo substr_count($string, 'ther2e');
+//echo ini_get('include_path');
+//echo "<br>";
+//echo get_include_path();
+//echo "<br>";
+//echo PATH_SEPARATOR;
+

@@ -8,12 +8,12 @@ $(document).ready(function(){
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
         // Echo JSON (indicator METADATA)
-        $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php-html/scripts/LMD_REST.php/indicators/";
+        $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicators/";
         curl_setopt($ch,CURLOPT_URL,$url1);
         $json1 = curl_exec($ch);
 
         // Echo JSON (indicator DATA)
-        $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/src/php-html/scripts/LMD_REST.php/indicatorvalues/";
+        $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorvalues/";
         curl_setopt($ch,CURLOPT_URL,$url2);
         $json2 = curl_exec($ch);
 
@@ -182,7 +182,7 @@ $(document).ready(function(){
         // Manipulate DOM
         $submit.prop('disabled','disabled');
         $threeMore.prop('disabled','disabled');
-        $submit.html("<img src='/LastMileData/src/images/ajax-loader_v20140916.gif'>")
+        $submit.html("<img src='../../images/ajax_loader.gif'>")
 
         // Parse queryString
         var queryString = "";
@@ -197,7 +197,7 @@ $(document).ready(function(){
         // Send AJAX request
         $.ajax({
             type: "POST",
-            url: "/LastMileData/src/php-html/scripts/ajaxSendQuery.php",
+            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
             data: myData,
             dataType: "json",
             success: function() {

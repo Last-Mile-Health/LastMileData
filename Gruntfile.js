@@ -1,9 +1,9 @@
 module.exports = function(grunt) {
-    
-    // !!!!! Description here
-    // !!!!! Description here
-    // !!!!! Description here
-    
+
+    // Clear and repopulate "build" directory, based on "src" directory
+
+    // !!!!! Add filerev and manifest !!!!!
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         
@@ -11,176 +11,166 @@ module.exports = function(grunt) {
             // Clear all files from "build" directory
             initial: [
                 'build/**/*'
+            ],
+            // Clear js/css files that have been concatenated/minified
+            second: [
+                'build/js/page_dataportal.js',
+                'build/js/page_medocs.js',
+                'build/js/LMD_dataPortal.js',
+                'build/js/LMD_dimpleHelper.js',
+                'build/css/page_dataportal.css',
+                'build/css/page_medocs.css'
             ]
-//            ],
-//            // !!!!!
-//            second: [
-//                'src/js/concatFiles.min.js',
-//            ]
         },
         
-        // !!!!! Task description !!!!!
+        // Copy all files from "src" --> "build"
         copy: {
-            // Copy all files from "src" --> "build"
             initial: {
                 files: [
-                    {expand:true, cwd:'src', src:['**/*','.htaccess'], dest:'build'}
+                    {
+                        expand:true,
+                        cwd:'src',
+                        src:['**/*','.htaccess'],
+                        dest:'build' }
                 ]
             }
-//            },
-//            test: {
-//                src: 'src/js/test_index.html',
-//                dest: 'src/js/test_index_BUILD.html'
-//            },
         },
         
-        // !!!!! Task description !!!!!
+        // Concatenate/minify JS and CSS in files; replace references (preparation)
         useminPrepare: {
             html: [
-                'build/php-html/pages/page_home.php',
-                'build/php-html/pages/page_medocs.php',
-                'build/php-html/pages/page_deqa.html',
-                'build/php-html/pages/page_dataportal.php'
+                'build/pages/page_home.php',
+//                'build/pages/page_medocs.php',
+//                'build/pages/page_dataportal.php'
             ],
             options: {
-                root: '../',
+                root: '/LastMileData/',
+//                dest: '/LastMileData/'
+//                root: '../',
                 dest: '../'
             }
         },
         
-        // !!!!! Task description !!!!!
+        // Concatenate/minify JS and CSS in files; replace references (execution)
+        usemin: {
+            html: [
+                'build/pages/page_home.php',
+//                'build/pages/page_medocs.php',
+//                'build/pages/page_dataportal.php'
+            ]
+        },
+
+        // Turn on source mapping and apply banner for JS minification
         uglify: {
             options: {
                 sourceMap: true,
                 banner: '/*! <%= pkg.name %> build: <%= grunt.template.today("yyyy-mm-dd hh:dd:ss") %> */\n'
-            }
-        },
-
-        // !!!!! Task description !!!!!
-        filerev: {
+            },
             main: {
-                src: 'src/js/concatFiles.min.js'
-//                dest: 'src/js'
+                files: [{
+                    expand: true,
+                    cwd: 'build/',
+                    src: [
+                        'js/LMD_fileSystemHelper.js',
+                        'js/formHelper.js',
+                        'js/fhwForms.js',
+                        'js/formValidate.js',
+                        'js/loadContents.js',
+                        'js/LMD_accessControl.js',
+                        'js/deqa.js',
+                        'js/leafletMap.js'
+                    ],
+                    dest: 'build/'
+                }]
             }
         },
-        
-        // !!!!! Task description !!!!!
-        usemin: {
-            html: [
-                'build/php-html/pages/page_home.php',
-                'build/php-html/pages/page_medocs.php',
-                'build/php-html/pages/page_deqa.html',
-                'build/php-html/pages/page_dataportal.php'
-            ]
+
+        // Turn on source mapping for CSS minification
+        cssmin: {
+            options: {
+                sourceMap: true
+            },
+            deqa: {
+                files: [{
+                    expand: true,
+                    cwd: 'build/',
+                    src: [
+                        'css/page_deqa.css',
+                        'css/fhwForms.css'
+                    ],
+                    dest: 'build/'
+                }]
+            }
         },
 
-        // !!!!! Task description !!!!!
+//        // !!!!! Task description !!!!!
+//        filerev: {
+//            main: {
+//                src: 'src/js/concatFiles.min.js'
+////                dest: 'src/js'
+//            }
+//        },
+        
+        // Minify HTML files
         htmlmin: {
             main: {
-                files: {
-                    'build/php-html/pages/page_deqa.html': 'build/php-html/pages/page_deqa.html',
-                    'build/php-html/pages/page_dataportal.php': 'build/php-html/pages/page_dataportal.php'
-                },
-                options: {
-                    collapseBooleanAttributes: true,
-                    collapseWhitespace: true,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeRedundantAttributes: true
-                }
+                files: [{
+                    expand: true,
+                    cwd: 'build/',
+                    src: [
+                        'forms/*.html',
+                        'forms/old/*.html',
+                        '!forms/fac_msh01_mesh.html', // !!!!! getting an error; debug !!!!!
+                        'fragments_portal/*.html',
+                        'pages/*.php',
+                        'pages/*.html'
+                    ],
+                    dest: 'build/'
+                }]
+            },
+            options: {
+                collapseBooleanAttributes: true,
+                collapseWhitespace: true,
+                minifyCSS: true,
+                removeAttributeQuotes: true,
+                removeComments: true,
+                removeRedundantAttributes: true
             }
         },
 
-        // !!!!! Task description !!!!!
+        // Dynamically create the AppCache manifest file
         manifest: {
             main: {
                 src: [
-                    "src/js/*.js",
-                    "src/forms",
-                    "src/php",
-                    "src/images/*.png"
+                    'lib/bootstrap-3.2.0-dist/css/*.css',
+                    'lib/bootstrap-3.2.0-dist/js/*.js',
+                    'lib/jquery-ui-1.11.1/*.{css,js}',
+                    'lib/jquery-ui-1.11.1/images/ui-icons*.png',
+                    'lib/jquery.min.js',
+                    'build/images/*.{gif,png}',
+                    'build/css/fhwForms/css',
+                    'build/css/page_deqa.css',
+                    'build/forms/*.html',
+                    'build/forms/old/*.html',
+                    'build/pages/header_bootstrap.html',
+                    'build/pages/page_deqa.html',
+                    'build/pages/tool_viewLocalRecords.html',
+                    'build/js/LMD_fileSystemHelper.js',
+                    'build/js/LMD_accessControl.js',
+                    'build/js/deqa.js',
+                    'build/js/fhwForms.js',
+                    'build/js/formHelper.js',
+                    'build/js/formValidate.js',
+                    'build/js/loadContents.js'
                 ],
-                dest: 'src/lastmiledata_generated.appcache',
+                dest: 'build/lastmiledata.appcache',
                 options: {
-//                    basePath: 'src',
                     verbose: false
                 }
             }
         }
         
-//        'string-replace': {
-//            dist: {
-//                files: {
-//                    'src/js/test_index2.html': 'src/js/test_index.html'
-//                },
-//                options: {
-//                    replacements: [
-//                        {
-//                            pattern: '!!!!! old !!!!!',
-//                            replacement: '????? new ?????'
-//                        }
-//                    ]
-//                }
-//            }
-//        },
-
-
-//        
-////        // Concatenate javascript files
-////        concat: {
-////            dist: {
-////                src: ['src/js/LMD_accessControl.js','src/js/LMD_dataPortal.js'],
-//////                dest: 'src/js/concatFiles.js'
-////                dest: '.tmp/concatFiles.js'
-////            }
-////        },
-////        // Minify javascript files
-////        uglify: {
-////            options: {
-////                sourceMap: true,
-////                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-////            },
-////            build: {
-//////                src: ['src/js/concatFiles.js'],
-////                src: ['.tmp/concatFiles.js'],
-////                dest: 'src/js/concatFiles.min.js'
-////            }
-////        }
-////        cssmin: {
-////            options: {
-////                sourceMap: true
-////            },
-////            target: {
-////                files: [{
-////                    expand: true,
-//////                    cwd: '/',
-////                    src: ['*.css', '!*.min.css'],
-////                    dest: ['build/css'],
-////                    ext: '.min.css'
-////                }]
-////            }
-////        }
-////        
-////        
-////        
-////        watch: {
-////            options: {
-////                livereload: true
-////            }
-////            scripts: {
-////                files: ['/*.js'],
-////                tasks: ['concat', 'uglify'],
-////                options: {
-////                    spawn: false,
-////                }
-////            }
-////        }
     });
-//
-////    grunt.loadNpmTasks('grunt-contrib-useminPrepare');
-//
-
-
 
     // Automatically run "grunt.loadNpmTasks" for all plugins
     require('load-grunt-tasks')(grunt);
@@ -190,13 +180,14 @@ module.exports = function(grunt) {
         'clean:initial',
         'copy:initial',
         'useminPrepare',
-        'concat:generated',
-        'cssmin:generated',
-        'uglify:generated',
-////        'filerev',
+        'concat',
+        'cssmin',
+        'uglify',
+//        'filerev',
         'usemin',
-        'htmlmin'
-//        'manifest'
+        'htmlmin',
+        'clean:second',
+        'manifest'
     ]);
 
 };
