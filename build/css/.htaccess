@@ -1,0 +1,8 @@
+
+# Last Mile Data - CSS
+
+# Cache "forever"; Grunt will change revision number of CSS resources when they change
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 10 years"
+</IfModule>

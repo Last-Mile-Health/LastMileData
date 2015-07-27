@@ -1,4 +1,17 @@
-<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><title>View local records</title><style>#myTable{border-collapse:collapse}#myTable th{border:1px solid #000;padding:5px}#myTable td{border:1px solid #000;padding:5px}</style><script src=../../../lib/jquery.min.js></script><script src=../../js/LMD_fileSystemHelper.js></script><script>$(document).ready(function(){
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset=UTF-8>
+        <meta name=viewport content="width=device-width">
+        
+        <title>View local records</title>
+        
+        <style>#myTable{border-collapse:collapse}#myTable th{border:1px solid #000;padding:5px}#myTable td{border:1px solid #000;padding:5px}</style><script src=../../lib/jquery.min.js></script>
+        <script src=../js/LMD_fileSystemHelper.1e003edd.js></script>
+        <script>
+            
+        $(document).ready(function(){
             
             // Read data.lmd into object; runn callback
             LMD_fileSystemHelper.readFileIntoObject('data.lmd', writeRows);
@@ -33,4 +46,21 @@
                     $('#myTable').append(row);
 //                }
             }
-        };</script></head><body><table id=myTable><tr><th>Table name</th><th>DE Date</th><th>DE Initials</th><th>QA Date</th><th>QA Initials</th></tr></table><br><a href=../pages/page_deqa.html>Return to DEQA page.</a></body></html>
+        };
+        
+        </script>
+    </head>
+    <body>
+        <table id=myTable>
+            <tr>
+                <th>Table name</th>
+                <th>DE Date</th>
+                <th>DE Initials</th>
+                <th>QA Date</th>
+                <th>QA Initials</th>
+            </tr>
+        </table>
+        <br>
+        <a href=page_deqa.html>Return to DEQA page.</a>
+    </body>
+</html>

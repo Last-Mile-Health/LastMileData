@@ -1,118 +1,99 @@
 module.exports = function(grunt) {
-
-    // Clear and repopulate "build" directory, based on "src" directory
-
-    // !!!!! Add filerev and manifest !!!!!
-
+    
     grunt.initConfig({
+        
         pkg: grunt.file.readJSON('package.json'),
         
+        // Clear all files/subdirectories from "build" directory
         clean: {
-            // Clear all files from "build" directory
-            initial: [
-                'build/**/*'
-            ],
-            // Clear js/css files that have been concatenated/minified
-            second: [
-                'build/js/page_dataportal.js',
-                'build/js/page_medocs.js',
-                'build/js/LMD_dataPortal.js',
-                'build/js/LMD_dimpleHelper.js',
-                'build/css/page_dataportal.css',
-                'build/css/page_medocs.css'
+            main: [
+                'build/**/*',
+                'build/**/.htaccess'
             ]
         },
         
         // Copy all files from "src" --> "build"
         copy: {
-            initial: {
+            main: {
                 files: [
                     {
                         expand:true,
                         cwd:'src',
-                        src:['**/*','.htaccess'],
+                        src:['**/*','**/.htaccess'],
                         dest:'build' }
                 ]
             }
         },
         
-        // Concatenate/minify JS and CSS in files; replace references (preparation)
-        useminPrepare: {
-            html: [
-                'build/pages/page_home.php',
-//                'build/pages/page_medocs.php',
-//                'build/pages/page_dataportal.php'
-            ],
-            options: {
-                root: '/LastMileData/',
-//                dest: '/LastMileData/'
-//                root: '../',
-                dest: '../'
-            }
-        },
-        
-        // Concatenate/minify JS and CSS in files; replace references (execution)
-        usemin: {
-            html: [
-                'build/pages/page_home.php',
-//                'build/pages/page_medocs.php',
-//                'build/pages/page_dataportal.php'
-            ]
-        },
-
-        // Turn on source mapping and apply banner for JS minification
+        // Minify JS files (turn on source mapping and apply timestamp banner)
         uglify: {
             options: {
                 sourceMap: true,
-                banner: '/*! <%= pkg.name %> build: <%= grunt.template.today("yyyy-mm-dd hh:dd:ss") %> */\n'
+                banner: '/*! LAST MILE DATA build: <%= grunt.template.today("yyyy-mm-dd hh:dd:ss") %> */\n'
             },
             main: {
                 files: [{
                     expand: true,
                     cwd: 'build/',
-                    src: [
-                        'js/LMD_fileSystemHelper.js',
-                        'js/formHelper.js',
-                        'js/fhwForms.js',
-                        'js/formValidate.js',
-                        'js/loadContents.js',
-                        'js/LMD_accessControl.js',
-                        'js/deqa.js',
-                        'js/leafletMap.js'
-                    ],
+                    src: ['js/*.js'],
                     dest: 'build/'
                 }]
             }
         },
 
-        // Turn on source mapping for CSS minification
+        // Minify CSS files (turn on source mapping)
         cssmin: {
             options: {
                 sourceMap: true
             },
-            deqa: {
+            main: {
                 files: [{
                     expand: true,
                     cwd: 'build/',
-                    src: [
-                        'css/page_deqa.css',
-                        'css/fhwForms.css'
-                    ],
+                    src: ['css/*.css'],
                     dest: 'build/'
                 }]
             }
         },
 
-//        // !!!!! Task description !!!!!
-//        filerev: {
-//            main: {
-//                src: 'src/js/concatFiles.min.js'
-////                dest: 'src/js'
-//            }
-//        },
-        
-        // Minify HTML files
+        // Add revision numbers to JS/CSS files; these will automatically change when the file contents change
+        //   e.g. loadContents.js --> loadContents.aj3o48xo.js
+        filerev: {
+            main: {
+                src: [
+                    'build/js/*.js',
+                    'build/css/*.css'
+                ]
+            }
+        },
+
+        // Replace references to the filerev'd JS/CSS files
+        //   e.g. <script src='../js/loadContents.js'> --> <script src='../js/loadContents.aj3o48xo.js'>
+        filerev_replace: {
+            options: {
+                assets_root: 'build/'
+            },
+            main: {
+              src: [
+                  'build/pages/*',
+                  'build/forms/*.html',
+                  'build/forms/old/*.html',
+                  'build/fragments_portal/*'
+              ]
+            }
+        },
+
+        // Minify HTML/PHP files
         htmlmin: {
+            options: {
+                collapseBooleanAttributes: true,
+//                collapseWhitespace: true, // !!!!! this currently breaks PHP !!!!!
+//                preserveLineBreaks: true, // !!!!! this currently breaks PHP !!!!!
+                minifyCSS: true,
+                removeAttributeQuotes: true,
+                removeComments: true,
+                removeRedundantAttributes: true
+            },
             main: {
                 files: [{
                     expand: true,
@@ -120,26 +101,20 @@ module.exports = function(grunt) {
                     src: [
                         'forms/*.html',
                         'forms/old/*.html',
-                        '!forms/fac_msh01_mesh.html', // !!!!! getting an error; debug !!!!!
+                        '!forms/fac_msh01_mesh.html', // !!!!! temporarily excluding because this file causes an error; debug !!!!!
                         'fragments_portal/*.html',
-                        'pages/*.php',
-                        'pages/*.html'
+                        'pages/*.{php,html}'
                     ],
                     dest: 'build/'
                 }]
-            },
-            options: {
-                collapseBooleanAttributes: true,
-                collapseWhitespace: true,
-                minifyCSS: true,
-                removeAttributeQuotes: true,
-                removeComments: true,
-                removeRedundantAttributes: true
             }
         },
 
         // Dynamically create the AppCache manifest file
         manifest: {
+            options: {
+                verbose: false
+            },
             main: {
                 src: [
                     'lib/bootstrap-3.2.0-dist/css/*.css',
@@ -148,28 +123,24 @@ module.exports = function(grunt) {
                     'lib/jquery-ui-1.11.1/images/ui-icons*.png',
                     'lib/jquery.min.js',
                     'build/images/*.{gif,png}',
-                    'build/css/fhwForms/css',
-                    'build/css/page_deqa.css',
+                    'build/css/fhwForms.*.css',
+                    'build/css/page_deqa.*.css',
                     'build/forms/*.html',
                     'build/forms/old/*.html',
                     'build/pages/header_bootstrap.html',
                     'build/pages/page_deqa.html',
                     'build/pages/tool_viewLocalRecords.html',
-                    'build/js/LMD_fileSystemHelper.js',
-                    'build/js/LMD_accessControl.js',
-                    'build/js/deqa.js',
-                    'build/js/fhwForms.js',
-                    'build/js/formHelper.js',
-                    'build/js/formValidate.js',
-                    'build/js/loadContents.js'
+                    'build/js/LMD_fileSystemHelper.*.js',
+                    'build/js/LMD_accessControl.*.js',
+                    'build/js/deqa.*.js',
+                    'build/js/fhwForms.*.js',
+                    'build/js/formHelper.*.js',
+                    'build/js/formValidate.*.js',
+                    'build/js/loadContents.*.js'
                 ],
-                dest: 'build/lastmiledata.appcache',
-                options: {
-                    verbose: false
-                }
+                dest: 'build/lastmiledata.appcache'
             }
         }
-        
     });
 
     // Automatically run "grunt.loadNpmTasks" for all plugins
@@ -177,16 +148,13 @@ module.exports = function(grunt) {
     
     // Register default tasks
     grunt.registerTask('default', [
-        'clean:initial',
-        'copy:initial',
-        'useminPrepare',
-        'concat',
+        'clean',
+        'copy',
+//        'uglify',
         'cssmin',
-        'uglify',
-//        'filerev',
-        'usemin',
+        'filerev',
+        'filerev_replace',
         'htmlmin',
-        'clean:second',
         'manifest'
     ]);
 

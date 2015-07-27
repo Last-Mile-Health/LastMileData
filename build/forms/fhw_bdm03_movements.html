@@ -1,1 +1,410 @@
-<!DOCTYPE html><html><head><title>CHW Form (BDM 03) - Births, Deaths, Movements</title><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=robots content=noindex><link rel=icon type=image/png href=../images/lmd_icon.png><script src=../../lib/jquery.min.js></script><script src=../../lib/jquery-ui-1.11.1/jquery-ui.min.js></script><script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script><script src=../js/LMD_fileSystemHelper.js></script><script src=../js/fhwForms.js></script><script src=../js/formHelper.js></script><script src=../js/formValidate.js></script><link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css type="text/css"><link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css type="text/css"><link rel=stylesheet href=../../lib/jquery-ui-1.11.1/jquery-ui.min.css type="text/css"><link rel=stylesheet type=text/css media=all href=../css/fhwForms.css><style>#sectionA{position:relative;top:-7px}#sectionB{position:relative;top:-14px}#sectionC{position:relative;top:-21px}#meBox{position:relative;top:-28px}@media print{#meBox{position:relative;top:-48px}}.bdmTable{border-collapse:collapse;margin:0;padding:3px}.bdmTable th{border:1px solid #000;padding:3px;text-align:center;font-weight:700}.bdmTable td{border:1px solid #000;padding:0;text-align:center;height:28px}.c1{width:.6in;border:none;margin-right:1px;margin-left:1px}.c2{width:.6in;border:none;margin-right:1px;margin-left:1px}.c3{width:1.35in;border:none;margin-right:1px;margin-left:1px}.c4{width:1.35in;border:none;margin-right:1px;margin-left:1px}.c6{width:1in;border:none;margin-right:1px;margin-left:1px}.c7{width:.8in}.c8{width:1in;font-size:80%}</style></head><body><div id=validationBox></div><div class=page><div class=formHeader><img style=float:left src=../images/logo_liberia.png> <span class=h2>CHW: Births, Deaths, Movements</span> <img style=float:right src=../images/logo_flag.png><div style=clear:both></div></div><hr><div class=thickBox><div><b>Use this form to record every birth, death, and movement in your community. For births and community members moving in, assign a new member ID using "CHW: Member ID Assignment List".</b></div><hr><div class=headField style=width:1.05in>CHW name/ID:</div><div class=headField style=width:1.53in><input class="stored autocomplete" name=chwName data-lmd-valid-required=yes data-lmd-valid-autoc=fhws style=width:1.4in> /</div><div class=headField style=width:1.5in><input class="stored integer" name=chwID data-lmd-valid-required=yes style=width:.7in></div><div class=headField style=width:.4in>Date:</div><div class=headField style=width:1.6in><input class="stored datepicker" name=visitDate data-lmd-valid-required=yes style=width:1.5in></div><div style=clear:both;height:3px></div></div><div id=sectionA><b>A. Births</b><div class=thickBox><table class=bdmTable><tr><th>Community<br>ID</th><th>HH<br>ID</th><th>Member<br>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date of birth<br>(d/m/y)</th></tr><tr><td><input class="stored c2 integer" name=birth_communityID_1></td><td><input class="stored c2 integer" name=birth_householdID_1></td><td><input class="stored c1" name=birth_memberID_1></td><td><input class="stored c3" name=birth_firstName_1></td><td><input class="stored c4" name=birth_lastName_1></td><td class=c7><input type=checkbox class=stored name=birth_gender_1 value=M>M&nbsp; <input type=checkbox class=stored name=birth_gender_1 value=F>F</td><td><input class="stored c6 datepicker" name=birth_dateOfBirth_1></td></tr><tr><td><input class="stored c2 integer" name=birth_communityID_2></td><td><input class="stored c2 integer" name=birth_householdID_2></td><td><input class="stored c1" name=birth_memberID_2></td><td><input class="stored c3" name=birth_firstName_2></td><td><input class="stored c4" name=birth_lastName_2></td><td class=c7><input type=checkbox class=stored name=birth_gender_2 value=M>M&nbsp; <input type=checkbox class=stored name=birth_gender_2 value=F>F</td><td><input class="stored c6 datepicker" name=birth_dateOfBirth_2></td></tr><tr><td><input class="stored c2 integer" name=birth_communityID_3></td><td><input class="stored c2 integer" name=birth_householdID_3></td><td><input class="stored c1" name=birth_memberID_3></td><td><input class="stored c3" name=birth_firstName_3></td><td><input class="stored c4" name=birth_lastName_3></td><td class=c7><input type=checkbox class=stored name=birth_gender_3 value=M>M&nbsp; <input type=checkbox class=stored name=birth_gender_3 value=F>F</td><td><input class="stored c6 datepicker" name=birth_dateOfBirth_3></td></tr><tr><td><input class="stored c2 integer" name=birth_communityID_4></td><td><input class="stored c2 integer" name=birth_householdID_4></td><td><input class="stored c1" name=birth_memberID_4></td><td><input class="stored c3" name=birth_firstName_4></td><td><input class="stored c4" name=birth_lastName_4></td><td class=c7><input type=checkbox class=stored name=birth_gender_4 value=M>M&nbsp; <input type=checkbox class=stored name=birth_gender_4 value=F>F</td><td><input class="stored c6 datepicker" name=birth_dateOfBirth_4></td></tr><tr><td><input class="stored c2 integer" name=birth_communityID_5></td><td><input class="stored c2 integer" name=birth_householdID_5></td><td><input class="stored c1" name=birth_memberID_5></td><td><input class="stored c3" name=birth_firstName_5></td><td><input class="stored c4" name=birth_lastName_5></td><td class=c7><input type=checkbox class=stored name=birth_gender_5 value=M>M&nbsp; <input type=checkbox class=stored name=birth_gender_5 value=F>F</td><td><input class="stored c6 datepicker" name=birth_dateOfBirth_5></td></tr></table></div></div><div id=sectionB><b>B. Deaths</b> &nbsp;&nbsp; (for location, C = community, F = facility, T = in transit)<div class=thickBox><table class=bdmTable><tr><th>Community<br>ID</th><th>Member<br>ID</th><th>First Name</th><th>Last Name</th><th>Date of death<br>(d/m/y)</th><th>Location<br>of death</th></tr><tr><td><input class="stored c2 integer" name=death_communityID_1></td><td><input class="stored c1" name=death_memberID_1></td><td><input class="stored c3" name=death_firstName_1></td><td><input class="stored c4" name=death_lastName_1></td><td><input class="stored c6 datepicker" name=death_dateOfDeath_1></td><td class=c8><input type=checkbox class=stored name=death_deathLocation_1 value=community>C&nbsp; <input type=checkbox class=stored name=death_deathLocation_1 value=facility>F&nbsp; <input type=checkbox class=stored name=death_deathLocation_1 value=transit>T</td></tr><tr><td><input class="stored c2 integer" name=death_communityID_2></td><td><input class="stored c1" name=death_memberID_2></td><td><input class="stored c3" name=death_firstName_2></td><td><input class="stored c4" name=death_lastName_2></td><td><input class="stored c6 datepicker" name=death_dateOfDeath_2></td><td class=c8><input type=checkbox class=stored name=death_deathLocation_2 value=community>C&nbsp; <input type=checkbox class=stored name=death_deathLocation_2 value=facility>F&nbsp; <input type=checkbox class=stored name=death_deathLocation_2 value=transit>T</td></tr><tr><td><input class="stored c2 integer" name=death_communityID_3></td><td><input class="stored c1" name=death_memberID_3></td><td><input class="stored c3" name=death_firstName_3></td><td><input class="stored c4" name=death_lastName_3></td><td><input class="stored c6 datepicker" name=death_dateOfDeath_3></td><td class=c8><input type=checkbox class=stored name=death_deathLocation_3 value=community>C&nbsp; <input type=checkbox class=stored name=death_deathLocation_3 value=facility>F&nbsp; <input type=checkbox class=stored name=death_deathLocation_3 value=transit>T</td></tr><tr><td><input class="stored c2 integer" name=death_communityID_4></td><td><input class="stored c1" name=death_memberID_4></td><td><input class="stored c3" name=death_firstName_4></td><td><input class="stored c4" name=death_lastName_4></td><td><input class="stored c6 datepicker" name=death_dateOfDeath_4></td><td class=c8><input type=checkbox class=stored name=death_deathLocation_4 value=community>C&nbsp; <input type=checkbox class=stored name=death_deathLocation_4 value=facility>F&nbsp; <input type=checkbox class=stored name=death_deathLocation_4 value=transit>T</td></tr><tr><td><input class="stored c2 integer" name=death_communityID_5></td><td><input class="stored c1" name=death_memberID_5></td><td><input class="stored c3" name=death_firstName_5></td><td><input class="stored c4" name=death_lastName_5></td><td><input class="stored c6 datepicker" name=death_dateOfDeath_5></td><td class=c8><input type=checkbox class=stored name=death_deathLocation_5 value=community>C&nbsp; <input type=checkbox class=stored name=death_deathLocation_5 value=facility>F&nbsp; <input type=checkbox class=stored name=death_deathLocation_5 value=transit>T</td></tr></table></div></div><div id=sectionC><b>C. Movements</b><div class=thickBox><table class=bdmTable><tr><th>Community<br>ID</th><th>HH<br>ID</th><th>Member<br>ID</th><th>First Name</th><th>Last Name</th><th class=c5>Gender</th><th>Date of birth<br>(d/m/y)</th><th>Move in/out</th></tr><tr><td><input class="stored c2 integer" name=movement_communityID_1></td><td><input class="stored c2 integer" name=movement_householdID_1></td><td><input class="stored c1" name=movement_memberID_1></td><td><input class="stored c3" name=movement_firstName_1></td><td><input class="stored c4" name=movement_lastName_1></td><td class=c7><input type=checkbox class=stored name=movement_gender_1 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_1 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_1></td><td class=c8><input type=checkbox class=stored name=movement_move_1 value=in>In <input type=checkbox class=stored name=movement_move_1 value=out>Out</td></tr><tr><td><input class="stored c2 integer" name=movement_communityID_2></td><td><input class="stored c2 integer" name=movement_householdID_2></td><td><input class="stored c1" name=movement_memberID_2></td><td><input class="stored c3" name=movement_firstName_2></td><td><input class="stored c4" name=movement_lastName_2></td><td class=c7><input type=checkbox class=stored name=movement_gender_2 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_2 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_2></td><td class=c8><input type=checkbox class=stored name=movement_move_2 value=in>In <input type=checkbox class=stored name=movement_move_2 value=out>Out</td></tr><tr><td><input class="stored c2 integer" name=movement_communityID_3></td><td><input class="stored c2 integer" name=movement_householdID_3></td><td><input class="stored c1" name=movement_memberID_3></td><td><input class="stored c3" name=movement_firstName_3></td><td><input class="stored c4" name=movement_lastName_3></td><td class=c7><input type=checkbox class=stored name=movement_gender_3 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_3 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_3></td><td class=c8><input type=checkbox class=stored name=movement_move_3 value=in>In <input type=checkbox class=stored name=movement_move_3 value=out>Out</td></tr><tr><td><input class="stored c2 integer" name=movement_communityID_4></td><td><input class="stored c2 integer" name=movement_householdID_4></td><td><input class="stored c1" name=movement_memberID_4></td><td><input class="stored c3" name=movement_firstName_4></td><td><input class="stored c4" name=movement_lastName_4></td><td class=c7><input type=checkbox class=stored name=movement_gender_4 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_4 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_4></td><td class=c8><input type=checkbox class=stored name=movement_move_4 value=in>In <input type=checkbox class=stored name=movement_move_4 value=out>Out</td></tr><tr><td><input class="stored c2 integer" name=movement_communityID_5></td><td><input class="stored c2 integer" name=movement_householdID_5></td><td><input class="stored c1" name=movement_memberID_5></td><td><input class="stored c3" name=movement_firstName_5></td><td><input class="stored c4" name=movement_lastName_5></td><td class=c7><input type=checkbox class=stored name=movement_gender_5 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_5 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_5></td><td class=c8><input type=checkbox class=stored name=movement_move_5 value=in>In <input type=checkbox class=stored name=movement_move_5 value=out>Out</td></tr><tr><td><input class="stored c2 integer" name=movement_communityID_6></td><td><input class="stored c2 integer" name=movement_householdID_6></td><td><input class="stored c1" name=movement_memberID_6></td><td><input class="stored c3" name=movement_firstName_6></td><td><input class="stored c4" name=movement_lastName_6></td><td class=c7><input type=checkbox class=stored name=movement_gender_6 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_6 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_6></td><td class=c8><input type=checkbox class=stored name=movement_move_6 value=in>In <input type=checkbox class=stored name=movement_move_6 value=out>Out</td></tr><tr><td><input class="stored c2 integer" name=movement_communityID_7></td><td><input class="stored c2 integer" name=movement_householdID_7></td><td><input class="stored c1" name=movement_memberID_7></td><td><input class="stored c3" name=movement_firstName_7></td><td><input class="stored c4" name=movement_lastName_7></td><td class=c7><input type=checkbox class=stored name=movement_gender_7 value=M>M&nbsp; <input type=checkbox class=stored name=movement_gender_7 value=F>F</td><td><input class="stored c6 datepicker" name=movement_dateOfBirth_7></td><td class=c8><input type=checkbox class=stored name=movement_move_7 value=in>In <input type=checkbox class=stored name=movement_move_7 value=out>Out</td></tr></table></div></div><div id=meBox><span class=blackBox>M&E</span> <span class=blackBox>BDM.03</span> &nbsp;&nbsp;&nbsp; DE Initials: <input class=stored name=meta_DE_init> DE Date: <input class=stored name=meta_DE_date> QA Initials: <input class=stored name=meta_QA_init> QA Date: <input class=stored name=meta_QA_date> <input name=meta_formVersion class=stored type=hidden value=3></div></div><div class=formButtons><button id=lmd_submit class="btn btn-success">Submit form</button>&nbsp; <button id=lmd_next class="btn btn-success">Next form</button>&nbsp; <button id=lmd_cancel class="btn btn-success">Cancel</button></div><input type=hidden class=stored name=database value=lastmile_chwdb> <input type=hidden class=stored name=table value=staging_birthsdeathsmovementsstep1></body></html>
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHW Form (BDM 03) - Births, Deaths, Movements</title>
+        <meta charset=UTF-8>
+        <meta name=viewport content="width=device-width">
+        <meta name=robots content=noindex>
+        <link rel=icon type=image/png href=../images/lmd_icon.png>
+        <script src=../../lib/jquery.min.js></script>
+        <script src=../../lib/jquery-ui-1.11.1/jquery-ui.min.js></script>
+        <script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script>
+        <script src=../js/LMD_fileSystemHelper.1e003edd.js></script>
+        <script src=../js/fhwForms.41514e7a.js></script>
+        <script src=../js/formHelper.bd9bbad2.js></script>
+        <script src=../js/formValidate.1e7ecd6d.js></script>
+        <link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css type="text/css">
+        <link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css type="text/css">
+        <link rel=stylesheet href=../../lib/jquery-ui-1.11.1/jquery-ui.min.css type="text/css">
+        <link rel=stylesheet type=text/css media=all href=../css/fhwForms.39fc69d7.css> 
+        
+        <style>#sectionA{position:relative;top:-7px}#sectionB{position:relative;top:-14px}#sectionC{position:relative;top:-21px}#meBox{position:relative;top:-28px}@media print{#meBox{position:relative;top:-48px}}.bdmTable{border-collapse:collapse;margin:0;padding:3px}.bdmTable th{border:1px solid #000;padding:3px;text-align:center;font-weight:700}.bdmTable td{border:1px solid #000;padding:0;text-align:center;height:28px}.c1{width:.6in;border:none;margin-right:1px;margin-left:1px}.c2{width:.6in;border:none;margin-right:1px;margin-left:1px}.c3{width:1.35in;border:none;margin-right:1px;margin-left:1px}.c4{width:1.35in;border:none;margin-right:1px;margin-left:1px}.c6{width:1in;border:none;margin-right:1px;margin-left:1px}.c7{width:.8in}.c8{width:1in;font-size:80%}</style></head><body>
+        
+        
+        <div id=validationBox></div>
+        
+        
+        
+        
+        
+        <div class=page>
+            
+            
+            
+            
+            <div class=formHeader>
+                <img style=float:left src=../images/logo_liberia.png>
+                <span class=h2>CHW: Births, Deaths, Movements</span>
+                <img style=float:right src=../images/logo_flag.png>
+                <div style=clear:both></div>
+            </div>
+            <hr>
+            
+            <div class=thickBox>
+                
+                <div>
+                    <b>Use this form to record every birth, death, and movement in your community. For births and community members moving in, assign a new member ID using "CHW: Member ID Assignment List".</b>
+                </div>
+                
+                <hr>
+                
+                <div class=headField style=width:1.05in>CHW name/ID:</div>
+                <div class=headField style=width:1.53in><input class="stored autocomplete" name=chwName data-lmd-valid-required=yes data-lmd-valid-autoc=fhws style=width:1.4in> / </div>
+                <div class=headField style=width:1.5in><input class="stored integer" name=chwID data-lmd-valid-required=yes style=width:.7in></div>
+                <div class=headField style=width:.4in>Date:</div>
+                <div class=headField style=width:1.6in><input class="stored datepicker" name=visitDate data-lmd-valid-required=yes style=width:1.5in></div>
+                <div style=clear:both;height:3px></div>
+                
+            </div>
+            
+            
+            
+            
+            
+            <div id=sectionA>
+                
+                <b>A. Births</b>
+                <div class=thickBox>
+                    
+                    <table class=bdmTable>
+                        <tr>
+                            <th>Community<br>ID</th>
+                            <th>HH<br>ID</th>
+                            <th>Member<br>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Date of birth<br>(d/m/y)</th>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=birth_communityID_1></td>
+                            <td><input class="stored c2 integer" name=birth_householdID_1></td>
+                            <td><input class="stored c1" name=birth_memberID_1></td>
+                            <td><input class="stored c3" name=birth_firstName_1></td>
+                            <td><input class="stored c4" name=birth_lastName_1></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=birth_gender_1 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=birth_gender_1 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=birth_dateOfBirth_1></td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=birth_communityID_2></td>
+                            <td><input class="stored c2 integer" name=birth_householdID_2></td>
+                            <td><input class="stored c1" name=birth_memberID_2></td>
+                            <td><input class="stored c3" name=birth_firstName_2></td>
+                            <td><input class="stored c4" name=birth_lastName_2></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=birth_gender_2 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=birth_gender_2 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=birth_dateOfBirth_2></td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=birth_communityID_3></td>
+                            <td><input class="stored c2 integer" name=birth_householdID_3></td>
+                            <td><input class="stored c1" name=birth_memberID_3></td>
+                            <td><input class="stored c3" name=birth_firstName_3></td>
+                            <td><input class="stored c4" name=birth_lastName_3></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=birth_gender_3 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=birth_gender_3 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=birth_dateOfBirth_3></td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=birth_communityID_4></td>
+                            <td><input class="stored c2 integer" name=birth_householdID_4></td>
+                            <td><input class="stored c1" name=birth_memberID_4></td>
+                            <td><input class="stored c3" name=birth_firstName_4></td>
+                            <td><input class="stored c4" name=birth_lastName_4></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=birth_gender_4 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=birth_gender_4 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=birth_dateOfBirth_4></td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=birth_communityID_5></td>
+                            <td><input class="stored c2 integer" name=birth_householdID_5></td>
+                            <td><input class="stored c1" name=birth_memberID_5></td>
+                            <td><input class="stored c3" name=birth_firstName_5></td>
+                            <td><input class="stored c4" name=birth_lastName_5></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=birth_gender_5 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=birth_gender_5 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=birth_dateOfBirth_5></td>
+                        </tr>
+                    </table>
+                    
+                </div>
+
+            </div>
+            
+            
+            
+            
+            
+            <div id=sectionB>
+                
+                <b>B. Deaths</b> &nbsp;&nbsp; (for location, C = community, F = facility, T = in transit)
+                <div class=thickBox>
+                    
+                    <table class=bdmTable>
+                        <tr>
+                            <th>Community<br>ID</th>
+                            <th>Member<br>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date of death<br>(d/m/y)</th>
+                            <th>Location<br>of death</th>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=death_communityID_1></td>
+                            <td><input class="stored c1" name=death_memberID_1></td>
+                            <td><input class="stored c3" name=death_firstName_1></td>
+                            <td><input class="stored c4" name=death_lastName_1></td>                                               
+                            <td><input class="stored c6 datepicker" name=death_dateOfDeath_1></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=death_deathLocation_1 value=community>C&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_1 value=facility>F&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_1 value=transit>T
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=death_communityID_2></td>
+                            <td><input class="stored c1" name=death_memberID_2></td>
+                            <td><input class="stored c3" name=death_firstName_2></td>
+                            <td><input class="stored c4" name=death_lastName_2></td>
+                            <td><input class="stored c6 datepicker" name=death_dateOfDeath_2></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=death_deathLocation_2 value=community>C&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_2 value=facility>F&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_2 value=transit>T
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=death_communityID_3></td>
+                            <td><input class="stored c1" name=death_memberID_3></td>
+                            <td><input class="stored c3" name=death_firstName_3></td>
+                            <td><input class="stored c4" name=death_lastName_3></td>
+                            <td><input class="stored c6 datepicker" name=death_dateOfDeath_3></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=death_deathLocation_3 value=community>C&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_3 value=facility>F&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_3 value=transit>T
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=death_communityID_4></td>
+                            <td><input class="stored c1" name=death_memberID_4></td>
+                            <td><input class="stored c3" name=death_firstName_4></td>
+                            <td><input class="stored c4" name=death_lastName_4></td>
+                            <td><input class="stored c6 datepicker" name=death_dateOfDeath_4></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=death_deathLocation_4 value=community>C&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_4 value=facility>F&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_4 value=transit>T
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=death_communityID_5></td>
+                            <td><input class="stored c1" name=death_memberID_5></td>
+                            <td><input class="stored c3" name=death_firstName_5></td>
+                            <td><input class="stored c4" name=death_lastName_5></td>
+                            <td><input class="stored c6 datepicker" name=death_dateOfDeath_5></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=death_deathLocation_5 value=community>C&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_5 value=facility>F&nbsp;
+                                <input type=checkbox class=stored name=death_deathLocation_5 value=transit>T
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+
+            </div>
+            
+            
+            
+            
+            
+            <div id=sectionC>
+                
+                <b>C. Movements</b>
+                <div class=thickBox>
+                    
+                    <table class=bdmTable>
+                        <tr>
+                            <th>Community<br>ID</th>
+                            <th>HH<br>ID</th>
+                            <th>Member<br>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th class=c5>Gender</th>
+                            <th>Date of birth<br>(d/m/y)</th>
+                            <th>Move in/out</th>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_1></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_1></td>
+                            <td><input class="stored c1" name=movement_memberID_1></td>
+                            <td><input class="stored c3" name=movement_firstName_1></td>
+                            <td><input class="stored c4" name=movement_lastName_1></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_1 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_1 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_1></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_1 value=in>In
+                                <input type=checkbox class=stored name=movement_move_1 value=out>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_2></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_2></td>
+                            <td><input class="stored c1" name=movement_memberID_2></td>
+                            <td><input class="stored c3" name=movement_firstName_2></td>
+                            <td><input class="stored c4" name=movement_lastName_2></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_2 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_2 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_2></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_2 value=in>In
+                                <input type=checkbox class=stored name=movement_move_2 value=out>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_3></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_3></td>
+                            <td><input class="stored c1" name=movement_memberID_3></td>
+                            <td><input class="stored c3" name=movement_firstName_3></td>
+                            <td><input class="stored c4" name=movement_lastName_3></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_3 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_3 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_3></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_3 value=in>In
+                                <input type=checkbox class=stored name=movement_move_3 value=out>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_4></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_4></td>
+                            <td><input class="stored c1" name=movement_memberID_4></td>
+                            <td><input class="stored c3" name=movement_firstName_4></td>
+                            <td><input class="stored c4" name=movement_lastName_4></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_4 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_4 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_4></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_4 value=in>In
+                                <input type=checkbox class=stored name=movement_move_4 value=out>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_5></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_5></td>
+                            <td><input class="stored c1" name=movement_memberID_5></td>
+                            <td><input class="stored c3" name=movement_firstName_5></td>
+                            <td><input class="stored c4" name=movement_lastName_5></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_5 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_5 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_5></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_5 value=in>In
+                                <input type=checkbox class=stored name=movement_move_5 value=out>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_6></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_6></td>
+                            <td><input class="stored c1" name=movement_memberID_6></td>
+                            <td><input class="stored c3" name=movement_firstName_6></td>
+                            <td><input class="stored c4" name=movement_lastName_6></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_6 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_6 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_6></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_6 value=in>In
+                                <input type=checkbox class=stored name=movement_move_6 value=out>Out
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input class="stored c2 integer" name=movement_communityID_7></td>
+                            <td><input class="stored c2 integer" name=movement_householdID_7></td>
+                            <td><input class="stored c1" name=movement_memberID_7></td>
+                            <td><input class="stored c3" name=movement_firstName_7></td>
+                            <td><input class="stored c4" name=movement_lastName_7></td>
+                            <td class=c7>
+                                <input type=checkbox class=stored name=movement_gender_7 value=M>M&nbsp;
+                                <input type=checkbox class=stored name=movement_gender_7 value=F>F
+                            </td>
+                            <td><input class="stored c6 datepicker" name=movement_dateOfBirth_7></td>
+                            <td class=c8>
+                                <input type=checkbox class=stored name=movement_move_7 value=in>In
+                                <input type=checkbox class=stored name=movement_move_7 value=out>Out
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+
+            </div>
+            
+            
+            
+            
+            
+            <div id=meBox>
+                <span class=blackBox>M&E</span>
+                <span class=blackBox>BDM.03</span>
+                &nbsp;&nbsp;&nbsp;                
+                DE Initials: <input class=stored name=meta_DE_init>
+                DE Date: <input class=stored name=meta_DE_date>
+                QA Initials: <input class=stored name=meta_QA_init>
+                QA Date: <input class=stored name=meta_QA_date>
+                <input name=meta_formVersion class=stored type=hidden value=3>
+            </div>
+            
+            
+            
+            
+        </div>
+        
+        
+        
+        
+        
+        <div class=formButtons>
+            <button id=lmd_submit class="btn btn-success">Submit form</button>&nbsp;
+            <button id=lmd_next class="btn btn-success">Next form</button>&nbsp;
+            <button id=lmd_cancel class="btn btn-success">Cancel</button>
+        </div>
+        
+        
+        
+        
+        
+        <input type=hidden class=stored name=database value=lastmile_chwdb>
+        <input type=hidden class=stored name=table value=staging_birthsdeathsmovementsstep1>
+        
+        
+    </body>
+    
+</html>

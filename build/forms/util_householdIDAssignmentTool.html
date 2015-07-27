@@ -1,4 +1,26 @@
-<!DOCTYPE html><html><head><title>CHW Tool (HID) - Household ID Assignment Tool</title><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=robots content=noindex><link rel=icon type=image/png href=../images/lmd_icon.png><script src=../../lib/jquery.min.js></script><script src=../../lib/jquery-ui-1.11.1/jquery-ui.min.js></script><script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script><script src=../js/fhwForms.js></script><script src=../js/formHelper.js></script><link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css type="text/css"><link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css type="text/css"><link rel=stylesheet href=../../lib/jquery-ui-1.11.1/jquery-ui.min.css type="text/css"><link rel=stylesheet type=text/css media=all href=../css/fhwForms.css><script>$(document).ready(function(){
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHW Tool (HID) - Household ID Assignment Tool</title>
+        <meta charset=UTF-8>
+        <meta name=viewport content="width=device-width">
+        <meta name=robots content=noindex>
+        <link rel=icon type=image/png href=../images/lmd_icon.png>
+        <script src=../../lib/jquery.min.js></script>
+        <script src=../../lib/jquery-ui-1.11.1/jquery-ui.min.js></script>
+        <script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script>
+        <script src=../js/fhwForms.41514e7a.js></script>
+        <script src=../js/formHelper.bd9bbad2.js></script>
+        <link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css type="text/css">
+        <link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css type="text/css">
+        <link rel=stylesheet href=../../lib/jquery-ui-1.11.1/jquery-ui.min.css type="text/css">
+        <link rel=stylesheet type=text/css media=all href=../css/fhwForms.39fc69d7.css> 
+        
+        <script>
+            $(document).ready(function(){
                 
                 for(var i=0; i<10; i++) {
                     $('#listBody').append('<div class="memID_outer">');
@@ -27,4 +49,72 @@
 
                 });
 
-            });</script><style>.memID_outer{float:left;width:69px}.memID_inner{text-align:center;margin-top:3px;margin-bottom:3px}.dataManager{background-color:#ff0;padding:5px;margin-bottom:10px}@media print{.dataManager{display:none}}#listBody{position:relative;top:-10px}</style></head><body><div class=page><div class=formHeader><img style=float:left src=../images/logo_liberia.png> <span class=h2>CHW: Household ID Assignment Tool</span> <img style=float:right src=../images/logo_flag.png><div style=clear:both></div></div><hr><br><div class=dataManager><div style=margin:5px><b>Database manager instructions: fill out the five boxes below (Village ID/name, CHW ID/name, first household ID). Then, click the "Generate List" button to update the list. Hit CTRL+P to print.</b></div><div style=text-align:center>First HH ID: <input style=text-align:center id=memberID> <button id=generateMemIDs>Generate List</button></div></div><div class=thickBox><div style=float:left;width:120px;margin:2px;margin-left:20px>Village ID:</div><div style=float:left;width:200px;margin:2px><input style=text-align:center id=villageID></div><div style=float:left;width:120px;margin:2px>CHW ID:</div><div style=float:left;width:200px;margin:2px><input style=text-align:center></div><div style=clear:both></div><div style=float:left;width:120px;margin:2px;margin-left:20px>Village Name:</div><div style=float:left;width:200px;margin:2px><input style=text-align:center></div><div style=float:left;width:120px;margin:2px>CHW Name:</div><div style=float:left;width:200px;margin:2px><input style=text-align:center></div><div style=clear:both></div><hr><div><b>Instructions: Use this list to assign HH IDs to households. New HH IDs should be assigned:<br>(1) during household registration, and (2) to anyone who builds a new household within the community. Each time you assign a HH ID, use a pen to cross it off this list.</b></div></div><div class=thickBox id=listBody></div></div><div class=formButtons><button id=lmd_cancel class="btn btn-success">Done</button></div></body></html>
+            });
+        </script>
+        
+        <style>.memID_outer{float:left;width:69px}.memID_inner{text-align:center;margin-top:3px;margin-bottom:3px}.dataManager{background-color:#ff0;padding:5px;margin-bottom:10px}@media print{.dataManager{display:none}}#listBody{position:relative;top:-10px}</style></head><body>
+        
+        
+        <div class=page>
+            
+            
+            
+            
+            <div class=formHeader>
+                <img style=float:left src=../images/logo_liberia.png>
+                <span class=h2>CHW: Household ID Assignment Tool</span>
+                <img style=float:right src=../images/logo_flag.png>
+                <div style=clear:both></div>
+            </div>
+            <hr><br>
+            
+            <div class=dataManager>
+                <div style=margin:5px>
+                    <b>Database manager instructions: fill out the five boxes below (Village ID/name, CHW ID/name, first household ID). Then, click the "Generate List" button to update the list. Hit CTRL+P to print.</b>
+                </div>
+                <div style=text-align:center>
+                    First HH ID: <input style=text-align:center id=memberID>
+                    <button id=generateMemIDs>Generate List</button>
+                </div>
+            </div>
+            
+            <div class=thickBox>
+                <div style=float:left;width:120px;margin:2px;margin-left:20px>Village ID:</div>
+                <div style=float:left;width:200px;margin:2px><input style=text-align:center id=villageID></div>
+                <div style=float:left;width:120px;margin:2px>CHW ID:</div>
+                <div style=float:left;width:200px;margin:2px><input style=text-align:center></div>
+                <div style=clear:both></div>
+                <div style=float:left;width:120px;margin:2px;margin-left:20px>Village Name:</div>
+                <div style=float:left;width:200px;margin:2px><input style=text-align:center></div>
+                <div style=float:left;width:120px;margin:2px>CHW Name:</div>
+                <div style=float:left;width:200px;margin:2px><input style=text-align:center></div>
+                <div style=clear:both></div>
+                <hr>
+                <div>
+                    <b>Instructions: Use this list to assign HH IDs to households. New HH IDs should be assigned:<br>(1) during household registration, and (2) to anyone who builds a new household within the community. Each time you assign a HH ID, use a pen to cross it off this list.</b>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class=thickBox id=listBody></div>
+            
+            
+            
+            
+        </div>
+        
+        
+        
+        
+        
+        <div class=formButtons>
+            <button id=lmd_cancel class="btn btn-success">Done</button>
+        </div>
+        
+        
+    </body>
+    
+</html>

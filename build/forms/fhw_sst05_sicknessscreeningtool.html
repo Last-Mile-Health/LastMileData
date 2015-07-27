@@ -1,1 +1,363 @@
-<!DOCTYPE html><html><head><title>FHW Form (SST 05) - Sickness Screening Tool</title><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=robots content=noindex><link rel=icon type=image/png href=../images/lmd_icon.png><script src=../../lib/jquery.min.js></script><script src=../../lib/jquery-ui-1.11.1/jquery-ui.min.js></script><script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script><script src=../js/LMD_fileSystemHelper.js></script><script src=../js/fhwForms.js></script><script src=../js/formHelper.js></script><script src=../js/formValidate.js></script><link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css type="text/css"><link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css type="text/css"><link rel=stylesheet href=../../lib/jquery-ui-1.11.1/jquery-ui.min.css type="text/css"><link rel=stylesheet type=text/css media=all href=../css/fhwForms.css><style>.contactTable td{border:1px solid #000;padding:3px;font-size:12px;overflow:hidden}.contactTable .NB{border:none}.contactTable .C1{width:540px;max-width:540px}.contactTable .C2{width:80px;max-width:80px;text-align:center}.contactTable .C3{width:80px;max-width:80px;text-align:center}.symptomTable{padding:3px}.symptomTable td{padding-left:10px}.L4{width:3.9in;padding-right:5px}.C4{width:1.3in}.R4{width:2in}.C5{width:1.7in}.C6{width:.9in}.C7{width:.9in}.blackAction{font-weight:700;color:#fff!important;background-color:#2f2f2f!important;-webkit-print-color-adjust:exact}</style></head><body><div id=validationBox></div><div class=deBox><div class=headField style=width:1.1in>FHW Name/ID:</div><div class=headField style=width:1.37in><input class="stored autocomplete" name=fhwName data-lmd-valid-required=yes data-lmd-valid-autoc=fhws style=width:120px> /</div><div class=headField style=width:1.12in><input class="stored integer" name=fhwID data-lmd-valid-required=yes style=width:60px></div><div class=headField style=width:1in>Visit date:</div><div class=headField style=width:2.5in><input class="stored datepicker" name=visitDate data-lmd-valid-required=yes> (d/m/y)</div><div style=clear:both;height:3px></div><div class=headField style=width:1.1in>Patient name:</div><div class=headField style=width:2.49in><input class=stored name=memberName data-lmd-valid-required=yes style=width:192px></div><div class=headField style=width:1in>Member ID:</div><div class=headField style=width:2.5in><input class=stored name=memberID data-lmd-valid-required=yes></div></div><div class=page><div class=formHeader><img style=float:left src=../images/logo_LMH.png> <span class=h2>FHW: Sickness Screening Tool</span> <img style=float:right src=../images/logo_TH.png><div style=clear:both></div></div><hr><div id=sectionA><b>A. Contact assessment</b><div class=thickBox><div class="inner_L L4">1. In the last three weeks, have you touched the body, touched body fluids, or lived in the same house with someone who got very sick or died?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=A1_contact value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=A1_contact value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>Patient has contact risk. Skip to box B</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">2. In the last three weeks, have you attended a burial or funeral, and did you participate in ceremony where you had contact with body or body fluids?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=A2_contact value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=A2_contact value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>Patient has contact risk. Skip to box B</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">3. In the last three weeks, have you cared for anyone who was very ill - nausea, vomiting, bleeding?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=A3_contact value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=A3_contact value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>Patient has contact risk. Skip to box B</div><div class=caOption>Patient is not contact. Skip to box C</div></div><div style=clear:both></div></div></div><div id=sectionB><b>B. Patient has contact risk</b><div class=thickBox><div class="inner_L L4">4. Do you have fever or have you had fever in the last 3 weeks?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=B4_fever value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=B4_fever value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>PROBABLE CASE. Skip to box D</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">5. Have you had any of these symptoms in the last 3 weeks?<br><div style="margin-left:5px;border:1px solid #000;padding-top:3px;width:345px"><table class=symptomTable><tr><td><div class=checkOption><input type=checkbox class=stored name=B5_abdominalPain_yes>Abdominal pain</div></td><td><div class=checkOption><input type=checkbox class=stored name=B5_hiccoughs_yes>Hiccoughs</div></td><td><div class=checkOption><input type=checkbox class=stored name=B5_diarrhea_yes>Diarrhea</div></td></tr><tr><td><div class=checkOption><input type=checkbox class=stored name=B5_difficultyBreathing_yes>Difficulty breathing</div></td><td><div class=checkOption><input type=checkbox class=stored name=B5_headache_yes>Headache</div></td><td><div class=checkOption><input type=checkbox class=stored name=B5_nausea_yes>Nausea</div></td></tr><tr><td><div class=checkOption><input type=checkbox class=stored name=B5_lossOfAppetite_yes>Loss of appetite</div></td><td><div class=checkOption><input type=checkbox class=stored name=B5_vomiting_yes>Vomiting</div></td><td><div class=checkOption><input type=checkbox class=stored name=B5_intenseFatigue_yes>Intense fatigue</div></td></tr><tr><td><div class=checkOption><input type=checkbox class=stored name=B5_difficultySwallowing_yes>Difficulty swallowing</div></td><td colspan=2><div class=checkOption><input type=checkbox class=stored name=B5_muscularPain_yes>Muscular pain</div></td></tr><tr></tr></table></div></div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=B5_threeOrMore value=1>Yes (3 or more) -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=B5_threeOrMore value=0>No (less than 3) -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>PROBABLE CASE. Skip to box D</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">6. Have you had any unexplained bleeding in the last 3 weeks?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=B6_unexplainedBleeding value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=B6_unexplainedBleeding value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>PROBABLE CASE. Skip to box D</div><div class=caOption>CONTACT RISK. Skip to box D</div></div><div style=clear:both></div></div></div><div id=sectionC><b>C. Patient has no contact risk</b><div class=thickBox><div class="inner_L L4">7. Do you have big belly with any bleeding?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=C7_bigBelly value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=C7_bigBelly value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>SUSPECT CASE. Skip to box D</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">8. Do you have fever or have you had fever in the last 3 weeks?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=C8_fever value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=C8_fever value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>Go to next question</div><div class="caOption blackAction">NOT A CASE. Proceed normally.</div></div><div style=clear:both></div><hr><div class="inner_L L4">9. Have you had any unexplained bleeding in the last 3 weeks?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=C9_unexplainedBleeding value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=C9_unexplainedBleeding value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>SUSPECT CASE. Skip to box D</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">10. <i>Is patient a child under five years?</i></div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=C10_childUnderFive value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=C10_childUnderFive value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class="caOption blackAction">NOT A CASE. Start sick child form.</div><div class=caOption>Go to next question</div></div><div style=clear:both></div><hr><div class="inner_L L4">11. Have you had any vomiting or diarrhea in the last 3 weeks?</div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=C11_vomitingOrDiarrhea value=1>Yes -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=C11_vomitingOrDiarrhea value=0>No -------------------------------------------------------</div></div><div class="inner_R R4"><div class=caOption>SUSPECT CASE. Skip to box D</div><div class=caOption>Possible malaria. Skip to box D</div></div><div style=clear:both></div></div></div><div id=sectionD><b>D. Ebola case management</b><div class=thickBox><div class="inner_L L4">12. <i>Mark type of case. Copy down the results from the "Sickness Screening Tool" onto paper.</i></div><div class="inner_C C4"><div class=checkOption><input type=checkbox class=stored name=D12_caseType value="probable case">Probable case -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=D12_caseType value="suspect case">Suspect case -------------------------------------------------------</div><div class=checkOption><input type=checkbox class=stored name=D12_caseType value="contact risk">Contact risk -------------------------------------------------------</div><div class=checkOption></div><div class=checkOption><input type=checkbox class=stored name=D12_caseType value="possible malaria">Possible malaria -------------------------------------------------------</div></div><div class="inner_R R4"><div class="caOption blackAction" style=height:36px>Begin "Case Management form".</div><div class="caOption blackAction" style=height:36px>Begin "Contact Tracing form".<br>Explain contact risk. Contact CHC.</div><div class="caOption blackAction">Begin "Malaria Assessment form".</div></div><div style=clear:both></div></div></div></div><div class=deBox><div id=meBox><span class=blackBox>M&E</span> <span class=blackBox>SST.05</span> &nbsp;&nbsp;&nbsp; DE Initials: <input class=stored name=meta_DE_init> DE Date: <input class=stored name=meta_DE_date> QA Initials: <input class=stored name=meta_QA_init> QA Date: <input class=stored name=meta_QA_date> <input name=meta_formVersion class=stored type=hidden value=5></div></div><div class=formButtons><button id=lmd_submit class="btn btn-success">Submit form</button>&nbsp; <button id=lmd_next class="btn btn-success">Next form</button>&nbsp; <button id=lmd_cancel class="btn btn-success">Cancel</button></div><input type=hidden class=stored name=database value=lastmile_db> <input type=hidden class=stored name=table value=tbl_data_fhw_sst_sicknessscreening></body></html>
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>FHW Form (SST 05) - Sickness Screening Tool</title>
+        <meta charset=UTF-8>
+        <meta name=viewport content="width=device-width">
+        <meta name=robots content=noindex>
+        <link rel=icon type=image/png href=../images/lmd_icon.png>
+        <script src=../../lib/jquery.min.js></script>
+        <script src=../../lib/jquery-ui-1.11.1/jquery-ui.min.js></script>
+        <script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script>
+        <script src=../js/LMD_fileSystemHelper.1e003edd.js></script>
+        <script src=../js/fhwForms.41514e7a.js></script>
+        <script src=../js/formHelper.bd9bbad2.js></script>
+        <script src=../js/formValidate.1e7ecd6d.js></script>
+        <link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css type="text/css">
+        <link rel=stylesheet href=../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css type="text/css">
+        <link rel=stylesheet href=../../lib/jquery-ui-1.11.1/jquery-ui.min.css type="text/css">
+        <link rel=stylesheet type=text/css media=all href=../css/fhwForms.39fc69d7.css> 
+        
+        <style>.contactTable td{border:1px solid #000;padding:3px;font-size:12px;overflow:hidden}.contactTable .NB{border:none}.contactTable .C1{width:540px;max-width:540px}.contactTable .C2{width:80px;max-width:80px;text-align:center}.contactTable .C3{width:80px;max-width:80px;text-align:center}.symptomTable{padding:3px}.symptomTable td{padding-left:10px}.L4{width:3.9in;padding-right:5px}.C4{width:1.3in}.R4{width:2in}.C5{width:1.7in}.C6{width:.9in}.C7{width:.9in}.blackAction{font-weight:700;color:#fff!important;background-color:#2f2f2f!important;-webkit-print-color-adjust:exact}</style></head><body>
+        
+        
+        <div id=validationBox></div>
+        
+        
+        
+        
+        
+        <div class=deBox>
+            <div class=headField style=width:1.1in>FHW Name/ID:</div>
+            <div class=headField style=width:1.37in><input class="stored autocomplete" name=fhwName data-lmd-valid-required=yes data-lmd-valid-autoc=fhws style=width:120px> / </div>
+            <div class=headField style=width:1.12in><input class="stored integer" name=fhwID data-lmd-valid-required=yes style=width:60px></div>
+            <div class=headField style=width:1in>Visit date:</div>
+            <div class=headField style=width:2.5in><input class="stored datepicker" name=visitDate data-lmd-valid-required=yes> (d/m/y)</div>
+            <div style=clear:both;height:3px></div>
+            <div class=headField style=width:1.1in>Patient name:</div>
+            <div class=headField style=width:2.49in><input class=stored name=memberName data-lmd-valid-required=yes style=width:192px></div>
+            <div class=headField style=width:1in>Member ID:</div>
+            <div class=headField style=width:2.5in><input class=stored name=memberID data-lmd-valid-required=yes></div>
+        </div>
+        
+        
+        
+        
+        
+        <div class=page>
+            
+            
+            
+            
+            <div class=formHeader>
+                <img style=float:left src=../images/logo_LMH.png>
+                <span class=h2>FHW: Sickness Screening Tool</span>
+                <img style=float:right src=../images/logo_TH.png>
+                <div style=clear:both></div>
+            </div>
+            <hr>
+            
+            
+            
+            
+            <div id=sectionA>
+                
+                <b>A. Contact assessment</b>
+                <div class=thickBox>
+                    
+                    
+                    <div class="inner_L L4">
+                        1. In the last three weeks, have you touched the body, touched body fluids, or lived in the same house with someone who got very sick or died?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=A1_contact value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=A1_contact value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>Patient has contact risk. Skip to box B</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+                    
+                    
+                    <div class="inner_L L4">
+                        2. In the last three weeks, have you attended a burial or funeral, and did you participate in ceremony where you had contact with body or body fluids?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=A2_contact value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=A2_contact value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>Patient has contact risk. Skip to box B</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+                    
+                    
+                    <div class="inner_L L4">
+                        3. In the last three weeks, have you cared for anyone who was very ill - nausea, vomiting, bleeding?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=A3_contact value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=A3_contact value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>Patient has contact risk. Skip to box B</div>
+                        <div class=caOption>Patient is not contact. Skip to box C</div>
+                    </div>
+                    <div style=clear:both></div>
+                    
+                </div>
+                
+            </div>
+            
+            
+            
+            
+            
+            <div id=sectionB>
+                
+                <b>B. Patient has contact risk</b>
+                <div class=thickBox>
+                    
+                    
+                    <div class="inner_L L4">
+                        4. Do you have fever or have you had fever in the last 3 weeks?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=B4_fever value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=B4_fever value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>PROBABLE CASE. Skip to box D</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+                    
+                    
+                    <div class="inner_L L4">
+                        5. Have you had any of these symptoms in the last 3 weeks?<br>
+                        <div style="margin-left:5px;border:1px solid #000;padding-top:3px;width:345px">
+                            <table class=symptomTable>
+                                <tr>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_abdominalPain_yes>Abdominal pain</div></td>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_hiccoughs_yes>Hiccoughs</div></td>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_diarrhea_yes>Diarrhea</div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_difficultyBreathing_yes>Difficulty breathing</div></td>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_headache_yes>Headache</div></td>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_nausea_yes>Nausea</div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_lossOfAppetite_yes>Loss of appetite</div></td>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_vomiting_yes>Vomiting</div></td>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_intenseFatigue_yes>Intense fatigue</div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class=checkOption><input type=checkbox class=stored name=B5_difficultySwallowing_yes>Difficulty swallowing</div></td>
+                                    <td colspan=2><div class=checkOption><input type=checkbox class=stored name=B5_muscularPain_yes>Muscular pain</div></td>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=B5_threeOrMore value=1>Yes (3 or more) -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=B5_threeOrMore value=0>No (less than 3) -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>PROBABLE CASE. Skip to box D</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+                    
+                    
+                    <div class="inner_L L4">
+                        6. Have you had any unexplained bleeding in the last 3 weeks?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=B6_unexplainedBleeding value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=B6_unexplainedBleeding value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>PROBABLE CASE. Skip to box D</div>
+                        <div class=caOption>CONTACT RISK. Skip to box D</div>
+                    </div>
+                    <div style=clear:both></div>
+                    
+                </div>
+                
+            </div>
+            
+            
+            
+            
+            
+            <div id=sectionC>
+                
+                <b>C. Patient has no contact risk</b>
+                <div class=thickBox>
+                    
+                    
+                    <div class="inner_L L4">
+                        7. Do you have big belly with any bleeding?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=C7_bigBelly value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=C7_bigBelly value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>SUSPECT CASE. Skip to box D</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+                    
+                    
+                    <div class="inner_L L4">
+                        8. Do you have fever or have you had fever in the last 3 weeks?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=C8_fever value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=C8_fever value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>Go to next question</div>
+                        <div class="caOption blackAction">NOT A CASE. Proceed normally.</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+                    
+                    
+                    <div class="inner_L L4">
+                        9. Have you had any unexplained bleeding in the last 3 weeks?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=C9_unexplainedBleeding value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=C9_unexplainedBleeding value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>SUSPECT CASE. Skip to box D</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+
+                    
+                    <div class="inner_L L4">
+                        10. <i>Is patient a child under five years?</i> 
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=C10_childUnderFive value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=C10_childUnderFive value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class="caOption blackAction">NOT A CASE. Start sick child form.</div>
+                        <div class=caOption>Go to next question</div>
+                    </div>
+                    <div style=clear:both></div>
+                    <hr>
+
+                    
+                    <div class="inner_L L4">
+                        11. Have you had any vomiting or diarrhea in the last 3 weeks?
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=C11_vomitingOrDiarrhea value=1>Yes -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=C11_vomitingOrDiarrhea value=0>No -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class=caOption>SUSPECT CASE. Skip to box D</div>
+                        <div class=caOption>Possible malaria. Skip to box D</div>
+                    </div>
+                    <div style=clear:both></div>
+                    
+                </div>
+                
+            </div>
+            
+            
+            
+            
+            
+            <div id=sectionD>
+                
+                <b>D. Ebola case management</b>
+                <div class=thickBox>
+                    
+                    
+                    <div class="inner_L L4">
+                        12. <i>Mark type of case. Copy down the results from the "Sickness Screening Tool" onto paper.</i>
+                    </div>
+                    <div class="inner_C C4">
+                        <div class=checkOption><input type=checkbox class=stored name=D12_caseType value="probable case">Probable case -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=D12_caseType value="suspect case">Suspect case -------------------------------------------------------</div>
+                        <div class=checkOption><input type=checkbox class=stored name=D12_caseType value="contact risk">Contact risk -------------------------------------------------------</div>
+                        <div class=checkOption></div>
+                        <div class=checkOption><input type=checkbox class=stored name=D12_caseType value="possible malaria">Possible malaria -------------------------------------------------------</div>
+                    </div>
+                    <div class="inner_R R4">
+                        <div class="caOption blackAction" style=height:36px>Begin "Case Management form".</div>
+                        <div class="caOption blackAction" style=height:36px>Begin "Contact Tracing form".<br>Explain contact risk. Contact CHC.</div>
+                        <div class="caOption blackAction">Begin "Malaria Assessment form".</div>
+                    </div>
+                    <div style=clear:both></div>
+
+                </div>
+                
+            </div>
+            
+            
+            
+            
+        </div>
+        
+        
+        
+        
+        
+        <div class=deBox>
+            
+            <div id=meBox>
+                <span class=blackBox>M&E</span>
+                <span class=blackBox>SST.05</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class=stored name=meta_DE_init>
+                DE Date: <input class=stored name=meta_DE_date>
+                QA Initials: <input class=stored name=meta_QA_init>
+                QA Date: <input class=stored name=meta_QA_date>
+                <input name=meta_formVersion class=stored type=hidden value=5>
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+        <div class=formButtons>
+            <button id=lmd_submit class="btn btn-success">Submit form</button>&nbsp;
+            <button id=lmd_next class="btn btn-success">Next form</button>&nbsp;
+            <button id=lmd_cancel class="btn btn-success">Cancel</button>
+        </div>
+        
+        
+        
+        
+        
+        <input type=hidden class=stored name=database value=lastmile_db>
+        <input type=hidden class=stored name=table value=tbl_data_fhw_sst_sicknessscreening>
+        
+        
+    </body>
+    
+</html>

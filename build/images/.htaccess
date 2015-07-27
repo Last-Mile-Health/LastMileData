@@ -1,0 +1,8 @@
+
+# Last Mile Data - images
+
+# Cache "forever"; manually change filename of image if it changes
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 10 years"
+</IfModule>

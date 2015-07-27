@@ -1,0 +1,8 @@
+
+# Last Mile Data - lib
+
+# Cache "forever"; manually change filename if a library file is changed/upgraded (e.g. add version number)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 10 years"
+</IfModule>

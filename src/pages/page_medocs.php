@@ -9,32 +9,31 @@
 <html>
     
     <head>
+        
         <?php
             if( isset($_SESSION['username']) ) {
                 echo "<script>sessionStorage.username = '" . $_SESSION['username'] . "'</script>";
             }
         ?>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
-        <link rel='icon' type='image/png' href='../../images/lmd_icon.png'>
+        
         <title>Last Mile Data</title>
         
-        <!-- build:css /LastMileData/build/css/page_medocs.min.css -->
-        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
-        <link rel="stylesheet" href="/LastMileData/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
-        <link rel="stylesheet" href="/LastMileData/build/css/page_medocs.css"  type="text/css" />
-        <!-- endbuild -->
+        <link rel='icon' type='image/png' href='../../images/lmd_icon.png'>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../css/page_medocs.css"  type="text/css" />
         
         <?php echo "<script>var usertype = '" . $_SESSION['usertype'] . "';</script>"; ?>
         
-        <!-- build:js /LastMileData/build/js/page_medocs.min.js -->
-        <script src="/LastMileData/lib/jquery.min.js"></script>
-        <script src="/LastMileData/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/LastMileData/build/js/LMD_accessControl.js"></script>
-        <script src="/LastMileData/build/js/loadContents.js"></script>
-        <script src="/LastMileData/build/js/page_medocs.js"></script>
-        <!-- endbuild -->
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_accessControl.js"></script>
+        <script src="../js/loadContents.js"></script>
+        <script src="../js/page_medocs.js"></script>
         
     </head>
     

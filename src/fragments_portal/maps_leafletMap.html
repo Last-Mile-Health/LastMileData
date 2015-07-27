@@ -1,10 +1,11 @@
 <!-- DEBUG -->
-<!--<html><head><script src="../../../lib/jquery.min.js"></script>-->
-<link rel="stylesheet" href="../../../lib/leaflet/leaflet.css" />
+<!--<html><head><script src="../../lib/jquery.min.js"></script>-->
+<link rel="stylesheet" href="../../lib/leaflet/leaflet.css" />
 
 <script>
-    $.getScript('../../../lib/leaflet/leaflet.js',function(){
-        $.getScript('../../js/leafletMap.js');
+    // !!!!! does this need to be done synchronously !!!!!
+    $.getScript('../../lib/leaflet/leaflet.js',function(){
+        $.getScript('../js/leafletMap.js');
     });
 </script>
 

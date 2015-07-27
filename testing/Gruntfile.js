@@ -19,6 +19,35 @@ module.exports = function(grunt) {
                 dest: 'build/js/concatFiles.js'
             }
         },
+        
+        
+//        // Concatenate/minify JS and CSS in files; replace references (preparation)
+//        useminPrepare: {
+//            html: [
+//                'build/pages/page_home.php',
+////                'build/pages/page_medocs.php',
+////                'build/pages/page_dataportal.php'
+//            ],
+//            options: {
+//                root: '/LastMileData/',
+////                dest: '/LastMileData/'
+////                root: '../',
+//                dest: '../'
+//            }
+//        },
+        
+//        // Concatenate/minify JS and CSS in files; replace references (execution)
+//        usemin: {
+//            html: [
+//                'build/pages/page_home.php',
+////                'build/pages/page_medocs.php',
+////                'build/pages/page_dataportal.php'
+//            ]
+//        },
+
+        
+        
+        
         cssmin: {
             options: {
                 sourceMap: true
@@ -33,6 +62,11 @@ module.exports = function(grunt) {
                 }]
             }
         }
+        
+        
+        
+        
+        
 //        watch: {
 //            options: {
 //                livereload: true

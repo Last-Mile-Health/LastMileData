@@ -9,27 +9,26 @@
 <html>
     
     <head>
+        
         <?php
             if( isset($_SESSION['username']) ) {
                 echo "<script>sessionStorage.username = '" . $_SESSION['username'] . "'</script>";
             }
         ?>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
-        <link rel='icon' type='image/png' href='../../images/lmd_icon.png'>
+        
         <title>Last Mile Data</title>
         
-        <!-- build:css /LastMileData/build/css/page_home.min.css -->
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
-        <!-- endbuild -->
         
-        <!-- build:js /LastMileData/build/js/page_home.min.js -->
         <script src="../../lib/jquery.min.js"></script>
         <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="../js/loadContents.js"></script>
-        <!-- endbuild -->
         
     </head>
     
