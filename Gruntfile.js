@@ -113,7 +113,7 @@ module.exports = function(grunt) {
         // Dynamically create the AppCache manifest file
         manifest: {
             options: {
-                verbose: false
+                verbose: false,
             },
             main: {
                 src: [
@@ -138,7 +138,7 @@ module.exports = function(grunt) {
                     'build/js/formValidate.*.js',
                     'build/js/loadContents.*.js'
                 ],
-                dest: 'build/lastmiledata.appcache'
+                dest: 'lastmiledata.appcache'
             }
         }
     });
@@ -150,7 +150,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'clean',
         'copy',
-//        'uglify',
+        'uglify',
         'cssmin',
         'filerev',
         'filerev_replace',

@@ -12,9 +12,9 @@
             #myTable th { border: 1px solid black; padding:5px; }
             #myTable td { border: 1px solid black; padding:5px; }
         </style>
-        <script src="../../../lib/jquery.min.js"></script>
-        <script src="../../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="../../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
         <script>
         $(document).ready(function(){
             

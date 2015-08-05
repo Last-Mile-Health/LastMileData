@@ -31,9 +31,9 @@
         
         <script src=../../lib/jquery.min.js></script>
         <script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script>
-        <script src=../js/LMD_accessControl.c881ef0c.js></script>
-        <script src=../js/loadContents.79ef918d.js></script>
-        <script src=../js/page_medocs.a31415be.js></script>
+        <script src=../js/LMD_accessControl.ed898af5.js></script>
+        <script src=../js/loadContents.011fe2f5.js></script>
+        <script src=../js/page_medocs.313a5680.js></script>
         
     </head>
     
