@@ -4,7 +4,8 @@ $(document).ready(function(){
     <?php
 
         // !!!!! User sets "$indicatorIDs" manually for now !!!!!
-        $indIDString = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
+//        $indIDString = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
+        $indIDString = "1,2,3,4,7,8,56,57,58,59,60,14,15";
         echo "var indIDString = '$indIDString';". "\n\n";
         
         // Include file that interacts with LMD_REST.php
@@ -16,14 +17,20 @@ $(document).ready(function(){
     // Sort "data_indicators" by indID
     // !!!!! replace this !!!!!
     data_indicators.sort(function(a,b){
-        if (Number(a.indID) < Number(b.indID)) {
+        var order = [1,2,3,4,7,8,56,57,58,59,60,14,15];
+        if ( order.indexOf(Number(a.indID)) < order.indexOf(Number(b.indID)) ) {
             return -1;
-        }
-        else if (Number(a.indID) > Number(b.indID)) {
-            return 1;
         } else {
-            return 0;
+            return 1;
         }
+//        if (Number(a.indID) < Number(b.indID)) {
+//            return -1;
+//        }
+//        else if (Number(a.indID) > Number(b.indID)) {
+//            return 1;
+//        } else {
+//            return 0;
+//        }
     });
 
     // Create "indicatorData" object to hold data from data_rawValues
@@ -133,9 +140,20 @@ $(document).ready(function(){
             var timeInterval = Math.ceil(numDataPoints/12);
 
             // !!!!! Temp tick format code: START !!!!!
-            var tempTick = (indID==11||indID==13) ? "%" : "";
+            var tempTick = (indID==58||indID==60) ? "%" : "";
+//            var tempTick = (indID==11||indID==13) ? "%" : "";
             // !!!!! Temp tick format code: END !!!!!
-
+            
+            // !!!!! Temp min dates: START !!!!!
+            if (indID==56||indID==57||indID==58||indID==59||indID==60) {
+                var overrideMin = "2015-06-15";
+                var overrideMax = "2015-08-01";
+            } else {
+                var overrideMin = "",
+                    overrideMax = "";
+            }
+            // !!!!! Temp min dates: END !!!!!
+            
             LMD_dimpleHelper.createChart({
                 type:"line",
                 targetDiv: RO.chartSpecs.div,
@@ -147,9 +165,11 @@ $(document).ready(function(){
                 xyVars: {x:"Date", y:"Value"},
                 // !!!!! add y-axis label !!!!!
 
-                // !!!!! Temp tick format code: START !!!!!
-                tickFormat: {y:tempTick}
-                // !!!!! Temp tick format code: END !!!!!
+                // !!!!! Temp code: START !!!!!
+                tickFormat: {y:tempTick},
+                overrideMin: overrideMin,
+                overrideMax: overrideMax
+                // !!!!! Temp code: END !!!!!
             });
 
         }
@@ -167,7 +187,7 @@ function twoDigits(d) {
 }
 </script>
 
-<h1>Executive Dashboard <span style="font-size:60%">(updated: 7/12/2015)</span></h1>
+<h1>Executive Dashboard <span style="font-size:60%">(updated: 8/12/2015)</span></h1>
 
 <div id='dashboardContent'>
     <div class='row' rv-each-report_object="model_execDashboard">
@@ -175,7 +195,7 @@ function twoDigits(d) {
         <div class='col-md-4'>
             <h3><b>{{index | plusOne}}</b>. {{report_object.indicatorMetadata.indName}}</h3>
             <p><b>Definition</b>: {{report_object.indicatorMetadata.indDefinition}}</p>
-            <p rv-if="report_object.indicatorMetadata.indTarget"><b>FY15 Target</b>: {{report_object.indicatorMetadata.indTarget | format report_object.indicatorMetadata.indFormat}}</p>
+            <p rv-if="report_object.indicatorMetadata.indTarget"><b>FY16 Target</b>: {{report_object.indicatorMetadata.indTarget | format report_object.indicatorMetadata.indFormat}}</p>
             <table class='ptg_data'>
                 <tr>
                     <th rv-each-rdata="report_object.indicatorMetadata.recentData">{{rdata.date | shortDate}}</th>

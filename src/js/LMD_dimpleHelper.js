@@ -22,10 +22,16 @@ var LMD_dimpleHelper = (function(){
 
         // Format chart
         myChart.setBounds(55, 30, params.size.x-75, params.size.y-75);
-        if (params.type==="line") {
+        if (params.type==="line" || params.type==="bar") {
             var x = myChart.addTimeAxis("x", params.xyVars.x, "%Y-%m-%d", "%b '%y");
             x.timePeriod = d3.time.months;
             x.timeInterval = params.timeInterval;
+            
+            // !!!!! temporary hack !!!!!
+//            if (params.overrideMin !== "") { x.overrideMin = new Date(params.overrideMin); }
+//            if (params.overrideMax !== "") { x.overrideMax = new Date(params.overrideMax); }
+            // !!!!! temporary hack !!!!!
+            
             var y = myChart.addMeasureAxis("y", params.xyVars.y);
         } else if (params.type==="pie") {
             var x = myChart.addCategoryAxis("x", "Month");
@@ -36,7 +42,7 @@ var LMD_dimpleHelper = (function(){
             myChart.addLegend(140, 10, 330, 20, "right"); // !!!!! this needs to be variablized !!!!!
         }
         
-        if (params.type==="line") {
+        if (params.type==="line" || params.type==="bar") {
             // Add axis titles
             if (params.axisTitles && params.axisTitles.x) {
                 x.title = params.axisTitles.x;
@@ -54,7 +60,11 @@ var LMD_dimpleHelper = (function(){
             }
 
             // Add series; add legend; draw chart
-            myChart.addSeries(params.cut, dimple.plot.line);
+            if (params.type==="line") {
+                myChart.addSeries(params.cut, dimple.plot.line);
+            } else if (params.type==="bar") {
+                myChart.addSeries(params.cut, dimple.plot.bar);
+            }
             if (params.legend !== "") {
                 myChart.addLegend(65, 10, 510, 20, params.legend);
             }

@@ -1,4 +1,4 @@
-<h1>CHW Training <span style="font-size:60%">(updated: 7/12/2015)</span></h1>
+<h1>CHW Training <span style="font-size:60%">(updated: 8/12/2015)</span></h1>
 <hr>
 
 <h3>CHWs</h3>

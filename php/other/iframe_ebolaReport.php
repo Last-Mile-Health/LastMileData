@@ -15,6 +15,8 @@
         <script src="../../lib/jquery.min.js"></script>
         <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <script>
         $(document).ready(function(){
             
@@ -28,7 +30,7 @@
                 var endDate = $('#endDate').val();
                 
                 if (startDate!='' & endDate!='') {
-                    var myLocation = "/LastMileData/php/other/report_ebola.php";
+                    var myLocation = "/LastMileData/php/other/iframe_ebolaReport.php";
                     myLocation += "?startDate=" + startDate;
                     myLocation += "&endDate=" + endDate;
                     location.assign(myLocation)
@@ -42,9 +44,9 @@
         </script>
     </head>
     <body>
-        <hr>Start date: <input id='startDate'><br><hr>
-        End date: <input id='endDate'><hr>
-        <button id='runReport' style='width:200px'>Run Report</button><hr>
+        <hr>Start date: <input id='startDate'>&nbsp;&nbsp;&nbsp;
+        End date: <input id='endDate'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id='runReport' class='btn btn-success' style='width:200px'>Run Report</button><hr>
         
         <?php
 

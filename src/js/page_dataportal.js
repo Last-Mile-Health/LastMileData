@@ -63,17 +63,19 @@ $(document).ready(function(){
     rivets.bind($('#sidebarDIV'), {model_sidebar: filteredSidebar});
 
     // Fade in overview pane by default
-    $('#mainContainer').load('../fragments_portal/overview_overview.php',function(){
+    $('#mainContainer').load('../fragments_portal/frag_overview.php',function(){
         // These need to happen AFTER navbar loads
         $(this).scrollTop(0);
         $('#dashboard_iframe').hide();
         $('#mainContainer').fadeIn(1000);
         $('#dp_sidebar').fadeIn(1000);
+        
+        // !!!!! this is not robust since first one might not be a frag !!!!!
         $('.dp_frag').first().addClass('dp-active');
     });
 
     // Handle sidebar clicks
-    $('.dp_frag, .dp_iframe').click(function(){
+    $('.dp_frag, .dp_iframe, .dp_markdown').click(function(){
 
         // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she navigates to another page
         var preventNavigation = false;
@@ -89,50 +91,88 @@ $(document).ready(function(){
 
             DataPortal_GLOBALS.anyChanges = false;
 
-            // Get link URL
+            // Get link URL; set link type
             if ( $(this).hasClass('dp_frag') ) {
-                var fragOrFrame =  "frag";
-                var myLink = '../fragments_portal/' + $(this).attr('data-link');
+                // HTML fragments
+                var linkType =  "frag";
+                var linkURL = '../fragments_portal/' + $(this).attr('data-link');
+            } else if ( $(this).hasClass('dp_iframe') ) {
+                // iFrames
+                var linkType =  "frame";
+                var linkURL = $(this).attr('data-link');
             } else {
-                var fragOrFrame =  "frame";
-                var myLink = $(this).attr('data-link');
+                // HTML fragments
+                var linkType =  "markdown";
+                var linkURL = '../fragments_portal/' + $(this).attr('data-link');
             }
 
-                // Fade out current mainContainer
-                $('#whitespaceContainer').slideDown(500, function(){
+            // Fade out current mainContainer
+            $('#whitespaceContainer').slideDown(500, function(){
 
-                    $('#mainContainer').scrollTop(0);
+                $('#mainContainer').scrollTop(0);
 
-                    // Handle fragment loads
-                    if (fragOrFrame === "frag") {
-                            $('#dashboard_iframe').hide();
-                            $('#mainContainer').show();
-                            $('#mainContainer').load(myLink, function(responseText, textStatus, jqXHR){
-                                if (textStatus === "error") {
-                                    $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
-                                }
-                            setTimeout(function(){
-                                    $('#whitespaceContainer').slideUp(1000);
-                                },500);
+                // Handle fragment loads
+                if (linkType === "frag") {
+                    $('#dashboard_iframe').hide();
+                    $('#mainContainer').show();
+                    
+                    $('#mainContainer').load(linkURL, function(responseText, textStatus, jqXHR){
+                        if (textStatus === "error") {
+                            $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
+                        }
+                        setTimeout(function(){
+                            $('#whitespaceContainer').slideUp(1000);
+                        },500);
+                    });
+
+                // Handle iframe loads
+                } else if (linkType === "frame") {
+                    $('#mainContainer').hide();
+                    $('#dashboard_iframe').show();
+                    $('#dashboard_iframe').prop('src',linkURL);
+
+                // Handle markdown loads
+                } else if (linkType === "markdown") {
+                    $('#dashboard_iframe').hide();
+                    $('#mainContainer').show();
+                    
+                    $.ajax({
+                        url: linkURL,
+                        success: function(responseText){
+                            // Initialize showdown.js (markdown parser)
+                            var converter = new showdown.Converter({
+                                tables: true,
+                                tasklists: true
                             });
-
-                    // Handle iframe loads
-                    } else if (fragOrFrame === "frame") {
-                            $('#mainContainer').hide();
-                            $('#dashboard_iframe').show();
-                            $('#dashboard_iframe').prop('src',myLink);
-                    }
-
-                });
+                            
+                            // Apply rendered html to mainContainer DIV
+                            var html = converter.makeHtml(responseText);
+                            $('#mainContainer').html(html);
+                            
+                            // Add bootstrap table classes
+                            $('#mainContainer table').addClass('table table-striped table-hover');
+                            
+                            setTimeout(function(){
+                                $('#whitespaceContainer').slideUp(1000);
+                            },500);
+                        },
+                        error: function(){
+                            $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
+                            setTimeout(function(){
+                                $('#whitespaceContainer').slideUp(1000);
+                            },500);
+                        }
+                    });
+                }
+            });
 
             // Switch active sidebar element
-            $('.dp_frag, .dp_iframe').each(function(){
+            $('.dp_frag, .dp_iframe, .dp_markdown').each(function(){
                 $(this).removeClass('dp-active');
             });
             $(this).addClass('dp-active');
 
         }
-
     });
 
     // Fade out whitespaceContainer when iFrame is done loading

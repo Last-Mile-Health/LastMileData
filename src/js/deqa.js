@@ -3,7 +3,7 @@
 $(document).ready(function(){
     
     // Set app version manually here
-    $('#appVersion').text('00489');
+    $('#appVersion').text('00490');
 
     // !!!!! This is not currently being used !!!!!
     // Apply access control settings

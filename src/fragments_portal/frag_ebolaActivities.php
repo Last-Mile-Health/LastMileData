@@ -191,7 +191,7 @@ function twoDigits(d) {
 }
 </script>
 
-<h1>Ebola activities <span style="font-size:60%">(updated: 7/12/2015)</span></h1>
+<h1>Ebola activities <span style="font-size:60%">(updated: 8/12/2015)</span></h1>
 
 <div id='dashboardContent'>
     <div class='row' rv-each-report_object="model_ebola">
