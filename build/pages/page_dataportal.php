@@ -22,7 +22,6 @@
         <link rel=stylesheet href=../css/page_dataportal.dfea538b.css type="text/css">
         
         <?php
-            
             // Echo username/usertype (used by access control system)
             echo "<script>";
             echo "sessionStorage.username = '" . $_SESSION['username'] . "';";
@@ -41,7 +40,6 @@
             curl_close($ch);
             echo "var model_sidebar = JSON.parse($json1.objectData);". "\n\n";
             echo "</script>";
-
         ?>
         
         <script src=../../lib/jquery.min.js></script>
@@ -49,12 +47,13 @@
         <script src=../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js></script>
         <script src=../../lib/rivets.bundled.min.js></script>
         <script src=../../lib/moment.min.js></script>
+        <script src=../../lib/showdown.min.js></script>
         <script src=../../lib/d3.min.js></script>
         <script src=../../lib/dimple.v2.1.0.min.js></script>
-        <script src=../js/LMD_dimpleHelper.d2b95e81.js></script>
-        <script src=../js/loadContents.011fe2f5.js></script>
-        <script src=../js/LMD_dataPortal.f9638243.js></script>
-        <script src=../js/page_dataportal.4bf22fe0.js></script>
+        <script src=../js/LMD_dimpleHelper.631a3f77.js></script>
+        <script src=../js/loadContents.c6540d1e.js></script>
+        <script src=../js/LMD_dataPortal.6d51246e.js></script>
+        <script src=../js/page_dataportal.966093d5.js></script>
         
     </head>
     
@@ -71,7 +70,7 @@
                     <div style=height:51px></div>
                     <div class="nav nav-sidebar" id=sidebarDIV>
                         <div rv-each-sidebar=model_sidebar>
-                            <h3 rv-id=sidebar.id id={{sidebar.id}}>{{sidebar.name}}</h3>
+                            <h3 rv-id=sidebar.id>{{sidebar.name}}</h3>
                             <div>
                                 <div rv-id=tabs.id rv-class=tabs.type rv-data-link=tabs.link rv-each-tabs=sidebar.tabs><a>&bull;&nbsp;{{tabs.name}}</a></div>
                             </div>

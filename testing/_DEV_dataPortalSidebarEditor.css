@@ -1,0 +1,60 @@
+
+body {
+    font-weight: bold;
+    color: #333;
+}
+
+.outerTab {
+    cursor:pointer;
+    padding: 10px;
+    margin: 10px;
+    width: 800px;
+    background: #f5e79e;
+    border: 1px solid #AAA;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px #eee;
+}
+
+.innerTab {
+    padding: 5px;
+    margin: 10px;
+    height: 40px;
+    width: 95%;
+    background: #CCC0DA;
+    border: 1px solid #AAA;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px #ddd;
+}
+
+.outerTab input {
+    width:95%;
+}
+
+.innerTab input {
+    width:23%;
+}
+
+#displayOrder {
+    margin: 10px;
+    font-size:20px;
+    width: 400px;
+}
+
+.btn {
+    margin: 10px;
+}
+
+.btn-sm, .btn-xs {
+    position:relative;
+    top:-6px;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+.addInnerDiv {
+    text-align:center;
+}
+
+#addOuter {
+    width: 900px;
+}

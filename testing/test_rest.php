@@ -12,7 +12,7 @@
 
 
 // Set include path; require connection strings; instantiate Slim
-set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/src/php-html/includes" );
+set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
 require_once("../../LastMileData/lib/Slim-2.6.2/Slim/Slim.php");
 require_once("cxn.php");
 \Slim\Slim::registerAutoloader();
