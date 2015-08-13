@@ -205,7 +205,7 @@ function twoDigits(d) {
                 </tr>
             </table>
             <hr class='smallHR'>
-            <p rv-if="report_object.indicatorMetadata.indNarrative"><b>Progress-to-goal</b>: {{report_object.indicatorMetadata.indNarrative}}</p>
+            <p rv-if="report_object.indicatorMetadata.indNarrative"><b>Narrative</b>: {{report_object.indicatorMetadata.indNarrative}}</p>
         </div>
         <div class='col-md-7'>
             <div rv-id="report_object.indicatorMetadata.divID"></div>
