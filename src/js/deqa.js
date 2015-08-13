@@ -2,6 +2,10 @@
 
 $(document).ready(function(){
     
+    var GLOBALS = {
+        queryDebugging: false
+    };
+    
     // Set app version manually here
     $('#appVersion').text('00490');
 
@@ -18,7 +22,7 @@ $(document).ready(function(){
         // Manipulate DOM
         $('#modal_sendRecords_buttons').slideUp(600);
         $('#modal_sendRecords_text').slideUp(800, function(){
-            sendRecordsAJAX();
+            sendRecordsAJAX(GLOBALS.queryDebugging);
         });
         
     });
@@ -634,6 +638,14 @@ $(document).ready(function(){
     });
     
     
+    // CLICK HANDLER: Query debugging
+    $('#toggleQueryDebugging').click(function(){
+        GLOBALS.queryDebugging = !GLOBALS.queryDebugging;
+        var state = (GLOBALS.queryDebugging) ? 'ON' : 'OFF';
+        alert('Query debugging is ' + state);
+    });
+
+
     // CLICK HANDLER: QA modal
     $('#modal_QA_submit').click(function() {
 
@@ -1073,7 +1085,7 @@ function noRecordsMessage() {
 
 
 
-function sendRecordsAJAX(){
+function sendRecordsAJAX(queryDebugging){
     
     // Reset variables
     var queryString = "",
@@ -1123,9 +1135,9 @@ function sendRecordsAJAX(){
                     
                     // Parse SQL Insert query
                     queryString = parseRecordIntoSQL(currentRecord);
-
+                    
                     // Send record to database via AJAX
-                    var myData = {'queryString': queryString, 'rKey': key, 'transaction': 0} ;
+                    var myData = { 'queryString': queryString, 'rKey': key, 'transaction': 0, 'queryDebugging': queryDebugging } ;
 
                     // Send AJAX request
                     $.ajax({

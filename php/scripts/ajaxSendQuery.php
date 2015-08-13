@@ -1,23 +1,25 @@
 <?php
 
-// Receives data from sendRecords.js and sends it to server
+// Receives data from deqa.js (via "Send records" button on page_deqa.html) and sends data to MySQL database on server
 
 // Disable PHP warnings
 error_reporting(0);
 
-// Get query string and rKey (record identifier)
+// Get query string, rKey (record identifier), and queryDebugging flag
 $queryString = $_POST['queryString'];
 $rKey = $_POST['rKey'];
 $transaction = $_POST['transaction'];
+$queryDebugging = $_POST['queryDebugging'];
 
 // Set include path; require connection strings
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
 require_once("cxn.php");
+require_once("PhpConsole.phar");
 
-// Uncomment next line to debug queries
-//mysqli_query($cxn, 'INSERT INTO lastmile_db.test (col_1) VALUES ("' . $queryString . '")');
-// !!!!! create a "turn debug queries on/off" configuration switch on DEQA !!!!!
-
+// Debug queries
+if ($queryDebugging=='true') {
+    mysqli_query($cxn, 'INSERT INTO lastmile_db.test (col_1) VALUES ("' . $queryString . '")');
+}
 
 if ($transaction) {
     
