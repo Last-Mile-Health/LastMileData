@@ -1,0 +1,9 @@
+
+# Last Mile Data - fragments_portal
+
+# Do not cache files in this directory
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>

@@ -153,27 +153,36 @@ $(document).ready(function(){
 
     }
 
-    // Initially populate all data
+    // Initially populate all data and bind events
     populateData();
+    bindEvents();
 
-    // Handle value changes
-    $('input.admin_input').change(function(){
-        var month = $(this).attr('data-month');
-        var year = $(this).attr('data-year');
-        var indID = $(this).attr('data-indid');
-        var value = $(this).val();
-        changedData.add(month, year, indID, value);
-    });
+    function bindEvents(){
 
+        // Unbind old event handlers (if they exist)
+        $('input.admin_input').off();
+        
+        // Handle value changes
+        $('input.admin_input').change(function(){
+            var month = $(this).attr('data-month');
+            var year = $(this).attr('data-year');
+            var indID = $(this).attr('data-indid');
+            var value = $(this).val();
+            changedData.add(month, year, indID, value);
+        });
+
+        // Select text on input click
+        $("input.admin_input").click(function() {
+            $(this).select();
+        });
+
+    }
+    
     // Click handler: SHOW 3 more months
     $('#btn_showThree').click(function(){
         monthList.add(3);
         populateData();
-    });
-
-    // Select text on input click
-    $(".admin_input").click(function() {
-        $(this).select();
+        bindEvents();
     });
 
     // Click handerl: SUBMIT

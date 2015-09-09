@@ -32,7 +32,7 @@
         <div class="container">
             <div class="jumbotron">
                 <h1>Last Mile Data</h1>
-                <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It can be used by all staff across teams to access up-to-date data and information about our programs, as well as access critical M&E team documents. It is used by our M&E team to enter, aggregate, and quality-check data from both paper forms and mobile health forms.</p>
+                <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It can be used by all staff across teams to access up-to-date data and information about our programs, as well as RM&E team documents. It is used by our RM&E team to enter, aggregate, and quality-check data from both paper forms and mobile health forms.</p>
                 <p><a href="#" class="btn btn-success btn-lg" data-toggle="modal" data-target="#loginModal">Login</a></p>
                 <?php
                     if ( isset($_GET['retry']) ) {
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <footer>
-                        <p>&copy; Copyright 2014 Last Mile Health.</p>
+                        <p>&copy; Copyright 2015 Last Mile Health.</p>
                     </footer>
                 </div>
             </div>

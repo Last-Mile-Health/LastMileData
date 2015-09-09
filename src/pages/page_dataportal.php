@@ -81,7 +81,7 @@
                 <!-- Outer container -->
                 <div id="outerContainer" class="pane col-md-10">
                     
-                    <div style="height:51px"></div>
+                    <div id="spacer" style="height:51px"></div>
                     
                     <!-- Whitespace container for fade in/out effects -->
                     <div id="whitespaceContainer"><br>

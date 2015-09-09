@@ -47,26 +47,22 @@ $(document).ready(function(){
     };
 
     // Add data to "indicatorData" (enforce business rule: don't display data from the previous month until the 12th of this month)
-    var todayYear = moment().format('YYYY');
-    var todayMonth = moment().format('M');
-    var todayDay = moment().format('D');
-    var latestTotalMonthAllowed = todayMonth + (12*todayYear) - 1;
+    var todayYear = moment().format('YYYY'),
+        todayMonth = moment().format('M'),
+        todayDay = moment().format('D'),
+        latestTotalMonthAllowed = Number(todayMonth) + (12*Number(todayYear)) - 1;
     if (todayDay < 12) {
         latestTotalMonthAllowed--;
     }
-
     for (var key in data_rawValues) {
-        
-        var indID = data_rawValues[key].indID;
-        var month = data_rawValues[key].month;
-        var year = data_rawValues[key].year;
-        var indValue = data_rawValues[key].indValue;
-        var totalMonth = Number(month) + (12*Number(year));
-        
+        var indID = data_rawValues[key].indID,
+            month = data_rawValues[key].month,
+            year = data_rawValues[key].year,
+            indValue = data_rawValues[key].indValue,
+            totalMonth = Number(month) + (12*Number(year));
         if (totalMonth <= latestTotalMonthAllowed) {
             indicatorData.add(indID, month, year, indValue);
         }
-        
     }
 
     // Sort indicatorData by date
