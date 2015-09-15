@@ -380,7 +380,7 @@ function handleAJAXErrors(request) {
         </select>
 
         <button id="btn_showThree" class="btn btn-primary">Show 3 more months</button>
-        <button id="btn_submit" class="btn btn-success">Submit changes</button>
+        <button id="btn_submit" class="btn btn-primary">Submit changes</button>
         <!--<button id="btn_revert" class="btn btn-danger">Revert changes</button>--> <!-- !!!!! Create "Revert changes" button !!!!! -->
     </div>
 

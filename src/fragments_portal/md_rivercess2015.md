@@ -48,45 +48,45 @@ Key Notes on Data
 - Questionnaire and indicators slightly different from those of Konobo Baseline: to ensure comparability with DHS, stick to global standards, and collect programmatically relevant data 
 - All estimates have a statistical margin of error:  Estimates’ precision are worsened in small subpopulations, so use care when making comparisons.  If you need estimates of statistical uncertainty, talk with an M&E team member—we can provide more detailed analyses.
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC6.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC6.1_V1.jpg)
 
 WASH
 ----
 
 **Drinking Water and Toilet Facility**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC8.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC8.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC8.2_V.1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC8.2_V1.jpg)
 
 Maternal & Neonatal Health
 --------------------------
 
 **Antenatal Care (ANC) visitation**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC10.1_V.1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC10.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC10.2_V.1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC10.2_V1.jpg)
 
 **Antenatal Care (ANC): Care Providers**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC12.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC12.1_V1.jpg)
 
 **Facility-Based Delivery**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC13.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC13.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC14.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC14.1_V1.jpg)
 
 **Maternal Post-Natal Care & Neonatal Care: Receipt of Care**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC15.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC15.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC15.2_V.1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC15.2_V1.jpg)
 
 **Receipt of full maternal service cascade**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC16.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC16.1_V1.jpg)
 
 Full maternal service cascade:
 - 4 ANC visits
@@ -98,22 +98,22 @@ Sexual Health & Family Planning
 
 **HIV Testing**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC18.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC18.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC18.2_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC18.2_V1.jpg)
 
 **Family Planning: Current Use of Contraception**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC19.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC19.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC19.2_V2.jpg)
+![](../images/dataPortal/LMSRCphotos/RC19.2_V2.jpg)
 
 Child Health
 ------------
 
 **Treatment of Childhood Illness by Formal Provider**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC21.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC21.1_V1.jpg)
 
 **Vaccination Coverage: Fully Vaccinated**
 
@@ -125,47 +125,47 @@ Vaccinations:
 - Yellow Fever
 - Pneumo 1-3
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC22.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC22.1_V1.jpg)
 
 **Vaccination Coverage: By Vaccination**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC23.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC23.1_V1.jpg)
 
 General Health Access
 ---------------------
 
 **Distance to a Health Facility**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC25.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC25.1_V1.jpg)
 
 **Acceptable Provider for Medical Care**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC26.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC26.1_V1.jpg)
 
 **Barriers to Accessing Health Care**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC27.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC27.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC27.2_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC27.2_V1.jpg)
 
 Ebola
 -----
 
 **Knowledge of Ebola Signs & Symptoms and Transmission**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC29.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC29.1_V1.jpg)
 **Anticipated Behavior if Suspected Ebola Case
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC30.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC30.1_V1.jpg)
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC30.2_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC30.2_V1.jpg)
 
 Rivercess Stackup
 -----------------
 
 **Rivercess(2015) vs. DHS Rural (2013)**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC31.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC31.1_V1.jpg)
 
 - PNC = maternal post-natal care 
 - Received formal care for diarrhea: among children under 5 who had diarrhea in the last 2 weeks, % who received care from a clinic or gCHV
@@ -174,7 +174,7 @@ Rivercess Stackup
 
 **Rivercess Remove (2015) vs. Konobo (2012)**
 
-![](/LastMileData/build/images/dataPortal/LMSRCphotos/RC32.1_V1.jpg)
+![](../images/dataPortal/LMSRCphotos/RC32.1_V1.jpg)
 
 Wrap Up
 -------

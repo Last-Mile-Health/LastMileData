@@ -40,18 +40,18 @@
             <div class="jumbotron">
                 <h1>Last Mile Data</h1>
                 <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It can be used by all staff across teams to access up-to-date data and information about our programs, as well as RM&E team documents. It is used by our RM&E team to enter, aggregate, and quality-check data from both paper forms and mobile health forms.</p>
-                <p><b>Welcome, <span style="color:green"><?php echo $_SESSION['username']; ?></span>.</b></p>
+                <p><b>Welcome, <span style="color:#3E86C3"><?php echo $_SESSION['username']; ?></span>.</b></p>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <h2>Data Portal</h2>
                     <p>The <i>Data Portal</i> is where all staff can go to access up-to-date data and information about our programs. Data is updated monthly on the 15th of each month.</p>
-                    <p><a class="fadeLink btn btn-success" href="page_dataportal.php">Go to Data Portal &raquo;</a></p>
+                    <p><a class="fadeLink btn btn-primary" href="page_dataportal.php">Go to Data Portal &raquo;</a></p>
                 </div>
                 <div class="col-md-6">
                     <h2>Data Entry / QA</h2>
                     <p>This section of the site is used by our RM&E staff, and can be accessed offline when no internet connection is present.</p>
-                    <p><a href="page_deqa.html" class="btn btn-success">Go to Data Entry / QA &raquo;</a></p>
+                    <p><a href="page_deqa.html" class="btn btn-primary">Go to Data Entry / QA &raquo;</a></p>
                 </div>
             </div>
             <hr>

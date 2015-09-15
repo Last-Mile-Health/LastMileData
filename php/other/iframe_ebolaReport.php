@@ -46,7 +46,7 @@
     <body>
         <hr>Start date: <input id='startDate'>&nbsp;&nbsp;&nbsp;
         End date: <input id='endDate'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button id='runReport' class='btn btn-success' style='width:200px'>Run Report</button><hr>
+        <button id='runReport' class='btn btn-primary' style='width:200px'>Run Report</button><hr>
         
         <?php
 

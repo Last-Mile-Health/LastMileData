@@ -62,18 +62,6 @@ $(document).ready(function(){
     // Bind sidebar model to accordion DIV
     rivets.bind($('#sidebarDIV'), {model_sidebar: filteredSidebar});
 
-    // Fade in overview pane by default
-    $('#mainContainer').load('../fragments_portal/frag_overview.php',function(){
-        // These need to happen AFTER navbar loads
-        $(this).scrollTop(0);
-        $('#dashboard_iframe').hide();
-        $('#mainContainer').fadeIn(1000);
-        $('#dp_sidebar').fadeIn(1000);
-        
-        // !!!!! this is not robust since first one might not be a frag !!!!!
-        $('.dp_frag').first().addClass('dp-active');
-    });
-
     // Handle sidebar clicks
     $('.dp_frag, .dp_iframe, .dp_markdown').click(function(){
 
@@ -175,6 +163,13 @@ $(document).ready(function(){
         }
     });
 
+    // !!!!! this is not robust since (1) the name of the first item may change, and (2) the first file might not be a markdown file !!!!!
+    // Fade in overview pane by default
+    $('.dp_markdown').first().addClass('dp-active');
+    $('#id_2').click();
+    $('#dashboard_iframe').hide();
+    $('#dp_sidebar, #mainContainer').fadeIn(1000);
+    
     // Fade out whitespaceContainer when iFrame is done loading
     document.getElementById("dashboard_iframe").onload = function() {
         location.href = "#"; location.href = "#spacer"; // to account for a scrolling bug
