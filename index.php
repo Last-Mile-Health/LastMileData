@@ -33,7 +33,7 @@
             <div class="jumbotron">
                 <h1>Last Mile Data</h1>
                 <p><i>Last Mile Data</i> is the primary programmatic database platform for Last Mile Health. It can be used by all staff across teams to access up-to-date data and information about our programs, as well as RM&E team documents. It is used by our RM&E team to enter, aggregate, and quality-check data from both paper forms and mobile health forms.</p>
-                <p><a href="#" class="btn btn-success btn-lg" data-toggle="modal" data-target="#loginModal">Login</a></p>
+                <p><a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</a></p>
                 <?php
                     if ( isset($_GET['retry']) ) {
                         echo "<p style='color:red'>Incorrect login credentials. Please try again.</p>";
@@ -68,7 +68,7 @@
                                 <input name="redirect" type="hidden" value="<?php echo @$_GET['redirect']; ?>">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-success btn-lg btn-block">Sign In</button>
+                                <button class="btn btn-primary btn-lg btn-block">Sign In</button>
                                 <span>Please email <a href="mailto:LMD@lastmilehealth.org?subject=Access to LastMileData.org">LMD@lastmilehealth.org</a> to request access to this site.</span>
                             </div>
                         </form>
