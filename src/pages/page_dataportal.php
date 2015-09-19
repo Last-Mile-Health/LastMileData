@@ -19,7 +19,7 @@
         <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
-        <link rel="stylesheet" href="../css/page_dataportal.css"  type="text/css" />
+        <link rel="stylesheet" href="../css/page_dataPortal.css"  type="text/css" />
         
         <?php
             // Echo username/usertype (used by access control system)
@@ -47,13 +47,16 @@
         <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="../../lib/rivets.bundled.min.js"></script>
         <script src="../../lib/moment.min.js"></script>
+        <script src="../../lib/underscore.min.js"></script>
+        <script src="../../lib/backbone.min.js"></script>
         <script src="../../lib/showdown.min.js"></script>
         <script src="../../lib/d3.min.js"></script>
         <script src="../../lib/dimple.v2.1.0.min.js"></script>
         <script src="../js/LMD_dimpleHelper.js"></script>
         <script src="../js/loadContents.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
         <script src="../js/LMD_dataPortal.js"></script>
-        <script src="../js/page_dataportal.js"></script>
+        <script src="../js/page_dataPortal.js"></script>
         
     </head>
     

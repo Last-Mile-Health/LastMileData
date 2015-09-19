@@ -18,7 +18,7 @@ A. STEPS FOR CREATING A NEW FORM:
     7) In the page_deqa.html file:
         a. Add a data entry link to the form in the "Current forms" section (id="currentVersions_div" element)
         b. Add a QA link to the form in the "Current forms" section
-    9) In the deqa.js file, add a QA click handler
+    9) In the page_deqa.js file, add a QA click handler
     10) Create the MySQL table
     11) Add a link to the application cache manifest ("lastmiledata.appcache"), under the "# src >> forms" header
 
@@ -36,6 +36,6 @@ B. STEPS FOR UPDATING A FORM:
     7) In the page_deqa.html file:
         a. Copy the data entry and QA links down to the "Archived forms" section (id="currentVersions_div" element)
         b. Update the data entry and QA links in the "Current forms" section (id="currentVersions_div" element)
-    8) In the deqa.js file:
+    8) In the page_deqa.js file:
         a. Add a click handler for the new form
         b. Update the "targetForm" URL of the old form

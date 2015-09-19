@@ -38,7 +38,7 @@ $(document).ready(function() {
     $de_init.after("<input id='de_print_init'>");
     
     // Set de_init and de_date; set fields to readonly
-    $de_date.val(mysql_date());
+    $de_date.val(LMD_utilities.mysql_date());
     $de_date.attr('readonly','readonly');
     $de_init.val(sessionStorage.username);
     $de_init.attr('readonly','readonly');
@@ -48,8 +48,8 @@ $(document).ready(function() {
     $("#meBox").append("<input name='meta_DE_endTime' class='stored' type='hidden'>");
     $("#meBox").append("<input name='meta_dataSource' class='stored' type='hidden' value='paper'>");
     $("#meBox").append("<input name='meta_UUID' class='stored' type='hidden'>");
-    $("input[name=meta_DE_startTime]").val(mysql_time());
-    $("input[name=meta_UUID]").val(getUUID());
+    $("input[name=meta_DE_startTime]").val(LMD_utilities.mysql_time());
+    $("input[name=meta_UUID]").val(LMD_utilities.getUUID());
     
     // If in "QA mode", populate field values
     if (qaRecordID) {
@@ -85,7 +85,7 @@ $(document).ready(function() {
             
             // Set qa_date; set to readonly
             $qa_date = $("input[name=qa_date]");
-            $qa_date.val(mysql_date());
+            $qa_date.val(LMD_utilities.mysql_date());
             $qa_date.attr('readonly','readonly');
             
         });
@@ -132,7 +132,7 @@ $(document).ready(function() {
         } else {
             
             // Set "form end" timestamp
-            $("input[name=meta_DE_endTime]").val(mysql_time());
+            $("input[name=meta_DE_endTime]").val(LMD_utilities.mysql_time());
             
             // Initialize nextKey
             var nextKey = 0;
@@ -181,7 +181,6 @@ $(document).ready(function() {
     });
     
     
-    
     // Cancel form submission
     $('#lmd_cancel').click(function() {
         $("body").fadeOut(500,function(){
@@ -190,67 +189,4 @@ $(document).ready(function() {
         });
     });
     
-    
-    
 });
-
-
-// Returns MySQL-formatted date
-// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
-function mysql_date(inputDate) {
-    if (arguments.length === 0) {
-        var myDate = new Date();
-    } else {
-        var myDate = new Date(inputDate);
-    }
-    return myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate());
-}
-
-
-// Returns a Universally-unique identifier (UUID)
-// !!!!! Refactor into "utility library"
-function getUUID() {
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    });
-    return uuid;
-}
-
-// Returns MySQL-formatted time
-// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
-function mysql_time(inputDate) {
-    if (arguments.length === 0) {
-        var myDate = new Date();
-    } else {
-        var myDate = new Date(inputDate);
-    }
-    return myDate.toTimeString().substring(0,8);
-}
-
-
-// Pad numbers to two digits ( helper function for mysql_datetime() )
-// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
-function twoDigits(d) {
-    if(0 <= d && d < 10) return "0" + d.toString();
-    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-    return d.toString();
-}
-
-// Return GET parameter  !!!!! inactive but useful; Refactor into "utility library" !!!!!
-//function getParameterByName(name) {
-//    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-//    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-//        results = regex.exec(location.search);
-//    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-//}
-
-//function logError(e) {
-//    // modify to catch errors where access to filesystem is not granted
-//    console.log('fhwForms - logError');
-//    console.log(e);
-//}
-
-//function addRecordToObject() {
-//    JSON.stringify(myRecord);
-//}

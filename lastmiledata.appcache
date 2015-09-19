@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Sun Sep 06 2015 15:28:30 GMT+0000 (Greenwich Standard Time)
+# Time: Sat Sep 19 2015 15:40:16 GMT+0000 (Greenwich Standard Time)
 
 CACHE:
 lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css
@@ -22,6 +22,7 @@ build/images/chk_print.png
 build/images/lmd_icon.png
 build/images/logo_LMH.png
 build/images/logo_LMH_invert.png
+build/images/logo_LMH_invert_v3.png
 build/images/logo_TH.png
 build/images/logo_flag.png
 build/images/logo_liberia.png
@@ -47,7 +48,6 @@ build/forms/fhw_sch03_sickchild.html
 build/forms/fhw_sst05_sicknessscreeningtool.html
 build/forms/fhw_vac01_vaccines.html
 build/forms/prg_chv01_gchvquestionnaire.html
-build/forms/prg_trl02_trainingledger.html
 build/forms/prg_trl03_trainingledger.html
 build/forms/util_householdIDAssignmentTool.html
 build/forms/util_memberIDAssignmentTool.html
@@ -59,16 +59,17 @@ build/forms/old/fhw_kpi02_kpiassessment.html
 build/forms/old/fhw_reg02_registration.html
 build/forms/old/fhw_sst04_ebolascreening.html
 build/forms/old/prg_trl01_trainingledger.html
+build/forms/old/prg_trl02_trainingledger.html
 build/pages/header_bootstrap.html
 build/pages/page_deqa.html
 build/pages/tool_viewLocalRecords.html
-build/js/LMD_fileSystemHelper.118259b5.js
-build/js/LMD_accessControl.0972c0c8.js
-build/js/deqa.c6a6d0d3.js
-build/js/fhwForms.741931e8.js
-build/js/formHelper.342590c2.js
-build/js/formValidate.87d3da38.js
-build/js/loadContents.a17b1d23.js
+build/js/LMD_fileSystemHelper.8e90992a.js
+build/js/LMD_utilities.b81abf3b.js
+build/js/page_deqa.7b9c6c11.js
+build/js/fhwForms.31546c48.js
+build/js/formHelper.c5a8e7f5.js
+build/js/formValidate.af42a788.js
+build/js/loadContents.8abe03ed.js
 
 NETWORK:
 *

@@ -28,7 +28,7 @@ $app = new \Slim\Slim();
 
 // Route 1: (lastmile_dataportal.tbl_indicators)
 $app->get('/indicators/(:id)',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", 1);
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "archived <> 1");
 });
 $app->post('/indicators/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");

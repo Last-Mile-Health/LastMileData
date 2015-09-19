@@ -11,7 +11,7 @@ var LMD_dataPortal = (function(){
     //          Values are objects containing four properties: Date (MySQL format), Month, Year, Value
     function addIndicatorData(indID, month, year, value) {
         var obj = {};
-        obj.Date = year + "-" + twoDigits(month) + "-01";
+        obj.Date = year + "-" + LMD_utilities.twoDigits(month) + "-01";
         obj.Month = Number(month);
         obj.Year = Number(year);
         obj.Value = Number(value);

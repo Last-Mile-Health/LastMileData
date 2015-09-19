@@ -1,4 +1,4 @@
-<h1>CHW Training <span style="font-size:60%">(updated: 8/12/2015)</span></h1>
+<h1>CHW Training <span style="font-size:60%">(updated: 9/15/2015)</span></h1>
 <hr>
 
 <h3>CHWs</h3>
@@ -18,8 +18,8 @@
         <td>Grand Gedeh</td>
         <td>Konobo</td>
         <td>Konobo</td>
-        <td>48</td>
-        <td>48</td>
+        <td>45</td>
+        <td>45</td>
         <td>31</td>
         <td>31</td>
         <td>5</td>
@@ -40,14 +40,25 @@
         <td>Grand Gedeh</td>
         <td>Gbarzon</td>
         <td>Gboe-Ploe</td>
-        <td>13</td>
-        <td>13</td>
+        <td>16</td>
+        <td>16</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
     </tr>
     <tr>
+        <td>Rivercess</td>
+        <td>(Cohort 1)</td>
+        <td></td>
+        <td>120</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+<!--    <tr>
         <td>Rivercess</td>
         <td>Central Rivercess</td>
         <td>Central C</td>
@@ -90,7 +101,7 @@
         <td>0</td>
         <td>0</td>
         <td>0</td>
-    </tr>
+    </tr>-->
 </table>
 <br>
 

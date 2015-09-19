@@ -46,7 +46,7 @@
                 <div class="col-md-6">
                     <h2>Data Portal</h2>
                     <p>The <i>Data Portal</i> is where all staff can go to access up-to-date data and information about our programs. Data is updated monthly on the 15th of each month.</p>
-                    <p><a class="fadeLink btn btn-primary" href="page_dataportal.php">Go to Data Portal &raquo;</a></p>
+                    <p><a class="fadeLink btn btn-primary" href="page_dataPortal.php">Go to Data Portal &raquo;</a></p>
                 </div>
                 <div class="col-md-6">
                     <h2>Data Entry / QA</h2>

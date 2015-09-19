@@ -8,6 +8,14 @@ $(document).ready(function(){
     // Configure rivets.js
     rivets.configure({templateDelimiters: ['{{', '}}']});
 
+    // Add Rivets-Backbone adapter
+    rivets.adapters[':'] = {
+        observe: function(obj, keypath, callback) { obj.on('change:' + keypath, callback); },
+        unobserve: function(obj, keypath, callback) { obj.off('change:' + keypath, callback); },
+        get: function(obj, keypath) { return obj.get(keypath); },
+        set: function(obj, keypath, value) { obj.set(keypath, value); }
+    };
+
     // Rivers formatter: numbers (one-way)
     rivets.formatters.format = function(x, format) {
         if (x !== undefined && x !== null) {
@@ -136,6 +144,9 @@ $(document).ready(function(){
                             // Apply rendered html to mainContainer DIV
                             var html = converter.makeHtml(responseText);
                             $('#mainContainer').html(html);
+                            
+                            // Make links open in new tabs/windows
+                            $('#mainContainer a').attr('target','_blank');
                             
                             // Add bootstrap table classes
                             $('#mainContainer table').addClass('table table-striped table-hover');

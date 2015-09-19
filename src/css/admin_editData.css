@@ -1,0 +1,64 @@
+.pad {
+    padding-left:10px;
+    padding-right:10px;
+}
+.admin_input {
+    width:100%;
+    height:100%;
+    border:none;
+    padding:1px;
+    margin-right:1px;
+    margin-left:1px;
+    background:#eee;
+}
+.admin_input:hover {
+    background:#DBFFB7;
+    cursor:pointer;
+}
+.admin_input:focus {
+    background:lightgreen;
+}
+
+div.tableContainer {
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+    clear: both;
+    width:100%;
+    overflow-x: scroll;
+    overflow-y: auto;
+    padding-top:4px;
+}
+div.tableContainer table {
+    width: 100%;
+}
+thead#adminHeader tr {
+    display: block
+}
+thead#adminHeader th {
+    padding-left:4px;
+    padding-right:4px;
+    border: 2px solid white;
+    color: white;
+    background: #003366;
+}
+#scrollContent {
+    display: block;
+    height: 60vh;
+    overflow-x:hidden;
+    overflow-y: auto;
+    width: 100%
+}
+#scrollContent td {
+    border:2px solid white;
+    background:#eee;
+}
+
+th:nth-child(1), td:nth-child(1) { min-width:120px; width:120px }
+th:nth-child(2), td:nth-child(2) { min-width:300px; width:300px }
+th:nth-child(3), td:nth-child(3) { min-width:120px; width:120px }
+th:nth-child(n+4), td:nth-child(n+4) { min-width:70px; width:70px }
+
+.btn {
+    width:200px;
+    margin:2px;
+}

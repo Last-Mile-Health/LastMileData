@@ -7,15 +7,8 @@ $(document).ready(function(){
     };
     
     // Set app version manually here
-    $('#appVersion').text('00490');
+    $('#appVersion').text('00491');
 
-    // !!!!! This is not currently being used !!!!!
-    // Apply access control settings
-    // Set permissions in LMD_accessControl.js file
-    LMD_accessControl.setPage('deqa');
-    LMD_accessControl.setUserType('deqa');
-    LMD_accessControl.go();
-            
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
         
@@ -1032,27 +1025,6 @@ function launchQAModal(options)
     
     // Open modal
     $('#modal_QA').modal();
-}
-
-
-
-// Return MySQL-formatted "DATETIME" string of current date/time
-// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
-function mysql_date(inputDate) {
-    if (arguments.length === 0) {
-        var myDate = new Date();
-    } else {
-        var myDate = new Date(inputDate);
-    }
-    return ( myDate.getUTCFullYear() + "-" + twoDigits(1 + myDate.getUTCMonth()) + "-" + twoDigits(myDate.getUTCDate()) );
-}
-
-// Pad numbers to two digits ( helper function for mysql_datetime() )
-// !!!!! Refactor into "utility library"; This is duplicated (fhwForms.js, deqa.js) !!!!!
-function twoDigits(d) {
-    if(0 <= d && d < 10) return "0" + d.toString();
-    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-    return d.toString();
 }
 
 

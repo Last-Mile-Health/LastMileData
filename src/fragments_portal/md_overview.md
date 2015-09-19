@@ -8,8 +8,8 @@ Contents
 #### **&bull; Last Mile Survey.** Data from the Last Mile Survey series.
 #### **&bull; KPI Assessment.** Data from the KPI Assessment, a short survey administered by CHWs in August of 2014 in Konobo.
 #### **&bull; Liberia stats.** Population data for the communities in Liberia, and selections of data from the 2013 Demographic and Health Survey (DHS) of Liberia.
-#### **&bull; RM&E team tools.** Links to key documents relevant to the RM&E team, including program forms, mHealth materials, strategy documents, and reports.
-#### **&bull; RM&E Documents.** Tools for use by our Research, Monitoring, & Evaluation team.
+#### **&bull; RM&E team tools.** Tools for use by our Research, Monitoring, & Evaluation team.
+#### **&bull; RM&E documents.** Links to key documents relevant to the RM&E team, including program forms, mHealth materials, strategy documents, and reports.
 
 Notes
 -----
