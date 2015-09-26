@@ -25,7 +25,26 @@ $.getScript('../js/frag_konobo.js');
             <h3><b>{{index | plusOne}}</b>. {{report_object.roMetadata_name}}</h3>
             <p><b>Definition</b>: {{report_object.roMetadata_description}}</p>
             <p rv-if="report_object.roMetadata_target"><b>FY15 Target</b>: {{report_object.roMetadata_target | format report_object.roMetadata_format}}</p>
+            
+            
+            <!-- !!!!! NEW !!!!! -->
             <table class='ptg_data'>
+                <tr>
+                    <th rv-if="report_object.multiple">&nbsp;</th>
+                    <th rv-each-lastfour="lastFourMonths">{{lastfour.shortMonth}}</th>
+                </tr>
+                <tr rv-each-indid="report_object.indicators">
+                    <!-- Indicator shortnames will be dynamically placed here -->
+                    <td class="indShortName" rv-if="report_object.multiple" rv-data-indid="indid"></td>
+                    <!-- Indicator values will be dynamically placed here -->
+                    <td rv-each-lastfour="lastFourMonths" class="indValue" rv-data-yearmonth="lastfour.yearMonth" rv-data-indid="indid" rv-data-format="report_object.roMetadata_format"></td>
+                </tr>
+            </table>
+            <!-- !!!!! NEW !!!!! -->
+            
+            
+            <!-- !!!!! OLD !!!!! -->
+<!--            <table class='ptg_data'>
                 <tr>
                     <th rv-if="report_object.data.multiple">&nbsp;</th>
                     <th rv-each-date="report_object.data.dates">{{date | shortDate}}</th>
@@ -34,7 +53,10 @@ $.getScript('../js/frag_konobo.js');
                     <td rv-if="report_object.data.multiple">{{values.name}}</td>
                     <td rv-each-value="values.values">{{value | format report_object.roMetadata_format}}</td>
                 </tr>
-            </table>
+            </table>-->
+            <!-- !!!!! OLD !!!!! -->
+            
+            
             <hr class='smallHR'>
             <p rv-if="report_object.roMetadata_narrative"><b>Progress-to-goal</b>: {{report_object.roMetadata_narrative}}</p>
         </div>

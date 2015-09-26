@@ -24,7 +24,7 @@
 
     # Redirect lastmiledata.org/portal --> DEQA page
     RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
-    RewriteRule ^portal$ "https\:\/\/lastmiledata\.org\/LastMileData\/build\/pages\/page_dataportal\.php" [R=301,L]
+    RewriteRule ^portal$ "https\:\/\/lastmiledata\.org\/LastMileData\/build\/pages\/page_dataPortal\.php" [R=301,L]
 
     # Redirect all HTTP requests to HTTPS
     RewriteCond %{SERVER_PORT} !=443

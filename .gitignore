@@ -35,11 +35,11 @@ Icon
 .Spotlight-V100
 .Trashes
 
+# User-ignored files
 nbproject/private/private.xml
 backups
-node_modules
 build
+node_modules
 testing
-nbproject/private/private.xml
-.tmp
 lastmiledata.appcache
+.tmp

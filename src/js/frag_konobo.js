@@ -16,7 +16,6 @@ $(document).ready(function(){
     for (var key in data_indicators) {
         var indID = data_indicators[key].indID;
         var metadata = data_indicators[key];
-        delete metadata.indID;
         LMD_dataPortal.addIndicatorMetadata(indID, metadata);
     }
 
@@ -38,92 +37,105 @@ $(document).ready(function(){
     });
 
 
+        
+        
+    // !!!!! NEW CODE !!!!!
     // Merge data into model_konobo
     for (var key in model_konobo) {
-
-        var multiple = model_konobo[key].indicators.length > 1 ? true : false;
-
-        // Add blank "data" property
-        model_konobo[key].data = { multiple:multiple, points:[], dates:[], values:[] };
         
+        var M = model_konobo[key];
+        
+        // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators
+        M.multiple = M.indicators.length > 1 ? true : false;
+
         // Add "chart_div" property
-        model_konobo[key].chart_div = "chart_" + model_konobo[key].id;
+        M.chart_div = "chart_" + M.id;
         
-        // !!!!! add option to take in passed data ?????
+        // Add chart_points array (for Dimple charts)
+        M.chart_points = [];
         
         // If roMetadata fields are not specified, get them from getIndicatorMetadata()
-        var indID = model_konobo[key].indicators[0];
+        var indID = M.indicators[0];
         var metadata = LMD_dataPortal.getIndicatorMetadata(indID);
-        if ( model_konobo[key].roMetadata_name == null || model_konobo[key].roMetadata_name == '' ) {
-            model_konobo[key].roMetadata_name = metadata.indName;
+        if ( M.roMetadata_name == null || M.roMetadata_name == '' ) {
+            M.roMetadata_name = metadata.indName;
         }
-        if ( model_konobo[key].roMetadata_format == null || model_konobo[key].roMetadata_format == '' ) {
-            model_konobo[key].roMetadata_format = metadata.indFormat;
+        if ( M.roMetadata_format == null || M.roMetadata_format == '' ) {
+            M.roMetadata_format = metadata.indFormat;
         }
-        if ( model_konobo[key].roMetadata_description == null || model_konobo[key].roMetadata_description == '' ) {
-            model_konobo[key].roMetadata_description = metadata.indDefinition;
+        if ( M.roMetadata_description == null || M.roMetadata_description == '' ) {
+            M.roMetadata_description = metadata.indDefinition;
         }
 
-        for (var key2 in model_konobo[key].indicators) {
-            
-            var indID = model_konobo[key].indicators[key2];
+        for (var key2 in M.indicators) {
+
+            var indID = M.indicators[key2];
             var dataArray = LMD_dataPortal.getIndicatorData(indID);
-            var valuesArray = [];
 
-            // Pull in recent data (for table)
-            for(var i=0; i<model_konobo[key].table_numMonths; i++) {
-                
-                if (dataArray !== undefined && dataArray[i] !== undefined) {
-                    
-                    // Create "recent data" array
-                    valuesArray.push(dataArray[i].Value);
-                    
-                    // !!!!! this code will break if there are missing data points !!!!!
-                    // !!!!! also modify this code to manually truncate the dataset (e.g. last 12 months) !!!!!
-//if (i===0) {
-//console.log('before');
-//console.log(model_konobo[key].data.dates.indexOf(dataArray[i].Date));
-//}
-                    if (model_konobo[key].data.dates.indexOf(dataArray[i].Date) === -1) {
-//if (i===0) {
-//console.log(dataArray[i].Date);
-//}
-                        
-                        // Create "recent data dates" array
-                        model_konobo[key].data.dates.push(dataArray[i].Date);
-                    }
-                    
-                }
-                
-            }
-
-            // Reverse "recent data" array
-            valuesArray.reverse();
-
-            // Populate data points array for chart
+            // Populate chart_points array (for Dimple charts)
             for(var i=0; i<dataArray.length; i++) {
-                model_konobo[key].data.points.push({
+                M.chart_points.push({
                     Month:dataArray[i].Date,
                     Value:dataArray[i].Value,
-                    Cut: multiple ? LMD_dataPortal.getIndicatorMetadata(indID).indShortName : 1
+                    Cut: M.multiple ? LMD_dataPortal.getIndicatorMetadata(indID).indShortName : 1
                 });
             }
-            model_konobo[key].data.values.push({
-                name:LMD_dataPortal.getIndicatorMetadata(indID).indShortName,
-                values:valuesArray
-            });
-
         }
-        
-        // Reverse "recent data dates" array
-        model_konobo[key].data.dates.reverse();
-
     }
+    // !!!!! NEW CODE !!!!!
+    
+    
+    // !!!!! NEW CODE !!!!!
+    var lastFourMonths = [
+        { yearMonth: "2015-4", shortMonth: "Apr '15" },
+        { yearMonth: "2015-5", shortMonth: "May '15" },
+        { yearMonth: "2015-6", shortMonth: "Jun '15" },
+        { yearMonth: "2015-7", shortMonth: "Jul '15" }
+    ];
+    // !!!!! NEW CODE !!!!!
+
 
     // Bind model to DIV
-    rivets.bind($('#dashboardContent'), {model_konobo: model_konobo});
-    console.log(model_konobo);
+    // !!!!! NEW CODE !!!!!
+    rivets.bind($('#dashboardContent'), {
+        model_konobo: model_konobo,
+        lastFourMonths: lastFourMonths
+    });
+    // !!!!! NEW CODE !!!!!
     
+    
+    // !!!!! NEW CODE !!!!!
+    var _newDataContainer = {};
+    for (var key in data_rawValues) {
+        var V = data_rawValues[key];
+        _newDataContainer["i_" + V.indID + "_m_" + V.year + "-" + V.month] = V.indValue;
+    }
+    
+    var _newIndContainer = {};
+    for (var key in data_indicators) {
+        var V = data_indicators[key];
+        _newIndContainer[V.indID] = V.indShortName;
+    }
+    
+    // Dynamically populate indicator values
+    $(".indValue").each(function(){
+        var indID = $(this).attr("data-indid");
+        var yearmonth = $(this).attr("data-yearmonth");
+        var format = $(this).attr("data-format");
+        var indValue = _newDataContainer["i_" + indID + "_m_" + yearmonth];
+        indValue = LMD_utilities.format_number(indValue, format, 1) // !!!!! decimal places (currently "1") ?????
+        $(this).html(indValue);
+    });
+    
+    // Dynamically populate indicator short names
+    $(".indShortName").each(function(){
+        var indID = $(this).attr("data-indid");
+        var shortName = _newIndContainer[indID];
+        $(this).html(shortName);
+    });
+    // !!!!! NEW CODE !!!!!
+
+
     // Create charts
     for(var key in model_konobo) {
         if (key>=0) {
@@ -133,7 +145,7 @@ $(document).ready(function(){
             LMD_dimpleHelper.createChart({
                 type:RO.chart_type,
                 targetDiv: RO.chart_div,
-                data: RO.data.points,
+                data: RO.chart_points,
                 colors: RO.chart_colors || "default",
                 timeInterval: RO.chart_timeInterval || 1, // !!!!! calculate this automatically
                 size: { x:RO.chart_size_x, y:RO.chart_size_y },

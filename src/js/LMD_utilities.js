@@ -50,12 +50,40 @@ var LMD_utilities = (function(){
     }
 
 
+    // PUBLIC:  Format numbers
+    //          Valid formats include 'integer', 'percent', 'decimal', or 'dollars'
+    //          "X" is number of decimal places
+    function format_number(number, format, X) {
+        if (number === '' || number === null || typeof number === 'undefined') {
+            return '';
+        } else {
+            switch(format) {
+                case 'integer':
+                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    break;
+                case 'percent':
+                    return (number*100).toFixed(X) + "%";
+                    break;
+                case 'decimal':
+                    return number.toFixed(X);
+                    break;
+                case 'dollars':
+                    return "$" + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    break;
+                default:
+                    return number;
+            }
+        }
+    }
+
+
     // LMD_utilities API
     return {
         mysql_date: mysql_date,
         mysql_time: mysql_time,
         getUUID: getUUID,
-        twoDigits: twoDigits
+        twoDigits: twoDigits,
+        format_number: format_number
     };
     
 

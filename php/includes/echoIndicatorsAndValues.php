@@ -29,5 +29,6 @@
     echo "var data_rawValues = $json2;". "\n\n";
     
     if(isset($reportObjectString)) {
+        // !!!!! this needs to be generalized !!!!!
         echo "var model_konobo = $json3;". "\n\n";
     }
