@@ -51,21 +51,22 @@ var LMD_utilities = (function(){
 
 
     // PUBLIC:  Format numbers
-    //          Valid formats include 'integer', 'percent', 'decimal', or 'dollars'
-    //          "X" is number of decimal places
-    function format_number(number, format, X) {
+    //          Valid formats include 'integer', 'percent-X', 'decimal-X', or 'dollars' (X is number of decimal places)
+    function format_number(number, format) {
         if (number === '' || number === null || typeof number === 'undefined') {
             return '';
         } else {
-            switch(format) {
+            var type = format.split("-")[0];
+            var X = format.split("-")[1] || 1;
+            switch(type) {
                 case 'integer':
                     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     break;
                 case 'percent':
-                    return (number*100).toFixed(X) + "%";
+                    return Number(number*100).toFixed(X) + "%";
                     break;
                 case 'decimal':
-                    return number.toFixed(X);
+                    return Number(number).toFixed(X);
                     break;
                 case 'dollars':
                     return "$" + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

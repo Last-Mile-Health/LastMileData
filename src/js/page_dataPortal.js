@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-    // This variable is set to true if any data changes occur (currently only used by "admin_editData.php" fragment)
     DataPortal_GLOBALS = {
+        // This variable is set to true if any data changes occur (currently only used by "admin_editData.php" fragment)
         anyChanges: false
     };
 
