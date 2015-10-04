@@ -22,18 +22,20 @@
             
             // Apply jQueryUI datepicker (MySQL date format)
             $("#startDate, #endDate").datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'yy-mm-dd'
             });
             
             $('#runReport').click(function(){
                 var startDate = $('#startDate').val();
                 var endDate = $('#endDate').val();
+                var district = $('#district').val();
                 
                 if (startDate!='' & endDate!='') {
                     var myLocation = "/LastMileData/php/other/iframe_sickChildReport.php";
                     myLocation += "?startDate=" + startDate;
                     myLocation += "&endDate=" + endDate;
-                    location.assign(myLocation)
+                    myLocation += "&district=" + district;
+                    location.assign(myLocation);
                 }
                 else {
                     alert("Please select a start date and end date.");
@@ -45,7 +47,12 @@
     </head>
     <body>
         <hr>Start date: <input id='startDate'>&nbsp;&nbsp;&nbsp;
-        End date: <input id='endDate'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        End date: <input id='endDate'>&nbsp;&nbsp;&nbsp;
+        District: <select id="district">
+            <option value="All">All districts</option>
+            <option value="Konobo">Konobo</option>
+            <option value="Gboe-Ploe">Gboe-Ploe</option>
+        </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button id='runReport' class='btn btn-primary' style='width:200px'>Run Report</button><hr>
         
         <?php
@@ -59,9 +66,23 @@
                 // Get startDate and endDate
                 $startDate = $_GET['startDate'];
                 $endDate = $_GET['endDate'];
+                $district = $_GET['district'];
+                
+                // Parse subquery
+                switch ($district) {
+                    case 'All':
+                        $subquery = 1;
+                        break;
+                    case 'Konobo':
+                        $subquery = "fhwID IN (SELECT pk_staff FROM lastmile_db.tbl_data_staff INNER JOIN lastmile_db.tbl_assc_staff_village ON pk_staff=fk_staff INNER JOIN lastmile_db.tbl_data_village ON fk_village=pk_village INNER JOIN lastmile_db.tbl_data_district ON fk_district=pk_district WHERE districtName IN ('Konobo','Glio-Twarbo'))";
+                        break;
+                    case 'Gboe-Ploe':
+                        $subquery = "fhwID IN (SELECT pk_staff FROM lastmile_db.tbl_data_staff INNER JOIN lastmile_db.tbl_assc_staff_village ON pk_staff=fk_staff INNER JOIN lastmile_db.tbl_data_village ON fk_village=pk_village INNER JOIN lastmile_db.tbl_data_district ON fk_district=pk_district WHERE districtName IN ('Gboe-Ploe'))";
+                        break;
+                }
                 
                 // Parse queryString; run query; extract data (ALL AGES)
-                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate';";
+                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && $subquery;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
                 extract($row);
@@ -77,7 +98,7 @@
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
                 // Parse queryString; run query; extract data (Ages 0-1)
-                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) < 12;";
+                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && $subquery && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) < 12;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
                 extract($row);
@@ -92,7 +113,7 @@
                 echo "Treated at home (ARI): <b>$treat_ARI</b><br><br>";
                 
                 // Parse queryString; run query; extract data (Ages 1-5)
-                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) >= 12 && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) < 72;";
+                $queryString = "SELECT SUM(C_diarrhea_giveORS) AS refer_diarrhea, SUM(C_fever_giveACT) AS refer_malaria, SUM(C_ari_giveAmox) AS refer_ARI, SUM(D_diarrhea_giveORS) AS treat_diarrhea, SUM(D_fever_giveACT) AS treat_malaria, SUM(D_ari_giveAmox) AS treat_ARI FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE visitDate>='$startDate' && visitDate<='$endDate' && $subquery && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) >= 12 && ((IFNULL(childAge_years,0)*12)+IFNULL(childAge_months,0)) < 72;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
                 extract($row);
