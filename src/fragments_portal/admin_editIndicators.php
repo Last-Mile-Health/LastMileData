@@ -34,7 +34,8 @@ $.getScript('../js/admin_editIndicators.js');
                     <th class="pad">Cut</th>
                     <th class="pad">Target</th>
                     <th class="pad">Narrative</th>
-                    <th class="pad">X</th>
+                    <th class="pad">Definition</th>
+                    <th class="pad">&nbsp;X&nbsp;&nbsp;&nbsp;</th>
                 </tr>
             </thead>
             <tbody id="scrollContent">
@@ -44,6 +45,7 @@ $.getScript('../js/admin_editIndicators.js');
                     <td><input class="admin_input pad filterCut" rv-value="indicator:indCut" rv-on-change="actions.change" rv-on-click="actions.click"></td>
                     <td><input class="admin_input pad" rv-value="indicator:indTarget" rv-on-change="actions.change" rv-on-click="actions.click"></td>
                     <td><input class="admin_input pad" rv-value="indicator:indNarrative" rv-on-change="actions.change" rv-on-click="actions.click"></td>
+                    <td><input class="admin_input pad" rv-value="indicator:indDefinition" rv-on-change="actions.change" rv-on-click="actions.click"></td>
                     <td><button rv-data-cid="indicator.cid" rv-on-click="actions.delete" class="btn btn-xs btn-danger btn_remove">X</button></td>
                 </tr>
             </tbody>
