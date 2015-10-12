@@ -26,6 +26,21 @@ require_once("cxn.php");
 $app = new \Slim\Slim();
 
 
+// Route 0: (lastmile_dataportal.tbl_testREST) // For testing REST clients (3 columns: `id`, `name`, `age`)
+$app->get('/test_rest/(:id)',function($id='all') {
+    LMD_get($id, "id", "lastmile_dataportal.test_rest", 1);
+});
+$app->post('/test_rest/', function() {
+    LMD_post("lastmile_dataportal.test_rest");
+});
+$app->put('/test_rest/:id', function($id) {
+    LMD_put($id, "id", "lastmile_dataportal.test_rest");
+});
+$app->delete('/test_rest/:id', function($id) {
+    LMD_delete($id, "id", "lastmile_dataportal.test_rest");
+});
+
+
 // Route 1: (lastmile_dataportal.tbl_indicators)
 $app->get('/indicators/(:id)',function($id='all') {
     LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "archived <> 1");

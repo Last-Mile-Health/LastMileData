@@ -7,35 +7,56 @@
 ?>
 
     // Bootstrap the page
+    console.log(model_report);
     LMD_dataPortal.bootstrap(data_rawValues, data_indicators, model_report);
 
 </script>
 
 <div id='reportContent'>
     <h1><?php echo $reportTitle; ?></h1>
-    <div class='row' rv-each-report_object="model_report">
-        <hr style="margin:15px; border:1px solid #eee;">
-        <div class='col-md-4'>
-            <h3><b>{{index | plusOne}}</b>. {{report_object.roMetadata_name}}</h3>
-            <p><b>Definition</b>: {{report_object.roMetadata_description}}</p>
-            <p rv-if="report_object.roMetadata_target"><b>FY16 Target</b>: {{report_object.roMetadata_target | format report_object.roMetadata_format}}</p>
-            <table class='ptg_data'>
-                <tr>
-                    <th rv-if="report_object.multiple">&nbsp;</th>
-                    <th rv-each-lastfour="lastFourMonths">{{lastfour.shortMonth}}</th>
-                </tr>
-                <tr rv-each-indid="report_object.indicators">
-                    <!-- Indicator shortnames will be dynamically placed here -->
-                    <td class="indShortName" rv-if="report_object.multiple" rv-data-indid="indid"></td>
-                    <!-- Indicator values will be dynamically placed here -->
-                    <td rv-each-lastfour="lastFourMonths" class="indValue" rv-data-yearmonth="lastfour.yearMonth" rv-data-indid="indid" rv-data-format="report_object.roMetadata_format"></td>
-                </tr>
-            </table>
-            <hr class='smallHR'>
-            <p rv-if="report_object.roMetadata_narrative"><b>Narrative</b>: {{report_object.roMetadata_narrative}}</p>
-        </div>
-        <div class='col-md-7'>
-            <div rv-id="report_object.chart_div"></div>
+    <div data-bind="foreach: {data:model_report, as:'ro'}">
+        <div class='row'>
+            <hr style="margin:15px; border:1px solid #eee;">
+            <div class='col-md-4'>
+                <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + roMetadata_name"></h3>
+                <p><b>Definition</b>: <span data-bind="text:roMetadata_description"></span></p>
+                <p data-bind="if:roMetadata_target"><b>FY16 Target</b>: <span data-bind="text: LMD_utilities.format_number(roMetadata_target,roMetadata_format)"></span></p>
+                <table class='ptg_data'>
+                    
+                    <tr>
+                        <!-- ko if:multiple -->
+                        <th>&nbsp;</th>
+                        <!-- /ko -->
+                        
+                        <!-- Month names -->
+                        <!-- ko foreach:$parents[0].lastFourMonths -->
+                        <th data-bind="text:shortMonth"></th>
+                        <!-- /ko -->
+                    </tr>
+                    
+                    <!-- ko foreach:indicators -->
+                    <tr>
+                        <!-- Indicator shortnames will be dynamically placed here -->
+                        <!-- ko if:ro.multiple -->
+                        <td class="indShortName" data-bind="attr: {'data-indid':$data}"></td>
+                        <!-- /ko -->
+                        
+                        <!-- Indicator values will be dynamically placed here -->
+                        <!-- ko foreach: $parents[1].lastFourMonths -->
+                        <td class="indValue" data-bind="attr: {'data-yearmonth':yearMonth, 'data-indid':$parentContext.$data, 'data-format':ro.roMetadata_format}"></td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                    
+                </table>
+                <hr class='smallHR'>
+                <!-- ko if: roMetadata_narrative -->
+                <p><b>Narrative</b>: <span data-bind="text:roMetadata_narrative"></span></p>
+                <!-- /ko -->
+            </div>
+            <div class='col-md-7'>
+                <div data-bind="attr: {id:chart_div}"></div>
+            </div>
         </div>
     </div>
 </div>

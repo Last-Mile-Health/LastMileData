@@ -1,3 +1,8 @@
+// Module:          LMD_dataPortal.js
+// Author:          Avi Kenny
+// Last update:     2014-10-11
+// Dependencies:    LMD_utilities.js, LMD_dimpleHelper, Knockout.js
+
 var LMD_dataPortal = (function(){
 
 
@@ -7,7 +12,7 @@ var LMD_dataPortal = (function(){
     var indicatorMetadata = {};     // Used for both
     
     
-    // Set "lastFourMonths"
+    // !!!!! Set "lastFourMonths" dynamically !!!!!
 //    var todayYear = moment().format('YYYY'),
 //        todayMonth = moment().format('M'),
 //        todayDay = moment().format('D'),
@@ -234,11 +239,11 @@ var LMD_dataPortal = (function(){
         // Configure report model
         model_report = configureReportModel(model_report);
 
-        // Bind model to DIV
-        rivets.bind($('#reportContent'), {
+        // Initialize knockout.js; bind model to DIV
+        ko.applyBindings({
             model_report: model_report,
             lastFourMonths: lastFourMonths
-        });
+        }, $('#reportContent')[0]);
 
         // Populate data tables
         populateTableData();

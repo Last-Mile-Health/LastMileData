@@ -45,7 +45,8 @@
         <script src="../../lib/jquery.min.js"></script>
         <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="../../lib/rivets.bundled.min.js"></script>
+        <script src="../../lib/knockout/knockout-3.3.0.js"></script>
+        <script src="../../lib/knockout/knockout.mapping-latest.js"></script>
         <script src="../../lib/moment.min.js"></script>
         <script src="../../lib/underscore.min.js"></script>
         <script src="../../lib/backbone.min.js"></script>
@@ -71,11 +72,13 @@
                 <!-- Side navigation bar -->
                 <div id="dp_sidebar" class="col-md-2" style="display:none; position:relative">
                     <div style="height:51px"></div>
-                    <div class="nav nav-sidebar" id="sidebarDIV">
-                        <div rv-each-sidebar="model_sidebar">
-                            <h3 rv-id="sidebar.id">{{sidebar.name}}</h3>
-                            <div>
-                                <div rv-id="tabs.id" rv-class="tabs.type" rv-data-link="tabs.link" rv-each-tabs="sidebar.tabs"><a>&bull;&nbsp;{{tabs.name}}</a></div>
+                    <div class="nav nav-sidebar" id="sidebarDIV" data-bind="foreach:groups">
+                        <div>
+                            <h3 data-bind="text:name, attr: {id:id}"></h3>
+                            <div data-bind="foreach:tabs">
+                                <div data-bind="attr: {id:id, class:type, 'data-link':link}">
+                                    <a>&bull;&nbsp;<span data-bind="text:name"></span></a>
+                                </div>
                             </div>
                         </div>
                     </div>

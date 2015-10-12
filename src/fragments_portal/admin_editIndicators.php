@@ -19,11 +19,19 @@
 // Load main script
 $.getScript('../js/admin_editIndicators.js');
 
+
+// !!!!!
+$(document).ready(function(){
+    $('#clickMe').click(function(){
+        
+    });
+});
+// !!!!!
 </script>
 
 <div id="outerDiv">
 
-    <h2>Edit indicators</h2>
+    <h2>Edit indicators</h2><button id="clickMe">Click</button>
 
     <div class="tableContainer">
         <table>
@@ -38,15 +46,15 @@ $.getScript('../js/admin_editIndicators.js');
                     <th class="pad">&nbsp;X&nbsp;&nbsp;&nbsp;</th>
                 </tr>
             </thead>
-            <tbody id="scrollContent">
-                <tr class="filterRow" rv-data-cid="indicator.cid" rv-each-indicator="indicators">
-                    <td><input class="admin_input pad filterCategory" rv-value="indicator:indCategory" rv-on-change="actions.change" rv-on-click="actions.click"></td>
-                    <td><input class="admin_input pad" rv-value="indicator:indName" rv-on-change="actions.change" rv-on-click="actions.click"></td>
-                    <td><input class="admin_input pad filterCut" rv-value="indicator:indCut" rv-on-change="actions.change" rv-on-click="actions.click"></td>
-                    <td><input class="admin_input pad" rv-value="indicator:indTarget" rv-on-change="actions.change" rv-on-click="actions.click"></td>
-                    <td><input class="admin_input pad" rv-value="indicator:indNarrative" rv-on-change="actions.change" rv-on-click="actions.click"></td>
-                    <td><input class="admin_input pad" rv-value="indicator:indDefinition" rv-on-change="actions.change" rv-on-click="actions.click"></td>
-                    <td><button rv-data-cid="indicator.cid" rv-on-click="actions.delete" class="btn btn-xs btn-danger btn_remove">X</button></td>
+            <tbody id="scrollContent" data-bind="foreach:indicators">
+                <tr class="filterRow" data-bind="attr: {'data-cid':cid}"> <!-- !!!!! continue; need to figure out how to link backbone with Knockout !!!!! -->
+                    <td><input class="admin_input pad filterCategory" data-bind="value: attributes.indCategory, event: {click:$root.actions.click, change:$root.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: attributes.indName, event: {click:$root.actions.click, change:$root.actions.change}"></td>
+                    <td><input class="admin_input pad filterCut" data-bind="value: attributes.indCut, event: {click:$root.actions.click, change:$root.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: attributes.indTarget, event: {click:$root.actions.click, change:$root.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: attributes.indNarrative, event: {click:$root.actions.click, change:$root.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: attributes.indDefinition, event: {click:$root.actions.click, change:$root.actions.change}"></td>
+                    <td><button data-bind="click:$root.actions.delete, attr:{'data-cid':cid}" class="btn btn-xs btn-danger btn_remove">X</button></td>
                 </tr>
             </tbody>
         </table>
@@ -54,11 +62,11 @@ $.getScript('../js/admin_editIndicators.js');
 
     <div style="margin:5px; font-size:150%">
         Filter:&nbsp;
-        <select class="dataFilter" id="filter_category" style="width:150px">
-            <option rv-each-option="selectLists.category">{{option}}</option>
+        <select class="dataFilter" id="filter_category" data-bind="foreach:selectLists.category" style="width:150px">
+            <option data-bind="text:$data"></option>
         </select>
-        <select class="dataFilter" id="filter_cut" style="width:150px">
-            <option rv-each-option="selectLists.cut">{{option}}</option>
+        <select class="dataFilter" id="filter_cut" data-bind="foreach:selectLists.cut" style="width:150px">
+            <option data-bind="text:$data"></option>
         </select>
 
         <button id="btn_add" class="btn btn-primary">Add a new indicator</button>

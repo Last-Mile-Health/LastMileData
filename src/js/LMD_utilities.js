@@ -1,3 +1,8 @@
+// Module:          LMD_utilities.js
+// Author:          Avi Kenny
+// Last update:     2014-10-11
+// Dependencies:    none
+
 var LMD_utilities = (function(){
 
 

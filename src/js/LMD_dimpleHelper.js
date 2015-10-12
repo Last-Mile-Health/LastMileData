@@ -1,3 +1,8 @@
+// Module:          LMD_dimpleHelper.js
+// Author:          Avi Kenny
+// Last update:     2014-10-11
+// Dependencies:    D3.js, Dimple.js
+
 var LMD_dimpleHelper = (function(){
 
     // Monthly line graph

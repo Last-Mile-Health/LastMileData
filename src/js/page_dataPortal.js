@@ -5,51 +5,6 @@ $(document).ready(function(){
         anyChanges: false
     };
 
-    // Configure rivets.js
-    rivets.configure({templateDelimiters: ['{{', '}}']});
-
-    // Add Rivets-Backbone adapter
-    rivets.adapters[':'] = {
-        observe: function(obj, keypath, callback) { obj.on('change:' + keypath, callback); },
-        unobserve: function(obj, keypath, callback) { obj.off('change:' + keypath, callback); },
-        get: function(obj, keypath) { return obj.get(keypath); },
-        set: function(obj, keypath, value) { obj.set(keypath, value); }
-    };
-
-    // Rivers formatter: numbers (one-way)
-    rivets.formatters.format = function(x, format) {
-        if (x !== undefined && x !== null) {
-            var type = format.split("-")[0];
-            var num = format.split("-")[1] ? format.split("-")[1] : 1;
-            switch(type) {
-                case 'integer':
-                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    break;
-                case 'percent': // !!!!! Modify for decimal places !!!!!
-                    return (x*100).toFixed(1) + "%";
-                    break;
-                case 'decimal': // Takes "decimal-1", "decimal-2", etc.
-                    return x.toFixed(num);
-                    break;
-                case 'dollars': // !!!!! Modify to go with/without cents by using dollars-0 or dollars-2 !!!!!
-                    return "$" + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    break;
-                default:
-                    return x;
-            }
-        }
-    };
-
-    // Rivers formatter: adds one; mainly for index)
-    rivets.formatters.plusOne = function(x) {
-        return x + 1;
-    };
-
-    // Rivers formatter: short date (example: Jan '15)
-    rivets.formatters.shortDate = function(x) {
-        return moment(x).format("MMM 'YY");
-    };
-
     // Apply access control rules
     var filteredSidebar = model_sidebar;
     for (var i=filteredSidebar.length-1; i>=0; i--) {
@@ -67,8 +22,8 @@ $(document).ready(function(){
 
     // !!!!! Make specific data portal pages "linkable" (with hash anchors); needs to interface with access control system !!!!!
 
-    // Bind sidebar model to accordion DIV
-    rivets.bind($('#sidebarDIV'), {model_sidebar: filteredSidebar});
+    // Initialize knockout.js; bind sidebar model to accordion DIV
+    ko.applyBindings({groups: filteredSidebar}, $('#sidebarDIV')[0]);
 
     // Handle sidebar clicks
     $('.dp_frag, .dp_iframe, .dp_markdown').click(function(){

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     // !!!!! Right now, all indicator data is being loaded (very inefficient) !!!!!
-    // !!!!! Incorporate Rivets.js two-way formatters !!!!!
+    // !!!!! Incorporate two-way data formatting !!!!!
 
     DataPortal_GLOBALS.anyChanges = false;
     var $submit = $('#btn_submit');
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
     // Generate "monthList" object
     var monthList = {
-        months: [],
+        months: ko.observableArray(),
         next: moment(),
         add: function(reps) {
             for(var i=0; i<reps; i++) {
@@ -67,27 +67,30 @@ $(document).ready(function(){
         }
     }
 
-    // Create adminModel (primary model for Rivets)
+    // Create adminModel (primary model for Knockout)
     var adminModel = {
         indicators: indicatorList,
         monthList: monthList,
         selects: selectLists,
         actions: {
-            aiClick: function() {
-                $(this).select();
+            // Parameters are passed in by Knockout.js event binder
+            aiClick: function(data,event) {
+                // Highlight input when user clicks on a table cell
+                $(event.currentTarget).select();
             },
-            aiChange: function() {
-                var month = $(this).attr('data-month');
-                var year = $(this).attr('data-year');
-                var indID = $(this).attr('data-indid');
-                var value = $(this).val();
+            aiChange: function(data,event) {
+                // When user changes a data value, add it to the changedData object
+                var month = $(event.currentTarget).attr('data-month');
+                var year = $(event.currentTarget).attr('data-year');
+                var indID = $(event.currentTarget).attr('data-indid');
+                var value = $(event.currentTarget).val();
                 changedData.add(month, year, indID, value);
             }
         }
     };
 
-    // Bind adminModel
-    rivets.bind($('#outerDiv'), {adminModel: adminModel});
+    // Initialize knockout.js; bind model to DIV
+    ko.applyBindings(adminModel, $('#outerDiv')[0]);
 
     // Create "changedData" object to hold changed values
     var changedData = {

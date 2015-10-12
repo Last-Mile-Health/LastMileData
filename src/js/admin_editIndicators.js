@@ -1,22 +1,53 @@
 $(document).ready(function(){
-    
+
     // Create model
-    var Row = Backbone.Model.extend({
-        idAttribute: "indID",
-        defaults: { indName:"New indicator" }
-     });
+//    var Row = Backbone.Model.extend({
+//        idAttribute: "indID",
+//        defaults: { indName:"New indicator" }
+//     });
 
     // Create collection
-    var Rows = Backbone.Collection.extend({
-        model: Row,
-        url: '/LastMileData/php/scripts/LMD_REST.php/indicators/'
-    });
+//    var Rows = Backbone.Collection.extend({
+//        model: Row,
+//        url: '/LastMileData/php/scripts/LMD_REST.php/indicators/'
+//    });
 
     // Instantiate collection
-    var myRows = new Rows();
+//    var myRows = new Rows();
 
     // Reset collection with data
-    myRows.reset(indicatorList);
+    console.log("indicatorList");
+//    myRows.reset(indicatorList);
+    
+    // !!!!! NEW CODE: START !!!!!
+    // !!!!! try rewriting this as an object literal !!!!!
+    function MyViewModel() {
+        var self = this;
+        self.url = '/LastMileData/php/scripts/LMD_REST.php/indicators/';
+        self.indicators = ko.observableArray();
+        self.ajax = function(url,method,data){
+            $.ajax({
+                url: url,
+                type: method,
+                contentType: "application/json", // ?????
+                dataType: 'json',
+                data: JSON.stringify(data),
+                error: function(jqXHR) {
+                    console.log("ajax error: " + jqXHR.status);
+                }
+            });
+        };
+        
+        
+    }
+    
+    
+    // Initialize knockout.js; bind model to DIV
+    ko.applyBindings(new MyViewModel(), $('#outerDiv')[0]);
+    // !!!!! NEW CODE: END !!!!!
+    
+    
+    
 
     // Submit button disabled by default; reset anyChanges flag
     var $submit = $('#btn_submit');
@@ -51,20 +82,23 @@ $(document).ready(function(){
 
     // Set click handlers for DELETE buttons
     var actions = {
-        delete: function() {
+        // Parameters are passed in by Knockout.js event binder
+        delete: function(data,event) {
             // !!!!! "Beautify" the confirm dialog !!!!!
             var confirmed = confirm("Do you really want to delete this indicator?");
             if (confirmed) {
-                var cid = $(this).attr('data-cid');
+                var cid = $(event.target).attr('data-cid');
                 myRows.remove(cid);
             }
         },
-        change: function(ev) {
-            var cid = $(ev.target).parent().parent().attr('data-cid');
+        change: function(data,event) {
+            // Add cid to list of changed rows
+            var cid = $(event.target).parent().parent().attr('data-cid');
             changedData.addChange(cid);
         },
-        click: function() {
-            $(this).select();
+        click: function(data,event) {
+            // Highlight input when user clicks on a table cell
+            $(event.currentTarget).select();
         }
     };
 
@@ -85,8 +119,13 @@ $(document).ready(function(){
         }
     }
 
-    // Bind #scrollContent with Rivets.js
-    rivets.bind($('#outerDiv'), {indicators: myRows.models, actions: actions, selectLists: selectLists});
+//    console.log(myRows.models);
+    // Initialize knockout.js; bind model to DIV
+    ko.applyBindings({
+        indicators: myRows.models,
+        actions: actions,
+        selectLists: selectLists
+    }, document.getElementById('outerDiv'));
 
     // Add a new indicator; scroll down
     $('#btn_add').click(function(){

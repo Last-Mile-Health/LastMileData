@@ -38,18 +38,21 @@ $.getScript('../js/admin_editData.js');
                     <th class="pad">Category</th>
                     <th class="pad">Indicator name</th>
                     <th class="pad">Cut</th>
-                    <th rv-each-month="adminModel.monthList.months">{{month.string}}</th>
+                    <!-- ko foreach:monthList.months -->
+                    <th data-bind="text:string">hey</th>
+                    <!-- /ko -->
                 </tr>
             </thead>
-            <tbody id="scrollContent">
-                <tr class="filterRow" rv-each-indicator="adminModel.indicators">
-                    <td class="pad filterCategory">{{indicator.indCategory}}</td>
-                    <td class="pad">{{indicator.indName}}</td>
-                    <td class="pad filterCut">{{indicator.indCut}}</td>
-                    <td rv-each-month="adminModel.monthList.months">
-                        <!-- !!!!! incorporate two-way formatter with indicator.indFormat !!!!! -->
-                        <input class="admin_input" rv-on-click="adminModel.actions.aiClick" rv-on-change="adminModel.actions.aiChange" rv-data-indid="indicator.indID" rv-data-month="month.month" rv-data-year="month.year">
+            <tbody id="scrollContent" data-bind="foreach:indicators">
+                <tr class="filterRow">
+                    <td class="pad filterCategory" data-bind="text:indCategory"></td>
+                    <td class="pad" data-bind="text:indName"></td>
+                    <td class="pad filterCut" data-bind="text:indCut"></td>
+                    <!-- ko foreach: $root.monthList.months -->
+                    <td>
+                        <input class="admin_input" data-bind="event: {click:$root.actions.aiClick, change:$root.actions.aiChange}, attr: {'data-indid':$parent.indID, 'data-month':month, 'data-year':year}">
                     </td>
+                    <!-- /ko -->
                 </tr>
             </tbody>
         </table>
@@ -57,11 +60,11 @@ $.getScript('../js/admin_editData.js');
 
     <div style="margin:5px; font-size:150%">
         Filter:&nbsp;
-        <select class="dataFilter" id="filter_category" style="width:150px">
-            <option rv-each-option="adminModel.selects.category">{{option}}</option>
+        <select class="dataFilter" id="filter_category" data-bind="foreach:selects.category" style="width:150px">
+            <option data-bind="text:$data"></option>
         </select>
-        <select class="dataFilter" id="filter_cut" style="width:150px">
-            <option rv-each-option="adminModel.selects.cut">{{option}}</option>
+        <select class="dataFilter" id="filter_cut" data-bind="foreach:selects.cut" style="width:150px">
+            <option data-bind="text:$data"></option>
         </select>
 
         <button id="btn_showThree" class="btn btn-primary">Show 3 more months</button>
