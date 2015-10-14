@@ -57,6 +57,7 @@
         <script src="../js/loadContents.js"></script>
         <script src="../js/LMD_utilities.js"></script>
         <script src="../js/LMD_dataPortal.js"></script>
+        <script src="../js/LMD_koREST.js"></script>
         <script src="../js/page_dataPortal.js"></script>
         
     </head>

@@ -1,106 +1,27 @@
 $(document).ready(function(){
 
-    // Create model
-//    var Row = Backbone.Model.extend({
-//        idAttribute: "indID",
-//        defaults: { indName:"New indicator" }
-//     });
 
-    // Create collection
-//    var Rows = Backbone.Collection.extend({
-//        model: Row,
-//        url: '/LastMileData/php/scripts/LMD_REST.php/indicators/'
-//    });
-
-    // Instantiate collection
-//    var myRows = new Rows();
-
-    // Reset collection with data
-    console.log("indicatorList");
-//    myRows.reset(indicatorList);
-    
-    // !!!!! NEW CODE: START !!!!!
-    // !!!!! try rewriting this as an object literal !!!!!
-    function MyViewModel() {
-        var self = this;
-        self.url = '/LastMileData/php/scripts/LMD_REST.php/indicators/';
-        self.indicators = ko.observableArray();
-        self.ajax = function(url,method,data){
-            $.ajax({
-                url: url,
-                type: method,
-                contentType: "application/json", // ?????
-                dataType: 'json',
-                data: JSON.stringify(data),
-                error: function(jqXHR) {
-                    console.log("ajax error: " + jqXHR.status);
-                }
-            });
-        };
-        
-        
-    }
-    
-    
-    // Initialize knockout.js; bind model to DIV
-    ko.applyBindings(new MyViewModel(), $('#outerDiv')[0]);
-    // !!!!! NEW CODE: END !!!!!
-    
-    
-    
-
-    // Submit button disabled by default; reset anyChanges flag
-    var $submit = $('#btn_submit');
-    $submit.prop('disabled','disabled');
-    DataPortal_GLOBALS.anyChanges = false;
-
-    // Create "changedData" object to hold changed values
-    // !!!!! somewhat WET with admin_editData !!!!!
-    var changedData = {
-        changes: [],
-        deletions: [],
-        addChange: function(cid) {
-            if (this.changes.indexOf(cid)===-1) {
-                this.changes.push(cid);
+    // Set actions object
+    var actions = {
+        click: function(data,event) {
+            $(event.currentTarget).select();
+        },
+        delete: function(data,event) {
+            // !!!!! "Beautify" the confirm dialog !!!!!
+            var confirmed = confirm("Do you really want to delete this indicator?");
+            if (confirmed) {
+                myViewModel.delete(data._cid);
                 DataPortal_GLOBALS.anyChanges = true;
                 $submit.prop('disabled','');
             }
         },
-        addDeletion: function(model) {
-    //                    if (this.changes.indexOf(model.cid)===-1) { // !!!!! need to distinguish between additions and changes ?????
-            this.deletions.push(model);
+        change: function(data,event) {
+            myViewModel.markAsChanged(data._cid);
             DataPortal_GLOBALS.anyChanges = true;
             $submit.prop('disabled','');
         }
     };
 
-    // Set on-remove handler
-    myRows.on('remove',function(model){
-        model.urlRoot = myRows.url;
-        changedData.addDeletion(model);
-    });
-
-    // Set click handlers for DELETE buttons
-    var actions = {
-        // Parameters are passed in by Knockout.js event binder
-        delete: function(data,event) {
-            // !!!!! "Beautify" the confirm dialog !!!!!
-            var confirmed = confirm("Do you really want to delete this indicator?");
-            if (confirmed) {
-                var cid = $(event.target).attr('data-cid');
-                myRows.remove(cid);
-            }
-        },
-        change: function(data,event) {
-            // Add cid to list of changed rows
-            var cid = $(event.target).parent().parent().attr('data-cid');
-            changedData.addChange(cid);
-        },
-        click: function(data,event) {
-            // Highlight input when user clicks on a table cell
-            $(event.currentTarget).select();
-        }
-    };
 
     // Generate "selectLists" object
     // !!!!! WET with admin_editData !!!!!
@@ -119,81 +40,57 @@ $(document).ready(function(){
         }
     }
 
-//    console.log(myRows.models);
-    // Initialize knockout.js; bind model to DIV
-    ko.applyBindings({
-        indicators: myRows.models,
-        actions: actions,
-        selectLists: selectLists
-    }, document.getElementById('outerDiv'));
 
-    // Add a new indicator; scroll down
-    $('#btn_add').click(function(){
-        var x = new Row();
-        myRows.add(x);
-        changedData.addChange(x.cid);
-        DataPortal_GLOBALS.anyChanges = true;
-        
-        // !!!!! Need to find a way to get height of DIV and scroll more reliably !!!!!
-        $("#scrollContent").animate({ scrollTop: 20000 }, 2000);
+    // Create new ViewModel
+    var myViewModel = LMD_koREST.newViewModel({
+        url: '/LastMileData/php/scripts/LMD_REST.php/indicators/',
+        element: $('#outerDiv')[0],
+        idAttribute: 'indID',
+        other: {
+            actions: actions,
+            selectLists: selectLists
+        }
     });
 
-    $('#btn_submit').click(function(){
 
+    // Bind data to DOM
+    myViewModel.reset(indicatorList);
+
+
+    // Add a new indicator; scroll down
+    // !!!!! Define Modle Defaults has to be called with every add (instead of once); refactor LMD_koREST.js accordingly !!!!!
+    $('#btn_add').click(function(){
+
+        // Define model default parameters
+        // !!!!! Need to be able to infer fields from the server
+        myViewModel.defineModelDefauls({
+            indCategory: "",
+            indName:"New indicator",
+            indCut:"",
+            indTarget:"",
+            indNarrative:"",
+            indDefinition:""
+        });
+
+
+        myViewModel.addNew();
+        DataPortal_GLOBALS.anyChanges = true;
+        // !!!!! Need to find a way to get height of DIV and scroll more reliably !!!!!
+        $("#scrollContent").animate({ scrollTop: 20000 }, 2000);
+        
+    });
+
+
+    // Save changes to server
+    $('#btn_submit').click(function(){
+        
         // Manipulate DOM
         $submit.prop('disabled','disabled');
         $submit.html("<img src='../images/ajax_loader.gif'>");
 
-        // Create object to handle ajax info 
-        var submitResults = {
-            pendingChanges: changedData.changes.length,
-            pendingDeletes: changedData.deletions.length,
-            numErrors: 0
-        };
-
-        // Initialize rep counter; set up loop
-        var reps = 1;
-        var myTimer = setInterval(function(){
-
-            // (1) Save model additions / changes
-            myRows.each(function(data){
-                // Only proceed if item is in changedData.changes array
-                var index = changedData.changes.indexOf(data.cid);
-                if(index!==-1) {
-                    // Remove CID from changedData array
-                    changedData.changes.splice(index,1);
-
-                    // Send additions / changes to server
-                    data.save({},{
-                        success: function(c,r,o) {
-                            // Decrement "pendingChanges" counter
-                            submitResults.pendingChanges--;
-                        },
-                        error: function(c,r,o) {
-                            // If change failed, re-insert the CID back into the array
-                            changedData.addChange(c.cid);
-console.log('error triggered!!!');
-                        }
-                    });
-                }
-            });
-
-            // (2) Save model deletions
-            for (var key in changedData.deletions) {
-                var myModel = changedData.deletions[key];
-                myModel.destroy({
-                    success: function() {
-                        submitResults.pendingDeletes--;
-                    }
-                    // !!!!! errors are not currently being handled; they should be handled as above !!!!!
-                });
-            }
-
-            // If all are done, clear timer and run success "callback"
-            if (submitResults.pendingChanges + submitResults.pendingDeletes === 0) {
-                // !!!!! WET with admin_editData !!!!!
-                // Clear timer; reset anyChanges flag; reset DOM
-                clearInterval(myTimer);
+        myViewModel.sync({
+            successCallback: function() {
+                // !!!!! TEMPORARY CODE !!!!!
                 DataPortal_GLOBALS.anyChanges = false;
                 $submit.html("Success!");
                 var color = "white";
@@ -207,22 +104,109 @@ console.log('error triggered!!!');
                     clearInterval(interval);
                 },2000);
                 $submit.prop('disabled','');
-            }
-
-            // Increment counter
-            reps++;
-
-            // If timeout of 20 seconds has been reached, display error message, reset DOM, and end loop
-            if(reps===20) {
+                // !!!!! TEMPORARY CODE !!!!!
+            },
+            errorCallback: function() {
+                // !!!!! TEMPORARY CODE !!!!!
                 alert('Error. Could not reach the database. Please try again.');
                 $submit.prop('disabled','');
                 $submit.html("Submit");
-                clearInterval(myTimer);
+                // !!!!! TEMPORARY CODE !!!!!
             }
-
-        }, 1000);
-
+        });
     });
+
+
+    // Submit button disabled by default; reset anyChanges flag
+    var $submit = $('#btn_submit');
+    $submit.prop('disabled','disabled');
+    DataPortal_GLOBALS.anyChanges = false;
+
+    
+    
+    
+
+//      !!!!! Refactor the code below into LMD_koREST !!!!!
+//    $('#!!!!! OLD btn_submit !!!!!').click(function(){
+//
+//        // Create object to handle ajax info
+//        var submitResults = {
+//            pendingChanges: changedData.changes.length,
+//            pendingDeletes: changedData.deletions.length,
+//            numErrors: 0
+//        };
+//
+//        // Initialize rep counter; set up loop
+//        var reps = 1;
+//        var myTimer = setInterval(function(){
+//
+//            // (1) Save model additions / changes
+//            myRows.each(function(data){
+//                // Only proceed if item is in changedData.changes array
+//                var index = changedData.changes.indexOf(data.cid);
+//                if(index!==-1) {
+//                    // Remove CID from changedData array
+//                    changedData.changes.splice(index,1);
+//
+//                    // Send additions / changes to server
+//                    data.save({},{
+//                        success: function(c,r,o) {
+//                            // Decrement "pendingChanges" counter
+//                            submitResults.pendingChanges--;
+//                        },
+//                        error: function(c,r,o) {
+//                            // If change failed, re-insert the CID back into the array
+//                            changedData.addChange(c.cid);
+//                        }
+//                    });
+//                }
+//            });
+//
+//            // (2) Save model deletions
+//            for (var key in changedData.deletions) {
+//                var myModel = changedData.deletions[key];
+//                myModel.destroy({
+//                    success: function() {
+//                        submitResults.pendingDeletes--;
+//                    }
+//                    // !!!!! errors are not currently being handled; they should be handled as above !!!!!
+//                });
+//            }
+//
+//            // If all are done, clear timer and run success "callback"
+//            if (submitResults.pendingChanges + submitResults.pendingDeletes === 0) {
+//                // !!!!! WET with admin_editData !!!!!
+//                // Clear timer; reset anyChanges flag; reset DOM
+//                clearInterval(myTimer);
+//                DataPortal_GLOBALS.anyChanges = false;
+//                $submit.html("Success!");
+//                var color = "white";
+//                var interval = setInterval(function() {
+//                    color = (color==="white") ? "yellow" : "white";
+//                    $submit.css('color',color);
+//                },100);
+//                setTimeout(function() {
+//                    $submit.css('color',"white");
+//                    $submit.html("Submit");
+//                    clearInterval(interval);
+//                },2000);
+//                $submit.prop('disabled','');
+//            }
+//
+//            // Increment counter
+//            reps++;
+//
+//            // If timeout of 20 seconds has been reached, display error message, reset DOM, and end loop
+//            if(reps===20) {
+//                alert('Error. Could not reach the database. Please try again.');
+//                $submit.prop('disabled','');
+//                $submit.html("Submit");
+//                clearInterval(myTimer);
+//            }
+//
+//        }, 1000);
+//
+//    });
 
     // Change handler: FILTER TABLE BASED ON CUT
     // !!!!! (mostly) WET with admin_editData !!!!!

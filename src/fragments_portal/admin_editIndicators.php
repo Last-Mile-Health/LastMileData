@@ -19,19 +19,11 @@
 // Load main script
 $.getScript('../js/admin_editIndicators.js');
 
-
-// !!!!!
-$(document).ready(function(){
-    $('#clickMe').click(function(){
-        
-    });
-});
-// !!!!!
 </script>
 
 <div id="outerDiv">
 
-    <h2>Edit indicators</h2><button id="clickMe">Click</button>
+    <h2>Edit indicators</h2>
 
     <div class="tableContainer">
         <table>
@@ -46,15 +38,15 @@ $(document).ready(function(){
                     <th class="pad">&nbsp;X&nbsp;&nbsp;&nbsp;</th>
                 </tr>
             </thead>
-            <tbody id="scrollContent" data-bind="foreach:indicators">
-                <tr class="filterRow" data-bind="attr: {'data-cid':cid}"> <!-- !!!!! continue; need to figure out how to link backbone with Knockout !!!!! -->
-                    <td><input class="admin_input pad filterCategory" data-bind="value: attributes.indCategory, event: {click:$root.actions.click, change:$root.actions.change}"></td>
-                    <td><input class="admin_input pad" data-bind="value: attributes.indName, event: {click:$root.actions.click, change:$root.actions.change}"></td>
-                    <td><input class="admin_input pad filterCut" data-bind="value: attributes.indCut, event: {click:$root.actions.click, change:$root.actions.change}"></td>
-                    <td><input class="admin_input pad" data-bind="value: attributes.indTarget, event: {click:$root.actions.click, change:$root.actions.change}"></td>
-                    <td><input class="admin_input pad" data-bind="value: attributes.indNarrative, event: {click:$root.actions.click, change:$root.actions.change}"></td>
-                    <td><input class="admin_input pad" data-bind="value: attributes.indDefinition, event: {click:$root.actions.click, change:$root.actions.change}"></td>
-                    <td><button data-bind="click:$root.actions.delete, attr:{'data-cid':cid}" class="btn btn-xs btn-danger btn_remove">X</button></td>
+            <tbody id="scrollContent" data-bind="foreach:vmData">
+                <tr class="filterRow">  <!-- removed: data-bind="attr: {'data-cid':cid}" -->
+                    <td><input class="admin_input pad filterCategory" data-bind="value: indCategory, event: {click:$root.other.actions.click, change:$root.other.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: indName, event: {click:$root.other.actions.click, change:$root.other.actions.change}"></td>
+                    <td><input class="admin_input pad filterCut" data-bind="value: indCut, event: {click:$root.other.actions.click, change:$root.other.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: indTarget, event: {click:$root.other.actions.click, change:$root.other.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: indNarrative, event: {click:$root.other.actions.click, change:$root.other.actions.change}"></td>
+                    <td><input class="admin_input pad" data-bind="value: indDefinition, event: {click:$root.other.actions.click, change:$root.other.actions.change}"></td>
+                    <td><button data-bind="click:$root.other.actions.delete, attr:{'data-cid':_cid}" class="btn btn-xs btn-danger btn_remove">X</button></td>
                 </tr>
             </tbody>
         </table>
@@ -62,10 +54,10 @@ $(document).ready(function(){
 
     <div style="margin:5px; font-size:150%">
         Filter:&nbsp;
-        <select class="dataFilter" id="filter_category" data-bind="foreach:selectLists.category" style="width:150px">
+        <select class="dataFilter" id="filter_category" data-bind="foreach:other.selectLists.category" style="width:150px">
             <option data-bind="text:$data"></option>
         </select>
-        <select class="dataFilter" id="filter_cut" data-bind="foreach:selectLists.cut" style="width:150px">
+        <select class="dataFilter" id="filter_cut" data-bind="foreach:other.selectLists.cut" style="width:150px">
             <option data-bind="text:$data"></option>
         </select>
 

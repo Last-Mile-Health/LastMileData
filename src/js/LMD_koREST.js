@@ -3,6 +3,10 @@
 // Last update:     2015-10-11
 // Dependencies:    Knockout.js, Knockout.mapping.js, jQuery
 
+// !!!!! Need to update variable names throughout so that "vm" represents the ViewModel, "vmData" is data table data, "vmOther" is other !!!!!
+// !!!!! Need to update variable names throughout so that "vm" represents the ViewModel, "vmData" is data table data, "vmOther" is other !!!!!
+// !!!!! Need to update variable names throughout so that "vm" represents the ViewModel, "vmData" is data table data, "vmOther" is other !!!!!
+
 var LMD_koREST = (function() {
 
 
@@ -18,16 +22,17 @@ var LMD_koREST = (function() {
     //          Usage: !!!!!
     //          Params include: url, element (stored as private variables)
     function NewViewModel(params) {
-        this.vm;                                //  A reference to the viewModel created by fetch()
+        this.vm;                                //  A reference to the viewModel created by fetch() or reset()
         this.url = params.url;                  //  Base URL of the REST service, set by newViewModel()
         this.element = params.element;          //  The element that knockout will bind to via applyBindings()
         this.idAttribute = params.idAttribute;  //  The attribute that uniquely identifies a row
-        this.actions = params.actions;          //  Object holding actions to bind
+        this.other = params.other || 1;         //  Object holding any other data or methods to bind (e.g. actions)
     }
 
     // Method (NewViewModel): Fetches data from the server via an AJAX GET request and binds data
+    //          Analagous to Backbone's fetch()
     //          Params include successCallback, errorCallback
-    //          !!!!! this throws an error if it's called twice
+    //          !!!!! this throws an error if it's called twice !!!!!
     NewViewModel.prototype.fetch = function(params) {
         
         var self = this;
@@ -50,7 +55,7 @@ var LMD_koREST = (function() {
                 }
                 
                 // Activate Knockout.js
-                ko.applyBindings({vmData:self.vm, actions:self.actions}, this.element);
+                ko.applyBindings({vmData:self.vm, other:self.other}, this.element);
                 
                 // Run success callback
                 if (typeof params.successCallback === 'function') {
@@ -64,6 +69,29 @@ var LMD_koREST = (function() {
                 }
             }
         });
+    };
+
+
+    // Method (NewViewModel): Binds data
+    //          Analagous to Backbone's reset()
+    //          !!!!! this throws an error if it's called twice !!!!!
+    //          !!!!! WET with fetch() !!!!!
+    NewViewModel.prototype.reset = function(data) {
+
+        // Create observable from fetched data; bind to this.element
+        this.vm = ko.mapping.fromJS(data);
+
+        // Assign client-side ID and REST attributes
+        for(var x in this.vm()) {
+            this.vm()[x]._cid = this.assignID();
+            this.vm()[x]._add = false;
+            this.vm()[x]._change = false;
+            this.vm()[x]._destroy = false;
+        }
+
+        // Activate Knockout.js
+        ko.applyBindings({vmData:this.vm, other:this.other}, this.element);
+
     };
 
 
