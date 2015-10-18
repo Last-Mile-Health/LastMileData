@@ -26,8 +26,8 @@
         <script src="/LastMileData/lib/knockout/knockout-3.3.0.js"></script>
         <script src="/LastMileData/lib/knockout/knockout.mapping-latest.js"></script>
         <script src="/LastMileData/lib/multiselect.min.js"></script>
-        <script src="/LastMileData/src/js/LMD_utilities.js"></script> <!-- THIS WILL FAIL -->
-        <script src="admin_sidebarEditor.js"></script>
+        <script src="../js/LMD_utilities.js"></script> <!-- THIS WILL FAIL -->
+        <script src="../js/admin_sidebarEditor.js"></script>
     </head>
     <body>
         

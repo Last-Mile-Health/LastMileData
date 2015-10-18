@@ -20,8 +20,6 @@ $(document).ready(function(){
         }
     }
 
-    // !!!!! Make specific data portal pages "linkable" (with hash anchors); needs to interface with access control system !!!!!
-
     // Initialize knockout.js; bind sidebar model to accordion DIV
     ko.applyBindings({groups: filteredSidebar}, $('#sidebarDIV')[0]);
 
@@ -40,7 +38,13 @@ $(document).ready(function(){
         // If "DataPortal_GLOBALS.anyChanges" is false or user confirms navigation, proceed
         if (!preventNavigation) {
 
+            // Reset anyChanges flag
             DataPortal_GLOBALS.anyChanges = false;
+
+            // Set hash fragment (element ID)
+            var elemID = $(this).attr('id');
+//            location.hash = '#' + elemID;
+            history.pushState(null, null, '#' + elemID);
 
             // Get link URL; set link type
             if ( $(this).hasClass('dp_frag') ) {
@@ -157,14 +161,7 @@ $(document).ready(function(){
 
         }
     });
-    
-    // !!!!! this is not robust since (1) the name of the first item may change, and (2) the first file might not be a markdown file !!!!!
-    // Fade in overview pane by default; manipulate DOM
-    $('.dp_markdown').first().addClass('dp-active');
-    $('#id_2').click();
-    $('#dashboard_iframe').hide();
-    $('#dp_sidebar, #mainContainer').fadeIn(1000);
-    
+
     // Fade out whitespaceContainer when iFrame is done loading
     document.getElementById("dashboard_iframe").onload = function() {
         location.href = "#"; location.href = "#spacer"; // to account for a scrolling bug
@@ -184,5 +181,19 @@ $(document).ready(function(){
             return "You have unsaved changes to data. If you leave or reload this page, all changes will be lost.";
         }
     };
+
+    // Routing for initial page load
+    // If there's a hash fragment in the URL, redirect user to the appropriate page (if he/she has permission)
+    // If there's no hash fragment OR user doesn't have appropriate permissions, redirect to the "overview" page
+    if ($(window.location.hash).length > 0) {
+        $(window.location.hash).parent().prev().click();
+        $(window.location.hash).click();
+    } else {
+        $('.dp_markdown').first().addClass('dp-active');
+        $('#id_1').click();
+        $('#id_2').click();
+    }
+    $('#dashboard_iframe').hide();
+    $('#dp_sidebar, #mainContainer').fadeIn(1000);
 
 });
