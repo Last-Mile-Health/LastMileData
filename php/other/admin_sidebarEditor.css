@@ -15,6 +15,10 @@ body {
     box-shadow: 2px 2px 10px #eee;
 }
 
+#btn_save {
+    width: 800px;
+}
+
 .innerTab {
     padding: 5px;
     margin: 10px;
@@ -27,7 +31,7 @@ body {
 }
 
 .outerTab input {
-    width:95%;
+    width:90%;
 }
 
 .innerTab input {

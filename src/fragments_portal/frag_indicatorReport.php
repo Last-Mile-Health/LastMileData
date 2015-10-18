@@ -7,7 +7,6 @@
 ?>
 
     // Bootstrap the page
-    console.log(model_report);
     LMD_dataPortal.bootstrap(data_rawValues, data_indicators, model_report);
 
 </script>
