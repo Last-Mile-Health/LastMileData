@@ -31,9 +31,9 @@ Liberia population, by district (southeast only)
 | County	| Health District | Admin District	| # People	| # Households  | # Villages    | Source                        |
 |---------------|-----------------|---------------------|---------------|---------------|---------------|-------------------------------|
 | Grand Gedeh	| B'hai           | B'hai	        | 125,937       | 18,207        | 264           | 2008 Census                   |
+| Grand Gedeh	| B'hai           | Gboe-Ploe           | 6,271         | 856           | 18            | 2008 Census                   |
 | Grand Gedeh	| Cavala	  | Cavala	        | 13,314	| 2,126         | 47            | 2008 Census                   |
 | Grand Gedeh	| Gbao            | Gbao	        | 12,324	| 1,986         | 39            | 2008 Census                   |
-| Grand Gedeh	| Gbao            | Gboe-Ploe           | 6,271         | 856           | 18            | 2008 Census                   |
 | Grand Gedeh	| Konobo	  | Glio-Twarbo	        | 2,699         | 471           | 12            | LMH registration (Jan '15)    |
 | Grand Gedeh	| Konobo	  | Konobo	        | 11,599	| 1,344         | 42            | LMH registration (Jan '15)    |
 | Grand Gedeh	| Putu            | Putu	        | 16,426	| 1,792         | 27            | 2008 Census                   |

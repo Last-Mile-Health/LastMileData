@@ -2,6 +2,8 @@ M&E Documents: Mobile health (mHealth)
 ======================================
 **************************************
 
+**Note: please consult the RM&E Team before using any content within these documents externally**
+
 Training materials
 ------------------
 #### [&bull; CHW Feasibility Assessment mHealth Training](https://drive.google.com/open?id=0B2wbmjD6KZKGc1hpOW51d2J2MDg&authuser=0)

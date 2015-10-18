@@ -85,33 +85,19 @@ $(document).ready(function(){
     $('#btn_submit').click(function(){
         
         // Manipulate DOM
-        $submit.prop('disabled','disabled');
-        $submit.html("<img src='../images/ajax_loader.gif'>");
+        LMD_utilities.ajaxButton($submit, 'ajaxLoader');
 
         myViewModel.sync({
             successCallback: function() {
-                // !!!!! TEMPORARY CODE !!!!!
+                // Reset anyChanges flag; manipulate DOM
                 DataPortal_GLOBALS.anyChanges = false;
-                $submit.html("Success!");
-                var color = "white";
-                var interval = setInterval(function() {
-                    color = (color==="white") ? "yellow" : "white";
-                    $submit.css('color',color);
-                },100);
-                setTimeout(function() {
-                    $submit.css('color',"white");
-                    $submit.html("Submit");
-                    clearInterval(interval);
-                },2000);
-                $submit.prop('disabled','');
-                // !!!!! TEMPORARY CODE !!!!!
+                LMD_utilities.ajaxButton($submit, 'alertSuccess', 'Submit');
             },
             errorCallback: function() {
-                // !!!!! TEMPORARY CODE !!!!!
+                // Error message; reset DOM
                 alert('Error. Could not reach the database. Please try again.');
-                $submit.prop('disabled','');
-                $submit.html("Submit");
-                // !!!!! TEMPORARY CODE !!!!!
+                LMD_utilities.ajaxButton($submit, 'alertError', 'Submit');
+                LMD_utilities.ajaxButton($submit, 'enable');
             }
         });
     });
@@ -119,7 +105,7 @@ $(document).ready(function(){
 
     // Submit button disabled by default; reset anyChanges flag
     var $submit = $('#btn_submit');
-    $submit.prop('disabled','disabled');
+    LMD_utilities.ajaxButton($submit, 'disabled');
     DataPortal_GLOBALS.anyChanges = false;
 
     

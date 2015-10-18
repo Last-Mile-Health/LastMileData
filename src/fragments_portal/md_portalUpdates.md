@@ -2,6 +2,15 @@ Portal Updates
 ==============
 **************
 
+October 2015
+--------------
+#### **&bull; MNH Intervention Audit.** Added the MNH Intervention Audit Report [RM&E Documents >> Strategy + reports].
+#### **&bull; Scale dashboard.** Added a new report, the *"Scale Dashboard"* [Monthly reports >> Scale dashboard], containing numbers of CHWs, CHWLs, CCSs, communities, and people served, disaggregated by geographic region. 
+#### **&bull; Maps.** Added a new tab [RM&E Documents >> Maps], containing assorted maps from Rivercess and Grand Gedeh.
+#### **&bull; Report modifications.** Added a new indicator to the Konobo supervision report [Monthly Reports >> Konobo supervision report] - "Average number of supervision visits per CHW" - useful for tracking progress against supervision targets, and "froze" the Ebola Activities report, since those activities have thankfully ceased.
+#### **&bull; Customized reports.** Added a Portal group for "customized reports", which will contain various reports requested to fulfill specific needs, sometimes only relevant to a small handful of users. This group currently contains two reports: "Approved Language", which contains commonly used language that can be copied-and-pasted into various documents, and the "P&D Quarterly Report" (specific to P&D).
+#### **&bull; Admin panel.** Added a group where certain users can add/edit/remove indicators, post monthly data, and create/edit new Data Portal reports. Most users will not have access to this Portal group.
+
 September 2015
 --------------
 #### **&bull; Last Mile Survey.** Key findings from the 2012 LMS in Konobo (aka. the “Konobo Baseline Survey”) and the 2015 LMS in Rivercess have been posted in the new “Last Mile Survey” section of the Data Portal.

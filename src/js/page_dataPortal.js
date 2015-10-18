@@ -56,6 +56,19 @@ $(document).ready(function(){
                 var linkType =  "markdown";
                 var linkURL = '../fragments_portal/' + $(this).attr('data-link');
             }
+            
+            // Send usage data point to database (tracks sidebar link clicks)
+            var reportName = $(this).find('a span').text();
+            $.ajax({
+                type: "POST",
+                url: "/LastMileData/php/scripts/ajaxSendQuery.php",
+                data: {
+                    'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + reportName + "', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "'",
+                    'rKey':1,
+                    'transaction': 1
+                },
+                dataType: "json"
+            });
 
             // Fade out current mainContainer
             $('#whitespaceContainer').slideDown(500, function(){
@@ -90,6 +103,7 @@ $(document).ready(function(){
                     $.ajax({
                         url: linkURL,
                         success: function(responseText){
+                            
                             // Initialize showdown.js (markdown parser)
                             var converter = new showdown.Converter({
                                 tables: true,
@@ -102,7 +116,22 @@ $(document).ready(function(){
                             
                             // Make links open in new tabs/windows
                             $('#mainContainer a').attr('target','_blank');
-                            
+
+                            // Send usage data point to database (tracks link clicks)
+                            $('#mainContainer a').click(function(){
+                                var linkURL = $(this).attr('href');
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/LastMileData/php/scripts/ajaxSendQuery.php",
+                                    data: {
+                                        'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Link click', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "'",
+                                        'rKey':1,
+                                        'transaction': 1
+                                    },
+                                    dataType: "json"
+                                });
+                            });
+
                             // Add bootstrap table classes
                             $('#mainContainer table').addClass('table table-striped table-hover');
                             
@@ -128,9 +157,9 @@ $(document).ready(function(){
 
         }
     });
-
+    
     // !!!!! this is not robust since (1) the name of the first item may change, and (2) the first file might not be a markdown file !!!!!
-    // Fade in overview pane by default
+    // Fade in overview pane by default; manipulate DOM
     $('.dp_markdown').first().addClass('dp-active');
     $('#id_2').click();
     $('#dashboard_iframe').hide();

@@ -83,13 +83,78 @@ var LMD_utilities = (function(){
     }
 
 
+    // PUBLIC:  Given a button (passed in via a selector), change its state
+    //          Used for ajax requests as an indication to the user of the state of the request
+    function ajaxButton($selector, state, buttonText) {
+        switch(state) {
+            case 'ajaxLoader':
+                // Disable the button; load the "AJAX loader" GIF into it
+                $selector.prop('disabled','disabled');
+                $selector.html("<img src='/LastMileData/build/images/ajax_loader.gif'>")
+                break;
+            case 'enable':
+                // Enable the button; optionally restore the buttonText
+                $selector.prop('disabled','');
+                if(buttonText) {
+                    $selector.html(buttonText);
+                }
+                break;
+            case 'disable':
+                // De-activate the button; optionally restore the buttonText
+                $selector.prop('disabled','disabled');
+                if(buttonText) {
+                    $selector.html(buttonText);
+                }
+                break;
+            case 'alertSuccess':
+                // Flash a "success" message for two seconds; restore the buttonText
+                $selector.html("Success!");
+                var color = "white";
+                var interval = setInterval(function() {
+                    color = (color==="white") ? "yellow" : "white";
+                    $selector.css('color',color);
+                },100);
+                setTimeout(function() {
+                    $selector.css('color',"white");
+                    $selector.html(buttonText);
+                    clearInterval(interval);
+                },2000);
+                break;
+            case 'alertError':
+                // Flash an "error" message for two seconds; restore the buttonText
+                $selector.html("Error!");
+                var color = "white";
+                var interval = setInterval(function() {
+                    color = (color==="white") ? "red" : "white";
+                    $selector.css('color',color);
+                },100);
+                setTimeout(function() {
+                    $selector.css('color',"white");
+                    $selector.html(buttonText);
+                    clearInterval(interval);
+                },2000);
+                break;
+        }
+    }
+
+
+    // PUBLIC:  Escape quote marks by adding a backslash
+    //          Useful for escaping query strings before sending to the server
+    //          Note: this will not prevent against SQL injection!
+    function addSlashes(string) {
+        return (string + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+    }
+
+
     // LMD_utilities API
     return {
         mysql_date: mysql_date,
         mysql_time: mysql_time,
         getUUID: getUUID,
         twoDigits: twoDigits,
-        format_number: format_number
+        format_number: format_number,
+        ajaxButton: ajaxButton,
+        addSlashes: addSlashes
     };
     
 

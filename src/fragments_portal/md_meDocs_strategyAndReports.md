@@ -2,6 +2,8 @@ M&E Documents: Strategy documents + reports
 ===========================================
 *******************************************
 
+**Note: please consult the RM&E Team before using any content within these documents externally**
+
 Strategy documents
 ------------------
 #### [&bull; M&E Roadmap (May 2014)](https://docs.google.com/a/tiyatienhealth.org/file/d/0BwzcZZmQ5MkFZXNxWWlYQ3JzeFE/edit)
@@ -12,9 +14,10 @@ Strategy documents
 
 Survey/assessment reports
 -------------------------
-#### [&bull; Konobo Baseline Survey (KBS), August 2012](https://docs.google.com/a/tiyatienhealth.org/file/d/0BwzcZZmQ5MkFcFozcjV0SFZzNGs/edit)
+#### [&bull; MNH Intervention Audit, October 2015](https://drive.google.com/open?id=0BwzcZZmQ5MkFRVMzNklzdVVWUHc)
+#### [&bull; Child Mortality Audit Report, January 2015](https://drive.google.com/open?id=0BwzcZZmQ5MkFWjNhNFVnLVh3Vmc)
 #### [&bull; Key Performance Indicators Assessment (KPIA), August 2014](https://docs.google.com/a/tiyatienhealth.org/file/d/0BwzcZZmQ5MkFeVJYZmdDLVdxY2c/edit)
-#### [&bull; Child Mortality Audit Report](https://drive.google.com/open?id=0BwzcZZmQ5MkFWjNhNFVnLVh3Vmc)
+#### [&bull; Konobo Baseline Survey (KBS), August 2012](https://docs.google.com/a/tiyatienhealth.org/file/d/0BwzcZZmQ5MkFcFozcjV0SFZzNGs/edit)
 
 Literature reviews
 ------------------

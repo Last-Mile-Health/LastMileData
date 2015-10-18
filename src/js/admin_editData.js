@@ -8,7 +8,7 @@ $(document).ready(function(){
     var $threeMore = $('#btn_showThree');
 
     // Submit button disabled by default
-    $submit.prop('disabled','disabled');
+    LMD_utilities.ajaxButton($submit, 'disabled');
 
     // Sort indicatorList
     indicatorList.sort(function(a,b){
@@ -157,9 +157,8 @@ $(document).ready(function(){
     $('#btn_submit').click(function(){
 
         // Manipulate DOM
-        $submit.prop('disabled','disabled');
+        LMD_utilities.ajaxButton($submit, 'ajaxLoader');
         $threeMore.prop('disabled','disabled');
-        $submit.html("<img src='../images/ajax_loader.gif'>")
 
         // Parse queryString
         var queryString = "";
@@ -178,30 +177,17 @@ $(document).ready(function(){
             data: myData,
             dataType: "json",
             success: function() {
-                
-                // Reset changedData object
+                // Reset changedData object; manipulate DOM
                 changedData.reset();
-                
-                // Manipulate DOM
-                $submit.html("Success!");
                 $threeMore.prop('disabled','');
-                var color = "white";
-                var interval = setInterval(function() {
-                    color = (color==="white") ? "yellow" : "white";
-                    $submit.css('color',color);
-                },100);
-                setTimeout(function() {
-                    $submit.css('color',"white");
-                    $submit.html("Submit");
-                    clearInterval(interval);
-                },2000);
+                LMD_utilities.ajaxButton($submit, 'alertSuccess', 'Submit');
             },
             error: function() {
                 // Error message; reset DOM
                 alert('Error. Could not reach the database. Please try again.');
-                $submit.prop('disabled','');
                 $threeMore.prop('disabled','');
-                $submit.html("Submit");
+                LMD_utilities.ajaxButton($submit, 'alertError', 'Submit');
+                LMD_utilities.ajaxButton($submit, 'enable');
             }
         });
     });

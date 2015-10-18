@@ -2,21 +2,6 @@ DHS 2013 Data
 =============
 *************
 
-Rivercess stats
----------------
-
-- Rivercess is the poorest county in Liberia, with `71.3%` of the population falling within the bottom 20% income 
-bracket of the country.
-- Also the lowest in terms of female education (only `9.9%` of women attended high school).
-- Lowest median age at first birth (`17.8` years).
-- `73.7%` of women reported "distance to health facility" as a serious problem in accessing healthcare, more than in 
-any other county.
-- Lowest full-vaccination rate in Liberia, at `33.1%`.
-- Highest prevalence of ARI (`12.2%`), and the second-highest prevalence of diarrhea (`32.1%`).
-- Lowest treatment rate for children with fever (`41.8%`).
-
-<br>
-
 Fertility
 ---------
 
