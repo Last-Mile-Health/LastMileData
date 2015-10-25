@@ -8,7 +8,7 @@ $(document).ready(function(){
     var $threeMore = $('#btn_showThree');
 
     // Submit button disabled by default
-    LMD_utilities.ajaxButton($submit, 'disabled');
+    LMD_utilities.ajaxButton($submit, 'disable');
 
     // Sort indicatorList
     indicatorList.sort(function(a,b){

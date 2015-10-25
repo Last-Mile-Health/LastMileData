@@ -28,18 +28,18 @@ response effort and laid the foundations for rebuilding a resilient health syste
 Rivercess and Grand Gedeh Counties, home to roughly `177,204` people.
 
 - LMH trained a total of `1,382` health workers and community members across the two counties to respond to the 
-outbreak, including 181 community health workers and `340` health facility staff. Community trainings enabled 
+outbreak, including `181` community health workers and `340` health facility staff. Community trainings enabled 
 participants to recognize the danger signs and symptoms of Ebola, deliver Ebola awareness and prevention messages to 
 community members, and isolate/refer suspected cases. Health facility trainings emphasized infection prevention and 
 control (IPC) best practices, referral procedures, and clinical case management.
 
 - In total, Last Mile Health CHWs screened over `10,000` community members for Ebola and provided nearly `12,000` 
-education and awareness talks in remote communities. LMH medical teams visited all 38 health facilities in Grand Gedeh 
-and Rivercess Counties, training staff in effective infection prevention and control (IPC) measures. LMH-developed IPC 
-training materials and protocols for health facilities were shared widely and adopted by multiple organizations across 
-the country involved with the Ebola response. Additionally, through the establishment of a MESH (Monitoring & Enhanced 
-Supervision of Health facilities) program, LMH followed up monthly with facilities to troubleshoot problems and ensure 
-that standards were being maintained.
+education and awareness talks in remote communities. LMH medical teams visited all `38` health facilities in Grand 
+Gedeh and Rivercess Counties, training staff in effective infection prevention and control (IPC) measures. 
+LMH-developed IPC training materials and protocols for health facilities were shared widely and adopted by multiple 
+organizations across the country involved with the Ebola response. Additionally, through the establishment of a MESH 
+(Monitoring & Enhanced Supervision of Health facilities) program, LMH followed up monthly with facilities to 
+troubleshoot problems and ensure that standards were being maintained.
 
 - All LMH trained workers were able to "keep safe and keep serving" to ensure that remote communities still had access 
 to essential health services at the height of the crisis. LMH’s CHWs treated more than `8,820` cases of childhood 

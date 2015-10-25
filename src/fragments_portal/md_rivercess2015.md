@@ -46,7 +46,7 @@ Key Notes on Data
 - Early childhood mortality: pending further validation
 - Perspective of enumerators: sometimes seen initially as Ebola workers/counselors
 - Questionnaire and indicators slightly different from those of Konobo Baseline: to ensure comparability with DHS, stick to global standards, and collect programmatically relevant data 
-- All estimates have a statistical margin of error:  Estimates’ precision are worsened in small subpopulations, so use care when making comparisons.  If you need estimates of statistical uncertainty, talk with an M&E team member—we can provide more detailed analyses.
+- All estimates have a statistical margin of error:  Estimates’ precision are worsened in small subpopulations, so use care when making comparisons.  If you need estimates of statistical uncertainty, talk with an M&E team member - we can provide more detailed analyses.
 
 ![](../images/dataPortal/LMSRCphotos/RC6.1_V1.jpg)
 

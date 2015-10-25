@@ -75,13 +75,13 @@ $(document).ready(function(){
             var index = getIndex(id, sidebar_model_obs);
 
             // Push new inner tab to proper outer tab
-            sidebar_model_obs()[index].tabs.push({
+            sidebar_model_obs()[index].tabs.push(ko.mapping.fromJS({
                 id: dpObjects.getNewID(),
                 type: 'dp_frag',
                 name: 'New page',
                 link: 'Insert link here',
                 permissions: 'superadmin'
-            });
+            }));
         },
         
         // Move OUTER tab up
@@ -316,6 +316,7 @@ function getIndex(id, sidebar_model) {
     // Test inner tabs
     for(var i=0; i<sidebar_model().length; i++) {
         for(var j=0; j<sidebar_model()[i].tabs().length; j++) {
+            console.log(sidebar_model()[i].tabs()[j].id());
             if(sidebar_model()[i].tabs()[j].id() === id) {
                 match = {
                     outer: i,

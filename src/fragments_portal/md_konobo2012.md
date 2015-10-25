@@ -13,7 +13,7 @@ Konobo district (which includes both the Konobo and Glio-Twarbo administrative d
 contained within this report, will help to guide Tiyatien Health in planning the most effective and appropriate 
 interventions at the clinic level and at the community level in order to improve health outcomes, particularly among 
 women and children. Additionally, the baseline indicators will provide a foundation for assessing and demonstrating the 
-impact of Tiyatien’s health interventions.
+impact of Tiyatien's health interventions.
 
 Summary of key findings
 -----------------------
@@ -21,8 +21,8 @@ Summary of key findings
 ### Distance to clinic
 
 Among all respondents, the mean distance to the Konobo Health Center (KHC), measured along motor roads by GPS, was 
-`28.7` kilometers. The range of walking distances was `3.5 km – 50.2 km`. The majority of respondents (`70.2%`) lived 
-between `20 – 40` kilometers from KHC.
+`28.7` kilometers. The range of walking distances was `3.5 km - 50.2 km`. The majority of respondents (`70.2%`) lived 
+between `20 - 40` kilometers from KHC.
 
 ### Education
 
@@ -45,9 +45,9 @@ households also used creek water at times. Additionally, given that `13.8%` of t
 reported treating their water in some way (across all geographic axes except Flah), it is likely that many of the hand 
 pumps in Konobo are not being treated.
 
-`36.5%` of households have access to an “improved, not shared” latrine (an unshared pit latrine with a slab). An 
+`36.5%` of households have access to an "improved, not shared" latrine (an unshared pit latrine with a slab). An 
 additional `7.3%` have access to a shared pit latrine with a slab. The majority of the Konobo population (`60.9%`) 
-reported using the “bush or field” for a toilet (either instead of a latrine or in addition to a latrine).
+reported using the "bush or field" for a toilet (either instead of a latrine or in addition to a latrine).
 
 ### Mosquito nets
 
@@ -72,9 +72,9 @@ attendance were Flah (`87.2%`), Druwar (`84.4%`), and Banglor (`81.7%`), and the
 (`13.3%`).
 
 The majority of respondents (`71.6%`) said that there was something stopping them from going to KHC. By far, the two 
-most common reasons for not going to clinic were “clinic is too far away” (`58.7%`) and “no transport money” (`54.3%`). 
-An additional `9.4%` cited “no medicine at clinic” as a reason for not going to KHC. Broken down by axis, `34.6%` of 
-respondents in Flah and `32.8%` of respondents in Billibo had the concern that there was “no medicine at clinic”, 
+most common reasons for not going to clinic were "clinic is too far away" (`58.7%`) and "no transport money" (`54.3%`). 
+An additional `9.4%` cited "no medicine at clinic" as a reason for not going to KHC. Broken down by axis, `34.6%` of 
+respondents in Flah and `32.8%` of respondents in Billibo had the concern that there was "no medicine at clinic", 
 whereas this percentage in all other axes was `15%` or less. Consequently, Tiyatien should make efforts to target the 
 Billibo and Flah axes with an awareness campaign to inform communities of new interventions at KHC and to dispel any 
 myths that drugs are not available.
@@ -87,8 +87,8 @@ average reported walking time to the clinic was `4.7` hours.
 
 ### Pregnancy history
 
-Our sample was slightly biased towards reproductively-active women (as noted in Section III.5 – “Reproductive History”), 
-since enumerators asked to speak with “the woman in the household who had most recently completed a pregnancy”. In 
+Our sample was slightly biased towards reproductively-active women (as noted in Section III.5 - "Reproductive History"), 
+since enumerators asked to speak with "the woman in the household who had most recently completed a pregnancy". In 
 Konobo, the average reproductively-active woman has had `6.3` pregnancies in her lifetime. `56.8%` have had at least 
 one miscarriage, and `8.3%` have had at least one stillbirth. `72.6%` give birth by the age of 18, and the median age 
 at first birth is roughly `16.5`.
@@ -102,25 +102,25 @@ than `50%`.
 ### Family Planning
 
 Overall, just `38.4%` of reproductively-active women in Konobo said that they want more children now (regardless of 
-age), which suggests that there is a strong demand for family planning methods. Basic knowledge (i.e. “has heard of it”) 
-of the three most commonly used birth control methods in Liberia – the “pill”, the “injection”, and the “male condom” – 
+age), which suggests that there is a strong demand for family planning methods. Basic knowledge (i.e. "has heard of it") 
+of the three most commonly used birth control methods in Liberia - the "pill", the "injection", and the "male condom" - 
 was nearly universal among respondents.
 
 Out of all respondents, `55.6%` reported that they had tried at least one method before. Specifically, `27.4%` have 
-tried the “male condom”, `26.0%` have tried the injection, `23.4%` have tried the “pill”, `1.4%` have tried the “female 
-condom”, and `1.1%` have tried the IUD. Experience with family planning methods was particularly low along the Druwar 
+tried the "male condom", `26.0%` have tried the injection, `23.4%` have tried the "pill", `1.4%` have tried the "female 
+condom", and `1.1%` have tried the IUD. Experience with family planning methods was particularly low along the Druwar 
 (`17.4%`) and Flah (`20.4%`) axes. This information will hopefully allow Tiyatien to target family planning outreach 
 activities to these two axes.
 
-The three most common reasons for not trying any family planning method before were “fear of side effects” (`35.8%`), 
-“wants more children now” (`32.4%`), and “knows no method” (`25.9%`).
+The three most common reasons for not trying any family planning method before were "fear of side effects" (`35.8%`), 
+"wants more children now" (`32.4%`), and "knows no method" (`25.9%`).
 
 ### ANC Visitation
 
 `76.3%` of women reported visiting the ANC at least once during their last pregnancy, and `43.7%` reported visiting at 
 least four times. Respondents along the Banglor, Druwar, and Flah axes went mainly to KHC, while respondents along 
-other axes often went to other clinics. The most common reasons for not visiting the ANC were “clinic is too far” 
-(`56.8%`), “no transportation” (`48.7%`), “costs too much money” (`28.6%`). Full ANC visitation (i.e. 4 visits or more) 
+other axes often went to other clinics. The most common reasons for not visiting the ANC were "clinic is too far" 
+(`56.8%`), "no transportation" (`48.7%`), "costs too much money" (`28.6%`). Full ANC visitation (i.e. 4 visits or more) 
 was particularly low along the Tempo (`18.5%`) and Billibo (`28.8%`) axes.
 
 In terms of components of antenatal care, `80.6%` reported taking an iron supplement during their last pregnancy, 
@@ -129,8 +129,8 @@ In terms of components of antenatal care, `80.6%` reported taking an iron supple
 ### Institutional delivery
 
 `55.3%` of respondents reported that their last delivery was in a health facility, and `55.1%` were delivered by a 
-“skilled provider”. Among those who did not deliver in a clinic, the most common reasons for delivering in one’s own 
-village were “clinic is too far” (`70.0%`), “no transportation” (`62.3%`), and “costs too much money” (`12.5%`). 
+"skilled provider". Among those who did not deliver in a clinic, the most common reasons for delivering in one's own 
+village were "clinic is too far" (`70.0%`), "no transportation" (`62.3%`), and "costs too much money" (`12.5%`). 
 Institutional delivery was very low along the Flah (`18.5%`), Tempo (`33.1%`), and Banglor (`37.0%`) axes.
 
 ### Postnatal care
@@ -164,8 +164,8 @@ treatment from a health facility.
 ### Vaccinations
 
 In our sample, `23.7%` of women who had children living in the house with them were able to find at least one of their 
-child’s vaccine cards. Out of all children who had vaccine cards, only `11.0%` had received a full course of 
-vaccinations, and not a single child had received a full course “on time” (i.e. according to the schedule set out by the 
+child's vaccine cards. Out of all children who had vaccine cards, only `11.0%` had received a full course of 
+vaccinations, and not a single child had received a full course "on time" (i.e. according to the schedule set out by the 
 WHO). `86.1%` of children had ever received the BCG vaccine, while only `63.1%` of children received the BCG vaccine on 
 time.
 

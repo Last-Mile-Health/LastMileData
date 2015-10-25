@@ -1,11 +1,10 @@
 
-body {
+#sidebarDIV_edit {
     font-weight: bold;
     color: #333;
 }
 
-.outerTab {
-    cursor:pointer;
+#sidebarDIV_edit .outerTab {
     padding: 10px;
     margin: 10px;
     width: 800px;
@@ -19,7 +18,7 @@ body {
     width: 800px;
 }
 
-.innerTab {
+#sidebarDIV_edit .innerTab {
     padding: 5px;
     margin: 10px;
     height: 40px;
@@ -30,15 +29,29 @@ body {
     box-shadow: 2px 2px 10px #ddd;
 }
 
-.outerTab input {
+#sidebarDIV_edit input {
+    border-radius: 4px;
+    position: relative;
+    top:-6px;
+    border: none;
+}
+
+#sidebarDIV_edit .outerTab input {
     width:90%;
 }
 
-.innerTab input {
+#sidebarDIV_edit .innerTab input {
     width:23%;
 }
 
-#displayOrder {
+#sidebarDIV_edit .innerTab select {
+    height:24px;
+    border-radius: 4px;
+    position: relative;
+    top:-6px;
+}
+
+    #displayOrder {
     margin: 10px;
     font-size:20px;
     width: 400px;
@@ -50,7 +63,7 @@ body {
 
 .btn-sm, .btn-xs {
     position:relative;
-    top:-6px;
+    top:-7px;
     margin-left:0px;
     margin-right:0px;
 }

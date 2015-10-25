@@ -105,7 +105,7 @@ $(document).ready(function(){
 
     // Submit button disabled by default; reset anyChanges flag
     var $submit = $('#btn_submit');
-    LMD_utilities.ajaxButton($submit, 'disabled');
+    LMD_utilities.ajaxButton($submit, 'disable');
     DataPortal_GLOBALS.anyChanges = false;
 
     

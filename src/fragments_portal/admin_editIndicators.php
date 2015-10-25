@@ -29,13 +29,13 @@ $.getScript('../js/admin_editIndicators.js');
         <table>
             <thead id="adminHeader">
                 <tr>
-                    <th class="pad">Category</th>
-                    <th class="pad">Indicator</th>
-                    <th class="pad">Cut</th>
-                    <th class="pad">Target</th>
-                    <th class="pad">Narrative</th>
-                    <th class="pad">Definition</th>
-                    <th class="pad">&nbsp;X&nbsp;&nbsp;&nbsp;</th>
+                    <th class="pad darkBlue">Category</th>
+                    <th class="pad darkBlue">Indicator</th>
+                    <th class="pad darkBlue">Cut</th>
+                    <th class="pad darkBlue">Target</th>
+                    <th class="pad darkBlue">Narrative</th>
+                    <th class="pad darkBlue">Definition</th>
+                    <th class="pad darkBlue">&nbsp;X&nbsp;&nbsp;&nbsp;</th>
                 </tr>
             </thead>
             <tbody id="scrollContent" data-bind="foreach:vmData">
@@ -63,7 +63,6 @@ $.getScript('../js/admin_editIndicators.js');
 
         <button id="btn_add" class="btn btn-primary">Add a new indicator</button>
         <button id="btn_submit" class="btn btn-primary">Submit changes</button>
-        <!--<button id="btn_revert" class="btn btn-danger">Revert changes</button>  !!!!! Create "Revert changes" button !!!!!--> 
     </div>
 
 </div>

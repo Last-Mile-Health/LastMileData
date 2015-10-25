@@ -35,11 +35,11 @@ $.getScript('../js/admin_editData.js');
         <table>
             <thead id="adminHeader">
                 <tr>
-                    <th class="pad">Category</th>
-                    <th class="pad">Indicator name</th>
-                    <th class="pad">Cut</th>
+                    <th class="pad darkBlue">Category</th>
+                    <th class="pad darkBlue">Indicator name</th>
+                    <th class="pad darkBlue">Cut</th>
                     <!-- ko foreach:monthList.months -->
-                    <th data-bind="text:string">hey</th>
+                    <th class="pad darkBlue" data-bind="text:string">hey</th>
                     <!-- /ko -->
                 </tr>
             </thead>

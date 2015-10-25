@@ -43,8 +43,7 @@ $(document).ready(function(){
 
             // Set hash fragment (element ID)
             var elemID = $(this).attr('id');
-//            location.hash = '#' + elemID;
-            history.pushState(null, null, '#' + elemID);
+            location.hash = '#' + elemID;
 
             // Get link URL; set link type
             if ( $(this).hasClass('dp_frag') ) {
@@ -56,9 +55,9 @@ $(document).ready(function(){
                 var linkType =  "frame";
                 var linkURL = $(this).attr('data-link');
             } else {
-                // HTML fragments
+                // Markdown
                 var linkType =  "markdown";
-                var linkURL = '../fragments_portal/' + $(this).attr('data-link');
+                var linkURL = '/LastMileData/php/scripts/LMD_REST.php/markdown/' + $(this).attr('data-link');
             }
             
             // Send usage data point to database (tracks sidebar link clicks)
@@ -97,6 +96,7 @@ $(document).ready(function(){
                 } else if (linkType === "frame") {
                     $('#mainContainer').hide();
                     $('#dashboard_iframe').show();
+                    alert(linkURL);
                     $('#dashboard_iframe').prop('src',linkURL);
 
                 // Handle markdown loads
@@ -115,7 +115,7 @@ $(document).ready(function(){
                             });
                             
                             // Apply rendered html to mainContainer DIV
-                            var html = converter.makeHtml(responseText);
+                            var html = converter.makeHtml(JSON.parse(responseText).mdText);
                             $('#mainContainer').html(html);
                             
                             // Make links open in new tabs/windows
@@ -168,13 +168,6 @@ $(document).ready(function(){
         $('#whitespaceContainer').slideUp(1000);
     };
 
-    // jQueryUI Accordion on sidebar
-    $("#sidebarDIV").accordion({
-        header: "h3",
-        heightStyle: "content",
-        collapsible: true
-    });
-
     // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she leaves page
     window.onbeforeunload = function() {
         if(DataPortal_GLOBALS.anyChanges) {
@@ -182,11 +175,21 @@ $(document).ready(function(){
         }
     };
 
+    // jQueryUI Accordion on sidebar
+    $("#sidebarDIV").accordion({
+        header: "h3",
+        heightStyle: "content",
+        collapsible: true,
+        active: false
+    });
+
     // Routing for initial page load
     // If there's a hash fragment in the URL, redirect user to the appropriate page (if he/she has permission)
     // If there's no hash fragment OR user doesn't have appropriate permissions, redirect to the "overview" page
     if ($(window.location.hash).length > 0) {
-        $(window.location.hash).parent().prev().click();
+//        if(window.location.hash !== "#id_2") {
+            $(window.location.hash).parent().prev().click();
+//        }
         $(window.location.hash).click();
     } else {
         $('.dp_markdown').first().addClass('dp-active');

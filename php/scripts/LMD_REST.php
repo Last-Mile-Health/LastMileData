@@ -26,7 +26,8 @@ require_once("cxn.php");
 $app = new \Slim\Slim();
 
 
-// Route 0: (lastmile_dataportal.tbl_testREST) // For testing REST clients (3 columns: `id`, `name`, `age`)
+// Route 0: (lastmile_dataportal.tbl_testREST)
+// For testing REST clients (3 columns: `id`, `name`, `age`)
 $app->get('/test_rest/(:id)',function($id='all') {
     LMD_get($id, "id", "lastmile_dataportal.test_rest", 1);
 });
@@ -41,7 +42,7 @@ $app->delete('/test_rest/:id', function($id) {
 });
 
 
-// Route 1: (lastmile_dataportal.tbl_indicators)
+// Route 1: Indicator metadata (lastmile_dataportal.tbl_indicators)
 $app->get('/indicators/(:id)',function($id='all') {
     LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "archived <> 1");
 });
@@ -56,7 +57,7 @@ $app->delete('/indicators/:id', function($id) {
 });
 
 
-// Route 2: (lastmile_dataportal.tbl_values)
+// Route 2: Indicator values (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/indicatorvalues/(:id)',function($id='all') {
     LMD_get($id, "indID", "lastmile_dataportal.tbl_values", "indValue <> ''");
@@ -72,8 +73,7 @@ $app->delete('/indicatorvalues/:id', function($id) {
 });
 
 
-// Route 3: (dataportal sidebar)
-// Note: this stores and retrieves the object representing the data portal sidebar
+// Route 3: Data Portal sidebar (tbl_json_objects)
 $app->get('/json_objects/:id',function($id) {
     LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects", 1);
 });
@@ -82,7 +82,7 @@ $app->put('/json_objects/:id', function($id) {
 });
 
 
-// Route 4: (lastmile_dataportal.tbl_reportobjects)
+// Route 4: Data Portal "report objects" (lastmile_dataportal.tbl_reportobjects)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/reportobjects/(:id)',function($id='all') {
     // !!!!! May need to create another address for this (e.g. /GETreportobjects/) !!!!!
@@ -99,6 +99,21 @@ $app->delete('/reportobjects/:id', function($id) {
 });
 
 
+// Route 5: Markdown (lastmile_dataportal.tbl_markdown)
+$app->get('/markdown/(:id)',function($id='all') {
+    LMD_get($id, "mdName", "lastmile_dataportal.tbl_markdown", 1);
+});
+$app->post('/markdown/', function() {
+    LMD_post("lastmile_dataportal.tbl_markdown");
+});
+$app->put('/markdown/:id', function($id) {
+    LMD_put($id, "mdName", "lastmile_dataportal.tbl_markdown");
+});
+$app->delete('/markdown/:id', function($id) {
+    LMD_delete($id, "mdName", "lastmile_dataportal.tbl_markdown");
+});
+
+
 // Run Slim
 $app->run();
 
@@ -106,7 +121,7 @@ $app->run();
 // Handles GET requests
 function LMD_get($id, $idFieldName, $table, $whereFilter) {
     try {
-        $whereClause = ($id == 'all') ? 1 : "$idFieldName IN ($id)" ;
+        $whereClause = ($id == 'all') ? 1 : "`$idFieldName` IN ('$id')" ;
         $whereClause .= " AND " . $whereFilter;
         $cxn = getCXN();
         $query = "SELECT * FROM $table WHERE $whereClause";
@@ -149,7 +164,7 @@ function LMD_post($table) {
         }
         $query = substr($query, 0, -2) ;
         if (mysqli_query($cxn, $query)) {
-            echo mysqli_insert_id($cxn);
+            echo mysqli_insert_id($cxn); // Only works if ID field is auto-increment
         } else {
             header("HTTP/1.1 404 Not Found"); // !!!!! change this to 500 / Internal server error !!!!!
         }
@@ -163,7 +178,6 @@ function LMD_post($table) {
 
 
 // Handles PUT requests
-// !!!!! test empty request !!!!!
 function LMD_put($id, $idFieldName, $table) {
     try {
         $app = \Slim\Slim::getInstance();
@@ -180,7 +194,7 @@ function LMD_put($id, $idFieldName, $table) {
         }
         $query = substr($query, 0, -2) ;
         if (mysqli_query($cxn, $query)) {
-            echo $id;
+            echo json_encode($id);
         } else {
             header("HTTP/1.1 404 Not Found"); // !!!!! change this to 500 / Internal server error !!!!!
         }
@@ -197,10 +211,10 @@ function LMD_put($id, $idFieldName, $table) {
 function LMD_delete($id, $idFieldName, $table) {
     try {
         $cxn = getCXN();
-        $query = "DELETE FROM $table WHERE `$idFieldName`=$id";
+        $query = "DELETE FROM $table WHERE `$idFieldName`='$id'";
         $result = mysqli_query($cxn, $query);
         if (mysqli_query($cxn, $query)) {
-            echo $id;
+            echo json_encode($id);
         } else {
             header("HTTP/1.1 404 Not Found"); // !!!!! change this to 500 / Internal server error !!!!!
         }
