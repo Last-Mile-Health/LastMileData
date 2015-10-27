@@ -4,14 +4,25 @@
 $user = "lastmile_admin";
 $password = "LastMile14";
 $host = "localhost";
+
 $db = "lastmile_db";
+$db1 = "lastmile_chwdb";
+$db2 = "lastmile_dataportal";
+$db3 = "lastmile_lms";
+
 
 $backup_file = $db . '_' . date("Y-m-d-H-i-s") . '.sql';
+$backup_file1 = $db1 . '_' . date("Y-m-d-H-i-s") . '.sql';
+$backup_file2 = $db2 . '_' . date("Y-m-d-H-i-s") . '.sql';
+$backup_file3 = $db3 . '_' . date("Y-m-d-H-i-s") . '.sql';
 
 // For Localhost (for testing)
 //exec('C:/Users/Avi/Desktop/Avi/xampp/mysql/bin/mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db . ' >' . $_SERVER['DOCUMENT_ROOT'] . '/LastMileData/backups/' . $backup_file);
 
 // For GoDaddy
 exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file);
+exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db1 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file1);
+exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db2 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file2);
+exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db3 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file3);
 
 ?>
