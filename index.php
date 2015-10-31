@@ -20,6 +20,10 @@
                 document.activeElement.blur();
                 $(this).find(".modal-body :input:visible").first().focus();
             });
+            if (location.hash !== '') {
+                var redirect = $('#redirect').val();
+                $('#redirect').val(redirect + location.hash);
+            }
             
         });
         </script>
@@ -65,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <input name="password" type="password" class="form-control input-lg" placeholder="Password">
-                                <input name="redirect" type="hidden" value="<?php echo @$_GET['redirect']; ?>">
+                                <input id="redirect" name="redirect" type="hidden" value="<?php echo @$_GET['redirect']; ?>">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-lg btn-block">Sign In</button>

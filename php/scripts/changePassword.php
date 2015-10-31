@@ -34,12 +34,12 @@ elseif ( $oldPasswordCorrect AND $newPasswordsMatch )
     // Generate hashed password (sha1)
     $hashedPassword = sha1($pw_new_1);
     
-    // Run query to update password
-    $query = "UPDATE tbl_utility_users SET password='$hashedPassword' WHERE pk='$pk'";
-    mysqli_query($cxn, $query) or $result_code = "error";
-    
-    // Assign "success" result code
+    // Tentatively assign "success" result code
     $result_code = "pw_success";
+    
+    // Run query to update password
+    $query = "UPDATE lastmile_db.tbl_utility_users SET password='$hashedPassword' WHERE pk='$pk'";
+    mysqli_query($cxn, $query) or $result_code = "error";
 }
 
 // Assign "error" result code
@@ -47,5 +47,3 @@ else { $result_code = "error"; }
 
 // Return result code (used by ajax success callback)
 echo json_encode($result_code);
-
-?>

@@ -10,6 +10,7 @@ $redirect = $_POST['redirect'];
 
 // Query password hash from database
 require_once("cxn.php");
+require_once("PhpConsole.phar");
 $query = "SELECT * FROM lastmile_db.tbl_utility_users WHERE username = '$input_username'";
 $result = mysqli_query($cxn, $query) or Header("Location:/LastMileData/index.php?retry=1");
 $row = mysqli_fetch_assoc($result);
