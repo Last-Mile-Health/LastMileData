@@ -2,6 +2,7 @@
 // Author:          Avi Kenny
 // Last update:     2014-10-11
 // Dependencies:    LMD_utilities.js, LMD_dimpleHelper, Knockout.js
+// Purpose:         Used by frag_indicatorReport.php to dynamically generate indicator reports
 
 var LMD_dataPortal = (function(){
 
@@ -30,7 +31,7 @@ var LMD_dataPortal = (function(){
     ];
 
 
-    // PUBLIC:  Stores indicator data (in "chartData" and "tableData" objects), to be used in charts and tables
+    // PRIVATE: Stores indicator data (in "chartData" and "tableData" objects), to be used in charts and tables
     //          The single parameter comes from LMD_REST.php/indicatorvalues
     //          For chartData, keys are indicator IDs and values are objects containing two properties, a MySQL-formatted date and the indicator value
     //          For tableData, keys are "indID-monthyear" hashes (e.g. "i_33_m_2015-4", for indID "33" on April, 2015) and values are indicator values
@@ -52,7 +53,7 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PUBLIC:  Stores indicator metadata (in "indicatorMetaata" object)
+    // PRIVATE: Stores indicator metadata (in "indicatorMetadata" object)
     //          Input object comes from LMD_REST.php/indicators
     //          Keys are indicator IDs, values are objects containing metadata for a given indicator
     function setMetadata(dataObject) {
@@ -64,7 +65,7 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PUBLIC:  Configures the "report model" (i.e. a single report within the data portal)
+    // PRIVATE: Configures the "report model" (i.e. a single report within the data portal)
     //          Input object comes from LMD_REST.php/reportobjects
     //          Must be called AFTER setData and setMetadata
     function configureReportModel(dataObject) {
@@ -72,6 +73,7 @@ var LMD_dataPortal = (function(){
         // 1. Transform indicator strings into arrays
         for (var key in dataObject) {
             dataObject[key].indicators = dataObject[key].indicators.split(",");
+            dataObject[key].chart_indicators = dataObject[key].chart_indicators.split(",");
         }
 
         // 2. Sort by "displayOrder"
@@ -100,14 +102,14 @@ var LMD_dataPortal = (function(){
             // Add chart_points array (for Dimple charts)
             d.chart_points = [];
 
-            // If roMetadata fields are not specified, get them from getIndicatorMetadata()
+            // If roMetadata fields are not specified, get them from indicatorMetadata
             var indID = d.indicators[0];
-            var metadata = getMetadata(indID);
+            var metadata = indicatorMetadata[indID];
             if ( d.roMetadata_name == null || d.roMetadata_name == '' ) {
                 d.roMetadata_name = metadata.indName;
             }
-            if ( d.roMetadata_format == null || d.roMetadata_format == '' ) {
-                d.roMetadata_format = metadata.indFormat;
+            if ( d.roMetadata_targetFormat == null || d.roMetadata_targetFormat == '' ) {
+                d.roMetadata_targetFormat = metadata.indFormat;
             }
             if ( d.roMetadata_description == null || d.roMetadata_description == '' ) {
                 d.roMetadata_description = metadata.indDefinition;
@@ -120,16 +122,16 @@ var LMD_dataPortal = (function(){
             }
 
             // Populate chart_points array (for Dimple charts)
-            for (var key2 in d.indicators) {
+            for (var key2 in d.chart_indicators) {
 
-                var indID = d.indicators[key2];
+                var indID = d.chart_indicators[key2];
                 var dataArray = getChartData(indID);
                 
                 for(var i=0; i<dataArray.length; i++) {
                     d.chart_points.push({
                         Month:dataArray[i].date,
                         Value:dataArray[i].value,
-                        Cut: d.multiple ? getMetadata(indID).indShortName : 1
+                        Cut: d.multiple ? indicatorMetadata[indID].indShortName : 1
                     });
                 }
             }
@@ -153,15 +155,7 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PRIVATE: Returns metadata object for a single indicator, based on indicator ID
-    // Example: getMetadata(16) might return the following...
-    //              { indName:"Number of CHWs", indDefinition:"A deployed CHW is...", ... },
-    function getMetadata(indID) {
-        return indicatorMetadata[indID];
-    }
-
-
-    // PUBLIC:  Dynamically populate indicator values into html tables
+    // PRIVATE: Dynamically populate indicator values into html tables
     //          Table cells must have the class "indValue" and the following data attributes:
     //               data-indid:        indicator ID
     //               data-yearmonth:    A string of the form "yyyy-m" (e.g. "2015-4", for April, 2015)
@@ -170,7 +164,7 @@ var LMD_dataPortal = (function(){
         $(".indValue").each(function(){
             var indID = $(this).attr("data-indid");
             var yearmonth = $(this).attr("data-yearmonth");
-            var format = $(this).attr("data-format");
+            var format = indicatorMetadata[indID].indFormat || 'integer';
             var indValue = tableData["i_" + indID + "_m_" + yearmonth];
             indValue = LMD_utilities.format_number(indValue, format);
             $(this).html(indValue);
@@ -178,7 +172,7 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PUBLIC:  Dynamically populate indicator short names into html tables
+    // PRIVATE: Dynamically populate indicator short names into html tables
     //          Table cells must have the class "indShortName" and the "data-indid" data attribute:
     //          !!!!! Potentially modify this in the future to populate other metadata
     function populateTableMetadata() {
@@ -190,7 +184,7 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PUBLIC:  Render D3/Dimple charts
+    // PRIVATE: Render D3/Dimple charts
     //          Parameter is a "report object", as returned by configureReportModel()
     function renderCharts(dataObject) {
         for(var key in dataObject) {
@@ -225,8 +219,8 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PUBLIC:  Render D3/Dimple charts
-    //          Parameter is a "report object", as returned by configureReportModel()
+    // PUBLIC:  Bootstrap the page
+    //          This function is called from frag_indicatorReport.php
     function bootstrap(data_rawValues, data_indicators, model_report) {
         
         // Clear data
@@ -256,12 +250,6 @@ var LMD_dataPortal = (function(){
 
     // LMD_dataPortal API
     return {
-//        setData: setData,
-//        setMetadata: setMetadata,
-//        configureReportModel: configureReportModel,
-//        populateTableData: populateTableData,
-//        populateTableMetadata: populateTableMetadata,
-//        renderCharts: renderCharts,
         bootstrap: bootstrap
     };
     

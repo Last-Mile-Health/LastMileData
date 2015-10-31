@@ -19,7 +19,7 @@
             <div class='col-md-4'>
                 <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + roMetadata_name"></h3>
                 <p><b>Definition</b>: <span data-bind="text:roMetadata_description"></span></p>
-                <p data-bind="if:roMetadata_target"><b>FY16 Target</b>: <span data-bind="text: LMD_utilities.format_number(roMetadata_target,roMetadata_format)"></span></p>
+                <p data-bind="if:roMetadata_target"><b>FY16 Target</b>: <span data-bind="text: LMD_utilities.format_number(roMetadata_target,roMetadata_targetFormat)"></span></p>
                 <table class='ptg_data'>
                     
                     <tr>
@@ -42,7 +42,7 @@
                         
                         <!-- Indicator values will be dynamically placed here -->
                         <!-- ko foreach: $parents[1].lastFourMonths -->
-                        <td class="indValue" data-bind="attr: {'data-yearmonth':yearMonth, 'data-indid':$parentContext.$data, 'data-format':ro.roMetadata_format}"></td>
+                        <td class="indValue" data-bind="attr: {'data-yearmonth':yearMonth, 'data-indid':$parentContext.$data}"></td>
                         <!-- /ko -->
                     </tr>
                     <!-- /ko -->
