@@ -32,10 +32,9 @@ var LMD_dimpleHelper = (function(){
             x.timePeriod = d3.time.months;
             x.timeInterval = params.timeInterval;
             
-            // !!!!! temporary hack !!!!!
+//            !!!!! temporary hack !!!!!
 //            if (params.overrideMin !== "") { x.overrideMin = new Date(params.overrideMin); }
 //            if (params.overrideMax !== "") { x.overrideMax = new Date(params.overrideMax); }
-            // !!!!! temporary hack !!!!!
             
             var y = myChart.addMeasureAxis("y", params.xyVars.y);
         } else if (params.type==="pie") {

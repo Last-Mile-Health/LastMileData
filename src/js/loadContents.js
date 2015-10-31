@@ -23,7 +23,7 @@ $(document).ready(function() {
             
             // Manipulate DOM; show loader GIF
             $('#modal_changePW_form').slideUp(500,function(){
-                $('#modal_changePW_message').html("<img src='../../images/ajax_loader.gif'>").delay(500).slideDown(500, function(){
+                $('#modal_changePW_message').html("<img src='../images/ajax_loader.gif'>").delay(500).slideDown(500, function(){
 
                     setTimeout(function(){
 
@@ -38,38 +38,29 @@ $(document).ready(function() {
                             data: "pw_old=" + pw_old + "&pw_new_1=" + pw_new_1 + "&pw_new_2=" + pw_new_2 + "&username=" + sessionStorage.username,
                             dataType: "json",
                             success: function(data) {
-
-                                // Script response: old password is incorrect
-                                if ( data == 'old_pw_bad' ) {
-                                    $('#modal_changePW_message').slideUp(500, function(){
-                                        $(this).html('Old password is incorrect. Please try again.').slideDown(500, closeAndResetModal);
-                                    });
+                                
+                                switch(data) {
+                                    
+                                    case 'old_pw_bad':
+                                        errorMessage('Old password is incorrect. Please try again.');
+                                        break;
+                                        
+                                    case 'new_pws_dont_match':
+                                        errorMessage('New passwords don\'t match. Please try again.');
+                                        break;
+                                    
+                                    case 'pw_success':
+                                        errorMessage('Success! New password has been set.');
+                                        break;
+                                    
+                                    default:
+                                        errorMessage('Error. Please contact LMD@LastMileHealth.org for support.');
+                                        break;
                                 }
-                                // Script response: new passwords don't match
-                                else if ( data == 'new_pws_dont_match' ) {
-                                    $('#modal_changePW_message').slideUp(500, function(){
-                                        $(this).html('New passwords don\'t match. Please try again.').slideDown(500, closeAndResetModal);
-                                    });
-                                }
-                                // Script response: success
-                                else if ( data == 'pw_success' ) {
-                                    $('#modal_changePW_message').slideUp(500, function(){
-                                        $(this).html('Success! New password has been set.').slideDown(500, closeAndResetModal);
-                                    });
-                                }
-                                // Error handler
-                                else {
-                                    $('#modal_changePW_message').slideUp(500, function(){
-                                        $(this).html('Error. Please contact Avi Kenny for support.').slideDown(500, closeAndResetModal);
-                                    });
-                                }
-
+                                
                             },
                             error: function(request, status, error) {
-                                // Error handler
-                                $('#modal_changePW_message').slideUp(500, function(){
-                                    $(this).html('Error. Please contact Avi Kenny for support.').slideDown(500, closeAndResetModal);
-                                });
+                                errorMessage('Error. Please contact LMD@LastMileHealth.org for support.');
                             }
                         });
                     },500);
@@ -86,6 +77,12 @@ $(document).ready(function() {
     });
 });
 
+
+function errorMessage(message) {
+    $('#modal_changePW_message').slideUp(500, function(){
+        $(this).html(message).slideDown(500, closeAndResetModal);
+    });
+}
 
 
 function closeAndResetModal() {

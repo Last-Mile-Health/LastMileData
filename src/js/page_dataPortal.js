@@ -187,9 +187,7 @@ $(document).ready(function(){
     // If there's a hash fragment in the URL, redirect user to the appropriate page (if he/she has permission)
     // If there's no hash fragment OR user doesn't have appropriate permissions, redirect to the "overview" page
     if ($(window.location.hash).length > 0) {
-//        if(window.location.hash !== "#id_2") {
             $(window.location.hash).parent().prev().click();
-//        }
         $(window.location.hash).click();
     } else {
         $('.dp_markdown').first().addClass('dp-active');
