@@ -121,7 +121,13 @@ $app->run();
 // Handles GET requests
 function LMD_get($id, $idFieldName, $table, $whereFilter) {
     try {
-        $whereClause = ($id == 'all') ? 1 : "`$idFieldName` IN ('$id')" ;
+        $idArray = explode(',', $id);
+        $idString = "";
+        foreach ($idArray as $value) {
+            $idString .= "'$value',";
+        }
+        $idString = trim($idString, ',');
+        $whereClause = ($id == 'all') ? 1 : "`$idFieldName` IN ($idString)" ;
         $whereClause .= " AND " . $whereFilter;
         $cxn = getCXN();
         $query = "SELECT * FROM $table WHERE $whereClause";
