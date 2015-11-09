@@ -7,7 +7,7 @@ $(document).ready(function(){
     };
     
     // Set app version manually here
-    $('#appVersion').text('00492');
+    $('#appVersion').text('00493');
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
@@ -411,7 +411,7 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    $('#qa_KPI_02').click(function() {
+    $('#qa_KPI_03').click(function() {
         launchQAModal({
             targetForm: "../forms/fhw_kpi03_kpiassessment.html",
             qaFormName: "FHW: KPI Assessment",
