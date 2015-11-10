@@ -2,6 +2,8 @@
 
 // Set DB connection strings (!!!!! figure out how to set include path with CRON !!!!!)
 $user = "lastmile_admin";
+$user1 = "root";
+
 $password = "LastMile14";
 $host = "localhost";
 
@@ -21,6 +23,6 @@ $backup_file3 = $db3 . '_' . date("Y-m-d-H-i-s") . '.sql';
 
 // For GoDaddy
 exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file);
-exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db1 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file1);
+exec('mysqldump --routines --user="' . $user1 . '" --password="' . $password . '" --host="' . $host . '" ' . $db1 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file1);
 exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db2 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file2);
 exec('mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db3 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file3);
