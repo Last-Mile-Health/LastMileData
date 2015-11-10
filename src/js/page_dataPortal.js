@@ -96,7 +96,6 @@ $(document).ready(function(){
                 } else if (linkType === "frame") {
                     $('#mainContainer').hide();
                     $('#dashboard_iframe').show();
-                    alert(linkURL);
                     $('#dashboard_iframe').prop('src',linkURL);
 
                 // Handle markdown loads
