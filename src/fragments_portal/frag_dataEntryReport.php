@@ -6,7 +6,7 @@ require_once("cxn.php");
 
 ?>
 
-<h1>Data Entry Summary</h1>
+<h1>Data Entry Details</h1>
 <table class="table table-striped table-hover">
     <tr>
         <th>DE Date</th>
@@ -19,64 +19,64 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT 'tbl_data_fhw_bbf_bigbellyfollowup' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(pk) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_db.tbl_data_fhw_bbf_bigbellyfollowup
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'tbl_data_fhw_bbi_bigbellyinitial',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_bbi_bigbellyinitial
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'tbl_data_fhw_bdm_movements',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            SELECT 'Births, Deaths, Movements (old)' AS myTable,
+            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
             FROM lastmile_db.tbl_data_fhw_bdm_movements
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'tbl_data_fhw_ees_ebolaeducationscreening',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            UNION SELECT 'Births, Deaths, Movements (new)',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            FROM lastmile_chwdb.staging_birthsdeathsmovementsstep1
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'Ebola Education And Screening Ledger',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_fhw_ees_ebolaeducationscreening
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'tbl_data_fhw_kpi_kpiassessment',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            UNION SELECT 'Health Survey',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_fhw_kpi_kpiassessment
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'tbl_data_fhw_pnf_postnatalfollowup',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_pnf_postnatalfollowup
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'tbl_data_fhw_pni_postnatalinitial',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_pni_postnatalinitial
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'tbl_data_fhw_ref_referral',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_ref_referral
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'tbl_data_fhw_reg_registration',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            UNION SELECT 'Registration (old)',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_fhw_reg_registration
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'tbl_data_fhw_sch_sickchild',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            UNION SELECT 'Registration (new)',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            FROM lastmile_chwdb.staging_registrationstep1
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'Sick Child Form',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_fhw_sch_sickchild
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'tbl_data_fhw_sst_sicknessscreening',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            UNION SELECT 'Sickness Screening Tool',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_fhw_sst_sicknessscreening
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'tbl_data_prg_trl_trainingledger',
-            meta_DE_init, meta_DE_date, COUNT(pk), SUM(meta_qa_init<>'')
+            UNION SELECT 'Training Ledger (old)',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_prg_trl_trainingledger
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'Training Ledger (new)',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            FROM lastmile_chwdb.staging_trainingledgerstep1
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'GCHV Questionnaire',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            FROM lastmile_db.tbl_data_prg_chv_gchvquestionnaire
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'Malaria Assessment',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            FROM lastmile_db.tbl_data_fhw_mat_malariaassessment
             GROUP BY meta_DE_init, meta_DE_date
 
             ORDER BY meta_DE_date DESC, meta_DE_init, myTable;

@@ -72,9 +72,9 @@ $(document).ready(function(){
             indDefinition:""
         });
 
-
         myViewModel.addNew();
         DataPortal_GLOBALS.anyChanges = true;
+        $submit.prop('disabled','');
         // !!!!! Need to find a way to get height of DIV and scroll more reliably !!!!!
         $("#scrollContent").animate({ scrollTop: 20000 }, 2000);
         

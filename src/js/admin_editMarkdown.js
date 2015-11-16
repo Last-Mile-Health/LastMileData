@@ -54,8 +54,6 @@ $(document).ready(function(){
     // !!!!! Define Modle Defaults has to be called with every add (instead of once); refactor LMD_koREST.js accordingly !!!!!
     $('#btn_add').click(function(){
 
-        DataPortal_GLOBALS.anyChanges = true;
-        
         // Define model default parameters
         // !!!!! Need to be able to infer fields from the server
         myViewModel.defineModelDefauls({
@@ -64,7 +62,10 @@ $(document).ready(function(){
         });
 
         myViewModel.addNew();
+        DataPortal_GLOBALS.anyChanges = true;
         $submit.prop('disabled','');
+        // !!!!! Need to find a way to get height of DIV and scroll more reliably !!!!!
+        $("#scrollContent").animate({ scrollTop: 20000 }, 2000);
         
     });
 

@@ -24,10 +24,10 @@ var LMD_dataPortal = (function(){
     
     
     var lastFourMonths = [          // Months to display for data tables (!!!!! Set this manually for now !!!!!)
-        { yearMonth: "2015-6", shortMonth: "Jun '15" },
         { yearMonth: "2015-7", shortMonth: "Jul '15" },
         { yearMonth: "2015-8", shortMonth: "Aug '15" },
-        { yearMonth: "2015-9", shortMonth: "Sep '15" }
+        { yearMonth: "2015-9", shortMonth: "Sep '15" },
+        { yearMonth: "2015-10", shortMonth: "Oct '15" }
     ];
 
 

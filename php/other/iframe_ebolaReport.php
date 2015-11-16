@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<!--
-    !!!!! This is just a rough draft; build this out into a more streamlined reporting system/interface !!!!!
--->
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <title>View sent records</title>
+        <title>RM&E - Ebola Report</title>
         <style>
             #myTable { border-collapse:collapse; }
             #myTable th { border: 1px solid black; padding:5px; }
