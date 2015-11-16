@@ -93,8 +93,11 @@ var LMD_dataPortal = (function(){
 
             var d = dataObject[key];
 
-            // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators
+            // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators (for data tables; used by knockout)
             d.multiple = d.indicators.length > 1 ? true : false;
+            
+            // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators (for charts)
+            d.chartMultiple = d.chart_indicators.length > 1 ? true : false;
 
             // Add "chart_div" property
             d.chart_div = "chart_" + d.id;
@@ -131,7 +134,7 @@ var LMD_dataPortal = (function(){
                     d.chart_points.push({
                         Month:dataArray[i].date,
                         Value:dataArray[i].value,
-                        Cut: d.multiple ? indicatorMetadata[indID].indShortName : 1
+                        Cut: d.chartMultiple ? indicatorMetadata[indID].indShortName : 1
                     });
                 }
             }

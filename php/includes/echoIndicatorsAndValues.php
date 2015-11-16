@@ -18,6 +18,7 @@
     $indIDString = "";
     foreach (json_decode($json1) as $value) {
         $indIDString .= $value->indicators. ",";
+        $indIDString .= $value->chart_indicators. ",";
     }
     $indIDString = trim($indIDString, ",");
 
