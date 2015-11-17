@@ -613,6 +613,21 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
+    $('#qa_TRL_04').click(function() {
+        launchQAModal({
+            targetForm: "../forms/prg_trl04_trainingledger.html",
+            qaFormName: "Program: Training Ledger",
+            pKey1_name: "trainingType",
+            pKey2_name: "trainingDate",
+            pKey3_name: "firstName_1",
+            pKey4_name: "lastName_1",
+            pKey1_label: "Training Type",
+            pKey2_label: "Training date",
+            pKey3_label: "First name (1)",
+            pKey4_label: "Last name (1)",
+            pKey_date: "pKey2"
+        });
+    });
     $('#qa_MSH_01').click(function() {
         launchQAModal({
             targetForm: "../forms/fac_msh01_mesh.html",
