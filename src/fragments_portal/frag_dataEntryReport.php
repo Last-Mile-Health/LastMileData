@@ -26,7 +26,7 @@ require_once("cxn.php");
 
             UNION SELECT 'Births, Deaths, Movements (new)',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_birthsdeathsmovementsstep1
+            FROM lastmile_chwdb.staging_birthsDeathsMovementsStep1
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'Ebola Education And Screening Ledger',
@@ -46,7 +46,7 @@ require_once("cxn.php");
 
             UNION SELECT 'Registration (new)',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_registrationstep1
+            FROM lastmile_chwdb.staging_registrationStep1
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'Sick Child Form',
@@ -66,7 +66,7 @@ require_once("cxn.php");
 
             UNION SELECT 'Training Ledger (new)',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_trainingledgerstep1
+            FROM lastmile_chwdb.staging_trainingLedgerStep1
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'GCHV Questionnaire',
