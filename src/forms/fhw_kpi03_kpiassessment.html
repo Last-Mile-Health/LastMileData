@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
 <html>
-    
+
     <head>
-        
+
         <title>CHW Form (HSV 03) - Health Survey</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
         <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
-        
+
         <style>
             .L1 { width: 3.4in }
             .C1 { width: 2.3in }
@@ -34,18 +34,18 @@
             .R3 { width: 1.2in }
             .C4 { width: 3.0in }
             .C5 { width: 3.8in }
-            
+
             #meBox { position:relative; top:145px; }
-            
+
             /* use CSS child selectors so that these styles don't hit the last column */
             .vaccTable { margin: 10px; }
             .vaccTable th { border: 1px solid black; text-align:center; font-weight:bold; }
             .vaccTable td { border: 1px solid black; padding-left:3px; padding-right:5px; padding-top:1px; padding-bottom:1px; }
             .vaccTable input { border:none; }
-            
+
             .cmTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
             .cmTable td { border: 1px solid black; padding-left:4px; padding-right:3px; padding-top:2px; padding-bottom:2px; }
-            
+
             .cmTable-rownum { text-align:center; }
             .cmTable-20 { width:95%; height:95%; border:none; }
             .cmTable-21 { width:0.8in; margin:1px; }
@@ -56,22 +56,22 @@
             .cmTable-mths { position:absolute; top:17px; left:0px; }
             .cmTable-days { position:absolute; top:34px; left:0px; }
         </style>
-        
+
     </head>
-    
+
     <body>
-        
+
         <!-- START: VALIDATION BOX -->
         <div id="validationBox"></div>
         <!-- END: VALIDATION BOX -->
-        
-        
-        
+
+
+
         <!-- START: PAGE 1 -->
         <div class="page">
-            
-            
-            
+
+
+
             <!-- START: FORM HEADER -->
             <div class="formHeader">
                 <img style="float:left" src="../images/logo_liberia.png">
@@ -80,38 +80,40 @@
                 <div style="clear:both"></div>
             </div>
             <hr>
-            
+
             <div class="thickBox">
-                
+
                 <div>
                     <b>Complete this form once per year for every woman between age 15 - 49.</b>
                 </div>
-                
+
                 <hr>
-                
+
                 <div class="headField" style="width:1.05in">Woman name:</div>
-                <div class="headField" style="width:3.35in"><input style="width:3.05in" class="stored" name="womanName"></div>
+                <div class="headField" style="width:3.35in"><input style="width:3.05in" class="stored" name="womanName"></div>   
+ 
                 <div class="headField" style="width:0.85in">Visit date:</div>
                 <div class="headField" style="width:1.80in"><input style="width:1.0in" class="stored datepicker" name="visitDate" data-lmd-valid-required="yes"> (d/m/y)</div>
                 <div style="clear:both; height:3px;"></div>
-                
+
                 <div class="headField" style="width:1.05in">CHW ID:</div>
-                <div class="headField" style="width:1.30in"><input style="width:1.0in" class="stored autocomplete" name="fhwID" data-lmd-valid-required="yes" data-lmd-valid-autoC='["Aaron Garley","Abel Doe","Alexander Nyanway","Alice M. Davis","Anthhony Garlo","Armstrog Tweh","Cynthia Tarley","Daniel Pyne","Ephesian Gedekar","Evelyn G. Kataka","Felecia Weah","G. Markson Barleh","Harrison Taryon","Isaac C. Dorbor","Jerome Tarlue","John Biala","K. Victor Youe","Kelvin Jellah","Markson Farley","Mary Youlo","Michael Morris","Miller Z. Karnual","Moses B Chealey","Moses S. Cheh","Patience Suzar","Pazarro Cooper","Prekins N. Dorbah","Prince Wayle","Raymond B. Chea","Rennie Dennis","Ruth Mitchell","Sam Roberts Jr.","Stanley Quiah","Tarley Dweh","Teta Sluwar","Theophilius Micgill","Ubo George","Wulu Gaye","Yarley Krayou","Youdesco Youbo","Zarkpa Yeoh"]'></div>
-                <div class="headField" style="width:0.75in">Village ID:</div>
-                <div class="headField" style="width:1.30in"><input style="width:1.0in" class="stored" name="vID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:1.17in"><input style="width:0.87in" class="stored autocomplete" name="chwID" data-lmd-valid-required="yes" data-lmd-valid-autoC='["Aaron Garley","Abel Doe","Alexander Nyanway","Alice M. Davis","Anthhony Garlo","Armstrog Tweh","Cynthia Tarley","Daniel Pyne","Ephesian Gedekar","Evelyn G. Kataka","Felecia Weah","G. Markson Barleh","Harrison Taryon","Isaac C. Dorbor","Jerome Tarlue","John Biala","K. Victor Youe","Kelvin Jellah","Markson Farley","Mary Youlo","Michael Morris","Miller Z. Karnual","Moses B Chealey","Moses S. Cheh","Patience Suzar","Pazarro Cooper","Prekins N. Dorbah","Prince Wayle","Raymond B. Chea","Rennie Dennis","Ruth Mitchell","Sam Roberts Jr.","Stanley Quiah","Tarley Dweh","Teta Sluwar","Theophilius Micgill","Ubo George","Wulu Gaye","Yarley Krayou","Youdesco Youbo","Zarkpa Yeoh"]'></div>
+                <div class="headField" style="width:1.00in">Community ID:</div>
+                <div class="headField" style="width:1.18in"><input style="width:0.88in" class="stored" name="communityID" data-lmd-valid-required="yes"></div>
+             
                 <div class="headField" style="width:0.85in">Member ID:</div>
-                <div class="headField" style="width:1.20in"><input style="width:1.0in" class="stored" name="memberID" data-lmd-valid-required="yes"></div>
+                <div class="headField" style="width:1.20in"><input style="width:1.0in" class="stored" name="memberID" data-lmd-valid-required="yes"></div>             
                 <div style="clear:both"></div>
-                
+
             </div>
             <!-- END: FORM HEADER -->
-            
-            
-            
+
+
+
             <!-- START: SECTION A -->
             <b>A. ANC visitation</b>
             <div class="thickBox">
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     1. From five years up to now, you ever born a child?
@@ -125,7 +127,7 @@
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     2. When was your last birth?
@@ -136,42 +138,42 @@
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     3. During your last belly, how many times you go to the clinic for a doctor or nurse to check on you?
                 </div>
                 <div class="inner_C C1">
-                    <div class="textOption"><input class="stored integer" name="v3_numANC_clinic" style="width:1in"></div>
+                    <div class="textOption"><input class="stored integer" name="v3_numberANC_clinic" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     4. During your last belly, how many times a doctor or nurse check on you in your own town here?
                 </div>
                 <div class="inner_C C1">
-                    <div class="textOption"><input class="stored integer" name="v4_numANC_home" style="width:1in"></div>
+                    <div class="textOption"><input class="stored integer" name="v4_numberANC_home" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div>
-                
+
             </div>
             <!-- END: SECTION A -->
-                
-                
-                
+
+
+
             <!-- START: SECTION B -->
             <b>B. Child/infant mortality, facility-based delivery</b>
             <div class="thickBox">
-                
+
                 <!-- Instruction lines -->
                 <div><b>Ask these questions about every child a woman has ever born, whether alive or not, starting with the first one. Record "age at death" in days if less than 1 month; record in months if less than 2 years.</b></div>
                 <hr>
-                
+
                 <!-- START: MORTALITY TABLE -->
                 <table class="cmTable">
-                    
+
                     <!-- Table header -->
                     <tr style='font-size:12px'>
                         <th>Number</th>
@@ -181,9 +183,9 @@
                         <th style='width:100px'>8. Is [NAME] still living?</th>
                         <th style='width:150px'>9. How old was [NAME] when he/she died?</th>
                     </tr>
-                    
-                    
-                    
+
+
+
                     <!-- Row 1 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>1</td>
@@ -202,7 +204,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_1'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_1'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_1'>Years</div>
@@ -211,7 +213,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 2 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>2</td>
@@ -230,7 +232,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_2'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_2'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_2'>Years</div>
@@ -239,7 +241,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 3 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>3</td>
@@ -258,7 +260,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_3'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_3'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_3'>Years</div>
@@ -267,7 +269,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 4 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>4</td>
@@ -286,7 +288,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_4'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_4'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_4'>Years</div>
@@ -295,7 +297,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 5 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>5</td>
@@ -314,7 +316,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_5'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_5'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_5'>Years</div>
@@ -323,7 +325,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 6 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>6</td>
@@ -342,7 +344,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_6'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_6'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_6'>Years</div>
@@ -351,35 +353,35 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                 </table><br><br><br><br>
                 <!-- CONTINUE: MORTALITY TABLE -->
-                
-                
-            
+
+
+
             </div>
             <!-- CONTINUE: SECTION B -->
-            
-            
+
+
         </div>
         <!-- END: PAGE 1 -->
-        
-        
-        
+
+
+
         <!-- START: PAGE 2 -->
         <div class="page">
-            
-                
-        
+
+
+
             <!-- CONTINUE: SECTION B -->
             <div class="thickBox">
-                
-                
-                
+
+
+
                 <!-- CONTINUE: MORTALITY TABLE -->
                 <table class="cmTable">
-                    
-                    
+
+
                     <!-- Table header -->
                     <tr style='font-size:12px; visibility:hidden'>
                         <th></th>
@@ -389,7 +391,7 @@
                         <th style='width:100px'></th>
                         <th style='width:150px'></th>
                     </tr>
-                    
+
                     <!-- Row 7 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>7</td>
@@ -408,7 +410,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_7'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_7'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_7'>Years</div>
@@ -417,7 +419,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 8 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>8</td>
@@ -436,7 +438,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_8'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_8'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_8'>Years</div>
@@ -445,7 +447,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 9 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>9</td>
@@ -464,7 +466,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_9'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_9'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_9'>Years</div>
@@ -473,7 +475,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 10 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>10</td>
@@ -492,7 +494,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_10'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_10'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_10'>Years</div>
@@ -501,7 +503,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 11 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>11</td>
@@ -520,7 +522,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_11'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_11'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_11'>Years</div>
@@ -529,7 +531,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 12 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>12</td>
@@ -548,7 +550,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_12'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_12'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_12'>Years</div>
@@ -557,7 +559,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 13 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>13</td>
@@ -576,7 +578,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_13'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_13'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_13'>Years</div>
@@ -585,7 +587,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 14 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>14</td>
@@ -604,7 +606,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_14'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_14'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_14'>Years</div>
@@ -613,7 +615,7 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <!-- Row 15 of 20 -->
                     <tr>
                         <td class='cmTable-rownum'>15</td>
@@ -632,7 +634,7 @@
                         </td>
                         <td class='left'>
                             <div class='cmTable-23-container-1'>
-                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_num_15'>
+                                <input class='stored integer cmTable-23' name='v9_ageAtDeath_number_15'>
                             </div>
                             <div class='cmTable-23-container-2'>
                                 <div class='cmTable-yrs'><input type='checkbox' class='stored' name='v9_ageAtDeath_years_15'>Years</div>
@@ -641,48 +643,48 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                 </table>
                 <!-- END: MORTALITY TABLE -->
-                
-                    
-                    
+
+
+
             </div>
             <!-- END: SECTION B -->
-            
-            
-            
+
+
+
         </div>
         <!-- END: PAGE 2 -->
-        
-        
-        
+
+
+
         <!-- START: PAGE 3 -->
         <div class="page">
-            
-            
-            
+
+
+
             <!-- START: SECTION C -->
             <b>C. Vaccination coverage</b>
             <div class="thickBox">
-                
+
                 <!-- Instruction lines -->
                 <div><b>Ask questions 10a - 12a if the woman has a living child between 0 - 23 months that she born herself.</b></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     10a. Write down child's name (and number from<br>above).
                 </div>
                 <div class="inner_C C5">
                     <div class="textOption">
-                        Number: <input class="stored" name="v10_childName_a" style="width:15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Number: <input class="stored" name="v10_childNumber_a" style="width:15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         Name: <input class="stored" name="v10_childName_a" style="width:50%">
                     </div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     11a. You get vaccine card for (NAME)?
@@ -696,14 +698,14 @@
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L" style="width:4.8in">
                     12a. Copy down all vaccines received, and record dates.
                 </div>
                 <div style="clear:both"></div>
                 <div style="font-size:12px">
-                    
+
                     <table class='vaccTable'>
                         <tr>
                             <td style="font-weight:bold">Vaccine:</td>
@@ -775,7 +777,7 @@
                             <td><input class="stored datepicker" name="v12_card_yf_date_a" style="width:0.5in"></td>
                         </tr>
                     </table>
-                    
+
                     <table class='vaccTable'>
                         <tr>
                             <td style="font-weight:bold">Vaccine:</td>
@@ -841,28 +843,28 @@
                             <td><input class="stored datepicker" name="v12_card_ipv3_date_a" style="width:0.5in"></td>
                         </tr>
                     </table>
-                    
+
                 </div>
                 <div style="clear:both"></div>
                 <br><hr>
-                
+
                 <!-- Instruction lines -->
                 <div><b>Ask questions 10b - 12b if the woman has another living child between 0 - 23 months that she born.</b></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     10b. Write down child's name (and number from<br>above).
                 </div>
                 <div class="inner_C C5">
                     <div class="textOption">
-                        Number: <input class="stored" name="v10_childName_b" style="width:15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Number: <input class="stored" name="v10_childNumber_b" style="width:15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         Name: <input class="stored" name="v10_childName_b" style="width:50%">
                     </div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L L1">
                     11b. You get vaccine card for (NAME)?
@@ -876,14 +878,14 @@
                 </div>
                 <div style="clear:both"></div>
                 <hr>
-                
+
                 <!-- Question -->
                 <div class="inner_L" style="width:4.8in">
                     12b. Copy down all vaccines received, and record dates.
                 </div>
                 <div style="clear:both"></div>
                 <div style="font-size:12px">
-                    
+
                     <table class='vaccTable'>
                         <tr>
                             <td style="font-weight:bold">Vaccine:</td>
@@ -955,7 +957,7 @@
                             <td><input class="stored datepicker" name="v12_card_yf_date_b" style="width:0.5in"></td>
                         </tr>
                     </table>
-                    
+
                     <table class='vaccTable'>
                         <tr>
                             <td style="font-weight:bold">Vaccine:</td>
@@ -1021,15 +1023,15 @@
                             <td><input class="stored datepicker" name="v12_card_ipv3_date_b" style="width:0.5in"></td>
                         </tr>
                     </table>
-                    
+
                 </div>
                 <div style="clear:both"></div>
-                
+
             </div>
             <!-- END: SECTION B -->
-            
-            
-            
+
+
+
             <!-- START: M&E Box -->
             <div id="meBox">
                 <span class="blackBox">M&E</span>
@@ -1042,14 +1044,14 @@
                 <input name='meta_formVersion' class='stored' type='hidden' value='3'>
             </div>
             <!-- END: M&E Box -->
-            
-            
-            
+
+
+
         </div>
         <!-- END: PAGE 3 -->
-        
-        
-        
+
+
+
         <!-- START: S/C Buttons -->
         <div class="formButtons">
             <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
@@ -1057,14 +1059,14 @@
             <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
         </div>
         <!-- END: S/C Buttons -->
-        
-        
-        
+
+
+
         <!-- START: Hidden fields -->
-        <input type="hidden" class="stored" name="database" value="lastmile_db">
-        <input type="hidden" class="stored" name="table" value="tbl_data_fhw_kpi_kpiassessment">
+        <input type="hidden" class="stored" name="database" value="lastmile_chwdb">
+        <input type="hidden" class="stored" name="table" value="staging_kpiAssessmentStep1">
         <!-- END: Hidden fields -->
-        
+
     </body>
-    
+
 </html>
