@@ -57,10 +57,9 @@ thead#adminHeader th {
 th:nth-child(1), td:nth-child(1) { min-width:120px; width:120px }
 th:nth-child(2), td:nth-child(2) { min-width:300px; width:300px }
 th:nth-child(3), td:nth-child(3) { min-width:80px; width:80px }
-th:nth-child(4), td:nth-child(4) { min-width:80px; width:80px }
+th:nth-child(4), td:nth-child(4) { min-width:400px; width:400px }
 th:nth-child(5), td:nth-child(5) { min-width:400px; width:400px }
-th:nth-child(6), td:nth-child(6) { min-width:400px; width:400px }
-th:nth-child(7), td:nth-child(7) { min-width:25px; width:25px }
+th:nth-child(6), td:nth-child(6) { min-width:25px; width:25px }
 
 .btn_remove {
     margin:2px;

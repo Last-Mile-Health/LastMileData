@@ -1,19 +1,54 @@
 <script>
 <?php
-    // Include file that fetches data via LMD_REST.php
+
+    // Extract 'reportID' and 'reportTitle' parameters
     extract($_GET);
-    set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
-    require_once("echoIndicatorsAndValues.php");
+    
+    // Initiate/configure CURL session
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+    // Echo JSON (report model)
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reportObjects/$reportID";
+    curl_setopt($ch,CURLOPT_URL,$url1);
+    $json1 = curl_exec($ch);
+    
+    // Get indicator IDs of all indicators used in the report (in either data tables or charts)
+    $instIDString = "";
+    foreach (json_decode($json1) as $value) {
+        $instIDString .= $value->instIDs. ",";
+        $instIDString .= $value->chart_instIDs. ",";
+    }
+    $instIDString = trim($instIDString, ",");
+
+    // Echo JSON (indicator metadata)
+    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/$instIDString";
+    curl_setopt($ch,CURLOPT_URL,$url2);
+    $json2 = curl_exec($ch);
+
+    // Echo JSON (indicator data)
+    $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/instanceValues/$instIDString";
+    curl_setopt($ch,CURLOPT_URL,$url3);
+    $json3 = curl_exec($ch);
+
+    // Close CURL session and echo JSON
+    // JSON consists of 3 javascript objects: data_indicators, data_rawValues, [model_report]
+    // !!!!! Note: this fails if report has only one indicator !!!!!
+    curl_close($ch);
+    echo "var reportObjects = $json1;". "\n\n";
+    echo "var indicatorInstances = $json2;". "\n\n";
+    echo "var instanceValues = $json3;". "\n\n";
+    
 ?>
 
     // Bootstrap the page
-    LMD_dataPortal.bootstrap(data_rawValues, data_indicators, model_report);
+    LMD_dataPortal.bootstrap(instanceValues, indicatorInstances, reportObjects);
 
 </script>
 
 <div id='reportContent'>
     <h1><?php echo $reportTitle; ?></h1>
-    <div data-bind="foreach: {data:model_report, as:'ro'}">
+    <div data-bind="foreach: {data:reportObjects, as:'ro'}">
         <div class='row'>
             <hr style="margin:15px; border:1px solid #eee;">
             <div class='col-md-4'>
@@ -33,16 +68,16 @@
                         <!-- /ko -->
                     </tr>
                     
-                    <!-- ko foreach:indicators -->
+                    <!-- ko foreach:instIDs -->
                     <tr>
                         <!-- Indicator shortnames will be dynamically placed here -->
                         <!-- ko if:ro.multiple -->
-                        <td class="indShortName" data-bind="attr: {'data-indid':$data}"></td>
+                        <td class="instShortName" data-bind="attr: {'data-instid':$data}"></td>
                         <!-- /ko -->
                         
                         <!-- Indicator values will be dynamically placed here -->
                         <!-- ko foreach: $parents[1].lastFourMonths -->
-                        <td class="indValue" data-bind="attr: {'data-yearmonth':yearMonth, 'data-indid':$parentContext.$data}"></td>
+                        <td class="instValue" data-bind="attr: {'data-yearmonth':yearMonth, 'data-instid':$parentContext.$data}"></td>
                         <!-- /ko -->
                     </tr>
                     <!-- /ko -->

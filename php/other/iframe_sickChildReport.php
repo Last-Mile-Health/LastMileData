@@ -139,7 +139,7 @@
                 echo "Well child visit: <b>$well_child_visit</b><br>";
                 echo "Other: <b>$other</b><br><br>";
                 
-                // Set queryString; run query; extract data (sick child visit source)
+                // Set queryString; run query; extract data (sick child follow-up)
                 $queryString = "SELECT sum(B_treat) as totalTreated, sum(if(F_followup_date_1,1,0)*if(F_followup_date_2,1,0)*if(F_followup_date_3,1,0)) as threeDaysfollowUp, sum(if(F_followup_date_1,1,0)*if(F_followup_date_2,1,0)*if(F_followup_date_3,1,0))/sum(B_treat) as fuRate FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE B_treat=1 && visitDate>='$startDate' && visitDate<='$endDate' && $districtSubquery;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);
@@ -152,7 +152,7 @@
                 echo "Total who received 3 days of follow-up: <b>$threeDaysfollowUp</b><br>";
                 echo "Follow-up rate: <b>$fuRateFormatted%</b><br><br>";
                 
-                // Set queryString; run query; extract data (sick child visit source)
+                // Set queryString; run query; extract data (sick child treated within 3 days)
                 $queryString = "SELECT sum(if(A_cough=1 && A_cough_howLong<=3 && (C_ari_giveAmox || D_ari_giveAmox),1,0))/(sum(if(A_cough=1 && A_cough_howLong<=3 && (C_ari_giveAmox || D_ari_giveAmox),1,0))+sum(if(A_cough=1 && A_cough_howLong>3 && (C_ari_giveAmox || D_ari_giveAmox),1,0))) as ari_pctTreatedWithinThree, sum(if(A_fever=1 && A_fever_howLong<=3 && (C_fever_giveACT || D_fever_giveACT),1,0))/(sum(if(A_fever=1 && A_fever_howLong<=3 && (C_fever_giveACT || D_fever_giveACT),1,0))+sum(if(A_fever=1 && A_fever_howLong>3 && (C_fever_giveACT || D_fever_giveACT),1,0))) as malaria_pctTreatedWithinThree, sum(if(A_diarrhea=1 && A_diarrhea_howLong<=3 && (C_diarrhea_giveORS || D_diarrhea_giveORS),1,0))/(sum(if(A_diarrhea=1 && A_diarrhea_howLong<=3 && (C_diarrhea_giveORS || D_diarrhea_giveORS),1,0))+sum(if(A_diarrhea=1 && A_diarrhea_howLong>3 && (C_diarrhea_giveORS || D_diarrhea_giveORS),1,0))) as diarrhea_pctTreatedWithinThree FROM lastmile_db.tbl_data_fhw_sch_sickchild WHERE B_treat=1 && visitDate>='$startDate' && visitDate<='$endDate' && $districtSubquery;";
                 $result = mysqli_query($cxn, $queryString);
                 $row = mysqli_fetch_assoc($result);

@@ -1,6 +1,9 @@
 <?php
 
 /*
+
+    The general pattern is as follows:
+
     URL                             HTTP METHOD     OPERATION
     ---                             -----------     ---------
     LMD_REST.php/routeName/         GET             Returns an array of objects
@@ -11,10 +14,18 @@
     LMD_REST.php/routeName/:id      DELETE          Deletes the object with id of :id (returns id) !!!!! if needed, modify DELETE to handle :ids !!!!!
 
 
-    ROUTE                           TABLE
-    ---                             -----
-    LMD_REST.php/indicators/        lastmile_dataportal.tbl_indicators
-    LMD_REST.php/indicatorvalues/   lastmile_dataportal.tbl_indicators
+    Specific routes:
+
+    ROUTE                               TABLE
+    ---                                 -----
+    LMD_REST.php/test_rest              lastmile_dataportal.test_rest
+    LMD_REST.php/indicators/            lastmile_dataportal.tbl_indicators
+    LMD_REST.php/indicatorValues/       lastmile_dataportal.tbl_indicators
+    LMD_REST.php/indicatorInstances/    lastmile_dataportal.tbl_indicators
+    LMD_REST.php/json_objects/          lastmile_dataportal.tbl_json_objects
+    LMD_REST.php/reportObjects/         lastmile_dataportal.reportobjects
+    LMD_REST.php/markdown/              lastmile_dataportal.markdown
+
 */
 
 
@@ -26,7 +37,7 @@ require_once("cxn.php");
 $app = new \Slim\Slim();
 
 
-// Route 0: (lastmile_dataportal.tbl_testREST)
+// Route 0: (lastmile_dataportal.test_rest)
 // For testing REST clients (3 columns: `id`, `name`, `age`)
 $app->get('/test_rest/(:id)',function($id='all') {
     LMD_get($id, "id", "lastmile_dataportal.test_rest", 1);
@@ -59,21 +70,28 @@ $app->delete('/indicators/:id', function($id) {
 
 // Route 2: Indicator values (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
-$app->get('/indicatorvalues/(:id)',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_values", "indValue <> ''");
+$app->get('/instanceValues/(:id)',function($id='all') {
+    LMD_get($id, "instID", "lastmile_dataportal.tbl_values", "instValue <> ''");
 });
-$app->post('/indicatorvalues/', function() {
+$app->post('/instanceValues/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");
 });
-$app->put('/indicatorvalues/:id', function($id) {
+$app->put('/instanceValues/:id', function($id) {
     LMD_put($id, "id", "lastmile_dataportal.tbl_values");
 });
-$app->delete('/indicatorvalues/:id', function($id) {
+$app->delete('/instanceValues/:id', function($id) {
     LMD_delete($id, "id", "lastmile_dataportal.tbl_values");
 });
 
 
-// Route 3: Data Portal sidebar (tbl_json_objects)
+// Route 3: Indicator instances (lastmile_dataportal.tbl_instances)
+$app->get('/indicatorInstances/(:id)',function($id='all') {
+    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "archived <> 1");
+});
+
+
+// Route 4: Data Portal sidebar (tbl_json_objects)
+//  !!!!! switch to jsonObjects to be consistent with camel-case style !!!!!
 $app->get('/json_objects/:id',function($id) {
     LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects", 1);
 });
@@ -82,24 +100,24 @@ $app->put('/json_objects/:id', function($id) {
 });
 
 
-// Route 4: Data Portal "report objects" (lastmile_dataportal.tbl_reportobjects)
+// Route 5: Data Portal "report objects" (lastmile_dataportal.tbl_reportobjects)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
-$app->get('/reportobjects/(:id)',function($id='all') {
+$app->get('/reportObjects/(:id)',function($id='all') {
     // !!!!! May need to create another address for this (e.g. /GETreportobjects/) !!!!!
     LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", 1);
 });
-$app->post('/reportobjects/', function() {
+$app->post('/reportObjects/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");
 });
-$app->put('/reportobjects/:id', function($id) {
+$app->put('/reportObjects/:id', function($id) {
     LMD_put($id, "id", "lastmile_dataportal.tbl_reportobjects");
 });
-$app->delete('/reportobjects/:id', function($id) {
+$app->delete('/reportObjects/:id', function($id) {
     LMD_delete($id, "id", "lastmile_dataportal.tbl_reportobjects");
 });
 
 
-// Route 5: Markdown (lastmile_dataportal.tbl_markdown)
+// Route 6: Markdown (lastmile_dataportal.tbl_markdown)
 $app->get('/markdown/(:id)',function($id='all') {
     LMD_get($id, "mdName", "lastmile_dataportal.tbl_markdown", 1);
 });

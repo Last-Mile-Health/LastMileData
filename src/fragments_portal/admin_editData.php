@@ -7,19 +7,20 @@
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
     // Echo JSON (indicator METADATA)
-    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicators/";
+//    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicators/";
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/";
     curl_setopt($ch,CURLOPT_URL,$url1);
     $json1 = curl_exec($ch);
 
     // Echo JSON (indicator DATA)
-    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorvalues/";
+    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/instanceValues/";
     curl_setopt($ch,CURLOPT_URL,$url2);
     $json2 = curl_exec($ch);
 
     // Close CURL session and echo JSON
     curl_close($ch);
-    echo "var indicatorList = $json1;". "\n\n";
-    echo "var indicatorValues = $json2;". "\n\n";
+    echo "var indicatorInstances = $json1;". "\n\n";
+    echo "var instanceValues = $json2;". "\n\n";
 ?>
 
 // Load main script
@@ -37,7 +38,7 @@ $.getScript('../js/admin_editData.js');
                 <tr>
                     <th class="pad darkBlue">Category</th>
                     <th class="pad darkBlue">Indicator name</th>
-                    <th class="pad darkBlue">Cut</th>
+                    <th class="pad darkBlue">Geo-cut</th>
                     <!-- ko foreach:monthList.months -->
                     <th class="pad darkBlue" data-bind="text:string">hey</th>
                     <!-- /ko -->
@@ -47,10 +48,10 @@ $.getScript('../js/admin_editData.js');
                 <tr class="filterRow">
                     <td class="pad filterCategory" data-bind="text:indCategory"></td>
                     <td class="pad" data-bind="text:indName"></td>
-                    <td class="pad filterCut" data-bind="text:indCut"></td>
+                    <td class="pad filterCut" data-bind="text:geoName"></td>
                     <!-- ko foreach: $root.monthList.months -->
                     <td>
-                        <input class="admin_input" data-bind="event: {click:$root.actions.aiClick, change:$root.actions.aiChange}, attr: {'data-indid':$parent.indID, 'data-month':month, 'data-year':year}">
+                        <input class="admin_input" data-bind="event: {click:$root.actions.aiClick, change:$root.actions.aiChange}, attr: {'data-instid':$parent.instID, 'data-month':month, 'data-year':year}">
                     </td>
                     <!-- /ko -->
                 </tr>

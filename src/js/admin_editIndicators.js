@@ -1,6 +1,22 @@
 $(document).ready(function(){
 
 
+    // Sort indicatorInstances
+    indicators.sort(function(a,b){
+        // Sort 1: "Category"
+        if (a.indCategory < b.indCategory) { return -1; }
+        else if (a.indCategory > b.indCategory) { return 1; } 
+        else {
+            // Sort 2: "Indicator name"
+            if (a.indName < b.indName) { return -1; }
+            else if (a.indName > b.indName) { return 1; } 
+            else {
+                return 0;
+            }
+        }
+    });
+
+
     // Set actions object
     var actions = {
         click: function(data,event) {
@@ -26,17 +42,12 @@ $(document).ready(function(){
     // Generate "selectLists" object
     // !!!!! WET with admin_editData !!!!!
     var selectLists = {
-        category: ["Category..."],
-        cut: ["Cut..."]
+        category: ["Category..."]
     };
-    for (var key in indicatorList) {
-        var category = indicatorList[key].indCategory;
-        var cut = indicatorList[key].indCut;
+    for (var key in indicators) {
+        var category = indicators[key].indCategory;
         if (selectLists.category.indexOf(category)===-1) {
             selectLists.category.push(category);
-        }
-        if (selectLists.cut.indexOf(cut)===-1) {
-            selectLists.cut.push(cut);
         }
     }
 
@@ -54,7 +65,7 @@ $(document).ready(function(){
 
 
     // Bind data to DOM
-    myViewModel.reset(indicatorList);
+    myViewModel.reset(indicators);
 
 
     // Add a new indicator; scroll down
@@ -66,7 +77,6 @@ $(document).ready(function(){
         myViewModel.defineModelDefauls({
             indCategory: "",
             indName:"New indicator",
-            indCut:"",
             indTarget:"",
             indNarrative:"",
             indDefinition:""
@@ -194,21 +204,17 @@ $(document).ready(function(){
 //
 //    });
 
-    // Change handler: FILTER TABLE BASED ON CUT
+
+    // Change handler: FILTER TABLE BASED ON CATEGORY
     // !!!!! (mostly) WET with admin_editData !!!!!
     $('.dataFilter').change(function() {
 
         var filterCategory = $('#filter_category').val();
-        var filterCut = $('#filter_cut').val();
 
         $('.filterRow').each(function() {
             $(this).removeClass('hide');
             var rowCategory = $(this).find('.filterCategory').val();
-            var rowCut = $(this).find('.filterCut').val();
             if (filterCategory!=='Category...' && filterCategory !== rowCategory) {
-                $(this).addClass('hide');
-            }
-            if (filterCut!=='Cut...' && filterCut !== rowCut) {
                 $(this).addClass('hide');
             }
         });
