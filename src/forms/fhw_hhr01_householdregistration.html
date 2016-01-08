@@ -31,22 +31,9 @@
             
             #HHRT { position:relative; top:-10px }
             
-            .householdRegistrationTableHeader { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
-            .householdRegistrationTableHeader th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
-            .householdRegistrationTableHeader td { border: 1px solid black; height:28px; padding:0px; text-align:center; }
-            
-            .ch1     { width:0.40in; }
-            .ch2     { width:0.60in;    border:none; margin-right:1px; margin-left:1px; }
-            .ch3     { width:1.50in;    border:none; margin-right:1px; margin-left:1px; }
-            .ch4     { width:0.88in;    border:none; margin-right:1px; margin-left:1px; }
-            .ch6     { width:0.88in;    border:none; margin-right:1px; margin-left:1px; }
-            .ch8     { width:0.88in;    border:none; margin-right:1px; margin-left:1px; }
-            .ch10    { width:0.88in;    border:none; margin-right:1px; margin-left:1px; }
-            .ch12    { width:0.88in;    border:none; margin-right:1px; margin-left:1px; }
-            
-            .householdRegistrationTable { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
-            .householdRegistrationTable th { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
-            .householdRegistrationTable td { border: 1px solid black; height:28px; padding:0px; text-align:center; }
+            .householdRegistrationTable     { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
+            .householdRegistrationTable th  { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            .householdRegistrationTable td  { border: 1px solid black; height:28px; padding:0px; text-align:center; }
             
             .c1     { width:0.40in; }
             .c2     { width:0.60in;     border:none; margin-right:1px; margin-left:1px; }
@@ -127,38 +114,21 @@
             <!-- START: SECTION A -->
             <div class="thickBox" id="HHRT">
                 
-                                
-                <!-- START: Registration Table Header-->
-                <table class='householdRegistrationTableHeader'>
-                    
-                    <!-- Table header -->
-                    <tr>
-                        <th class="ch1" ></th>
-                        <th></th>
-                        <th></th>
-                        <th># < 1 yr</th>
-                        <th># 1-5 yrs</th>
-                        <th># 6-14 yrs</th>
-                        <th># 15-49 yrs</th>
-                        <th># 50+ yrs</th>
-                    </tr>
-                    
-                    <tr>
-                        <td></td>
-                        <td><input class="stored ch2 "  name="dummy2" data-lmd-valid-required="no"></td>
-                        <td><input class="stored ch3 "  name="dummy3" data-lmd-valid-required="no"></td>
-                        <td><input class="stored ch4 "  name="dummy4" data-lmd-valid-required="no"></td>
-                        <td><input class="stored ch6 "  name="dummy6" data-lmd-valid-required="no"></td>
-                        <td><input class="stored ch8 "  name="dummy8" data-lmd-valid-required="no"></td>
-                        <td><input class="stored ch10 " name="dummy10" data-lmd-valid-required="no"></td>
-                        <td><input class="stored ch12 " name="dummy12" data-lmd-valid-required="no"></td>
-                    </tr>
-                   
-                </table>
-                <!-- END: Household Registration Table Header -->
                 
                 <!-- START: Registration table -->
                 <table class='householdRegistrationTable'>
+                    
+                    <!-- Table header -->
+                    <tr>
+                        <th class="c1" ></th>
+                        <th></th>
+                        <th></th>
+                        <th colspan="2" scope="colgroup" ># less 1 yr</th>
+                        <th colspan="2" scope="colgroup" ># 1-5 yrs</th>
+                        <th colspan="2" scope="colgroup" ># 6-14 yrs</th>
+                        <th colspan="2" scope="colgroup" ># 15-49 yrs</th>
+                        <th colspan="2" scope="colgroup" ># 50+ yrs</th>
+                    </tr>
                    
                     <!-- Table header -->
                     <tr>
