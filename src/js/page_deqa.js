@@ -7,7 +7,7 @@ $(document).ready(function(){
     };
     
     // Set app version manually here
-    $('#appVersion').text('00494');
+    $('#appVersion').text('00495');
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
@@ -380,6 +380,18 @@ $(document).ready(function(){
             pKey1_label: "Var 1",
             pKey2_label: "Var 6",
             pKey_date: "pKey2"
+        });
+    });
+    $('#qa_HHR_01').click(function() {
+        launchQAModal({
+            targetForm: "../forms/fhw_hhr01_householdregistration.html",
+            qaFormName: "CHW: Houusehold Registration",
+            pKey1_name: "chwID",
+            pKey2_name: "communityID",
+            pKey3_name: "householdID_1",
+            pKey1_label: "CHW ID",
+            pKey2_label: "Community ID",
+            pKey3_label: "First Household ID"
         });
     });
     $('#qa_REG_03').click(function() {
