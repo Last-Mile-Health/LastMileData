@@ -20,11 +20,12 @@
     ---                                 -----
     LMD_REST.php/test_rest              lastmile_dataportal.test_rest
     LMD_REST.php/indicators/            lastmile_dataportal.tbl_indicators
-    LMD_REST.php/indicatorValues/       lastmile_dataportal.tbl_indicators
+    LMD_REST.php/instanceValues/        lastmile_dataportal.tbl_indicators
     LMD_REST.php/indicatorInstances/    lastmile_dataportal.tbl_indicators
     LMD_REST.php/json_objects/          lastmile_dataportal.tbl_json_objects
     LMD_REST.php/reportObjects/         lastmile_dataportal.reportobjects
     LMD_REST.php/markdown/              lastmile_dataportal.markdown
+    LMD_REST.php/users/                 lastmile_db.tbl_utility_users
 
 */
 
@@ -40,7 +41,7 @@ $app = new \Slim\Slim();
 // Route 0: (lastmile_dataportal.test_rest)
 // For testing REST clients (3 columns: `id`, `name`, `age`)
 $app->get('/test_rest/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.test_rest", 1);
+    LMD_get($id, "id", "lastmile_dataportal.test_rest", "*", 1);
 });
 $app->post('/test_rest/', function() {
     LMD_post("lastmile_dataportal.test_rest");
@@ -55,7 +56,7 @@ $app->delete('/test_rest/:id', function($id) {
 
 // Route 1: Indicator metadata (lastmile_dataportal.tbl_indicators)
 $app->get('/indicators/(:id)',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "archived <> 1");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "*", "archived <> 1");
 });
 $app->post('/indicators/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");
@@ -71,7 +72,7 @@ $app->delete('/indicators/:id', function($id) {
 // Route 2: Indicator values (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/instanceValues/(:id)',function($id='all') {
-    LMD_get($id, "instID", "lastmile_dataportal.tbl_values", "instValue <> ''");
+    LMD_get($id, "instID", "lastmile_dataportal.tbl_values", "*", "instValue <> ''");
 });
 $app->post('/instanceValues/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");
@@ -86,14 +87,14 @@ $app->delete('/instanceValues/:id', function($id) {
 
 // Route 3: Indicator instances (lastmile_dataportal.tbl_instances)
 $app->get('/indicatorInstances/(:id)',function($id='all') {
-    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "archived <> 1");
+    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", "archived <> 1");
 });
 
 
 // Route 4: Data Portal sidebar (tbl_json_objects)
 //  !!!!! switch to jsonObjects to be consistent with camel-case style !!!!!
 $app->get('/json_objects/:id',function($id) {
-    LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects", 1);
+    LMD_get($id, "id", "lastmile_dataportal.tbl_json_objects", "*", 1);
 });
 $app->put('/json_objects/:id', function($id) {
     LMD_put($id, "id", "lastmile_dataportal.tbl_json_objects");
@@ -104,7 +105,7 @@ $app->put('/json_objects/:id', function($id) {
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/reportObjects/(:id)',function($id='all') {
     // !!!!! May need to create another address for this (e.g. /GETreportobjects/) !!!!!
-    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", 1);
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", "*", 1);
 });
 $app->post('/reportObjects/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");
@@ -119,7 +120,7 @@ $app->delete('/reportObjects/:id', function($id) {
 
 // Route 6: Markdown (lastmile_dataportal.tbl_markdown)
 $app->get('/markdown/(:id)',function($id='all') {
-    LMD_get($id, "mdName", "lastmile_dataportal.tbl_markdown", 1);
+    LMD_get($id, "mdName", "lastmile_dataportal.tbl_markdown", "*", 1);
 });
 $app->post('/markdown/', function() {
     LMD_post("lastmile_dataportal.tbl_markdown");
@@ -132,12 +133,28 @@ $app->delete('/markdown/:id', function($id) {
 });
 
 
+// Route 7: LMD users (lastmile_db.tbl_utility_users)
+//  For GET, consider building this off of a view, which excludes password, 
+$app->get('/users/(:id)',function($id='all') {
+    LMD_get($id, "pk", "lastmile_db.tbl_utility_users", "pk, username, userGroups", 1);
+});
+$app->post('/users/', function() {
+    LMD_post("lastmile_db.tbl_utility_users");
+});
+$app->put('/users/:id', function($id) {
+    LMD_put($id, "pk", "lastmile_db.tbl_utility_users");
+});
+$app->delete('/users/:id', function($id) {
+    LMD_delete($id, "pk", "lastmile_db.tbl_utility_users");
+});
+
+
 // Run Slim
 $app->run();
 
 
 // Handles GET requests
-function LMD_get($id, $idFieldName, $table, $whereFilter) {
+function LMD_get($id, $idFieldName, $table, $fields, $whereFilter) {
     try {
         $idArray = explode(',', $id);
         $idString = "";
@@ -148,7 +165,7 @@ function LMD_get($id, $idFieldName, $table, $whereFilter) {
         $whereClause = ($id == 'all') ? 1 : "`$idFieldName` IN ($idString)" ;
         $whereClause .= " AND " . $whereFilter;
         $cxn = getCXN();
-        $query = "SELECT * FROM $table WHERE $whereClause";
+        $query = "SELECT $fields FROM $table WHERE $whereClause";
         $result = mysqli_query($cxn, $query);
         $resultSet = array();
         
