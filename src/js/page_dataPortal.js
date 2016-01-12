@@ -10,11 +10,27 @@ $(document).ready(function(){
     for (var i=filteredSidebar.length-1; i>=0; i--) {
 
         var tabs = filteredSidebar[i].tabs;
+        
+        // Loop BACKWARDS through tabs ot enable splicing
         for (var j=tabs.length-1; j>=0; j--) {
-            if (tabs[j].permissions.indexOf(sessionStorage.usertype) === -1) {
+            
+            var spliceTab = true;
+            
+            // Test all userGroups to see if there are no matches
+            for (var key in sessionStorage.userGroups.split(',')) {
+                var userGroups = sessionStorage.userGroups.split(',')[key];
+                if (tabs[j].permissions.indexOf(userGroups) !== -1) {
+                    spliceTab = false;
+                }
+            }
+            
+            // If there are no group matches, splice out the tab
+            if (spliceTab) {
                 tabs.splice(j,1);
             }
         }
+        
+        // If there are no tabs within a tab-group, don't display the tab-group
         if ( filteredSidebar[i].tabs.length===0 ) {
             filteredSidebar.splice(i,1);
         }

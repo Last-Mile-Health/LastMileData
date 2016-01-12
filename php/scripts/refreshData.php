@@ -12,7 +12,8 @@ set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'
 require_once("cxn.php");
 
 // 1. Update "deqaUsers" (object)
-$query = "SELECT username, password FROM lastmile_db.tbl_utility_users WHERE usertype='admin' OR usertype='deqa'";
+//  Note that the LOCATE('admin',`userGroups`)>0 clause will pick up both "admin" and "superadmin"
+$query = "SELECT username, password FROM lastmile_db.tbl_utility_users WHERE LOCATE('admin',`userGroups`)>0 OR LOCATE('deqa',`userGroups`)>0";
 $result = mysqli_query($cxn, $query) or die("failure");
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
 {

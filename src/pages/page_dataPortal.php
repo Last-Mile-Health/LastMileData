@@ -22,10 +22,10 @@
         <link rel="stylesheet" href="../css/page_dataPortal.css"  type="text/css" />
         
         <?php
-            // Echo username/usertype (used by access control system)
+            // Echo username / userGroups (used by access control system)
             echo "<script>";
             echo "sessionStorage.username = '" . $_SESSION['username'] . "';";
-            echo "sessionStorage.usertype = '" . $_SESSION['usertype'] . "';";
+            echo "sessionStorage.userGroups = '" . $_SESSION['userGroups'] . "';";
 
             // Initiate/configure CURL session
             $ch = curl_init();

@@ -20,6 +20,8 @@
                 document.activeElement.blur();
                 $(this).find(".modal-body :input:visible").first().focus();
             });
+            
+            // Load redirect URL into the form, if it exists
             if (location.hash !== '') {
                 var redirect = $('#redirect').val();
                 $('#redirect').val(redirect + location.hash);

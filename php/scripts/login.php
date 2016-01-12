@@ -21,7 +21,7 @@ if( $input_username <> " AND $input_password <> " AND sha1($input_password) == $
     // Start session; set $_SESSION vars
     Session_start() ;
     $_SESSION['username'] = $row['username'];
-    $_SESSION['usertype'] = $row['usertype'];
+    $_SESSION['userGroups'] = $row['userGroups'];
     
     // Update login table
     updateLoginTable($input_username, $cxn);
