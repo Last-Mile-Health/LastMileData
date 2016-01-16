@@ -224,76 +224,81 @@ $(document).ready(function(){
                                 for (var j=0; j<fileContentArray.length; j++) {
 
                                     var myJQXML = $.parseXML(fileContentArray[j].trim());
-                                    // !!!!! Need to build an error catcher for invalid XML !!!!!
-                                    var $myJQXML = $(myJQXML);
-
-                                    // Extract database schema name
-                                    var $dbTag = $myJQXML.find('*').filter(function(){return /^LMD\-DATABASE/i.test(this.nodeName);}).remove();
-                                    var dbName = $dbTag[0].textContent;
-
-                                    // Extract sub-records (aka. "repeating groups")
-                                    var $subRecords = $myJQXML.find('*').filter(function(){return /^LMD\-RPT/i.test(this.nodeName);}).remove();
-
-                                    // Process main XML file ($myJQXML)
-                                    var xmlKey, xmlValue, chkArray, pullString = "";
-                                    var xmlRecord = { database:dbName };
-                                    var $elementSet = $myJQXML.find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
-                                    $elementSet.each(function(){
-                                        // !!!!! document this code !!!!!
-                                        xmlPair = processLMD($(this).prop("tagName"),$(this).text());
-                                        if (xmlPair.key === "CHK") {
-                                            chkArray = xmlPair.value.split(" ");
-                                            for (var opt=0; opt<chkArray.length; opt++) {
-                                                if (chkArray[opt] !== "") {
-                                                    chkKey = chkArray[opt].slice(8);
-                                                    xmlRecord[$(this).prop("tagName").slice(8) + "_" + chkKey] = 1;
-                                                }
-                                            }
-                                        } else {
-                                            xmlRecord[xmlPair.key] = xmlPair.value;
-                                        }
-                                    });
+                                    // !!!!! Build an error catcher for invalid XML that displays helpful error messages !!!!!
                                     
-                                    uploadedRecordset.addRecord(JSON.stringify(xmlRecord));
+                                    // Check for null strings caused by trailing whitespace or trailing <LMD_delimiter> tags
+                                    if (myJQXML !== null) {
+                                        
+                                        var $myJQXML = $(myJQXML);
 
-                                    // Process subgroups ($subRecords)
-                                    for(var k=0; k<$subRecords.length; k++) {
+                                        // Extract database schema name
+                                        var $dbTag = $myJQXML.find('*').filter(function(){return /^LMD\-DATABASE/i.test(this.nodeName);}).remove();
+                                        var dbName = $dbTag[0].textContent;
 
-                                        var pullFields = [];
-                                        var xmlSubrecord = { database:dbName, table: $subRecords[k].tagName.slice(8) };
-                                        $elementSet = $($subRecords[k]).find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
+                                        // Extract sub-records (aka. "repeating groups")
+                                        var $subRecords = $myJQXML.find('*').filter(function(){return /^LMD\-RPT/i.test(this.nodeName);}).remove();
+
+                                        // Process main XML file ($myJQXML)
+                                        var xmlKey, xmlValue, chkArray, pullString = "";
+                                        var xmlRecord = { database:dbName };
+                                        var $elementSet = $myJQXML.find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
                                         $elementSet.each(function(){
-                                            // !!!!! document this code
-                                            if ($(this).prop("tagName")==='LMD-PULL') {
-                                                pullString = $(this).text();
-                                                var pullFieldsBulky = pullString.split(",");
-                                                pullFields = $.map(pullFieldsBulky,function(val){return val.trim().slice(8);});
-                                            } else {
-                                                xmlPair = processLMD($(this).prop("tagName"),$(this).text());
-                                                if (xmlPair.key === "CHK") {
-                                                    chkArray = xmlPair.value.split(" ");
-                                                    for (var opt=0; opt<chkArray.length; opt++) {
-                                                        if (chkArray[opt] !== "") {
-                                                            chkKey = chkArray[opt].slice(8);
-                                                            xmlRecord[$(this).prop("tagName").slice(8) + "_" + chkKey] = 1;
-                                                        }
+                                            // !!!!! document this code !!!!!
+                                            xmlPair = processLMD($(this).prop("tagName"),$(this).text());
+                                            if (xmlPair.key === "CHK") {
+                                                chkArray = xmlPair.value.split(" ");
+                                                for (var opt=0; opt<chkArray.length; opt++) {
+                                                    if (chkArray[opt] !== "") {
+                                                        chkKey = chkArray[opt].slice(8);
+                                                        xmlRecord[$(this).prop("tagName").slice(8) + "_" + chkKey] = 1;
                                                     }
-                                                } else {
-                                                    xmlSubrecord[xmlPair.key] = xmlPair.value;
                                                 }
+                                            } else {
+                                                xmlRecord[xmlPair.key] = xmlPair.value;
                                             }
                                         });
 
-                                        // Pull fields from xmlRecord into sub-record
-                                        if (pullFields.length > 0) {
-                                            for(var l=0; l<pullFields.length; l++) {
-                                                // Filter out invalid PULL fields (will have no effect for proper xForms) !!!!! remove after LMS ?????
-                                                if(xmlRecord[pullFields[l]] !== undefined) {
-                                                    xmlSubrecord[pullFields[l]] = xmlRecord[pullFields[l]];
+                                        uploadedRecordset.addRecord(JSON.stringify(xmlRecord));
+
+                                        // Process subgroups ($subRecords)
+                                        for(var k=0; k<$subRecords.length; k++) {
+
+                                            var pullFields = [];
+                                            var xmlSubrecord = { database:dbName, table: $subRecords[k].tagName.slice(8) };
+                                            $elementSet = $($subRecords[k]).find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
+                                            $elementSet.each(function(){
+                                                // !!!!! document this code
+                                                if ($(this).prop("tagName")==='LMD-PULL') {
+                                                    pullString = $(this).text();
+                                                    var pullFieldsBulky = pullString.split(",");
+                                                    pullFields = $.map(pullFieldsBulky,function(val){return val.trim().slice(8);});
+                                                } else {
+                                                    xmlPair = processLMD($(this).prop("tagName"),$(this).text());
+                                                    if (xmlPair.key === "CHK") {
+                                                        chkArray = xmlPair.value.split(" ");
+                                                        for (var opt=0; opt<chkArray.length; opt++) {
+                                                            if (chkArray[opt] !== "") {
+                                                                chkKey = chkArray[opt].slice(8);
+                                                                xmlRecord[$(this).prop("tagName").slice(8) + "_" + chkKey] = 1;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        xmlSubrecord[xmlPair.key] = xmlPair.value;
+                                                    }
+                                                }
+                                            });
+
+                                            // Pull fields from xmlRecord into sub-record
+                                            if (pullFields.length > 0) {
+                                                for(var l=0; l<pullFields.length; l++) {
+                                                    // Filter out invalid PULL fields (will have no effect for proper xForms) !!!!! remove after LMS ?????
+                                                    if(xmlRecord[pullFields[l]] !== undefined) {
+                                                        xmlSubrecord[pullFields[l]] = xmlRecord[pullFields[l]];
+                                                    }
                                                 }
                                             }
+                                            uploadedRecordset.addRecord(JSON.stringify(xmlSubrecord));
                                         }
-                                        uploadedRecordset.addRecord(JSON.stringify(xmlSubrecord));
                                     }
                                 }
                             } catch(e) {
