@@ -16,22 +16,31 @@ var LMD_dataPortal = (function(){
     var instanceMetadata = {};     // Used for both
     
     
-    // !!!!! Set "lastFourMonths" dynamically !!!!!
-//    var todayYear = moment().format('YYYY'),
-//        todayMonth = moment().format('M'),
-//        todayDay = moment().format('D'),
-//        latestTotalMonthAllowed = Number(todayMonth) + (12*Number(todayYear)) - 1;
-//    if (todayDay < 12) {
-//        latestTotalMonthAllowed--;
-//    }
-    
-    
-    var lastFourMonths = [          // Months to display for data tables (!!!!! Set this manually for now !!!!!)
-        { yearMonth: "2015-8", shortMonth: "Aug '15" },
-        { yearMonth: "2015-9", shortMonth: "Sep '15" },
-        { yearMonth: "2015-10", shortMonth: "Oct '15" },
-        { yearMonth: "2015-11", shortMonth: "Nov '15" }
-    ];
+    // PRIVATE: Sets the dates for the Data Portal to display
+    //          If it is the 15th of the month or later, display the previous 4 months; otherwise, display the four months before the previous month
+    //          Example:
+    //              Before June 15th, the months would be Jan -- Apr
+    //              After June 15th, the months would be Feb -- May
+    function setDates() {
+        
+        // Generate dates (last 4 months)
+        var todayDay = 11,
+            todayMinus1m = moment().subtract(1 + ( todayDay < 15 ? 1 : 0 ),'months'),
+            todayMinus2m = moment().subtract(2 + ( todayDay < 15 ? 1 : 0 ),'months'),
+            todayMinus3m = moment().subtract(3 + ( todayDay < 15 ? 1 : 0 ),'months'),
+            todayMinus4m = moment().subtract(4 + ( todayDay < 15 ? 1 : 0 ),'months');
+
+        // Create object to hold formatted dates
+        var lastFourMonths = [
+            { yearMonth: todayMinus4m.format("YYYY-M"), shortMonth: todayMinus4m.format("MMM 'YY") },
+            { yearMonth: todayMinus3m.format("YYYY-M"), shortMonth: todayMinus3m.format("MMM 'YY") },
+            { yearMonth: todayMinus2m.format("YYYY-M"), shortMonth: todayMinus2m.format("MMM 'YY") },
+            { yearMonth: todayMinus1m.format("YYYY-M"), shortMonth: todayMinus1m.format("MMM 'YY") }
+        ];
+        
+        return lastFourMonths;
+        
+    }
 
 
     // PRIVATE: Stores "instance value" data (in "chartData" and "tableData" objects), to be used in charts and tables
@@ -123,9 +132,6 @@ var LMD_dataPortal = (function(){
             }
             if ( d.roMetadata_target == null || d.roMetadata_target == '' ) {
                 d.roMetadata_target = metadata.indTarget;
-            }
-            if ( d.roMetadata_narrative == null || d.roMetadata_narrative == '' ) {
-                d.roMetadata_narrative = metadata.indNarrative;
             }
 
             // Populate chart_points array (for Dimple charts)
@@ -231,7 +237,7 @@ var LMD_dataPortal = (function(){
         // Initialize knockout.js; bind model to DIV
         ko.applyBindings({
             reportObjects: reportObjects,
-            lastFourMonths: lastFourMonths
+            lastFourMonths: setDates()
         }, $('#reportContent')[0]);
 
         // Populate data tables
