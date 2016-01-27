@@ -26,6 +26,7 @@ var LMD_koREST = (function() {
         this.url = params.url;                  //  Base URL of the REST service, set by newViewModel()
         this.element = params.element;          //  The element that knockout will bind to via applyBindings()
         this.idAttribute = params.idAttribute;  //  The attribute that uniquely identifies a row
+        this.mysqlIgnore = params.mysqlIgnore;  //  An array of fields that should be ignored by all queries
         this.other = params.other || 1;         //  Object holding any other data or methods to bind (e.g. actions)
     }
 
@@ -138,14 +139,14 @@ var LMD_koREST = (function() {
         
         // Process inserts, updates, and deletes
         for (var x in requests) {
-            
+
             for (var y in requests[x]) {
-                
+
                 // Set attributes to ignore
-                var mappingIgnore = {
-                    ignore: ["_cid","_add","_change","_destroy"]
-                };
-                
+                var ignoreArray = ["_cid","_add","_change","_destroy"];
+                var ignoreMerged = ignoreArray.concat(self.mysqlIgnore);
+                var mappingIgnore = { ignore: ignoreMerged };
+
                 // Set REST URL and data objects
                 switch(x) {
                     case "POST":
@@ -164,6 +165,10 @@ var LMD_koREST = (function() {
                         for (var z in this.vm()) {
                             if (this.vm()[z]._cid == cid) {
                                 var myData = ko.mapping.toJS(self.vm()[z],mappingIgnore);
+                                console.log('self.vm()');
+                                console.log(self.vm());
+                                console.log('self.vm()[z]');
+                                console.log(self.vm()[z]);
                             }
                         }
                         break;

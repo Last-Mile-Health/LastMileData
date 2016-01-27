@@ -146,6 +146,12 @@ var LMD_utilities = (function(){
     }
 
 
+    // PUBLIC:  Test if the value is numeric
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+
     // LMD_utilities API
     return {
         mysql_date: mysql_date,
@@ -154,7 +160,8 @@ var LMD_utilities = (function(){
         twoDigits: twoDigits,
         format_number: format_number,
         ajaxButton: ajaxButton,
-        addSlashes: addSlashes
+        addSlashes: addSlashes,
+        isNumeric: isNumeric
     };
     
 

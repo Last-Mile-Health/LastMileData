@@ -19,13 +19,15 @@
     ROUTE                               TABLE
     ---                                 -----
     LMD_REST.php/test_rest              lastmile_dataportal.test_rest
-    LMD_REST.php/indicators/            lastmile_dataportal.tbl_indicators
-    LMD_REST.php/instanceValues/        lastmile_dataportal.tbl_indicators
-    LMD_REST.php/indicatorInstances/    lastmile_dataportal.tbl_indicators
-    LMD_REST.php/json_objects/          lastmile_dataportal.tbl_json_objects
-    LMD_REST.php/reportObjects/         lastmile_dataportal.reportobjects
-    LMD_REST.php/markdown/              lastmile_dataportal.markdown
-    LMD_REST.php/users/                 lastmile_db.tbl_utility_users
+    LMD_REST.php/indicators             lastmile_dataportal.tbl_indicators
+    LMD_REST.php/instanceValues         lastmile_dataportal.tbl_indicators
+    LMD_REST.php/indicatorInstances     lastmile_dataportal.tbl_indicators
+    LMD_REST.php/json_objects           lastmile_dataportal.tbl_json_objects
+    LMD_REST.php/reportObjects          lastmile_dataportal.reportobjects
+    LMD_REST.php/markdown               lastmile_dataportal.markdown
+    LMD_REST.php/users                  lastmile_db.tbl_utility_users
+    LMD_REST.php/staff                  lastmile_chwdb.admin_staff
+    LMD_REST.php/narratives             lastmile_dataportal.view_reportObjects
 
 */
 
@@ -134,7 +136,6 @@ $app->delete('/markdown/:id', function($id) {
 
 
 // Route 7: LMD users (lastmile_db.tbl_utility_users)
-//  For GET, consider building this off of a view, which excludes password, 
 $app->get('/users/(:id)',function($id='all') {
     LMD_get($id, "pk", "lastmile_db.tbl_utility_users", "pk, username, userGroups", 1);
 });
@@ -146,6 +147,36 @@ $app->put('/users/:id', function($id) {
 });
 $app->delete('/users/:id', function($id) {
     LMD_delete($id, "pk", "lastmile_db.tbl_utility_users");
+});
+
+
+// Route 8: Program staff - CHWs, CHWLs, CCSs (lastmile_chwdb.admin_staff)
+$app->get('/staff/(:id)',function($id='all') {
+    LMD_get($id, "staffID", "lastmile_chwdb.admin_staff", "staffID, firstName, lastName, dateOfBirth, gender", 1);
+});
+$app->post('/staff/', function() {
+    LMD_post("lastmile_chwdb.admin_staff");
+});
+$app->put('/staff/:id', function($id) {
+    LMD_put($id, "staffID", "lastmile_chwdb.admin_staff");
+});
+$app->delete('/staff/:id', function($id) {
+    LMD_delete($id, "staffID", "lastmile_chwdb.admin_staff");
+});
+
+
+// Route 9: Data Portal narratives (lastmile_dataportal.view_reportObjects)
+$app->get('/narratives/(:id)',function($id='all') {
+    LMD_get($id, "id", "lastmile_dataportal.view_reportObjects", "id, reportID, reportName, displayOrder, roName, roMetadata_narrative", 1);
+});
+$app->post('/narratives/', function() {
+    LMD_post("lastmile_dataportal.tbl_reportobjects");
+});
+$app->put('/narratives/:id', function($id) {
+    LMD_put($id, "id", "lastmile_dataportal.tbl_reportobjects");
+});
+$app->delete('/narratives/:id', function($id) {
+    LMD_delete($id, "id", "lastmile_dataportal.tbl_reportobjects");
 });
 
 
@@ -219,21 +250,20 @@ function LMD_post($table) {
 
 
 // Handles PUT requests
+// Note: this does not handle cases where the PUT request is an INSERT; use POST for INSERTS
 function LMD_put($id, $idFieldName, $table) {
     try {
         $app = \Slim\Slim::getInstance();
 	$bodyDecoded = $app->request->put() ? $app->request->put() : json_decode($app->request->getBody());
         $cxn = getCXN();
         
-        $query = "REPLACE INTO $table SET ";
+        $query = "UPDATE $table SET ";
         foreach ($bodyDecoded as $key => $value) {
             $query .= "`$key` = '" . addslashes($value) . "', " ;
         }
-        // If id string has not already been included in request body, add it
-        if (substr_count($query, "`$idFieldName`")==0) {
-            $query .= "`$idFieldName`='" . $id . "', ";
-        }
         $query = substr($query, 0, -2) ;
+        $query .= " WHERE `$idFieldName`='" . $id . "';";
+        
         if (mysqli_query($cxn, $query)) {
             echo json_encode($id);
         } else {
