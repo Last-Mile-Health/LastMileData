@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHW Form (MSR 01) - Monthly Service Report</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            .inner_L { width: 3.0in; }
+            .inner_C { width: 2.3in; }
+            .inner_R { width: 2.0in; }
+            
+            #meBox  { position:relative; top:-17px; }
+            
+            #MSRT   { position:relative; top:-10px }
+            
+            .professionalismTable     { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
+            .professionalismTable th  { -webkit-transform: rotate(-90deg); height:54px; font-weight:normal; text-align:center; border: 1px solid black; padding:3px; }       
+            .professionalismTable td  { border: 1px solid black; height:24px; padding:0px; text-align:center; }
+            
+            .c1     { width:1.9in; }
+            .c2     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .c3     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .c4     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .c5     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .c6     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .c7     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
+
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <div class="page">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h2">CHW: Monthly Service Report</span>
+                <img style="float:right" src="../images/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <div class="thickBox">
+                                
+                <div class="headField" style="width:0.40in">CHW:</div>
+                <div class="headField" style="width:1.9in"><input class="stored" name="chwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:1.85in; border:none; border-bottom: 1px solid black;"></div>
+                
+                <div class="headField" style="width:0.60in">CHW ID:</div>
+                <div class="headField" style="width:0.70in"><input class="stored integer" name="chwID" data-lmd-valid-required="yes" style=" width:0.65in; border:none; border-bottom: 1px solid black; "></div>
+
+                <div class="headField" style="width:0.40in">CCS:</div>
+                <div class="headField" style="width:1.5in"><input class="stored" name="ccsName" data-lmd-valid-required="no" data-lmd-valid-autoC="ccss" style=" width:1.45in; border:none; border-bottom: 1px solid black; "></div>
+                
+                <div class="headField" style="width:0.60in">CCS ID:</div>
+                <div class="headField" style="width:1.1in"><input class="stored integer" name="ccsID" data-lmd-valid-required="no" style=" width:1.05in; border:none; border-bottom: 1px solid black; "></div>
+
+                <div style="clear:both; height:3px;"></div>
+                
+                <div class="headField" style="width:0.50in">Month:</div>
+                <div class="headField" style="width:0.50in"><input class="stored integer" name="monthReported" data-lmd-valid-required="yes" style=" width:0.45in; border:none; border-bottom: 1px solid black; "></div>
+ 
+                <div class="headField" style="width:0.40in">Year:</div>
+                <div class="headField" style="width:0.50in"><input class="stored integer" name="yearReported" data-lmd-valid-required="yes" style=" width:0.45in; border:none; border-bottom: 1px solid black;"></div>
+                
+                <div class="headField" style="width:0.55in">District:</div>
+                <div class="headField" style="width:1.15in"><input class="stored" name="district" data-lmd-valid-required="yes" style=" width:1.10in; border:none; border-bottom: 1px solid black; "></div>
+ 
+                <div class="headField" style="width:0.85in">Community:</div>
+                <div class="headField" style="width:1.05in"><input class="stored" name="community" data-lmd-valid-required="yes" style=" width:1.0in; border:none; border-bottom: 1px solid black; "></div>
+ 
+                <div class="headField" style="width:1.05in">Community ID:</div>
+                <div class="headField" style="width:0.65in"><input class="stored integer" name="communityID" data-lmd-valid-required="yes" style=" width:0.55in; border:none; border-bottom: 1px solid black; "></div>
+                               
+                <div style="clear:both; height:3px;"></div>
+                
+            </div>
+            <!-- END: FORM HEADER -->
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="MSRT">
+                
+                
+                <!-- START: Professionalism Table -->
+                <table class='professionalismTable'>
+                                       
+                    <!-- Table header -->
+                    <tr>
+                        <th class="c1" style="font-weight:bold; text-align:left; vertical-align: bottom; -webkit-transform: rotate(0deg);">1. Professionalism</th>
+                        <th>Target</th>
+                        <th>W1</th>
+                        <th>W2</th>
+                        <th>W3</th>
+                        <th>W4</th>
+                        <th style="font-weight:bold;">Total</th>
+                    </tr>
+                    
+                    <tr>
+                        <td style="text-align:left;">Supervision Visit Attempted</td>
+                        <td>4</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input class="stored c7 integer" name="professionalismSupervisionVisitAttemptedTotal" data-lmd-valid-required="yes"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="text-align:left;">CHW Absent for Supervision</td>
+                        <td>0</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input class="stored c7 integer" name="professionalismCHWAbsentForSupervisionTotal" data-lmd-valid-required="yes"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="text-align:left;">Excused Absence</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input class="stored c7 integer" name="professionalismExcusedAbsenceTotal" data-lmd-valid-required="yes"></td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:left;">Verbal Warning</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input class="stored c7 integer" name="professionalismVerbalWarningTotal" data-lmd-valid-required="yes"></td>
+                    </tr>                    
+
+                    <tr>
+                        <td style="text-align:left;">Written Warning</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input class="stored c7 integer" name="professionalismWrittenWarningTotal" data-lmd-valid-required="yes"></td>
+                    </tr>    
+                    
+                </table>
+                <!-- END: Professionalism Table -->
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">MSR.01</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='1'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_chwdb">
+        <input type="hidden" class="stored" name="table" value="staging_monthlyServiceReportStep1">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
