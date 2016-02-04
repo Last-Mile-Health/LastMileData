@@ -31,18 +31,25 @@
             
             #MSRT   { position:relative; top:-10px }
             
-            .professionalismTable     { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
-            .professionalismTable th  { -webkit-transform: rotate(-90deg); height:54px; font-weight:normal; text-align:center; border: 1px solid black; padding:3px; }       
-            .professionalismTable td  { border: 1px solid black; height:24px; padding:0px; text-align:center; }
+            .matrixLayout     { table-layout: fixed; width: 3.4in; }
+            .matrixLayout     { border-collapse: collapse; margin:0px; padding: 3px; }
             
-            .c1     { width:1.9in; }
-            .c2     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .c3     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .c4     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .c5     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .c6     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .c7     { width:0.25in;     border:none; margin-right:1px; margin-left:1px; }
-
+            .matrixLayout th  { -webkit-transform: rotate(-90deg) translate( -13px, 0px); }       
+            .matrixLayout th  { height: 52px; font-weight: normal; text-align: center; border: 1px solid black; padding: 3px;   }       
+            
+            .matrixLayout td  { border: 1px solid black; height: 24px; padding: 0px; text-align: center;                        }
+                      
+            .thickBox { padding:3px; }
+                       
+            .column1     { width: 1.90in;     border:none; margin-right:1px; margin-left:1px; }
+            .column2     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .column3     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .column4     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .column5     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .column6     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .column7     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            
+            
         </style>
         
     </head>
@@ -103,20 +110,20 @@
 
             <!-- START: SECTION A -->
             <div class="thickBox" id="MSRT">
-                
-                
+              
                 <!-- START: Professionalism Table -->
-                <table class='professionalismTable'>
+                <table class="matrixLayout">
                                        
                     <!-- Table header -->
                     <tr>
-                        <th class="c1" style="font-weight:bold; text-align:left; vertical-align: bottom; -webkit-transform: rotate(0deg);">1. Professionalism</th>
-                        <th>Target</th>
-                        <th>W1</th>
-                        <th>W2</th>
-                        <th>W3</th>
-                        <th>W4</th>
-                        <th style="font-weight:bold;">Total</th>
+                     
+                        <th class="column1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">1. Professionalism</th>
+                        <th class="column2">Target</th>
+                        <th class="column3">W1</th>
+                        <th class="column4">W2</th>
+                        <th class="column5">W3</th>
+                        <th class="column6">W4</th>
+                        <th class="column7" style="font-weight:bold;">Total</th>
                     </tr>
                     
                     <tr>
@@ -126,7 +133,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input class="stored c7 integer" name="professionalismSupervisionVisitAttemptedTotal" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored column7 integer" name="professionalismSupervisionVisitAttemptedTotal" data-lmd-valid-required="yes"></td>
                     </tr>
                     
                     <tr>
@@ -136,7 +143,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input class="stored c7 integer" name="professionalismCHWAbsentForSupervisionTotal" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored column7 integer" name="professionalismCHWAbsentForSupervisionTotal" data-lmd-valid-required="yes"></td>
                     </tr>
                     
                     <tr>
@@ -146,7 +153,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input class="stored c7 integer" name="professionalismExcusedAbsenceTotal" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored column7 integer" name="professionalismExcusedAbsenceTotal" data-lmd-valid-required="yes"></td>
                     </tr>
 
                     <tr>
@@ -156,7 +163,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input class="stored c7 integer" name="professionalismVerbalWarningTotal" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored column7 integer" name="professionalismVerbalWarningTotal" data-lmd-valid-required="yes"></td>
                     </tr>                    
 
                     <tr>
@@ -166,12 +173,12 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input class="stored c7 integer" name="professionalismWrittenWarningTotal" data-lmd-valid-required="yes"></td>
+                        <td><input class="stored column7 integer" name="professionalismWrittenWarningTotal" data-lmd-valid-required="yes"></td>
                     </tr>    
                     
                 </table>
                 <!-- END: Professionalism Table -->
-                
+          
             </div>
             <!-- END: SECTION A -->
             
