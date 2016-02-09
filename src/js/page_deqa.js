@@ -7,7 +7,7 @@ $(document).ready(function(){
     };
     
     // Set app version manually here
-    $('#appVersion').text('00495');
+    $('#appVersion').text('00496');
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
@@ -387,9 +387,9 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    $('#qa_HHR_01').click(function() {
+    $('#qa_HHR_02').click(function() {
         launchQAModal({
-            targetForm: "../forms/fhw_hhr01_householdregistration.html",
+            targetForm: "../forms/fhw_hhr02_householdregistration.html",
             qaFormName: "CHW: Houusehold Registration",
             pKey1_name: "chwID",
             pKey2_name: "communityID",
