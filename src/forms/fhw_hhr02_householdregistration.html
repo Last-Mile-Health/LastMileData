@@ -31,13 +31,15 @@
             
             #HHRT { position:relative; top:-10px }
             
-            .householdRegistrationTable     { border-collapse:collapse; margin:0px; padding:3px; font-size: 85%;            }
-            .householdRegistrationTable th  { border: 1px solid black; padding:3px; text-align:center; font-weight:bold;    }
-            .householdRegistrationTable td  { border: 1px solid black; height:1px; padding:0px; text-align:center;          }
+            /* Set font-size in thick box and household registration table to easily fit 30-plus rows in on form */
+            .thickBox { padding:3px; font-size: 96%; }
+            .householdRegistrationTable     { font-size: 96%;           margin: 0px;     padding: 3px;        border-collapse: collapse;    }
+            .householdRegistrationTable th  { border: 1px solid black;  padding: 3px;    text-align: center;  font-weight: bold;            }
+            .householdRegistrationTable td  { border: 1px solid black;  padding: 0px;    text-align: center;                                }
 
             .c1     { width:0.30in;     border:none; margin-right:1px; margin-left:1px; }
             .c2     { width:0.91in;     border:none; margin-right:1px; margin-left:1px; }
-            .c3     { width:1.29in;     border:none; margin-right:1px; margin-left:1px; }
+            .c3     { width:1.39in;     border:none; margin-right:1px; margin-left:1px; }
             .c4     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; }
             .c5     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; }
             .c6     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; }
@@ -79,28 +81,28 @@
                 
                 <hr>
                 
-                <div class="headField" style="width:1.05in">CHW ID:</div>
+                <div class="headField" style="width:0.95in">CHW ID:</div>
                 <div class="headField" style="width:0.75in"><input class="stored integer" name="chwID" data-lmd-valid-required="yes" style="width:0.65in"></div>
                 
-                <div class="headField" style="width:0.85in">CHW:</div>
-                <div class="headField" style="width:2.0in"><input class="stored" name="chwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:1.95in"></div>
+                <div class="headField" style="width:0.75in">CHW:</div>
+                <div class="headField" style="width:2.10in"><input class="stored" name="chwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:2.05in"></div>
                 
-                <div class="headField" style="width:0.55in">Month:</div>
-                <div class="headField" style="width:0.80in"><input class="stored integer" name="monthRegistered" data-lmd-valid-required="yes" style="width:0.75in"></div>
+                <div class="headField" style="width:0.50in">Month:</div>
+                <div class="headField" style="width:0.85in"><input class="stored integer" name="monthRegistered" data-lmd-valid-required="yes" style="width:0.40in"> (1-12)</div>
  
-                <div class="headField" style="width:0.40in">Year:</div>
-                <div class="headField" style="width:0.80in"><input class="stored integer" name="yearRegistered" data-lmd-valid-required="yes" style="width:0.75in"></div>
+                <div class="headField" style="width:0.35in">Year:</div>
+                <div class="headField" style="width:0.95in"><input class="stored integer" name="yearRegistered" data-lmd-valid-required="yes" style="width:0.50in"> (2016)</div>
                 
                 <div style="clear:both; height:3px;"></div>
                 
-                <div class="headField" style="width:1.05in">Community ID:</div>
+                <div class="headField" style="width:0.95in">Community ID:</div>
                 <div class="headField" style="width:0.75in"><input class="stored integer" name="communityID" data-lmd-valid-required="yes" style="width:0.65in"></div>
                 
-                <div class="headField" style="width:0.85in">Community:</div>
-                <div class="headField" style="width:2.0in"><input class="stored" name="community" data-lmd-valid-required="yes" style="width:1.95in"></div>
+                <div class="headField" style="width:0.75in">Community:</div>
+                <div class="headField" style="width:2.10in"><input class="stored" name="community" data-lmd-valid-required="yes" style="width:2.05in"></div>
                 
-                <div class="headField" style="width:0.55in">District:</div>
-                <div class="headField" style="width:2.0in"><input class="stored" name="district" data-lmd-valid-required="yes" style="width:1.95in"></div>
+                <div class="headField" style="width:0.50in">District:</div>
+                <div class="headField" style="width:2.20in"><input class="stored" name="district" data-lmd-valid-required="yes" style="width:2.15in"></div>
                
             </div>
             <!-- END: FORM HEADER -->
@@ -810,7 +812,7 @@
                     <!-- Totals of rows 1-30 -->
                     <tr>
                         <td style="border:none"></td>
-                        <td style="border:none; font-weight:bold"><div class="rightArrow">Totals<img style="max-width:20%; max-height:20%" src="../images/arrow_right.png"></div></td>
+                        <td style="border:none; font-weight:bold"><div class="rightArrow">Totals<img style="max-width: 25%; max-height:25%" src="../images/arrow_right.png"></div></td>
                         
                         <td><input class="stored c3 integer"    name="totalHouseholdMembers_total"                  data-lmd-valid-required="no"></td>
                         
