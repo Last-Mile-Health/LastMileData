@@ -41,29 +41,45 @@
             .boxHead    { table-layout: fixed;          width: 7.04in;              }
             .boxHead    { border-collapse: collapse;    borkder: none;      margin:0px; padding: 0px;   }
             
-            .boxHeadColumn1 { width: 2.06in; border:none; margin-right:1px; margin-left:1px; }
-            .boxHeadColumn2 { width: 1.56in; border:none; margin-right:1px; margin-left:1px; }
-            .boxHeadColumn3 { width: 1.66in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn1 { width: 2.08in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn2 { width: 1.50in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn3 { width: 1.70in; border:none; margin-right:1px; margin-left:1px; }
             .boxHeadColumn4 { width: 2.10in; border:none; margin-right:1px; margin-left:1px; }
             
             /* Matrices 1-5 */
             .leftRightColumns td { padding:3px; }
             
-            .matrixLayout     { table-layout: fixed; width: 3.52in; }
-            .matrixLayout     { border-collapse: collapse; margin:0px; padding: 3px; }
             
-            .matrixLayout th  { -webkit-transform: rotate(-90deg) translate( -17px, 0px); }       
-            .matrixLayout th  { height: 62px; font-weight: normal; text-align: center; border: 1px solid black; padding: 3px; white-space: nowrap; }       
+            .codeLegend          { table-layout: fixed; width: 3.52in; border: 1px solid black; font-size:95%; }
+            .codeLegend          { border-collapse: collapse; margin:0px; padding: 3px; }
             
-            .matrixLayout td  { border: 1px solid black; height: 24px; padding: 0px; text-align: center; }
+            .codeLegend td       { border: none; height: 24px; padding: 0px; text-align: left; }
+            
+            .codeLegendColumn1   { width: 0.55in; border: none; margin-right:1px; margin-left:1px; }
+            .codeLegendColumn2   { width: 0.90in; border: none; margin-right:1px; margin-left:1px; }
+            .codeLegendColumn3   { width: 1.15in; border: none; margin-right:1px; margin-left:1px; }
+            .codeLegendColumn4   { width: 0.70in; border: none; margin-right:1px; margin-left:1px; }
+            
+            .currentPerformanceBox     { table-layout: fixed; width: 3.52in; border: 1px solid black; font-size:95%;}
+            .currentPerformanceBox     { border-collapse: collapse; margin:0px; padding: 3px; } 
+            .currentPerformanceBox td  { border: none; height: 60px; padding: 3px; text-align: left; vertical-align: top }
+           
+          
+            .matrixLayout       { table-layout: fixed; width: 3.52in; }
+            .matrixLayout       { border-collapse: collapse; margin:0px; padding: 3px; }
+            
+            .matrixLayout th    { -webkit-transform: rotate(-90deg) translate( -17px, 0px); }       
+            .matrixLayout th    { height: 62px; font-weight: normal; text-align: center; border: 1px solid black; padding: 3px; white-space: nowrap; }       
+            
+            .matrixLayout td    { border: 1px solid black; height: 24px; padding: 0px; text-align: center; }
                       
-            .matrixColumn1     { width: 2.02in;     border:none; margin-right:1px; margin-left:1px; }
-            .matrixColumn2     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .matrixColumn3     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .matrixColumn4     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .matrixColumn5     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .matrixColumn6     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
-            .matrixColumn7     { width: 0.25in;     border:none; margin-right:1px; margin-left:1px; }
+            .matrixColumn1      { width: 2.02in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumn2      { width: 0.25in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumn3      { width: 0.25in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumn4      { width: 0.25in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumn5      { width: 0.25in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumn6      { width: 0.25in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumn7      { width: 0.25in;     border: 1px solid black; border-right: 2px solid black; margin-right:1px; margin-left:0px; }
                       
         </style>
         
@@ -93,17 +109,17 @@
                 <table class="matrixLayout">
                                   
                     <tr>
-                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHW: <input class="stored" name="chwName" data-lmd-valid-required="yes" style=" width:1.50in; border:none; "></td>
-                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHW ID: <input class="stored integer" name="chwID" data-lmd-valid-required="yes" style=" width:0.80in; border:none;  "></td>
-                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHW-L: <input class="stored" name="chwlName" data-lmd-valid-required="yes" data-lmd-valid-autoC="chwls" style=" width:1.00in; border:none; "></td>
-                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 3px; border: none; " >CHW-L ID: <input class="stored integer" name="chwlID" data-lmd-valid-required="yes" style=" width:0.40in; border:none;"></td>
+                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHW: <input class="stored" name="chwName" data-lmd-valid-required="yes" style=" width:1.57in; border:none; "></td>
+                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHW ID: <input class="stored integer" name="chwID" data-lmd-valid-required="yes" style=" width:0.81in; border:none;  "></td>
+                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHW-L: <input class="stored" name="chwlName" data-lmd-valid-required="yes" data-lmd-valid-autoC="chwls" style=" width:1.05in; border:none; "></td>
+                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 3px; border: none; " >CHW-L ID: <input class="stored integer" name="chwlID" data-lmd-valid-required="yes" style=" width:1.20in; border:none;"></td>
                     </tr>                  
                     
                     <tr>
-                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; border-top: 1px solid black; " >Community: <input class="stored" name="community" data-lmd-valid-required="yes" style=" width:1.10in; border:none; "></td>
-                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; border-top: 1px solid black; " >Community ID: <input class="stored integer" name="communityID" data-lmd-valid-required="yes" style=" width:0.45in; border:none; "></td>
-                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; border-top: 1px solid black; " >District: <input class="stored" name="district" data-lmd-valid-required="yes" style=" width:1.0in; border:none; "></td>
-                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; " >Month: <input class="stored integer" name="monthReported" data-lmd-valid-required="yes" style=" width:0.25in; border:none; "><span style="font-size:80%; font-style: italic;"> (1-12), </span> Year: <input class="stored integer" name="yearReported" data-lmd-valid-required="yes" style=" width:0.45in; border:none; "></td>
+                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 3px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community: <input class="stored" name="community" data-lmd-valid-required="yes" style=" width:1.17in; border:none; "></td>
+                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 3px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID: <input class="stored integer" name="communityID" data-lmd-valid-required="yes" style=" width:0.40in; border:none; "></td>
+                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 3px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >District: <input class="stored" name="district" data-lmd-valid-required="yes" style=" width:1.10in; border:none; "></td>
+                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 3px; border: none; border-top:    1px solid black; " >Month: <input class="stored integer" name="monthReported" data-lmd-valid-required="yes" style=" width:0.25in; border:none; "><span style="font-size:80%; font-style: italic;"> (1-12), </span> Year: <input class="stored integer" name="yearReported" data-lmd-valid-required="yes" style=" width:0.40in; border:none; "></td>
                     </tr>
                     
                 </table>
@@ -142,7 +158,7 @@
                                             </tr>
                     
                                             <tr>
-                                                <td style="text-align:left;">Supervision Visit Attempted</td>
+                                                <td style="text-align:left; padding-left: 2px;">Supervision Visit Attempted</td>
                                                 <td>4</td>
                                                 <td></td>
                                                 <td></td>
@@ -152,7 +168,7 @@
                                             </tr>
                     
                                             <tr>
-                                                <td style="text-align:left;">CHW Absent for Supervision</td>
+                                                <td style="text-align:left; padding-left: 2px;">CHW Absent for Supervision</td>
                                                 <td>0</td>
                                                 <td></td>
                                                 <td></td>
@@ -161,202 +177,228 @@
                                                 <td><input class="stored matrixColumn7 integer" name="professionalismCHWAbsentForSupervisionTotal" data-lmd-valid-required="yes"></td>
                                             </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Excused Absence</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="professionalismExcusedAbsenceTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Excused Absence</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="professionalismExcusedAbsenceTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
 
-                                <tr>
-                                    <td style="text-align:left;">Verbal Warning</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="professionalismVerbalWarningTotal" data-lmd-valid-required="yes"></td>
-                                </tr>                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Verbal Warning</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="professionalismVerbalWarningTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>                    
    
-                                <tr>
-                                    <td style="text-align:left;">Written Warning</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="professionalismWrittenWarningTotal" data-lmd-valid-required="yes"></td>
-                                </tr>    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Written Warning</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="professionalismWrittenWarningTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>    
                  
-                             </table>
-                             <!-- END: Professionalism Table -->
+                                        </table>
+                                        <!-- END: Professionalism Table -->
                                        
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         
-                             <!-- START: 2. Audit & CHC -->
-                            <table class="matrixLayout" style="width: 3.27in">
+                                        <!-- START: 2. Audit & CHC -->
+                                        <table class="matrixLayout" style="width: 3.27in">
                                        
-                                <!-- Table header -->
-                                <tr>
+                                            <!-- Table header -->
+                                            <tr>
                      
-                                    <th class="matrixColumn1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">2. Audit & CHC</th>
-                                    <th class="matrixColumn2">Target</th>
-                                    <th class="matrixColumn3">Week 1</th>
-                                    <th class="matrixColumn4">Week 2</th>
-                                    <th class="matrixColumn5">Week 3</th>
-                                    <th class="matrixColumn6">Week 4</th>
-                                    <th class="matrixColumn7" style="font-weight:bold;">Total</th>
-                                </tr>
+                                                <th class="matrixColumn1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">2. Audit & CHC</th>
+                                                <th class="matrixColumn2">Target</th>
+                                                <th class="matrixColumn3">Week 1</th>
+                                                <th class="matrixColumn4">Week 2</th>
+                                                <th class="matrixColumn5">Week 3</th>
+                                                <th class="matrixColumn6">Week 4</th>
+                                                <th class="matrixColumn7" style="font-weight:bold;">Total</th>
+                                            </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Type of Visit Audited (code)</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="auditCHCTypeOfVisitAuditedTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Type of Visit Audited (code)</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="auditCHCTypeOfVisitAuditedTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Audit Score</td>
-                                    <td>5</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="auditCHCAuditScoreTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Audit Score</td>
+                                                <td>5</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="auditCHCAuditScoreTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Met With CHC?</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="auditCHCMetWithCHCTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Met With CHC?</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="auditCHCMetWithCHCTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
                 
-                                </table>
-                                <!-- END: Audit & CHC Matrix -->
+                                        </table>
+                                        <!-- END: Audit & CHC Matrix -->
                                         
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         
-                            <!-- START: 3. Routine Visits & Population -->
-                            <table class="matrixLayout">
+                                        <!-- START: 3. Routine Visits & Population -->
+                                        <table class="matrixLayout">
                                        
-                                <!-- Table header -->
-                                <tr>
-                     
-                                    <th class="matrixColumn1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">3. Routine Visit/Population</th>
-                                    <th class="matrixColumn2">Target</th>
-                                    <th class="matrixColumn3">Week 1</th>
-                                    <th class="matrixColumn4">Week 2</th>
-                                    <th class="matrixColumn5">Week 3</th>
-                                    <th class="matrixColumn6">Week 4</th>
-                                    <th class="matrixColumn7" style="font-weight:bold;">Total</th>
-                                </tr>
+                                        <!-- Table header -->
+                                            <tr>
+                                                <th class="matrixColumn1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">3. Routine Visit/Population</th>
+                                                <th class="matrixColumn2">Target</th>
+                                                <th class="matrixColumn3">Week 1</th>
+                                                <th class="matrixColumn4">Week 2</th>
+                                                <th class="matrixColumn5">Week 3</th>
+                                                <th class="matrixColumn6">Week 4</th>
+                                                <th class="matrixColumn7" style="font-weight:bold;">Total</th>
+                                            </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Number of Routine Visits</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationNumberOfRoutineVisitsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Number of Routine Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationNumberOfRoutineVisitsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Births</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationBirthsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Births</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationBirthsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
                     
-                                <tr>
-                                    <td style="text-align:left;">Still Births</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationStillBirthsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Still Births</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationStillBirthsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>
 
-                                <tr>
-                                    <td style="text-align:left;">Neonatal Deaths</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationNeonatalDeathsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Neonatal Deaths</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationNeonatalDeathsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>                    
    
-                                <tr>
-                                    <td style="text-align:left;">Post-Neonatal Deaths</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationPostNeonatalDeathsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Post-Neonatal Deaths</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationPostNeonatalDeathsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>    
  
-                                <tr>
-                                    <td style="text-align:left;">Child Deaths</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationChildDeathsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Child Deaths</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationChildDeathsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>    
 
-                                <tr>
-                                    <td style="text-align:left;">Maternal Deaths</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationMaternalDeathsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>    
-                                
-                                 <tr>
-                                    <td style="text-align:left;">Number of Vaccine Referrals</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationNumberOfVaccineReferralsTotal" data-lmd-valid-required="yes"></td>
-                                </tr>    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Maternal Deaths</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationMaternalDeathsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>    
+ 
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Adult Deaths</td>
+                                                <td>-</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationAdultDeathsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>    
+                                                              
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 2px;">Number of Vaccine Referrals</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumn7 integer" name="routineVisitsPopulationNumberOfVaccineReferralsTotal" data-lmd-valid-required="yes"></td>
+                                            </tr>    
                                                              
-                            </table>
-                            <!-- END: 3. Routine Visits & Population -->
+                                        </table>
+                                        <!-- END: 3. Routine Visits & Population -->
                                        
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         
-                            <!-- START: Visit Codes -->
-                            <!-- END: Visit Codes -->
+                                        <!-- START: Code Legend -->
+                                        <table class="codeLegend">
+                                                        
+                                            <tr>
+                                                <td class="codeLegendColumn1" style="text-align:left; padding-left: 2px;">Legend:</td>
+                                                <td class="codeLegendColumn2" style="text-align:left;">R=Registration</td>
+                                                <td class="codeLegendColumn3" style="text-align:left;">V=Routine Visit</td>
+                                                <td class="codeLegendColumn4" style="text-align:left;">I=iCCM</td>
+                                            </tr>
+            
+                                            <tr>
+                                                <td></td>
+                                                <td>N=Neonatal</td>
+                                                <td>F=Family Planning</td>
+                                                <td>B=Big Belly</td>
+                                            </tr>
+                                    
+                                        </table> 
+                                        <!-- END: Code Legend -->
                                        
                                     </td>
                                 </tr>                                                                                  
@@ -387,7 +429,7 @@
                                             </tr>
                     
                                             <tr>
-                                                <td style="text-align:left;">Type of Home Visit (code)</td>
+                                                <td style="text-align:left; padding-left: 2px;">Type of Home Visit (code)</td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -397,7 +439,7 @@
                                             </tr>
                                             
                                             <tr>
-                                                <td style="text-align:left;">Home Visit Evaluation Score</td>
+                                                <td style="text-align:left; padding-left: 2px;">Home Visit Evaluation Score</td>
                                                 <td>15</td>
                                                 <td></td>
                                                 <td></td>
@@ -420,7 +462,7 @@
                                         <!-- Table header -->
                                             <tr>
                      
-                                                <th class="matrixColumn1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">4. iCCM & Nutrition</th>
+                                                <th class="matrixColumn1" style="-webkit-transform: rotate(0deg); border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom;">5. iCCM & Nutrition</th>
                                                 <th class="matrixColumn2">Target</th>
                                                 <th class="matrixColumn3">Week 1</th>
                                                 <th class="matrixColumn4">Week 2</th>
@@ -430,7 +472,7 @@
                                                 </tr>
                     
                                             <tr>
-                                                <td style="text-align:left;">Pneumonia Cases</td>
+                                                <td style="text-align:left; padding-left: 2px;">Pneumonia Cases</td>
                                                 <td>-</td>
                                                 <td></td>
                                                 <td></td>
@@ -440,7 +482,7 @@
                                             </tr>
                     
                                               <tr>
-                                                <td style="text-align:left;">Malaria Cases</td>
+                                                <td style="text-align:left; padding-left: 2px;">Malaria Cases</td>
                                                 <td>-</td>
                                                 <td></td>
                                                 <td></td>
@@ -450,7 +492,7 @@
                                             </tr>
 
                                               <tr>
-                                                <td style="text-align:left;">Diarrhea Cases</td>
+                                                <td style="text-align:left; padding-left: 2px;">Diarrhea Cases</td>
                                                 <td>-</td>
                                                 <td></td>
                                                 <td></td>
@@ -459,7 +501,7 @@
                                                 <td><input class="stored matrixColumn7 integer" name="iCCMNutritionDiarrheaCasesTotal" data-lmd-valid-required="yes"></td>
                                             </tr>
                                               <tr>
-                                                <td style="text-align:left;">Malnutrition Cases</td>
+                                                <td style="text-align:left; padding-left: 2px;">Malnutrition Cases</td>
                                                 <td>-</td>
                                                 <td></td>
                                                 <td></td>
@@ -468,7 +510,7 @@
                                                 <td><input class="stored matrixColumn7 integer" name="iCCMNutritionMalnutritionCasesTotal" data-lmd-valid-required="yes"></td>
                                             </tr>
                                               <tr>
-                                                <td style="text-align:left;">Total iCCM Visits</td>
+                                                <td style="text-align:left; padding-left: 2px;">Total iCCM Visits</td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -477,7 +519,7 @@
                                                 <td><input class="stored matrixColumn7 integer" name="iCCMNutritionTotaliCCMVisitsTotal" data-lmd-valid-required="yes"></td>
                                             </tr>
                                               <tr>
-                                                <td style="text-align:left;">Active Case Finds</td>
+                                                <td style="text-align:left; padding-left: 2px;">Active Case Finds</td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -486,7 +528,7 @@
                                                 <td><input class="stored matrixColumn7 integer" name="iCCMNutritionActiveCaseFindsTotal" data-lmd-valid-required="yes"></td>
                                             </tr>
                                               <tr>
-                                                <td style="text-align:left;">Sick More than 24 Hours</td>
+                                                <td style="text-align:left; padding-left: 2px;">Sick More than 24 Hours</td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -495,7 +537,7 @@
                                                 <td><input class="stored matrixColumn7 integer" name="iCCMNutritionSickMoreThan24HoursTotal" data-lmd-valid-required="yes"></td>
                                             </tr>
                                               <tr>
-                                                <td style="text-align:left;">Fever More than 24 Hours</td>
+                                                <td style="text-align:left; padding-left: 2px;">Fever More than 24 Hours</td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -505,7 +547,7 @@
                                             </tr>
           
                                             <tr>
-                                                <td style="text-align:left;">Incomplete Referrals</td>
+                                                <td style="text-align:left; padding-left: 2px;">Incomplete Referrals</td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -522,7 +564,29 @@
                                 <tr>
                                     <td>
                                         
-                                        <!-- Current Performance Summary, Goals, Improvement Plan -->
+                                        <!-- Current Performance Summary, Goals, Improvement Plan -->                             
+                                        <table class="currentPerformanceBox">
+                                                        
+                                            <tr>
+                                                <td class="codeLegendColumn1" style="text-align:left; padding-left: 2px;">Current Performance Summary:</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="codeLegendColumn1" style="text-align:left; padding-left: 2px;">Goals:</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="codeLegendColumn1" style="text-align:left; padding-left: 2px;">Improvement Plan:</td>
+                                            </tr>
+                                    
+                                        </table> 
+                                        <!-- END: Current Performance Summary, Goals, Improvement Plan -->
+                                       
+                                    </td>
+                                </tr>                                                                                  
+                            </table>
+                            
+                        </td>
+                        <!-- End left column -->
+
                                        
                                     </td>
                                 </tr>
