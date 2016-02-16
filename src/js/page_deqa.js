@@ -399,6 +399,30 @@ $(document).ready(function(){
             pKey3_label: "First Household ID"
         });
     });
+    $('#qa_MS1_02').click(function() {
+        launchQAModal({
+            targetForm: "../forms/fhw_ms102_monthlyservicereportmodule1.html",
+            qaFormName: "CHW Form (MS1 02) - CHW-L: CHW Monthly Service Report - Module 1",
+            pKey1_name: "chwID",
+            pKey2_name: "chwlID",
+            pKey3_name: "communityID",
+            pKey1_label: "CHW ID",
+            pKey2_label: "CHW-L ID",
+            pKey3_label: "Community ID"
+        });
+    });
+    $('#qa_MS2_02').click(function() {
+        launchQAModal({
+            targetForm: "../forms/fhw_ms202_monthlyservicereportmodule2.html",
+            qaFormName: "CHW Form (MS2 02) - CHW-L: CHW Monthly Service Report - Module 2",
+            pKey1_name: "chwID",
+            pKey2_name: "chwlID",
+            pKey3_name: "communityID",
+            pKey1_label: "CHW ID",
+            pKey2_label: "CHW-L ID",
+            pKey3_label: "Community ID"
+        });
+    });
     $('#qa_REG_03').click(function() {
         launchQAModal({
             targetForm: "../forms/fhw_reg03_registration.html",
