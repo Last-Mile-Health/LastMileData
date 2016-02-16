@@ -24,7 +24,7 @@ var LMD_dataPortal = (function(){
     function setDates() {
         
         // Generate dates (last 4 months)
-        var todayDay = 11,
+        var todayDay = moment().format('D'),
             todayMinus1m = moment().subtract(1 + ( todayDay < 15 ? 1 : 0 ),'months'),
             todayMinus2m = moment().subtract(2 + ( todayDay < 15 ? 1 : 0 ),'months'),
             todayMinus3m = moment().subtract(3 + ( todayDay < 15 ? 1 : 0 ),'months'),

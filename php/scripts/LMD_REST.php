@@ -167,7 +167,7 @@ $app->delete('/staff/:id', function($id) {
 
 // Route 9: Data Portal narratives (lastmile_dataportal.view_reportObjects)
 $app->get('/narratives/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.view_reportObjects", "id, reportID, reportName, displayOrder, roName, roMetadata_narrative", 1);
+    LMD_get($id, "id", "lastmile_dataportal.view_reportobjects", "id, reportID, reportName, displayOrder, roName, roMetadata_narrative", 1);
 });
 $app->post('/narratives/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");
