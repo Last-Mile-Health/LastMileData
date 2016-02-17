@@ -7,7 +7,7 @@ $(document).ready(function(){
     };
     
     // Set app version manually here
-    $('#appVersion').text('00496');
+    $('#appVersion').text('00497');
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
