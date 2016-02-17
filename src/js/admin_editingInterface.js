@@ -320,12 +320,12 @@ $(document).ready(function(){
             successCallback: function() {
                 // Reset anyChanges flag; manipulate DOM
                 DataPortal_GLOBALS.anyChanges = false;
-                LMD_utilities.ajaxButton($submit, 'alertSuccess', 'Submit');
+                LMD_utilities.ajaxButton($submit, 'alertSuccess', 'Submit changes');
             },
             errorCallback: function() {
                 // Error message; reset DOM
                 alert('Error. Could not reach the database. Please try again.');
-                LMD_utilities.ajaxButton($submit, 'alertError', 'Submit');
+                LMD_utilities.ajaxButton($submit, 'alertError', 'Submit changes');
                 LMD_utilities.ajaxButton($submit, 'enable');
             }
         });

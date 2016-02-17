@@ -119,6 +119,11 @@ table.ptg_data td {
     padding: 3px;
     background-color: #eeeeee;
 }
+
+table.ptg_data td.instShortName {
+    text-align:left;
+}
+
 .smallHR {
     margin-bottom:0px;
 }

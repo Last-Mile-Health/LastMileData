@@ -225,6 +225,7 @@ $(document).ready(function(){
 
                                     var myJQXML = $.parseXML(fileContentArray[j].trim());
                                     // !!!!! Build an error catcher for invalid XML that displays helpful error messages !!!!!
+									// !!!!! Sample errors to catch: (1) missing <LMD-DATABASE> tag, (2) missing <LMD-TABLE> tag. (3) generic "invalid XML" !!!!!
                                     
                                     // Check for null strings caused by trailing whitespace or trailing <LMD_delimiter> tags
                                     if (myJQXML !== null) {

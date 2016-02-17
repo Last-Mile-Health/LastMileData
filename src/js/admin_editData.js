@@ -192,13 +192,13 @@ $(document).ready(function(){
                 // Reset changedData object; manipulate DOM
                 changedData.reset();
                 $threeMore.prop('disabled','');
-                LMD_utilities.ajaxButton($submit, 'alertSuccess', 'Submit');
+                LMD_utilities.ajaxButton($submit, 'alertSuccess', 'Submit changes');
             },
             error: function() {
                 // Error message; reset DOM
                 alert('Error. Could not reach the database. Please try again.');
                 $threeMore.prop('disabled','');
-                LMD_utilities.ajaxButton($submit, 'alertError', 'Submit');
+                LMD_utilities.ajaxButton($submit, 'alertError', 'Submit changes');
                 LMD_utilities.ajaxButton($submit, 'enable');
             }
         });
