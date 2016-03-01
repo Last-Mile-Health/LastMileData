@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>Program Form (TRR 04) - Training Results Record</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            .trainingParticipantTable       { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
+            .trainingParticipantTable th    { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            .trainingParticipantTable td    { border: 1px solid black; height:28px; padding:3px; text-align:center; }
+            
+            #trainingInfo { position:relative; top:-8px; }
+            #trainingParticipant { position:relative; top:-24px; }
+            #meBox { position:relative; top:-25px; }
+            @media print { #meBox { position:relative; top:-47px; } }/* to compensate for a CSS bug where print view cuts off page */
+            
+            .c1     { width:0.55in; border:none; margin-right:1px; margin-left:1px;}
+            .c2     { width:0.69in; }
+            .c3     { width:2.16in; border:none; margin-right:1px; margin-left:1px; }
+            .c4     { width:1.40in; border:none; margin-right:1px; margin-left:1px; }
+            .c5     { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            .c6     { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            .c7     { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            .c8     { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            .c9     { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            .c10    { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            .c11    { width:0.55in; border:none; margin-right:1px; margin-left:1px; }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <div class="page_h">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h2">Training Results Record</span>
+                <img style="float:right" src="../images/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            <!-- END: FORM HEADER -->
+            
+
+            
+            <!-- START: Training Info Section -->
+            <div style="height:10px"></div>
+            <div id="trainingInfo">
+                <div class="thickBox" style="border:none;">
+                    
+                    <table>
+                        <tr>
+                            <td>
+                                
+<div class="headField" style="width:1.25in; font-weight:bold; ">Training Name:</div>
+<div class="headField" style="width:2.4in;"><input class="stored" name="trainingName" data-lmd-valid-required="yes" style="width:2.0in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+
+<div class="headField" style="width:1.1in; font-weight:bold; ">Date:</div>
+<div class="headField" style="width:2.28in"><input class="stored datepicker" name="trainingDate" data-lmd-valid-required="yes" style="width:1.9in; border: none; border-bottom: 1px solid black; padding:0px;"></div>    
+
+<div style="clear:both; height:3px;"></div>
+
+<div class="headField" style="width:1.25in; font-weight:bold; ">Facilitator name:</div>
+<div class="headField" style="width:2.4in"><input class="stored" name="facilitatorName" data-lmd-valid-required="yes" style="width:2.0in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+
+<div class="headField" style="width:1.1in; font-weight:bold; ">Facilitator ID#:</div>
+<div class="headField" style="width:2.28in"><input class="stored" name="facilitatorID" style="width:1.9in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+
+<div style="clear:both; height:3px;"></div>
+
+<div class="headField" style="width:1.25in; font-weight:bold; ">County:</div>
+<div class="headField" style="width:2.4in"><input class="stored" name="county" data-lmd-valid-required="yes" style="width:2.0in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+
+<div class="headField" style="width:1.1in; font-weight:bold; ">City:</div>
+<div class="headField" style="width:2.28in; font-weight:bold; "><input class="stored" name="city" data-lmd-valid-required="yes" style="width:1.9in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+                                           
+                        </td>
+                          
+                        <td>
+                            
+    <div class="headField" style="width:2.6in; border: 1px solid black; ">
+    <div class="headField" style="width:0.85in; border-bottom: 1px solid black; border-right: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="LMA1"> LMA 1</div>
+    <div class="headField" style="width:0.85in; border-bottom: 1px solid black; border-right: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="LMA4"> LMA 4</div>
+    <div class="headField" style="width:0.85in; border-bottom: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="CHW3"> CHW 3</div>
+    
+    <div style="clear:both"></div>
+    
+    <div class="headField" style="width:0.85in; border-bottom: 1px solid black; border-right: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="LMA2"> LMA 2</div>
+    <div class="headField" style="width:0.85in; border-bottom: 1px solid black; border-right: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="CHW1"> CHW 1</div>
+    <div class="headField" style="width:0.85in; border-bottom: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="CHW4"> CHW 4</div> 
+    
+    <div style="clear:both"></div>
+    
+    <div class="headField" style="width:0.85in; border-right: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="LMA3"> LMA 3</div>
+    <div class="headField" style="width:0.85in; border-right: 1px solid black; padding: 3px; "><input type="checkbox" class="stored" name="trainingType" value="CHW2"> CHW 2</div>
+    <div class="headField" style="width:0.85in; padding: 3px;"><input type="checkbox" class="stored" name="trainingType" value="other"> Other</div>
+ 
+ </div>
+                            
+                        </td>                        
+                        
+                    </tr>
+                </table>
+                    
+                </div>
+                                
+            </div>
+            <!-- END: Training Info Section -->
+            
+           
+            <!-- START: Training Participant Section -->
+            <div id="trainingParticipant">
+                
+                <div class="thickBox" style="border:none;" >
+                    
+                    <!-- START: Training table -->
+                    <table class='trainingParticipantTable'>
+
+                        <!-- Table header -->
+                        <tr>
+                            <th class="c1">ID#</th>
+                            <th class="c2">Sex</th>
+                            <th class="c3">Participant Name</th>
+                            <th class="c4">Participant Position</th>
+                            <th class="c5">Pre-test</th>
+                            <th class="c6">Post-test</th>
+                            <th class="c7">L&V<br>score</th>
+                            <th class="c8">K score</th>
+                            <th class="c9">P&E<br>score</th>
+                            <th class="c10">Total<br>score</th>
+                            <th class="c11">Initials</th>
+                        </tr>
+                        
+
+                        <!-- Row 1 of 30 -->
+                        <tr>
+                            <td><input class='stored c1' name='participantID_1'></td>
+                            <td>
+                                <input type='checkbox' class='stored' name='gender_1' value='M'>M&nbsp;
+                                <input type='checkbox' class='stored' name='gender_1' value='F'>F&nbsp;
+                            </td>
+                            <td><input class='stored c3' name='participantName_1' data-lmd-valid-required='yes'></td>
+                            <td><input class='stored c4 autocomplete' name=' participantPosition_1' data-lmd-valid-autoC='["CHW","CHW Leader","CCS"]'></td>
+                            <td><input class='stored c5' name='preTest_1'></td>
+                            <td><input class='stored c6' name='postTest_1'></td>
+                            <td><input class='stored c7' name='score_LV_1'></td>
+                            <td><input class='stored c8' name='score_K_1'></td>
+                            <td><input class='stored c9' name='score_PE_1'></td>
+                            <td><input class='stored c10' name='score_total_1'></td>
+                            <td><input class='stored c11' disabled></td>
+                        </tr>
+
+                        <!-- Row 2 of 30 -->
+ 
+                    </table>
+                    <!-- END: training table -->
+                    
+                </div>
+                
+            </div>
+            <!-- END: Training Participant Section -->
+            
+            
+            
+            <!-- START: M&E Box -->
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">TRR.04</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='4'>
+            </div>
+            <!-- START: M&E Box -->
+            
+            
+            
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_chwdb">
+        <input type="hidden" class="stored" name="table" value="staging_trainingResultsRecordStep1">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
