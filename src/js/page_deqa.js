@@ -655,18 +655,16 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    $('#qa_TRL_04').click(function() {
+    $('#qa_TRR_04').click(function() {
         launchQAModal({
-            targetForm: "../forms/prg_trl04_trainingledger.html",
-            qaFormName: "Program: Training Ledger",
+            targetForm: "../forms/prg_trr04_trainingresultsrecord.html",
+            qaFormName: "Program: Training Results Record",
             pKey1_name: "trainingType",
             pKey2_name: "trainingDate",
-            pKey3_name: "firstName_1",
-            pKey4_name: "lastName_1",
+            pKey3_name: "participantName_1",
             pKey1_label: "Training Type",
             pKey2_label: "Training date",
-            pKey3_label: "First name (1)",
-            pKey4_label: "Last name (1)",
+            pKey3_label: "Participant Name (1)",
             pKey_date: "pKey2"
         });
     });
