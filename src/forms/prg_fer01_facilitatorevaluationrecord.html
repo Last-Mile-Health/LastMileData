@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>Program Form (FER 01) - Facilitator Evaluation Record</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            .facilitatorTable       { border: 1px solid black; border-collapse:collapse; margin:0px; padding:3px; }
+            .facilitatorTable th    { border: 1px solid black; padding:3px; text-align:center; font-weight:bold; }
+            .facilitatorTable td    { border: 1px solid black; height:28px; padding:3px; text-align:center; }
+            
+            #evaluatorInfo { position:relative; top:-8px; }
+            #facilitator { position:relative; top:-28px; }
+            #meBox { position:relative; top:-35px; }
+            @media print { #meBox { position:relative; top:-47px; } }/* to compensate for a CSS bug where print view cuts off page */
+            
+            .c1     { width:0.80in; border:none; margin-right:1px; margin-left:1px; }
+            .c2     { width:1.86in; border:none; margin-right:1px; margin-left:1px; }
+            .c3     { width:1.86in; border:none; margin-right:1px; margin-left:1px; }
+            .c4     { width:1.86in; border:none; margin-right:1px; margin-left:1px; }
+            .c5     { width:0.35in; border:none; margin-right:1px; margin-left:1px; }
+              
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <div class="page" style="font-size: 100%; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h2">Facilitator Evaluation Record</span>
+                <img style="float:right" src="../images/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            <!-- END: FORM HEADER -->
+            
+
+            
+            <!-- START: Evaluator Info Section -->
+            <div style="height:8px"></div>
+            <div id="evaluatorInfo">
+                <div class="thickBox" style="border:none;">
+                    
+                 <div class="headField" style="width:1.30in; font-weight:bold; ">&nbsp;Evaluator Name:</div>
+                 <div class="headField" style="width:2.30in;"><input class="stored" name="evaluatorName" data-lmd-valid-required="yes" style="width:2.25in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+                 <div class="headField" style="width:1.50in; font-weight:bold; ">&nbsp;Evaluator Position:</div>
+                 <div class="headField" style="width:2.15in;"><input class="stored" name="evaluatorPosition" data-lmd-valid-required="yes" style="width:2.10in; border: none; border-bottom: 1px solid black; padding:0px;"></div>
+ 
+                </div>                 
+            </div>
+            <!-- END: Evaluator Info Section -->
+            
+           
+            <!-- START: Facilitator Section -->
+            <div style="height:8px"></div>
+            <div id="facilitator">
+                
+                <div class="thickBox" style="border:none;" >
+                    
+                    <!-- START: Facilitator table -->
+                    <table class='facilitatorTable' style="border-top: none; border-bottom: none; ">
+
+                        <!-- Table header -->
+                        <tr>
+                            <th class="c1">Date</th>
+                            <th class="c2">Facilitator Name</th>
+                            <th class="c3">Training Name</th>
+                            <th class="c4">Location</th>
+                            <th class="c5">Eval.<br>Score</th>
+                        </tr>
+                        
+
+                        <!-- Row 1 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_1'></td>
+                            <td><input class='stored c2' name='facilitatorName_1' data-lmd-valid-required='yes'></td>
+                            <td><input class='stored c3' name='trainingName_1'></td>
+                            <td><input class='stored c4' name='location_1'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_1'></td>
+                        </tr>
+                        
+                        <!-- Row 2 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_2'></td>
+                            <td><input class='stored c2' name='facilitatorName_2'></td>
+                            <td><input class='stored c3' name='trainingName_2'></td>
+                            <td><input class='stored c4' name='location_2'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_2'></td>
+                        </tr>
+
+                        <!-- Row 3 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_3'></td>
+                            <td><input class='stored c2' name='facilitatorName_3'></td>
+                            <td><input class='stored c3' name='trainingName_3'></td>
+                            <td><input class='stored c4' name='location_3'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_3'></td>
+                        </tr>
+
+                        <!-- Row 4 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_4'></td>
+                            <td><input class='stored c2' name='facilitatorName_4'></td>
+                            <td><input class='stored c3' name='trainingName_4'></td>
+                            <td><input class='stored c4' name='location_4'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_4'></td>
+                        </tr>
+
+                        <!-- Row 5 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_5'></td>
+                            <td><input class='stored c2' name='facilitatorName_5'></td>
+                            <td><input class='stored c3' name='trainingName_5'></td>
+                            <td><input class='stored c4' name='location_5'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_5'></td>
+                        </tr>
+
+                        <!-- Row 6 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_6'></td>
+                            <td><input class='stored c2' name='facilitatorName_6'></td>
+                            <td><input class='stored c3' name='trainingName_6'></td>
+                            <td><input class='stored c4' name='location_6'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_6'></td>
+                        </tr>
+
+                        <!-- Row 7 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_7'></td>
+                            <td><input class='stored c2' name='facilitatorName_7'></td>
+                            <td><input class='stored c3' name='trainingName_7'></td>
+                            <td><input class='stored c4' name='location_7'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_7'></td>
+                        </tr>
+
+                        <!-- Row 8 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_8'></td>
+                            <td><input class='stored c2' name='facilitatorName_8'></td>
+                            <td><input class='stored c3' name='trainingName_8'></td>
+                            <td><input class='stored c4' name='location_8'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_8'></td>
+                        </tr>
+
+                        <!-- Row 9 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_9'></td>
+                            <td><input class='stored c2' name='facilitatorName_9'></td>
+                            <td><input class='stored c3' name='trainingName_9'></td>
+                            <td><input class='stored c4' name='location_9'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_9'></td>
+                        </tr>
+ 
+                        <!-- Row 10 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_10'></td>
+                            <td><input class='stored c2' name='facilitatorName_10'></td>
+                            <td><input class='stored c3' name='trainingName_10'></td>
+                            <td><input class='stored c4' name='location_10'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_10'></td>
+                        </tr>
+
+                        <!-- Row 11 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_11'></td>
+                            <td><input class='stored c2' name='facilitatorName_11'></td>
+                            <td><input class='stored c3' name='trainingName_11'></td>
+                            <td><input class='stored c4' name='location_11'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_11'></td>
+                        </tr>
+
+                        <!-- Row 12 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_12'></td>
+                            <td><input class='stored c2' name='facilitatorName_12'></td>
+                            <td><input class='stored c3' name='trainingName_12'></td>
+                            <td><input class='stored c4' name='location_12'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_12'></td>
+                        </tr>
+
+                        <!-- Row 13 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_13'></td>
+                            <td><input class='stored c2' name='facilitatorName_13'></td>
+                            <td><input class='stored c3' name='trainingName_13'></td>
+                            <td><input class='stored c4' name='location_13'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_13'></td>
+                        </tr>
+                        
+                        <!-- Row 14 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_14'></td>
+                            <td><input class='stored c2' name='facilitatorName_14'></td>
+                            <td><input class='stored c3' name='trainingName_14'></td>
+                            <td><input class='stored c4' name='location_14'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_14'></td>
+                        </tr>
+
+                        <!-- Row 15 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_15'></td>
+                            <td><input class='stored c2' name='facilitatorName_15'></td>
+                            <td><input class='stored c3' name='trainingName_15'></td>
+                            <td><input class='stored c4' name='location_15'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_15'></td>
+                        </tr>
+
+                        <!-- Row 16 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_16'></td>
+                            <td><input class='stored c2' name='facilitatorName_16'></td>
+                            <td><input class='stored c3' name='trainingName_16'></td>
+                            <td><input class='stored c4' name='location_16'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_16'></td>
+                        </tr>
+
+                        <!-- Row 17 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_17'></td>
+                            <td><input class='stored c2' name='facilitatorName_17'></td>
+                            <td><input class='stored c3' name='trainingName_17'></td>
+                            <td><input class='stored c4' name='location_17'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_17'></td>
+                        </tr>
+
+                        <!-- Row 18 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_18'></td>
+                            <td><input class='stored c2' name='facilitatorName_18'></td>
+                            <td><input class='stored c3' name='trainingName_18'></td>
+                            <td><input class='stored c4' name='location_18'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_18'></td>
+                        </tr>
+
+                        <!-- Row 19 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_19'></td>
+                            <td><input class='stored c2' name='facilitatorName_19'></td>
+                            <td><input class='stored c3' name='trainingName_19'></td>
+                            <td><input class='stored c4' name='location_19'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_19'></td>
+                        </tr>
+
+                        <!-- Row 20 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_20'></td>
+                            <td><input class='stored c2' name='facilitatorName_20'></td>
+                            <td><input class='stored c3' name='trainingName_20'></td>
+                            <td><input class='stored c4' name='location_20'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_20'></td>
+                        </tr>
+
+                        <!-- Row 21 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_21'></td>
+                            <td><input class='stored c2' name='facilitatorName_21'></td>
+                            <td><input class='stored c3' name='trainingName_21'></td>
+                            <td><input class='stored c4' name='location_21'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_21'></td>
+                        </tr>
+
+                        <!-- Row 22 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_22'></td>
+                            <td><input class='stored c2' name='facilitatorName_22'></td>
+                            <td><input class='stored c3' name='trainingName_22'></td>
+                            <td><input class='stored c4' name='location_22'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_22'></td>
+                        </tr>
+
+                        <!-- Row 23 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_23'></td>
+                            <td><input class='stored c2' name='facilitatorName_23'></td>
+                            <td><input class='stored c3' name='trainingName_23'></td>
+                            <td><input class='stored c4' name='location_23'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_23'></td>
+                        </tr>
+
+                        <!-- Row 24 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_24'></td>
+                            <td><input class='stored c2' name='facilitatorName_24'></td>
+                            <td><input class='stored c3' name='trainingName_24'></td>
+                            <td><input class='stored c4' name='location_24'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_24'></td>
+                        </tr>
+
+                        <!-- Row 25 of 25 -->
+                        <tr>
+                            <td><input class='stored datepicker c1' name='date_25'></td>
+                            <td><input class='stored c2' name='facilitatorName_25'></td>
+                            <td><input class='stored c3' name='trainingName_25'></td>
+                            <td><input class='stored c4' name='location_25'></td>
+                            <td><input class='stored decimal c5' name='evaluatorScore_25'></td>
+                        </tr>
+                        
+                    </table>
+                    <!-- END: Facilitator table -->
+                    
+                </div>
+                
+            </div>
+            <!-- END: Facilitator Section -->
+                       
+            <!-- START: M&E Box -->
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">FER.01</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='1'>
+            </div>
+            <!-- START: M&E Box -->
+            
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_chwdb">
+        <input type="hidden" class="stored" name="table" value="staging_facilitatorEvaluationRecordStep1">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>

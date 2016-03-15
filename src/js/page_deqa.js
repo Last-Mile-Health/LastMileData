@@ -663,8 +663,21 @@ $(document).ready(function(){
             pKey2_name: "trainingDate",
             pKey3_name: "participantName_1",
             pKey1_label: "Training Type",
-            pKey2_label: "Training date",
+            pKey2_label: "Training Date",
             pKey3_label: "Participant Name (1)",
+            pKey_date: "pKey2"
+        });
+    });
+     $('#qa_FER_01').click(function() {
+        launchQAModal({
+            targetForm: "../forms/prg_fer01_facilitatorevaluationrecord.html",
+            qaFormName: "Program: Facilitator Evaluation Record",
+            pKey1_name: "evaluatorName",
+            pKey2_name: "evaluatorPosition",
+            pKey3_name: "facilitatorName_1",
+            pKey1_label: "Evaluator Name",
+            pKey2_label: "Evaluator Position",
+            pKey3_label: "Facilitator Name (1)",
             pKey_date: "pKey2"
         });
     });
