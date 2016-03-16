@@ -12,14 +12,15 @@ module.exports = function(grunt) {
             ]
         },
         
-        // Copy all files from "src" --> "build"
+        // Copy the directory structure and files from "src" --> "build", excluding directory branches
+        // with "archive" in their names.
         copy: {
             main: {
                 files: [
                     {
                         expand:true,
                         cwd:'src',
-                        src:['**/*','**/.htaccess'],
+                        src: ['**/*', '**/.htaccess', '!**/archive/**'],
                         dest:'build' }
                 ]
             }

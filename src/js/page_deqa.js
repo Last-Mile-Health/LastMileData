@@ -374,8 +374,18 @@ $(document).ready(function(){
         } // !!!!! if (!anyErrors) {
     });
 
-
     // QA Click handlers current forms
+    $('#qa_TST').click(function() {
+        launchQAModal({
+            targetForm: "../forms/0_testDE.html",
+            qaFormName: "TEST FORM",
+            pKey1_name: "var1",
+            pKey2_name: "var6",
+            pKey1_label: "Var 1",
+            pKey2_label: "Var 6",
+            pKey_date: "pKey2"
+        });
+    });
     $('#qa_HHR_02').click(function() {
         launchQAModal({
             targetForm: "../forms/fhw_hhr02_householdregistration.html",
@@ -440,7 +450,7 @@ $(document).ready(function(){
     });
     $('#qa_HSV_03').click(function() {
         launchQAModal({
-            targetForm: "../forms/fhw_kpi03_kpiassessment.html",
+            targetForm: "../forms/chw_hsv03_healthsurvey.html",
             qaFormName: "CHW: Health Survey",
             pKey1_name: "memberID",
             pKey2_name: "visitDate",
@@ -448,23 +458,10 @@ $(document).ready(function(){
             pKey2_label: "Visit Date",
             pKey_date: "pKey2"
         });
-    });
-    $('#qa_TST').click(function() {
-        launchQAModal({
-            targetForm: "../forms/0_testDE.html",
-            qaFormName: "TEST FORM",
-            pKey1_name: "var1",
-            pKey2_name: "var6",
-            pKey1_label: "Var 1",
-            pKey2_label: "Var 6",
-            pKey_date: "pKey2"
-        });
-    });
-    
-    // QA Click handlers for old forms.  Be sure to add old/ to form path.
+    });    
     $('#qa_SCH_03').click(function() {
         launchQAModal({
-            targetForm: "../forms/old/fhw_sch03_sickchild.html",
+            targetForm: "../forms/fhw_sch03_sickchild.html",
             qaFormName: "FHW: Sick Child",
             pKey1_name: "memberID",
             pKey2_name: "visitDate",
@@ -478,7 +475,23 @@ $(document).ready(function(){
             // !!!!!
         });
     });
-    
+    // QA Click handlers for old forms.  Be sure to add old/ to form path.
+    $('#qa_TRL_03').click(function() {
+        launchQAModal({
+            targetForm: "../forms/old/prg_trl03_trainingledger.html",
+            qaFormName: "Program: Training Ledger",
+            pKey1_name: "trainingType",
+            pKey2_name: "trainingDate",
+            pKey3_name: "firstName_1",
+            pKey4_name: "lastName_1",
+            pKey1_label: "Training Type",
+            pKey2_label: "Training date",
+            pKey3_label: "First name (1)",
+            pKey4_label: "Last name (1)",
+            pKey_date: "pKey2"
+        });
+    });
+
     
     // CLICK HANDLER: Query debugging
     $('#toggleQueryDebugging').click(function(){
