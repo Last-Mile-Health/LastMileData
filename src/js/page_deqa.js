@@ -7,7 +7,7 @@ $(document).ready(function(){
     };
     
     // Set app version manually here
-    $('#appVersion').text('00497');
+    $('#appVersion').text('00498');
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
@@ -375,19 +375,7 @@ $(document).ready(function(){
     });
 
 
-
-    // QA Click handlers
-    $('#qa_TST').click(function() {
-        launchQAModal({
-            targetForm: "../forms/0_testDE.html",
-            qaFormName: "TEST FORM",
-            pKey1_name: "var1",
-            pKey2_name: "var6",
-            pKey1_label: "Var 1",
-            pKey2_label: "Var 6",
-            pKey_date: "pKey2"
-        });
-    });
+    // QA Click handlers current forms
     $('#qa_HHR_02').click(function() {
         launchQAModal({
             targetForm: "../forms/fhw_hhr02_householdregistration.html",
@@ -424,237 +412,6 @@ $(document).ready(function(){
             pKey3_label: "Community ID"
         });
     });
-    $('#qa_REG_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_reg03_registration.html",
-            qaFormName: "CHW: Registration",
-            pKey1_name: "memberID_1",
-            pKey2_name: "communityID",
-            pKey1_label: "First Member ID",
-            pKey2_label: "Community ID"
-        });
-    });
-    $('#qa_REG_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms_old/fhw_reg02_registration.html",
-            qaFormName: "FHW: Registration",
-            pKey1_name: "memID_1",
-            pKey1_label: "First Member ID"
-        });
-    });
-    $('#qa_KPI_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/old/fhw_kpi02_kpiassessment.html",
-            qaFormName: "FHW: KPI Assessment",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Woman member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_KPI_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_kpi03_kpiassessment.html",
-            qaFormName: "FHW: KPI Assessment",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Woman member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_REF_02').click(function() {
-        launchQAModal({
-            // !!!!!
-        });
-    });
-    $('#qa_BBI_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_bbi02_bigbellyinitial.html",
-            qaFormName: "FHW: Big Belly (initial)",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_BBF_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_bbf02_bigbellyfollowup.html",
-            qaFormName: "FHW: Big Belly (follow-up)",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_PNI_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_pni02_postnatalinitial.html",
-            qaFormName: "FHW: Postnatal (initial)",
-            // !!!!!
-        });
-    });
-    $('#qa_PNF_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_pnf02_postnatalfollowup.html",
-            qaFormName: "FHW: Postnatal (follow-up)",
-            // !!!!!
-        });
-    });
-    $('#qa_BDM_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_bdm02_movements.html",
-            qaFormName: "FHW: Births, Deaths, Movements",
-            pKey1_name: "fhwID",
-            pKey2_name: "bdmDate",
-            pKey1_label: "FHW ID",
-            pKey2_label: "Form date",
-            pKey_date: "pKey2"
-        });
-    });
-        $('#qa_BDM_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_bdm03_movements.html",
-            qaFormName: "CHW: Births, Deaths, Movements",
-            pKey1_name: "chwID",
-            pKey2_name: "visitDate",
-            pKey1_label: "CHW ID",
-            pKey2_label: "Form date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_SCH_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_sch03_sickchild.html",
-            qaFormName: "FHW: Sick Child",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_ECM_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_ecm02_ebolacasemanagement.html",
-            qaFormName: "FHW: Ebola Case Management",
-            // !!!!!
-        });
-    });
-    $('#qa_ECT_01').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_ect01_ebolacontacttracing.html",
-            qaFormName: "FHW: Ebola Contact Tracing",
-            // !!!!!
-        });
-    });
-    $('#qa_EES_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/old/fhw_ees02_ebolaeducationscreening.html",
-            qaFormName: "FHW: Ebola Education + Screening Ledger",
-            pKey1_name: "memberID_1",
-            pKey2_name: "visitDate_1",
-            pKey1_label: "First member ID",
-            pKey2_label: "First visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_EES_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_ees03_ebolaeducationscreening.html",
-            qaFormName: "FHW: Ebola Education + Screening Ledger",
-            pKey1_name: "memberID_1",
-            pKey2_name: "visitDate_1",
-            pKey1_label: "First member ID",
-            pKey2_label: "First visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_MAT_01').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_mat01_malariaassessment.html",
-            qaFormName: "FHW: Malaria Assessment Tool",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_SST_05').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_sst05_sicknessscreeningtool.html",
-            qaFormName: "FHW: Sickness Screening Tool",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_ESC_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_esc02_ebolascreening.html",
-            qaFormName: "FHW: Ebola Screening Tool",
-            // !!!!!
-        });
-    });
-    $('#qa_ESC_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_esc03_ebolascreening.html",
-            qaFormName: "FHW: Ebola Screening Tool",
-            // !!!!!
-        });
-    });
-    $('#qa_TRL_01').click(function() {
-        launchQAModal({
-            targetForm: "../forms/old/prg_trl01_trainingledger.html",
-            qaFormName: "Program: Training Ledger",
-            pKey1_name: "trainingName",
-            pKey2_name: "trainingDate",
-            pKey3_name: "firstName_1",
-            pKey4_name: "lastName_1",
-            pKey1_label: "Training name",
-            pKey2_label: "Training date",
-            pKey3_label: "First name (1)",
-            pKey4_label: "Last name (1)",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_TRL_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/old/prg_trl02_trainingledger.html",
-            qaFormName: "Program: Training Ledger",
-            pKey1_name: "trainingName",
-            pKey2_name: "trainingDate",
-            pKey3_name: "firstName_1",
-            pKey4_name: "lastName_1",
-            pKey1_label: "Training name",
-            pKey2_label: "Training date",
-            pKey3_label: "First name (1)",
-            pKey4_label: "Last name (1)",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_TRL_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/prg_trl03_trainingledger.html",
-            qaFormName: "Program: Training Ledger",
-            pKey1_name: "trainingType",
-            pKey2_name: "trainingDate",
-            pKey3_name: "firstName_1",
-            pKey4_name: "lastName_1",
-            pKey1_label: "Training Type",
-            pKey2_label: "Training date",
-            pKey3_label: "First name (1)",
-            pKey4_label: "Last name (1)",
-            pKey_date: "pKey2"
-        });
-    });
     $('#qa_TRR_04').click(function() {
         launchQAModal({
             targetForm: "../forms/prg_trr04_trainingresultsrecord.html",
@@ -681,35 +438,44 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    $('#qa_MSH_01').click(function() {
+    $('#qa_HSV_03').click(function() {
         launchQAModal({
-            targetForm: "../forms/fac_msh01_mesh.html",
-            qaFormName: "Facility: IPC MESH Tool",
-            pKey1_name: "facilityName",
+            targetForm: "../forms/fhw_kpi03_kpiassessment.html",
+            qaFormName: "CHW: Health Survey",
+            pKey1_name: "memberID",
             pKey2_name: "visitDate",
-            pKey3_name: "county",
-            pKey1_label: "Facility name",
+            pKey1_label: "Woman Member ID",
+            pKey2_label: "Visit Date",
+            pKey_date: "pKey2"
+        });
+    });
+    $('#qa_TST').click(function() {
+        launchQAModal({
+            targetForm: "../forms/0_testDE.html",
+            qaFormName: "TEST FORM",
+            pKey1_name: "var1",
+            pKey2_name: "var6",
+            pKey1_label: "Var 1",
+            pKey2_label: "Var 6",
+            pKey_date: "pKey2"
+        });
+    });
+    
+    // QA Click handlers for old forms.  Be sure to add old/ to form path.
+    $('#qa_SCH_03').click(function() {
+        launchQAModal({
+            targetForm: "../forms/old/fhw_sch03_sickchild.html",
+            qaFormName: "FHW: Sick Child",
+            pKey1_name: "memberID",
+            pKey2_name: "visitDate",
+            pKey1_label: "Member ID",
             pKey2_label: "Visit date",
-            pKey3_label: "County",
             pKey_date: "pKey2"
         });
     });
-    $('#qa_SST_04').click(function() {
+    $('#qa_REF_02').click(function() {
         launchQAModal({
-            targetForm: "../forms/fhw_sst04_ebolascreening.html",
-            qaFormName: "FHW: Sickness Screening Tool",
             // !!!!!
-        });
-    });
-    $('#qa_CHV_01').click(function() {
-        launchQAModal({
-            targetForm: "../forms/prg_chv01_gchvquestionnaire.html",
-            qaFormName: "Program: gCHV Questionnaire",
-            pKey1_name: "gchvName",
-            pKey2_name: "todayDate",
-            pKey1_label: "gCHV name",
-            pKey2_label: "Date",
-            pKey_date: "pKey2"
         });
     });
     
