@@ -1,7 +1,8 @@
 // Module:          LMD_dimpleHelper.js
 // Author:          Avi Kenny
-// Last update:     2014-10-11
+// Last update:     2016-03-27
 // Dependencies:    D3.js, Dimple.js
+// Purpose:         Helper API to create charts
 
 var LMD_dimpleHelper = (function(){
 
@@ -47,6 +48,7 @@ var LMD_dimpleHelper = (function(){
         }
         
         if (params.type==="line" || params.type==="bar") {
+            
             // Add axis titles
             if (params.axisTitles && params.axisTitles.x) {
                 x.title = params.axisTitles.x;
@@ -65,7 +67,19 @@ var LMD_dimpleHelper = (function(){
 
             // Add series; add legend; draw chart
             if (params.type==="line") {
-                myChart.addSeries(params.cut, dimple.plot.line);
+                var mySeries = myChart.addSeries(params.cut, dimple.plot.line);
+                
+                // !!!!! This code (incomplete) can assign specific colors to specific cuts !!!!!
+//                var myArr = [{"Konobo":"#F79646"},{"Gboe-Ploe":"#9BBB59"},{"Rivercess":"#4BACC6"}];
+//                for (el in myArr) {
+//                    var cut = Object.keys(myArr[el])[0];
+//                    var color = myArr[el][cut];
+//                    myChart.assignColor(cut,color); // !!!!! testing !!!!!
+//                }
+                
+                // Order by cut (so that graphs have the same colors
+                mySeries.addOrderRule(params.cut);
+                
             } else if (params.type==="bar") {
                 myChart.addSeries(params.cut, dimple.plot.bar);
             }
@@ -76,7 +90,7 @@ var LMD_dimpleHelper = (function(){
         myChart.draw();
     }
 
-    // Description
+    // LMD_dimpleHelper API
     return {
         createChart: createChart
     };
