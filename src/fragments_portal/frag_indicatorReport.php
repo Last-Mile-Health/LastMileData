@@ -2,7 +2,7 @@
 <?php
 
     // Extract 'reportID' and 'reportTitle' parameters
-    extract($_GET);
+    $reportID = $_GET['reportID'];
     
     // Initiate/configure CURL session
     $ch = curl_init();
@@ -14,6 +14,9 @@
     $json1 = curl_exec($ch);
     
     // Get indicator IDs of all indicators used in the report (in either data tables or charts)
+    if (substr($json1,0,1)!=="[") {
+        $json1 = "[" . $json1 . "]";
+    }
     $instIDString = "";
     foreach (json_decode($json1) as $value) {
         $instIDString .= $value->instIDs. ",";
@@ -30,6 +33,11 @@
     $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/instanceValues/$instIDString";
     curl_setopt($ch,CURLOPT_URL,$url3);
     $json3 = curl_exec($ch);
+
+    // Echo report title
+    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/$reportID";
+    curl_setopt($ch,CURLOPT_URL,$url4);
+    $reportTitle = JSON_decode(curl_exec($ch))->reportName;
 
     // Close CURL session and echo JSON
     // JSON consists of 3 javascript objects: data_indicators, data_rawValues, [model_report]
