@@ -179,7 +179,8 @@ $(document).ready(function(){
 
     // Fade out whitespaceContainer when iFrame is done loading
     document.getElementById("dashboard_iframe").onload = function() {
-        location.href = "#"; location.href = "#spacer"; // to account for a scrolling bug
+        var myHash = location.hash;
+        location.href = "#"; location.href = "#spacer"; location.href = myHash; // to account for a scrolling bug
         $('#whitespaceContainer').slideUp(1000);
     };
 
