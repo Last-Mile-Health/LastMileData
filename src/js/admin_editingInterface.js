@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    
+    // This works in tandem with LMD_REST.php. The switch variable corresponds to the LMD_REST route.
 
 
     // !!!!! BUG: There is an error if you add a markdown page, submit it, and then try to edit it and submit it again !!!!!
@@ -84,7 +86,7 @@ $(document).ready(function(){
         
         case 'narratives':
             var ei = {
-                stringH2: 'Edit Data Portal narratives',
+                stringH2: 'Edit Data Portal narratives and targets',
                 hideAddButton: true,
                 hideDeleteButtons: true,
                 sortVars: ['reportName','displayOrder'],
@@ -95,11 +97,12 @@ $(document).ready(function(){
                 idAttribute: 'id',
                 readOnlyFields: ['reportName','displayOrder','roName'],
                 mysqlIgnore: ['reportName','roName'],
-                modelHeaders: ['Report name','Indicator #','Indicator name','Narrative'],
+                modelHeaders: ['Report name','#','Indicator name','Target','Narrative'],
                 modelDefaults: {
                     reportName: "",
                     displayOrder: "", // !!!!! This is problematic if the MySQL displayOrder fields "skip" integers (e.g. 1,2,3,5,6,...); will lead to misalignment between the displayOrder field and the "indicator number" on the report
                     roName: "",
+                    roMetadata_target: "",
                     roMetadata_narrative: ""
                 }
             };

@@ -18,11 +18,11 @@
 .css_staff th:nth-child(4), .css_staff td:nth-child(4) { min-width:120px; width:120px }
 .css_staff th:nth-child(5), .css_staff td:nth-child(5) { min-width:80px; width:80px }
 .css_staff th:nth-child(6), .css_staff td:nth-child(6) { min-width:25px; width:25px }
-.css_narratives th:nth-child(1), .css_narratives td:nth-child(1) { min-width:200px; width:200px }
-.css_narratives th:nth-child(2), .css_narratives td:nth-child(2) { min-width:100px; width:100px }
-.css_narratives th:nth-child(3), .css_narratives td:nth-child(3) { min-width:200px; width:200px }
-.css_narratives th:nth-child(4), .css_narratives td:nth-child(4) { min-width:500px; width:500px }
-.css_narratives th:nth-child(5), .css_narratives td:nth-child(5) { min-width:25px; width:25px }
+.css_narratives th:nth-child(1), .css_narratives td:nth-child(1) { min-width:190px; width:190px }
+.css_narratives th:nth-child(2), .css_narratives td:nth-child(2) { min-width:30px; width:30px }
+.css_narratives th:nth-child(3), .css_narratives td:nth-child(3) { min-width:210px; width:210px }
+.css_narratives th:nth-child(4), .css_narratives td:nth-child(4) { min-width:80px; width:80px }
+.css_narratives th:nth-child(5), .css_narratives td:nth-child(5) { min-width:500px; width:500px }
 
 .pad {
     padding-left:10px;

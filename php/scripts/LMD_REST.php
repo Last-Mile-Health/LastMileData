@@ -28,6 +28,7 @@
     LMD_REST.php/users                  lastmile_db.tbl_utility_users
     LMD_REST.php/staff                  lastmile_chwdb.admin_staff
     LMD_REST.php/narratives             lastmile_dataportal.view_reportObjects
+    LMD_REST.php/reports                lastmile_dataportal.tbl_reports
 
 */
 
@@ -167,7 +168,7 @@ $app->delete('/staff/:id', function($id) {
 
 // Route 9: Data Portal narratives (lastmile_dataportal.view_reportObjects)
 $app->get('/narratives/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.view_reportobjects", "id, reportID, reportName, displayOrder, roName, roMetadata_narrative", 1);
+    LMD_get($id, "id", "lastmile_dataportal.view_reportobjects", "id, reportID, reportName, displayOrder, roName, roMetaData_target, roMetadata_narrative", 1);
 });
 $app->post('/narratives/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");
@@ -180,6 +181,11 @@ $app->delete('/narratives/:id', function($id) {
 });
 
 
+// Route 10: Data Portal report titles (tbl_reports)
+// Route 1: Indicator metadata (lastmile_dataportal.tbl_indicators)
+$app->get('/reports/(:id)',function($id='all') {
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "*", 1);
+});
 // Run Slim
 $app->run();
 
