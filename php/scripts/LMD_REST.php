@@ -108,7 +108,7 @@ $app->put('/json_objects/:id', function($id) {
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/reportObjects/(:id)',function($id='all') {
     // !!!!! May need to create another address for this (e.g. /GETreportobjects/) !!!!!
-    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", "*", 1);
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", "*", "archived <> 1");
 });
 $app->post('/reportObjects/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");

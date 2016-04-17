@@ -140,12 +140,14 @@ var LMD_dataPortal = (function(){
                 var instID = d.chart_instIDs[key2];
                 var dataArray = chartData[instID];
                 
-                for(var i=0; i<dataArray.length; i++) {
-                    d.chart_points.push({
-                        Month:dataArray[i].date,
-                        Value:dataArray[i].value,
-                        Cut: d.chartMultiple ? instanceMetadata[instID].instShortName : 1
-                    });
+                if (dataArray) {
+                    for(var i=0; i<dataArray.length; i++) {
+                        d.chart_points.push({
+                            Month:dataArray[i].date,
+                            Value:dataArray[i].value,
+                            Cut: d.chartMultiple ? instanceMetadata[instID].instShortName : 1
+                        });
+                    }
                 }
             }
         }
@@ -189,24 +191,25 @@ var LMD_dataPortal = (function(){
     //          Parameter is a "report object", as returned by configureReportModel()
     function renderCharts(dataObject) {
         for(var key in dataObject) {
-            if (key>=0) {
+            if (key >= 0) {
 
                 var d = dataObject[key];
 
-                LMD_dimpleHelper.createChart({
-                    type:d.chart_type,
-                    targetDiv: d.chart_div,
-                    data: d.chart_points,
-                    colors: d.chart_colors || "default",
-                    timeInterval: d.chart_timeInterval || 1, // !!!!! calculate this automatically
-                    size: { x:d.chart_size_x, y:d.chart_size_y },
-                    xyVars: { x:"Month", y:"Value" },
-    //                axisTitles: d.chartSpecs.axisTitles, // !!!!! use indNameShort !!!!!
-                    cut: "Cut",
-                    legend: d.chart_legend || "",
-                    tickFormat: { y:d.chart_tickFormat }
-                });
-                
+                if (d.chart_points.length > 0) {
+                    LMD_dimpleHelper.createChart({
+                        type:d.chart_type,
+                        targetDiv: d.chart_div,
+                        data: d.chart_points,
+                        colors: d.chart_colors || "default",
+                        timeInterval: d.chart_timeInterval || 1, // !!!!! calculate this automatically
+                        size: { x:d.chart_size_x, y:d.chart_size_y },
+                        xyVars: { x:"Month", y:"Value" },
+        //                axisTitles: d.chartSpecs.axisTitles, // !!!!! use indNameShort !!!!!
+                        cut: "Cut",
+                        legend: d.chart_legend || "",
+                        tickFormat: { y:d.chart_tickFormat }
+                    });
+                }
             }
         }
     }

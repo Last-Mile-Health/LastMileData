@@ -62,7 +62,7 @@ $(document).ready(function() {
         }
 
         // Create select element
-        myNewInput = "<select class='dynamicSelect " + $(this).attr('class') + "' id='" + $(this).attr('id') + "' style='" + $(this).attr('style') + "'>";
+        myNewInput = "<select class='dynamicSelect " + $(this).attr('class') + "' name='" + $(this).attr('name') + "' style='" + $(this).attr('name') + "'>";
         myNewInput += "<option value=''></option>";
         for (var i=0; i<myList.length; i++) {
             myNewInput += "<option value='" + myList[i] + "'>" + myList[i] + "</option>";

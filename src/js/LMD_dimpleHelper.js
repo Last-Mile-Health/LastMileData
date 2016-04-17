@@ -8,6 +8,10 @@ var LMD_dimpleHelper = (function(){
 
     // Monthly line graph
     function createChart(params){
+        
+        // If chart size is not specified, set defaults
+        params.size.x = params.size.x ? params.size.x : 590;
+        params.size.y = params.size.y ? params.size.y : 380;
 
         // Create new dimple SVG; set data; create new chart object
         var svg = dimple.newSvg("#" + params.targetDiv, params.size.x, params.size.y);
@@ -69,16 +73,16 @@ var LMD_dimpleHelper = (function(){
             if (params.type==="line") {
                 var mySeries = myChart.addSeries(params.cut, dimple.plot.line);
                 
-                // !!!!! This code (incomplete) can assign specific colors to specific cuts !!!!!
-//                var myArr = [{"Konobo":"#F79646"},{"Gboe-Ploe":"#9BBB59"},{"Rivercess":"#4BACC6"}];
-//                for (el in myArr) {
-//                    var cut = Object.keys(myArr[el])[0];
-//                    var color = myArr[el][cut];
-//                    myChart.assignColor(cut,color); // !!!!! testing !!!!!
-//                }
+                // Assign specific colors to specific cuts (!!!!! This should be passed in as a parameter, possibly a global set of key-value pairs !!!!!)
+                var myArr = [{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4F81BD"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"}];
+                for (el in myArr) {
+                    var cut = Object.keys(myArr[el])[0];
+                    var color = myArr[el][cut];
+                    myChart.assignColor(cut,color); // !!!!! testing !!!!!
+                }
                 
-                // Order by cut (so that graphs have the same colors
-                mySeries.addOrderRule(params.cut);
+                // Order by cut
+                mySeries.addOrderRule(params.cut,true);
                 
             } else if (params.type==="bar") {
                 myChart.addSeries(params.cut, dimple.plot.bar);

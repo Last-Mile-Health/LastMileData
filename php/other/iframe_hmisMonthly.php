@@ -126,19 +126,19 @@
                     echo "<tr>";
                     echo "<td>$healthFacility</td>";
                     echo "<td>$nReports</td>";
-                    echo "<td>$nARI</td>";
-                    echo "<td>$nARI_inf</td>";
-                    echo "<td>$nARI_chi</td>";
                     echo "<td>$nMalaria</td>";
                     echo "<td>$nMalaria_inf</td>";
                     echo "<td>$nMalaria_chi</td>";
                     echo "<td>$nDiarrhea</td>";
                     echo "<td>$nDiarrhea_inf</td>";
                     echo "<td>$nDiarrhea_chi</td>";
+                    echo "<td>$nARI</td>";
+                    echo "<td>$nARI_inf</td>";
+                    echo "<td>$nARI_chi</td>";
                     echo "</tr>";
                 }
                 
-                echo "</table>";
+                echo "</table><br>";
                 
             }
             

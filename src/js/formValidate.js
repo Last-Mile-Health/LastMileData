@@ -108,7 +108,7 @@ $(document).ready(function(){
                 }
                 
                 // Test: !!!!! build character limit here !!!!!
-                if (1==0) {
+                if (1===0) {
                     errorFields.push(myField);
                     errorMessages.push('Field "' + myField + '" EM');
                 }
@@ -119,13 +119,13 @@ $(document).ready(function(){
                 result: errorFields.length > 0 ? "fail" : "pass",
                 errorMessages: errorMessages,
                 errorFields: errorFields
-            }
+            };
             
         }
         
         return {
             validate:validate
-        }
+        };
         
     })();
     
