@@ -58,7 +58,7 @@
                 $endDate = $_GET['endDate'];
                 
                 // Set queryString; run query; extract data (ALL AGES)
-                $queryString = "SELECT * FROM lastmile_lms.view_qa_master WHERE AutoDate>='$startDate' && AutoDate<='$endDate';";
+                $queryString = "SELECT EnumeratorID, enumeratorName, sum(numHH) as numHH, sum(numFem) as numFem, sum(numGen) as numGen, sum(numChi) as numChi, sum(err_FBD) as err_FBD, sum(err_anyBirths) as err_anyBirths, sum(err_birthsNo5Yes2) as err_birthsNo5Yes2, sum(err_diffDOB) as err_diffDOB, sum(err_childDeath) as err_childDeath, sum(err_ebola1) as err_ebola1, sum(err_ebola2) as err_ebola2, sum(err_chiProvider) as err_chiProvider FROM lastmile_lms.view_qa_master WHERE AutoDate>='$startDate' && AutoDate<='$endDate' GROUP BY EnumeratorID;";
                 $result = mysqli_query($cxn, $queryString);
                 
                 // Display header and report description
@@ -84,7 +84,6 @@
                 echo "<table id='myTable'><tr>";
                 echo "<th>Enum ID</th>";
                 echo "<th>Enum Name</th>";
-                echo "<th>Date<br></th>";
                 echo "<th># HH Q</th>";
                 echo "<th># FEM Q</th>";
                 echo "<th># GEN Q</th>";
@@ -106,7 +105,6 @@
                     echo "<tr>";
                     echo "<td>$EnumeratorID</td>";
                     echo "<td>$enumeratorName</td>";
-                    echo "<td>$AutoDate</td>";
                     echo "<td>$numHH</td>";
                     echo "<td>$numFem</td>";
                     echo "<td>$numGen</td>";
@@ -122,7 +120,7 @@
                     echo "</tr>";
                 }
                 
-                echo "</table>";
+                echo "</table><br>";
                 
             }
             
