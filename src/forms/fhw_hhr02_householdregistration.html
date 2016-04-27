@@ -32,14 +32,14 @@
             #HHRT { position:relative; top:-10px }
             
             /* Set font-size in thick box and household registration table to easily fit 30-plus rows in on form */
-            .thickBox { padding:3px; font-size: 96%; }
-            .householdRegistrationTable     { font-size: 96%;           margin: 0px;     padding: 3px;        border-collapse: collapse;    }
+            .thickBox { padding:3px; font-size: 95%; }
+            .householdRegistrationTable     { font-size: 95%;           margin: 0px;     padding: 3px;        border-collapse: collapse;    }
             .householdRegistrationTable th  { border: 1px solid black;  padding: 3px;    text-align: center;  font-weight: bold;            }
             .householdRegistrationTable td  { border: 1px solid black;  padding: 0px;    text-align: center;                                }
 
-            .c1     { width:0.30in;     border:none; margin-right:1px; margin-left:1px; }
-            .c2     { width:0.91in;     border:none; margin-right:1px; margin-left:1px; }
-            .c3     { width:1.39in;     border:none; margin-right:1px; margin-left:1px; }
+            .c1     { width:0.17in;     border:none; margin-right:1px; margin-left:1px; }
+            .c2     { width:1.16in;     border:none; margin-right:1px; margin-left:1px; }
+            .c3     { width:1.22in;     border:none; margin-right:1px; margin-left:1px; }
             .c4     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; }
             .c5     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; }
             .c6     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; }
@@ -82,21 +82,21 @@
                 <hr>
                 
                 <div class="headField" style="width:0.95in">CHW ID:</div>
-                <div class="headField" style="width:0.75in"><input class="stored integer" name="chwID" data-lmd-valid-required="yes" style="width:0.65in"></div>
+                <div class="headField" style="width:0.75in"><input class="stored integer" data-lmd-valid-intMin="1" name="chwID" data-lmd-valid-required="yes" style="width:0.65in"></div>
                 
                 <div class="headField" style="width:0.75in">CHW:</div>
                 <div class="headField" style="width:2.10in"><input class="stored" name="chwName" data-lmd-valid-required="yes" data-lmd-valid-autoC="fhws" style="width:2.05in"></div>
                 
                 <div class="headField" style="width:0.50in">Month:</div>
-                <div class="headField" style="width:0.85in"><input class="stored integer" name="monthRegistered" data-lmd-valid-required="yes" style="width:0.40in"> (1-12)</div>
+                <div class="headField" style="width:0.85in"><input class="stored integer" data-lmd-valid-select='["1","2","3","4","5","6","7","8","9","10","11","12"]' name="monthRegistered" data-lmd-valid-required="yes" style="width:0.40in"> (1-12)</div>
  
                 <div class="headField" style="width:0.35in">Year:</div>
-                <div class="headField" style="width:0.95in"><input class="stored integer" name="yearRegistered" data-lmd-valid-required="yes" style="width:0.50in"> (2016)</div>
-                
+                <div class="headField" style="width:0.95in"><input class="stored integer" data-lmd-valid-intMin="2015" data-lmd-valid-intMax="2030" name="yearRegistered" data-lmd-valid-required="yes" style="width:0.50in"> (2016)</div>
+               
                 <div style="clear:both; height:3px;"></div>
                 
                 <div class="headField" style="width:0.95in">Community ID:</div>
-                <div class="headField" style="width:0.75in"><input class="stored integer" name="communityID" data-lmd-valid-required="yes" style="width:0.65in"></div>
+                <div class="headField" style="width:0.75in"><input class="stored integer" data-lmd-valid-intMin="1" name="communityID" data-lmd-valid-required="yes" style="width:0.65in"></div>
                 
                 <div class="headField" style="width:0.75in">Community:</div>
                 <div class="headField" style="width:2.10in"><input class="stored" name="community" data-lmd-valid-required="yes" style="width:2.05in"></div>
@@ -152,684 +152,690 @@
                     <!-- Row 01 of 30 -->
                     <tr>
                         <td>1</td>
-                        <td><input class="stored c2 integer"    name="householdID_1"                            data-lmd-valid-required="yes"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_1"                  data-lmd-valid-required="yes"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_1"            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_1"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_1"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_1"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_1"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_1"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_1"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_1"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_1"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_1"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_1"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_1"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_1"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_1"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_1"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_1"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_1"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_1"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_1"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_1"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_1"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_1"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 02 of 30 -->
                     <tr>
                         <td>2</td>
-                        <td><input class="stored c2 integer"    name="householdID_2"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_2"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_2"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_2"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_2"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_2"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_2"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_2"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_2"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_2"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_2"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_2"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_2"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_2"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_2"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_2"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_2"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_2"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_2"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_2"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_2"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_2"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_2"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_2"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 03 of 30 -->
                     <tr>
                         <td>3</td>
-                        <td><input class="stored c2 integer"    name="householdID_3"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_3"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_3"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_3"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_3"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_3"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_3"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_3"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_3"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_3"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_3"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_3"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_3"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_3"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_3"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_3"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_3"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_3"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_3"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_3"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_3"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_3"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_3"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_3"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 04 of 30 -->
                     <tr>
                         <td>4</td>
-                        <td><input class="stored c2 integer"    name="householdID_4"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_4"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_4"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_4"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_4"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_4"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_4"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_4"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_4"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_4"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_4"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_4"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_4"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_4"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_4"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_4"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_4"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_4"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_4"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_4"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_4"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_4"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_4"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_4"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 05 of 30 -->
                     <tr>
                         <td>5</td>
-                        <td><input class="stored c2 integer"    name="householdID_5"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_5"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_5"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_5"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_5"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_5"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_5"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_5"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_5"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_5"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_5"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_5"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_5"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_5"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_5"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_5"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_5"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_5"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_5"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_5"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_5"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_5"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_5"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_5"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 06 of 30 -->
                     <tr>
                         <td>6</td>
-                        <td><input class="stored c2 integer"    name="householdID_6"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_6"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_6"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_6"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_6"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_6"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_6"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_6"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_6"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_6"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_6"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_6"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_6"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_6"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_6"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_6"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_6"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_6"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_6"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_6"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_6"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_6"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_6"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_6"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 07 of 30 -->
                     <tr>
                         <td>7</td>
-                        <td><input class="stored c2 integer"    name="householdID_7"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_7"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_7"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_7"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_7"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_7"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_7"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_7"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_7"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_7"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_7"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_7"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_7"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_7"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_7"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_7"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_7"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_7"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_7"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_7"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_7"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_7"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_7"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_7"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 08 of 30 -->
                     <tr>
                         <td>8</td>
-                        <td><input class="stored c2 integer"    name="householdID_8"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_8"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_8"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_8"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_8"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_8"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_8"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_8"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_8"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_8"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_8"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_8"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_8"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_8"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_8"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_8"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_8"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_8"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_8"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_8"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_8"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_8"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_8"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_8"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 09 of 30 -->
                     <tr>
                         <td>9</td>
-                        <td><input class="stored c2 integer"    name="householdID_9"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_9"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_9"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_9"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_9"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_9"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_9"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_9"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_9"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_9"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_9"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_9"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_9"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_9"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_9"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_9"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_9"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_9"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_9"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_9"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_9"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_9"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_9"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_9"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 10 of 30 -->
                     <tr>
                         <td>10</td>
-                        <td><input class="stored c2 integer"    name="householdID_10"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_10"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_10"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_10"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_10"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_10"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_10"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_10"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_10"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_10"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_10"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_10"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_10"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_10"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_10"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_10"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_10"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_10"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_10"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_10"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_10"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_10"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_10"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_10"                  data-lmd-valid-required="no"></td>
                     </tr>
                                         
                     <!-- Row 11 of 30 -->
                     <tr>
                         <td>11</td>
-                        <td><input class="stored c2 integer"    name="householdID_11"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_11"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_11"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_11"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_11"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_11"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_11"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_11"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_11"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_11"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_11"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_11"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_11"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_11"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_11"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_11"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_11"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_11"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_11"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_11"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_11"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_11"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_11"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_11"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 12 of 30 -->
                     <tr>
                         <td>12</td>
-                        <td><input class="stored c2 integer"    name="householdID_12"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_12"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_12"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_12"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_12"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_12"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_12"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_12"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_12"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_12"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_12"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_12"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_12"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_12"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_12"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_12"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_12"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_12"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_12"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_12"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_12"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_12"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_12"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_12"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 13 of 30 -->
                     <tr>
                         <td>13</td>
-                        <td><input class="stored c2 integer"    name="householdID_13"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_13"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_13"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_13"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_13"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_13"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_13"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_13"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_13"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_13"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_13"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_13"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_13"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_13"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_13"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_13"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_13"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_13"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_13"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_13"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_13"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_13"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_13"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_13"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 14 of 30 -->
                     <tr>
                         <td>14</td>
-                        <td><input class="stored c2 integer"    name="householdID_14"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_14"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_14"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_14"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_14"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_14"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_14"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_14"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_14"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_14"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_14"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_14"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_14"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_14"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_14"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_14"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_14"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_14"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_14"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_14"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_14"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_14"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_14"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_14"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 15 of 30 -->
                     <tr>
                         <td>15</td>
-                        <td><input class="stored c2 integer"    name="householdID_15"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_15"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_15"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_15"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_15"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_15"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_15"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_15"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_15"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_15"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_15"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_15"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_15"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_15"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_15"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_15"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_15"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_15"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_15"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_15"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_15"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_15"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_15"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_15"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 16 of 30 -->
                     <tr>
                         <td>16</td>
-                        <td><input class="stored c2 integer"    name="householdID_16"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_16"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_16"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_16"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_16"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_16"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_16"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_16"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_16"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_16"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_16"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_16"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_16"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_16"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_16"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_16"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_16"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_16"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_16"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_16"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_16"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_16"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_16"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_16"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 17 of 30 -->
                     <tr>
                         <td>17</td>
-                        <td><input class="stored c2 integer"    name="householdID_17"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_17"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_17"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_17"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_17"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_17"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_17"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_17"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_17"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_17"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_17"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_17"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_17"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_17"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_17"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_17"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_17"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_17"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_17"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_17"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_17"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_17"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_17"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_17"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 18 of 30 -->
                     <tr>
                         <td>18</td>
-                        <td><input class="stored c2 integer"    name="householdID_18"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_18"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_18"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_18"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_18"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_18"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_18"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_18"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_18"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_18"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_18"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_18"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_18"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_18"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_18"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_18"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_18"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_18"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_18"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_18"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_18"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_18"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_18"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_18"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 19 of 30 -->
                     <tr>
                         <td>19</td>
-                        <td><input class="stored c2 integer"    name="householdID_19"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_19"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_19"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_19"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_19"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_19"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_19"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_19"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_19"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_19"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_19"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_19"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_19"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_19"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_19"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_19"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_19"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_19"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_19"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_19"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_19"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_19"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_19"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_19"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 20 of 30 -->
                     <tr>
                         <td>20</td>
-                        <td><input class="stored c2 integer"    name="householdID_20"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_20"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_20"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_20"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_20"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_20"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_20"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_20"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_20"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_20"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_20"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_20"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_20"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_20"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_20"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_20"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_20"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_20"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_20"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_20"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_20"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_20"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_20"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_20"                  data-lmd-valid-required="no"></td>
                     </tr>
                         
                     <!-- Row 21 of 30 -->
                     <tr>
                         <td>21</td>
-                        <td><input class="stored c2 integer"    name="householdID_21"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_21"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_21"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_21"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_21"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_21"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_21"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_21"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_21"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_21"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_21"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_21"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_21"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_21"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_21"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_21"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_21"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_21"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_21"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_21"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_21"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_21"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_21"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_21"                  data-lmd-valid-required="no"></td>
                     </tr>
                       
                     <!-- Row 22 of 30 -->
                     <tr>
                         <td>22</td>
-                        <td><input class="stored c2 integer"    name="householdID_22"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_22"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_22"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_22"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_22"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_22"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_22"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_22"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_22"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_22"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_22"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_22"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_22"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_22"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_22"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_22"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_22"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_22"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_22"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_22"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_22"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_22"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_22"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_22"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 23 of 30 -->
                     <tr>
                         <td>23</td>
-                        <td><input class="stored c2 integer"    name="householdID_23"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_23"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_23"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_23"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_23"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_23"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_23"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_23"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_23"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_23"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_23"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_23"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_23"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_23"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_23"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_23"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_23"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_23"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_23"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_23"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_23"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_23"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_23"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_23"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 24 of 30 -->
                     <tr>
                         <td>24</td>
-                        <td><input class="stored c2 integer"    name="householdID_24"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_24"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_24"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_24"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_24"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_24"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_24"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_24"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_24"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_24"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_24"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_24"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_24"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_24"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_24"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_24"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_24"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_24"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_24"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_24"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_24"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_24"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_24"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_24"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 25 of 25 -->
                     <tr>
                         <td>25</td>
-                        <td><input class="stored c2 integer"    name="householdID_25"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_25"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_25"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_25"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_25"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_25"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_25"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_25"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_25"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_25"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_25"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_25"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_25"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_25"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_25"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_25"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_25"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_25"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_25"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_25"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_25"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_25"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_25"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_25"                  data-lmd-valid-required="no"></td>
                     </tr>
                     
                     <!-- Row 26 of 30 -->
                     <tr>
                         <td>26</td>
-                        <td><input class="stored c2 integer"    name="householdID_26"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_26"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_26"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_26"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_26"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_26"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_26"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_26"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_26"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_26"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_26"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_26"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_26"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_26"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_26"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_26"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_26"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_26"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_26"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_26"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_26"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_26"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_26"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_26"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 27 of 30 -->
                     <tr>
                         <td>27</td>
-                        <td><input class="stored c2 integer"    name="householdID_27"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_27"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_27"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_27"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_27"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_27"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_27"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_27"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_27"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_27"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_27"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_27"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_27"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_27"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_27"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_27"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_27"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_27"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_27"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_27"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_27"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_27"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_27"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_27"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 28 of 30 -->
                     <tr>
                         <td>28</td>
-                        <td><input class="stored c2 integer"    name="householdID_28"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_28"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_28"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_28"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_28"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_28"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_28"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_28"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_28"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_28"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_28"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_28"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_28"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_28"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_28"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_28"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_28"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_28"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_28"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_28"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_28"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_28"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_28"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_28"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 29 of 30 -->
                     <tr>
                         <td>29</td>
-                        <td><input class="stored c2 integer"    name="householdID_29"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_29"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_29"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_29"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_29"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_29"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_29"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_29"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_29"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_29"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_29"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_29"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_29"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_29"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_29"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_29"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_29"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_29"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_29"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_29"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_29"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_29"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_29"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_29"                  data-lmd-valid-required="no"></td>
                     </tr>
 
                     <!-- Row 30 of 30 -->
                     <tr>
                         <td>30</td>
-                        <td><input class="stored c2 integer"    name="householdID_30"                            data-lmd-valid-required="no"></td>
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_30"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c2 integer"    name="householdID_30"                            data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c3 integer"    name="totalHouseholdMembers_30"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_30"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_30"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c4 integer"    name="underOneMale_30"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c5 integer"    name="underOneFemale_30"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_30"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_30"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c6 integer"    name="oneToFiveMale_30"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c7 integer"    name="oneToFiveFemale_30"                  data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_30"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_30"              data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c8 integer"    name="sixToFourteenMale_30"                data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c9 integer"    name="sixToFourteenFemale_30"              data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_30"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_30"         data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c10 integer"   name="fifteenToFortyNineMale_30"           data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c11 integer"   name="fifteenToFortyNineFemale_30"         data-lmd-valid-required="no"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_30"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_30"                  data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c12 integer"   name="fiftyPlusMale_30"                    data-lmd-valid-required="no"></td>
+                        <td><input disabled class="stored c13 integer"   name="fiftyPlusFemale_30"                  data-lmd-valid-required="no"></td>
                     </tr>
-
+                    
                     <!-- Totals of rows 1-30 -->
                     <tr>
-                        <td style="border:none"></td>
-                        <td style="border:none; font-weight:bold"><div class="rightArrow">Totals<img style="max-width: 25%; max-height:25%" src="../images/arrow_right.png"></div></td>
+                        <td><input class="stored c1 integer" data-lmd-valid-intMin="0" data-lmd-valid-intMax="30"  name="numberHouseholdsOnForm"              data-lmd-valid-required="yes"></td>
+
+                        <td style=" border-bottom: 1px black solid; "><table><tr> 
+                                        <td style=" border:none; width:0.18in; font-weight:bold;"> <div>&larr;</div></td> 
+                                        <td style=" border:none; width:0.45in; font-weight:bold; font-size: 90%;"> <div>#Rows |</div></td> 
+                                        <td style=" border:none; width:0.41in; font-weight:bold; font-size: 90%; "><div>Totals</div></td> 
+                                        <td style=" border:none; width:0.18in; font-weight:bold"><div>&rarr;</div></td>
+                        </tr></table></td>
                         
-                        <td><input class="stored c3 integer"    name="totalHouseholdMembers_total"                  data-lmd-valid-required="no"></td>
+                        <td><input class="stored c3 integer" data-lmd-valid-intMin="0"  name="totalHouseholdMembers_total"          data-lmd-valid-required="yes"></td>
                         
-                        <td><input class="stored c4 integer"    name="underOneMale_total"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c5 integer"    name="underOneFemale_total"                  data-lmd-valid-required="no"></td>
+                        <td><input class="stored c4 integer" data-lmd-valid-intMin="0"  name="underOneMale_total"                   data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c5 integer" data-lmd-valid-intMin="0"  name="underOneFemale_total"                 data-lmd-valid-required="yes"></td>
                         
-                        <td><input class="stored c6 integer"    name="oneToFiveMale_total"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c7 integer"    name="oneToFiveFemale_total"                  data-lmd-valid-required="no"></td>
+                        <td><input class="stored c6 integer" data-lmd-valid-intMin="0"  name="oneToFiveMale_total"                  data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c7 integer" data-lmd-valid-intMin="0"  name="oneToFiveFemale_total"                data-lmd-valid-required="yes"></td>
                         
-                        <td><input class="stored c8 integer"    name="sixToFourteenMale_total"                data-lmd-valid-required="no"></td>
-                        <td><input class="stored c9 integer"    name="sixToFourteenFemale_total"              data-lmd-valid-required="no"></td>
+                        <td><input class="stored c8 integer" data-lmd-valid-intMin="0"  name="sixToFourteenMale_total"              data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c9 integer" data-lmd-valid-intMin="0"  name="sixToFourteenFemale_total"            data-lmd-valid-required="yes"></td>
                         
-                        <td><input class="stored c10 integer"   name="fifteenToFortyNineMale_total"           data-lmd-valid-required="no"></td>
-                        <td><input class="stored c11 integer"   name="fifteenToFortyNineFemale_total"         data-lmd-valid-required="no"></td>
+                        <td><input class="stored c10 integer" data-lmd-valid-intMin="0"  name="fifteenToFortyNineMale_total"         data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c11 integer" data-lmd-valid-intMin="0"  name="fifteenToFortyNineFemale_total"       data-lmd-valid-required="yes"></td>
                         
-                        <td><input class="stored c12 integer"   name="fiftyPlusMale_total"                    data-lmd-valid-required="no"></td>
-                        <td><input class="stored c13 integer"   name="fiftyPlusFemale_total"                  data-lmd-valid-required="no"></td>
+                        <td><input class="stored c12 integer" data-lmd-valid-intMin="0"  name="fiftyPlusMale_total"                  data-lmd-valid-required="yes"></td>
+                        <td><input class="stored c13 integer" data-lmd-valid-intMin="0"  name="fiftyPlusFemale_total"                data-lmd-valid-required="yes"></td>
                     </tr>
 
                 </table>
