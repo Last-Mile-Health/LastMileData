@@ -52,9 +52,18 @@
 
 <div style="color:#555; font-weight:bold; margin:5px;">
     
-    <div style="float:left;margin-right:10px;margin-top:5px;margin-bottom:5px;">
-        <select id="select_indicator" style="font-size:150%">
-            <option>Select an indicator...</option>
+    <div style="float:left;margin-right:5px;margin-top:5px;margin-bottom:5px;margin-left:5px">
+        <select id="select_level" class="mapChange" style="font-size:150%">
+            <option>Select level...</option>
+            <option value='setLevel_county'>County</option>
+            <option value='setLevel_district'>District</option>
+            <option value='setLevel_community'>Community</option>
+        </select>
+    </div>
+    
+    <div style="float:left;margin-right:5px;margin-top:5px;margin-bottom:5px;margin-left:5px">
+        <select id="select_indicator" class="mapChange" style="font-size:150%">
+            <option>Select indicator...</option>
             <option value='numCHW'># of active CHWs</option>
             <option value='numCHWL'># of active CHW Leaders</option>
             <option value=''># of villages served</option>
@@ -64,14 +73,16 @@
         </select>
     </div>
     
-    <div style="float:left;margin-right:10px;margin-top:5px;margin-bottom:5px;margin-left:310px">
+    <div style="float:left;margin-right:5px;margin-top:5px;margin-bottom:5px;margin-left:5px">
         <select id="select_zoom" style="font-size:150%">
-            <option>Zoom</option>
+            <option>Select zoom...</option>
             <option value='setView_RC'>Rivercess</option>
             <option value='setView_GG'>Grand Gedeh</option>
             <option value='setView_LIB'>Liberia</option>
         </select>
     </div>
+    
+    <button id="testButton" style="margin-left:10px">Test</button>
     
 </div>
 

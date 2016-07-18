@@ -29,6 +29,7 @@
     LMD_REST.php/staff                  lastmile_chwdb.admin_staff
     LMD_REST.php/narratives             lastmile_dataportal.view_reportObjects
     LMD_REST.php/reports                lastmile_dataportal.tbl_reports
+    LMD_REST.php/gis                    !!!!!
 
 */
 
@@ -88,7 +89,7 @@ $app->delete('/instanceValues/:id', function($id) {
 });
 
 
-// Route 3: Indicator instances (lastmile_dataportal.tbl_instances)
+// Route 3: Indicator instances (lastmile_dataportal.view_instances)
 $app->get('/indicatorInstances/(:id)',function($id='all') {
     LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", "archived <> 1");
 });
@@ -181,11 +182,19 @@ $app->delete('/narratives/:id', function($id) {
 });
 
 
-// Route 10: Data Portal report titles (tbl_reports)
-// Route 1: Indicator metadata (lastmile_dataportal.tbl_indicators)
+// Route 10: Data Portal report titles (lastmile_dataportal.tbl_reports)
 $app->get('/reports/(:id)',function($id='all') {
     LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "*", 1);
 });
+
+
+// Route 11: Data Portal GIS (!!!!!)
+// !!!!! change source table !!!!!
+$app->get('/gis/(:id)',function($id='all') {
+    LMD_get($id, "communityID", "lastmile_chwdb.admin_communitygis", "communityID, name, proximityHealthFacility, X, Y, LMS_2016", 1);
+});
+
+
 // Run Slim
 $app->run();
 
