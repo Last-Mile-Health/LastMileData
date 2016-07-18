@@ -63,48 +63,48 @@
     </head>
     
     <body>
-        
+
+        <!-- START: header / navigation bar -->
         <div id="load_navbar"></div>
+        <!-- END: header / navigation bar -->
         
-        <div class="container-fluid">
+        <div id="outerContainer">
             
-            <div class="row" style="height:100vh">
-                
-                <!-- Side navigation bar -->
-                <div id="dp_sidebar" class="col-md-2" style="display:none; position:relative">
-                    <div style="height:51px"></div>
-                    <div class="nav nav-sidebar" id="sidebarDIV" data-bind="foreach:groups">
-                        <div>
-                            <h3 data-bind="text:name, attr: {id:id}"></h3>
-                            <div data-bind="foreach:tabs">
-                                <div data-bind="attr: {id:id, class:type, 'data-link':link}">
-                                    <a>&bull;&nbsp;<span data-bind="text:name"></span></a>
-                                </div>
+            <!-- START: Sidebar -->
+            <div id="dp_sidebar">
+                <div class="nav nav-sidebar" id="sidebarDIV" data-bind="foreach:groups">
+                    <div>
+                        <h3 data-bind="text:name, attr: {id:id}"></h3>
+                        <div data-bind="foreach:tabs">
+                            <div data-bind="attr: {id:id, class:type, 'data-link':link}">
+                                <a>&bull;&nbsp;<span data-bind="text:name"></span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Outer container -->
-                <div id="outerContainer" class="pane col-md-10">
-                    
-                    <div id="spacer" style="height:51px"></div>
-                    
-                    <!-- Whitespace container for fade in/out effects -->
-                    <div id="whitespaceContainer"><br>
-                        <div style="position:relative; width:100px; left:20px">
-                            <img src="../images/ajax_loader.gif"><br>
-                            <img src="../images/ajax_loader.gif"><br>
-                            <img src="../images/ajax_loader.gif"><br>
-                        </div>
-                    </div>
-                    
-                    <!-- Content containers -->
-                    <div id="mainContainer"></div>
-                    <iframe id="dashboard_iframe"></iframe>
-                    
-                </div>
             </div>
+            <!-- END: Sidebar -->
+            
+            <!-- START: Main body container -->
+            <div id="innerContainer">
+
+                <!-- Whitespace container for fade in/out effects -->
+                <div id="whitespaceContainer"><br>
+                    <div>
+                        <img src="../images/ajax_loader.gif"><br>
+                        <img src="../images/ajax_loader.gif"><br>
+                        <img src="../images/ajax_loader.gif"><br>
+                    </div>
+                </div>
+
+                <!-- Content containers -->
+                <div id="mainContainer"></div>
+                <iframe id="dashboard_iframe"></iframe>
+
+            </div>
+            <!-- END: Main body container -->
+            
         </div>
-    </body>
+
+   </body>
 </html>

@@ -57,6 +57,10 @@
                 $startDate = $_GET['startDate'];
                 $endDate = $_GET['endDate'];
                 
+                // Set maximum query execution time
+                set_time_limit(300);
+//                ini_set('MAX_EXECUTION_TIME', 300);
+                
                 // Set queryString; run query; extract data (ALL AGES)
                 $queryString = "SELECT EnumeratorID, enumeratorName, sum(numHH) as numHH, sum(numFem) as numFem, sum(numGen) as numGen, sum(numChi) as numChi, sum(err_FBD) as err_FBD, sum(err_anyBirths) as err_anyBirths, sum(err_birthsNo5Yes2) as err_birthsNo5Yes2, sum(err_diffDOB) as err_diffDOB, sum(err_childDeath) as err_childDeath, sum(err_ebola1) as err_ebola1, sum(err_ebola2) as err_ebola2, sum(err_chiProvider) as err_chiProvider FROM lastmile_lms.view_qa_master WHERE AutoDate>='$startDate' && AutoDate<='$endDate' GROUP BY EnumeratorID;";
                 $result = mysqli_query($cxn, $queryString);

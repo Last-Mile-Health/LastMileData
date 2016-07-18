@@ -74,7 +74,7 @@ var LMD_dimpleHelper = (function(){
                 var mySeries = myChart.addSeries(params.cut, dimple.plot.line);
                 
                 // Assign specific colors to specific cuts (!!!!! This should be passed in as a parameter, possibly a global set of key-value pairs !!!!!)
-                var myArr = [{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4F81BD"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"}];
+                var myArr = [{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4F81BD"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"},{"Monrovia":"#202020"}];
                 for (el in myArr) {
                     var cut = Object.keys(myArr[el])[0];
                     var color = myArr[el][cut];

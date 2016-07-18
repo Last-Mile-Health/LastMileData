@@ -59,7 +59,7 @@ $(document).ready(function(){
 
             // Set hash fragment (element ID)
             var elemID = $(this).attr('id');
-            location.hash = '#' + elemID;
+            history.pushState(null, null, '#' + elemID); // "location.hash" not used because it causes a bug that moves the main DIV up 50px when the hash is changed
 
             // Get link URL; set link type
             if ( $(this).hasClass('dp_frag') ) {
