@@ -19,6 +19,7 @@
         <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/multiselect.css"  type="text/css" />
         <link rel="stylesheet" href="../css/page_dataPortal.css"  type="text/css" />
         
         <?php
@@ -51,6 +52,7 @@
         <script src="../../lib/underscore.min.js"></script>
         <script src="../../lib/backbone.min.js"></script>
         <script src="../../lib/showdown.min.js"></script>
+        <script src="../../lib/multiselect.min.js"></script>
         <script src="../../lib/d3.min.js"></script>
         <script src="../../lib/dimple.v2.1.0.min.js"></script>
         <script src="../js/LMD_dimpleHelper.js"></script>
