@@ -138,6 +138,41 @@
                     echo "</tr>";
                 }
                 
+                echo "</table><br><br>";
+                
+                // Set queryString; run query; extract data (ALL AGES)
+                $queryString = "SELECT healthFacilityID, healthFacility, nBirths, nStillBirths, nDeathsNeonatal, nDeathsPostneonatal, nDeathsChild, nDeathsMaternal
+                    FROM lastmile_chwdb.view_msr_healthFacility WHERE $whereClause
+                    AND monthReported=$reportMonth AND yearReported=$reportYear
+                    GROUP BY healthFacilityID, monthReported, yearReported;";
+                $result = mysqli_query($cxn, $queryString);
+                
+                echo "<table id='myTable'><tr>";
+                echo "<th>Health Facility</th>";
+                echo "<th># Births</th>";
+                echo "<th># Neonatal deaths</th>";
+                echo "<th># Under-five deaths</th>";
+                echo "<th># Maternal deaths</th>";
+                echo "<th>Total # deaths</th>";
+                echo "</tr>";
+                
+                while ( $row = mysqli_fetch_assoc($result) )
+                {
+                    extract($row);
+                    
+                    $nU5Deaths = $nDeathsNeonatal + $nDeathsPostneonatal + $nDeathsChild;
+                    $totalDeaths = $nU5Deaths + $nDeathsMaternal;
+                    
+                    echo "<tr>";
+                    echo "<td>$healthFacility</td>";
+                    echo "<td>$nBirths</td>";
+                    echo "<td>$nDeathsNeonatal</td>";
+                    echo "<td>$nU5Deaths</td>";
+                    echo "<td>$nDeathsMaternal</td>";
+                    echo "<td>$totalDeaths</td>";
+                    echo "</tr>";
+                }
+                
                 echo "</table><br>";
                 
             }
