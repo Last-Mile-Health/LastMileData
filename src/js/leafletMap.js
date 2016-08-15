@@ -73,19 +73,19 @@ var availability = {
 // contains URLs of sources for GIS coordinates and data
 var urls = {
     coordinates: {
-        communities_nearFacility: '/LastMileData/php/scripts/LMD_REST.php/gis_communities_nearFacility/',
-        communities_remote: '/LastMileData/php/scripts/LMD_REST.php/gis_communities_remote/',
-        communities_CHW: '/LastMileData/php/scripts/LMD_REST.php/gis_communities_CHW/',
-        district: '/LastMileData/src/data/districtCoordinates.geoJSON',
-        county: '/LastMileData/src/data/countyCoordinates.geoJSON',
-        healthFacility: '/LastMileData/src/data/healthFacilityCoordinates.geoJSON'
+        communities_nearFacility: '../../php/scripts/LMD_REST.php/gis_communities_nearFacility/',
+        communities_remote: '../../php/scripts/LMD_REST.php/gis_communities_remote/',
+        communities_CHW: '../../php/scripts/LMD_REST.php/gis_communities_CHW/',
+        district: '../data/districtCoordinates.geoJSON',
+        county: '../data/countyCoordinates.geoJSON',
+        healthFacility: '../data/healthFacilityCoordinates.geoJSON'
     },
     data: {
-        communities_CHW: '/LastMileData/php/scripts/LMD_REST.php/gis_community_data/',
-        district: '/LastMileData/php/scripts/LMD_REST.php/gis_district_data/',
-        county: '/LastMileData/php/scripts/LMD_REST.php/gis_county_data/'
+        communities_CHW: '../../php/scripts/LMD_REST.php/gis_community_data/',
+        district: '../../php/scripts/LMD_REST.php/gis_district_data/',
+        county: '../../php/scripts/LMD_REST.php/gis_county_data/'
     },
-    indicators: '/LastMileData/php/scripts/LMD_REST.php/indicators/'
+    indicators: '../../php/scripts/LMD_REST.php/indicators/'
 };
 
 
