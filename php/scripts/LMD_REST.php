@@ -20,8 +20,8 @@
     --  ---                                 -----
      0  LMD_REST.php/test_rest              lastmile_dataportal.test_rest
      1  LMD_REST.php/indicators             lastmile_dataportal.tbl_indicators
-     2  LMD_REST.php/instanceValues         lastmile_dataportal.tbl_indicators
-     3  LMD_REST.php/indicatorInstances     lastmile_dataportal.tbl_indicators
+     2  LMD_REST.php/instanceValues         lastmile_dataportal.tbl_values
+     3  LMD_REST.php/indicatorInstances     lastmile_dataportal.view_instances
      4  LMD_REST.php/json_objects           lastmile_dataportal.tbl_json_objects
      5  LMD_REST.php/reportObjects          lastmile_dataportal.reportobjects
      6  LMD_REST.php/markdown               lastmile_dataportal.markdown

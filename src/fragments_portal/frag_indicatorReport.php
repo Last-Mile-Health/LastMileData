@@ -13,7 +13,7 @@
     curl_setopt($ch,CURLOPT_URL,$url1);
     $json1 = curl_exec($ch);
     
-    // Get indicator IDs of all indicators used in the report (in either data tables or charts)
+    // Get instance IDs of all indicator instances used in the report (in either data tables or charts)
     if (substr($json1,0,1)!=="[") {
         $json1 = "[" . $json1 . "]";
     }
@@ -24,12 +24,12 @@
     }
     $instIDString = trim($instIDString, ",");
 
-    // Echo JSON (indicator metadata)
+    // Echo JSON (indicator instance metadata)
     $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/$instIDString";
     curl_setopt($ch,CURLOPT_URL,$url2);
     $json2 = curl_exec($ch);
 
-    // Echo JSON (indicator data)
+    // Echo JSON (indicator instance data)
     $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/instanceValues/$instIDString";
     curl_setopt($ch,CURLOPT_URL,$url3);
     $json3 = curl_exec($ch);

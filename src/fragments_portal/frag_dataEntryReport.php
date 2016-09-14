@@ -59,14 +59,9 @@ require_once("cxn.php");
             FROM lastmile_db.tbl_data_fhw_sst_sicknessscreening
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'Training Ledger (old)',
+            UNION SELECT 'Training Results Record',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_prg_trl_trainingledger
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Training Ledger (new)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_trainingLedgerStep1
+            FROM lastmile_chwdb.staging_trainingResultsRecordStep1
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'GCHV Questionnaire',
@@ -77,6 +72,11 @@ require_once("cxn.php");
             UNION SELECT 'Malaria Assessment',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_db.tbl_data_fhw_mat_malariaassessment
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'CHW Monthly Service Report',
+            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            FROM lastmile_chwdb.staging_chwMonthlyServiceReportStep1
             GROUP BY meta_DE_init, meta_DE_date
 
             ORDER BY meta_DE_date DESC, meta_DE_init, myTable;

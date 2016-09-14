@@ -40,7 +40,7 @@ $.getScript('../js/admin_editData.js');
                     <th class="pad darkBlue">Indicator name</th>
                     <th class="pad darkBlue">Geo-cut</th>
                     <!-- ko foreach:monthList.months -->
-                    <th class="pad darkBlue" data-bind="text:string">hey</th>
+                    <th class="pad darkBlue" data-bind="text:string"></th>
                     <!-- /ko -->
                 </tr>
             </thead>
