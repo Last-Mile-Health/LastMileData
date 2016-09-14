@@ -22,12 +22,11 @@ $(document).ready(function(){
                     field: 'indCategory'
                 }],
                 idAttribute: 'indID',
-                modelHeaders: ['Category','Indicator','Target','Narrative','Definition'],
+                modelHeaders: ['Category','Indicator','Target','Definition'],
                 modelDefaults: {
                     indCategory: '',
                     indName: 'New indicator',
                     indTarget: '',
-                    indNarrative: '',
                     indDefinition: ''
                 }
             };

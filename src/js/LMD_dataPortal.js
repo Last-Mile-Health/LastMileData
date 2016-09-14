@@ -65,7 +65,7 @@ var LMD_dataPortal = (function(){
     }
 
 
-    // PRIVATE: Stores indicator instance metadata (in "instanceMetadata" object)
+    // PUBLIC: Stores indicator instance metadata (in "instanceMetadata" object)
     //          Input object comes from LMD_REST.php/indicatorInstances
     //          Keys are instance IDs, values are objects containing metadata for a given indicator instance
     function setMetadata(dataObject) {
@@ -75,8 +75,14 @@ var LMD_dataPortal = (function(){
             instanceMetadata[instID] = metadata;
         }
     }
-
-
+    
+    
+    // PUBLIC: Returns "instanceMetadata" object
+    function getMetadata() {
+        return instanceMetadata;
+    }
+    
+    
     // PRIVATE: Configures the "report model" (i.e. a single report within the data portal)
     //          Input object comes from LMD_REST.php/reportobjects
     //          Must be called AFTER setData and setMetadata
@@ -234,27 +240,33 @@ var LMD_dataPortal = (function(){
         setData(instanceValues);
         setMetadata(indicatorInstances);
 
-        // Configure report model
-        reportObjects = configureReportModel(reportObjects);
+        if (reportObjects) {
+            // Configure report model
+            reportObjects = configureReportModel(reportObjects);
 
-        // Initialize knockout.js; bind model to DIV
-        ko.applyBindings({
-            reportObjects: reportObjects,
-            lastFourMonths: setDates()
-        }, $('#reportContent')[0]);
+            // Initialize knockout.js; bind model to DIV
+            ko.applyBindings({
+                reportObjects: reportObjects,
+                lastFourMonths: setDates()
+            }, $('#reportContent')[0]);
+        }
 
         // Populate data tables
         populateTableData();
         populateTableMetadata();
 
         // Create charts
-        renderCharts(reportObjects);
+        if (reportObjects) {
+            renderCharts(reportObjects);
+        }
     }
 
 
     // LMD_dataPortal API
     return {
-        bootstrap: bootstrap
+        bootstrap: bootstrap,
+        setMetadata: setMetadata,
+        getMetadata: getMetadata
     };
     
 
