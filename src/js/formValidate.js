@@ -70,9 +70,12 @@ $(document).ready(function(){
                 }
                 
                 // Test: is a value-restricted integer
+                // Owen Note:  For now, minimum integer value will be 0.  We can recode this later if we want minimuns
+                // to be less than zero.
                 myMin = Number($(this).attr('data-lmd-valid-intMin'));
                 myMax = Number($(this).attr('data-lmd-valid-intMax'));
-                if ( myMin && myValue!="" ) {
+                
+                if ( ( myMin >= 0 ) && ( myValue != "" ) ) {
                     if ( myMax && ( myValue<myMin || myValue>myMax || isNaN(myValue) || myValue!=Math.floor(myValue) ) ) {
                         errorFields.push(myField);
                         errorMessages.push('Field "' + myField + '" must be an integer between ' + myMin + ' and ' + myMax);
@@ -91,21 +94,30 @@ $(document).ready(function(){
                 
                 // Test: regex
                 // !!!!! Note: this may have problems if the regexp contains a single-quote (') or double-quote (") character !!!!!
-                if ($(this).attr('data-lmd-valid-regex')) {
+                // 
+                // Owen Note: I added a conditional test to see if the myValue string is empty; otherwise, it is always treated 
+                // as mandatory field.  This is probably a hack.
+                
+                if ( myValue!="" ) {
                     
-                    myRegEx = new RegExp($(this).attr('data-lmd-valid-regex'));
+                    if ($(this).attr('data-lmd-valid-regex')) {
                     
-                    if (!myRegEx.test(myValue)) {
-                        errorFields.push(myField);
-                        if ($(this).attr('data-lmd-valid-errormessage')) {
-                            errorMessages.push('Field "' + myField + '" ' + $(this).attr('data-lmd-valid-errormessage'));
-                        }
-                        else {
-                            errorMessages.push('Field "' + myField + '" must conform to the regex pattern: /' + $(this).attr('data-lmd-valid-regex') + '/');
+                        myRegEx = new RegExp($(this).attr('data-lmd-valid-regex'));
+                    
+                        if (!myRegEx.test(myValue)) {
+                            
+                            errorFields.push(myField);
+                            
+                            if ($(this).attr('data-lmd-valid-errormessage')) {
+                                errorMessages.push('Field "' + myField + '" ' + $(this).attr('data-lmd-valid-errormessage'));
+                            }
+                            else {  
+                                errorMessages.push('Field "' + myField + '" must conform to the regex pattern: /' + $(this).attr('data-lmd-valid-regex') + '/');
+                            }
                         }
                     }
-                    
-                }
+                };
+                
                 
                 // Test: !!!!! build character limit here !!!!!
                 if (1===0) {

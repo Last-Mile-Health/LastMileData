@@ -110,14 +110,14 @@
                         <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHW ID:<input class="stored integer" name="chwID" data-lmd-valid-required="yes" style=" width:0.64in; border:none;  "></td>
                         <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHW-L:<input class="stored" name="chwlName" data-lmd-valid-required="yes" data-lmd-valid-autoC="chwls" style=" width:0.89in; border:none; "></td>
                         <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHW-L ID: <input class="stored integer" name="chwlID" data-lmd-valid-required="yes" style=" width:0.66in; border:none;"></td>
-                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none;                                " >Report Month:<input class="stored integer" data-lmd-valid-select='["1","2","3","4","5","6","7","8","9","10","11","12"]' name="monthReported" data-lmd-valid-required="yes"></td>  
+                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none;                                " >Report Month:<input class="stored integer" data-lmd-valid-intMin="1" data-lmd-valid-intMax="12" name="monthReported" data-lmd-valid-required="yes" style=" width:0.35in; border:none;" ></td>  
                     </tr>                  
                     <tr>
                         <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community:<input class="stored" name="community" data-lmd-valid-required="yes" style=" width:1.10in; border:none; "></td>
                         <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID:<input class="stored integer" name="communityID" data-lmd-valid-required="yes" style=" width:0.29in; border:none; "></td>
                         <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Facility:<input class="stored" name="healthFacility" data-lmd-valid-required="yes" style=" width:0.91in; border:none; "></td>
                         <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >District:<input class="stored" name="district" data-lmd-valid-required="yes" style=" width:0.91in; border:none; "></td>
-                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; " >Year:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="stored integer" name="yearReported" data-lmd-valid-select='["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"]' data-lmd-valid-required="yes"></td>                        
+                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; " >Report Year:<input class="stored integer" data-lmd-valid-intMin="2015" data-lmd-valid-intMax="2030" name="yearReported"  data-lmd-valid-required="yes" style=" width:0.45in; border:none; "></td>                        
                     </tr>
                     
                 </table>
@@ -161,7 +161,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="professionalismSupervisionVisitAttemptedTotal" data-lmd-valid-required="yes"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="professionalismSupervisionVisitAttemptedTotal" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
                                             </tr>
                     
                                             <tr>
@@ -229,21 +229,21 @@
                     
                                             <tr>
                                                 <td style="text-align:left; padding-left: 2px;">Type of Visit Audited (code)</td>
-                                                <td>-</td>
-                                                <td><input class="stored matrixColumnInputBold" name="auditCHCTypeOfVisitAuditedWeek1" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold" name="auditCHCTypeOfVisitAuditedWeek2" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold" name="auditCHCTypeOfVisitAuditedWeek3" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold" name="auditCHCTypeOfVisitAuditedWeek4" data-lmd-valid-required="no"></td>
+                                                <td>-</td>                                               
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="auditCHCTypeOfVisitAuditedWeek1" data-lmd-valid-required="no"></td>                                               
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="auditCHCTypeOfVisitAuditedWeek2" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="auditCHCTypeOfVisitAuditedWeek3" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="auditCHCTypeOfVisitAuditedWeek4" data-lmd-valid-required="no"></td>
                                                 <td style="background-image: linear-gradient( to top left, white 48%, black, white 52%"></td>
                                             </tr>
                     
                                             <tr>
                                                 <td style="text-align:left; padding-left: 2px;">Audit Score</td>
                                                 <td>5</td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek1" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek2" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek3" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek4" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek1" data-lmd-valid-intMin="0" data-lmd-valid-intMax="5" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek2" data-lmd-valid-intMin="0" data-lmd-valid-intMax="5" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek3" data-lmd-valid-intMin="0" data-lmd-valid-intMax="5" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="auditCHCAuditScoreWeek4" data-lmd-valid-intMin="0" data-lmd-valid-intMax="5" data-lmd-valid-required="no"></td>
                                                 <td style="background-image: linear-gradient( to top left, white 48%, black, white 52%"></td>
                                             </tr>
                     
@@ -282,20 +282,20 @@
                                             <tr>
                                                 <td style="text-align:left; padding-left: 2px;">Type of Home Visit (code)</td>
                                                 <td>-</td>
-                                                <td><input class="stored matrixColumnInputBold" name="homeVisitEvaluationTypeOfHomeVisitWeek1" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold" name="homeVisitEvaluationTypeOfHomeVisitWeek2" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold" name="homeVisitEvaluationTypeOfHomeVisitWeek3" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold" name="homeVisitEvaluationTypeOfHomeVisitWeek4" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="homeVisitEvaluationTypeOfHomeVisitWeek1" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="homeVisitEvaluationTypeOfHomeVisitWeek2" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="homeVisitEvaluationTypeOfHomeVisitWeek3" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold" data-lmd-valid-regex="R|V|I|N|F|B" name="homeVisitEvaluationTypeOfHomeVisitWeek4" data-lmd-valid-required="no"></td>
                                                 <td style="background-image: linear-gradient( to top left, white 48%, black, white 52%"></td>
                                             </tr>
                                             
                                             <tr>
                                                 <td style="text-align:left; padding-left: 2px;">Home Visit Evaluation Score</td>
                                                 <td>15</td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek1" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek2" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek3" data-lmd-valid-required="no"></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek4" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek1" data-lmd-valid-intMin="0" data-lmd-valid-intMax="15" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek2" data-lmd-valid-intMin="0" data-lmd-valid-intMax="15" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek3" data-lmd-valid-intMin="0" data-lmd-valid-intMax="15" data-lmd-valid-required="no"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="homeVisitEvaluationHomeVisitEvaluationScoreWeek4" data-lmd-valid-intMin="0" data-lmd-valid-intMax="15" data-lmd-valid-required="no"></td>
                                                 <td style="background-image: linear-gradient( to top left, white 48%, black, white 52%"></td>
                                             </tr>
 
