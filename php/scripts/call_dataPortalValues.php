@@ -1,7 +1,6 @@
 <?php
 
-// URL
-// localhost/LastMileData/php/scripts/call_dataPortalValues.php?month=X&year=X
+// URL: localhost/LastMileData/php/scripts/call_dataPortalValues.php?month=X&year=X
 
 // Set include path
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );

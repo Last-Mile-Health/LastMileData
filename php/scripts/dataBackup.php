@@ -2,6 +2,7 @@
 
 // Backs up all MySQL databse schemas. Should be run daily at roughly 1am (server time - EST)
 // Set DB connection strings (!!!!! figure out how to set include path with CRON !!!!!)
+// URL: localhost/LastMileData/php/scripts/dataBackup.php
 
 $user = "root";
 $password = "LastMile14";
