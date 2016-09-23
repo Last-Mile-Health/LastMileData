@@ -43,3 +43,4 @@ node_modules
 testing
 lastmiledata.appcache
 .tmp
+npm-debug.log
