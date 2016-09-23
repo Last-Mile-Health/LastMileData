@@ -69,6 +69,14 @@ var LMD_dimpleHelper = (function(){
                 y.tickFormat = params.tickFormat.y;
             }
 
+            // Add y-axis min/max
+            if (params.axisValues && params.axisValues.min) {
+                y.overrideMin = params.axisValues.min;
+            }
+            if (params.axisValues && params.axisValues.max) {
+                y.overrideMax = params.axisValues.max;
+            }
+
             // Add series; add legend; draw chart
             if (params.type==="line") {
                 var mySeries = myChart.addSeries(params.cut, dimple.plot.line);

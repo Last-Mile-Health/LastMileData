@@ -213,7 +213,8 @@ var LMD_dataPortal = (function(){
         //                axisTitles: d.chartSpecs.axisTitles, // !!!!! use indNameShort !!!!!
                         cut: "Cut",
                         legend: d.chart_legend || "",
-                        tickFormat: { y:d.chart_tickFormat }
+                        tickFormat: { y:d.chart_tickFormat },
+                        axisValues: { min:d.chart_yAxis_min, max:d.chart_yAxis_max }
                     });
                 }
             }
