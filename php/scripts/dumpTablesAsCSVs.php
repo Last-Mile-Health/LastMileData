@@ -11,14 +11,14 @@ executeStatements('lastmile_chwdb','staging_chwMonthlyServiceReportStep1', $cxn)
 executeStatements('lastmile_chwdb','staging_odk_departurechecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_arrivalchecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_chwrestock', $cxn);
-executeStatements('lastmile_chwdb','staging_odk_sickchildform', $cxn);
+executeStatements('lastmile_chwdb','staging_odk_sickChildForm', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_routinevisit', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_vaccinetracker', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_supervisionvisitlog', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
-    // 
+    // Increase maximum length of row entry for GROUP_CONCAT
     $query1 = "SET SESSION group_concat_max_len=10000;";
     mysqli_query($cxn, $query1) or die(mysqli_error($cxn));
     
@@ -27,7 +27,6 @@ function executeStatements($schema, $table, $cxn) {
     WHERE `table_schema`='$schema' AND table_name='$table';";
     $result = mysqli_query($cxn, $query2) or die(mysqli_error($cxn));
     $columnHeaders = mysqli_fetch_assoc($result)['val'];
-//    echo $columnHeaders . "<br><br>";
     
     // Parse full query string
     $query3 = "SELECT $columnHeaders
@@ -36,8 +35,6 @@ function executeStatements($schema, $table, $cxn) {
     INTO OUTFILE '" . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/backups/CSVs/$table" . "_" . date('Y-m-d') . ".csv'
     FIELDS TERMINATED BY ',' ENCLOSED BY '\\\"' LINES TERMINATED BY '\\n';";
 
-//echo $query2 . "<br><br>";
-    
     // Run query
     mysqli_query($cxn, $query3) or die(mysqli_error($cxn));
  
