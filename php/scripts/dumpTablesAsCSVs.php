@@ -7,6 +7,14 @@
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
 require_once("cxn.php");
 
+// Delete old files
+$files = glob('../../backups/CSVs/*');
+foreach($files as $file){ 
+    if(is_file($file)) {
+        unlink($file); 
+    }
+}
+
 executeStatements('lastmile_chwdb','staging_chwMonthlyServiceReportStep1', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_departurechecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_arrivalchecklog', $cxn);
