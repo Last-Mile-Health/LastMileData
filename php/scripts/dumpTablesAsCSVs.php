@@ -4,7 +4,10 @@
 // URL: localhost/LastMileData/php/scripts/dumpTablesAsCSVs.php
 
 // Set include path; require connection file
-set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
+// set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
+// Apparently, cron does not inherit all the user shell info, like DOCUMENT_ROOT, so I had to hard code the .../php/includes path.
+// Same goes for the query3 string below.
+set_include_path( "/home/lastmilehealth/public_html/LastMileData/php/includes" );
 require_once("cxn.php");
 
 // Delete old files
@@ -37,12 +40,18 @@ function executeStatements($schema, $table, $cxn) {
     $columnHeaders = mysqli_fetch_assoc($result)['val'];
     
     // Parse full query string
+ //   $query3 = "SELECT $columnHeaders
+ //   UNION
+ //   SELECT * FROM `$schema`.`$table`
+ //   INTO OUTFILE '" . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/backups/CSVs/$table" . "_" . date('Y-m-d') . ".csv'
+ //   FIELDS TERMINATED BY ',' ENCLOSED BY '\\\"' LINES TERMINATED BY '\\n';";
+    
     $query3 = "SELECT $columnHeaders
     UNION
     SELECT * FROM `$schema`.`$table`
-    INTO OUTFILE '" . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/backups/CSVs/$table" . "_" . date('Y-m-d') . ".csv'
+    INTO OUTFILE '" . "/home/lastmilehealth/public_html" . "/LastMileData/backups/CSVs/$table" . "_" . date('Y-m-d') . ".csv'
     FIELDS TERMINATED BY ',' ENCLOSED BY '\\\"' LINES TERMINATED BY '\\n';";
-
+   
     // Run query
     mysqli_query($cxn, $query3) or die(mysqli_error($cxn));
  
