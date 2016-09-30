@@ -241,7 +241,7 @@ $(document).ready(function(){
 
                                         // Process main XML file ($myJQXML)
                                         var xmlKey, xmlValue, chkArray, pullString = "";
-                                        var xmlRecord = { database:dbName };
+                                        var xmlRecord = { database:dbName, meta_uploadUser:sessionStorage.username };
                                         var $elementSet = $myJQXML.find('*').filter(function(){return /^LMD\-/i.test(this.nodeName);});
                                         $elementSet.each(function(){
                                             // !!!!! document this code !!!!!

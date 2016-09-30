@@ -9,77 +9,49 @@ require_once("cxn.php");
 <h1>ODK Data Upload Details</h1>
 <table class="table table-striped table-hover">
     <tr>
-        <th>DE Date</th>
-        <th>DE Initials</th>
-        <th>Table name</th>
+        <th>Upload date</th>
+        <th>Upload time</th>
+        <th>Upload user</th>
+        <th>Form type</th>
         <th># Records</th>
-        <th># Records QA'd</th>
     </tr>
     <?php
 
         $queryString = "
 
-            SELECT 'CHW Restock' AS myTable,
-            meta_autoDate, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_db.tbl_data_fhw_bdm_movements
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Births, Deaths, Movements (new)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_birthsDeathsMovementsStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Ebola Education And Screening Ledger',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_ees_ebolaeducationscreening
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Health Survey',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_kpi_kpiassessment
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Registration (old)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_reg_registration
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Registration (new)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_registrationStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Sick Child Form',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_sch_sickchild
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Sickness Screening Tool',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_sst_sicknessscreening
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Training Results Record',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_trainingResultsRecordStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'GCHV Questionnaire',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_prg_chv_gchvquestionnaire
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Malaria Assessment',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_mat_malariaassessment
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'CHW Monthly Service Report',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_chwMonthlyServiceReportStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            ORDER BY meta_DE_date DESC, meta_DE_init, myTable;
+            SELECT 'CHW restock' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_chwrestock` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Health survey' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
+            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_healthsurvey` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Routine visit' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
+            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_routinevisit` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Sick child form' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_sickChildForm` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Supervision visit log' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_supervisionvisitlog` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Vaccine tracker' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_vaccinetracker` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Arrival check log' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
+            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_arrivalchecklog` GROUP BY `uploadDate`, `uploadTime`
+            
+            UNION SELECT 'Departure check log' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
+            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            FROM `lastmile_chwdb`.`staging_odk_departurechecklog` GROUP BY `uploadDate`, `uploadTime`
+            
+            ORDER BY `uploadDate` DESC, `uploadTime` DESC;
 
         ";
 
@@ -88,11 +60,11 @@ require_once("cxn.php");
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $tableRow = "<tr>";
-            $tableRow .= "<td>$meta_DE_date</td>";
-            $tableRow .= "<td>$meta_DE_init</td>";
-            $tableRow .= "<td>$myTable</td>";
-            $tableRow .= "<td>$recordCount</td>";
-            $tableRow .= "<td>$qaCount</td>";
+            $tableRow .= "<td>$uploadDate</td>";
+            $tableRow .= "<td>$uploadTime</td>";
+            $tableRow .= "<td>---</td>";
+            $tableRow .= "<td>$formType</td>";
+            $tableRow .= "<td>$numRecords</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
         }
