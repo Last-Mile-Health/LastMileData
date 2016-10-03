@@ -42,3 +42,5 @@ exec('mysqldump --routines --events --add-drop-trigger --user="' . $user . '" --
 
 exec( 'echo "dumping" ' . $db3 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 exec('mysqldump --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db3 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file3 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+
+exec( 'echo "------------------------------------------------------" >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
