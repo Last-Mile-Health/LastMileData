@@ -4,6 +4,8 @@
 // Set DB connection strings (!!!!! figure out how to set include path with CRON !!!!!)
 // URL: localhost/LastMileData/php/scripts/dataBackup.php
 
+// --skip-lock-tables option to mysqldump helps clear up the problem of mysqld using excessive amounts of memory during the nightly backups.
+
 $user = "root";
 $password = "LastMile14";
 $host = "localhost";
@@ -31,16 +33,16 @@ exec( 'echo "------------------------------------------------------" >> ' . '/ho
 exec( 'date >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 exec( 'echo "dumping" ' . $db . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
-exec( 'mysqldump --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+exec( 'mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 exec( 'echo "dumping" ' . $db1 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
-exec('mysqldump --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db1 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file1 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db1 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file1 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 
 exec( 'echo "dumping" ' . $db2 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
-exec('mysqldump --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db2 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file2 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db2 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file2 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 exec( 'echo "dumping" ' . $db3 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
-exec('mysqldump --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db3 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file3 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db3 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file3 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 exec( 'echo "------------------------------------------------------" >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
