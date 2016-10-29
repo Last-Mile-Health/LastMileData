@@ -92,7 +92,7 @@
                 
                 // Set queryString; run query; extract data (ALL AGES)
                 $queryString = "SELECT healthFacilityID, healthFacility, nReports, nARI, nMalaria, nDiarrhea
-                    FROM lastmile_chwdb.view_msr_healthFacility WHERE $whereClause
+                    FROM lastmile_chwdb.view_msr_healthfacility WHERE $whereClause
                     AND monthReported=$reportMonth AND yearReported=$reportYear
                     GROUP BY healthFacilityID, monthReported, yearReported;";
                 $result = mysqli_query($cxn, $queryString);
@@ -142,7 +142,7 @@
                 
                 // Set queryString; run query; extract data (ALL AGES)
                 $queryString = "SELECT healthFacilityID, healthFacility, nBirths, nStillBirths, nDeathsNeonatal, nDeathsPostneonatal, nDeathsChild, nDeathsMaternal
-                    FROM lastmile_chwdb.view_msr_healthFacility WHERE $whereClause
+                    FROM lastmile_chwdb.view_msr_healthfacility WHERE $whereClause
                     AND monthReported=$reportMonth AND yearReported=$reportYear
                     GROUP BY healthFacilityID, monthReported, yearReported;";
                 $result = mysqli_query($cxn, $queryString);

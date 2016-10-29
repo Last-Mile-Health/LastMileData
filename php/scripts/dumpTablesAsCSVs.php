@@ -18,7 +18,6 @@ foreach($files as $file){
     }
 }
 
-executeStatements('lastmile_chwdb','staging_chwMonthlyServiceReportStep1', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_departurechecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_arrivalchecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_chwrestock', $cxn);
@@ -26,6 +25,7 @@ executeStatements('lastmile_chwdb','staging_odk_sickChildForm', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_routinevisit', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_vaccinetracker', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_supervisionvisitlog', $cxn);
+executeStatements('lastmile_chwdb','view_msr', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
