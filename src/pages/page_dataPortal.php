@@ -17,10 +17,11 @@
         <title>Last Mile Data</title>
         
         <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
-        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
-        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
-        <link rel="stylesheet" href="../../lib/multiselect.css"  type="text/css" />
-        <link rel="stylesheet" href="../css/page_dataPortal.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../lib/multiselect.css" type="text/css" />
+        <link rel="stylesheet" href="../../lib/shepherd-1.8.1/shepherd-theme-arrows.css" type="text/css" />
+        <link rel="stylesheet" href="../css/page_dataPortal.css" type="text/css" />
         
         <?php
             // Echo username / userGroups (used by access control system)
@@ -55,11 +56,14 @@
         <script src="../../lib/multiselect.min.js"></script>
         <script src="../../lib/d3.min.js"></script>
         <script src="../../lib/dimple.v2.1.0.min.js"></script>
-        <script src="../js/LMD_dimpleHelper.js"></script>
+        <script src="../../lib/shepherd-1.8.1/tether.min.js"></script>
+        <script src="../../lib/shepherd-1.8.1/shepherd.min.js"></script>
         <script src="../js/loadContents.js"></script>
+        <script src="../js/LMD_dimpleHelper.js"></script>
         <script src="../js/LMD_utilities.js"></script>
         <script src="../js/LMD_dataPortal.js"></script>
         <script src="../js/LMD_koREST.js"></script>
+        <script src="../js/LMD_shepherd.js"></script>
         <script src="../js/page_dataPortal.js"></script>
         
     </head>
@@ -89,6 +93,9 @@
             
             <!-- START: Main body container -->
             <div id="innerContainer">
+                
+                <!-- DIV for Shepherd.js tour to attach to -->
+                <div style="float:right" id="shepherdAnchor"></div>
 
                 <!-- Whitespace container for fade in/out effects -->
                 <div id="whitespaceContainer"><br>
