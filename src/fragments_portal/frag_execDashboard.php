@@ -8,10 +8,10 @@
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
     // Set instance IDs of all indicator instances used in the report (in either data tables or charts)
-    $instIDString = "336,337,338,339,340,375,341,342,343,344,377,379,381,383,385,376,378,380,382,384,345,"
-            . "386,2,346,348,350,352,354,71,347,349,351,353,415,414,413,412,387,388,231,233,235,297,296,"
-            . "364,365,366,367,368,369,370,371,372,373,374,389,390,391,392,393,394,395,396,397,398,399,"
-            . "400,401,402,403,404,405,406,407,408,355,356,357,358,56,359,360,361,362,57,409,410,411,363";
+    $instIDString = "336,337,338,339,340,375,341,342,343,344,377,379,381,383,385,376,378,380,382,384,420,"
+            . "422,423,346,348,350,352,354,71,347,349,351,353,415,414,413,412,387,388,231,233,235,297,296,"
+            . "364,365,366,367,368,369,370,371,372,373,374,389,390,391,392,393,394,395,396,406,407,408,"
+            . "355,356,357,358,56,359,360,361,362,57,409,410,411,363,418,70,419,424,425,426,427,428";
 
     // Echo JSON (indicator instance metadata)
     $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/$instIDString";
@@ -35,7 +35,7 @@
         indicators: [
             {
                 name: 'Number of CHAs and CHSSs deployed through the NCHA program',
-                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program',
+                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. LMH counties will be reflected here once they receive NCHA trainings.',
                 dataSource: 'Liberia iHRIS database',
                 groups: [
                     { name: 'CHAs', instIDs: [336,337,338,339,340,375] },
@@ -44,7 +44,7 @@
                 ]
             },
             {
-                name: 'Number of community health assistants (CHAs) deployed',
+                name: 'Number of Community Health Assistants (CHAs) deployed',
                 definition: 'Total number of CHAs deployed within LMH counties',
                 dataSource: 'LMH employment trackers',
                 groups: [
@@ -53,11 +53,11 @@
                 ]
             },
             {
-                name: 'Number of community health supervisors deployed',
-                definition: 'Total number of CHWLs and CCSs deployed within LMH counties',
+                name: 'Number of Community Health Services Supervisors deployed',
+                definition: 'Total number of Community Health Services Supervisors (CHSSs) deployed within LMH counties',
                 dataSource: 'LMH employment trackers',
                 groups: [
-                    { name: '', instIDs: [345,386,2] }
+                    { name: '', instIDs: [420,422,423] }
                 ]
             },
             {
@@ -65,38 +65,38 @@
                 definition: 'Number of people in target population living in a community that is served by an active CHA, based on LMH registration data',
                 dataSource: 'LMH registration data',
                 groups: [
-                    { name: 'Grand Gedeh', instIDs: [346,348,350,352,354] },
-                    { name: 'Rivercess', instIDs: [71,347,349,351,353] }
+                    { name: 'Grand Gedeh', instIDs: [346,419,348,350,352,354] },
+                    { name: 'Rivercess', instIDs: [71,70,347,349,351,353] }
                 ]
             },
             {
                 name: 'County coverage',
-                definition: 'Percentage of county population >5km of health facility that has access to a CHA',
-                dataSource: 'GIS mapping data',
+                definition: 'Percentage of county population >5km of health facility that has access to a CHA, based on household counts',
+                dataSource: 'GIS mapping data, CHA registration data',
                 groups: [
-                    { name: '', instIDs: [415,414] }
+                    { name: '', instIDs: [415,414,425] }
                 ]
             },
             {
                 name: 'Correct Treatment Rate ',
                 definition: 'Percentage of patient audits for which correct treatment was given',
-                dataSource: 'CCS supervision trackers (NOT YET AVAILABLE DUE TO DATA QUALITY ISSUES)',
+                dataSource: 'CCS supervision trackers (Not yet available due to data quality issues; data will be available starting in November)',
                 groups: [
-                    { name: '', instIDs: [413,412] }
+                    { name: '', instIDs: [413,412,426] }
                 ]
             },
             {
                 name: 'Monthly supervision rate',
-                definition: 'Average number of supervision visits per CHW ([Total number of supervision visits] / [number of active CHWs])',
+                definition: 'Average number of supervision visits by a CHWL, per CHA ([Total number of supervision visits] / [number of active CHAs]). This currently represents CHWL visits; once the national program rolls out, this will represent CHSS visits, and we will adjust the definition accordingly.',
                 dataSource: 'Monthly service report',
                 groups: [
-                    { name: '', instIDs: [387,388] }
+                    { name: '', instIDs: [387,388,427] }
                 ]
             },
             {
                 name: 'Number of supervision checklists correctly filled and reported by CHSS',
-                definition: 'TBD',
-                dataSource: 'TBD',
+                definition: 'TBD. This indicator will be finalized once the national CHSS package of services is finalized.',
+                dataSource: 'TBD. Will likely be the CHSS Monthly Service Report.',
                 groups: [
                     { name: '', instIDs: [] }
                 ]
@@ -106,15 +106,15 @@
                 definition: 'A motorbike is "down" when it cannot be used for its desired purpose for 1 or more hours. If the motorbike is down for 1 or more hours, the whole day counts as a motorbike down day. Down days are tracked only at the motorbike\'s base location, even when the motorbike is down in another location.',
                 dataSource: 'Operations team records',
                 groups: [
-                    { name: '', instIDs: [231,233,235] }
+                    { name: '', instIDs: [231,233,235,418] }
                 ]
             },
             {
-                name: 'Percent of CHWs with all essential commodities in stock',
-                definition: 'Percent of CHWs with all essential commodities in stock on day of restock visit',
+                name: 'Percent of CHAs with all essential commodities in stock',
+                definition: 'Percent of CHAs with all essential commodities in stock on day of restock visit',
                 dataSource: 'ODK restock form',
                 groups: [
-                    { name: '', instIDs: [297,296] }
+                    { name: '', instIDs: [297,296,428] }
                 ]
             },
             {
@@ -138,20 +138,20 @@
                 definition: 'Percent completion of projected quarterly deadlines for activities required to successfully achieve annual targets',
                 dataSource: 'Quarterly progress report',
                 groups: [
-                    { name: '', instIDs: [389,390,391,392,393,394,395,396] }
+                    { name: '', instIDs: [389,390,391,392,393,394,395,396,424] }
                 ]
             },
+//            {
+//                name: 'Monthly variance in budget-to-actual',
+//                definition: 'Total variance between budget and actual expenditure',
+//                dataSource: 'Monthly financial reports',
+//                groups: [
+//                    { name: '', instIDs: [397,398,399,400,401,402,417,403,404,405,416] }
+//                ]
+//            },
             {
-                name: 'Monthly variance in Budget-to-Actual',
-                definition: 'Total variance between budget and actual expenditure',
-                dataSource: 'Monthly financial reports',
-                groups: [
-                    { name: '', instIDs: [397,398,399,400,401,402,403,404,405] }
-                ]
-            },
-            {
-                name: 'Working capital ratio',
-                definition: 'Working capital ratio determines how long LMH could sustain its level of spending using its net available assets. We include in working capital unrestricted and temporarily restricted net assets, and exclude permanently restricted net assets. Dividing these net available assets by LMH\'s total expenses for the most recent fiscal year, yields the working capital ratio',
+                name: 'Cash reserves ratio',
+                definition: 'Average number of months of operating expenses covered by cash on hand',
                 dataSource: 'Monthly financial reports',
                 groups: [
                     { name: '', instIDs: [406,407,408] }
@@ -231,6 +231,67 @@
     // Bootstrap the page
     LMD_dataPortal.bootstrap(instanceValues, indicatorInstances, null);
     
+    // Custom change: FY17-19 target for indicator #16
+    $('#table_16 th:last-child').text('FY17-19 target');
+    
+    // Custom change: quarterly targets for indicator #2
+    $('#table_2 th:nth-child(4)').after('<th style="text-align:right">Q1 target</th>');
+    $('#table_2 th:nth-child(8)').after('<th style="text-align:right">Q2 target</th>');
+    $('#table_2 th:nth-child(11)').after('<th style="text-align:right">Q3 target</th>');
+    $('#table_2 th:nth-child(13)').text('Q4 target');
+    $('#table_2 tr:nth-child(2) td:nth-child(1)').attr('colspan','4');
+    $('#table_2 tr:nth-child(8) td:nth-child(1)').attr('colspan','4');
+    $('#table_2 tr:nth-child(3) td:nth-child(4)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(4) td:nth-child(4)').after('<td style="text-align:right">39</td>');
+    $('#table_2 tr:nth-child(5) td:nth-child(4)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(6) td:nth-child(4)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(7) td:nth-child(4)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(9) td:nth-child(4)').after('<td style="text-align:right">224</td>');
+    $('#table_2 tr:nth-child(10) td:nth-child(4)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(11) td:nth-child(4)').after('<td style="text-align:right">121</td>');
+    $('#table_2 tr:nth-child(12) td:nth-child(4)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(13) td:nth-child(4)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(3) td:nth-child(8)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(4) td:nth-child(8)').after('<td style="text-align:right">39</td>');
+    $('#table_2 tr:nth-child(5) td:nth-child(8)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(6) td:nth-child(8)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(7) td:nth-child(8)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(9) td:nth-child(8)').after('<td style="text-align:right">224</td>');
+    $('#table_2 tr:nth-child(10) td:nth-child(8)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(11) td:nth-child(8)').after('<td style="text-align:right">121</td>');
+    $('#table_2 tr:nth-child(12) td:nth-child(8)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(13) td:nth-child(8)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(3) td:nth-child(11)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(4) td:nth-child(11)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(5) td:nth-child(11)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(6) td:nth-child(11)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(7) td:nth-child(11)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(9) td:nth-child(11)').after('<td style="text-align:right">224</td>');
+    $('#table_2 tr:nth-child(10) td:nth-child(11)').after('<td style="text-align:right">121</td>');
+    $('#table_2 tr:nth-child(11) td:nth-child(11)').after('<td style="text-align:right">121</td>');
+    $('#table_2 tr:nth-child(12) td:nth-child(11)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(13) td:nth-child(11)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(3) td:nth-child(13)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(4) td:nth-child(13)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(5) td:nth-child(13)').after('<td style="text-align:right">57</td>');
+    $('#table_2 tr:nth-child(6) td:nth-child(13)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(7) td:nth-child(13)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(9) td:nth-child(13)').after('<td style="text-align:right">224</td>');
+    $('#table_2 tr:nth-child(10) td:nth-child(13)').after('<td style="text-align:right">224</td>');
+    $('#table_2 tr:nth-child(11) td:nth-child(13)').after('<td style="text-align:right">224</td>');
+    $('#table_2 tr:nth-child(12) td:nth-child(13)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(13) td:nth-child(13)').after('<td style="text-align:right">0</td>');
+    $('#table_2 tr:nth-child(3) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(4) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(5) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(6) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(7) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(9) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(10) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(11) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(12) td:nth-child(13)').remove();
+    $('#table_2 tr:nth-child(13) td:nth-child(13)').remove();
+    
 </script>
 
 <div id="reportContent">
@@ -244,7 +305,7 @@
         <p><b>Definition:</b> <span data-bind="text:ind.definition"></span></p>
         <p><b>Data source:</b> <span data-bind="text:ind.dataSource"></span></p>
         
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" data-bind="attr: {id:'table_'+($index()+1)}">
             <tr>
                 <th></th>
                 <!-- ko foreach:$root.edModel.months -->
