@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    
     DataPortal_GLOBALS = {
         // This variable is set to true if any data changes occur (currently only used by "admin_editData.php" fragment)
         anyChanges: false
@@ -173,7 +173,14 @@ $(document).ready(function(){
                 $(this).removeClass('dp-active');
             });
             $(this).addClass('dp-active');
-
+            
+            // If user is on the overview page, start the Shepherd tour; otherwise, destroy the tour
+            if ( $(this).attr('data-link') === 'Overview' ) {
+                LMD_shepherd.start();
+            } else {
+                LMD_shepherd.destroy();
+            }
+            
         }
     });
 
