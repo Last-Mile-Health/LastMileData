@@ -89,12 +89,16 @@
                         <!-- /ko -->
                     </tr>
                     <!-- /ko -->
-                    
                 </table>
+                
                 <hr class='smallHR'>
+                
                 <!-- ko if: roMetadata_narrative -->
                 <p><b>Narrative</b>: <span data-bind="text:roMetadata_narrative"></span></p>
                 <!-- /ko -->
+                
+                <p><a download="data.csv" class="downloadData btn btn-info btn-sm" data-bind="attr:{id:'download_'+$index()}">Download data</a></p>
+                
             </div>
             <div class='col-md-7'>
                 <div data-bind="attr: {id:chart_div}"></div>

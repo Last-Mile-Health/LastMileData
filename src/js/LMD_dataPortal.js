@@ -13,7 +13,8 @@ var LMD_dataPortal = (function(){
     // PRIVATE VARS
     var chartData = {};             // Used for Dimple charts
     var tableData = {};             // Used for data tables
-    var instanceMetadata = {};     // Used for both
+    var csvData = [];               // Used for CSV-formatted data (for downloading)
+    var instanceMetadata = {};      // Used for both
     
     
     // PRIVATE: Sets the dates for the Data Portal to display
@@ -61,6 +62,7 @@ var LMD_dataPortal = (function(){
             
             // Set table data
             tableData["i_" + d.instID + "_m_" + d.year + "-" + d.month] = d.instValue;
+            
         }
     }
 
@@ -105,8 +107,11 @@ var LMD_dataPortal = (function(){
                 return 0;
             }
         });
-
-        // 3. Merge in data
+        
+        // 3. Clear csvData array
+        csvData = [];
+        
+        // 4. Merge in data
         for (var key in dataObject) {
 
             var d = dataObject[key];
@@ -139,7 +144,10 @@ var LMD_dataPortal = (function(){
             if ( d.roMetadata_target == null || d.roMetadata_target == '' ) {
                 d.roMetadata_target = metadata.indTarget;
             }
-
+            
+            // Create "dates" array, for CSV data
+            var dates = [];
+            
             // Populate chart_points array (for Dimple charts)
             for (var key2 in d.chart_instIDs) {
 
@@ -148,17 +156,52 @@ var LMD_dataPortal = (function(){
                 
                 if (dataArray) {
                     for(var i=0; i<dataArray.length; i++) {
+                        
+                        // Add chart point
                         d.chart_points.push({
                             Month:dataArray[i].date,
                             Value:dataArray[i].value,
                             Cut: d.chartMultiple ? instanceMetadata[instID].instShortName : 1
                         });
+                        
+                        // Add date to date array (for CSV data)
+                        dates.push(dataArray[i].date);
                     }
                 }
+                
             }
+            
+            // Remove duplicates from "dates" array; sort
+            var uniqueDates = [];
+            $.each(dates, function(i, el){
+                if($.inArray(el, uniqueDates) === -1) uniqueDates.push(el);
+            });
+            uniqueDates.sort();
+            
+            // Populate "CSV" object (for "download data" function)
+            var csvFile = '"' + d.roMetadata_name + '"' + '\n' + 'month,';
+            for (var key in d.chart_instIDs) {
+                csvFile += instanceMetadata[d.chart_instIDs[key]].instShortName + ','
+            }
+            csvFile = csvFile.slice(0, -1);
+            csvFile += '\n';
+            for (var key in uniqueDates) {
+                csvFile += uniqueDates[key] + ',';
+                for (var key2 in d.chart_instIDs) {
+                    var yearMonth = uniqueDates[key].slice(0,-3);
+                    yearMonth = yearMonth.charAt(5)==='1' ? yearMonth : yearMonth.slice(0, 5) + yearMonth.slice(6);
+                    csvFile += tableData['i_' + d.chart_instIDs[key2] + '_m_' + yearMonth] + ',';
+                }
+                csvFile = csvFile.slice(0, -1);
+                csvFile += '\n';
+            }
+            csvFile = csvFile.slice(0, -1);
+            csvFile = csvFile.replace(/undefined/g, "");
+            csvData.push(csvFile);
+        
         }
         
-        // 4. Return transformed report object
+        // 5. Return transformed report object
         return dataObject;
         
     };
@@ -193,13 +236,23 @@ var LMD_dataPortal = (function(){
     }
 
 
+    // PRIVATE: Activate "download data" links, each of which downloads a CSV of all of the data in the Dimple chart
+    function setDownloadLinks() {
+        $('.downloadData').each(function() {
+            var roNumber = $(this).attr('id').slice(9);
+            var data = 'text;charset=utf-8,' + encodeURIComponent(csvData[roNumber]);
+            $(this).attr('href',"data:" + data);
+        });
+    }
+
+
     // PRIVATE: Render D3/Dimple charts
     //          Parameter is a "report object", as returned by configureReportModel()
-    function renderCharts(dataObject) {
-        for(var key in dataObject) {
+    function renderCharts(reportObjects) {
+        for(var key in reportObjects) {
             if (key >= 0) {
 
-                var d = dataObject[key];
+                var d = reportObjects[key];
 
                 if (d.chart_points.length > 0) {
                     LMD_dimpleHelper.createChart({
@@ -260,6 +313,9 @@ var LMD_dataPortal = (function(){
         if (reportObjects) {
             renderCharts(reportObjects);
         }
+        
+        // Activate "download data" links
+        setDownloadLinks();
     }
 
 
