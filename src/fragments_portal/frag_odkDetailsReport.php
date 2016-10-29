@@ -20,38 +20,38 @@ require_once("cxn.php");
         $queryString = "
 
             SELECT 'CHW restock' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
-            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_chwrestock` GROUP BY `uploadDate`, `uploadTime`
             
-            UNION SELECT 'Health survey' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
-            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            UNION SELECT 'Health survey' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_healthsurvey` GROUP BY `uploadDate`, `uploadTime`
             
-            UNION SELECT 'Routine visit' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
-            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            UNION SELECT 'Routine visit' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_routinevisit` GROUP BY `uploadDate`, `uploadTime`
             
             UNION SELECT 'Sick child form' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
-            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_sickChildForm` GROUP BY `uploadDate`, `uploadTime`
             
             UNION SELECT 'Supervision visit log' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
-            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_supervisionvisitlog` GROUP BY `uploadDate`, `uploadTime`
             
             UNION SELECT 'Vaccine tracker' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
-            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_vaccinetracker` GROUP BY `uploadDate`, `uploadTime`
             
-            UNION SELECT 'Arrival check log' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
-            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            UNION SELECT 'Arrival check log' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_arrivalchecklog` GROUP BY `uploadDate`, `uploadTime`
             
-            UNION SELECT 'Departure check log' AS `formType`, DATE(meta_insertDate) AS `uploadDate`, 
-            'unknown' AS `uploadTime`, count(1) AS `numRecords`
+            UNION SELECT 'Departure check log' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
+            DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
             FROM `lastmile_chwdb`.`staging_odk_departurechecklog` GROUP BY `uploadDate`, `uploadTime`
             
-            ORDER BY `uploadDate` DESC, `uploadTime` DESC;
+            ORDER BY `uploadDate` DESC, `uploadUser` DESC, `uploadTime` DESC;
 
         ";
 
@@ -62,7 +62,7 @@ require_once("cxn.php");
             $tableRow = "<tr>";
             $tableRow .= "<td>$uploadDate</td>";
             $tableRow .= "<td>$uploadTime</td>";
-            $tableRow .= "<td>---</td>";
+            $tableRow .= "<td>$uploadUser</td>";
             $tableRow .= "<td>$formType</td>";
             $tableRow .= "<td>$numRecords</td>";
             $tableRow .= "</tr>";
