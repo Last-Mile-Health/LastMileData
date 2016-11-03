@@ -890,10 +890,10 @@ function launchQAModal(options)
 function parseRecordIntoSQL(currentRecord) {
     
     // Set array of currentRecord properties that are not stored
-    var notStored = ['table', 'database']; // !!!!! database property not yet being used; filter out anyways !!!!!
+    var notStored = ['table', 'database'];
     
     // Begin query string
-    var database = currentRecord.database || 'lastmile_db';
+    var database = currentRecord.database || 'lastmile_chwdb';
     var queryString = "INSERT INTO " + database + "." + currentRecord.table + " SET ";
     
     // Add key/value pairs to query string

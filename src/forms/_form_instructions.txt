@@ -30,12 +30,9 @@ B. STEPS FOR UPDATING A FORM:
     4) Increment the version number in the filename
         - e.g. fhw_sch03_sickchild.html --> fhw_sch04_sickchild.html
     5) Increment the version number in the <title> element and in the "M&E Box" (<div id="meBox">)
-    6) Update the application cache manifest ("lastmiledata.appcache"):
-        a. move the old form under the "# src >> forms (old)" header and update the filepath
-        b. add the new form under the "# src >> forms" header
-    7) In the page_deqa.html file:
+    6) In the page_deqa.html file:
         a. Copy the data entry and QA links down to the "Archived forms" section (id="currentVersions_div" element)
         b. Update the data entry and QA links in the "Current forms" section (id="currentVersions_div" element)
-    8) In the page_deqa.js file:
+    7) In the page_deqa.js file:
         a. Add a click handler for the new form
         b. Update the "targetForm" URL of the old form

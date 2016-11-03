@@ -25,7 +25,7 @@
      4  LMD_REST.php/json_objects           lastmile_dataportal.tbl_json_objects
      5  LMD_REST.php/reportObjects          lastmile_dataportal.reportobjects
      6  LMD_REST.php/markdown               lastmile_dataportal.markdown
-     7  LMD_REST.php/users                  lastmile_db.tbl_utility_users
+     7  LMD_REST.php/users                  lastmile_dataportal.tbl_utility_users
      8  LMD_REST.php/staff                  lastmile_chwdb.admin_staff
      9  LMD_REST.php/narratives             lastmile_dataportal.view_reportObjects
     10  LMD_REST.php/reports                lastmile_dataportal.tbl_reports
@@ -138,18 +138,18 @@ $app->delete('/markdown/:id', function($id) {
 });
 
 
-// Route 7: LMD users (lastmile_db.tbl_utility_users)
+// Route 7: LMD users (lastmile_dataportal.tbl_utility_users)
 $app->get('/users/(:id)',function($id='all') {
-    LMD_get($id, "pk", "lastmile_db.tbl_utility_users", "pk, username, userGroups", 1);
+    LMD_get($id, "pk", "lastmile_dataportal.tbl_utility_users", "pk, username, userGroups", 1);
 });
 $app->post('/users/', function() {
-    LMD_post("lastmile_db.tbl_utility_users");
+    LMD_post("lastmile_dataportal.tbl_utility_users");
 });
 $app->put('/users/:id', function($id) {
-    LMD_put($id, "pk", "lastmile_db.tbl_utility_users");
+    LMD_put($id, "pk", "lastmile_dataportal.tbl_utility_users");
 });
 $app->delete('/users/:id', function($id) {
-    LMD_delete($id, "pk", "lastmile_db.tbl_utility_users");
+    LMD_delete($id, "pk", "lastmile_dataportal.tbl_utility_users");
 });
 
 

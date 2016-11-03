@@ -1,6 +1,7 @@
 <?php
 
 // Downloads "system data" (e.g. most recent list of villges) from MySQL database and puts it into localStorage
+// Userful for populating dynamic dropdown menus or comboboxes in paper data entry forms
 
 // Disable PHP warnings
 error_reporting(0);
@@ -13,7 +14,7 @@ require_once("cxn.php");
 
 // 1. Update "deqaUsers" (object)
 //  Note that the LOCATE('admin',`userGroups`)>0 clause will pick up both "admin" and "superadmin"
-$query = "SELECT username, password FROM lastmile_db.tbl_utility_users WHERE LOCATE('admin',`userGroups`)>0 OR LOCATE('deqa',`userGroups`)>0";
+$query = "SELECT username, password FROM lastmile_dataportal.tbl_utility_users WHERE LOCATE('admin',`userGroups`)>0 OR LOCATE('deqa',`userGroups`)>0";
 $result = mysqli_query($cxn, $query) or die("failure");
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
 {
@@ -23,7 +24,7 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
 }
 
 // 2. Update "villages" (array)
-$query = "SELECT villageName FROM lastmile_db.tbl_data_village";
+$query = "SELECT `name` FROM lastmile_chwdb.admin_community WHERE archived<>1;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_villages = array();
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
@@ -33,8 +34,8 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
     array_push($json_villages,$villageName);
 }
 
-// 3. Update "fhws" (array)
-$query = "SELECT staffName FROM lastmile_db.tbl_data_staff WHERE staffType='F'";
+// 3. Update "FHWs" (array)
+$query = "SELECT staffName FROM lastmile_chwdb.view_staffposition WHERE title='CHW';";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_fhws = array();
 for ($i=1;$i<=mysqli_num_rows($result);$i++)

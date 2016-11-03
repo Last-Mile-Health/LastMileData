@@ -18,7 +18,7 @@ require_once("PhpConsole.phar");
 
 // Debug queries
 if ($queryDebugging=='true') {
-    mysqli_query($cxn, 'INSERT INTO lastmile_db.test (col_1) VALUES ("' . $queryString . '")');
+    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . $queryString . '")');
 }
 
 if ($transaction) {

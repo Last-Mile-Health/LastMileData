@@ -19,29 +19,9 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT 'Births, Deaths, Movements (old)' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_db.tbl_data_fhw_bdm_movements
-            GROUP BY meta_DE_init, meta_DE_date
-
             UNION SELECT 'Births, Deaths, Movements (new)',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_chwdb.staging_birthsDeathsMovementsStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Ebola Education And Screening Ledger',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_ees_ebolaeducationscreening
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Health Survey',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_kpi_kpiassessment
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Registration (old)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_reg_registration
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'Registration (new)',
@@ -49,29 +29,9 @@ require_once("cxn.php");
             FROM lastmile_chwdb.staging_registrationStep1
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'Sick Child Form',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_sch_sickchild
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Sickness Screening Tool',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_sst_sicknessscreening
-            GROUP BY meta_DE_init, meta_DE_date
-
             UNION SELECT 'Training Results Record',
             meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
             FROM lastmile_chwdb.staging_trainingResultsRecordStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'GCHV Questionnaire',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_prg_chv_gchvquestionnaire
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Malaria Assessment',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_db.tbl_data_fhw_mat_malariaassessment
             GROUP BY meta_DE_init, meta_DE_date
 
             UNION SELECT 'CHW Monthly Service Report',
