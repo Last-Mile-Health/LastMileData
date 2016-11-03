@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" type="text/css" />
         <link rel="stylesheet" href="../../lib/multiselect.css" type="text/css" />
-        <link rel="stylesheet" href="../../lib/shepherd-1.8.1/shepherd-theme-arrows.css" type="text/css" />
+        <link rel="stylesheet" href="../../lib/shepherd-1.8.1/shepherd-theme-lmd.css" type="text/css" />
         <link rel="stylesheet" href="../css/page_dataPortal.css" type="text/css" />
         
         <?php

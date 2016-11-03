@@ -40,7 +40,7 @@ $(document).ready(function(){
     ko.applyBindings({groups: filteredSidebar}, $('#sidebarDIV')[0]);
 
     // Handle sidebar clicks
-    $('.dp_frag, .dp_iframe, .dp_markdown').click(function(){
+    $('.dp_frag, .dp_iframe, .dp_markdown').click(function(ev){
 
         // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she navigates to another page
         var preventNavigation = false;
@@ -177,7 +177,7 @@ $(document).ready(function(){
             // If user is on the overview page, start the Shepherd tour; otherwise, destroy the tour
             if ( $(this).attr('data-link') === 'Overview' ) {
                 LMD_shepherd.start();
-            } else {
+            } else if (ev.hasOwnProperty('originalEvent')) {
                 LMD_shepherd.destroy();
             }
             
