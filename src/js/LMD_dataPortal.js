@@ -356,7 +356,7 @@ var LMD_dataPortal = (function(){
         
         // Activate "download data" links
         setDownloadLinks_data();
-        setDownloadLinks_charts;
+        setDownloadLinks_charts();
     }
 
 
