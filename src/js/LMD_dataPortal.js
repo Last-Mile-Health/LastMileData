@@ -1,7 +1,7 @@
 // Module:          LMD_dataPortal.js
 // Author:          Avi Kenny
 // Last update:     2014-10-11
-// Dependencies:    LMD_utilities.js, LMD_dimpleHelper, Knockout.js
+// Dependencies:    LMD_utilities.js, LMD_dimpleHelper, Knockout.js, Dimple.js, D3.js
 // Purpose:         Used by frag_indicatorReport.php to dynamically generate indicator reports
 // Notes:           An "indicator" is an individual metric that can be implemented repeatedly (e.g. ANC4+)
 //                  An "indicator instance" (II) is an "implementations" of an indicator in a specific geographic region (e.g. ANC4+ in Konobo)
@@ -237,11 +237,51 @@ var LMD_dataPortal = (function(){
 
 
     // PRIVATE: Activate "download data" links, each of which downloads a CSV of all of the data in the Dimple chart
-    function setDownloadLinks() {
+    function setDownloadLinks_data() {
         $('.downloadData').each(function() {
             var roNumber = $(this).attr('id').slice(9);
             var data = 'text;charset=utf-8,' + encodeURIComponent(csvData[roNumber]);
             $(this).attr('href',"data:" + data);
+        });
+    }
+
+
+    // PRIVATE: Activate "download chart" links, each of which downloads the Dimple chart as a PNG image
+    function setDownloadLinks_charts() {
+        
+        $('.downloadChart').click(function(){
+            
+            // Code adapted from: http://techslides.com/save-svg-as-an-image
+            
+            var chart_id = $(this).closest('.row').find('svg').parent().attr('id');
+            var html = d3.select("#" + chart_id + " svg")
+                    .attr("version", 1.1)
+                    .attr("xmlns", "http://www.w3.org/2000/svg")
+                    .attr('style','background:white')
+                    .node().parentNode.innerHTML;
+
+            var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+            var img = '<img src="'+imgsrc+'">'; 
+            d3.select("#svgdataurl").html(img);
+
+            var canvas = document.querySelector("canvas")
+            var context = canvas.getContext("2d");
+
+            var image = new Image;
+            image.src = imgsrc;
+            image.onload = function() {
+                context.drawImage(image, 0, 0);
+
+                var canvasdata = canvas.toDataURL("image/png");
+
+                var pngimg = '<img src="'+canvasdata+'">'; 
+                d3.select("#pngdataurl").html(pngimg);
+
+                var a = document.createElement("a");
+                a.download = "chart.png";
+                a.href = canvasdata;
+                a.click();
+            };
         });
     }
 
@@ -315,7 +355,8 @@ var LMD_dataPortal = (function(){
         }
         
         // Activate "download data" links
-        setDownloadLinks();
+        setDownloadLinks_data();
+        setDownloadLinks_charts;
     }
 
 

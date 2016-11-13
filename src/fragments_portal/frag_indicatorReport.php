@@ -41,7 +41,6 @@
 
     // Close CURL session and echo JSON
     // JSON consists of 3 javascript objects: data_indicators, data_rawValues, [model_report]
-    // !!!!! Note: this fails if report has only one indicator !!!!!
     curl_close($ch);
     echo "var reportObjects = $json1;". "\n\n";
     echo "var indicatorInstances = $json2;". "\n\n";
@@ -97,7 +96,10 @@
                 <p><b>Narrative</b>: <span data-bind="text:roMetadata_narrative"></span></p>
                 <!-- /ko -->
                 
-                <p><a download="data.csv" class="downloadData btn btn-info btn-sm" data-bind="attr:{id:'download_'+$index()}">Download data</a></p>
+                <p>
+                    <a download="data.csv" class="downloadData btn btn-info btn-sm" data-bind="attr:{id:'download_'+$index()}">Download data</a>
+                    <span class="downloadChart btn btn-info btn-sm">Download chart</span>
+                </p>
                 
             </div>
             <div class='col-md-7'>
@@ -105,4 +107,10 @@
             </div>
         </div>
     </div>
+    
+    <!-- Hidden elements used to download charts -->
+    <div id="svgdataurl" style="display:none"></div>
+    <div id="pngdataurl" style="display:none"></div>
+    <canvas width="590" height="380" style="display:none"></canvas>
+    
 </div>
