@@ -61,8 +61,8 @@ var LMD_utilities = (function(){
         if (number === '' || number === null || typeof number === 'undefined') {
             return '';
         } else {
-            var type = format.split("-")[0];
-            var X = format.split("-")[1] || 1;
+            var type = format ? format.split("-")[0] : null;
+            var X = format ? format.split("-")[1] : 1;
             switch(type) {
                 case 'integer':
                     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
