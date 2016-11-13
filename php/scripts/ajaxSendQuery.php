@@ -14,11 +14,16 @@ $queryDebugging = $_POST['queryDebugging'];
 // Set include path; require connection strings
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
 require_once("cxn.php");
-require_once("PhpConsole.phar");
+
+// Debug queries with PHP Console (uncomment to use)
+//require_once("../includes/PhpConsole.phar");
+//$handler = PhpConsole\Handler::getInstance();
+//$handler->start();
+//$handler->debug($queryString);
 
 // Debug queries
 if ($queryDebugging=='true') {
-    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . $queryString . '")');
+    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . mysqli_real_escape_string($queryString) . '")');
 }
 
 if ($transaction) {
@@ -30,7 +35,7 @@ if ($transaction) {
 
     for ($i=0;$i<count($queryPieces);$i++) {
         if ($queryPieces[$i]<>'') {
-            mysqli_query($cxn, $queryPieces[$i]) ? null : $all_query_ok=false;
+            mysqli_query($cxn, mysqli_real_escape_string($queryPieces[$i])) ? null : $all_query_ok=false;
         }
     }
     
@@ -40,13 +45,14 @@ if ($transaction) {
     } else {
         mysqli_rollback($cxn);
         // Send error header to trigger AJAX error handler
-        header("HTTP/1.1 404 Not Found");
+        echo '{"rKeyAJAX":"nope"}'; // !!!!!
+//        header("HTTP/1.1 404 Not Found");
         
     };
     
 } else {
     // If there is a connection, run query
-    if ( !($cxn && mysqli_query($cxn, $queryString)) ) { // !!!!! $result var is unnecessary !!!!!
+    if ( !($cxn && mysqli_query($cxn, $queryString)) ) {
         // Send error header to trigger AJAX error handler
         // !!!!! Can we send a "custom header" instead ?????
         header("HTTP/1.1 404 Not Found"); // !!!!! change this to 500 / Internal server error !!!!!
