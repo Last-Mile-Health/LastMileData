@@ -77,12 +77,13 @@ $(document).ready(function(){
             }
             
             // Send usage data point to database (tracks sidebar link clicks)
+            // !!!!! Modularize this code !!!!!
             var reportName = $(this).find('a span').text();
             $.ajax({
                 type: "POST",
                 url: "/LastMileData/php/scripts/ajaxSendQuery.php",
                 data: {
-                    'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + reportName + "', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "'",
+                    'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + reportName + "', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
                     'rKey':1,
                     'transaction': 1
                 },
@@ -101,7 +102,11 @@ $(document).ready(function(){
                     
                     $('#mainContainer').load(linkURL, function(responseText, textStatus, jqXHR){
                         if (textStatus === "error") {
+                            // Display error message
                             $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
+                        } else {
+                            // Fire "DP_loaded" event
+                            $(window).trigger('DP_loaded');
                         }
                         setTimeout(function(){
                             $('#whitespaceContainer').slideUp(1000);
@@ -122,6 +127,9 @@ $(document).ready(function(){
                     $.ajax({
                         url: linkURL,
                         success: function(responseText){
+                            
+                            // Fire "DP_loaded" event
+                            $(window).trigger('DP_loaded');
                             
                             // Initialize showdown.js (markdown parser)
                             var converter = new showdown.Converter({
@@ -175,7 +183,7 @@ $(document).ready(function(){
             $(this).addClass('dp-active');
             
             // If user is on the overview page, start the Shepherd tour; otherwise, destroy the tour
-            if ( $(this).attr('data-link') === 'Overview' ) {
+            if ( $(this).attr('data-link') === 'Overview' && sessionStorage.userGroups==='superadmin' ) {
                 LMD_shepherd.start();
             } else if (ev.hasOwnProperty('originalEvent')) {
                 LMD_shepherd.destroy();
@@ -189,6 +197,7 @@ $(document).ready(function(){
         var myHash = location.hash;
         location.href = "#"; location.href = "#spacer"; location.href = myHash; // to account for a scrolling bug
         $('#whitespaceContainer').slideUp(1000);
+        $(window).trigger('DP_loaded');
     };
 
     // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she leaves page

@@ -16,21 +16,25 @@
 
     Specific routes:
 
-    #   ROUTE                               TABLE
-    --  ---                                 -----
-     0  LMD_REST.php/test_rest              lastmile_dataportal.test_rest
-     1  LMD_REST.php/indicators             lastmile_dataportal.tbl_indicators
-     2  LMD_REST.php/instanceValues         lastmile_dataportal.tbl_values
-     3  LMD_REST.php/indicatorInstances     lastmile_dataportal.view_instances
-     4  LMD_REST.php/json_objects           lastmile_dataportal.tbl_json_objects
-     5  LMD_REST.php/reportObjects          lastmile_dataportal.reportobjects
-     6  LMD_REST.php/markdown               lastmile_dataportal.markdown
-     7  LMD_REST.php/users                  lastmile_dataportal.tbl_utility_users
-     8  LMD_REST.php/staff                  lastmile_chwdb.admin_staff
-     9  LMD_REST.php/narratives             lastmile_dataportal.view_reportObjects
-    10  LMD_REST.php/reports                lastmile_dataportal.tbl_reports
-    11  LMD_REST.php/gis                    !!!!!
-    ...                                     ...
+    #   ROUTE                                           TABLE
+    --  ---                                             -----
+     0  LMD_REST.php/test_rest                          lastmile_dataportal.test_rest
+     1  LMD_REST.php/indicators                         lastmile_dataportal.tbl_indicators
+     2  LMD_REST.php/instanceValues                     lastmile_dataportal.tbl_values
+     3  LMD_REST.php/indicatorInstances                 lastmile_dataportal.view_instances
+     4  LMD_REST.php/json_objects                       lastmile_dataportal.tbl_json_objects
+     5  LMD_REST.php/reportObjects                      lastmile_dataportal.reportobjects
+     6  LMD_REST.php/markdown                           lastmile_dataportal.markdown
+     7  LMD_REST.php/users                              lastmile_dataportal.tbl_utility_users
+     8  LMD_REST.php/staff                              lastmile_chwdb.admin_staff
+     9  LMD_REST.php/narratives                         lastmile_dataportal.view_reportObjects
+    10  LMD_REST.php/reports                            lastmile_dataportal.tbl_reports
+    11  Data Portal GIS: communities (remote)           lastmile_chwdb.admin_community
+    12  Data Portal GIS: communities (near-facility)    lastmile_chwdb.admin_community
+    13  Data Portal GIS: communities (CHW-served)       lastmile_chwdb.view_leaflet_communities_chw_2
+    14  Data Portal GIS: community data                 lastmile_dataportal.tbl_leaflet_values
+    15  Data Portal GIS: district data                  lastmile_dataportal.tbl_leaflet_values
+    16  Data Portal GIS: county data                    lastmile_dataportal.tbl_leaflet_values
 
 */
 
@@ -190,41 +194,38 @@ $app->get('/reports/(:id)',function($id='all') {
 
 
 // Route 11: Data Portal GIS: communities (remote)
-// ????? Use `public_view_gisCommunity` and/or `public_view_gisCommunityChw` ?????
 $app->get('/gis_communities_remote/(:id)',function($id='all') {
     LMD_get($id, "communityID", "lastmile_chwdb.admin_community", "communityID, name, X, Y", "proximityHealthFacility='remote'");
 });
 
 
 // Route 12: Data Portal GIS: communities (near-facility)
-// ????? Use `public_view_gisCommunity` and/or `public_view_gisCommunityChw` ?????
 $app->get('/gis_communities_nearFacility/(:id)',function($id='all') {
     LMD_get($id, "communityID", "lastmile_chwdb.admin_community", "communityID, name, X, Y", "proximityHealthFacility='near-facility'");
 });
 
 
 // Route 13: Data Portal GIS: communities (CHW-served)
-// ????? Use `public_view_gisCommunity` and/or `public_view_gisCommunityChw` ?????
 $app->get('/gis_communities_CHW/(:id)',function($id='all') {
-    LMD_get($id, "communityID", "lastmile_chwdb.view_leaflet_communities_chw", "*", 1);
+    LMD_get($id, "communityID", "lastmile_chwdb.view_leaflet_communities_chw_2", "*", 1);
 });
 
 
 // Route 14: Data Portal GIS: community data
 $app->get('/gis_community_data/:period/:id',function($period,$id) {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "indLevel='community' AND periodID IN ($period, 99)");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='community' AND periodID IN ($period, 99)");
 });
 
 
 // Route 15: Data Portal GIS: district data
 $app->get('/gis_district_data/:period/:id',function($period,$id) {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "indLevel='district' AND periodID IN ($period, 99)");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='district' AND periodID IN ($period, 99)");
 });
 
 
 // Route 16: Data Portal GIS: county data
 $app->get('/gis_county_data/:period/:id',function($period,$id) {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "indLevel='county' AND periodID IN ($period, 99)");
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='county' AND periodID IN ($period, 99)");
 });
 
 

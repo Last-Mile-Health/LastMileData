@@ -9,8 +9,11 @@ var map = L.map('map',{
 
 
 // Start loading OSM base layer
+// Uses options from "Leaflet.TileLayer.PouchDBCached" plugin to cache tiles for offline use
 var tileLayer = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 18
+    maxZoom: 18,
+//    useCache: true,
+//    crossOrigin: true
 }).addTo(map);
 
 
@@ -31,30 +34,67 @@ var currInd = {
     
     // `indColors` controls the colors of indicators on the map based on the data provided
     indColors: {
-        quintiles: {},
-        setQuintiles: function(array) {
+        scale: {1:{},2:{},3:{},4:{},5:{}},
+        setScale: function(array) {
+            
+            // Sort array
             array.sort(function(a,b){return a-b;});
             for (var i=array.length-1; i>=0; i--) {
                 if (array[i]===null) {
                     array.splice(i,1);
                 }
             }
-            this.quintiles[0] = array[0];
-            this.quintiles[20] = array[Math.floor(array.length*0.2)-1];
-            this.quintiles[40] = array[Math.floor(array.length*0.4)-1];
-            this.quintiles[60] = array[Math.floor(array.length*0.6)-1];
-            this.quintiles[80] = array[Math.floor(array.length*0.8)-1];
-            this.quintiles[100] = array[array.length-1];
+            
+            // Count number of distinct values in array
+            var distinctArray = [];
+            for (var i=0; i<array.length; i++) {
+                if (distinctArray.indexOf(array[i]) === -1) {
+                    distinctArray.push(array[i]);
+                }
+            }
+            
+            // If array has 5 or fewer distinct values, use those values directly
+            if (distinctArray.length <= 5) {
+                this.scale[1].bottom = distinctArray[0];
+                this.scale[1].top = distinctArray[0];
+                this.scale[2].bottom = distinctArray[1];
+                this.scale[2].top = distinctArray[1];
+                this.scale[3].bottom = distinctArray[2];
+                this.scale[3].top = distinctArray[2];
+                this.scale[4].bottom = distinctArray[3];
+                this.scale[4].top = distinctArray[3];
+                this.scale[5].bottom = distinctArray[4];
+                this.scale[5].top = distinctArray[4];
+                
+            // If array has more than 5 distinct values, use quintiles of distinctArray
+            } else {
+                this.scale[1].bottom = distinctArray[Math.floor(distinctArray.length*0.0)];
+                this.scale[1].top = distinctArray[Math.floor(distinctArray.length*0.2)-1];
+                this.scale[2].bottom = distinctArray[Math.floor(distinctArray.length*0.2)];
+                this.scale[2].top = distinctArray[Math.floor(distinctArray.length*0.4)-1];
+                this.scale[3].bottom = distinctArray[Math.floor(distinctArray.length*0.4)];
+                this.scale[3].top = distinctArray[Math.floor(distinctArray.length*0.6)-1];
+                this.scale[4].bottom = distinctArray[Math.floor(distinctArray.length*0.6)];
+                this.scale[4].top = distinctArray[Math.floor(distinctArray.length*0.8)-1];
+                this.scale[5].bottom = distinctArray[Math.floor(distinctArray.length*0.8)];
+                this.scale[5].top = distinctArray[Math.floor(distinctArray.length*1.0)-1];
+            }
+            
+            
         },
         // Return color corresponding to value, based on which quintile it is in
         returnColor: function(value) {
-            // !!!!! LP: Make the color scale configurable !!!!!
-            return value >= this.quintiles[80] ? '#800026' :
-                   value >= this.quintiles[60] ? '#E31A1C' :
-                   value >= this.quintiles[40] ? '#FD8D3C' :
-                   value >= this.quintiles[20] ? '#FED976' :
-                   value >= this.quintiles[0] ? '#FFEDA0' :
-                              '#ffffff';
+            if(value!==null) {
+                // !!!!! LP: Make the color scale configurable !!!!!
+                return value >= this.scale[5].bottom ? '#4D000F' :
+                       value >= this.scale[4].bottom ? '#A80022' :
+                       value >= this.scale[3].bottom ? '#F03B20' :
+                       value >= this.scale[2].bottom ? '#FD8D3C' :
+                       value >= this.scale[1].bottom ? '#FFFFB2' :
+                       '#ffffff';
+            } else {
+                return '#ffffff';
+            }
         }
     }
 };
@@ -69,7 +109,7 @@ var availability = {
 };
 
 
-// Set URLs global; 
+// Set URLs global
 // contains URLs of sources for GIS coordinates and data
 var urls = {
     coordinates: {
@@ -123,9 +163,8 @@ function GeoJSON(url) {
     // Add data to `features.indVal` property of each geoJSON feature
     this.resetData = function(data) {
         for (var i=0; i<this.features.length; i++) {
-            this.features[i].properties.indVal = null;
             var id = this.features[i].properties['id'];
-            this.features[i].properties.indVal = data[id];
+            this.features[i].properties.indVal = (data[id]===undefined ? null : data[id]);
         }
     };
     
@@ -432,7 +471,6 @@ $(document).ready(function(){
             $('#select_period').prop('disabled',true);
             
             // Add overlay
-            // !!!!! add "loading" GIF !!!!!
             $('.leaflet-container').css('opacity','0.3');
 
             // Set AjaxManager and callback
@@ -456,7 +494,7 @@ $(document).ready(function(){
                 }
 
                 // Set indColors
-                currInd.indColors.setQuintiles(dataArr);
+                currInd.indColors.setScale(dataArr);
 
                 // Add data to geoJSON object
                 var item = 'ind_' + select_level;
@@ -650,11 +688,13 @@ $(document).ready(function(){
                 label = '<i style="background:#FFF"></i> missing';
                 labels.push(label);
                 for (var i=0; i<5; i++) {
-                    from = LMD_utilities.format_number(currInd.indColors.quintiles[20*i], currInd.indFormat);
-                    to = LMD_utilities.format_number(currInd.indColors.quintiles[(20*i) + 20], currInd.indFormat);
-                        label = '<i style="background:' + currInd.indColors.returnColor(currInd.indColors.quintiles[20*i]) + '"></i> ' +
-                            from + '&nbsp;&ndash;&nbsp;' + to;
-                    labels.push(label);
+                    from = LMD_utilities.format_number(currInd.indColors.scale[i+1].bottom, currInd.indFormat);
+                    to = LMD_utilities.format_number(currInd.indColors.scale[i+1].top, currInd.indFormat);
+                        label = '<i style="background:' + currInd.indColors.returnColor(currInd.indColors.scale[i+1].bottom) + '"></i> ' +
+                            (from===to ? from : from + '&nbsp;&ndash;&nbsp;' + to);
+                    if (from!=='') {
+                        labels.push(label);
+                    }
                 }
 
                 div.innerHTML = labels.join('<br>');

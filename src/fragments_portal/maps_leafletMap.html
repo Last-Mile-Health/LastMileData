@@ -1,9 +1,12 @@
 <link rel="stylesheet" href="../../lib/leaflet/leaflet.css" />
 
 <script>
-    // !!!!! does this need to be done synchronously !!!!!
-    $.getScript('../../lib/leaflet/leaflet.js',function(){
-        $.getScript('../js/leafletMap.js');
+    $.getScript('../../lib/leaflet/leaflet.js', function(){
+//        $.getScript('../../lib/pouchdb.min.js', function(){
+//            $.getScript('../../lib/l.tilelayer.pouchdbcached.min.js', function(){
+                $.getScript('../js/leafletMap.js');
+//            });
+//        });
     });
 </script>
 
@@ -177,10 +180,6 @@
         </button>
     </div>
     
-</div>
-
-<div style='z-index:1; font-size:16px; font-weight:bold; color:darkred; text-align:right; position:relative; top:-30px; left:-10px; float:right'>
-    Please note that this is a<br>"beta release" and there might<br>be bugs or inaccurate data.
 </div>
 
 <div id="map"></div>
