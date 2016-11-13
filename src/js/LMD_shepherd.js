@@ -183,7 +183,7 @@ var LMD_shepherd = (function(){
         // Scale dashboard
         tour_basics.addStep({
             title: 'Scale dashboard',
-            text: 'Similar to the Executive Dashboard, there are many different data reports on Last Mile Data. We\'re not going to review them all out now, but check them out when you have the time.',
+            text: 'Similar to the Executive Dashboard, there are many different data reports on Last Mile Data. We\'re not going to review them all now, but check them out when you have the time.',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
@@ -286,6 +286,17 @@ var LMD_shepherd = (function(){
                 {
                     text: 'Next',
                     action: function(){
+                        
+                        // Hide the info box temporarily
+                        var hideInfoBox = function(){
+                            setTimeout(function(){
+                                console.log($('.leaflet-control'));
+                                $('.leaflet-control').hide();
+                                $(window).unbind('DP_loaded',hideInfoBox);
+                            },100);
+                        };
+                        $(window).bind('DP_loaded',hideInfoBox);
+                        
                         tour_basics.next();
                         $('#id_26').click();
                         $('#id_27').click();
@@ -358,7 +369,8 @@ var LMD_shepherd = (function(){
         
         // Finish (B)
         tour_basics.addStep({
-            text: 'Thanks for completing the tour! If you\'ve made it this far, congratulations - you\'ve just won a free home-cooked meal from Nick Gordon. Pepe soup or palm butter. Email Nick to claim your prize...',
+            text: 'Thanks for completing the tour!',
+//            text: 'Thanks for completing the tour! If you\'ve made it this far, congratulations - you\'ve just won a free home-cooked meal from Nick Gordon. Pepe soup or palm butter. Email Nick to claim your prize...',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
