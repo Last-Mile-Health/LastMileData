@@ -9,7 +9,7 @@ error_reporting(0);
 $queryString = $_POST['queryString'];
 $rKey = $_POST['rKey'];
 $transaction = $_POST['transaction'];
-$queryDebugging = $_POST['queryDebugging'];
+$queryDebugging = isset($_POST['queryDebugging']) ? $_POST['queryDebugging'] : 'false';
 
 // Set include path; require connection strings
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
@@ -23,7 +23,7 @@ require_once("cxn.php");
 
 // Debug queries
 if ($queryDebugging=='true') {
-    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . mysqli_real_escape_string($queryString) . '")');
+    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . mysqli_real_escape_string($cxn,$queryString) . '")');
 }
 
 if ($transaction) {
@@ -35,7 +35,7 @@ if ($transaction) {
 
     for ($i=0;$i<count($queryPieces);$i++) {
         if ($queryPieces[$i]<>'') {
-            mysqli_query($cxn, mysqli_real_escape_string($queryPieces[$i])) ? null : $all_query_ok=false;
+            mysqli_query($cxn, $queryPieces[$i]) ? null : $all_query_ok=false;
         }
     }
     

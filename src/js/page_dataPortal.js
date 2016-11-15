@@ -83,7 +83,7 @@ $(document).ready(function(){
                 type: "POST",
                 url: "/LastMileData/php/scripts/ajaxSendQuery.php",
                 data: {
-                    'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + reportName + "', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
+                    'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + LMD_utilities.addSlashes(reportName) + "', `linkURL`='" + LMD_utilities.addSlashes(linkURL) + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
                     'rKey':1,
                     'transaction': 1
                 },
