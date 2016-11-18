@@ -183,7 +183,7 @@ $(document).ready(function(){
             $(this).addClass('dp-active');
             
             // If user is on the overview page, start the Shepherd tour; otherwise, destroy the tour
-            if ( $(this).attr('data-link') === 'Overview' && sessionStorage.userGroups==='superadmin' ) {
+            if ( $(this).attr('data-link') === 'Overview' ) {
                 LMD_shepherd.start();
             } else if (ev.hasOwnProperty('originalEvent')) {
                 LMD_shepherd.destroy();
