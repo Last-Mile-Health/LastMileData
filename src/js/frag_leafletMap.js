@@ -100,13 +100,18 @@ var currInd = {
 };
 
 
-// "Availability" object to deal with the fact that not all indicators are available at all levels
-// !!!!! Set this manually for now; later, pull from server !!!!!
-var availability = {
-    county: [18,28,25,29,115,116,137,138,139,140,141,142,146],
-    district: [18,28,115,116,137,138,139,140,141,142,146],
-    communities_CHW: [18,28,115,116,137,138,139,140,141,142,146]
-};
+// Create "availability" object to deal with the fact that not all indicators are available at all levels
+// Uses 'availability_RAW' object returned via PHP/cURL, at the top of frag_leafletMap.php
+var availability = { county: [], district: [], community: [], communities_CHW: [] };
+for (var key1 in availability_RAW) {
+    var indID = availability_RAW[key1].indID;
+    var indLevels = availability_RAW[key1].indLevels.split(',')
+    for (var key2 in indLevels) {
+        availability[indLevels[key2]].push(Number(indID));
+    }
+}
+availability.communities_CHW = availability.community;
+delete availability.community;
 
 
 // Set URLs global
@@ -284,6 +289,11 @@ geoJSON.healthFacility.loadGISData();
 $(document).ready(function(){
     
     
+    // Initialize knockout.js; bind model to DIV
+    // Uses 'availability_RAW' object returned via PHP/cURL, at the top of frag_leafletMap.php
+    ko.applyBindings(availability_RAW, $('#select_indicator')[0]);
+    
+    
     // Add "info box" (a Leaflet control) that shows info when you hover over a feature
     var info = L.control();
     info.onAdd = function (map) {
@@ -447,15 +457,8 @@ $(document).ready(function(){
             if(availability[key].indexOf(Number(select_indicator))===-1) {
                 $("#select_level option[value='" + key + "']").prop('disabled',true);
             }
-//            console.log(availability[key]); // [1,2,3,5]
-//            console.log(key); // district
             
         }
-//        console.log($("#select_level option[value='county']").val());
-//        console.log(availability['county'].indexOf(Number(select_indicator))!==-1);
-//        console.log(availability['district'].indexOf(Number(select_indicator))!==-1);
-//        console.log(availability['community'].indexOf(Number(select_indicator))!==-1);
-        
         
         // When both "indicator" and "level" are selected, enable "3. Select period" dropdown
         if (select_indicator!=='1. Select indicator' && select_level!=='2. Select level') {

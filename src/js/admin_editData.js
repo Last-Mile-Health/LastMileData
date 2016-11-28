@@ -97,7 +97,7 @@ $(document).ready(function(){
 
 
     // Initialize knockout.js; bind model to DIV
-    ko.applyBindings(adminModel, $('#outerDiv')[0]);
+    ko.applyBindings(availability_RAW, $('#outerDiv')[0]);
 
 
     // Create "changedData" object to hold changed values

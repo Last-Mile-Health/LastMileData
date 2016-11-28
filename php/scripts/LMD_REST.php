@@ -35,6 +35,7 @@
     14  Data Portal GIS: community data                 lastmile_dataportal.tbl_leaflet_values
     15  Data Portal GIS: district data                  lastmile_dataportal.tbl_leaflet_values
     16  Data Portal GIS: county data                    lastmile_dataportal.tbl_leaflet_values
+    17  Data Portal GIS: leaflet data availability      lastmile_dataportal.view_leaflet_availability_2
 
 */
 
@@ -226,6 +227,12 @@ $app->get('/gis_district_data/:period/:id',function($period,$id) {
 // Route 16: Data Portal GIS: county data
 $app->get('/gis_county_data/:period/:id',function($period,$id) {
     LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='county' AND periodID IN ($period, 99)");
+});
+
+
+// Route 17: Data Portal GIS: leaflet data availability
+$app->get('/gis_data_availability/',function($id='all') {
+    LMD_get($id, "indID", "lastmile_dataportal.view_leaflet_availability_2", "*", 1);
 });
 
 

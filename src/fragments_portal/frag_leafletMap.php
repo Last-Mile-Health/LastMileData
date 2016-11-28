@@ -1,10 +1,29 @@
 <link rel="stylesheet" href="../../lib/leaflet/leaflet.css" />
 
+<?php
+    // Echo availability object (!!!!!)
+    echo "<script>";
+
+    // Initiate/configure CURL session
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+    // Echo JSON (indicators for which GIS-linked data is available)
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/gis_data_availability/";
+    curl_setopt($ch,CURLOPT_URL,$url1);
+    $json1 = curl_exec($ch);
+
+    // Close CURL session and echo JSON
+    curl_close($ch);
+    echo "var availability_RAW = $json1;". "\n\n";
+    echo "</script>";
+?>
+
 <script>
     $.getScript('../../lib/leaflet/leaflet.js', function(){
 //        $.getScript('../../lib/pouchdb.min.js', function(){
 //            $.getScript('../../lib/l.tilelayer.pouchdbcached.min.js', function(){
-                $.getScript('../js/leafletMap.js');
+                $.getScript('../js/frag_leafletMap.js');
 //            });
 //        });
     });
@@ -132,23 +151,12 @@
     </div>
     
     <!-- Select indicator -->
-    <!-- !!!!! This should come dynamically from the server !!!!! -->
     <div style="float:left; margin-right:5px">
         <select id="select_indicator" class="indChange form-control">
             <option value='1. Select indicator'>1. Select indicator</option>
-            <option value='18'>Number of births</option>
-            <option value='28'>Number of CHWs deployed</option>
-            <option value='25'>Number of CHW Leaders</option>
-            <option value='29'>Number of Community Clinical Supervisors</option>
-            <option value='115'>Number of malnutrition referrals</option>
-            <option value='116'>Number of vaccination referrals</option>
-            <option value='137'>Estimated percent of infants at least 7 days old who have received BCG + OPV-0</option>
-            <option value='138'>Estimated percent of infants at least 10 weeks old who have received OPV-1 + Penta-1</option>
-            <option value='139'>Estimated percent of infants at least 10 weeks old who have received OPV-2 + Penta-2</option>
-            <option value='140'>Estimated percent of infants at least 10 weeks old who have received OPV-3 + Penta-3</option>
-            <option value='141'>Estimated percent of infants at least 45 weeks old who have received Measles + Yellow Fever</option>
-            <option value='142'>Estimated percent of infants at least 7 days old on track for full vaccination</option>
-            <option value='146'>Percent of child malaria cases treated within 24 hours</option>
+            <!-- ko foreach: $root -->
+            <option data-bind="text:indName, value:indID">hey</option>
+            <!-- /ko -->
         </select>
     </div>
     
