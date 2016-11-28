@@ -143,8 +143,8 @@ $(document).ready(function(){
                         var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
                     }
                     
+                    // Incorrect file extension (not ".lmd" or ".xml")
                     if (['xml','lmd'].indexOf(sFileExtension.toLowerCase()) === -1) {
-                        // Incorrect file extension (not ".lmd" or ".xml")
                         // User is NOT notified that he/she can select XML files; this is a feature for advanced users only
                         $('#modal_uploadLMD_error').text('Please select only ".lmd" files.');
                         anyErrors = true;
@@ -746,29 +746,37 @@ $(window).load(function(){
 
 
 
-// !!!!! Need to create documentation on ODK naming convention scheme !!!!!
 function processLMD(inputKey, inputValue) {
     
     var outputKey, outputValue;
     var fieldType = inputKey.slice(4,7);
 
-// !!!!! rewrite this as a switch !!!!!
-
-    if (fieldType === 'TAB') {
-        outputKey = "table";
-        outputValue = inputValue;
-    } else if (fieldType === 'VAL') {
-        outputKey = inputKey.slice(8);
-        outputValue = inputValue;
-    } else if (fieldType === 'DAT') { // !!!!! this is an artifact of old forms and should be removed !!!!!
-        outputKey = inputKey.slice(8);
-        outputValue = inputValue;
-    } else if (fieldType === 'TIM') {
-        outputKey = inputKey.slice(8);
-        outputValue = inputValue.slice(11,19);
-    } else if (fieldType === 'CHK') {
-        outputKey = "CHK";
-        outputValue = inputValue;
+    switch(fieldType) {
+        
+        case 'TAB':
+            outputKey = "table";
+            outputValue = inputValue;
+            break;
+        case 'VAL':
+            outputKey = inputKey.slice(8);
+            outputValue = inputValue;
+            break;
+        case 'DAT': // !!!!! this is an artifact of old forms and should eventually be removed !!!!!
+            outputKey = inputKey.slice(8);
+            outputValue = inputValue;
+            break;
+        case 'TIM': // !!!!! this is an artifact of old forms and should eventually be removed !!!!!
+            outputKey = inputKey.slice(8);
+            outputValue = inputValue;
+            break;
+        case 'CHK':
+            outputKey = "CHK";
+            outputValue = inputValue;
+            break;
+        default:
+            // !!!!! This error is not currently handled !!!!!
+            outputKey = "invalid LMD file";
+            outputValue = "invalid LMD file";
     }
 
     return {
