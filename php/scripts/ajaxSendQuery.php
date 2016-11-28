@@ -23,7 +23,7 @@ require_once("cxn.php");
 
 // Debug queries
 if ($queryDebugging=='true') {
-    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . mysqli_real_escape_string($cxn,$queryString) . '")');
+    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . $queryString . '")');
 }
 
 if ($transaction) {
