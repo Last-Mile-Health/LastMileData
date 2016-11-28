@@ -19,23 +19,18 @@ require_once("cxn.php");
 
         $queryString = "
 
-            UNION SELECT 'Births, Deaths, Movements (new)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
-            FROM lastmile_chwdb.staging_birthsDeathsMovementsStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Registration (new)',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            SELECT 'Registration (new)' AS myTable,
+            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
             FROM lastmile_chwdb.staging_registrationStep1
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'Training Results Record',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            UNION SELECT 'Training Results Record' AS myTable,
+            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
             FROM lastmile_chwdb.staging_trainingResultsRecordStep1
             GROUP BY meta_DE_init, meta_DE_date
 
-            UNION SELECT 'CHW Monthly Service Report',
-            meta_DE_init, meta_DE_date, COUNT(*), SUM(meta_qa_init<>'')
+            UNION SELECT 'CHW Monthly Service Report' AS myTable,
+            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
             FROM lastmile_chwdb.staging_chwMonthlyServiceReportStep1
             GROUP BY meta_DE_init, meta_DE_date
 

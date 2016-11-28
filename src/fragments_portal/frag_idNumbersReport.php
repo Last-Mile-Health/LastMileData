@@ -58,7 +58,7 @@ require_once("cxn.php");
     <?php
 
         $queryString = "
-            SELECT staffID, staffName, datePositionBegan, datePositionEnded FROM lastmile_chwdb.view_staffposition
+            SELECT staffID, staffName, datePositionBegan, datePositionEnded FROM lastmile_chwdb.view_staffPosition
             WHERE title='CHW'
             ORDER BY staffName;
         ";
@@ -91,7 +91,7 @@ require_once("cxn.php");
     <?php
 
         $queryString = "
-            SELECT staffID, staffName, datePositionBegan, datePositionEnded, title FROM lastmile_chwdb.view_staffposition
+            SELECT staffID, staffName, datePositionBegan, datePositionEnded, title FROM lastmile_chwdb.view_staffPosition
             WHERE title IN ('CHWL','CCS')
             ORDER BY title, staffName;
         ";
