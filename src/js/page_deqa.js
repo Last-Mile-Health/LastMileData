@@ -791,14 +791,13 @@ function processLMD(inputKey, inputValue) {
 function ajaxRefresh() {
     
     // Run script to update localStorage with data values
+    // See refreshData.php for further info
     $.ajax({
         url: "/LastMileData/php/scripts/refreshData.php",
-    //            data: "myTestData=3",     // AVI: Potentially send data to filter localStorage based on user (e.g. only FHWs in one site)
         dataType: "json",
         success: function(data) {
             
-            // !!!!! this code is WET (with refreshData.php); refactor !!!!!
-            // !!!!! most of the data stored in localStorage should be stored in FileSystem (for scalability) !!!!!
+            // !!!!! This data is currently stored in localStorage; should be stored instead in FileSystem (to avoid running out of storage space) !!!!!
             
             // Update localStorage
             localStorage.deqaUsers = JSON.stringify(data['deqaUsers']);
@@ -812,6 +811,7 @@ function ajaxRefresh() {
             
             // Reload page
             setTimeout( function() {
+                // !!!!! build error handler; this results in an infinite loop if any of the above queries fail !!!!!
                 location.reload();
             }, 1500 );
             

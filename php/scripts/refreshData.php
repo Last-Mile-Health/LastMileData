@@ -14,7 +14,7 @@ require_once("cxn.php");
 
 // 1. Update "deqaUsers" (object)
 //  Note that the LOCATE('admin',`userGroups`)>0 clause will pick up both "admin" and "superadmin"
-$query = "SELECT username, password FROM lastmile_dataportal.tbl_utility_users WHERE LOCATE('admin',`userGroups`)>0 OR LOCATE('deqa',`userGroups`)>0";
+$query = "SELECT username, password FROM lastmile_dataportal.tbl_utility_users WHERE LOCATE('admin',`userGroups`)>0 OR LOCATE('deqa',`userGroups`)>0;";
 $result = mysqli_query($cxn, $query) or die("failure");
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
 {
@@ -35,7 +35,7 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
 }
 
 // 3. Update "FHWs" (array)
-$query = "SELECT staffName FROM lastmile_chwdb.view_staffposition WHERE title='CHW';";
+$query = "SELECT staffName FROM lastmile_chwdb.view_staffPosition WHERE title='CHW';";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_fhws = array();
 for ($i=1;$i<=mysqli_num_rows($result);$i++)
@@ -45,9 +45,7 @@ for ($i=1;$i<=mysqli_num_rows($result);$i++)
     array_push($json_fhws,$staffName);
 }
 
-// !!!!! build error handler !!!!!
-
-// !!!!! this code is WET (with deqa.js); refactor !!!!!
+// !!!!! build error handler; this results in an infinite loop if any of the above queries fail !!!!!
 
 // Return results
 echo '{' ;
@@ -55,5 +53,3 @@ echo '"deqaUsers":' . json_encode($json_deqaUsers) . ", " ;
 echo '"villages":' . json_encode($json_villages) . ", " ;
 echo '"fhws":' . json_encode($json_fhws) ;
 echo '}' ;
-
-?>

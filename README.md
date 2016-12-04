@@ -1,10 +1,10 @@
 Last Mile Data - README
 =======================
 
-AUTHORS:        Avi Kenny, Owen Eddins
-LAST UPDATED:   2015-07-06
-COPYRIGHT:      Copyright 2015 Last Mile Health
-LICENSE:        Distributed under the terms of the GNU General Public License
+> AUTHORS:        Avi Kenny, Owen Eddins
+> LAST UPDATED:   2015-07-06
+> COPYRIGHT:      Copyright 2015 Last Mile Health
+> LICENSE:        Distributed under the terms of the GNU General Public License
 
 
 I. Overview
