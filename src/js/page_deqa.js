@@ -6,8 +6,13 @@ $(document).ready(function(){
         queryDebugging: false
     };
     
-    // Set app version manually here
-    $('#appVersion').text('00499');
+    // Set app "last updated" timestamp (from AppCache manifest)
+    $.ajax({
+        url: 'http://localhost/LastMileData/lastmiledata.appcache',
+        success: function(data){
+            $('#appVersion').text('App last updated: ' + data.substring(23,47));
+        }
+    });
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
