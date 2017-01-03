@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <footer>
-                        <p>&copy; Copyright 2015 Last Mile Health.</p>
+                        <p>&copy; Copyright <?php echo date("Y"); ?> Last Mile Health.</p>
                     </footer>
                 </div>
             </div>
