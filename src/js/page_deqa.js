@@ -8,7 +8,7 @@ $(document).ready(function(){
     
     // Set app "last updated" timestamp (from AppCache manifest)
     $.ajax({
-        url: 'http://localhost/LastMileData/lastmiledata.appcache',
+        url: '../../lastmiledata.appcache',
         success: function(data){
             $('#appVersion').text('App last updated: ' + data.substring(23,47));
         }
