@@ -55,11 +55,7 @@ var LMD_shepherd = (function(){
                         $.ajax({
                             type: "POST",
                             url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: {
-                                'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Basics tour - start', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
-                                'rKey':1,
-                                'transaction': 1
-                            },
+                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Basics tour - start', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
                             dataType: "json"
                         });
                     }
@@ -74,11 +70,7 @@ var LMD_shepherd = (function(){
                         $.ajax({
                             type: "POST",
                             url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: {
-                                'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Programs tour - start', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
-                                'rKey':1,
-                                'transaction': 1
-                            },
+                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Programs tour - start', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
                             dataType: "json"
                         });
                     }
@@ -374,11 +366,7 @@ var LMD_shepherd = (function(){
                         $.ajax({
                             type: "POST",
                             url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: {
-                                'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Basics tour - finished', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
-                                'rKey':1,
-                                'transaction': 1
-                            },
+                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Basics tour - finished', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
                             dataType: "json"
                         });
                     }
@@ -682,11 +670,7 @@ var LMD_shepherd = (function(){
                         $.ajax({
                             type: "POST",
                             url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: {
-                                'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Programs tour - finished', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
-                                'rKey':1,
-                                'transaction': 1
-                            },
+                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Programs tour - finished', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
                             dataType: "json"
                         });
                     }

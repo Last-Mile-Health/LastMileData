@@ -2,6 +2,7 @@ $(document).ready(function(){
     
     DataPortal_GLOBALS = {
         // This variable is set to true if any data changes occur (currently only used by "admin_editData.php" fragment)
+        // !!!!! Expand to other pages !!!!!
         anyChanges: false
     };
 
@@ -82,11 +83,7 @@ $(document).ready(function(){
             $.ajax({
                 type: "POST",
                 url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                data: {
-                    'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + LMD_utilities.addSlashes(reportName) + "', `linkURL`='" + LMD_utilities.addSlashes(linkURL) + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';",
-                    'rKey':1,
-                    'transaction': 1
-                },
+                data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + LMD_utilities.addSlashes(reportName) + "', `linkURL`='" + LMD_utilities.addSlashes(linkURL) + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
                 dataType: "json"
             });
 
@@ -150,11 +147,7 @@ $(document).ready(function(){
                                 $.ajax({
                                     type: "POST",
                                     url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                                    data: {
-                                        'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Link click', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "'",
-                                        'rKey':1,
-                                        'transaction': 1
-                                    },
+                                    data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Link click', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "'" },
                                     dataType: "json"
                                 });
                             });
@@ -201,9 +194,10 @@ $(document).ready(function(){
     };
 
     // If "DataPortal_GLOBALS.anyChanges" has been set to true, warn user before he/she leaves page
+    // Note: with Chrome 51+, a custom message cannot be passed to the user (see here: https://www.chromestatus.com/feature/5349061406228480)
     window.onbeforeunload = function() {
         if(DataPortal_GLOBALS.anyChanges) {
-            return "You have unsaved changes to data. If you leave or reload this page, all changes will be lost.";
+            return 1;
         }
     };
 

@@ -7,8 +7,8 @@ error_reporting(0);
 
 // Get query string, rKey (record identifier), and queryDebugging flag
 $queryString = $_POST['queryString'];
-$rKey = $_POST['rKey'];
-$transaction = $_POST['transaction'];
+$rKey = isset($_POST['rKey']) ? $_POST['rKey'] : 1;
+$transaction = isset($_POST['transaction']) ? $_POST['transaction'] : false;
 $queryDebugging = isset($_POST['queryDebugging']) ? $_POST['queryDebugging'] : 'false';
 
 // Set include path; require connection strings

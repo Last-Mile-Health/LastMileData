@@ -90,7 +90,7 @@ var LMD_utilities = (function(){
             case 'ajaxLoader':
                 // Disable the button; load the "AJAX loader" GIF into it
                 $selector.prop('disabled','disabled');
-                $selector.html("<img src='/LastMileData/build/images/ajax_loader.gif'>")
+                $selector.html("<img src='/LastMileData/build/images/ajax_loader.gif'>");
                 break;
             case 'enable':
                 // Enable the button; optionally restore the buttonText
