@@ -29,13 +29,17 @@
      8  LMD_REST.php/staff                              lastmile_chwdb.admin_staff
      9  LMD_REST.php/narratives                         lastmile_dataportal.view_reportObjects
     10  LMD_REST.php/reports                            lastmile_dataportal.tbl_reports
-    11  Data Portal GIS: communities (remote)           lastmile_chwdb.admin_community
-    12  Data Portal GIS: communities (near-facility)    lastmile_chwdb.admin_community
-    13  Data Portal GIS: communities (CHW-served)       lastmile_chwdb.view_leaflet_communities_chw_2
-    14  Data Portal GIS: community data                 lastmile_dataportal.tbl_leaflet_values
-    15  Data Portal GIS: district data                  lastmile_dataportal.tbl_leaflet_values
-    16  Data Portal GIS: county data                    lastmile_dataportal.tbl_leaflet_values
-    17  Data Portal GIS: leaflet data availability      lastmile_dataportal.view_leaflet_availability_2
+    11  LMD_REST.php/gis_communities_remote             lastmile_chwdb.admin_community
+    12  LMD_REST.php/gis_communities_nearFacility       lastmile_chwdb.admin_community
+    13  LMD_REST.php/gis_communities_CHW                lastmile_chwdb.view_leaflet_communities_chw_2
+    14  LMD_REST.php/gis_community_data                 lastmile_dataportal.tbl_leaflet_values
+    15  LMD_REST.php/gis_district_data                  lastmile_dataportal.tbl_leaflet_values
+    16  LMD_REST.php/gis_county_data                    lastmile_dataportal.tbl_leaflet_values
+    17  LMD_REST.php/gis_data_availability              lastmile_dataportal.view_leaflet_availability_2
+    18  LMD_REST.php/indicatorInstancesFiltered         lastmile_dataportal.view_instances
+    19  LMD_REST.php/instanceValuesFiltered             lastmile_dataportal.view_values
+    20  LMD_REST.php/geoCuts                            lastmile_dataportal.tbl_geocuts
+    21  LMD_REST.php/indCategories                      lastmile_dataportal.view_categories
 
 */
 
@@ -233,6 +237,42 @@ $app->get('/gis_county_data/:period/:id',function($period,$id) {
 // Route 17: Data Portal GIS: leaflet data availability
 $app->get('/gis_data_availability/',function($id='all') {
     LMD_get($id, "indID", "lastmile_dataportal.view_leaflet_availability_2", "*", 1);
+});
+
+
+// Route 18: Indicator/instance metadata (filtered by category and cut) (lastmile_dataportal.view_instances)
+$app->get('/indicatorInstancesFiltered/:category/(:geoName)',function($category,$geoName='all') {
+    $geo = $geoName=='all' ? 1 : "geoName = '$geoName'";
+    LMD_get('all', "instID", "lastmile_dataportal.view_instances", "*", "archived <> 1 AND indCategory='$category' AND $geo");
+});
+
+
+// Route 19: Indicator/instance values (filtered by category, cut, and date range) (lastmile_dataportal.view_values)
+// minDate and maxDate should be specified in terms of "# of months since year 0" (i.e. year*12 + month)
+$app->get('/instanceValuesFiltered/:category/:geoName/:startDate/:endDate',function($category,$geoName,$minDate,$maxDate) {
+    $geo = $geoName=='all' ? 1 : "geoName = '$geoName'";
+    LMD_get('all', "instID", "lastmile_dataportal.view_values", "month, year, instID, instValue", "archived <> 1 AND indCategory='$category' AND $geo AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
+});
+
+
+// Route 20: Indicator/instance geoCuts (lastmile_dataportal.tbl_geocuts)
+$app->get('/geoCuts/(:id)',function($id='all') {
+    LMD_get($id, "geoID", "lastmile_dataportal.tbl_geocuts", "*", 1);
+});
+$app->post('/geoCuts/', function() {
+    LMD_post("lastmile_dataportal.tbl_geocuts");
+});
+$app->put('/geoCuts/:id', function($id) {
+    LMD_put($id, "geoID", "lastmile_dataportal.tbl_geocuts");
+});
+$app->delete('/geoCuts/:id', function($id) {
+    LMD_delete($id, "geoID", "lastmile_dataportal.tbl_geocuts");
+});
+
+
+// Route 21: Indicator/instance categories (lastmile_dataportal.view_categories)
+$app->get('/indCategories/(:id)',function($id='all') {
+    LMD_get($id, "", "lastmile_dataportal.view_categories", "*", 1);
 });
 
 
