@@ -26,7 +26,6 @@ executeStatements('lastmile_chwdb','staging_odk_routinevisit', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_vaccinetracker', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_supervisionvisitlog', $cxn);
 executeStatements('lastmile_upload','temp_chss_training_january2017', $cxn);
-executeStatements('lastmile_upload','temp_chss_training_january2017', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
