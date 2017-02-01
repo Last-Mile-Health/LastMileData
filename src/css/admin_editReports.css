@@ -1,0 +1,58 @@
+
+#editReports_bottom {
+    font-weight: bold;
+    color: #333;
+}
+
+#editReports_bottom .roContainer {
+    padding: 5px;
+    margin: 5px;
+    width: 800px;
+    background: lightblue;
+    border: 1px solid #AAA;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px #eee;
+}
+
+#btn_save {
+    width: 800px;
+}
+
+#editReports_bottom input {
+    border-radius: 4px;
+    border: none;
+}
+
+#editReports_bottom .roContainer input {
+    margin-top: 2px;
+}
+
+#displayOrder {
+    margin: 10px;
+    font-size:20px;
+    width: 400px;
+}
+
+.btn {
+    margin: 5px;
+}
+
+.btn-sm, .btn-xs {
+    position:relative;
+    top:-7px;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+#addNewRO {
+    width: 800px;
+}
+
+#editReports_top td {
+    padding-right:5px;
+}
+
+.repButton {
+    position:relative;
+    top:-1px;
+}

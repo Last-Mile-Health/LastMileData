@@ -40,6 +40,7 @@
     19  LMD_REST.php/instanceValuesFiltered             lastmile_dataportal.view_values
     20  LMD_REST.php/geoCuts                            lastmile_dataportal.tbl_geocuts
     21  LMD_REST.php/indCategories                      lastmile_dataportal.view_categories
+    22  LMD_REST.php/max                                various
 
 */
 
@@ -118,7 +119,6 @@ $app->put('/json_objects/:id', function($id) {
 // Route 5: Data Portal "report objects" (lastmile_dataportal.tbl_reportobjects)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 $app->get('/reportObjects/(:id)',function($id='all') {
-    // !!!!! May need to create another address for this (e.g. /GETreportobjects/) !!!!!
     LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", "*", "archived <> 1");
 });
 $app->post('/reportObjects/', function() {
@@ -179,7 +179,7 @@ $app->delete('/staff/:id', function($id) {
 
 // Route 9: Data Portal narratives (lastmile_dataportal.view_reportObjects)
 $app->get('/narratives/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.view_reportobjects", "id, reportID, reportName, displayOrder, roName, roMetaData_target, roMetadata_narrative", 1);
+    LMD_get($id, "id", "lastmile_dataportal.view_reportobjects", "id, reportID, reportName, displayOrder, roName, ro_narrative", 1);
 });
 $app->post('/narratives/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");
@@ -194,7 +194,16 @@ $app->delete('/narratives/:id', function($id) {
 
 // Route 10: Data Portal report titles (lastmile_dataportal.tbl_reports)
 $app->get('/reports/(:id)',function($id='all') {
-    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "*", 1);
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "reportID, reportName", "archived <> 1");
+});
+$app->post('/reports/', function() {
+    LMD_post("lastmile_dataportal.tbl_reports");
+});
+$app->put('/reports/:id', function($id) {
+    LMD_put($id, "reportID", "lastmile_dataportal.tbl_reports");
+});
+$app->delete('/reports/:id', function($id) {
+    LMD_delete($id, "reportID", "lastmile_dataportal.tbl_reports");
 });
 
 
@@ -273,6 +282,12 @@ $app->delete('/geoCuts/:id', function($id) {
 // Route 21: Indicator/instance categories (lastmile_dataportal.view_categories)
 $app->get('/indCategories/(:id)',function($id='all') {
     LMD_get($id, "", "lastmile_dataportal.view_categories", "*", 1);
+});
+
+
+// Route 22: Returns maximum value of a field from a given table (various)
+$app->get('/max/:schema/:table/:idFieldName',function($schema,$table,$idFieldName) {
+    LMD_get('all', '', "$schema.$table", "MAX($idFieldName) AS max", 1);
 });
 
 
