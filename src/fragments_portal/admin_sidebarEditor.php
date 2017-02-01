@@ -27,11 +27,11 @@ $.getScript('../js/admin_sidebarEditor.js');
 
 <div id="sidebarDIV_edit">
     <div id="sidebarDIV_edit2" data-bind="foreach:sidebar">
-        <div class="outerTab" data-bind="attr: {id:id}"> <!-- rv-each-sidebar="sidebar_model_edit" -->
+        <div class="outerTab" data-bind="attr: {id:id}">
             <input class="ui-state-default ui-corner-all" data-bind="value:name">
-            <button class="deleteOuter btn btn-xs btn-danger" data-bind="click:$root.actions.deleteOuter">X</button>
             <button class="deleteOuter btn btn-xs btn-warning" data-bind="click:$root.actions.moveOuterUp">&#8593;</button>
             <button class="deleteOuter btn btn-xs btn-warning" data-bind="click:$root.actions.moveOuterDown">&#8595;</button>
+            <button class="deleteOuter btn btn-xs btn-danger" data-bind="click:$root.actions.deleteOuter">X</button>
             <div data-bind="foreach: tabs">
                 <div data-bind="attr: {id:id}" class="innerTab">
                     <input class="ui-state-default ui-corner-all" data-bind="value:name">

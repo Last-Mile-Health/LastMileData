@@ -59,9 +59,9 @@
         <div class='row'>
             <hr style="margin:15px; border:1px solid #eee;">
             <div class='col-md-4'>
-                <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + roMetadata_name"></h3>
-                <p><b>Definition</b>: <span data-bind="text:roMetadata_description"></span></p>
-                <p data-bind="if:roMetadata_target"><b>FY16 Target</b>: <span data-bind="text: LMD_utilities.format_number(roMetadata_target,roMetadata_targetFormat)"></span></p>
+                <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + ro_name"></h3>
+                <p><b>Definition</b>: <span data-bind="text:ro_description"></span></p>
+                <!--<p data-bind="if:roMetadata_target"><b>Target</b>: <span data-bind="text: LMD_utilities.format_number(roMetadata_target,roMetadata_targetFormat)"></span></p>-->
                 <table class='ptg_data'>
                     
                     <tr>
@@ -92,8 +92,8 @@
                 
                 <hr class='smallHR'>
                 
-                <!-- ko if: roMetadata_narrative -->
-                <p><b>Narrative</b>: <span data-bind="text:roMetadata_narrative"></span></p>
+                <!-- ko if: ro_narrative -->
+                <p><b>Narrative</b>: <span data-bind="text:ro_narrative"></span></p>
                 <!-- /ko -->
                 
                 <p>

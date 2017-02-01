@@ -132,18 +132,18 @@ var LMD_dataPortal = (function(){
             var instID = d.instIDs[0];
             var metadata = instanceMetadata[instID];
             
-            if ( d.roMetadata_name == null || d.roMetadata_name == '' ) {
-                d.roMetadata_name = metadata.indName;
+            if ( d.ro_name == null || d.ro_name == '' ) {
+                d.ro_name = metadata.indName;
             }
-            if ( d.roMetadata_targetFormat == null || d.roMetadata_targetFormat == '' ) {
-                d.roMetadata_targetFormat = metadata.indFormat;
+            if ( d.ro_description == null || d.ro_description == '' ) {
+                d.ro_description = metadata.indDefinition;
             }
-            if ( d.roMetadata_description == null || d.roMetadata_description == '' ) {
-                d.roMetadata_description = metadata.indDefinition;
-            }
-            if ( d.roMetadata_target == null || d.roMetadata_target == '' ) {
-                d.roMetadata_target = metadata.indTarget;
-            }
+//            if ( d.roMetadata_targetFormat == null || d.roMetadata_targetFormat == '' ) {
+//                d.roMetadata_targetFormat = metadata.indFormat;
+//            }
+//            if ( d.roMetadata_target == null || d.roMetadata_target == '' ) {
+//                d.roMetadata_target = metadata.indTarget;
+//            }
             
             // Create "dates" array, for CSV data
             var dates = [];
@@ -179,7 +179,7 @@ var LMD_dataPortal = (function(){
             uniqueDates.sort();
             
             // Populate "CSV" object (for "download data" function)
-            var csvFile = '"' + d.roMetadata_name + '"' + '\n' + 'month,';
+            var csvFile = '"' + d.ro_name + '"' + '\n' + 'month,';
             for (var key in d.chart_instIDs) {
                 csvFile += instanceMetadata[d.chart_instIDs[key]].instShortName + ','
             }

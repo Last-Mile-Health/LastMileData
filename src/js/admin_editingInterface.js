@@ -99,10 +99,9 @@ $(document).ready(function(){
                 modelHeaders: ['Report name','#','Indicator name','Target','Narrative'],
                 modelDefaults: {
                     reportName: "",
-                    displayOrder: "", // !!!!! This is problematic if the MySQL displayOrder fields "skip" integers (e.g. 1,2,3,5,6,...); will lead to misalignment between the displayOrder field and the "indicator number" on the report
+                    displayOrder: "",
                     roName: "",
-                    roMetadata_target: "",
-                    roMetadata_narrative: ""
+                    ro_narrative: ""
                 }
             };
             break;

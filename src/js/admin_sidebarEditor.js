@@ -33,22 +33,30 @@ $(document).ready(function(){
         
         // Delete OUTER tab
         deleteOuter: function(){
-            // Get ID of item and corresponding indexes
-            var id = $(event.currentTarget).parent().attr('id');
-            var index = getIndex(id, sidebar_model_obs);
+            // Display "confirm" dialog box
+            var confirm = window.confirm("Are you sure you want to delete this object?");
+            if (confirm) {
+                // Get ID of item and corresponding indexes
+                var id = $(event.currentTarget).parent().attr('id');
+                var index = getIndex(id, sidebar_model_obs);
 
-            // Remove the item
-            sidebar_model_obs.splice(index,1);
+                // Remove the item
+                sidebar_model_obs.splice(index,1);
+            }
         },
         
         // Delete INNER tab
         deleteInner: function(){
-            // Get ID of item and corresponding indexes
-            var id = $(event.currentTarget).parent().attr('id');
-            var index = getIndex(id, sidebar_model_obs);
+            // Display "confirm" dialog box
+            var confirm = window.confirm("Are you sure you want to delete this object?");
+            if (confirm) {
+                // Get ID of item and corresponding indexes
+                var id = $(event.currentTarget).parent().attr('id');
+                var index = getIndex(id, sidebar_model_obs);
 
-            // Remove the item
-            sidebar_model_obs()[index.outer].tabs.splice(index.inner,1);
+                // Remove the item
+                sidebar_model_obs()[index.outer].tabs.splice(index.inner,1);
+            }
         },
         
         // Add a new OUTER tab
