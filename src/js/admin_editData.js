@@ -130,7 +130,7 @@ $(document).ready(function(){
             queryString += "('" + x.month + "','" + x.year + "','" + x.instID + "','" + x.value + "'" + ");";
         }
 
-        var myData = {'queryString': queryString} ;
+        var myData = {'queryString': queryString, 'transaction': true} ;
 
         // Send AJAX request
         $.ajax({
