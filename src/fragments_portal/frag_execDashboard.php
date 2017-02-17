@@ -80,7 +80,7 @@
             {
                 name: 'Correct Treatment Rate ',
                 definition: 'Percentage of patient audits for which correct treatment was given',
-                dataSource: 'CCS supervision trackers (Not yet available due to data quality issues; data will be available starting in November)',
+                dataSource: 'CCS supervision trackers (Data is curently unavailable due to CHSS compliance issues)',
                 groups: [
                     { name: '', instIDs: [413,412,426] }
                 ]
@@ -95,8 +95,8 @@
             },
             {
                 name: 'Number of supervision checklists correctly filled and reported by CHSS',
-                definition: 'TBD. This indicator will be finalized once the national CHSS package of services is finalized.',
-                dataSource: 'TBD. Will likely be the CHSS Monthly Service Report.',
+                definition: 'TBD. This indicator is pending review by the programs team.',
+                dataSource: 'TBD',
                 groups: [
                     { name: '', instIDs: [] }
                 ]
@@ -141,14 +141,6 @@
                     { name: '', instIDs: [389,390,391,392,393,394,395,396,424] }
                 ]
             },
-//            {
-//                name: 'Monthly variance in budget-to-actual',
-//                definition: 'Total variance between budget and actual expenditure',
-//                dataSource: 'Monthly financial reports',
-//                groups: [
-//                    { name: '', instIDs: [397,398,399,400,401,402,417,403,404,405,416] }
-//                ]
-//            },
             {
                 name: 'Cash reserves ratio',
                 definition: 'Average number of months of operating expenses covered by cash on hand',
