@@ -165,10 +165,6 @@ var LMD_koREST = (function() {
                         for (var z in this.vm()) {
                             if (this.vm()[z]._cid == cid) {
                                 var myData = ko.mapping.toJS(self.vm()[z],mappingIgnore);
-                                console.log('self.vm()');
-                                console.log(self.vm());
-                                console.log('self.vm()[z]');
-                                console.log(self.vm()[z]);
                             }
                         }
                         break;
@@ -194,6 +190,7 @@ var LMD_koREST = (function() {
                         }
                     },
                     error: function(jqXHR) {
+                        console.log("Error. jqXHR below:");
                         console.log(jqXHR);
                         // Run error callback
                         if (typeof params.errorCallback === 'function') {

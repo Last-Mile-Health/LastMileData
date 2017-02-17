@@ -9,7 +9,6 @@ $(document).ready(function(){
     reports.unshift({reportID:"0", reportName:"Select report..."});
     ko.applyBindings({
         reports: reports
-//        ,actions: actions
     }, $('#editReports_top')[0]);
 
 

@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     // !!!!! BUG: There is an error if you add a markdown page, submit it, and then try to edit it and submit it again !!!!!
 
-    // Set variables here thta are specific to each page ("edit indicators", "edit markdown", etc.)
+    // Set variables here that are specific to each page ("edit indicators", "edit markdown", etc.)
     //      The "sw" variable is passed to admin_editingInterface.php as a GET parameter
     //      The "ei" object is a container for configuration variables used on this page
     //      ei.sortVars is an array of up to three fields; eDate is sorted by these three fields
@@ -85,7 +85,7 @@ $(document).ready(function(){
         
         case 'narratives':
             var ei = {
-                stringH2: 'Edit Data Portal narratives and targets',
+                stringH2: 'Edit Data Portal narratives',
                 hideAddButton: true,
                 hideDeleteButtons: true,
                 sortVars: ['reportName','displayOrder'],
@@ -94,13 +94,13 @@ $(document).ready(function(){
                     field: 'reportName'
                 }],
                 idAttribute: 'id',
-                readOnlyFields: ['reportName','displayOrder','roName'],
-                mysqlIgnore: ['reportName','roName'],
-                modelHeaders: ['Report name','#','Indicator name','Target','Narrative'],
+                readOnlyFields: ['reportName','displayOrder','ro_name'],
+                mysqlIgnore: ['reportName','ro_name'],
+                modelHeaders: ['Report name','#','Indicator name','Narrative'],
                 modelDefaults: {
                     reportName: "",
                     displayOrder: "",
-                    roName: "",
+                    ro_name: "",
                     ro_narrative: ""
                 }
             };
