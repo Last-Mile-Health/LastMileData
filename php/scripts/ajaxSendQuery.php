@@ -21,6 +21,12 @@ require_once("cxn.php");
 //$handler->start();
 //$handler->debug($queryString);
 
+//Temporary: Replace every instance of string lastmile_chwdb.staging_odk_sickChildForm with string lastmile_upload.odk_sickChildForm.
+//Place before queryDebugging so actual queries in $queryString are captured when debug is toggled on.
+if ( strpos( $queryString, 'lastmile_chwdb.staging_odk_sickChildForm' ) !== false ) {
+    $queryString = str_replace( 'lastmile_chwdb.staging_odk_sickChildForm', 'lastmile_upload.odk_sickChildForm', $queryString );
+}
+       
 // Debug queries
 if ($queryDebugging=='true') {
     mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . $queryString . '")');
@@ -32,7 +38,7 @@ if ($transaction) {
     $queryPieces = explode(";",$queryString);
     $all_query_ok=true;
     mysqli_autocommit($cxn,FALSE);
-
+    
     for ($i=0;$i<count($queryPieces);$i++) {
         if ($queryPieces[$i]<>'') {
             mysqli_query($cxn, $queryPieces[$i]) ? null : $all_query_ok=false;
