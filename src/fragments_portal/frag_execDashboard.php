@@ -35,7 +35,7 @@
         indicators: [
             {
                 name: 'Number of CHAs and CHSSs deployed through the NCHA program',
-                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. LMH counties will be reflected here once they receive NCHA trainings.',
+                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules',
                 dataSource: 'Liberia iHRIS database',
                 groups: [
                     { name: 'CHAs', instIDs: [336,337,338,339,340,375] },
@@ -45,7 +45,7 @@
             },
             {
                 name: 'Number of Community Health Assistants (CHAs) deployed',
-                definition: 'Total number of CHAs deployed within LMH counties',
+                definition: 'Total number of CHAs deployed within LMH counties. Training numbers through 2016 include LMH training modules. Training numbers from January 2017 onwards reflect completion of NCHA training modules',
                 dataSource: 'LMH employment trackers',
                 groups: [
                     { name: 'Grand Gedeh', instIDs: [377,379,381,383,385] },
@@ -54,7 +54,7 @@
             },
             {
                 name: 'Number of Community Health Services Supervisors deployed',
-                definition: 'Total number of Community Health Services Supervisors (CHSSs) deployed within LMH counties',
+                definition: 'Total number of Community Health Services Supervisors (CHSSs) deployed within LMH counties.',
                 dataSource: 'LMH employment trackers',
                 groups: [
                     { name: '', instIDs: [420,422,423] }
@@ -62,7 +62,7 @@
             },
             {
                 name: 'Number of people served',
-                definition: 'Number of people in target population living in a community that is served by an active CHA, based on LMH registration data',
+                definition: 'Number of people in target population living in a community that is served by an active CHA, based on LMH registration data.',
                 dataSource: 'LMH registration data',
                 groups: [
                     { name: 'Grand Gedeh', instIDs: [346,419,348,350,352,354] },
@@ -71,7 +71,7 @@
             },
             {
                 name: 'County coverage',
-                definition: 'Percentage of county population >5km of health facility that has access to a CHA, based on household counts',
+                definition: 'Percentage of county population >5km of health facility that has access to a CHA, based on household counts.',
                 dataSource: 'GIS mapping data, CHA registration data',
                 groups: [
                     { name: '', instIDs: [415,414,425] }
@@ -79,7 +79,7 @@
             },
             {
                 name: 'Correct Treatment Rate ',
-                definition: 'Percentage of patient audits for which correct treatment was given',
+                definition: 'Percentage of patient audits for which correct treatment was given.',
                 dataSource: 'CCS supervision trackers (Data is curently unavailable due to CHSS compliance issues)',
                 groups: [
                     { name: '', instIDs: [413,412,426] }
@@ -119,7 +119,7 @@
             },
             {
                 name: 'Average time from job posting to HR initial shortlist delivered to hiring manager',
-                definition: 'Total number of days between job posting and initial shortlist from HR delivered to Hiring Manager / Total number of vacancies',
+                definition: 'Total number of days between job posting and initial shortlist from HR delivered to Hiring Manager / Total number of vacancies.',
                 dataSource: 'Director of HR, HR records',
                 groups: [
                     { name: '', instIDs: [364,365] }
@@ -135,7 +135,7 @@
             },
             {
                 name: 'Percent completion of planned quarterly activities for annual targets',
-                definition: 'Percent completion of projected quarterly deadlines for activities required to successfully achieve annual targets',
+                definition: 'Percent completion of projected quarterly deadlines for activities required to successfully achieve annual targets.',
                 dataSource: 'Quarterly progress report',
                 groups: [
                     { name: '', instIDs: [389,390,391,392,393,394,395,396,424] }
@@ -143,7 +143,7 @@
             },
             {
                 name: 'Cash reserves ratio',
-                definition: 'Average number of months of operating expenses covered by cash on hand',
+                definition: 'Average number of months of operating expenses covered by cash on hand.',
                 dataSource: 'Monthly financial reports',
                 groups: [
                     { name: '', instIDs: [406,407,408] }
@@ -151,7 +151,7 @@
             },
             {
                 name: 'Total funds received',
-                definition: 'Total funds received on a cash basis',
+                definition: 'Total funds received on a cash basis.',
                 dataSource: 'P&D Revenue Roadmap report',
                 groups: [
                     { name: '', instIDs: [355,356,357,358,56] }
@@ -159,7 +159,7 @@
             },
             {
                 name: 'Total funds received & committed against 3-year target',
-                definition: 'Total money received on a cash basis and committed in writing by the donor for receipt in current FY',
+                definition: 'Total money received on a cash basis and committed in writing by the donor for receipt in current FY.',
                 dataSource: 'P&D Revenue Roadmap report',
                 groups: [
                     { name: '', instIDs: [359,360,361,362,57] }
@@ -167,7 +167,7 @@
             },
             {
                 name: 'Percentage of operating reserve raised',
-                definition: 'Total dollars in operating reserve/operating reserve target',
+                definition: 'Total dollars in operating reserve/operating reserve target.',
                 dataSource: 'Monthly financial report',
                 groups: [
                     { name: '', instIDs: [409,410,411] }
@@ -175,7 +175,7 @@
             },
             {
                 name: 'Cost to raise a dollar',
-                definition: 'Total fundraising costs / Net revenue',
+                definition: 'Total fundraising costs / Net revenue.',
                 dataSource: 'Monthly financial report',
                 groups: [
                     { name: '', instIDs: [363] }
