@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHA Form (MSR 5.1) - CHA Monthly Service Report</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        
+ <!-- Note to self: Something in bootstrap.min.css file is causing the matrix layout to chop off the right side of the last column. -->
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+ <!-- End of Note to self. -->       
+        
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap style sheet to override -->
+        
+        <style>
+            .inner_L { width: 3.0in; }
+            .inner_C { width: 2.3in; }
+            .inner_R { width: 2.0in; }
+            
+            #meBox  { position:relative; top:-23px; font-size: 96%; }
+            
+            #MSRT   { position:relative; top:-13px }
+            
+            .thickBox { padding: 0px; font-size: 96%; }
+            
+            /* Header Input */
+            .boxHead    { table-layout: fixed;          width: 7.04in;              }
+            .boxHead    { border-collapse: collapse;    border: none;      margin:0px; padding: 0px;   }
+            
+            .boxHeadColumn1 { width: 1.90in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn2 { width: 1.28in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn3 { width: 1.45in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn4 { width: 1.45in; border:none; margin-right:1px; margin-left:1px; }
+            .boxHeadColumn5 { width: 1.50in; border:none; margin-right:1px; margin-left:1px; }
+            
+            /* Matrices 1-5 */
+            .leftRightColumns td { padding:1px; font-size: 95%; vertical-align: top; }
+            
+            .matrixLayout       { table-layout: fixed; width: 3.52in; }
+            .matrixLayout       { border-collapse: collapse; margin:0px; padding: 1px; }
+                     
+            .matrixLayout th    { height: 20px; font-weight: bold; text-align: center; vertical-align: bottom; border: 1px solid black; padding: 1px; white-space: nowrap; }       
+            
+            .matrixLayout td    { border: 1px solid black; height: 20px; padding: 0px; text-align: center; }
+                       
+            .matrixColumnDescription    { width: 2.39in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumnNoInput        { width: 0.22in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumnInputBold      { width: 0.35in;     border: 1px solid black; border-right: 2px solid black; margin-right:1px; margin-left:0px; }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <div class="page">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h3">5.1 CHA Monthly Service Report</span>
+                <img style="float:right" src="../images/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <!-- New Form Header layout -->
+            <div class="thickBox">
+                
+                <table class="matrixLayout">
+                                  
+                    <tr>
+                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHA:<input class="stored" name="chaName" data-lmd-valid-required="yes" style=" width:1.45in; border:none; "></td>
+                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHA ID:<input class="stored integer" name="chwID" data-lmd-valid-required="yes" style=" width:0.64in; border:none;  "></td>
+                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHSS:<input class="stored" name="chssName" data-lmd-valid-required="yes" data-lmd-valid-autoC="chss" style=" width:0.89in; border:none; "></td>
+                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHSS ID:<input class="stored integer" name="chssID" data-lmd-valid-required="yes" style=" width:0.66in; border:none;"></td>
+                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none;                                " >Report Month:<input class="stored integer" data-lmd-valid-intMin="1" data-lmd-valid-intMax="12" name="monthReported" data-lmd-valid-required="yes" style=" width:0.35in; border:none;" ></td>  
+                    </tr>                  
+                    <tr>
+                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community:<input class="stored" name="community" data-lmd-valid-required="yes" style=" width:1.10in; border:none; "></td>
+                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID:<input class="stored integer" name="communityID" data-lmd-valid-required="yes" style=" width:0.29in; border:none; "></td>
+                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >District:<input class="stored" name="district" data-lmd-valid-required="yes" style=" width:0.91in; border:none; "></td>
+                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Facility:<input class="stored" name="healthFacility" data-lmd-valid-required="yes" style=" width:0.91in; border:none; "></td>
+                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; " >Report Year:<input class="stored integer" data-lmd-valid-intMin="2016" data-lmd-valid-intMax="2030" name="yearReported"  data-lmd-valid-required="yes" style=" width:0.45in; border:none; "></td>                        
+                    </tr>
+                    
+                </table>
+                                 
+            </div>
+                 
+            <!-- END: FORM HEADER -->
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="MSRT">
+                              
+                <!-- Left and right columns within MSRT -->
+                <table class="leftRightColumns" >
+                    <tr>
+                        <!-- Begin left column -->
+                        <td> 
+                                                       
+                            <table>
+                                
+                                <tr>
+                                    <td>
+                                        
+                                        <!-- START: Module 1 - Routine Visit -->
+                                        <table class="matrixLayout">
+                                       
+                                        <!-- Table header -->
+                                            <tr>
+                                                <th class="matrixColumnDescription" style="border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom; ">Module 1 - Routine Visit</th>
+                                                <th class="matrixColumnNoInput">W1</th>
+                                                <th class="matrixColumnNoInput">W2</th>
+                                                <th class="matrixColumnNoInput">W3</th>
+                                                <th class="matrixColumnNoInput">W4</th>
+                                                <th class="matrixColumnInputBold" style="font-weight:bold;">Total</th>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2A Routine household visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_A_routine_household_visits" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2B Births (community/home)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_B_births_community_home" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2C Births (facility)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_C_births_facility" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2D Still births</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_D_still_births" data-lmd-valid-required="no"></td>
+                                            </tr>                    
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2E Neonatal deaths</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_E_neonatal_deaths" data-lmd-valid-required="no"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2F Post-neonatal deaths</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_F_post_neonatal_deaths" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2G Child deaths</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_G_child_deaths" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2H Maternal deaths</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_H_maternal_deaths" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2I Community triggers</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_I_community_triggers" data-lmd-valid-required="no"></td>
+                                            </tr>                    
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">1.2J HIV/TB/CM-NTD/MH Suspect Referrals</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_J_HIV_TB_CM_NTD_MH_Suspect_Referrals" data-lmd-valid-required="no"></td>
+                                            </tr>   
+                 
+                                        </table>
+                                        <!-- END: Module 1 - Routine Visit -->
+                                       
+                                    </td>
+                                </tr>
+                                
+                                <!-- Spacer -->
+                                <tr><td></td></tr>
+                                                               
+                                <tr>
+                                    <td>
+                                        
+                                        <!-- START: Module 2 - RMNH -->
+                                        <table class="matrixLayout">
+                                       
+                                        <!-- Table header -->
+                                            <tr>
+                                                <th class="matrixColumnDescription" style="border:none; font-weight:bold; text-align:left; vertical-align: bottom; ">Module 2 - RMNH</th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnInputBold"   style="border:none;" ></th>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1A Pregnant Woman Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_A_pregnant_woman_visits" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1B Referred for Delivery</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_B_referred_for_delivery" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1C Referred for ANC</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_C_referred_for_ANC" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1D Post Natal Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_D_post_natal_visits" data-lmd-valid-required="no"></td>
+                                            </tr>                    
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1E Referred for Danger Sign</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_E_referred_for_danger_sign" data-lmd-valid-required="no"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1F HBMNC within 48 hrs: Mother</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_F_HBMNC_within_48_hrs_mother" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.1G HBMNC within 48 hrs: Infant</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_1_G_HBMNC_within_48_hrs_infant" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">2.2H Clients currently using modern FP</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="2_2_H_clients_currently_using_modern_FP" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                        </table>
+                                        <!-- END: Module 2 - RMNH -->
+                                       
+                                    </td>
+                                </tr>
+                            
+                            </table>
+                            
+                        </td>
+                        <!-- End left column -->
+                        
+                        <!-- Start right column -->
+                        <td style="vertical-align:top;">
+
+                            <table>                               
+                             
+                                 <tr>
+                                    <td>
+                                        
+                                        <!-- START: Module 3 - iCCM -->
+                                        <table class="matrixLayout">
+                                       
+                                        <!-- Table header -->
+                                            <tr>
+                                                <th class="matrixColumnDescription" style="border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom; ">Module 3 - iCCM</th>
+                                                <th class="matrixColumnNoInput">W1</th>
+                                                <th class="matrixColumnNoInput">W2</th>
+                                                <th class="matrixColumnNoInput">W3</th>
+                                                <th class="matrixColumnNoInput">W4</th>
+                                                <th class="matrixColumnInputBold" style="font-weight:bold;">Total</th>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1A Active Case Finds</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_A_active_case_finds" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1B MUAC Red</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_B_MUAC_red" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1C MUAC Yellow</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_C_MUAC_yellow" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1D MUAC Green</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_D_MUAC_green" data-lmd-valid-required="no"></td>
+                                            </tr>                    
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1E Pneumonia cases identified</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_E_pneumonia_cases_identified" data-lmd-valid-required="no"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1F Malaria (RDT +)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_F_malaria_RDT_plus" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1G Diarrhea cases identified</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_G_diarrhea_cases_identified" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1H Pneumonia treated (antibiotics)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_H_pneumonia_treated_antibiotics" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1I Malaria treated (2-11 months)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_I_malaria_treated_2_11_months" data-lmd-valid-required="no"></td>
+                                            </tr>                    
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1J Malaria treated (1-5 years)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_J_malaria_treated_1_5_years" data-lmd-valid-required="no"></td>
+                                            </tr>   
+  
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1K Malaria treated in less than 24 hrs</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_K_malaria_treated_less_24_hrs" data-lmd-valid-required="no"></td>
+                                            </tr>                                              
+                                              
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1L Malaria treated in more than 24 hrs</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_L_malaria_treated_more_24_hrs" data-lmd-valid-required="no"></td>
+                                            </tr>                                              
+                                            
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1M Diarrhea treated (Zinc + ORS)</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_M_diarrhea_treated_zinc_ORS" data-lmd-valid-required="no"></td>
+                                            </tr>  
+                                              
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">3.1N Referred to Health Facility</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="3_1_N_referred_health_facility" data-lmd-valid-required="no"></td>
+                                            </tr>                                              
+                                            
+                                        </table>
+                                        <!-- END: Module 3 - iCCM -->
+                                       
+                                    </td>
+                                </tr>
+                                
+                                <!-- Spacer -->
+                                <tr><td></td></tr>
+                                                               
+                                <tr>
+                                    <td>
+                                        
+                                        <!-- START: Module 4 - HIV, TB, NTD, Mental Health -->
+                                        <table class="matrixLayout">
+                                       
+                                        <!-- Table header -->
+                                            <tr>
+                                                <th class="matrixColumnDescription" style="border:none; font-weight:bold; text-align:left; vertical-align: bottom; ">Module 4 - Module 4 - HIV, TB, NTD, Mental Health</th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnNoInput"     style="border:none;" ></th>
+                                                <th class="matrixColumnInputBold"   style="border:none;" ></th>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">4.1A HIV Client Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">4.1B TB Client Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="" data-lmd-valid-required="no"></td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">4.1C CM-NTD Client Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="" data-lmd-valid-required="no"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">4.1D Mental Health Client Visits</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="" data-lmd-valid-required="no"></td>
+                                            </tr>                    
+   
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">4.1E LTFU HIV Clients Traced</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="" data-lmd-valid-required="no"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="text-align:left; padding-left: 1px;">4.1F LTFU TB Clients Traced</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                            </tr>
+                    
+                                        </table>
+                                        <!-- END: Module 4 - HIV, TB, NTD, Mental Health -->
+                                       
+                                    </td>
+                                </tr>
+                                                                              
+                            </table>
+                                                                             
+                        </td>
+                        <!-- End right column -->
+                    </tr>
+                </table>
+          
+                   
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">MSR.0501</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="meta_DE_init">
+                DE Date: <input class="stored" name="meta_DE_date">
+                QA Initials: <input class="stored" name="meta_QA_init">
+                QA Date: <input class="stored" name="meta_QA_date">
+                <input name='meta_formVersion' class='stored' type='hidden' value='3'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next" class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="dataEntry_chaMonthlyServiceReport">
+       
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
