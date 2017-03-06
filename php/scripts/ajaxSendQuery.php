@@ -51,8 +51,8 @@ if ($transaction) {
     } else {
         mysqli_rollback($cxn);
         // Send error header to trigger AJAX error handler
-        echo '{"rKeyAJAX":"nope"}'; // !!!!!
-//        header("HTTP/1.1 404 Not Found");
+        echo '{"rKeyAJAX":"error"}';
+//        header("HTTP/1.1 404 Not Found"); // !!!!!
         
     };
     
@@ -65,7 +65,7 @@ if ($transaction) {
     }
 }
 
-mysqli_autocommit($cxn,TRUE); // !!!!! Is this necessary ?????
+mysqli_autocommit($cxn,TRUE);
 mysqli_close($cxn);
 
 // Send JSON back to AJAX handlers
