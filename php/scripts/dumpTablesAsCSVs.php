@@ -18,14 +18,21 @@ foreach($files as $file){
     }
 }
 
+executeStatements('lastmile_upload','odk_sickChildForm', $cxn);
+executeStatements('lastmile_upload','odk_chaRestock', $cxn);
+executeStatements('lastmile_upload','odk_routineVisit', $cxn);
+executeStatements('lastmile_upload','odk_supervisionVisitLog', $cxn);
+executeStatements('lastmile_upload','odk_vaccineTracker', $cxn);
+
+// Temporary tables to hold training data
+executeStatements('lastmile_upload','temp_chss_training', $cxn);
+
 executeStatements('lastmile_chwdb','staging_odk_departurechecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_arrivalchecklog', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_chwrestock', $cxn);
-executeStatements('lastmile_upload','odk_sickChildForm', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_routinevisit', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_vaccinetracker', $cxn);
 executeStatements('lastmile_chwdb','staging_odk_supervisionvisitlog', $cxn);
-executeStatements('lastmile_upload','temp_chss_training', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
