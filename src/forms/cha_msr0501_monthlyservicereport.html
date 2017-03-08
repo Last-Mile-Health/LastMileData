@@ -31,7 +31,7 @@
             
             #meBox  { position:relative; top:-23px; font-size: 96%; }
             
-            #MSRT   { position:relative; top:-13px }
+            #MSRT   { position:relative; top:-13px; }
             
             .thickBox { padding: 0px; font-size: 96%; }
             
@@ -51,12 +51,12 @@
             .matrixLayout       { table-layout: fixed; width: 3.52in; }
             .matrixLayout       { border-collapse: collapse; margin:0px; padding: 1px; }
                      
-            .matrixLayout th    { height: 20px; font-weight: bold; text-align: center; vertical-align: bottom; border: 1px solid black; padding: 1px; white-space: nowrap; }       
+            .matrixLayout th    { height: 20px; font-weight: normal; text-align: center; vertical-align: bottom; border: 1px solid black; padding: 1px; white-space: nowrap; }       
             
             .matrixLayout td    { border: 1px solid black; height: 20px; padding: 0px; text-align: center; }
                        
             .matrixColumnDescription    { width: 2.39in;     border: none; margin-right:1px; margin-left:1px; }
-            .matrixColumnNoInput        { width: 0.22in;     border: none; margin-right:1px; margin-left:1px; }
+            .matrixColumnNoInput        { width: 0.22in;     border: none; margin-right:1px; margin-left:1px; font-size:80%; }
             .matrixColumnInputBold      { width: 0.35in;     border: 1px solid black; border-right: 2px solid black; margin-right:1px; margin-left:0px; }
             
         </style>
@@ -70,12 +70,13 @@
         <!-- END: VALIDATION BOX -->
         
         <!-- START: PAGE 1 -->
+        <!-- Shrink page height to fit form layout.  Default is 9.9in. -->
         <div class="page">
             
             <!-- START: FORM HEADER -->
             <div class="formHeader">
                 <img style="float:left" src="../images/logo_liberia.png">
-                <span class="h3">5.1 CHA Monthly Service Report</span>
+                <span class="h3">CHA Monthly Service Report (5.1 )</span>
                 <img style="float:right" src="../images/logo_flag.png">
                 <div style="clear:both"></div>
             </div>
@@ -87,18 +88,18 @@
                 <table class="matrixLayout">
                                   
                     <tr>
-                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHA:<input           class="stored"          name="chaName"          data-lmd-valid-required="yes"                                                           style=" width:1.45in; border:none;  "></td>
-                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHA ID:<input        class="stored integer"  name="chaID"            data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"    style=" width:0.64in; border:none;  "></td>
-                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHSS:<input          class="stored"          name="chssName"         data-lmd-valid-required="yes" data-lmd-valid-autoC="chss"                               style=" width:0.89in; border:none;  "></td>
-                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHSS ID:<input       class="stored integer"  name="chssID"           data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"    style=" width:0.66in; border:none;  "></td>
+                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHA:<input           class="stored"          name="chaName"          data-lmd-valid-required="yes"                                                           style=" width:1.52in; border:none;  "></td>
+                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHA ID:<input        class="stored integer"  name="chaID"            data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"    style=" width:0.70in; border:none;  "></td>
+                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHSS:<input          class="stored"          name="chssName"         data-lmd-valid-required="yes" data-lmd-valid-autoC="chss"                               style=" width:0.96in; border:none;  "></td>
+                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >CHSS ID:<input       class="stored integer"  name="chssID"           data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"    style=" width:0.78in; border:none;  "></td>
                         <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none;                                " >Report Month:<input  class="stored integer"  name="monthReported"    data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="12"      style=" width:0.35in; border:none;  " ></td>  
                     </tr>                  
                     <tr>
-                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community:<input       class="stored"          name="community"        data-lmd-valid-required="yes"                                                           style=" width:1.10in; border:none; "></td>
-                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID:<input    class="stored integer"  name="communityID"      data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"    style=" width:0.29in; border:none; "></td>
-                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >District:<input        class="stored"          name="district"         data-lmd-valid-required="yes"                                                           style=" width:0.91in; border:none; "></td>
-                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Facility:<input        class="stored"          name="healthFacility"   data-lmd-valid-required="yes"                                                           style=" width:0.91in; border:none; "></td>
-                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black; " >Report Year:<input                                  class="stored integer"  name="yearReported"     data-lmd-valid-required="yes" data-lmd-valid-intMin="2016" data-lmd-valid-intMax="2030" style=" width:0.45in; border:none; "></td>                        
+                        <td class="boxHeadColumn1" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community:<input       class="stored"          name="community"        data-lmd-valid-required="yes"                                                           style=" width:1.12in; border:none; "></td>
+                        <td class="boxHeadColumn2" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID:<input    class="stored integer"  name="communityID"      data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"    style=" width:0.30in; border:none; "></td>
+                        <td class="boxHeadColumn3" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >District:<input        class="stored"          name="district"         data-lmd-valid-required="yes"                                                           style=" width:0.93in; border:none; "></td>
+                        <td class="boxHeadColumn4" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Facility:<input        class="stored"          name="healthFacility"   data-lmd-valid-required="yes"                                                           style=" width:0.92in; border:none; "></td>
+                        <td class="boxHeadColumn5" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black; " >Report Year:<input                                  class="stored integer"  name="yearReported"     data-lmd-valid-required="yes" data-lmd-valid-intMin="2016" data-lmd-valid-intMax="2030" style=" width:0.46in; border:none; "></td>                        
                     </tr>
                     
                 </table>
@@ -127,11 +128,11 @@
                                         <!-- Table header -->
                                             <tr>
                                                 <th class="matrixColumnDescription" style="border-top:none; border-left:none; font-weight:bold; text-align:left; vertical-align: bottom; ">Module 1 - Routine Visit</th>
-                                                <th class="matrixColumnNoInput">W1</th>
-                                                <th class="matrixColumnNoInput">W2</th>
-                                                <th class="matrixColumnNoInput">W3</th>
-                                                <th class="matrixColumnNoInput">W4</th>
-                                                <th class="matrixColumnInputBold" style="font-weight:bold;">Total</th>
+                                                <th class="matrixColumnNoInput" >W1</th>
+                                                <th class="matrixColumnNoInput" >W2</th>
+                                                <th class="matrixColumnNoInput" >W3</th>
+                                                <th class="matrixColumnNoInput" >W4</th>
+                                                <th class="matrixColumnInputBold"   style="font-weight:bold; ">Total</th>
                                             </tr>
                     
                                             <tr>
@@ -140,7 +141,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_A_routine_household_visits" data-lmd-valid-intMin="0" data-lmd-valid-intMax="9" data-lmd-valid-required="yes"></td>
+                                                <td><input class="stored matrixColumnInputBold integer" name="1_2_A_routine_household_visits" data-lmd-valid-intMin="0" data-lmd-valid-required="no"></td>
                                             </tr>
                     
                                             <tr>
@@ -580,7 +581,7 @@
                         
             <div id="meBox">
                 <span class="blackBox">M&E</span>
-                <span class="blackBox">MSR.0501</span>
+                <span class="blackBox">MSR.05.01</span>
                 &nbsp;&nbsp;&nbsp;
                 DE Initials: <input class="stored" name="meta_DE_init">
                 DE Date: <input class="stored" name="meta_DE_date">
