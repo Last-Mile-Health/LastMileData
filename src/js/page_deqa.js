@@ -380,7 +380,34 @@ $(document).ready(function(){
     });
 
     // QA Click handlers current forms
-    $('#qa_TST').click(function() {
+        
+    $('#qa_MSR_0501').click(function() {
+        launchQAModal({
+            targetForm: "../forms/cha_msr0501_monthlyservicereport.html",
+            qaFormName: "CHA Form (MSR 5.1) - CHA Monthly Service Report",
+            pKey1_name: "chaID",
+            pKey2_name: "chssID",
+            pKey3_name: "communityID",
+            pKey1_label: "CHA ID",
+            pKey2_label: "CHSS ID",
+            pKey3_label: "Community ID"
+        });
+    }); 
+
+    $('#qa_HHR_0101').click(function() {
+        launchQAModal({
+            targetForm: "../forms/cha_hhr0101_householdregistration.html",
+            qaFormName: "CHA Form (HHR 1.1) - Household Registration Form",
+            pKey1_name: "chaID",
+            pKey2_name: "communityID",
+            pKey3_name: "1_1_A_total_number_households",
+            pKey1_label: "CHA ID",
+            pKey2_label: "Community ID",
+            pKey3_label: "1.1A Total Number Households"
+        });
+    }); 
+    
+        $('#qa_TST').click(function() {
         launchQAModal({
             targetForm: "../forms/0_testDE.html",
             qaFormName: "TEST FORM",
@@ -391,18 +418,7 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    $('#qa_HHR_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_hhr02_householdregistration.html",
-            qaFormName: "CHW: Houusehold Registration",
-            pKey1_name: "chwID",
-            pKey2_name: "communityID",
-            pKey3_name: "totalHouseholdMembers_total",
-            pKey1_label: "CHW ID",
-            pKey2_label: "Community ID",
-            pKey3_label: "Total HH Members for form"
-        });
-    });
+    
     $('#qa_MSR_03').click(function() {
         launchQAModal({
             targetForm: "../forms/chw_msr03_monthlyservicereport.html",
@@ -415,78 +431,20 @@ $(document).ready(function(){
             pKey3_label: "Community ID"
         });
     });
-    $('#qa_MS1_02').click(function() {
+    
+    $('#qa_HHR_02').click(function() {
         launchQAModal({
-            targetForm: "../forms/fhw_ms102_monthlyservicereportmodule1.html",
-            qaFormName: "CHW Form (MS1 02) - CHW-L: CHW Monthly Service Report - Module 1",
+            targetForm: "../forms/fhw_hhr02_householdregistration.html",
+            qaFormName: "CHW: Houusehold Registration",
             pKey1_name: "chwID",
-            pKey2_name: "chwlID",
-            pKey3_name: "communityID",
+            pKey2_name: "communityID",
+            pKey3_name: "totalHouseholdMembers_total",
             pKey1_label: "CHW ID",
-            pKey2_label: "CHW-L ID",
-            pKey3_label: "Community ID"
+            pKey2_label: "Community ID",
+            pKey3_label: "Total HH Members for form"
         });
     });
-    $('#qa_MS2_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_ms202_monthlyservicereportmodule2.html",
-            qaFormName: "CHW Form (MS2 02) - CHW-L: CHW Monthly Service Report - Module 2",
-            pKey1_name: "chwID",
-            pKey2_name: "chwlID",
-            pKey3_name: "communityID",
-            pKey1_label: "CHW ID",
-            pKey2_label: "CHW-L ID",
-            pKey3_label: "Community ID"
-        });
-    });
-    $('#qa_TRR_04').click(function() {
-        launchQAModal({
-            targetForm: "../forms/prg_trr04_trainingresultsrecord.html",
-            qaFormName: "Program: Training Results Record",
-            pKey1_name: "trainingType",
-            pKey2_name: "trainingDate",
-            pKey3_name: "participantName_1",
-            pKey1_label: "Training Type",
-            pKey2_label: "Training Date",
-            pKey3_label: "Participant Name (1)",
-            pKey_date: "pKey2"
-        });
-    });
-     $('#qa_FER_01').click(function() {
-        launchQAModal({
-            targetForm: "../forms/prg_fer01_facilitatorevaluationrecord.html",
-            qaFormName: "Program: Facilitator Evaluation Record",
-            pKey1_name: "evaluatorName",
-            pKey2_name: "evaluatorPosition",
-            pKey3_name: "facilitatorName_1",
-            pKey1_label: "Evaluator Name",
-            pKey2_label: "Evaluator Position",
-            pKey3_label: "Facilitator Name (1)",
-            pKey_date: "pKey2"
-        });
-    });
-    $('#qa_HSV_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/chw_hsv03_healthsurvey.html",
-            qaFormName: "CHW: Health Survey",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Woman Member ID",
-            pKey2_label: "Visit Date",
-            pKey_date: "pKey2"
-        });
-    });    
-    $('#qa_SCH_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_sch03_sickchild.html",
-            qaFormName: "FHW: Sick Child",
-            pKey1_name: "memberID",
-            pKey2_name: "visitDate",
-            pKey1_label: "Member ID",
-            pKey2_label: "Visit date",
-            pKey_date: "pKey2"
-        });
-    });
+
     $('#qa_REF_02').click(function() {
         launchQAModal({
             // !!!!!
@@ -509,7 +467,6 @@ $(document).ready(function(){
         });
     });
 
-    
     // CLICK HANDLER: Query debugging
     $('#toggleQueryDebugging').click(function(){
         GLOBALS.queryDebugging = !GLOBALS.queryDebugging;
