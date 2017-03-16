@@ -801,13 +801,6 @@ function showErrorMessage() {
 
 
 
-// WET with indicators.js
-function addslashes( str ) {
-    return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-}
-
-
-
 function launchQAModal(options)
 {
     // Set global qaOptions object
@@ -855,34 +848,6 @@ function launchQAModal(options)
     // Open modal
     $('#modal_QA').modal();
 }
-
-
-function parseRecordIntoSQL(currentRecord) {
-    
-    // Set array of currentRecord properties that are not stored
-    var notStored = ['table', 'database'];
-    
-    // Begin query string
-    var database = currentRecord.database || 'lastmile_chwdb';
-    var queryString = "INSERT INTO " + database + "." + currentRecord.table + " SET ";
-    
-    // Add key/value pairs to query string
-    for(var key in currentRecord) {
-        // if key isn't in "notStored" array, add it to query string
-        if ( notStored.indexOf(key) == -1) {
-            // !!!!! wrap key in `` characters !!!!!
-            queryString += key + "='" + addslashes(currentRecord[key]) + "', ";
-        }
-    }
-    
-    // Finish query string segment
-    queryString = queryString.slice(0,-2);
-    queryString += ";";
-    
-    // Return query string
-    return queryString;
-}
-
 
 
 function flashDiv(myDiv) {
@@ -950,7 +915,7 @@ function sendRecordsAJAX(queryDebugging){
                     }
                     
                     // Parse SQL Insert query
-                    queryString = parseRecordIntoSQL(currentRecord);
+                    queryString = LMD_utilities.parseJSONIntoSQL(currentRecord, currentRecord.database, currentRecord.table, ['table', 'database']);
                     
                     // Send record to database via AJAX
                     var myData = { 'queryString': queryString, 'rKey': key, 'transaction': 0, 'queryDebugging': queryDebugging } ;

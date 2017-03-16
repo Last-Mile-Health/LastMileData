@@ -1,106 +1,189 @@
 $(document).ready(function(){
-
-    // Declare object to hold "report objects"
-    var reportObjects = ko.observableArray();
-
+    
+    // !!!!! Add ajaxButton usage throughout; test on slow connection !!!!!
 
     // Add "Select report..." to beginning of array; initialize knockout.js; bind model to DIV ("top" model - add/edit/delete reports)
     // Note: `reports` comes from PHP CURL
     reports.unshift({reportID:"0", reportName:"Select report..."});
-    ko.applyBindings({
-        reports: reports
-    }, $('#editReports_top')[0]);
 
 
     // Declare main model for editing sets of report objects
     var erModel = {
-        reportObjects: reportObjects,
-        // Given the ID of an inner/outer tab, return the current index(es) representing its position
-        getIndex: function(id) {
-            var match = 'not found';
-            for(var i=0; i<this.reportObjects().length; i++) {
-                if(this.reportObjects()[i].id() === id) {
-                    match = i;
-                }
-            }
-            
-            return match;
-        },
+        
+        // Object to hold list of reports
+        reports: reports,
+        
+        // Object to hold list of "report objects"
+        reportObjects: ko.observableArray(),
+        
+        // Holds reportID of current report
+        currentReportID: null,
+        
         actions: {
             
-            // Delete report object
-            deleteObj: function(){
+            // Click handler: Add a new report
+            addReport: function() {
                 
-                // Display "confirm" dialog box
-                var confirm = window.confirm("Are you sure you want to delete this object?");
+                // First, check to see if report name is already taken (case insensitive)
+                var newReportName = $('#addReport_input').val();
+                var reportNames = [];
+                for(var key in erModel.reports) {
+                    reportNames.push(erModel.reports[key].reportName.toLowerCase());
+                }
+                var isTaken = reportNames.indexOf(newReportName.toLowerCase())===-1 ? false : true;
+
+                // If report name is not already taken, proceed
+                if (isTaken) {
+                    alert('This report name is already taken. Please choose another name.');
+                } else {
+
+                    // Send database request to add new report
+                    $.ajax({
+                        type: "POST",
+                        url: "/LastMileData/php/scripts/LMD_REST.php/reports/",
+                        data: {
+                            reportName: newReportName
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            // Clear report objects; set reportID; add one blank RO
+                            erModel.reportObjects.removeAll();
+                            erModel.currentReportID = data;
+                            erModel.actions.addNewObj();
+                        },
+                        error: ajaxError
+                    });
+
+                }
+
+            },
+            
+            // Click handler: Edit a report
+            editReport: function() {
+                
+                var reportID = $('#editReport_input').val();
+                
+                // Load report objects
+                erModel.actions.loadReportObjects(reportID);
+                
+                // Display report name and set currentReportID
+                $('#currentReport').text($('#editReport_input option[value=' + reportID + ']')[0].outerText);
+                erModel.currentReportID = reportID;
+                
+            },
+            
+            // Click handler: Delete a report
+            // Note: report is actually "archived", not deleted, and can be restored by a DBA
+            deleteReport: function() {
+
+                // Prompt user with dialog box to confirm deletion
+                var confirm = window.confirm("Are you sure you want to delete this report?");
+
+                // Proceed with "deletion" (archiving)
                 if (confirm) {
-                    // Get ID of item and corresponding index
-                    var id = $(event.currentTarget).parent().parent().attr('id');
-                    var index = erModel.getIndex(id); // !!!!! how do I change this to a `this` reference ?????
 
-                    // Remove the item
-                    erModel.reportObjects.splice(index,1); // !!!!! how do I change this to a `this` reference ?????
+                    // !!!!! Integrate "AJAX button" utility function ?????
+
+                    // Send database request to add new report
+                    $.ajax({
+                        type: "PUT",
+                        url: "/LastMileData/php/scripts/LMD_REST.php/reports/" + $('#deleteReport_input').val(),
+                        data: { archived: 1 },
+                        dataType: "json",
+                        success: function() {
+                            window.location.reload();
+                        },
+                        error: ajaxError
+                    });
+
                 }
                 
             },
-
-            // Move report object up
-            moveObjUp: function(data,event){
+            
+            // Load report objects for a given report into editor
+            loadReportObjects: function(reportID) {
                 
-                // Get ID of item and corresponding index
-                var id = $(event.currentTarget).parent().parent().attr('id');
-                var index = erModel.getIndex(id); // !!!!! how do I change this to a `this` reference ?????
-
-                // Move item UP one place
-                if(index!==0) {
-                    var item = erModel.reportObjects.splice(index,1)[0]; // !!!!! how do I change this to a `this` reference ?????
-                    erModel.reportObjects.splice(index-1, 0, item); // !!!!! how do I change this to a `this` reference ?????
-                }
-                
-            },
-
-            // Move report object down
-            moveObjDown: function(data,event){
-                
-                // Get ID of item and corresponding index
-                var id = $(event.currentTarget).parent().parent().attr('id');
-                var index = erModel.getIndex(id); // !!!!! how do I change this to a `this` reference ?????
-
-                // Move item DOWN one place
-                var item = erModel.reportObjects.splice(index,1)[0]; // !!!!! how do I change this to a `this` reference ?????
-                erModel.reportObjects.splice(index+1, 0, item); // !!!!! how do I change this to a `this` reference ?????
-            },
-
-            // Add a new report object
-            // !!!!! change "outer/inner" language throughout !!!!!
-            addNewRO: function(){
-                
-                // Get maximum ID
+                // Send AJAX request to retrieve report objects associated with that report
                 $.ajax({
                     type: "GET",
-                    url: "/LastMileData/php/scripts/LMD_REST.php/max/lastmile_dataportal/tbl_reportobjects/id",
+                    url: "/LastMileData/php/scripts/LMD_REST.php/reportObjects/" + reportID,
                     dataType: "json",
                     success: function(data) {
-                        // Create new report object; load defaults
-                        erModel.reportObjects.push(ko.mapping.fromJS({ // !!!!! how do I change this to a `this` reference ?????
-                            id: data.max,
-                            instIDs: '',
-                            ro_name: '',
-                            ro_description: '',
-                            chart_type: 'line',
-                            chart_instIDs: ''
-                        }));
+
+                        // !!!!! Be sure to handle cases with reports with zero/one objects !!!!!
+
+                        // Sort `reportObjects` array by displayOrder attribute
+                        data.sort(function(a,b){
+                            if (Number(a.displayOrder) < Number(b.displayOrder)) { return -1; }
+                            else if (Number(a.displayOrder) > Number(b.displayOrder)) { return 1; }
+                            else {
+                                return 0;
+                            }
+                        });
+
+                        // Clear reportObjects array; refill with new objects
+                        erModel.reportObjects.removeAll();
+                        for (var key in data) {
+                            erModel.reportObjects.push(ko.mapping.fromJS(data[key]));
+                        }
+
                     },
                     error: ajaxError
                 });
                 
             },
             
+            // Move report object up
+            moveObjUp: function(data,event) {
+                var index = Number($(event.currentTarget).parent().parent().attr('index'));
+                if(index!==0) {
+                    var item = erModel.reportObjects.splice(index,1)[0];
+                    erModel.reportObjects.splice(index-1, 0, item);
+                }
+                
+            },
+
+            // Move report object down
+            moveObjDown: function(data,event) {
+                var index = Number($(event.currentTarget).parent().parent().attr('index'));
+                var item = erModel.reportObjects.splice(index,1)[0];
+                erModel.reportObjects.splice(index+1, 0, item);
+            },
+
+            // Delete report object
+            deleteObj: function() {
+                
+                // Display "confirm" dialog box
+                var confirm = window.confirm("Are you sure you want to delete this object?");
+                if (confirm) {
+                    var index = Number($(event.currentTarget).parent().parent().attr('index'));
+                    erModel.reportObjects.splice(index,1);
+                }
+                
+            },
+
+            // Add a new report object
+            addNewObj: function() {
+                
+                // Create new report object; load defaults
+                // !!!!! check defaults !!!!!
+                erModel.reportObjects.push(ko.mapping.fromJS({
+                    reportID: erModel.currentReportID,
+                    instIDs: '',
+                    ro_name: '',
+                    ro_description: '',
+                    chart_type: 'line',
+                    chart_instIDs: ''
+                }));
+                
+            },
+            
+            
             // Load metadata from first instance ID
-            loadMetadata: function(){
+            loadMetadata: function() {
                 
+                // Reference to current RO
                 var self = this;
-                
                 var firstInstID = this.instIDs().split(',')[0];
 
                 // Get metadata for first instance ID
@@ -121,14 +204,37 @@ $(document).ready(function(){
                 });
                 
             },
-            
-            // Save all changes
-            saveChanges: function(){
+
+            // Save current set of report objects
+            // For simplicity of code, this deletes all report objects in the database for the current report and then inserts all of the new ones
+            saveChanges: function() {
                 
-                // !!!!! Loop through report objects and parse query string
+                // Begin query string
+                var queryString = "DELETE FROM lastmile_dataportal.tbl_reportobjects WHERE reportID=" + erModel.currentReportID + ";";
                 
+                // Parse data back into regular JS array
+                var roData = ko.mapping.toJS(erModel.reportObjects);
                 
-                // !!!!! Send all changes to server via AJAX in a single transaction
+                // Reset display order based on current array order
+                var i = 1;
+                for (var key in roData) {
+                    roData[key].displayOrder = i++;
+                    queryString += LMD_utilities.parseJSONIntoSQL(roData[key], "lastmile_dataportal", "tbl_reportobjects", ['id']);
+                }
+
+                // Send record to database via AJAX
+                var myData = { 'queryString': queryString, 'transaction': 1 } ;
+                $.ajax({
+                    type: "POST",
+                    url: "/LastMileData/php/scripts/ajaxSendQuery.php",
+                    data: myData,
+                    dataType: "json",
+                    success: function() {
+                        // Manipulate DOM
+                        LMD_utilities.ajaxButton($('#btn_save'), 'alertSuccess', 'Save changes');
+                    },
+                    error: ajaxError
+                });
                 
             }
             
@@ -136,123 +242,17 @@ $(document).ready(function(){
     };
 
 
-    // Initialize knockout.js; bind model to DIV ("bottom" model - edit report objects)
-    ko.applyBindings(erModel, $('#editReports_bottom')[0]);
+    // Initialize knockout.js; bind model to DIV
+    ko.applyBindings(erModel, $('#editReports_container')[0]);
 
 
-    // Click handler: Add a new report
-    $('#addReport').click(function(){
-        
-        // First, check to see if report name is already taken (case insensitive)
-        var newReportName = $('#addReport_input').val();
-        var reportNames = [];
-        for(var key in reports) {
-            reportNames.push(reports[key].reportName.toLowerCase());
-        }
-        var isTaken = reportNames.indexOf(newReportName.toLowerCase())===-1 ? false : true;
-        
-        // If report name is not already taken, proceed
-        if (isTaken) {
-            alert('This report name is already taken. Please choose another name.');
-        } else {
-            
-            // Send database request to add new report
-            $.ajax({
-                type: "POST",
-                url: "/LastMileData/php/scripts/LMD_REST.php/reports/",
-                data: {
-                    reportName: newReportName
-                },
-                dataType: "json",
-                success: function(data) {
-                    console.log('success!');
-                    // !!!!! `data` returned is ID of new report !!!!!
-                    console.log(data);
-                    // !!!!! Go to editor for new report; functionize so that #editReport click handler uses same code !!!!!
-                },
-                error: ajaxError
-            });
-            
-        }
-        
+    // Click handler: View instructions
+    $('#instructions_click').click(function() {
+        // Slide down instructions paragraph; change header
+        $('#instructions_text').slideDown();
+        $('#instructions_click').text('Instructions');
     });
     
-    
-    // Click handler: Edit a report
-    $('#editReport').click(function(){
-        
-        // Send AJAX request to retrieve report objects associated with that report
-        $.ajax({
-            type: "GET",
-            url: "/LastMileData/php/scripts/LMD_REST.php/reportObjects/" + $('#editReport_input').val(),
-            dataType: "json",
-            success: function(data) {
-                
-                // !!!!! Be sure to handle cases with reports with zero/one objects !!!!!
-                
-                // Sort `reportObjects` array by displayOrder attribute
-                // !!!!! `displayOrder` is going to need to be reset by the application right before changes are sent to the server !!!!!
-                data.sort(function(a,b){
-                    if (Number(a.displayOrder) < Number(b.displayOrder)) { return -1; }
-                    else if (Number(a.displayOrder) > Number(b.displayOrder)) { return 1; }
-                    else {
-                        return 0;
-                    }
-                });
-                
-                
-                // Clear reportObjects array; refill with new objects
-                reportObjects.removeAll();
-                
-                for (var key in data) {
-                    reportObjects.push(ko.mapping.fromJS(data[key]));
-                }
-                
-                // !!!!! Testing !!!!!
-//                console.log(reportObjects()[0].instIDs);
-//                setTimeout(function(){
-//                    reportObjects()[0].instIDs("12345");
-//                    console.log(reportObjects()[0].instIDs());
-//                },1000);
-                
-                
-            },
-            error: ajaxError
-        });
-        
-        
-    });
-    
-    
-    // Click handler: Delete a report
-    $('#deleteReport').click(function(){
-        
-        // Prompt user with dialog box to confirm deletion
-        var confirm = window.confirm("Are you sure you want to delete this report?");
-        
-        // Proceed with deletion
-        // Note: in reality, report is "archived", not deleted, and can be restored by a DBA
-        if (confirm) {
-            
-            // !!!!! Integrate "AJAX button" utility function ?????
-            
-            // Send database request to add new report
-            $.ajax({
-                type: "PUT",
-                url: "/LastMileData/php/scripts/LMD_REST.php/reports/" + $('#deleteReport_input').val(),
-                data: { archived: 1 },
-                dataType: "json",
-                success: function() {
-                    window.location.reload();
-                },
-                error: ajaxError
-            });
-            
-        }
-        
-        // !!!!! Reload page
-        
-    });
     
     // !!!!! TEMP; FOR DEVELOPMENT !!!!!
     $('#editReport_input').val('4');

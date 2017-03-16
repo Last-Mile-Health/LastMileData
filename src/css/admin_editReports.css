@@ -29,7 +29,7 @@
 
 #displayOrder {
     margin: 10px;
-    font-size:20px;
+    font-size: 20px;
     width: 400px;
 }
 
@@ -38,21 +38,33 @@
 }
 
 .btn-sm, .btn-xs {
-    position:relative;
-    top:-7px;
-    margin-left:0px;
-    margin-right:0px;
+    position: relative;
+    top: -7px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
-#addNewRO {
+#addNewObj {
     width: 800px;
 }
 
 #editReports_top td {
-    padding-right:5px;
+    padding-right: 5px;
 }
 
 .repButton {
-    position:relative;
-    top:-1px;
+    position: relative;
+    top: -1px;
+}
+
+#instructions_text {
+    display: none;
+}
+
+#instructions_click {
+    cursor: pointer;
+}
+
+#currentReport {
+    font-weight: bold;
 }

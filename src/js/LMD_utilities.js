@@ -146,6 +146,31 @@ var LMD_utilities = (function(){
     }
 
 
+    // PUBLIC:  Takes a JSON object (consisting only of key-value pairs) and parses it into a SQL insert query
+    //          notStored is an array of keys for which the key-value pairs will be ignored
+    function parseJSONIntoSQL(JSON, database, table, notStored) {
+
+        // Begin query string
+        var queryString = "INSERT INTO " + database + "." + table + " SET ";
+
+        // Add key/value pairs to query string
+        for(var key in JSON) {
+            // if key is not null and is not in "notStored" array, add it to query string
+            if (notStored.indexOf(key) == -1 && JSON[key] !== 'NULL' && JSON[key] !== 'null' && JSON[key] != null) {
+                queryString += "`" + key + "`='" + addSlashes(JSON[key]) + "', ";
+            }
+        }
+
+        // Finish query string segment
+        queryString = queryString.slice(0,-2);
+        queryString += ";";
+
+        // Return query string
+        return queryString;
+        
+    }
+
+
     // PUBLIC:  Test if the value is numeric
     function isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -161,6 +186,7 @@ var LMD_utilities = (function(){
         format_number: format_number,
         ajaxButton: ajaxButton,
         addSlashes: addSlashes,
+        parseJSONIntoSQL: parseJSONIntoSQL,
         isNumeric: isNumeric
     };
     
