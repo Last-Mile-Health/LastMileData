@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHA Form (HHR 0101) - Household Registration Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            #meBox { position:relative; top:-17px; font-size: 96%; }
+            
+            #HHRT { position:relative; top:-10px }
+            
+            /* Set font-size in thick box and household registration table to easily fit 30-plus rows in on form */
+            .thickBox { padding:3px; font-size: 100%; }
+            
+            
+            /* Header Input Row 1*/
+            .headerRow1    { table-layout: fixed;           width: 7.25in; }
+            .headerRow1    { border-collapse: collapse;     border: none; margin:0px; padding: 0px; }
+            
+            .headerRow1Column1 { width: 1.85in; margin-right:1px; margin-left:1px; }
+            .headerRow1Column2 { width: 1.30in; margin-right:1px; margin-left:1px; }
+            .headerRow1Column3 { width: 1.80in; margin-right:1px; margin-left:1px; }
+            .headerRow1Column4 { width: 1.20in; margin-right:1px; margin-left:1px; }
+
+            /* Header Input Row 2*/
+            .headerRow2    { table-layout: fixed;           width: 7.25in; }
+            .headerRow2    { border-collapse: collapse;     border: none; margin:0px; padding: 0px; }
+            
+            .headerRow2Column1 { width: 1.85in; margin-right:1px; margin-left:1px; }
+            .headerRow2Column2 { width: 1.30in; margin-right:1px; margin-left:1px; }
+            .headerRow2Column3 { width: 2.98in; margin-right:1px; margin-left:1px; }
+            
+            /* Header Input Row 3*/
+            .headerRow3    { table-layout: fixed;           width: 7.25in; }
+            .headerRow3    { border-collapse: collapse;     border: none; margin:0px; padding: 0px; }
+            
+            .headerRow3Column1 { width: 3.15in; margin-right:1px; margin-left:1px; }
+            .headerRow3Column2 { width: 2.99in; margin-right:1px; margin-left:1px; }
+            
+
+           
+            .householdRegistrationTable     { font-size: 95%;           margin: 0px;     padding: 3px;        border-collapse: collapse;    }
+            .householdRegistrationTable th  { border: 1px solid black;  padding: 3px;    text-align: center;  font-weight: bold;            }
+            .householdRegistrationTable td  { border: 1px solid black;  padding: 0px;    text-align: center;                                }
+
+            .c1     { width:0.17in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c2     { width:0.88in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c3     { width:1.22in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c4     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c5     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c6     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c7     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c8     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c9     { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c10    { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c11    { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c12    { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .c13    { width:0.42in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+       
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+       
+        <!-- START: PAGE 1 -->
+        <div class="page" style="height: 8.75in; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h2">CHA: Household Registration (1.1)</span>
+                <img style="float:right" src="../images/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <div class="thickBox">
+                
+                
+                <div style="font-size: 96%; ">Register all households in your catchment once per year. Enter the number of members in each age group and according to sex in every household. All occupants who sleep regularly in the same house are considered members of the same household.</div>
+                
+                <hr>
+                
+                <table class="headerRow1">              
+                    <tr>
+                        <td class="headerRow1Column1" style="text-align: left; padding-left: 2px; border: 1px solid black; border-bottom: none;                              " >CHA:<input          class="stored"          name="chaName"      data-lmd-valid-required="yes"                                                        style=" width:1.79in; border:none; "></td>
+                        <td class="headerRow1Column2" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >CHA ID:<input       class="stored integer"  name="chaID"        data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999" style=" width:0.95in; border:none; "></td>
+                        <td class="headerRow1Column3" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >Community:<input    class="stored"          name="community"    data-lmd-valid-required="yes"                                                        style=" width:1.27in; border:none; "></td>
+                        <td class="headerRow1Column4" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >Community ID:<input class="stored integer"  name="communityID"  data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999" style=" width:0.37in; border:none; "></td>  
+                    </tr>              
+                </table>
+                <table class="headerRow2">              
+                    <tr>
+                        <td class="headerRow2Column1" style="text-align: left; padding-left: 2px; border: 1px solid black; border-bottom: none;                              " >CHSS:<input              class="stored"             name="chssName"         data-lmd-valid-required="yes"                                                        style=" width:1.70in; border:none; "></td>
+                        <td class="headerRow2Column2" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >CHSS ID:<input           class="stored integer"     name="chssID"           data-lmd-valid-required="yes" data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999" style=" width:0.85in; border:none; "></td>
+                        <td class="headerRow2Column3" style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >Date (yyyy-mm-dd):<input class="stored datepicker"  name="registrationDate" data-lmd-valid-required="yes"                                                        style=" width:2.16in; border:none; "></td>         
+                    </tr>              
+                </table>
+                <table class="headerRow3">
+                    <tr>
+                        <td class="headerRow3Column1" style="text-align: left; padding-left: 2px; border: 1px solid black;                    " >Health District:<input class="stored" name="healthDistrict" data-lmd-valid-required="yes" style=" width:2.71in; border:none; "></td>
+                        <td class="headerRow3Column2" style="text-align: left; padding-left: 2px; border: 1px solid black; border-left: none; " >Facility:<input        class="stored" name="healthFacility" data-lmd-valid-required="yes" style=" width:2.97in; border:none; "></td>
+                    </tr>              
+                </table>
+                          
+            </div>
+            <!-- END: FORM HEADER -->
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="HHRT">
+                
+                
+                <!-- START: Registration table -->
+                <table class='householdRegistrationTable'>
+                    
+                    <!-- Table header -->
+                    <tr>
+                        <th class="c1" style="border:none"></th>
+                        <th style="border:none"></th>
+                        <th style="border:none"></th>
+                        <th colspan="2" scope="colgroup" ># 0-11 mths</th>
+                        <th colspan="2" scope="colgroup" ># 1-5 yrs</th>
+                        <th colspan="2" scope="colgroup" ># 6-14 yrs</th>
+                        <th colspan="2" scope="colgroup" ># 15-49 yrs</th>
+                        <th colspan="2" scope="colgroup" ># 50+ yrs</th>
+                    </tr>
+                   
+                    <!-- Table header -->
+                    <tr>
+                        <th class="c1"></th>
+                        <th>HH ID</th>
+                        <th>Total HH Members</th>
+                        
+                        <th>M</th>
+                        <th>F</th>
+                        
+                        <th>M</th>
+                        <th>F</th>
+                        
+                        <th>M</th>
+                        <th>F</th>
+                        
+                        <th>M</th>
+                        <th>F</th>
+                        
+                        <th>M</th>
+                        <th>F</th>
+                        
+                    </tr>
+                    
+                    <!-- Row 01 0f 25 -->
+                    <tr>
+                        <td>1</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <!-- Row 02 0f 25 -->
+                    <tr>
+                        <td>2</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>                    
+                    <!-- Row 03 0f 25 -->
+                    <tr>
+                        <td>3</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <!-- Row 04 0f 25 -->
+                    <tr>
+                        <td>4</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <!-- Row 05 0f 25 -->
+                    <tr>
+                        <td>5</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 06 0f 25 -->
+                    <tr>
+                        <td>6</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 07 0f 25 -->
+                    <tr>
+                        <td>7</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 08 0f 25 -->
+                    <tr>
+                        <td>8</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    
+                    <!-- Row 09 0f 25 -->
+                    <tr>
+                        <td>9</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 10 0f 25 -->
+                    <tr>
+                        <td>10</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                                        
+                    <!-- Row 11 0f 25 -->
+                    <tr>
+                        <td>11</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    
+                    <!-- Row 12 0f 25 -->
+                    <tr>
+                        <td>12</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    
+                    <!-- Row 13 0f 25 -->
+                    <tr>
+                        <td>13</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 14 0f 25 -->
+                    <tr>
+                        <td>14</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 15 0f 25 -->
+                    <tr>
+                        <td>15</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 16 0f 25 -->
+                    <tr>
+                        <td>16</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 17 0f 25 -->
+                    <tr>
+                        <td>17</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 18 0f 25 -->
+                    <tr>
+                        <td>18</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    
+                    <!-- Row 19 0f 25 -->
+                    <tr>
+                        <td>19</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 20 0f 25 -->
+                    <tr>
+                        <td>20</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                        
+                    <!-- Row 21 0f 25 -->
+                    <tr>
+                        <td>21</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                      
+                    <!-- Row 22 0f 25 -->
+                    <tr>
+                        <td>22</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    
+                    <!-- Row 23 0f 25 -->
+                    <tr>
+                        <td>23</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 24 0f 25 -->
+                    <tr>
+                        <td>24</td> 
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+
+                    <!-- Row 25 of 25 -->
+                    <tr>
+                        <td>25</td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                                      
+                    <!-- Totals of rows 1-25 -->
+                    <tr>
+                        <td style="border: 2px solid black; height: 38px; font-weight: bold; -webkit-transform: rotate(-90deg) translate( 0px, 0px);">Total</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c2 integer"    style="height: 32px; " data-lmd-valid-intMin="0" data-lmd-valid-intMax="25"    name="1_1_A_total_number_households"                  data-lmd-valid-required="yes"></td>
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c3 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_B_total_household_members"                  data-lmd-valid-required="yes"></td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c4 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_C_total_zero_eleven_months_male"            data-lmd-valid-required="yes"></td>
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c5 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_D_total_zero_eleven_months_female"          data-lmd-valid-required="yes"></td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c6 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_E_total_one_five_years_male"                data-lmd-valid-required="yes"></td>
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c7 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_F_total_one_five_years_female"              data-lmd-valid-required="yes"></td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c8 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_G_total_six_fourteen_years_male"            data-lmd-valid-required="yes"></td>
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c9 integer"    style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_H_total_six_fourteen_years_female"          data-lmd-valid-required="yes"></td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c10 integer"   style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_I_total_fifteen_forty_nine_years_male"      data-lmd-valid-required="yes"></td>
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c11 integer"   style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_J_total_fifteen_forty_nine_years_female"    data-lmd-valid-required="yes"></td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c12 integer"   style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_K_total_fifty_plus_years_male"              data-lmd-valid-required="yes"></td>
+                        <td style="border: none; border-top: 2px solid black; border-right: 2px solid black; border-bottom: 2px solid black;"><input class="stored c13 integer"   style="height: 32px; " data-lmd-valid-intMin="0"                               name="1_1_L_total_fifty_plus_years_female"            data-lmd-valid-required="yes"></td>
+                    </tr>
+
+                </table>
+                <!-- END: Household Registration Table -->
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">HHR.01.01</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="meta_DE_init" style="width: 0.70in">
+                DE Date: <input     class="stored" name="meta_DE_date" style="width: 0.75in">
+                QA Initials: <input class="stored" name="meta_QA_init" style="width: 0.35in">
+                QA Date: <input     class="stored" name="meta_QA_date" style="width: 0.75in">
+                <input name='meta_formVersion' class='stored' type='hidden' value='1.1'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="de_chaHouseholdRegistration">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
