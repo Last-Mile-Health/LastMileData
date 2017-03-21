@@ -78,14 +78,8 @@ $(document).ready(function(){
             }
             
             // Send usage data point to database (tracks sidebar link clicks)
-            // !!!!! Modularize this code !!!!!
             var reportName = $(this).find('a span').text();
-            $.ajax({
-                type: "POST",
-                url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='" + LMD_utilities.addSlashes(reportName) + "', `linkURL`='" + LMD_utilities.addSlashes(linkURL) + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
-                dataType: "json"
-            });
+            LMD_utilities.logUsage(reportName, linkURL);
 
             // Fade out current mainContainer
             $('#whitespaceContainer').slideDown(500, function(){
@@ -143,13 +137,7 @@ $(document).ready(function(){
 
                             // Send usage data point to database (tracks link clicks)
                             $('#mainContainer a').click(function(){
-                                var linkURL = $(this).attr('href');
-                                $.ajax({
-                                    type: "POST",
-                                    url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                                    data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Link click', `linkURL`='" + linkURL + "', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "'" },
-                                    dataType: "json"
-                                });
+                                LMD_utilities.logUsage('Link click', $(this).attr('href'));
                             });
 
                             // Add bootstrap table classes

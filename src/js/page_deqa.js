@@ -101,23 +101,18 @@ $(document).ready(function(){
                     // Display message, close and reset modal
                     $('#modal_downloadDataFile_downloading').slideDown(500,function(){
                         
-                        // Construct the download link and programmatically click the link
-                        var textToWrite = result;
-                        var textFileAsBlob = new Blob([textToWrite], {type: 'text/plain'});
-                        var today = new Date();
-                        var dd = today.getDate();
-                        var mm = today.getMonth() + 1;
-                        var yyyy = today.getFullYear();
-                        var fileNameToSaveAs = "data_" + yyyy + "-" + mm + "-" + dd + ".lmd";
-                        var downloadLink = document.createElement("a");
-                        downloadLink.download = fileNameToSaveAs;
-                        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-                        downloadLink.click();
-                        
+                        // Download LMU file (function returns filename)
+                        var fullFilename = LMD_utilities.downloadStringAsFile({
+                            fileName: 'data',
+                            fileExtension: 'lmd',
+                            fileContents: result,
+                            appendDateToFilename: true
+                        });
+
                         // Back up the file to the "dataFileBackups" directory
                         LMD_fileSystemHelper.createDirectory('dataFileBackups', function(){
                             // !!!!! create an interface to access these backups !!!!!
-                            LMD_fileSystemHelper.createOrOverwriteFile('/dataFileBackups/downloadDataFileBackup_' + fileNameToSaveAs, textToWrite, function(){
+                            LMD_fileSystemHelper.createOrOverwriteFile('/dataFileBackups/downloadDataFileBackup_' + fullFilename, result, function(){
                                 // Delete file
                                 LMD_fileSystemHelper.deleteFile('data.lmd');
                                 
@@ -477,19 +472,14 @@ $(document).ready(function(){
                     $('#modal_createLMU_message').text('LMU creation complete.');
                     $('#modal_createLMU_done').fadeIn();
 
-                    // Download file
-                    // !!!!! Refactor into LMD_utilities; same function is used above and in DP !!!!!
-                    var textFileAsBlob = new Blob([LMU], {type: 'text/plain'});
-                    var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth() + 1;
-                    var yyyy = today.getFullYear();
-                    var fileNameToSaveAs = "LMU_" + yyyy + "-" + mm + "-" + dd + ".lmu";
-                    var downloadLink = document.createElement("a");
-                    downloadLink.download = fileNameToSaveAs;
-                    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-                    downloadLink.click();
-
+                    // Download LMU file
+                    LMD_utilities.downloadStringAsFile({
+                        fileName: 'LMU',
+                        fileExtension: 'lmu',
+                        fileContents: LMU,
+                        appendDateToFilename: true
+                    });
+                    
                     clearInterval(myTimer);
                 }
 

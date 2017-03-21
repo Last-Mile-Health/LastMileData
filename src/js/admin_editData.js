@@ -104,12 +104,14 @@ $(document).ready(function(){
         
         if (confirm || DataPortal_GLOBALS.anyChanges===false) {
             // Show loading GIF; manipulate DOM
-            $('#ajax_loader').fadeIn(500);
+            $('#ajax_loader').fadeIn(250);
             $('#btn_submit').prop('disabled','disabled');
-            // Add three months
-            monthList.add(3);
-            // Load data
-            adminModel.loadData({initialLoad:false});
+            setTimeout(function(){
+                // Add three months
+                monthList.add(3);
+                // Load data
+                adminModel.loadData({initialLoad:false});
+            },250);
         }
         
     });
@@ -127,7 +129,7 @@ $(document).ready(function(){
         for(var key in adminModel.changedData.changed) {
             var x = adminModel.changedData.changed[key];
             queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`month`,`year`,`instID`,`instValue`) VALUES ";
-            queryString += "('" + x.month + "','" + x.year + "','" + x.instID + "','" + x.value + "'" + ");";
+            queryString += "('" + x.month + "','" + x.year + "','" + x.instID + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
         }
 
         var myData = {'queryString': queryString, 'transaction': true} ;
@@ -158,11 +160,13 @@ $(document).ready(function(){
         
         if (confirm || DataPortal_GLOBALS.anyChanges===false) {
             // Show loading GIF
-            $('#ajax_loader').fadeIn(500);
-            // Clear current data
-            adminModel.indicators.removeAll();
-            // Load data
-            adminModel.loadData({initialLoad:false});
+            $('#ajax_loader').fadeIn(250);
+            setTimeout(function(){
+                // Clear current data
+                adminModel.indicators.removeAll();
+                // Load data
+                adminModel.loadData({initialLoad:false});
+            },250);
         }
         
     });
@@ -291,7 +295,7 @@ function loadData(options) {
             $('#btn_showThree').prop('disabled','');
             
             // Hide loading GIF
-            $('#ajax_loader').fadeOut(500);
+            $('#ajax_loader').fadeOut(250);
             
         });
         

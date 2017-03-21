@@ -52,12 +52,7 @@ var LMD_shepherd = (function(){
                         tour_basics.start();
                         
                         // Log tour usage
-                        $.ajax({
-                            type: "POST",
-                            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Basics tour - start', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
-                            dataType: "json"
-                        });
+                        LMD_utilities.logUsage('Basics tour', 'START');
                     }
                 },
                 {
@@ -67,12 +62,7 @@ var LMD_shepherd = (function(){
                         tour_programs.start();
                         
                         // Log tour usage
-                        $.ajax({
-                            type: "POST",
-                            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Programs tour - start', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
-                            dataType: "json"
-                        });
+                        LMD_utilities.logUsage('Programs tour', 'START');
                     }
                 }
 //                {
@@ -363,12 +353,7 @@ var LMD_shepherd = (function(){
                         tour_basics.next();
                         
                         // Log tour usage
-                        $.ajax({
-                            type: "POST",
-                            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Basics tour - finished', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
-                            dataType: "json"
-                        });
+                        LMD_utilities.logUsage('Basics tour', 'FINISHED');
                     }
                 }
             ]
@@ -667,12 +652,7 @@ var LMD_shepherd = (function(){
                         });
                         
                         // Log tour usage
-                        $.ajax({
-                            type: "POST",
-                            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-                            data: { 'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET `reportName`='Programs tour - finished', `username`='" + sessionStorage.username + "', `accessDate`='" + LMD_utilities.mysql_date() + "', `accessTime`='" + LMD_utilities.mysql_time() + "';" },
-                            dataType: "json"
-                        });
+                        LMD_utilities.logUsage('Programs tour', 'FINISHED');
                     }
                 }
             ]

@@ -50,8 +50,8 @@
         <script src="../../lib/knockout/knockout-3.3.0.js"></script>
         <script src="../../lib/knockout/knockout.mapping-latest.js"></script>
         <script src="../../lib/moment.min.js"></script>
-        <script src="../../lib/underscore.min.js"></script>
-        <script src="../../lib/backbone.min.js"></script>
+        <!--<script src="../../lib/underscore.min.js"></script>-->
+        <!--<script src="../../lib/backbone.min.js"></script>-->
         <script src="../../lib/showdown.min.js"></script>
         <script src="../../lib/multiselect.min.js"></script>
         <script src="../../lib/d3.min.js"></script>

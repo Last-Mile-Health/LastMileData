@@ -7,7 +7,7 @@ var LMD_utilities = (function(){
 
 
     // PRIVATE VARS
-    var indicatorData = {}; // !!!!! template !!!!!
+    var indicatorData = {};
 
 
     // PUBLIC:  Returns MySQL-formatted date
@@ -177,6 +177,52 @@ var LMD_utilities = (function(){
     }
 
 
+    // PUBLIC:  Download a string as a file, with specified filename, extension, and contents
+    function downloadStringAsFile(options) {
+        
+        // Create full file name
+        var fullFilename = options.fileName;
+        if (options.appendDateToFilename) {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            fullFilename += "_" + yyyy + "-" + mm + "-" + dd;
+        }
+        fullFilename +=  "." + options.fileExtension;
+        
+        // Download file
+        var textFileAsBlob = new Blob([options.fileContents], {type: 'text/plain'});
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fullFilename;
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        downloadLink.click();
+        
+        // Return filename
+        return fullFilename;
+        
+    }
+
+
+    // PUBLIC:  Insert a record into lastmile_dataportal.tbl_usage
+    //          Used to track data portal usage, for a number of features
+    function logUsage(object, details) {
+        $.ajax({
+            type: "POST",
+            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
+            data: {
+                'queryString':"INSERT INTO lastmile_dataportal.tbl_usage SET "
+                        + "`object`='" + LMD_utilities.addSlashes(object)
+                        + "', `details`='" + LMD_utilities.addSlashes(details)
+                        + "', `username`='" + sessionStorage.username
+                        + "', `accessDate`='" + LMD_utilities.mysql_date()
+                        + "', `accessTime`='" + LMD_utilities.mysql_time() + "';"
+            },
+            dataType: "json"
+        });
+    }
+
+
     // LMD_utilities API
     return {
         mysql_date: mysql_date,
@@ -187,7 +233,9 @@ var LMD_utilities = (function(){
         ajaxButton: ajaxButton,
         addSlashes: addSlashes,
         parseJSONIntoSQL: parseJSONIntoSQL,
-        isNumeric: isNumeric
+        isNumeric: isNumeric,
+        downloadStringAsFile: downloadStringAsFile,
+        logUsage: logUsage
     };
     
 
