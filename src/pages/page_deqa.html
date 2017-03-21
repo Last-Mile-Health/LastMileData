@@ -78,6 +78,7 @@
                     <p><a href="../forms/util_memberIDAssignmentTool.html" class="btn btn-danger" title="Generate Member ID Assignment Tools.">Member ID Assignment Tool</a></p>
                     <p><a href="../forms/util_householdIDAssignmentTool.html" class="btn btn-danger" title="Generate Household ID Assignment Tools.">Household ID Assignment Tool</a></p>
                     <p><a class="btn btn-danger" id="toggleQueryDebugging" title="Toggle query debugging">Toggle query debugging</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_createLMU" title="Create .LMU file (from .XML files)">Create .LMU file (from .XML files)</a></p>
                 </div>
             </div>
             
@@ -269,6 +270,42 @@
             </div>
         </div>
         <!-- MODAL END: "UPLOAD LMD DATA FILES" -->
+        
+        
+        
+        <!-- MODAL START: "CREATE LMU FILE" -->
+        <div id="modal_createLMU" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">Create .LMU file (from .XML files)</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group text-center">
+                            <div id="modal_createLMU_formContent">
+                                <form id="modal_createLMU_form">
+                                    <div class="form-group text-center">
+                                        <input class="form-control input-lg" type="file" id="modal_createLMU_fileInput" multiple><br>
+                                        <p id="modal_createLMU_error" class="form-group" style="display:none; color:red"></p>
+                                        <a id="modal_createLMU_submit" class="btn btn-primary btn-lg btn-block">Upload</a>
+                                        <br>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="modal_createLMU_status" style='display:none'>
+                                <img src='../images/ajax_loader.gif'><br>
+                                <h3 id='modal_createLMU_message'>Creating .LMU file...</h3>
+                                <a id="modal_createLMU_done" style="display:none" data-dismiss="modal" class="btn btn-primary btn-lg btn-block">Done</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL END: "CREATE LMU FILE" -->
         
         
         

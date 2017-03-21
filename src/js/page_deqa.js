@@ -42,6 +42,23 @@ $(document).ready(function(){
         
     });
     
+    // CLICK HANDLER: Close "createLMU" modal
+    $('#modal_createLMU_done').click(function(){
+        
+        // Close dialog box
+        $('.modal').modal('hide');
+        
+        // Pause, reset DOM
+        setTimeout( function() {
+            $('#modal_createLMU_message').text('Creating .LMU file...');
+            $('#modal_createLMU_status').hide();
+            $('#modal_createLMU_done').hide();
+            $('#modal_createLMU_formContent').show();
+            $('#modal_createLMU_form').get(0).reset();
+        }, 500 );
+        
+    });
+    
     // CLICK HANDLER: Close send Records modal
     $('#modal_sendRecords_close').click(function(){
         
@@ -331,7 +348,6 @@ $(document).ready(function(){
             }
             
             // When all files have been processed, proceed
-            // !!!!! rewrite this using "$.when" !!!!!
             var myTimer = setInterval(function(){
 
                 if(numFilesProcessed === myInput.files.length) {
@@ -376,7 +392,110 @@ $(document).ready(function(){
             },500);
             
             
-        } // !!!!! if (!anyErrors) {
+        }
+    });
+    
+
+    // CLICK HANDLER: Create .LMU file
+    // Data files are ".XML" xForm files. This function concatenates uploaded files and puts <LMD_delimiter> in between (with two line breaks before and after delimiter)
+    $("#modal_createLMU_submit").click(function() {
+        
+        // Reset error flag; get file input contents
+        var anyErrors = false;
+        var myInput = document.getElementById('modal_createLMU_fileInput');
+        
+        // Error check #1: No file was selected
+        if (myInput.files.length === 0) {
+            $('#modal_createLMU_error').text('No file was selected.');
+            flashDiv('#modal_createLMU_error');
+            anyErrors = true;
+        }
+        
+        // Error check #2: incorrect file extension(s)
+        if (!anyErrors) {
+            for(var i=0; i<myInput.files.length; i++) {
+                if (!anyErrors) {
+                    
+                    // Get file and extension
+                    var fileToLoad = myInput.files[i];
+                    if (fileToLoad !== undefined) {
+                        var sFileName = fileToLoad.name;
+                        var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+                    }
+                    
+                    // Incorrect file extension (not ".xml")
+                    if (sFileExtension.toLowerCase() !== 'xml') {
+                        $('#modal_createLMU_error').text('Please select only ".XML" files.');
+                        anyErrors = true;
+                        flashDiv('#modal_createLMU_error');
+                    }
+                    
+                }
+            }
+        }
+        
+        // No errors; proceed with file creation
+        if (!anyErrors) {
+            
+            // Set counter; create LMU file
+            var numFilesProcessed = 0;
+            var LMU = '';
+            
+            // Manipulate DOM
+            $('#modal_createLMU_formContent').slideUp(500, function(){
+                $('#modal_createLMU_status').slideDown(500);
+            });
+            
+            // Loop through files and parse data
+            for(var i=0; i < myInput.files.length; i++) {
+                (function(i){
+                    
+                    var file = myInput.files[i];
+                    var reader = new FileReader();
+                    reader.onload = function() {
+
+                        // Get file contents; test if XML or JSON
+                        LMU += reader.result;
+                        LMU += '\n\n<LMD_delimiter>\n\n';
+                        
+                        // Increment file counter
+                        numFilesProcessed++;
+                    };
+                    reader.readAsText(file);
+                })(i);
+            }
+            
+            // When all files have been processed, proceed
+            var myTimer = setInterval(function(){
+
+                if(numFilesProcessed === myInput.files.length) {
+                    
+                    // Trim LMU file
+                    LMU = LMU.slice(0,-19);
+                    
+                    // Display success message
+                    $('#modal_createLMU_message').text('LMU creation complete.');
+                    $('#modal_createLMU_done').fadeIn();
+
+                    // Download file
+                    // !!!!! Refactor into LMD_utilities; same function is used above and in DP !!!!!
+                    var textFileAsBlob = new Blob([LMU], {type: 'text/plain'});
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1;
+                    var yyyy = today.getFullYear();
+                    var fileNameToSaveAs = "LMU_" + yyyy + "-" + mm + "-" + dd + ".lmu";
+                    var downloadLink = document.createElement("a");
+                    downloadLink.download = fileNameToSaveAs;
+                    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+                    downloadLink.click();
+
+                    clearInterval(myTimer);
+                }
+
+            },500);
+            
+        }
     });
 
     // QA Click handlers current forms
