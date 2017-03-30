@@ -33,7 +33,7 @@ require_once("cxn.php");
             
             UNION SELECT 'Sick child form' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
             DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
-            FROM `lastmile_chwdb`.`staging_odk_sickChildForm` GROUP BY `uploadDate`, `uploadTime`
+            FROM `lastmile_upload`.`odk_sickChildForm` GROUP BY `uploadDate`, `uploadTime`
             
             UNION SELECT 'Supervision visit log' AS `formType`, DATE(meta_insertDatetime) AS `uploadDate`, 
             DATE_FORMAT(meta_insertDatetime,'%h:%i %p') AS `uploadTime`, count(1) AS `numRecords`, meta_uploadUser AS `uploadUser`
