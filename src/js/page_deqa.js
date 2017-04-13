@@ -528,32 +528,6 @@ $(document).ready(function(){
         });
     });
     
-    $('#qa_MSR_03').click(function() {
-        launchQAModal({
-            targetForm: "../forms/chw_msr03_monthlyservicereport.html",
-            qaFormName: "CHW Form (MSR 03) - CHW-L: CHW Monthly Service Report",
-            pKey1_name: "chwID",
-            pKey2_name: "chwlID",
-            pKey3_name: "communityID",
-            pKey1_label: "CHW ID",
-            pKey2_label: "CHW-L ID",
-            pKey3_label: "Community ID"
-        });
-    });
-    
-    $('#qa_HHR_02').click(function() {
-        launchQAModal({
-            targetForm: "../forms/fhw_hhr02_householdregistration.html",
-            qaFormName: "CHW: Houusehold Registration",
-            pKey1_name: "chwID",
-            pKey2_name: "communityID",
-            pKey3_name: "totalHouseholdMembers_total",
-            pKey1_label: "CHW ID",
-            pKey2_label: "Community ID",
-            pKey3_label: "Total HH Members for form"
-        });
-    });
-
     $('#qa_REF_02').click(function() {
         launchQAModal({
             // !!!!!
