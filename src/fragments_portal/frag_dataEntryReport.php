@@ -19,7 +19,7 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT 'Registration (new)' AS myTable,
+            SELECT 'Registration' AS myTable,
             meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
             FROM lastmile_chwdb.staging_registrationStep1
             GROUP BY meta_DE_init, meta_DE_date
@@ -32,6 +32,16 @@ require_once("cxn.php");
             UNION SELECT 'CHW Monthly Service Report' AS myTable,
             meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
             FROM lastmile_chwdb.staging_chwMonthlyServiceReportStep1
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'CHW Monthly Service Report' AS myTable,
+            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
+            FROM lastmile_upload.de_chaMonthlyServiceReport
+            GROUP BY meta_DE_init, meta_DE_date
+
+            UNION SELECT 'Registration' AS myTable,
+            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
+            FROM lastmile_upload.de_chaHouseholdRegistration
             GROUP BY meta_DE_init, meta_DE_date
 
             ORDER BY meta_DE_date DESC, meta_DE_init, myTable;
