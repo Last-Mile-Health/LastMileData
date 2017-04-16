@@ -35,7 +35,7 @@
         indicators: [
             {
                 name: 'Number of CHAs and CHSSs deployed through the NCHA program',
-                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules. NOTE THAT NUMBERS ARE SELF-REPORTED AND ARE SUBJECT TO FLUCTUATIONS AS THEY ARE VALIDATED OVER THE COMING WEEKS.',
+                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules. NOTE THAT NUMBERS ARE SELF-REPORTED AND ARE SUBJECT TO FLUCTUATIONS AS THEY ARE VALIDATED OVER THE COMING WEEKS. Also note that changes from Rebruary to March are reflective of changes in current understanding based on recent QRM reporting, rather than changes in underlying reality.',
                 dataSource: 'Current: self-reporting by implementing partners. Future: Liberia iHRIS database',
                 groups: [
                     { name: 'CHAs', instIDs: [336,337,338,339,340,375] },
@@ -191,7 +191,8 @@
             { yearMonth: "2016-11", shortMonth: "Nov '16" },
             { yearMonth: "2016-12", shortMonth: "Dec '16" },
             { yearMonth: "2017-1", shortMonth: "Jan '17" },
-            { yearMonth: "2017-2", shortMonth: "Feb '17" }
+            { yearMonth: "2017-2", shortMonth: "Feb '17" },
+            { yearMonth: "2017-3", shortMonth: "Mar '17" }
         ]
     };
     
@@ -223,67 +224,9 @@
     // Bootstrap the page
     LMD_dataPortal.bootstrap(instanceValues, indicatorInstances, null);
     
-    // Custom change: FY17-19 target for indicator #16
+    // !!!!! Custom change: FY17-19 target for indicator #16 !!!!!
     $('#table_16 th:last-child').text('FY17-19 target');
-    
-    // Custom change: quarterly targets for indicator #2
-    $('#table_2 th:nth-child(4)').after('<th style="text-align:right">Q1 target</th>');
-    $('#table_2 th:nth-child(8)').after('<th style="text-align:right">Q2 target</th>');
-    $('#table_2 th:nth-child(11)').after('<th style="text-align:right">Q3 target</th>');
-    $('#table_2 th:nth-child(13)').text('Q4 target');
-    $('#table_2 tr:nth-child(2) td:nth-child(1)').attr('colspan','4');
-    $('#table_2 tr:nth-child(8) td:nth-child(1)').attr('colspan','4');
-    $('#table_2 tr:nth-child(3) td:nth-child(4)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(4) td:nth-child(4)').after('<td style="text-align:right">39</td>');
-    $('#table_2 tr:nth-child(5) td:nth-child(4)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(6) td:nth-child(4)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(7) td:nth-child(4)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(9) td:nth-child(4)').after('<td style="text-align:right">224</td>');
-    $('#table_2 tr:nth-child(10) td:nth-child(4)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(11) td:nth-child(4)').after('<td style="text-align:right">121</td>');
-    $('#table_2 tr:nth-child(12) td:nth-child(4)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(13) td:nth-child(4)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(3) td:nth-child(8)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(4) td:nth-child(8)').after('<td style="text-align:right">39</td>');
-    $('#table_2 tr:nth-child(5) td:nth-child(8)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(6) td:nth-child(8)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(7) td:nth-child(8)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(9) td:nth-child(8)').after('<td style="text-align:right">224</td>');
-    $('#table_2 tr:nth-child(10) td:nth-child(8)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(11) td:nth-child(8)').after('<td style="text-align:right">121</td>');
-    $('#table_2 tr:nth-child(12) td:nth-child(8)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(13) td:nth-child(8)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(3) td:nth-child(11)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(4) td:nth-child(11)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(5) td:nth-child(11)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(6) td:nth-child(11)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(7) td:nth-child(11)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(9) td:nth-child(11)').after('<td style="text-align:right">224</td>');
-    $('#table_2 tr:nth-child(10) td:nth-child(11)').after('<td style="text-align:right">121</td>');
-    $('#table_2 tr:nth-child(11) td:nth-child(11)').after('<td style="text-align:right">121</td>');
-    $('#table_2 tr:nth-child(12) td:nth-child(11)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(13) td:nth-child(11)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(3) td:nth-child(13)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(4) td:nth-child(13)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(5) td:nth-child(13)').after('<td style="text-align:right">57</td>');
-    $('#table_2 tr:nth-child(6) td:nth-child(13)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(7) td:nth-child(13)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(9) td:nth-child(13)').after('<td style="text-align:right">224</td>');
-    $('#table_2 tr:nth-child(10) td:nth-child(13)').after('<td style="text-align:right">224</td>');
-    $('#table_2 tr:nth-child(11) td:nth-child(13)').after('<td style="text-align:right">224</td>');
-    $('#table_2 tr:nth-child(12) td:nth-child(13)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(13) td:nth-child(13)').after('<td style="text-align:right">0</td>');
-    $('#table_2 tr:nth-child(3) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(4) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(5) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(6) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(7) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(9) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(10) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(11) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(12) td:nth-child(13)').remove();
-    $('#table_2 tr:nth-child(13) td:nth-child(13)').remove();
-    
+
 </script>
 
 <div id="reportContent">

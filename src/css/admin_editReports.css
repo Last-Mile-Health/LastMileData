@@ -8,8 +8,8 @@
     padding: 5px;
     margin: 5px;
     width: 800px;
-    background: lightblue;
-    border: 1px solid #AAA;
+    background: #fff;
+    border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 2px 2px 10px #eee;
 }
@@ -19,11 +19,8 @@
 }
 
 #editReports_bottom input {
+    border: 1px solid #ddd;
     border-radius: 4px;
-    border: none;
-}
-
-#editReports_bottom .roContainer input {
     margin-top: 2px;
 }
 
@@ -67,4 +64,8 @@
 
 #currentReport {
     font-weight: bold;
+}
+
+.roHeader {
+    color: green;
 }
