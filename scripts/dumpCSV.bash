@@ -19,6 +19,11 @@ fileName1=view_msr
 query2='select * from lastmile_chwdb.view_odk_scf_nick'
 fileName2=view_odk_scf_nick
 
+query3='select * from lastmile_cha.temp_view_chss_cha_report'
+fileName3=temp_view_chss_cha_report
+
 mysql --batch --user=$user --password=$password -e "${query1}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName1}_$dateStamp.csv 
 
 mysql --batch --user=$user --password=$password -e "${query2}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName2}_$dateStamp.csv 
+
+mysql --batch --user=$user --password=$password -e "${query3}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName3}_$dateStamp.csv 
