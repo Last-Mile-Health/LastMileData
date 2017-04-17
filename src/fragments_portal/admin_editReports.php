@@ -89,7 +89,7 @@ $.getScript('../js/admin_editReports.js');
                     <div style="width:46%; float:left">
                         <table>
                             <tr>
-                                <td>METADATA</td>
+                                <td class="roHeader">METADATA</td>
                             </tr>
                             <tr>
                                 <td colspan="2">
@@ -115,7 +115,7 @@ $.getScript('../js/admin_editReports.js');
                     <div style="width:46%; float:left">
                         <table>
                             <tr>
-                                <td>CHART</td>
+                                <td class="roHeader">CHART</td>
                             </tr>
                             <tr>
                                 <td>Type:</td>
