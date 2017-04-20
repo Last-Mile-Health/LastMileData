@@ -35,7 +35,7 @@
         indicators: [
             {
                 name: 'Number of CHAs and CHSSs deployed through the NCHA program',
-                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules. NOTE THAT NUMBERS ARE SELF-REPORTED AND ARE SUBJECT TO FLUCTUATIONS AS THEY ARE VALIDATED OVER THE COMING WEEKS. Also note that changes from Rebruary to March are reflective of changes in current understanding based on recent QRM reporting, rather than changes in underlying reality.',
+                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules. NOTE THAT NUMBERS ARE SELF-REPORTED AND ARE SUBJECT TO FLUCTUATIONS AS THEY ARE VALIDATED OVER THE COMING WEEKS. Also note that changes from February to March are reflective of changes in current understanding based on recent QRM reporting, rather than changes in underlying reality.',
                 dataSource: 'Current: self-reporting by implementing partners. Future: Liberia iHRIS database',
                 groups: [
                     { name: 'CHAs', instIDs: [336,337,338,339,340,375] },
