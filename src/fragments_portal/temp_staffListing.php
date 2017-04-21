@@ -11,6 +11,7 @@ require_once("cxn.php");
 <h2>Grand Gedeh</h2>
 <table class="table table-striped table-hover">
     <tr>
+        <th>Health Facility</th>
         <th>CHSS</th>
         <th>CHA</th>
         <th>Communities</th>
@@ -18,13 +19,14 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT * FROM lastmile_cha.temp_view_chss_cha_report where county='Grand Gedeh' ORDER BY chssID, chaID;";
+        $queryString = "SELECT chss, chssID, cha, chaID, community, communityID, healthFacility FROM lastmile_cha.temp_view_chss_cha_report where county='Grand Gedeh' ORDER BY healthFacility, chssID, chaID;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $chssPlusID = $chss!="" ? $chss . " (" . $chssID . ")" : "unassigned";
             $tableRow = "<tr>";
+            $tableRow .= "<td>$healthFacility</td>";
             $tableRow .= "<td>$chssPlusID</td>";
             $tableRow .= "<td>$cha ($chaID)</td>";
             $tableRow .= "<td>$community</td>";
@@ -40,6 +42,7 @@ require_once("cxn.php");
 <h2>Rivercess</h2>
 <table class="table table-striped table-hover">
     <tr>
+        <th>Health Facility</th>
         <th>CHSS</th>
         <th>CHA</th>
         <th>Communities</th>
@@ -47,13 +50,14 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT * FROM lastmile_cha.temp_view_chss_cha_report where county='Rivercess' ORDER BY chssID, chaID;";
+        $queryString = "SELECT chss, chssID, cha, chaID, community, communityID, healthFacility FROM lastmile_cha.temp_view_chss_cha_report where county='Rivercess' ORDER BY healthFacility, chssID, chaID;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
-            $chssPlusID = $chss!="" ? $chss . " (" . $chssID . ")" : "(unassigned)";
+            $chssPlusID = $chss!="" ? $chss . " (" . $chssID . ")" : "unassigned";
             $tableRow = "<tr>";
+            $tableRow .= "<td>$healthFacility</td>";
             $tableRow .= "<td>$chssPlusID</td>";
             $tableRow .= "<td>$cha ($chaID)</td>";
             $tableRow .= "<td>$community</td>";
