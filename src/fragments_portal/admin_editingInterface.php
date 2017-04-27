@@ -13,7 +13,7 @@
     echo "var sw = '$sw';". "\n\n";
 
     // Echo JSON (indicator METADATA)
-    $url = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/$sw/";
+    $url = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/$sw/1/";
     curl_setopt($ch,CURLOPT_URL,$url);
     $json = curl_exec($ch);
 

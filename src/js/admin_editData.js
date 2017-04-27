@@ -194,7 +194,7 @@ function loadData(options) {
             // Send AJAX request #1 (indicator/instance metadata)
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstancesFiltered/" + filterCategory + "/" + filterCut,
+                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstancesFiltered/0/" + filterCategory + "/" + filterCut,
                 dataType: "json",
                 error: ajaxError
             }),
@@ -210,7 +210,7 @@ function loadData(options) {
             // Send AJAX request #3 (indicator/instance geocuts)
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/geoCuts/",
+                url: "/LastMileData/php/scripts/LMD_REST.php/geoCuts/0/",
                 dataType: "json",
                 error: ajaxError
             }),

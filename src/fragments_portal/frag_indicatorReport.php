@@ -9,7 +9,7 @@
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
     // Echo JSON (report model)
-    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reportObjects/$reportID";
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reportObjects/0/$reportID";
     curl_setopt($ch,CURLOPT_URL,$url1);
     $json1 = curl_exec($ch);
     
@@ -25,7 +25,7 @@
     $instIDString = trim($instIDString, ",");
 
     // Echo JSON (indicator instance metadata)
-    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/$instIDString";
+    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/1/$instIDString";
     curl_setopt($ch,CURLOPT_URL,$url2);
     $json2 = curl_exec($ch);
 
@@ -35,7 +35,7 @@
     $json3 = curl_exec($ch);
 
     // Echo report title
-    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/$reportID";
+    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
     curl_setopt($ch,CURLOPT_URL,$url4);
     $reportTitle = JSON_decode(curl_exec($ch))->reportName;
 

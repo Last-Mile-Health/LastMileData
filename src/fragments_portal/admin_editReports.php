@@ -7,7 +7,7 @@
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
     
     // Echo JSON (reports)
-    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/";
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/1/";
     curl_setopt($ch,CURLOPT_URL,$url1);
     $json1 = curl_exec($ch);
     

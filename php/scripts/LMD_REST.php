@@ -70,8 +70,8 @@ $app->delete('/test_rest/:id', function($id) {
 
 
 // Route 1: Indicator metadata (lastmile_dataportal.tbl_indicators)
-$app->get('/indicators/(:id)',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "*", "archived <> 1");
+$app->get('/indicators/:includeArchived/(:id)',function($includeArchived,$id='all') {
+    LMD_get($id, "indID", "lastmile_dataportal.tbl_indicators", "*", $includeArchived==1 ? 1 : "archived <> 1");
 });
 $app->post('/indicators/', function() {
     LMD_post("lastmile_dataportal.tbl_indicators");
@@ -101,8 +101,8 @@ $app->delete('/instanceValues/:id', function($id) {
 
 
 // Route 3: Indicator instances (lastmile_dataportal.view_instances)
-$app->get('/indicatorInstances/(:id)',function($id='all') {
-    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", "archived <> 1");
+$app->get('/indicatorInstances/:includeArchived/(:id)',function($includeArchived,$id='all') {
+    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1");
 });
 
 
@@ -118,8 +118,8 @@ $app->put('/json_objects/:id', function($id) {
 
 // Route 5: Data Portal "report objects" (lastmile_dataportal.tbl_reportobjects)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
-$app->get('/reportObjects/(:id)',function($id='all') {
-    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", "*", "archived <> 1");
+$app->get('/reportObjects/:includeArchived/(:id)',function($includeArchived,$id='all') {
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reportobjects", "*", $includeArchived==1 ? 1 : "archived <> 1");
 });
 $app->post('/reportObjects/', function() {
     LMD_post("lastmile_dataportal.tbl_reportobjects");
@@ -133,7 +133,8 @@ $app->delete('/reportObjects/:id', function($id) {
 
 
 // Route 6: Markdown (lastmile_dataportal.tbl_markdown)
-$app->get('/markdown/(:id)',function($id='all') {
+// Note: the "/1/" in the URL is to enable admin_editingInterface to work
+$app->get('/markdown/1/(:id)',function($id='all') {
     LMD_get($id, "mdName", "lastmile_dataportal.tbl_markdown", "*", 1);
 });
 $app->post('/markdown/', function() {
@@ -148,7 +149,8 @@ $app->delete('/markdown/:id', function($id) {
 
 
 // Route 7: LMD users (lastmile_dataportal.tbl_utility_users)
-$app->get('/users/(:id)',function($id='all') {
+// Note: the "/1/" in the URL is to enable admin_editingInterface to work
+$app->get('/users/1/(:id)',function($id='all') {
     LMD_get($id, "pk", "lastmile_dataportal.tbl_utility_users", "pk, username, userGroups", 1);
 });
 $app->post('/users/', function() {
@@ -163,7 +165,8 @@ $app->delete('/users/:id', function($id) {
 
 
 // Route 8: Program staff - CHWs, CHWLs, CCSs (lastmile_chwdb.admin_staff)
-$app->get('/staff/(:id)',function($id='all') {
+// Note: the "/1/" in the URL is to enable admin_editingInterface to work
+$app->get('/staff/1/(:id)',function($id='all') {
     LMD_get($id, "staffID", "lastmile_chwdb.admin_staff", "staffID, firstName, lastName, dateOfBirth, gender", 1);
 });
 $app->post('/staff/', function() {
@@ -178,7 +181,8 @@ $app->delete('/staff/:id', function($id) {
 
 
 // Route 9: Data Portal narratives (lastmile_dataportal.view_reportObjects)
-$app->get('/narratives/(:id)',function($id='all') {
+// Note: the "/1/" in the URL is to enable admin_editingInterface to work
+$app->get('/narratives/1/(:id)',function($id='all') {
     LMD_get($id, "id", "lastmile_dataportal.view_reportobjects", "*", 1);
 });
 $app->post('/narratives/', function() {
@@ -193,8 +197,8 @@ $app->delete('/narratives/:id', function($id) {
 
 
 // Route 10: Data Portal report titles (lastmile_dataportal.tbl_reports)
-$app->get('/reports/(:id)',function($id='all') {
-    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "reportID, reportName", "archived <> 1");
+$app->get('/reports/:includeArchived/(:id)',function($includeArchived,$id='all') {
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "reportID, reportName", $includeArchived==1 ? 1 : "archived <> 1");
 });
 $app->post('/reports/', function() {
     LMD_post("lastmile_dataportal.tbl_reports");
@@ -250,9 +254,9 @@ $app->get('/gis_data_availability/',function($id='all') {
 
 
 // Route 18: Indicator/instance metadata (filtered by category and cut) (lastmile_dataportal.view_instances)
-$app->get('/indicatorInstancesFiltered/:category/(:geoName)',function($category,$geoName='all') {
+$app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:geoName)',function($includeArchived,$category,$geoName='all') {
     $geo = $geoName=='all' ? 1 : "geoName = '$geoName'";
-    LMD_get('all', "instID", "lastmile_dataportal.view_instances", "*", "archived <> 1 AND indCategory='$category' AND $geo");
+    LMD_get('all', "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1" . " AND indCategory='$category' AND $geo");
 });
 
 
@@ -265,8 +269,8 @@ $app->get('/instanceValuesFiltered/:category/:geoName/:startDate/:endDate',funct
 
 
 // Route 20: Indicator/instance geoCuts (lastmile_dataportal.tbl_geocuts)
-$app->get('/geoCuts/(:id)',function($id='all') {
-    LMD_get($id, "geoID", "lastmile_dataportal.tbl_geocuts", "*", 1);
+$app->get('/geoCuts/:includeArchived/(:id)',function($includeArchived,$id='all') {
+    LMD_get($id, "geoID", "lastmile_dataportal.tbl_geocuts", "*", $includeArchived==1 ? 1 : "archived <> 1");
 });
 $app->post('/geoCuts/', function() {
     LMD_post("lastmile_dataportal.tbl_geocuts");

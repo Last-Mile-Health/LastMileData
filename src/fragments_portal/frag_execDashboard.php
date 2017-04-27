@@ -14,7 +14,7 @@
             . "355,356,357,358,56,359,360,361,362,57,409,410,411,363,418,70,419,424,425,426,427,428,487,68";
 
     // Echo JSON (indicator instance metadata)
-    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/$instIDString";
+    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/1/$instIDString";
     curl_setopt($ch,CURLOPT_URL,$url2);
     $json2 = curl_exec($ch);
 

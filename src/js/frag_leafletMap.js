@@ -130,7 +130,7 @@ var urls = {
         district: '../../php/scripts/LMD_REST.php/gis_district_data/',
         county: '../../php/scripts/LMD_REST.php/gis_county_data/'
     },
-    indicators: '../../php/scripts/LMD_REST.php/indicators/'
+    indicators: '../../php/scripts/LMD_REST.php/indicators/1/'
 };
 
 

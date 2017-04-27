@@ -106,7 +106,7 @@ $(document).ready(function(){
                 // Send AJAX request to retrieve report objects associated with that report
                 $.ajax({
                     type: "GET",
-                    url: "/LastMileData/php/scripts/LMD_REST.php/reportObjects/" + reportID,
+                    url: "/LastMileData/php/scripts/LMD_REST.php/reportObjects/1/" + reportID,
                     dataType: "json",
                     success: function(data) {
 
@@ -189,7 +189,7 @@ $(document).ready(function(){
                 // Get metadata for first instance ID
                 $.ajax({
                     type: "GET",
-                    url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/" + firstInstID,
+                    url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/0/" + firstInstID,
                     dataType: "json",
                     success: function(data) {
                         if (data.indName === undefined) {
