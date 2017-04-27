@@ -2,17 +2,18 @@ $(document).ready(function() {
     
     
     // Apply jQueryUI autocomplete
-    // e.g.     (static)            <input class="autocomplete" data-lmd-valid-autoC='["one","two","three"]'>
-    //          (static, sorted)    <input class="autocomplete" data-lmd-valid-autoC='["one","two","three"]' data-lmd-valid-sortList="yes">
-    //          (dynamic)           <input class="autocomplete" data-lmd-valid-autoC="villages"> // !!!!! villages must be deifned in... !!!!!
-    $(".autocomplete").each(function() {
+    // e.g.     (static)                <input data-lmd-valid-autoC='["one","two","three"]'>
+    //          (static, not sorted)    <input data-lmd-valid-autoC='["one","two","three"]' data-lmd-valid-sortList="no">
+    //          (dynamic)               <input data-lmd-valid-autoC="villages"> // villages is a key in localStorage
+    //          (dynamic)               <input data-lmd-valid-autoC="villages" data-lmd-valid-restrict> // user cannot enter an item that is not on the list
+    $("input[data-lmd-valid-autoC]").each(function() {
         
         // Get source from data attribute
         mySource = $(this).attr('data-lmd-valid-autoC');
         
         if (mySource.substring(0,1)=="[") {
             // Parse "static" (inline) arrays
-            myList = JSON.parse(mySource);
+            var myList = JSON.parse(mySource);
         } else {
             // Parse "dynamic" (localStorage) arrays
             myList = JSON.parse(localStorage[mySource]);
@@ -21,7 +22,7 @@ $(document).ready(function() {
                 myList = JSON.parse(localStorage[mySource]);
             }
         }
-        if ($(this).attr('data-lmd-valid-sortList')=='yes') {
+        if (!$(this).attr('data-lmd-valid-sortList')=='no') {
             // Sort list alphabetically
             myList.sort();
         }
@@ -30,7 +31,18 @@ $(document).ready(function() {
         $(this).autocomplete({
             source: myList,
             autoFocus: true,
-            delay: 100
+            delay: 0,
+            change: function(ev) {
+                if ( $(this)[0].attributes['data-lmd-valid-restrict']!==undefined ) {
+                    var key = $(ev.target.attributes['data-lmd-valid-autoC']).val();
+                    var myList = JSON.parse(localStorage[key]);
+                    if (myList.indexOf($(this)[0].value)===-1) {
+                        alert('Please select an item from the list.')
+                        $(this).val('');
+                        $(this).focus();
+                    }
+                }
+            }
         });
     });
     
@@ -46,7 +58,7 @@ $(document).ready(function() {
 
         if (mySource.substring(0,1)=="[") {
             // Parse "static" (inline) arrays
-            myList = JSON.parse(mySource);
+            var myList = JSON.parse(mySource);
         } else {
             // Parse "dynamic" (localStorage) arrays
             myList = JSON.parse(localStorage[mySource]);

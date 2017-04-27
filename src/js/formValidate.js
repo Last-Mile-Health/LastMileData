@@ -30,20 +30,20 @@ $(document).ready(function(){
                     errorMessages.push('Field "' + myField + '" cannot contain the following characters: `~#$%^&*+;\|<>');
                 }
                 
-                // Test: field is required (data-lmd-valid-required="yes") // !!!!! do we need "&& myValue=='0000-00-00' ?????
-                if ( $(this).attr('data-lmd-valid-required')=="yes" && myValue=="" ) {
+                // Test: field is required
+                if ( $(this).attr('data-lmd-valid-required')==='' && myValue=="" ) {
                     errorFields.push(myField);
                     errorMessages.push('Field "' + myField + '" is required.');
                 }
                 
                 // Test: is a (decimal) number
-                if ( $(this).hasClass('decimal') && isNaN(myValue) ) {
+                if ( $(this).attr('data-lmd-valid-dec')==='' && isNaN(myValue) ) {
                     errorFields.push(myField);
                     errorMessages.push('Field "' + myField + '" must be a number');
                 }
                 
                 // Test: is an integer
-                if ( $(this).hasClass('integer') && ( isNaN(myValue) || myValue!=Math.floor(myValue) ) ) {
+                if ( $(this).attr('data-lmd-valid-int')==='' && ( isNaN(myValue) || myValue!=Math.floor(myValue) ) ) {
                     errorFields.push(myField);
                     errorMessages.push('Field "' + myField + '" must be an integer');
                 }

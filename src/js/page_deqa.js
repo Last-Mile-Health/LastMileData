@@ -1,4 +1,4 @@
-// Dependencies: jQuery, jQueryUI, LMD_fileSystemHelpers.js
+// Dependencies: jQuery, jQueryUI, LMD_fileSystemHelpers.js, LMD_utilities.js
 
 $(document).ready(function(){
     
@@ -627,12 +627,18 @@ $(document).ready(function(){
     
     
     
-    // Refresh Data Modal
-    // Run this script when modal_refreshData is shown
-    // !!!!! Change this to automatically refresh system data once per week ?????
+    // Refresh Data Modal when modal_refreshData is shown
     $('#modal_refreshData').on('shown.bs.modal', function(e) {
         ajaxRefresh();
     });
+    
+    
+    
+    // Refresh Data Modal once per day
+    if (localStorage.lastAjaxRefresh !== LMD_utilities.mysql_date()) {
+        $("#modal_refreshData").modal();
+        ajaxRefresh();
+    }
     
     
     
@@ -842,33 +848,33 @@ function ajaxRefresh() {
         dataType: "json",
         success: function(data) {
             
-            // !!!!! This data is currently stored in localStorage; should be stored instead in FileSystem (to avoid running out of storage space) !!!!!
+            // !!!!! This data is currently stored in localStorage; should be stored instead in FileSystem (to avoid running out of storage space); this approach may also lead to namespacing issues !!!!!
             
             // Update localStorage
-            localStorage.deqaUsers = JSON.stringify(data['deqaUsers']);
-            localStorage.villages = JSON.stringify(data['villages']);
-            localStorage.fhws = JSON.stringify(data['fhws']);
             localStorage.initialized = "yes";
+            localStorage.lastAjaxRefresh = LMD_utilities.mysql_date();
+            for (var key in data) {
+                localStorage[key] = JSON.stringify(data[key]);
+            }
             
             // Manipulate DOM
-            $('#modal_refreshData_text').text('Data was successfully refreshed. Reloading page now...');
+            $('#modal_refreshData_text').text('System data was successfully refreshed. Reloading page now...');
             $('#modal_initialize_text').text('Initialization successful. Reloading page now...');
             
             // Reload page
             setTimeout( function() {
-                // !!!!! build error handler; this results in an infinite loop if any of the above queries fail !!!!!
+                // Note: this will result in an infinite loop if any of the above queries fail
                 location.reload();
             }, 1500 );
             
         },
         error: function(request, status, error) {
             // Display error message
-            $('#modal_refreshData_text').text('Data refresh was unsuccessful. Please try again later. Reloading page now...');
-            $('#modal_initialize_text').text('Initialization was unsuccessful. Please try again later. Reloading page now...');
+            $('#modal_refreshData_text').text('Data refresh was unsuccessful. Please try again later.');
+            $('#modal_initialize_text').text('Initialization was unsuccessful. Please try again later.');
             
             // Redirect to home page
             setTimeout( function() {
-                // !!!!! build in more comprehensive error handler; e.g., alert if no internet conncetion is present !!!!!
                 location.reload();
             }, 1000 );
         }

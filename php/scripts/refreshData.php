@@ -7,7 +7,7 @@
 error_reporting(0);
 
 // Set include path
-set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
+set_include_path(get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes");
 
 // Require connection strings
 require_once("cxn.php");
@@ -16,40 +16,32 @@ require_once("cxn.php");
 //  Note that the LOCATE('admin',`userGroups`)>0 clause will pick up both "admin" and "superadmin"
 $query = "SELECT username, password FROM lastmile_dataportal.tbl_utility_users WHERE LOCATE('admin',`userGroups`)>0 OR LOCATE('deqa',`userGroups`)>0;";
 $result = mysqli_query($cxn, $query) or die("failure");
-for ($i=1;$i<=mysqli_num_rows($result);$i++)
-{
+for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     $row = mysqli_fetch_assoc($result);
-    extract($row);
-    $json_deqaUsers[$username]=$password;
+    $json_deqaUsers[$row['username']] = $row['password'];
 }
 
-// 2. Update "villages" (array)
-$query = "SELECT `name` FROM lastmile_chwdb.admin_community WHERE archived<>1;";
+// 2. Update "facilities" (array)
+$query = "SELECT healthFacility FROM lastmile_cha.healthfacility;";
 $result = mysqli_query($cxn, $query) or die("failure");
-$json_villages = array();
-for ($i=1;$i<=mysqli_num_rows($result);$i++)
-{
+$json_facilities = array();
+for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     $row = mysqli_fetch_assoc($result);
-    extract($row);
-    array_push($json_villages,$villageName);
+    array_push($json_facilities, $row['healthFacility']);
 }
 
-// 3. Update "FHWs" (array)
-$query = "SELECT staffName FROM lastmile_chwdb.view_staffPosition WHERE title='CHW';";
+// 3. Update "districts" (array)
+$query = "SELECT healthDistrict FROM lastmile_cha.healthdistrict WHERE (healthDistrictID BETWEEN 20 AND 32) OR (healthDistrictID=6);";
 $result = mysqli_query($cxn, $query) or die("failure");
-$json_fhws = array();
-for ($i=1;$i<=mysqli_num_rows($result);$i++)
-{
+$json_districts = array();
+for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     $row = mysqli_fetch_assoc($result);
-    extract($row);
-    array_push($json_fhws,$staffName);
+    array_push($json_districts, $row['healthDistrict']);
 }
-
-// !!!!! build error handler; this results in an infinite loop if any of the above queries fail !!!!!
 
 // Return results
-echo '{' ;
-echo '"deqaUsers":' . json_encode($json_deqaUsers) . ", " ;
-echo '"villages":' . json_encode($json_villages) . ", " ;
-echo '"fhws":' . json_encode($json_fhws) ;
-echo '}' ;
+echo '{';
+    echo '"deqaUsers":' . json_encode($json_deqaUsers) . ", ";
+    echo '"facilities":' . json_encode($json_facilities) . ", ";
+    echo '"districts":' . json_encode($json_districts);
+echo '}';

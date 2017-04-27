@@ -55,14 +55,19 @@
                 
                 <div><b>INSTRUCTION LINE</b></div><hr>
                 <div style="float:left; width:1.2in; overflow:hidden">Var1. Required</div>
-                <div style="float:left; width:1.4in; overflow:hidden"><input style="width:50%" class="stored" name="var1" data-lmd-valid-required="yes"></div>
+                <div style="float:left; width:1.4in; overflow:hidden"><input style="width:50%" class="stored" name="var1" data-lmd-valid-required></div>
                 <div style="float:left; width:2.5in; overflow:hidden">Var2a. Autocomplete (static)</div>
-                <div style="float:left; width:2in; overflow:hidden"><input class="stored autocomplete" data-lmd-valid-autoC='["one","two","three"]' name="var2a"></div>
+                <div style="float:left; width:2in; overflow:hidden"><input class="stored" data-lmd-valid-autoC='["one","two","three"]' name="var2a"></div>
                 <div style="clear:both; height:3px"></div>
                 <div style="float:left; width:1.2in; overflow:hidden">&nbsp;</div>
                 <div style="float:left; width:1.4in; overflow:hidden">&nbsp;</div>
                 <div style="float:left; width:2.5in; overflow:hidden">Var2b. Autocomplete (dynamic)</div>
-                <div style="float:left; width:2in; overflow:hidden"><input class="stored autocomplete" data-lmd-valid-autoC="villages" name="var2b"></div>
+                <div style="float:left; width:2in; overflow:hidden"><input class="stored" data-lmd-valid-autoC="facilities" name="var2b"></div>
+                <div style="clear:both; height:3px"></div>
+                <div style="float:left; width:1.2in; overflow:hidden">&nbsp;</div>
+                <div style="float:left; width:1.4in; overflow:hidden">&nbsp;</div>
+                <div style="float:left; width:2.5in; overflow:hidden">Var2c. Autocomplete (dynamic; restricted)</div>
+                <div style="float:left; width:2in; overflow:hidden"><input class="stored" data-lmd-valid-restrict data-lmd-valid-autoC="facilities" name="var2c"></div>
                 <div style="clear:both"></div>
                 
             </div><br>
@@ -92,7 +97,7 @@
                 <!-- Question 3 -->
                 <div class="inner_L">Var7. Decimal</div>
                 <div class="inner_C">
-                    <div class="textOption"><input class="stored decimal" name="var7" style="width:1in"></div>
+                    <div class="textOption"><input class="stored" data-lmd-valid-dec name="var7" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div>
                 <hr>
@@ -100,7 +105,7 @@
                 <!-- Question 3 -->
                 <div class="inner_L">Var8. Integer</div>
                 <div class="inner_C">
-                    <div class="textOption"><input type="text" class="stored integer" name="var8" style="width:1in"></div>
+                    <div class="textOption"><input type="text" class="stored" data-lmd-valid-int name="var8" style="width:1in"></div>
                 </div>
                 <div style="clear:both"></div><hr>
                 
@@ -136,10 +141,10 @@
                 <div style="clear:both"></div><hr>
                 
                 <!-- Question 3 -->
-                <div class="inner_L">Var12. Select (dynamic + sorted)</div>
+                <div class="inner_L">Var12. Select (dynamic + not sorted)</div>
                 <div class="inner_C">
                     <div class="textOption">
-                        <input class="stored" data-lmd-valid-select='villages' data-lmd-valid-sortList="yes" name="var13" style="width:1in">
+                        <input class="stored" data-lmd-valid-select='facilities' data-lmd-valid-sortList="no" name="var13" style="width:1in">
                     </div>
                 </div>
                 <div style="clear:both"></div><hr>
