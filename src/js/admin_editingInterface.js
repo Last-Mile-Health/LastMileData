@@ -38,7 +38,7 @@ $(document).ready(function(){
                 stringAdd: 'Add a new markdown file',
                 sortVars: ['mdName'],
                 filters: [],
-                idAttribute: 'mdName',
+                idAttribute: 'id',
                 dupeField: 'mdName',
                 modelHeaders: ['Name','Markdown text'],
                 modelDefaults: {
@@ -64,6 +64,7 @@ $(document).ready(function(){
             };
             break;
         
+        // !!!!! Not currently being used !!!!!
         case 'staff':
             var ei = {
                 stringH2: 'Edit staff info (CHWs, CHWLs, CCSs)',
@@ -197,13 +198,20 @@ $(document).ready(function(){
                 }
                 // If dupes are found, display visual alert and redirect the user to the field that must be unique
                 if (dupes > 0) {
-                    alert("Value must be unique.");
-                    $(event.currentTarget).parent().parent().find('[data-bind]').each(function(){
-                        if ( $(this)[0].outerHTML.indexOf('value:' + ei.dupeField) >- 1 ) {
-                            $(this).select();
-                        }
-                    });
-                    
+                    if (!DataPortal_GLOBALS.blurFiredRecently) {
+                        alert("Value must be unique.");
+                        $(event.currentTarget).parent().parent().find('[data-bind]').each(function(){
+                            if ( $(this)[0].outerHTML.indexOf('value:' + ei.dupeField) >- 1 ) {
+                                $(this).select();
+                            }
+                        });
+                        
+                        // Prevents repeated triggering of alert
+                        DataPortal_GLOBALS.blurFiredRecently = true;
+                        setTimeout(function(){
+                            DataPortal_GLOBALS.blurFiredRecently = false;
+                        }, 5);
+                    }
                 }
             }
         }

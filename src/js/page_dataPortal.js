@@ -74,7 +74,7 @@ $(document).ready(function(){
             } else {
                 // Markdown
                 var linkType =  "markdown";
-                var linkURL = '/LastMileData/php/scripts/LMD_REST.php/markdown/1/' + $(this).attr('data-link');
+                var linkURL = '/LastMileData/php/scripts/LMD_REST.php/markdownByName/' + $(this).attr('data-link');
             }
             
             // Send usage data point to database (tracks sidebar link clicks)
