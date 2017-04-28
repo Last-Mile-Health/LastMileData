@@ -22,6 +22,7 @@ var LMD_dataPortal = (function(){
     //          Example:
     //              Before June 15th, the months would be Jan -- Apr
     //              After June 15th, the months would be Feb -- May
+    //          This a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data
     function setDates() {
         
         // Generate dates (last 4 months)
@@ -158,11 +159,17 @@ var LMD_dataPortal = (function(){
                     for(var i=0; i<dataArray.length; i++) {
                         
                         // Add chart point
-                        d.chart_points.push({
-                            Month:dataArray[i].date,
-                            Value:dataArray[i].value,
-                            Cut: d.chartMultiple ? instanceMetadata[instID].instShortName : 1
-                        });
+                        // Chart point only added if its date is not "too new" (a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data)
+                        var data_totalMonth = (12*Number(dataArray[i].date.split('-')[0]))+Number(dataArray[i].date.split('-')[1]);
+                        var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < 15 ? 1 : 0 ),'months');
+                        var latestAllowed_totalMonth = (12*latestAllowed_date.year())+(latestAllowed_date.month()+1);
+                        if (data_totalMonth <= latestAllowed_totalMonth) {
+                            d.chart_points.push({
+                                Month:dataArray[i].date,
+                                Value:dataArray[i].value,
+                                Cut: d.chartMultiple ? instanceMetadata[instID].instShortName : 1
+                            });
+                        }
                         
                         // Add date to date array (for CSV data)
                         dates.push(dataArray[i].date);
