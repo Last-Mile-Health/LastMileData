@@ -2,9 +2,11 @@
 
 $(document).ready(function(){
     
+    // Set GLOBALS object
     var GLOBALS = {
         queryDebugging: false
     };
+    
     
     // Set app "last updated" timestamp (from AppCache manifest)
     $.ajax({
@@ -13,6 +15,7 @@ $(document).ready(function(){
             $('#appVersion').text('App last updated: ' + data.substring(23,47));
         }
     });
+
 
     // CLICK HANDLER: Send Records
     $('#modal_sendRecords_submit').click(function(){
@@ -24,6 +27,7 @@ $(document).ready(function(){
         });
         
     });
+
     
     // CLICK HANDLER: Close "uploadLMD" modal
     $('#modal_uploadLMD_done').click(function(){
@@ -42,6 +46,7 @@ $(document).ready(function(){
         
     });
     
+    
     // CLICK HANDLER: Close "createLMU" modal
     $('#modal_createLMU_done').click(function(){
         
@@ -58,6 +63,7 @@ $(document).ready(function(){
         }, 500 );
         
     });
+    
     
     // CLICK HANDLER: Close send Records modal
     $('#modal_sendRecords_close').click(function(){
@@ -488,8 +494,8 @@ $(document).ready(function(){
         }
     });
 
-    // QA Click handlers current forms
-        
+
+    // QA Click handlers (current forms)
     $('#qa_MSR_0501').click(function() {
         launchQAModal({
             targetForm: "../forms/cha_msr0501_monthlyservicereport.html",
@@ -502,7 +508,6 @@ $(document).ready(function(){
             pKey3_label: "Community ID"
         });
     }); 
-
     $('#qa_HHR_0101').click(function() {
         launchQAModal({
             targetForm: "../forms/cha_hhr0101_householdregistration.html",
@@ -515,8 +520,7 @@ $(document).ready(function(){
             pKey3_label: "1.1A Total Number Households"
         });
     }); 
-    
-        $('#qa_TST').click(function() {
+    $('#qa_TST').click(function() {
         launchQAModal({
             targetForm: "../forms/0_testDE.html",
             qaFormName: "TEST FORM",
@@ -528,12 +532,8 @@ $(document).ready(function(){
         });
     });
     
-    $('#qa_REF_02').click(function() {
-        launchQAModal({
-            // !!!!!
-        });
-    });
-    // QA Click handlers for old forms.  Be sure to add old/ to form path.
+    
+    // QA Click handlers (old forms).  Be sure to add "old/" to form path.
     $('#qa_TRL_03').click(function() {
         launchQAModal({
             targetForm: "../forms/old/prg_trl03_trainingledger.html",
@@ -549,6 +549,7 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
+
 
     // CLICK HANDLER: Query debugging
     $('#toggleQueryDebugging').click(function(){
@@ -626,23 +627,20 @@ $(document).ready(function(){
     });
     
     
-    
-    // Refresh Data Modal when modal_refreshData is shown
+    // Run "Refresh System Data" function when modal_refreshData is shown
     $('#modal_refreshData').on('shown.bs.modal', function(e) {
         ajaxRefresh();
     });
     
     
-    
-    // Refresh Data Modal once per day
+    // Run "Refresh System Data" function once per day
     if (localStorage.lastAjaxRefresh !== LMD_utilities.mysql_date()) {
         $("#modal_refreshData").modal();
         ajaxRefresh();
     }
     
     
-    
-    // CLICK HANDLER: versions
+    // CLICK HANDLERS: versions
     $('#oldVersions_link').click(function() {
         $('#currentVersions_div').slideUp(1000,function(){
             $('#oldVersions_div').slideDown(1000);
@@ -650,7 +648,6 @@ $(document).ready(function(){
             $('#currentVersions_link').show();
         });
     });
-    
     $('#currentVersions_link').click(function() {
         $('#oldVersions_div').slideUp(1000,function(){
             $('#currentVersions_div').slideDown();
@@ -659,6 +656,13 @@ $(document).ready(function(){
         });
     });
     
+    
+    // ERROR HANDLER: AppCache error
+    window.applicationCache.onerror = function (e) {
+        $('#modal_appcacheRefresh_text').html('An error occurred (AppCache error). Please contact <a href=\'mailto:LMD@LastMileHealth.org\'>LMD@LastMileHealth.org</a> for assistance.');
+        $('#modal_appcacheRefresh_progress').text('');
+        console.log(e);
+    }
     
     
 });
