@@ -2,6 +2,7 @@
 
 // Downloads "system data" (e.g. most recent list of villges) from MySQL database and puts it into localStorage
 // Userful for populating dynamic dropdown menus or comboboxes in paper data entry forms
+// Note: if there is an error in this query, this will throw the DEQA page in an infinite "refresh system data" loop 
 
 // Disable PHP warnings
 error_reporting(0);
@@ -22,7 +23,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 2. Update "facilities" (array)
-$query = "SELECT healthFacility FROM lastmile_cha.healthfacility;";
+$query = "SELECT healthFacility FROM lastmile_cha.healthFacility;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_facilities = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -31,7 +32,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 3. Update "districts" (array)
-$query = "SELECT healthDistrict FROM lastmile_cha.healthdistrict WHERE (healthDistrictID BETWEEN 20 AND 32) OR (healthDistrictID=6);";
+$query = "SELECT healthDistrict FROM lastmile_cha.healthDistrict WHERE (healthDistrictID BETWEEN 20 AND 32) OR (healthDistrictID=6);";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_districts = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
