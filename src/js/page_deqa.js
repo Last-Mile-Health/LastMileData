@@ -508,6 +508,7 @@ $(document).ready(function(){
             pKey3_label: "Community ID"
         });
     }); 
+    
     $('#qa_HHR_0101').click(function() {
         launchQAModal({
             targetForm: "../forms/cha_hhr0101_householdregistration.html",
@@ -519,7 +520,21 @@ $(document).ready(function(){
             pKey2_label: "Community ID",
             pKey3_label: "1.1A Total Number Households"
         });
+    });
+    
+    $('#qa_SMR_0502').click(function() {
+        launchQAModal({
+            targetForm: "../forms/chss_msr0502_monthlyservicereport.html",
+            qaFormName: "CHSS Form (MSR 5.2) - CHSS Monthly Service Report",
+            pKey1_name: "chssID",
+            pKey2_name: "monthReported",
+            pKey3_name: "chaID_1",
+            pKey1_label: "CHSS ID",
+            pKey2_label: "Report Month",
+            pKey3_label: "CHA ID 1"
+        });
     }); 
+    
     $('#qa_TST').click(function() {
         launchQAModal({
             targetForm: "../forms/0_testDE.html",

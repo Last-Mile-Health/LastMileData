@@ -23,7 +23,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 2. Update "facilities" (array)
-$query = "SELECT healthFacility FROM lastmile_cha.healthFacility;";
+$query = "SELECT healthFacility FROM lastmile_cha.healthFacility order by healthFacility asc;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_facilities = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -32,7 +32,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 3. Update "districts" (array)
-$query = "SELECT healthDistrict FROM lastmile_cha.healthDistrict WHERE (healthDistrictID BETWEEN 20 AND 32) OR (healthDistrictID=6);";
+$query = "SELECT healthDistrict FROM lastmile_cha.healthDistrict WHERE (healthDistrictID BETWEEN 20 AND 32) OR (healthDistrictID=6)";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_districts = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -40,9 +40,29 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     array_push($json_districts, $row['healthDistrict']);
 }
 
+// 4. Update "county" (array)
+$query = "SELECT county FROM lastmile_cha.county WHERE ( ( countyID = 6 ) or ( countyID = 14) ) order by county asc;";
+$result = mysqli_query($cxn, $query) or die("failure");
+$json_county = array();
+for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
+    $row = mysqli_fetch_assoc($result);
+    array_push($json_county, $row['county']);
+}
+
+// 5. Update "chss" (array)
+$query = "select chss from lastmile_cha.view_php_refreshData_chss order by chss asc;";
+$result = mysqli_query($cxn, $query) or die("failure");
+$json_chss = array();
+for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
+    $row = mysqli_fetch_assoc($result);
+    array_push($json_chss, $row['chss']);
+}
+
 // Return results
 echo '{';
-    echo '"deqaUsers":' . json_encode($json_deqaUsers) . ", ";
-    echo '"facilities":' . json_encode($json_facilities) . ", ";
-    echo '"districts":' . json_encode($json_districts);
+    echo '"deqaUsers":'     . json_encode($json_deqaUsers)  . ", ";
+    echo '"facilities":'    . json_encode($json_facilities) . ", ";
+    echo '"districts":'     . json_encode($json_districts)  . ", ";
+    echo '"county":'        . json_encode($json_county)     . ", ";
+    echo '"chss":'          . json_encode($json_chss);
 echo '}';
