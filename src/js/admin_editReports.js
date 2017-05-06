@@ -1,6 +1,7 @@
 $(document).ready(function(){
     
     // !!!!! Add ajaxButton usage throughout; test on slow connection !!!!!
+    // !!!!! Add instIDs_shortNames and chart_instIDs_shortNames; ensure that # of IDs matches; write a note to user that short names can't contain commas !!!!!
 
     // Add "Select report..." to beginning of array; initialize knockout.js; bind model to DIV ("top" model - add/edit/delete reports)
     // Note: `reports` comes from PHP CURL

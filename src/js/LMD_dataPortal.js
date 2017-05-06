@@ -90,11 +90,13 @@ var LMD_dataPortal = (function(){
     //          Input object comes from LMD_REST.php/reportobjects
     //          Must be called AFTER setData and setMetadata
     function configureReportModel(dataObject) {
-        
+
         // 1. Transform indicator strings into arrays
         for (var key in dataObject) {
             dataObject[key].instIDs = dataObject[key].instIDs.split(",");
             dataObject[key].chart_instIDs = dataObject[key].chart_instIDs.split(",");
+            dataObject[key].instIDs_shortNames = dataObject[key].instIDs_shortNames ? dataObject[key].instIDs_shortNames.split(",") : null;
+            dataObject[key].chart_instIDs_shortNames = dataObject[key].chart_instIDs_shortNames ? dataObject[key].chart_instIDs_shortNames.split(",") : null;
         }
 
         // 2. Sort by "displayOrder"
@@ -108,18 +110,18 @@ var LMD_dataPortal = (function(){
                 return 0;
             }
         });
-        
+
         // 3. Clear csvData array
         csvData = [];
-        
+
         // 4. Merge in data
         for (var key in dataObject) {
 
             var d = dataObject[key];
-            
+
             // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators (for data tables; used by knockout)
             d.multiple = d.instIDs.length > 1 ? true : false;
-            
+
             // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators (for charts)
             d.chartMultiple = d.chart_instIDs.length > 1 ? true : false;
 
@@ -130,21 +132,23 @@ var LMD_dataPortal = (function(){
             d.chart_points = [];
 
             // If roMetadata fields are not specified, get them from instanceMetadata (only practical for report objects with a single indicator instance)
+            // !!!!! eventually phase this out !!!!!
             var instID = d.instIDs[0];
             var metadata = instanceMetadata[instID];
-            
             if ( d.ro_name == null || d.ro_name == '' ) {
                 d.ro_name = metadata.indName;
             }
-            if ( d.ro_description == null || d.ro_description == '' ) {
+            if ( d.ro_description == null || d.ro_description == '' ) { // !!!!! eventually phase this out !!!!!
                 d.ro_description = metadata.indDefinition;
             }
-//            if ( d.roMetadata_targetFormat == null || d.roMetadata_targetFormat == '' ) {
-//                d.roMetadata_targetFormat = metadata.indFormat;
-//            }
-//            if ( d.roMetadata_target == null || d.roMetadata_target == '' ) {
-//                d.roMetadata_target = metadata.indTarget;
-//            }
+            
+            // If d.instIDs_shortNames exists (from report object), overwrite instanceMetadata
+            if ( d.instIDs_shortNames != null) {
+                for (var key2 in d.instIDs_shortNames) {
+                    var instID2 = d.instIDs[key2];
+                    instanceMetadata[instID2].instShortName = d.instIDs_shortNames[key2];
+                }
+            }
             
             // Create "dates" array, for CSV data
             var dates = [];
@@ -158,6 +162,9 @@ var LMD_dataPortal = (function(){
                 if (dataArray) {
                     for(var i=0; i<dataArray.length; i++) {
                         
+                        // Get instShortName from report object if it exists; otherwise, get it from instanceMetadata
+                        var instShortName = d.chart_instIDs_shortNames ? d.chart_instIDs_shortNames[key2] : instanceMetadata[instID].instShortName;
+                        
                         // Add chart point
                         // Chart point only added if its date is not "too new" (a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data)
                         var data_totalMonth = (12*Number(dataArray[i].date.split('-')[0]))+Number(dataArray[i].date.split('-')[1]);
@@ -167,7 +174,7 @@ var LMD_dataPortal = (function(){
                             d.chart_points.push({
                                 Month:dataArray[i].date,
                                 Value:dataArray[i].value,
-                                Cut: d.chartMultiple ? instanceMetadata[instID].instShortName : 1
+                                Cut: d.chartMultiple ? instShortName : 1
                             });
                         }
                         
@@ -187,17 +194,18 @@ var LMD_dataPortal = (function(){
             
             // Populate "CSV" object (for "download data" function)
             var csvFile = '"' + d.ro_name + '"' + '\n' + 'month,';
-            for (var key in d.chart_instIDs) {
-                csvFile += instanceMetadata[d.chart_instIDs[key]].instShortName + ','
+            for (var key2 in d.chart_instIDs) {
+                // Get instShortNames from report object if they exist; otherwise, get it from instanceMetadata
+                csvFile += d.chart_instIDs_shortNames ? d.chart_instIDs_shortNames[key2] + ',' : instanceMetadata[d.chart_instIDs[key2]].instShortName + ',';
             }
             csvFile = csvFile.slice(0, -1);
             csvFile += '\n';
-            for (var key in uniqueDates) {
-                csvFile += uniqueDates[key] + ',';
-                for (var key2 in d.chart_instIDs) {
-                    var yearMonth = uniqueDates[key].slice(0,-3);
+            for (var key2 in uniqueDates) {
+                csvFile += uniqueDates[key2] + ',';
+                for (var key3 in d.chart_instIDs) {
+                    var yearMonth = uniqueDates[key2].slice(0,-3);
                     yearMonth = yearMonth.charAt(5)==='1' ? yearMonth : yearMonth.slice(0, 5) + yearMonth.slice(6);
-                    csvFile += tableData['i_' + d.chart_instIDs[key2] + '_m_' + yearMonth] + ',';
+                    csvFile += tableData['i_' + d.chart_instIDs[key3] + '_m_' + yearMonth] + ',';
                 }
                 csvFile = csvFile.slice(0, -1);
                 csvFile += '\n';
