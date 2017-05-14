@@ -316,7 +316,7 @@ var LMD_dataPortal = (function(){
                         data: d.chart_points,
                         colors: d.chart_colors || "default",
                         timeInterval: Math.ceil(d.uniqueDates.length/24),
-                        size: { x:d.chart_size_x, y:d.chart_size_y },
+                        size: { x:Number(d.chart_size_x), y:Number(d.chart_size_y) },
                         xyVars: { x:"Month", y:"Value" },
         //                axisTitles: d.chartSpecs.axisTitles, // !!!!! new attribute for this (specified in edit "reports interface") ?????
                         cut: "Cut",

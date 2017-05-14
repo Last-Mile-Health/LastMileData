@@ -87,15 +87,14 @@ $.getScript('../js/admin_editReports.js');
             <div data-bind="foreach:reportObjects">
                 <div data-bind="attr:{index:$index, class:'roContainer archived_'+archived()}">
 
-                    <div style="width:46%; float:left">
+                    <div style="width:45%; float:left">
                         <table>
                             <tr>
                                 <td class="roHeader">METADATA</td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    Load metadata from first instance ID:
-                                    <button class="btn btn-xs btn-success" data-bind="click:$root.actions.loadMetadata" style="top:0px;">+</button>
+                                    <button class="btn btn-xs btn-success" data-bind="click:$root.actions.loadMetadata" style="top:0px;">Load metadata from first instance ID</button>
                                 </td>
                             </tr>
                             <tr>
@@ -113,7 +112,7 @@ $.getScript('../js/admin_editReports.js');
                         </table>
                     </div>
 
-                    <div style="width:46%; float:left">
+                    <div style="width:45%; float:left">
                         <table>
                             <tr>
                                 <td class="roHeader">CHART</td>
@@ -133,20 +132,45 @@ $.getScript('../js/admin_editReports.js');
                                 <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:chart_instIDs"></td>
                             </tr>
                             <tr>
-                                <!-- !!!!! need to fix opacity issue !!!!! -->
                                 <td><button class="btn btn-xs btn-success btn_archive" data-bind="click:$root.actions.archiveToggle">Archive</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-xs btn-success btn_advanced" data-bind="click:$root.actions.showAdvancedOptions">Show advanced options</button></td>
                             </tr>
                         </table>
                     </div>
 
-                    <div style="width:8%; float:left">
+                    <div style="width:10%; float:left">
                         <button class="deleteOuter btn btn-xs btn-warning" data-bind="click:$root.actions.moveObjUp">&#8593;</button>
                         <button class="deleteOuter btn btn-xs btn-warning" data-bind="click:$root.actions.moveObjDown">&#8595;</button>
                         <button class="deleteOuter btn btn-xs btn-danger" data-bind="click:$root.actions.deleteObj">X</button>
                     </div>
 
                     <div style="clear:both"></div>
-
+                    
+                    <div class="advancedOptions hide">
+                        <hr style="margin-bottom:0px">
+                        <table>
+                            <tr>
+                                <td colspan="2" class="roHeader">ADVANCED OPTIONS</td>
+                            </tr>
+                            <tr>
+                                <td>Chart width (px):&nbsp;</td>
+                                <td><input class="ui-state-default ui-corner-all" style='width:50px' data-bind="value:chart_size_x"></td>
+                                <td style='width:40px'></td>
+                                <td>Labels (data table):&nbsp;</td>
+                                <td><input class="ui-state-default ui-corner-all" style='width:400px' data-bind="value:instIDs_shortNames" placeholder="Type a comma-separated list of labels..."></td>
+                            </tr>
+                            <tr>
+                                <td>Chart height (px):&nbsp;</td>
+                                <td><input class="ui-state-default ui-corner-all" style='width:50px' data-bind="value:chart_size_y"></td>
+                                <td style='width:40px'></td>
+                                <td>Labels (chart):&nbsp;</td>
+                                <td><input class="ui-state-default ui-corner-all" style='width:400px' data-bind="value:chart_instIDs_shortNames" placeholder="Type a comma-separated list of labels..."></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
                 </div>
 
             </div>

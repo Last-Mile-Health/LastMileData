@@ -62,7 +62,7 @@
     top: -1px;
 }
 
-.btn_archive {
+.btn_archive, .btn_advanced {
     /*opacity:1.0; !!!!! need to fix opacity issue !!!!!*/
     background:#555;
 }

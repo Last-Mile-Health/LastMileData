@@ -175,6 +175,8 @@ $(document).ready(function(){
                     ro_name: '',
                     ro_description: '',
                     chart_type: 'line',
+                    chart_size_x: 0,
+                    chart_size_y: 0,
                     chart_instIDs: '',
                     archived: 0
                 }));
@@ -213,6 +215,16 @@ $(document).ready(function(){
                 var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
                 var archived = Number(erModel.reportObjects()[index].archived());
                 erModel.reportObjects()[index].archived(1-archived);
+                
+            },
+            
+            // Archive or unarchive the report object (value is toggled based on current value)
+            showAdvancedOptions: function() {
+                
+                console.log($(event.currentTarget).closest('.roContainer').find('.advancedOptions').removeClass('hide'));
+//                var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
+//                var archived = Number(erModel.reportObjects()[index].archived());
+//                erModel.reportObjects()[index].archived(1-archived);
                 
             },
             

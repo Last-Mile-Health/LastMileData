@@ -9,7 +9,7 @@ var LMD_dimpleHelper = (function(){
     // Monthly line graph
     function createChart(params){
         
-        // If chart size is not specified, set defaults
+        // If chart size is NULL or 0, set defaults
         params.size.x = params.size.x ? params.size.x : 590;
         params.size.y = params.size.y ? params.size.y : 380;
 
