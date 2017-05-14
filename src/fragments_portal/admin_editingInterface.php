@@ -38,7 +38,7 @@ $.getScript('../js/admin_editingInterface.js');
                     <!-- ko foreach:other.tableHeaders -->
                     <th class="pad darkBlue" data-bind="text:$data"></th>
                     <!-- /ko -->
-                    <th id="deleteTH" class="pad darkBlue">&nbsp;X&nbsp;&nbsp;&nbsp;</th>
+                    <th id="deleteTH" class="pad darkBlue">&nbsp;X&nbsp;</th>
                 </tr>
             </thead>
             <tbody id="scrollContent" data-bind="foreach:vmData">

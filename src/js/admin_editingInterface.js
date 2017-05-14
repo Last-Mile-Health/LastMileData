@@ -22,11 +22,10 @@ $(document).ready(function(){
                     field: 'indCategory'
                 }],
                 idAttribute: 'indID',
-                modelHeaders: ['Category','Indicator','Target','Definition'],
+                modelHeaders: ['Category','Indicator','Definition'],
                 modelDefaults: {
                     indCategory: '',
                     indName: 'New indicator',
-                    indTarget: '',
                     indDefinition: ''
                 }
             };
@@ -301,7 +300,7 @@ $(document).ready(function(){
 
 
     // Add a new indicator
-    // !!!!! Define Modle Defaults has to be called with every add (instead of once); refactor LMD_koREST.js accordingly !!!!!
+    // !!!!! DefineModelDefaults has to be called with every add (instead of once); refactor LMD_koREST.js accordingly !!!!!
     $('#btn_add').click(function() {
 
         // Define model default parameters

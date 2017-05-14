@@ -2,15 +2,14 @@
 /* Set column widths here */
 .css_users th:nth-child(1), .css_users td:nth-child(1) { min-width:200px; width:200px }
 .css_users th:nth-child(2), .css_users td:nth-child(2) { min-width:400px; width:400px }
-.css_users th:nth-child(3), .css_users td:nth-child(3) { min-width:40px; width:40px }
+.css_users th:nth-child(3), .css_users td:nth-child(3) { min-width:25px; width:25px }
 .css_markdown th:nth-child(1), .css_markdown td:nth-child(1) { min-width:200px; width:200px }
 .css_markdown th:nth-child(2), .css_markdown td:nth-child(2) { min-width:550px; width:550px }
-.css_markdown th:nth-child(3), .css_markdown td:nth-child(3) { min-width:40px; width:40px }
+.css_markdown th:nth-child(3), .css_markdown td:nth-child(3) { min-width:25px; width:25px }
 .css_indicators th:nth-child(1), .css_indicators td:nth-child(1) { min-width:120px; width:120px }
 .css_indicators th:nth-child(2), .css_indicators td:nth-child(2) { min-width:300px; width:300px }
-.css_indicators th:nth-child(3), .css_indicators td:nth-child(3) { min-width:80px; width:80px }
-.css_indicators th:nth-child(4), .css_indicators td:nth-child(4) { min-width:400px; width:400px }
-.css_indicators th:nth-child(5), .css_indicators td:nth-child(5) { min-width:25px; width:25px }
+.css_indicators th:nth-child(3), .css_indicators td:nth-child(3) { min-width:500px; width:500px }
+.css_indicators th:nth-child(4), .css_indicators td:nth-child(4) { min-width:25px; width:25px }
 .css_staff th:nth-child(1), .css_staff td:nth-child(1) { min-width:70px; width:70px }
 .css_staff th:nth-child(2), .css_staff td:nth-child(2) { min-width:150px; width:150px }
 .css_staff th:nth-child(3), .css_staff td:nth-child(3) { min-width:150px; width:150px }

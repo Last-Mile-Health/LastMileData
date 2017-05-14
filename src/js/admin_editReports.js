@@ -47,11 +47,13 @@ $(document).ready(function(){
                         },
                         dataType: "json",
                         success: function(data) {
-                            // Clear report objects; display report name; set reportID; add one blank RO
+                            // Clear report objects; display report name; set reportID; add one blank RO; unhide DIV
                             erModel.reportObjects.removeAll();
                             $('#currentReport').text($('#addReport_input').val());
                             erModel.currentReportID = data;
                             erModel.actions.addNewObj();
+                            $('#editReports_bottom').removeClass('hide');
+                            
                         },
                         error: ajaxError
                     });
@@ -71,6 +73,9 @@ $(document).ready(function(){
                 // Display report name and set currentReportID
                 $('#currentReport').text($('#editReport_input option[value=' + reportID + ']')[0].outerText);
                 erModel.currentReportID = reportID;
+                
+                // Unhide DIV
+                $('#editReports_bottom').removeClass('hide');
                 
             },
             
@@ -168,7 +173,6 @@ $(document).ready(function(){
             addNewObj: function() {
                 
                 // Create new report object; load defaults
-                // !!!!! check defaults !!!!!
                 erModel.reportObjects.push(ko.mapping.fromJS({
                     reportID: erModel.currentReportID,
                     instIDs: '',
@@ -178,6 +182,8 @@ $(document).ready(function(){
                     chart_size_x: 0,
                     chart_size_y: 0,
                     chart_instIDs: '',
+                    instIDs_shortNames: '',
+                    chart_instIDs_shortNames: '',
                     archived: 0
                 }));
                 
@@ -295,8 +301,8 @@ $(document).ready(function(){
     
     
     // !!!!! TEMP; FOR DEVELOPMENT !!!!!
-    $('#editReport_input').val('4');
-    $('#editReport').click();
+//    $('#editReport_input').val('4');
+//    $('#editReport').click();
     // !!!!! TEMP; FOR DEVELOPMENT !!!!!
     
     

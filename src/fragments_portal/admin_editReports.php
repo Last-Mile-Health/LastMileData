@@ -7,7 +7,7 @@
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
     
     // Echo JSON (reports)
-    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/1/";
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/";
     curl_setopt($ch,CURLOPT_URL,$url1);
     $json1 = curl_exec($ch);
     
@@ -72,12 +72,12 @@ $.getScript('../js/admin_editReports.js');
 
     </div>
     
-    <div>
-        <h3>Currently editing: <span id="currentReport"></span></h3>
-        <button class="btn btn-xs btn-success" data-bind="click:actions.changeReportName">Change report name</button>
-    </div>
+    <div id="editReports_bottom" class="hide">
 
-    <div id="editReports_bottom" class="hide2"> <!-- !!!!! change to "hide" when done developing !!!!! -->
+        <div>
+            <h3>Currently editing: <span id="currentReport"></span></h3>
+            <button class="btn btn-xs btn-success" data-bind="click:actions.changeReportName">Change report name</button>
+        </div>
 
         <div>
             <button id="btn_save" class="btn btn-success" data-bind="click:actions.saveChanges">Save changes</button>
