@@ -186,11 +186,11 @@ var LMD_dataPortal = (function(){
             }
             
             // Remove duplicates from "dates" array; sort
-            var uniqueDates = [];
+            d.uniqueDates = [];
             $.each(dates, function(i, el){
-                if($.inArray(el, uniqueDates) === -1) uniqueDates.push(el);
+                if($.inArray(el, d.uniqueDates) === -1) d.uniqueDates.push(el);
             });
-            uniqueDates.sort();
+            d.uniqueDates.sort();
             
             // Populate "CSV" object (for "download data" function)
             var csvFile = '"' + d.ro_name + '"' + '\n' + 'month,';
@@ -200,10 +200,10 @@ var LMD_dataPortal = (function(){
             }
             csvFile = csvFile.slice(0, -1);
             csvFile += '\n';
-            for (var key2 in uniqueDates) {
-                csvFile += uniqueDates[key2] + ',';
+            for (var key2 in d.uniqueDates) {
+                csvFile += d.uniqueDates[key2] + ',';
                 for (var key3 in d.chart_instIDs) {
-                    var yearMonth = uniqueDates[key2].slice(0,-3);
+                    var yearMonth = d.uniqueDates[key2].slice(0,-3);
                     yearMonth = yearMonth.charAt(5)==='1' ? yearMonth : yearMonth.slice(0, 5) + yearMonth.slice(6);
                     csvFile += tableData['i_' + d.chart_instIDs[key3] + '_m_' + yearMonth] + ',';
                 }
@@ -315,12 +315,12 @@ var LMD_dataPortal = (function(){
                         targetDiv: d.chart_div,
                         data: d.chart_points,
                         colors: d.chart_colors || "default",
-                        timeInterval: d.chart_timeInterval || 1, // !!!!! calculate this automatically
+                        timeInterval: Math.ceil(d.uniqueDates.length/24),
                         size: { x:d.chart_size_x, y:d.chart_size_y },
                         xyVars: { x:"Month", y:"Value" },
-        //                axisTitles: d.chartSpecs.axisTitles, // !!!!! use indNameShort !!!!!
+        //                axisTitles: d.chartSpecs.axisTitles, // !!!!! new attribute for this (specified in edit "reports interface") ?????
                         cut: "Cut",
-                        legend: d.chart_legend || "",
+                        legend: d.chartMultiple ? "right" : "",
                         tickFormat: { y:d.chart_tickFormat },
                         axisValues: { min:d.chart_yAxis_min, max:d.chart_yAxis_max }
                     });

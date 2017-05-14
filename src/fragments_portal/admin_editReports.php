@@ -74,6 +74,7 @@ $.getScript('../js/admin_editReports.js');
     
     <div>
         <h3>Currently editing: <span id="currentReport"></span></h3>
+        <button class="btn btn-xs btn-success" data-bind="click:actions.changeReportName">Change report name</button>
     </div>
 
     <div id="editReports_bottom" class="hide2"> <!-- !!!!! change to "hide" when done developing !!!!! -->
@@ -84,7 +85,7 @@ $.getScript('../js/admin_editReports.js');
 
         <div>
             <div data-bind="foreach:reportObjects">
-                <div class="roContainer" data-bind="attr:{index:$index}">
+                <div data-bind="attr:{index:$index, class:'roContainer archived_'+archived()}">
 
                     <div style="width:46%; float:left">
                         <table>
@@ -130,6 +131,10 @@ $.getScript('../js/admin_editReports.js');
                             <tr>
                                 <td>Instance IDs (chart):&nbsp;</td>
                                 <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:chart_instIDs"></td>
+                            </tr>
+                            <tr>
+                                <!-- !!!!! need to fix opacity issue !!!!! -->
+                                <td><button class="btn btn-xs btn-success btn_archive" data-bind="click:$root.actions.archiveToggle">Archive</button></td>
                             </tr>
                         </table>
                     </div>

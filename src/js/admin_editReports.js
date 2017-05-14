@@ -47,8 +47,9 @@ $(document).ready(function(){
                         },
                         dataType: "json",
                         success: function(data) {
-                            // Clear report objects; set reportID; add one blank RO
+                            // Clear report objects; display report name; set reportID; add one blank RO
                             erModel.reportObjects.removeAll();
+                            $('#currentReport').text($('#addReport_input').val());
                             erModel.currentReportID = data;
                             erModel.actions.addNewObj();
                         },
@@ -136,7 +137,7 @@ $(document).ready(function(){
             
             // Move report object up
             moveObjUp: function(data,event) {
-                var index = Number($(event.currentTarget).parent().parent().attr('index'));
+                var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
                 if(index!==0) {
                     var item = erModel.reportObjects.splice(index,1)[0];
                     erModel.reportObjects.splice(index-1, 0, item);
@@ -146,7 +147,7 @@ $(document).ready(function(){
 
             // Move report object down
             moveObjDown: function(data,event) {
-                var index = Number($(event.currentTarget).parent().parent().attr('index'));
+                var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
                 var item = erModel.reportObjects.splice(index,1)[0];
                 erModel.reportObjects.splice(index+1, 0, item);
             },
@@ -157,7 +158,7 @@ $(document).ready(function(){
                 // Display "confirm" dialog box
                 var confirm = window.confirm("Are you sure you want to delete this object?");
                 if (confirm) {
-                    var index = Number($(event.currentTarget).parent().parent().attr('index'));
+                    var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
                     erModel.reportObjects.splice(index,1);
                 }
                 
@@ -174,11 +175,11 @@ $(document).ready(function(){
                     ro_name: '',
                     ro_description: '',
                     chart_type: 'line',
-                    chart_instIDs: ''
+                    chart_instIDs: '',
+                    archived: 0
                 }));
                 
             },
-            
             
             // Load metadata from first instance ID
             loadMetadata: function() {
@@ -206,6 +207,27 @@ $(document).ready(function(){
                 
             },
 
+            // Archive or unarchive the report object (value is toggled based on current value)
+            archiveToggle: function() {
+                
+                var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
+                var archived = Number(erModel.reportObjects()[index].archived());
+                erModel.reportObjects()[index].archived(1-archived);
+                
+            },
+            
+            // Archive or unarchive the report object (value is toggled based on current value)
+            changeReportName: function() {
+                
+                // If this is the first time the button has been clicked, change the span to an input
+                if ($('#currentReport_input').length===0) {
+                    var currentReportName = $('#currentReport').text();
+                    $('#currentReport').html("<input id='currentReport_input'></input>");
+                    $('#currentReport_input').val(currentReportName);
+                }
+                
+            },
+            
             // Save current set of report objects
             // For simplicity of code, this deletes all report objects in the database for the current report and then inserts all of the new ones
             saveChanges: function() {
@@ -223,7 +245,13 @@ $(document).ready(function(){
                     queryString += LMD_utilities.parseJSONIntoSQL(roData[key], "lastmile_dataportal", "tbl_reportobjects", ['id']);
                 }
 
-                // Send record to database via AJAX
+                // If the report name has been changed, add an additional query to the queryString
+                if ($('#currentReport_input').length===1) {
+                    var newReportName = $('#currentReport_input').val();
+                    queryString += "UPDATE lastmile_dataportal.tbl_reports SET reportName='" + LMD_utilities.addSlashes(newReportName) + "' WHERE reportID=" + erModel.currentReportID + ";";
+                }
+                
+                // Send changes to database via AJAX; manipulate DOM on success
                 var myData = { 'queryString': queryString, 'transaction': 1 } ;
                 $.ajax({
                     type: "POST",
@@ -231,7 +259,6 @@ $(document).ready(function(){
                     data: myData,
                     dataType: "json",
                     success: function() {
-                        // Manipulate DOM
                         LMD_utilities.ajaxButton($('#btn_save'), 'alertSuccess', 'Save changes');
                     },
                     error: ajaxError
