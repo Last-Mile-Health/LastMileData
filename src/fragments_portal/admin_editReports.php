@@ -25,18 +25,6 @@ $.getScript('../js/admin_editReports.js');
 <h2>Edit Reports</h2>
 <hr>
 
-<div>
-    <a id="instructions_click">Click here for instructions</a>
-    <div id="instructions_text">
-        <ul>
-            <li>One</li>
-            <li>Two</li>
-            <li>Three</li>
-        </ul>
-    </div>
-</div>
-<hr>
-
 <div id="editReports_container">
 
     <div id="editReports_top">
@@ -75,8 +63,11 @@ $.getScript('../js/admin_editReports.js');
     <div id="editReports_bottom" class="hide">
 
         <div>
-            <h3>Currently editing: <span id="currentReport"></span></h3>
-            <button class="btn btn-xs btn-success" data-bind="click:actions.changeReportName">Change report name</button>
+            <h3>
+                Currently editing: <span id="currentReport"></span>
+                &nbsp;&nbsp;&nbsp;
+                <button id="btn_changeReportName" class="btn btn-xs btn-success" data-bind="click:actions.changeReportName">Change report name</button>
+            </h3>
         </div>
 
         <div>
@@ -99,7 +90,7 @@ $.getScript('../js/admin_editReports.js');
                             </tr>
                             <tr>
                                 <td>Instance IDs (table):&nbsp;</td>
-                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:instIDs"></td>
+                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:instIDs, event:{blur:$root.actions.checkInstIDsTable}"></td>
                             </tr>
                             <tr>
                                 <td>Name:</td>
@@ -129,7 +120,7 @@ $.getScript('../js/admin_editReports.js');
                             </tr>
                             <tr>
                                 <td>Instance IDs (chart):&nbsp;</td>
-                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:chart_instIDs"></td>
+                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:chart_instIDs, event:{blur:$root.actions.checkInstIDsChart}"></td>
                             </tr>
                             <tr>
                                 <td><button class="btn btn-xs btn-success btn_archive" data-bind="click:$root.actions.archiveToggle">Archive</button></td>
@@ -159,14 +150,14 @@ $.getScript('../js/admin_editReports.js');
                                 <td><input class="ui-state-default ui-corner-all" style='width:50px' data-bind="value:chart_size_x"></td>
                                 <td style='width:40px'></td>
                                 <td>Labels (data table):&nbsp;</td>
-                                <td><input class="ui-state-default ui-corner-all" style='width:400px' data-bind="value:instIDs_shortNames" placeholder="Type a comma-separated list of labels..."></td>
+                                <td><input class="labels_table ui-state-default ui-corner-all" style='width:400px' data-bind="value:instIDs_shortNames, event:{blur:$root.actions.checkInstIDsTable}" placeholder="Type a comma-separated list of labels..."></td>
                             </tr>
                             <tr>
                                 <td>Chart height (px):&nbsp;</td>
                                 <td><input class="ui-state-default ui-corner-all" style='width:50px' data-bind="value:chart_size_y"></td>
                                 <td style='width:40px'></td>
                                 <td>Labels (chart):&nbsp;</td>
-                                <td><input class="ui-state-default ui-corner-all" style='width:400px' data-bind="value:chart_instIDs_shortNames" placeholder="Type a comma-separated list of labels..."></td>
+                                <td><input class="labels_chart ui-state-default ui-corner-all" style='width:400px' data-bind="value:chart_instIDs_shortNames, event:{blur:$root.actions.checkInstIDsChart}" placeholder="Type a comma-separated list of labels..."></td>
                             </tr>
                         </table>
                     </div>

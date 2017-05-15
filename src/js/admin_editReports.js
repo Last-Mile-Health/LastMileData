@@ -234,6 +234,18 @@ $(document).ready(function(){
                 
             },
             
+            checkInstIDsTable: function() {
+                var length_1 = $(event.currentTarget).val().split(',').length;
+                console.log('table');
+                console.log(length_1);
+            },
+            
+            checkInstIDsChart: function() {
+                var string1 = $(event.currentTarget).val();
+                console.log('chart');
+                console.log($(event.currentTarget).val());
+            },
+            
             // Archive or unarchive the report object (value is toggled based on current value)
             changeReportName: function() {
                 
@@ -292,17 +304,9 @@ $(document).ready(function(){
     ko.applyBindings(erModel, $('#editReports_container')[0]);
 
 
-    // Click handler: View instructions
-    $('#instructions_click').click(function() {
-        // Slide down instructions paragraph; change header
-        $('#instructions_text').slideDown();
-        $('#instructions_click').text('Instructions');
-    });
-    
-    
     // !!!!! TEMP; FOR DEVELOPMENT !!!!!
-//    $('#editReport_input').val('4');
-//    $('#editReport').click();
+    $('#editReport_input').val('4');
+    $('#editReport').click();
     // !!!!! TEMP; FOR DEVELOPMENT !!!!!
     
     
@@ -322,217 +326,3 @@ function ajaxError(response) {
     console.log('ajax error :/');
     console.log(response);
 }
-
-
-// !!!!! Toggle 
-function slidePanels() {
-    
-}
-
-    // !!!!!!!!!! NEW CODE: END !!!!!!!!!!
-
-
-    // Initialize dpObjects object (mechanism for assigning unique IDs to sidebar components)
-//    var dpObjects = {
-//        idList: [],
-//        getNewID: function(){
-//            var newID = "id_1";
-//            while (this.idList.indexOf(newID)!==-1) {
-//                var random = Math.floor(Math.random()*(10000))+1;
-//                newID = "id_" + random;
-//            }
-//            this.idList.push(newID);
-//            return newID;
-//        }
-//    };
-    
-    
-    // Populate dpObjects.idList
-//    for(var i=0; i<sidebar_model_edit.length; i++){
-//        dpObjects.idList.push(sidebar_model_edit[i].id);
-//        for(var j=0; j<sidebar_model_edit[i].tabs.length; j++){
-//            dpObjects.idList.push(sidebar_model_edit[i].tabs[j].id);
-//        }
-//    }
-
-
-    // Create observable model from "raw" model
-//    var sidebar_model_obs = ko.mapping.fromJS(sidebar_model_edit);
-
-
-    // Set click handlers for ADD / DELETE / MOVE buttons
-//    var actions = {
-//        
-//        // Delete OUTER tab
-//        deleteOuter: function(){
-//            // Get ID of item and corresponding indexes
-//            var id = $(event.currentTarget).parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Remove the item
-//            sidebar_model_obs.splice(index,1);
-//        },
-//        
-//        // Delete INNER tab
-//        deleteInner: function(){
-//            // Get ID of item and corresponding indexes
-//            var id = $(event.currentTarget).parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Remove the item
-//            sidebar_model_obs()[index.outer].tabs.splice(index.inner,1);
-//        },
-//        
-//        // Add a new OUTER tab
-//        addOuter: function(){
-//            // Push new outer tab
-//            sidebar_model_obs.push(ko.mapping.fromJS({
-//                id: dpObjects.getNewID(),
-//                name: 'New Outer Tab',
-//                tabs: [{
-//                    id: dpObjects.getNewID(),
-//                    type: 'dp_frag',
-//                    name: 'New page',
-//                    link: 'Insert link here',
-//                    permissions: 'superadmin'
-//                }]
-//            }));
-//            
-//        },
-//        
-//        // Add a new INNER tab
-//        addInner: function(data,event){
-//            // Get ID of containing DIV and corresponding index
-//            var id = $(event.currentTarget).parent().parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Push new inner tab to proper outer tab
-//            sidebar_model_obs()[index].tabs.push(ko.mapping.fromJS({
-//                id: dpObjects.getNewID(),
-//                type: 'dp_frag',
-//                name: 'New page',
-//                link: 'Insert link here',
-//                permissions: 'superadmin'
-//            }));
-//        },
-//        
-//        // Move OUTER tab up
-//        moveOuterUp: function(data,event){
-//            // Get ID of item and corresponding indexes
-//            var id = $(event.currentTarget).parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Move item UP one place
-//            if(index!==0) {
-//                var item = sidebar_model_obs.splice(index,1)[0];
-//                sidebar_model_obs.splice(index-1, 0, item);
-//            }
-//        },
-//        
-//        // Move OUTER tab down
-//        moveOuterDown: function(data,event){
-//            // Get ID of item and corresponding indexes
-//            var id = $(event.currentTarget).parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Move item DOWN one place
-//            var item = sidebar_model_obs.splice(index,1)[0];
-//            sidebar_model_obs.splice(index+1, 0, item);
-//        },
-//        
-//        // Move INNER tab up
-//        moveInnerUp: function(data,event){
-//            // Get ID of item and corresponding indexes
-//            var id = $(event.currentTarget).parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Move item UP one place
-//            if(index.inner!==0) {
-//                var item = sidebar_model_obs()[index.outer].tabs.splice(index.inner,1)[0];
-//                sidebar_model_obs()[index.outer].tabs.splice(index.inner-1, 0, item);
-//            }
-//        },
-//        
-//        // Move INNER tab down
-//        moveInnerDown: function(data,event){
-//            // Get ID of item and corresponding indexes
-//            var id = $(event.currentTarget).parent().parent().attr('id');
-//            var index = getIndex(id, sidebar_model_obs);
-//
-//            // Move item DOWN one place
-//            var item = sidebar_model_obs()[index.outer].tabs.splice(index.inner,1)[0];
-//            sidebar_model_obs()[index.outer].tabs.splice(index.inner+1, 0, item);
-//        }
-//        
-//    };
-
-
-    // Initialize knockout.js; bind model to DIV
-//    ko.applyBindings({
-//        sidebar: sidebar_model_obs,
-//        actions: actions
-//    }, $('#sidebarDIV_edit')[0]);
-
-
-    // Serialize the model and send it to the server
-//    $('#btn_save').click(function(){
-//        
-//        var $self = $(this);
-//        
-//        // Manipulate DOM
-//        LMD_utilities.ajaxButton($self, 'ajaxLoader');
-//        
-//        var objectData = ko.mapping.toJSON(sidebar_model_obs);
-//        var queryString = "UPDATE lastmile_dataportal.tbl_json_objects SET objectData='" + LMD_utilities.addSlashes(objectData) + "' WHERE objectName='Data Portal sidebar'";
-//        var myData = {'queryString': queryString} ;
-//        $.ajax({
-//                type: "POST",
-//                url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-//                data: myData,
-//                dataType: "json",
-//                success: function(data) {
-//                    // Manipulate DOM
-//                    LMD_utilities.ajaxButton($self, 'alertSuccess', 'Save changes');
-//                    LMD_utilities.ajaxButton($self, 'enable');
-//                },
-//                error: function() {
-//                    // Error message; reset DOM
-//                    alert('Error. Could not reach the database. Please try again.');
-//                    LMD_utilities.ajaxButton($self, 'alertError', 'Save changes');
-//                    LMD_utilities.ajaxButton($self, 'enable');
-//                }
-//        });
-//    });
-    
-    
-
-
-        
-// Given the ID of an inner/outer tab, return the current index(es) representing its position
-// Assumes that all IDs are unique, regardless of whether the tab is an "inner" or "outer" tab
-//function getIndex(id, sidebar_model) {
-//
-//    var match = 'not found';
-//
-//    // Test outer tabs
-//    for(var i=0; i<sidebar_model().length; i++) {
-//        if(sidebar_model()[i].id() === id) {
-//            match = i;
-//        }
-//    }
-//
-//    // Test inner tabs
-//    for(var i=0; i<sidebar_model().length; i++) {
-//        for(var j=0; j<sidebar_model()[i].tabs().length; j++) {
-//            console.log(sidebar_model()[i].tabs()[j].id());
-//            if(sidebar_model()[i].tabs()[j].id() === id) {
-//                match = {
-//                    outer: i,
-//                    inner: j
-//                };
-//            }
-//        }
-//    }
-//
-//    return match;
-//}

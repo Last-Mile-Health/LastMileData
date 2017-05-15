@@ -49,6 +49,11 @@
     margin-right: 0px;
 }
 
+#btn_changeReportName {
+    position:relative;
+    top:-1px;
+}
+
 #addNewObj {
     width: 800px;
 }
