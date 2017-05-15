@@ -35,7 +35,7 @@
         indicators: [
             {
                 name: 'Number of CHAs and CHSSs deployed through the NCHA program',
-                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules. NOTE THAT NUMBERS ARE SELF-REPORTED AND ARE SUBJECT TO FLUCTUATIONS AS THEY ARE VALIDATED OVER THE COMING WEEKS. Also note that changes from February to March are reflective of changes in current understanding based on recent QRM reporting, rather than changes in underlying reality.',
+                definition: 'Total number of CHAs and CHSSs deployed across all 15 counties through the NCHA program. Training numbers refer to the number of CHAs who have completed NCHA training modules. NOTE THAT NUMBERS ARE SELF-REPORTED AND ARE SUBJECT TO FLUCTUATIONS AS THEY ARE VALIDATED. Also note that we have updated monthly numbers such that changes from month to month are reflective of additional CHAs being trained, rather than changes in current understanding.',
                 dataSource: 'Current: self-reporting by implementing partners. Future: Liberia iHRIS database',
                 groups: [
                     { name: 'CHAs', instIDs: [336,337,338,339,340,375] },
@@ -192,7 +192,8 @@
             { yearMonth: "2016-12", shortMonth: "Dec '16" },
             { yearMonth: "2017-1", shortMonth: "Jan '17" },
             { yearMonth: "2017-2", shortMonth: "Feb '17" },
-            { yearMonth: "2017-3", shortMonth: "Mar '17" }
+            { yearMonth: "2017-3", shortMonth: "Mar '17" },
+            { yearMonth: "2017-4", shortMonth: "Apr '17" }
         ]
     };
     
@@ -232,6 +233,9 @@
 <div id="reportContent">
     
     <h1>Executive dashboard</h1>
+    <hr>
+    
+    <p style="color:darkred; font-weight:bold">Note: there is a bug that is causing some numbers to get cut off on the right side of the screen. As a temporary fix, please use the zoom function on your web browser (on Google Chrome, press "CTRL" and the minus sign at the same time) to zoom out so that everything fits on the screen.</p>
     <hr>
     
     <div data-bind="foreach: {data:$root.edModel.indicators, as:'ind'}">
