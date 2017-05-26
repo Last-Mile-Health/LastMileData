@@ -109,6 +109,8 @@ $(document).ready(function(){
             setTimeout(function(){
                 // Add three months
                 monthList.add(3);
+                // Clear current data
+                adminModel.indicators.removeAll();
                 // Load data
                 adminModel.loadData({initialLoad:false});
             },250);

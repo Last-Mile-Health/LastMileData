@@ -146,6 +146,14 @@ var LMD_utilities = (function(){
     }
 
 
+    // PUBLIC:  Temporarily encode semicolons
+    //          Used by parseJSONIntoSQL function to avoid semicolons in values being interpreted as ends of SQL statements
+    //          Semicolons are decoded by ajaxSendQuery.php
+    function encodeSemicolons(string) {
+        return (string + '').replace(/[;]/g, 'ENCODED_SEMICOLON');
+    }
+
+
     // PUBLIC:  Takes a JSON object (consisting only of key-value pairs) and parses it into a SQL insert query
     //          notStored is an array of keys for which the key-value pairs will be ignored
     function parseJSONIntoSQL(JSON, database, table, notStored) {
@@ -157,7 +165,7 @@ var LMD_utilities = (function(){
         for(var key in JSON) {
             // if key is not null and is not in "notStored" array, add it to query string
             if (notStored.indexOf(key) == -1 && JSON[key] !== 'NULL' && JSON[key] !== 'null' && JSON[key] != null) {
-                queryString += "`" + key + "`='" + addSlashes(JSON[key]) + "', ";
+                queryString += "`" + key + "`='" + encodeSemicolons(addSlashes(JSON[key])) + "', ";
             }
         }
 
@@ -232,6 +240,7 @@ var LMD_utilities = (function(){
         format_number: format_number,
         ajaxButton: ajaxButton,
         addSlashes: addSlashes,
+        encodeSemicolons: encodeSemicolons,
         parseJSONIntoSQL: parseJSONIntoSQL,
         isNumeric: isNumeric,
         downloadStringAsFile: downloadStringAsFile,
