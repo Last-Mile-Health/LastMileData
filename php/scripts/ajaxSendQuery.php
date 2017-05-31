@@ -36,6 +36,9 @@ if ($transaction) {
     
     // Break longer query strings down to individual queries to send together in a transaction
     $queryPieces = explode(";",$queryString);
+    
+    // Decode semicolons that have been encoded by the function LMD_utilities.encodeSemicolons()
+    $queryPieces = str_replace("ENCODED_SEMICOLON",";",$queryPieces);
     $all_query_ok=true;
     mysqli_autocommit($cxn,FALSE);
     
