@@ -23,25 +23,25 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 2. Update "facilities" (array)
-$query = "SELECT healthFacility FROM lastmile_cha.healthFacility order by healthFacility asc;";
+$query = "SELECT health_facility FROM lastmile_cha.health_facility order by health_facility asc;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_facilities = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     $row = mysqli_fetch_assoc($result);
-    array_push($json_facilities, $row['healthFacility']);
+    array_push($json_facilities, $row['health_facility']);
 }
 
 // 3. Update "districts" (array)
-$query = "SELECT healthDistrict FROM lastmile_cha.healthDistrict WHERE (healthDistrictID BETWEEN 20 AND 32) OR (healthDistrictID=6)";
+$query = "SELECT health_district FROM lastmile_cha.health_district WHERE (health_district_id BETWEEN 20 AND 32) OR (health_district_id=6)";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_districts = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     $row = mysqli_fetch_assoc($result);
-    array_push($json_districts, $row['healthDistrict']);
+    array_push($json_districts, $row['health_district']);
 }
 
 // 4. Update "county" (array)
-$query = "SELECT county FROM lastmile_cha.county WHERE ( ( countyID = 6 ) or ( countyID = 14) ) order by county asc;";
+$query = "SELECT county FROM lastmile_cha.county WHERE ( ( county_id = 6 ) or ( county_id = 14) ) order by county asc;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_county = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -50,7 +50,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 5. Update "chss" (array)
-$query = "select chss from lastmile_cha.view_php_refreshData_chss order by chss asc;";
+$query = "select chss from lastmile_dataportal.view_php_refresh_data_chss order by chss asc;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_chss = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {

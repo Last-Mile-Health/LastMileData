@@ -19,18 +19,18 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT chss, chssID, cha, chaID, community, communityID, healthFacility FROM lastmile_cha.temp_view_chss_cha_report where county='Grand Gedeh' ORDER BY healthFacility, chssID, chaID;";
+        $queryString = "SELECT chss, chss_id, cha, cha_id, community_list, community_id_list, health_facility FROM lastmile_report.view_staff_listing where county='Grand Gedeh' ORDER BY health_facility, chss_id, cha_id;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
-            $chssPlusID = $chss!="" ? $chss . " (" . $chssID . ")" : "unassigned";
+            $chssPlusID = $chss!="" ? $chss . " (" . $chss_id . ")" : "unassigned";
             $tableRow = "<tr>";
-            $tableRow .= "<td>$healthFacility</td>";
+            $tableRow .= "<td>$health_facility</td>";
             $tableRow .= "<td>$chssPlusID</td>";
-            $tableRow .= "<td>$cha ($chaID)</td>";
-            $tableRow .= "<td>$community</td>";
-            $tableRow .= "<td>$communityID</td>";
+            $tableRow .= "<td>$cha ($cha_id)</td>";
+            $tableRow .= "<td>$community_list</td>";
+            $tableRow .= "<td>$community_id_list</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
         }
@@ -50,18 +50,18 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT chss, chssID, cha, chaID, community, communityID, healthFacility FROM lastmile_cha.temp_view_chss_cha_report where county='Rivercess' ORDER BY healthFacility, chssID, chaID;";
+        $queryString = "SELECT chss, chss_id, cha, cha_id, community_list, community_id_list, health_facility FROM lastmile_report.view_staff_listing where county='Rivercess' ORDER BY health_facility, chss_id, cha_id;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
-            $chssPlusID = $chss!="" ? $chss . " (" . $chssID . ")" : "unassigned";
+            $chssPlusID = $chss!="" ? $chss . " (" . $chss_id . ")" : "unassigned";
             $tableRow = "<tr>";
-            $tableRow .= "<td>$healthFacility</td>";
+            $tableRow .= "<td>$health_facility</td>";
             $tableRow .= "<td>$chssPlusID</td>";
-            $tableRow .= "<td>$cha ($chaID)</td>";
-            $tableRow .= "<td>$community</td>";
-            $tableRow .= "<td>$communityID</td>";
+            $tableRow .= "<td>$cha ($cha_id)</td>";
+            $tableRow .= "<td>$community_list</td>";
+            $tableRow .= "<td>$community_id_list</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
         }
