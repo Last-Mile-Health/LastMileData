@@ -19,7 +19,7 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT chss, chss_id, cha, cha_id, community_list, community_id_list, health_facility FROM lastmile_report.view_staff_listing where county='Grand Gedeh' ORDER BY health_facility, chss_id, cha_id;";
+        $queryString = "SELECT chss, chss_id, cha, cha_id, community_list, community_id_list, health_facility FROM lastmile_report.view_staff_list where county='Grand Gedeh' ORDER BY health_facility, chss_id, cha_id;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
@@ -50,7 +50,7 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT chss, chss_id, cha, cha_id, community_list, community_id_list, health_facility FROM lastmile_report.view_staff_listing where county='Rivercess' ORDER BY health_facility, chss_id, cha_id;";
+        $queryString = "SELECT chss, chss_id, cha, cha_id, community_list, community_id_list, health_facility FROM lastmile_report.view_staff_list where county='Rivercess' ORDER BY health_facility, chss_id, cha_id;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
