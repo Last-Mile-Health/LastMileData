@@ -36,11 +36,25 @@ $logFile = 'dataBackup.log';
 
 
 // For localhost
-// !!!!! Don't delete; reminder of issue with using full mysqldump path !!!!!
 //exec('C:/Users/Avi/Desktop/Avi/xampp/mysql/bin/mysqldump --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db . ' >' . $_SERVER['DOCUMENT_ROOT'] . '/LastMileData/backups/' . $backup_file);
 
 
 // For GoDaddy
+
+// Move old files into backups/archive directory
+$source = "/home/lastmilehealth/public_html/LastMileData/backups/";
+$files = scandir($source);
+$destination = "/home/lastmilehealth/public_html/LastMileData/backups/archive/";
+foreach ($files as $file) {
+    if (in_array($file, array(".",".."))) continue;
+    if (substr($file, -4) != '.sql') continue;
+    // If we successfully copied this file, delete it from the source folder
+    if (copy($source.$file, $destination.$file)) {
+        unlink($source.$file);
+    }
+}
+
+// Create new backups
 
 exec( 'echo "------------------------------------------------------" >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 exec( 'date >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
@@ -71,8 +85,5 @@ exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user
 
 exec( 'echo "dumping" ' . $db10 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db10 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file10 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
-
-
-
 
 exec( 'echo "------------------------------------------------------" >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
