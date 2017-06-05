@@ -25,3 +25,9 @@
     margin: 1px;
     -webkit-border-radius: 4px;
 }
+
+table, tr, td {
+    text-align: left;
+    padding-right: 15px;
+    padding-bottom: 5px;
+}

@@ -495,6 +495,50 @@ $(document).ready(function(){
     });
 
 
+    // CLICK HANDLER: View an xForm
+    // Data files are ".XML" xForm files. This function visualizes the xForm as a readable HTML file
+    $("#modal_viewXform_submit").click(function() {
+        
+        // Reset error flag; get file input contents
+        var anyErrors = false;
+        var myInput = document.getElementById('modal_viewXform_fileInput');
+        
+        // Error check #1: No file was selected
+        if (myInput.files.length === 0) {
+            $('#modal_viewXform_error').text('No file was selected.');
+            flashDiv('#modal_viewXform_error');
+            anyErrors = true;
+        }
+        
+        // Error check #2: incorrect file extension(s)
+        if (!anyErrors) {
+            if (!anyErrors) {
+
+                // Get file and extension
+                var fileToLoad = myInput.files[0];
+                if (fileToLoad !== undefined) {
+                    var sFileName = fileToLoad.name;
+                    var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+                }
+
+                // Incorrect file extension (not ".xml")
+                if (sFileExtension.toLowerCase() !== 'xml') {
+                    $('#modal_viewXform_error').text('Please select only ".XML" files.');
+                    anyErrors = true;
+                    flashDiv('#modal_viewXform_error');
+                }
+
+            }
+        }
+        
+        // No errors; proceed
+        if (!anyErrors) {
+            // Submit form
+            $('#modal_viewXform_form').submit();
+        }
+    });
+
+
     // QA Click handlers (current forms)
     $('#qa_MSR_0501').click(function() {
         launchQAModal({

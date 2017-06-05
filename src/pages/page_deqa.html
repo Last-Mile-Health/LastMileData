@@ -75,6 +75,7 @@
                     <p><a href="../forms/util_householdIDAssignmentTool.html" class="btn btn-danger" title="Generate Household ID Assignment Tools.">Household ID Assignment Tool</a></p>
                     <p><a class="btn btn-danger" id="toggleQueryDebugging" title="Toggle query debugging">Toggle query debugging</a></p>
                     <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_createLMU" title="Create .LMU file (from .XML files)">Create .LMU file (from .XML files)</a></p>
+                    <p><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal_viewXform" title="View an xForm">View an xForm</a></p>
                 </div>
             </div>
             
@@ -108,7 +109,7 @@
         
         
         <!-- MODAL START: "DEQA LOGIN" -->
-        <div id="modal_deqaLogin" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_deqaLogin" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -138,7 +139,7 @@
         
         
         <!-- MODAL START: "INITIALIZE" -->
-        <div id="modal_initialize" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_initialize" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -162,7 +163,7 @@
         
         
         <!-- MODAL START: "APPCACHE REFRESH" -->
-        <div id="modal_appcacheRefresh" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_appcacheRefresh" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -185,7 +186,7 @@
         
         
         <!-- MODAL START: "REFRESH DATA" -->
-        <div id="modal_refreshData" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_refreshData" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -207,7 +208,7 @@
         
         
         <!-- MODAL START: "DOWNLOAD DATA FILE" -->
-        <div id="modal_downloadDataFile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_downloadDataFile" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -217,7 +218,7 @@
                         <div id="modal_downloadDataFile_prompt" class="form-group text-center">
                             <a id="modal_downloadDataFile_submit" class="btn btn-primary btn-lg btn-block">Download</a>
                             <br>
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                            <button class="btn" data-dismiss="modal">Cancel</button>
                         </div>
                         <div id="modal_downloadDataFile_downloading" class="form-group text-center" style="display:none">
                             <img src="../images/ajax_loader.gif">
@@ -234,7 +235,7 @@
         
         
         <!-- MODAL START: "UPLOAD LMD DATA FILES" -->
-        <div id="modal_uploadLMD" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_uploadLMD" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -249,7 +250,7 @@
                                         <p id="modal_uploadLMD_error" class="form-group" style="display:none; color:red"></p>
                                         <a id="modal_uploadLMD_submit" class="btn btn-primary btn-lg btn-block">Upload</a>
                                         <br>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                        <button class="btn" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -270,7 +271,7 @@
         
         
         <!-- MODAL START: "CREATE LMU FILE" -->
-        <div id="modal_createLMU" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_createLMU" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -285,7 +286,7 @@
                                         <p id="modal_createLMU_error" class="form-group" style="display:none; color:red"></p>
                                         <a id="modal_createLMU_submit" class="btn btn-primary btn-lg btn-block">Upload</a>
                                         <br>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                        <button class="btn" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
@@ -305,8 +306,57 @@
         
         
         
+        <!-- MODAL START: "VIEW AN XFORM" -->
+        <div id="modal_viewXform" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">View an xForm<br>(Use .XML files, not .LMU files)</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group text-center">
+                            <div id="modal_viewXform_formContent">
+                                <form id="modal_viewXform_form" action="../pages/tool_viewXform.php" method="post" enctype="multipart/form-data">
+                                    <div class="form-group text-center">
+                                        <input class="form-control input-lg" type="file" name="modal_viewXform_fileInput" id="modal_viewXform_fileInput"><br>
+                                        <p id="modal_viewXform_error" class="form-group" style="display:none; color:red"></p>
+                                        <table>
+                                            <tr>
+                                                <td><b>Options:</b></td>
+                                                <td><input type="checkbox" name="show_labels" checked> Show labels</td>
+                                                <td><input type="checkbox" name="show_xPaths" checked> Show xPaths</td>
+                                                <td><input type="checkbox" name="show_calculations" checked> Show calculations</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><input type="checkbox" name="show_skipLogic" checked> Show skip logic</td>
+                                                <td><input type="checkbox" name="show_internalVariables" checked> Show internal variables</td>
+                                                <td><input type="checkbox" name="show_constraints" checked> Show constraints</td>
+                                            </tr>
+                                        </table>
+                                        <a id="modal_viewXform_submit" class="btn btn-primary btn-lg btn-block">Upload</a>
+                                        <br>
+                                        <button class="btn" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="modal_viewXform_status" style='display:none'>
+                                <img src='../images/ajax_loader.gif'><br>
+                                <h3 id='modal_viewXform_message'>Parsing .XML file...</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL END: "VIEW AN XFORM" -->
+        
+        
+        
         <!-- MODAL START: "SEND RECORDS" -->
-        <div id="modal_sendRecords" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_sendRecords" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -326,12 +376,12 @@
                             <div id='modal_sendRecords_buttons'>
                                 <a id="modal_sendRecords_submit" class="btn btn-primary btn-lg">Yes, send records</a>
                                 &nbsp;
-                                <button class="btn btn-primary btn-lg" data-dismiss="modal" aria-hidden="true">No, go back</button>
+                                <button class="btn btn-primary btn-lg" data-dismiss="modal">No, go back</button>
                             </div>
                         </div>
                         
                         <div id="modal_sendRecords_close">
-                            <button class="btn btn-primary btn-lg" data-dismiss="modal" aria-hidden="true">Close</button>
+                            <button class="btn btn-primary btn-lg" data-dismiss="modal">Close</button>
                         </div>
                         
                     </div>
@@ -346,11 +396,11 @@
         
         <!-- MODAL START: "QUALITY ASSURANCE" -->
         <!-- !!!!! fix all of these IDs to match standard prefixed format !!!!! -->
-        <div id="modal_QA" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div id="modal_QA" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
                         <h1 class="text-center">Quality Assurance</h1>
                     </div>
                     <div class="modal-body">
@@ -383,7 +433,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-md-12">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                            <button class="btn" data-dismiss="modal">Cancel</button>
                         </div>    
                     </div>
                 </div>
