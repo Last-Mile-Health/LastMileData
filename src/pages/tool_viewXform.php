@@ -15,64 +15,54 @@
     <body>
         <?php
         
-            // Note: This parser assumes that variable names withing the <data> element are unique (i.e. regardless of group/hierarchy structure). This can be easily changed if this is an unsafe assumption by changing the primary key of the $dataArray to the xPath.
-            /* !!!!! Existing end-user functionality:   (1) generate list of questions
-             *                                          (2) Generate labels
-             *                                          (3) Generate select list options
-             *                                          (4) 
-             */
-            
             // Options passed from page_deqa.html via $_POST array
             $show_labels = isset($_POST['show_labels']) ? true : false;
-            $show_xPaths = isset($_POST['show_xPaths']) ? true : false;
-            $show_skipLogic = isset($_POST['show_skipLogic']) ? true : false;
+            $show_names = isset($_POST['show_names']) ? true : false;
+            $show_logic = isset($_POST['show_logic']) ? true : false;
             $show_internalVariables = isset($_POST['show_internalVariables']) ? true : false;
-            $show_calculations = isset($_POST['show_calculations']) ? true : false;
-            $show_constraints = isset($_POST['show_constraints']) ? true : false;
             
+            // Create "Simple XML" object and an associative array to hold data
             $xForm = simplexml_load_file($_FILES['modal_viewXform_fileInput']['tmp_name']);
-            
-            // Create associative array to hold data
             $dataArray = array();
             
-            // Form questions
+            // Get form questions
             $questions = $xForm->xpath("/h:html/h:head")[0]->model->instance->data[0];
             $i = 1;
             foreach($questions as $varName => $value) {
                 
                 // Nesting level 1
-                // !!!!! Implement this recursively ?????
+                // !!!!! This can be implemented more succinctly, possibly through a recursive function !!!!!
                 $xPath = '/data/';
                 $numChildren = count($value);
                 if ($numChildren===0) {
                     $dataArray[$xPath . $varName] = ['varName' => $varName];
                 } else {
                     $questions2 = $value->children();
-                    $xPath .= $varName . '/';
+                    $xPath2 = $xPath . $varName . '/';
                     foreach($questions2 as $varName => $value) {
                         
                         // Nesting level 2
                         $numChildren = count($value);
                         if ($numChildren===0) {
-                            $dataArray[$xPath . $varName] = ['varName' => $varName];
+                            $dataArray[$xPath2 . $varName] = ['varName' => $varName];
                         } else {
                             $questions3 = $value->children();
-                            $xPath .= $varName . '/';
+                            $xPath3 = $xPath2 . $varName . '/';
                             foreach($questions3 as $varName => $value) {
                                 
                                 // Nesting level 3
                                 $numChildren = count($value);
                                 if ($numChildren===0) {
-                                    $dataArray[$xPath . $varName] = ['varName' => $varName];
+                                    $dataArray[$xPath3 . $varName] = ['varName' => $varName];
                                 } else {
                                     $questions4 = $value->children();
-                                    $xPath .= $varName . '/';
+                                    $xPath4 = $xPath3 . $varName . '/';
                                     foreach($questions4 as $varName => $value) {
                                         
                                         // Nesting level 4
                                         $numChildren = count($value);
                                         if ($numChildren===0) {
-                                            $dataArray[$xPath . $varName] = ['varName' => $varName];
+                                            $dataArray[$xPath4 . $varName] = ['varName' => $varName];
                                         }
                                     }
                                 }
@@ -104,7 +94,7 @@
                 }
             }
             
-            // Get SELECT options
+            // Get SELECT options (multiple-select)
             $selectOptions = $xForm->xpath("//*[local-name()='select']");
             foreach($selectOptions as $selectOption) {
                 $xPath = (string) $selectOption->attributes();
@@ -123,6 +113,28 @@
                 }
                 if (isset($dataArray[$xPath])) {
                     $dataArray[$xPath]['selectOptions'] = $optionArray;
+                }
+            }
+            
+            // Get SELECT1 options (single-select)
+            $select1Options = $xForm->xpath("//*[local-name()='select1']");
+            foreach($select1Options as $select1Option) {
+                $xPath = (string) $select1Option->attributes();
+                $optionArray = [];
+                foreach($select1Option as $key => $value) {
+                    if ($key == 'item') {
+                        $optName = stripPrefixLMD($value->value);
+                        $optTextLocation = getLabelLocation($value->label->attributes());
+                        $optText = $xForm->xpath("//*[local-name()='text'][@id='" . $optTextLocation . "']")[0]->value;
+                        array_push($optionArray, [
+                            'optName' => $optName,
+                            'optTextLocation' => $optTextLocation,
+                            'optText' => $optText
+                        ]);
+                    }
+                }
+                if (isset($dataArray[$xPath])) {
+                    $dataArray[$xPath]['select1Options'] = $optionArray;
                 }
             }
             
@@ -153,21 +165,37 @@
                 $type = isset($value['type']) ? $value['type'] : '';
                 
                 echo "<p>";
-                echo "<h3>Variable #" . $index++ . " name: <i>" . $value['varName'] . "</i></h3>";
-                echo $show_labels ? "<b>Label</b>: " . $labelText . "<br>" : "";
-                echo $show_xPaths ? "<b>xPath</b>: " . $xPath . "<br>" : "";
-                echo $show_skipLogic ? "<b>Skip logic</b>: " . $relevant . "<br>" : "";
-                echo $show_calculations ? "<b>Calculations</b>: " . $calculate . "<br>" : "";
-                if ($show_constraints) {
+                echo "<h2>Variable #" . $index++;
+                echo $show_names ? " name: <i>" . $value['varName'] . "</i></h2>" : "</h2>";
+                echo ($show_names && $show_labels) ? "<b>Label</b>: " : "";
+                echo $show_labels ? $labelText . "<br>" : "";
+                if ($show_logic) {
+                    echo "<b>xPath</b>: " . $xPath . "<br>";
+                    echo "<b>Skip logic</b>: " . $relevant . "<br>";
+                    echo "<b>Calculations</b>: " . $calculate . "<br>";
                     echo "<b>Constraints</b>: " . $constraint . "<br>";
                     echo "<b>Required</b>: " . $required . "<br>";
                     echo "<b>Type</b>: " . $type . "<br>";
                 }
                 
                 if (isset($value['selectOptions'])) {
-                    echo "<b>Options</b>:<ul>";
+                    echo $show_names ? "<b>Options (multiple-select)</b>:<ul>" : "<ul>";
                     foreach($value['selectOptions'] as $value2) {
-                        echo "<li>" . $value2['optText'] . " (" . $value2['optName'] . ")</li>";
+                        echo "<li>";
+                        echo $show_labels ? $value2['optText'] : "";
+                        echo $show_names ? " (" . $value2['optName'] . ")" : "";
+                        echo "</li>";
+                    }
+                    echo "</ul>";
+                }
+                
+                if (isset($value['select1Options'])) {
+                    echo $show_names ? "<b>Options (single-select)</b>:<ul>" : "<ul>";
+                    foreach($value['select1Options'] as $value2) {
+                        echo "<li>";
+                        echo $show_labels ? $value2['optText'] : "";
+                        echo $show_names ? " (" . $value2['optName'] . ")" : "";
+                        echo "</li>";
                     }
                     echo "</ul>";
                 }
@@ -210,9 +238,12 @@
             
             function isInternalVariable($varName) {
                 
-                $systemVariables = ['LMD-DATABASE', 'LMD-TABLE', 'LMD-VAL-meta_UUID', 'LMD-VAL-meta_dataSource', 'LMD-VAL-meta_formVersion', 'LMD-VAL-meta_deviceID'];
+                $systemVariables = ['LMD-DATABASE', 'LMD-TABLE', 'LMD-VAL-meta_UUID', 'LMD-VAL-meta_dataSource', 'LMD-VAL-meta_formVersion', 'LMD-VAL-meta_deviceID','LMD-VAL-meta_autoDate','LMD-TIM-meta_dataEntry_startTime','LMD-TIM-meta_dataEntry_endTime'];
                 
-                if ( in_array($varName, $systemVariables) OR substr($varName, 0, 4)=='VAR-' ) {
+                // !!!!! Hack to account for sick child form
+                array_push($systemVariables, 'LMD-VAL-childHasDangerSign');
+                
+                if ( in_array($varName, $systemVariables) || substr($varName, 0, 4)=='VAR-' ) {
                     return true;
                 } else {
                     return false;
