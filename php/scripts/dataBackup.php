@@ -19,7 +19,7 @@ $db6    = "lastmile_dataquality";
 $db8    = "lastmile_temp";
 $db9    = "lastmile_pilot";
 $db10   = "lastmile_cha";
-
+$db11   = "lastmile_report";
 
 $backup_file1   = $db1      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file2   = $db2      . '_' . date("Y-m-d-H-i-s") . '.sql';
@@ -30,7 +30,7 @@ $backup_file6   = $db6      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file8   = $db8      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file9   = $db9      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file10  = $db10     . '_' . date("Y-m-d-H-i-s") . '.sql';
-
+$backup_file11  = $db11     . '_' . date("Y-m-d-H-i-s") . '.sql';
 
 $logFile = 'dataBackup.log';
 
@@ -85,5 +85,8 @@ exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user
 
 exec( 'echo "dumping" ' . $db10 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db10 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file10 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+
+exec( 'echo "dumping" ' . $db11 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+exec('mysqldump --skip-lock-tables --routines --events --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db11 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file11 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 exec( 'echo "------------------------------------------------------" >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
