@@ -92,10 +92,11 @@ County: <select id="county">
         }
 
         // Set queryString; run query; extract data
-        $queryString = "SELECT healthFacility, nReports, nARI, nMalaria_2_11_months, nMalaria_1_5_years, nDiarrhea,
-            nBirths_home, nBirths_facility, nStillBirths, nDeathsNeonatal, nDeathsPostneonatal, nDeathsChild, nDeathsMaternal
-            FROM lastmile_dataportal._temp_view_msr_facility WHERE $whereClause
-            AND monthReported=$reportMonth AND yearReported=$reportYear";
+        $queryString = "SELECT health_facility, num_reports, num_tx_ari, num_tx_malaria_under1, num_tx_malaria_over1, num_tx_diarrhea,
+            num_births_home, num_births_facility, num_stillbirths, num_deaths_neonatal, num_deaths_postneonatal, num_deaths_child, num_deaths_maternal
+            FROM lastmile_cha.view_base_msr_facility WHERE $whereClause
+            AND month_reported=$reportMonth AND year_reported=$reportYear";
+
         $result = mysqli_query($cxn, $queryString);
 
         echo "<h2><b>HMIS Monthly Report</b>: $reportMonth-$reportYear ($county)</h2><br><br>";
@@ -121,22 +122,22 @@ County: <select id="county">
         {
             extract($row);
 
-            $nARI_chi = round($nARI*.83,0);
-            $nARI_inf = $nARI - $nARI_chi;
-            $nMalaria = $nMalaria_2_11_months + $nMalaria_1_5_years;
-            $nDiarrhea_chi = round($nDiarrhea*.83,0);
-            $nDiarrhea_inf = $nDiarrhea - $nDiarrhea_chi;
+            $nARI_chi = round($num_tx_ari*.83,0);
+            $nARI_inf = $num_tx_ari - $nARI_chi;
+            $nMalaria = $num_tx_malaria_under1 + $num_tx_malaria_over1;
+            $nDiarrhea_chi = round($num_tx_diarrhea*.83,0);
+            $nDiarrhea_inf = $num_tx_diarrhea - $nDiarrhea_chi;
 
             echo "<tr>";
-            echo "<td>$healthFacility</td>";
-            echo "<td>$nReports</td>";
+            echo "<td>$health_facility</td>";
+            echo "<td>$num_reports</td>";
             echo "<td>$nMalaria</td>";
-            echo "<td>$nMalaria_2_11_months</td>";
-            echo "<td>$nMalaria_1_5_years</td>";
-            echo "<td>$nDiarrhea</td>";
+            echo "<td>$num_tx_malaria_under1</td>";
+            echo "<td>$num_tx_malaria_over1</td>";
+            echo "<td>$num_tx_diarrhea</td>";
             echo "<td>$nDiarrhea_inf</td>";
             echo "<td>$nDiarrhea_chi</td>";
-            echo "<td>$nARI</td>";
+            echo "<td>$num_tx_ari</td>";
             echo "<td>$nARI_inf</td>";
             echo "<td>$nARI_chi</td>";
             echo "</tr>";
@@ -160,16 +161,16 @@ County: <select id="county">
         {
             extract($row);
 
-            $nBirths = $nBirths_home + $nBirths_facility;
-            $nU5Deaths = $nStillBirths + $nDeathsNeonatal + $nDeathsPostneonatal + $nDeathsChild;
-            $totalDeaths = $nU5Deaths + $nDeathsMaternal;
+            $nBirths = $num_births_home + $num_births_facility;
+            $nU5Deaths = $num_stillbirths + $num_deaths_neonatal + $num_deaths_postneonatal + $num_deaths_child;
+            $totalDeaths = $nU5Deaths + $num_deaths_maternal;
 
             echo "<tr>";
-            echo "<td>$healthFacility</td>";
+            echo "<td>$health_facility</td>";
             echo "<td>$nBirths</td>";
-            echo "<td>$nDeathsNeonatal</td>";
+            echo "<td>$num_deaths_neonatal</td>";
             echo "<td>$nU5Deaths</td>";
-            echo "<td>$nDeathsMaternal</td>";
+            echo "<td>$num_deaths_maternal</td>";
             echo "<td>$totalDeaths</td>";
             echo "</tr>";
         }
