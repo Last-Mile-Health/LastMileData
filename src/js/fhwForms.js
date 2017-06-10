@@ -32,8 +32,8 @@ $(document).ready(function() {
     });
     
     // Append #de_date and #de_init boxes (for printing)
-    $de_date = $("input[name=meta_DE_date]");
-    $de_init = $("input[name=meta_DE_init]");
+    $de_date = $("input[name=meta_de_date]");
+    $de_init = $("input[name=meta_de_init]");
     $de_date.after("<input id='de_print_date'>");
     $de_init.after("<input id='de_print_init'>");
     
@@ -44,12 +44,12 @@ $(document).ready(function() {
     $de_init.attr('readonly','readonly');
     
     // Set timestamps, data source, UUID
-    $("#meBox").append("<input name='meta_DE_startTime' class='stored' type='hidden'>");
-    $("#meBox").append("<input name='meta_DE_endTime' class='stored' type='hidden'>");
-    $("#meBox").append("<input name='meta_dataSource' class='stored' type='hidden' value='paper'>");
-    $("#meBox").append("<input name='meta_UUID' class='stored' type='hidden'>");
-    $("input[name=meta_DE_startTime]").val(LMD_utilities.mysql_time());
-    $("input[name=meta_UUID]").val(LMD_utilities.getUUID());
+    $("#meBox").append("<input name='meta_de_time_start' class='stored' type='hidden'>");
+    $("#meBox").append("<input name='meta_de_time_end' class='stored' type='hidden'>");
+    $("#meBox").append("<input name='meta_data_source' class='stored' type='hidden' value='paper'>");
+    $("#meBox").append("<input name='meta_uuid' class='stored' type='hidden'>");
+    $("input[name=meta_de_time_start]").val(LMD_utilities.mysql_time());
+    $("input[name=meta_uuid]").val(LMD_utilities.getUUID());
     
     // If in "QA mode", populate field values
     if (qaRecordID) {
@@ -132,7 +132,7 @@ $(document).ready(function() {
         } else {
             
             // Set "form end" timestamp
-            $("input[name=meta_DE_endTime]").val(LMD_utilities.mysql_time());
+            $("input[name=meta_de_time_end]").val(LMD_utilities.mysql_time());
             
             // Initialize nextKey
             var nextKey = 0;
