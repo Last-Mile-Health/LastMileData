@@ -28,22 +28,22 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT chssID, chssName, SUM(numSupervisionVisitLogs) as numSupervisionVisitLogs, "
-                . "SUM(numVaccineTrackers) as numVaccineTrackers, SUM(numCHSSMSRs) as numCHSSMSRs, SUM(numCHAMSRs) as numCHAMSRs "
-                . "FROM lastmile_chwdb.view_chss_tool_completion_2 "
+        $queryString = "SELECT chss_id, chss, SUM(num_supervision_visit_logs) as num_supervision_visit_logs, "
+                . "SUM(num_vaccine_trackers) as num_vaccine_trackers, SUM(num_chss_msrs) as num_chss_msrs, SUM(num_cha_msrs) as num_cha_msrs "
+                . "FROM lastmile_cha.view_chss_tool_completion_report "
                 . "WHERE (month(now())+(year(now())*12))-(`month`+(`year`*12))<=6 "
-                . "GROUP BY `chssID` ORDER BY `chssName`;";
+                . "GROUP BY `chss_id` ORDER BY `chss`;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $tableRow = "<tr>";
-            $tableRow .= "<td>$chssName</td>";
-            $tableRow .= "<td>$chssID</td>";
-            $tableRow .= "<td>$numSupervisionVisitLogs</td>";
-            $tableRow .= "<td>$numVaccineTrackers</td>";
-            $tableRow .= "<td>$numCHSSMSRs</td>";
-            $tableRow .= "<td>$numCHAMSRs</td>";
+            $tableRow .= "<td>$chss</td>";
+            $tableRow .= "<td>$chss_id</td>";
+            $tableRow .= "<td>$num_supervision_visit_logs</td>";
+            $tableRow .= "<td>$num_vaccine_trackers</td>";
+            $tableRow .= "<td>$num_chss_msrs</td>";
+            $tableRow .= "<td>$num_cha_msrs</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
         }
@@ -66,20 +66,20 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT * FROM lastmile_chwdb.view_chss_tool_completion_2 ORDER BY `year` DESC, `month` DESC, `chssName`;";
+        $queryString = "SELECT * FROM lastmile_cha.view_chss_tool_completion_report ORDER BY `year` DESC, `month` DESC, `chss`;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $tableRow = "<tr>";
-            $tableRow .= "<td>$chssName</td>";
-            $tableRow .= "<td>$chssID</td>";
+            $tableRow .= "<td>$chss</td>";
+            $tableRow .= "<td>$chss_id</td>";
             $tableRow .= "<td>$year</td>";
             $tableRow .= "<td>$month</td>";
-            $tableRow .= "<td>$numSupervisionVisitLogs</td>";
-            $tableRow .= "<td>$numVaccineTrackers</td>";
-            $tableRow .= "<td>$numCHSSMSRs</td>";
-            $tableRow .= "<td>$numCHAMSRs</td>";
+            $tableRow .= "<td>$num_supervision_visit_logs</td>";
+            $tableRow .= "<td>$num_vaccine_trackers</td>";
+            $tableRow .= "<td>$num_chss_msrs</td>";
+            $tableRow .= "<td>$num_cha_msrs</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
         }
