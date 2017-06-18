@@ -87,7 +87,7 @@
             },
             {
                 name: 'Monthly supervision rate',
-                definition: 'Average number of supervision visits by a CHWL, per CHA ([Total number of supervision visits] / [number of active CHAs]). This currently represents CHWL visits; once the national program rolls out, this will represent CHSS visits, and we will adjust the definition accordingly.',
+                definition: 'Average number of supervision visits by a CHWL/CHSS, per CHA ([Total number of supervision visits] / [number of active CHAs]).',
                 dataSource: 'Monthly service report',
                 groups: [
                     { name: '', instIDs: [533,388,427] }
@@ -184,16 +184,14 @@
         ],
         // !!!!! Eventually, replace this with automated code (like in LMD_dataPortal.js !!!!!
         months: [
-            { yearMonth: "2016-7", shortMonth: "Jul '16" },
-            { yearMonth: "2016-8", shortMonth: "Aug '16" },
-            { yearMonth: "2016-9", shortMonth: "Sep '16" },
             { yearMonth: "2016-10", shortMonth: "Oct '16" },
             { yearMonth: "2016-11", shortMonth: "Nov '16" },
             { yearMonth: "2016-12", shortMonth: "Dec '16" },
             { yearMonth: "2017-1", shortMonth: "Jan '17" },
             { yearMonth: "2017-2", shortMonth: "Feb '17" },
             { yearMonth: "2017-3", shortMonth: "Mar '17" },
-            { yearMonth: "2017-4", shortMonth: "Apr '17" }
+            { yearMonth: "2017-4", shortMonth: "Apr '17" },
+            { yearMonth: "2017-5", shortMonth: "May '17" }
         ]
     };
     
@@ -233,9 +231,6 @@
 <div id="reportContent">
     
     <h1>Executive dashboard</h1>
-    <hr>
-    
-    <p style="color:darkred; font-weight:bold">Note: there is a bug that is causing some numbers to get cut off on the right side of the screen. As a temporary fix, please use the zoom function on your web browser (on Google Chrome, press "CTRL" and the minus sign at the same time) to zoom out so that everything fits on the screen.</p>
     <hr>
     
     <div data-bind="foreach: {data:$root.edModel.indicators, as:'ind'}">
