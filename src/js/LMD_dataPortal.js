@@ -174,7 +174,7 @@ var LMD_dataPortal = (function(){
                             d.chart_points.push({
                                 Month:dataArray[i].date,
                                 Value:dataArray[i].value,
-                                Cut: d.chartMultiple ? instShortName : 1
+                                Cut: d.chartMultiple ? instShortName : '(none)'
                             });
                         }
                         

@@ -46,7 +46,7 @@ var LMD_dimpleHelper = (function(){
             var x = myChart.addCategoryAxis("x", "Month");
             myChart.addCategoryAxis("y", "");
             myChart.addMeasureAxis("p", "Value");
-            var pies = myChart.addSeries(params.cut, dimple.plot.pie); // !!!!! this needs to be variablized !!!!!
+            var pies = myChart.addSeries(params.cut, dimple.plot.pie);
             pies.radius = 25;
             myChart.addLegend(140, 10, 330, 20, "right"); // !!!!! this needs to be variablized !!!!!
         }
@@ -56,9 +56,13 @@ var LMD_dimpleHelper = (function(){
             // Add axis titles
             if (params.axisTitles && params.axisTitles.x) {
                 x.title = params.axisTitles.x;
+            } else {
+                x.title = "";
             }
             if (params.axisTitles && params.axisTitles.y) {
                 y.title = params.axisTitles.y;
+            } else {
+                y.title = "";
             }
 
             // Add tick formats
@@ -86,7 +90,7 @@ var LMD_dimpleHelper = (function(){
                 for (el in myArr) {
                     var cut = Object.keys(myArr[el])[0];
                     var color = myArr[el][cut];
-                    myChart.assignColor(cut,color); // !!!!! testing !!!!!
+                    myChart.assignColor(cut,color);
                 }
                 
                 // Order by cut

@@ -58,7 +58,7 @@
     <div data-bind="foreach: {data:reportObjects, as:'ro'}">
         <div class='row'>
             <hr style="margin:15px; border:1px solid #eee;">
-            <div class='col-md-4'>
+            <div class='col-md-5'>
                 <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + ro_name"></h3>
                 <p><b>Definition</b>: <span data-bind="text:ro_description"></span></p>
                 <!--<p data-bind="if:roMetadata_target"><b>Target</b>: <span data-bind="text: LMD_utilities.format_number(roMetadata_target,roMetadata_targetFormat)"></span></p>-->
