@@ -24,15 +24,10 @@ executeStatements('lastmile_upload','odk_routineVisit', $cxn);
 executeStatements('lastmile_upload','odk_supervisionVisitLog', $cxn);
 executeStatements('lastmile_upload','odk_vaccineTracker', $cxn);
 
-// Temporary tables to hold training data
+executeStatements('lastmile_upload','de_chaHouseholdRegistration', $cxn);
+executeStatements('lastmile_upload','de_cha_monthly_service_report', $cxn);
+executeStatements('lastmile_upload','de_chss_monthly_service_report', $cxn);
 executeStatements('lastmile_temp','chss_training', $cxn);
-
-executeStatements('lastmile_chwdb','staging_odk_departurechecklog', $cxn);
-executeStatements('lastmile_chwdb','staging_odk_arrivalchecklog', $cxn);
-executeStatements('lastmile_chwdb','staging_odk_chwrestock', $cxn);
-executeStatements('lastmile_chwdb','staging_odk_routinevisit', $cxn);
-executeStatements('lastmile_chwdb','staging_odk_vaccinetracker', $cxn);
-executeStatements('lastmile_chwdb','staging_odk_supervisionvisitlog', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
