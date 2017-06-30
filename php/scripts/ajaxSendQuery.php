@@ -26,6 +26,10 @@ require_once("cxn.php");
 if ( strpos( $queryString, 'lastmile_chwdb.staging_odk_sickChildForm' ) !== false ) {
     $queryString = str_replace( 'lastmile_chwdb.staging_odk_sickChildForm', 'lastmile_upload.odk_sickChildForm', $queryString );
 }
+if ( strpos( $queryString, 'lastmile_chwdb.staging_odk_routinevisit' ) !== false ) {
+    $queryString = str_replace( 'lastmile_chwdb.staging_odk_routinevisit', 'lastmile_archive.chwdb_odk_routine_visit', $queryString );
+}
+    
        
 // Debug queries
 if ($queryDebugging=='true') {
