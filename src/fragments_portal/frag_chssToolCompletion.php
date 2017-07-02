@@ -30,7 +30,7 @@ require_once("cxn.php");
 
         $queryString = "SELECT chss_id, chss, SUM(num_supervision_visit_logs) as num_supervision_visit_logs, "
                 . "SUM(num_vaccine_trackers) as num_vaccine_trackers, SUM(num_chss_msrs) as num_chss_msrs, SUM(num_cha_msrs) as num_cha_msrs "
-                . "FROM lastmile_cha.view_chss_tool_completion_report "
+                . "FROM lastmile_report.view_base_chss_tool_completion "
                 . "WHERE (month(now())+(year(now())*12))-(`month`+(`year`*12))<=6 "
                 . "GROUP BY `chss_id` ORDER BY `chss`;";
 
@@ -66,7 +66,7 @@ require_once("cxn.php");
     </tr>
     <?php
 
-        $queryString = "SELECT * FROM lastmile_cha.view_chss_tool_completion_report ORDER BY `year` DESC, `month` DESC, `chss`;";
+        $queryString = "SELECT * FROM lastmile_report.view_base_chss_tool_completion ORDER BY `year` DESC, `month` DESC, `chss`;";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {

@@ -94,7 +94,7 @@ County: <select id="county">
         // Set queryString; run query; extract data
         $queryString = "SELECT health_facility, num_reports, num_tx_ari, num_tx_malaria_under1, num_tx_malaria_over1, num_tx_diarrhea,
             num_births_home, num_births_facility, num_stillbirths, num_deaths_neonatal, num_deaths_postneonatal, num_deaths_child, num_deaths_maternal
-            FROM lastmile_cha.view_base_msr_facility WHERE $whereClause
+            FROM lastmile_report.view_base_msr_facility WHERE $whereClause
             AND month_reported=$reportMonth AND year_reported=$reportYear";
 
         $result = mysqli_query($cxn, $queryString);
