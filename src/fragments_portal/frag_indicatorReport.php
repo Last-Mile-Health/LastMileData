@@ -37,7 +37,8 @@
     // Echo report title
     $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
     curl_setopt($ch,CURLOPT_URL,$url4);
-    $reportTitle = JSON_decode(curl_exec($ch))->reportName;
+    $reportName = JSON_decode(curl_exec($ch))->reportName;
+    $headerNote = JSON_decode(curl_exec($ch))->headerNote;
 
     // Close CURL session and echo JSON
     // JSON consists of 3 javascript objects: data_indicators, data_rawValues, [model_report]
@@ -54,7 +55,8 @@
 </script>
 
 <div id='reportContent'>
-    <h1><?php echo $reportTitle; ?></h1>
+    <h1><?php echo $reportName; ?></h1>
+    <p><?php echo $headerNote; ?></p>
     <div data-bind="foreach: {data:reportObjects, as:'ro'}">
         <div class='row'>
             <hr style="margin:15px; border:1px solid #eee;">

@@ -220,7 +220,7 @@ $app->delete('/narratives/:id', function($id) {
 
 // Route 8: Data Portal report titles (lastmile_dataportal.tbl_reports)
 $app->get('/reports/:includeArchived/(:id)',function($includeArchived,$id='all') {
-    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "reportID, reportName", $includeArchived==1 ? 1 : "archived <> 1");
+    LMD_get($id, "reportID", "lastmile_dataportal.tbl_reports", "reportID, reportName, headerNote", $includeArchived==1 ? 1 : "archived <> 1");
 });
 $app->post('/reports/', function() {
     LMD_post("lastmile_dataportal.tbl_reports");
