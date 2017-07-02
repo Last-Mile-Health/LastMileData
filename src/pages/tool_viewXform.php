@@ -6,11 +6,6 @@
         <title>View xForm</title>
         <script src="../../lib/jquery.min.js"></script>
         <script src="../js/LMD_fileSystemHelper.js"></script>
-        <script>
-        $(document).ready(function(){
-            console.log('hey');
-        });
-        </script>
     </head>
     <body>
         <?php
@@ -20,6 +15,7 @@
             $show_names = isset($_POST['show_names']) ? true : false;
             $show_logic = isset($_POST['show_logic']) ? true : false;
             $show_internalVariables = isset($_POST['show_internalVariables']) ? true : false;
+            $paperForm = $show_labels && !$show_names && !$show_logic && !$show_internalVariables ? true : false;
             
             // Create "Simple XML" object and an associative array to hold data
             $xForm = simplexml_load_file($_FILES['modal_viewXform_fileInput']['tmp_name']);
@@ -165,10 +161,12 @@
                 $type = isset($value['type']) ? $value['type'] : '';
                 
                 echo "<p>";
-                echo "<h2>Variable #" . $index++;
+                echo $paperForm ? "" : "<h2>Variable #" . $index++;
                 echo $show_names ? " name: <i>" . $value['varName'] . "</i></h2>" : "</h2>";
                 echo ($show_names && $show_labels) ? "<b>Label</b>: " : "";
-                echo $show_labels ? $labelText . "<br>" : "";
+                echo $show_labels ? $labelText : "";
+                echo $paperForm && in_array($type, ['xsd:int','xsd:string','xsd:date']) ? " <input>" : "";
+                echo $show_labels ? "<br>" : "";
                 if ($show_logic) {
                     echo "<b>xPath</b>: " . $xPath . "<br>";
                     echo "<b>Skip logic</b>: " . $relevant . "<br>";
@@ -182,6 +180,7 @@
                     echo $show_names ? "<b>Options (multiple-select)</b>:<ul>" : "<ul>";
                     foreach($value['selectOptions'] as $value2) {
                         echo "<li>";
+                        echo $paperForm ? "<input type='checkbox'>" : "";
                         echo $show_labels ? $value2['optText'] : "";
                         echo $show_names ? " (" . $value2['optName'] . ")" : "";
                         echo "</li>";
@@ -193,6 +192,7 @@
                     echo $show_names ? "<b>Options (single-select)</b>:<ul>" : "<ul>";
                     foreach($value['select1Options'] as $value2) {
                         echo "<li>";
+                        echo $paperForm ? "<input type='checkbox'>" : "";
                         echo $show_labels ? $value2['optText'] : "";
                         echo $show_names ? " (" . $value2['optName'] . ")" : "";
                         echo "</li>";
