@@ -544,9 +544,9 @@ $(document).ready(function(){
         launchQAModal({
             targetForm: "../forms/cha_msr0501_monthlyservicereport.html",
             qaFormName: "CHA Form (MSR 5.1) - CHA Monthly Service Report",
-            pKey1_name: "chaID",
-            pKey2_name: "chssID",
-            pKey3_name: "communityID",
+            pKey1_name: "cha_id",
+            pKey2_name: "chss_id",
+            pKey3_name: "community_id",
             pKey1_label: "CHA ID",
             pKey2_label: "CHSS ID",
             pKey3_label: "Community ID"
