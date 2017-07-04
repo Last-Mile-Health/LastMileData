@@ -570,9 +570,9 @@ $(document).ready(function(){
         launchQAModal({
             targetForm: "../forms/chss_msr0502_monthlyservicereport.html",
             qaFormName: "CHSS Form (MSR 5.2) - CHSS Monthly Service Report",
-            pKey1_name: "chssID",
-            pKey2_name: "monthReported",
-            pKey3_name: "chaID_1",
+            pKey1_name: "chss_id",
+            pKey2_name: "month_reported",
+            pKey3_name: "cha_id_1",
             pKey1_label: "CHSS ID",
             pKey2_label: "Report Month",
             pKey3_label: "CHA ID 1"
