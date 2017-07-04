@@ -46,11 +46,13 @@
                 // !!!!! consider using type = "ODK" !!!!!
 //                if (currentRecord.type == "form") {
                     var row = '<tr><td>' + currentRecord.table + '</td>';
-                    row += '<td>' + currentRecord.meta_DE_date + '</td>';
-                    row += '<td>' + currentRecord.meta_DE_init + '</td>';
-                    row += '<td>' + currentRecord.meta_QA_date + '</td>';
-                    row += '<td>' + currentRecord.meta_QA_init + '</td></tr>';
-                    $('#myTable').append(row);
+
+                    row += '<td>' + currentRecord.meta_de_date + '</td>';
+                    row += '<td>' + currentRecord.meta_de_init + '</td>';
+                    row += '<td>' + currentRecord.meta_qa_date + '</td>';
+                    row += '<td>' + currentRecord.meta_qa_init + '</td></tr>';
+                    
+            $('#myTable').append(row);
 //                }
             }
         };
