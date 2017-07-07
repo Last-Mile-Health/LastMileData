@@ -21,33 +21,20 @@ require_once("cxn.php");
 
         $queryString = "
 
-            SELECT yearReported, monthReported, county, healthFacility, CONCAT(chwName,' (',chwID,')') as CHA, CONCAT(community,' (',communityID,')') as Community ,
+            SELECT year_reported, month_reported, county, health_facility, CONCAT(cha_name,' (',cha_id,')') as cha, CONCAT(community,' (',community_id,')') as community,
             TRIM(TRAILING ', ' FROM (
                 CONCAT(
-                    IF(routineVisitsPopulationStillBirthsTotal,CONCAT('stillbirth: ',routineVisitsPopulationStillBirthsTotal,', '),''),
-                    IF(routineVisitsPopulationNeonatalDeathsTotal,CONCAT('neonatal: ',routineVisitsPopulationNeonatalDeathsTotal,', '),''),
-                    IF(routineVisitsPopulationPostNeonatalDeathsTotal,CONCAT('post-neonatal: ',routineVisitsPopulationPostNeonatalDeathsTotal,', '),''),
-                    IF(routineVisitsPopulationChildDeathsTotal,CONCAT('child: ',routineVisitsPopulationChildDeathsTotal,', '),''),
-                    IF(routineVisitsPopulationMaternalDeathsTotal,CONCAT('maternal: ',routineVisitsPopulationMaternalDeathsTotal,', '),'')
+                    IF(num_stillbirths,CONCAT('stillbirth: ',num_stillbirths,', '),''),
+                    IF(num_deaths_neonatal,CONCAT('neonatal: ',num_deaths_neonatal,', '),''),
+                    IF(num_deaths_postneonatal,CONCAT('postneonatal: ',num_deaths_postneonatal,', '),''),
+                    IF(num_deaths_child,CONCAT('child: ',num_deaths_child,', '),''),
+                    IF(num_deaths_maternal,CONCAT('maternal: ',num_deaths_maternal,', '),'')
                 )
             )) as `deaths`
-            FROM lastmile_chwdb.view_msr
-            WHERE (routineVisitsPopulationStillBirthsTotal OR routineVisitsPopulationNeonatalDeathsTotal OR routineVisitsPopulationPostNeonatalDeathsTotal OR routineVisitsPopulationChildDeathsTotal OR routineVisitsPopulationMaternalDeathsTotal)
-            AND yearReported IS NOT NULL AND monthReported IS NOT NULL
-            UNION SELECT yearReported, monthReported, county, healthFacility, CONCAT(chaName,' (',chaID,')') as CHA, CONCAT(community,' (',communityID,')') as Community ,
-            TRIM(TRAILING ', ' FROM (
-                CONCAT(
-                    IF(nStillBirths,CONCAT('stillbirth: ',nStillBirths,', '),''),
-                    IF(nDeathsNeonatal,CONCAT('neonatal: ',nDeathsNeonatal,', '),''),
-                    IF(nDeathsPostneonatal,CONCAT('post-neonatal: ',nDeathsPostneonatal,', '),''),
-                    IF(nDeathsChild,CONCAT('child: ',nDeathsChild,', '),''),
-                    IF(nDeathsMaternal,CONCAT('maternal: ',nDeathsMaternal,', '),'')
-                )
-            )) as `deaths`
-            FROM lastmile_dataportal._temp_view_msr
-            WHERE (nStillBirths OR nDeathsNeonatal OR nDeathsPostneonatal OR nDeathsChild OR nDeathsMaternal)
-            AND yearReported IS NOT NULL AND monthReported IS NOT NULL
-            ORDER BY CAST(yearReported AS UNSIGNED) DESC, CAST(monthReported AS UNSIGNED) DESC, county DESC, healthFacility DESC, community DESC;
+            FROM lastmile_report.view_base_msr
+            WHERE (num_stillbirths OR num_deaths_neonatal OR num_deaths_postneonatal OR num_deaths_child OR num_deaths_maternal)
+            AND year_reported IS NOT NULL AND month_reported IS NOT NULL
+            ORDER BY year_reported DESC, month_reported DESC, county DESC, health_facility DESC, community DESC;
 
         ";
 
@@ -56,12 +43,12 @@ require_once("cxn.php");
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $tableRow = "<tr>";
-            $tableRow .= "<td>$yearReported</td>";
-            $tableRow .= "<td>$monthReported</td>";
+            $tableRow .= "<td>$year_reported</td>";
+            $tableRow .= "<td>$month_reported</td>";
             $tableRow .= "<td>$county</td>";
-            $tableRow .= "<td>$healthFacility</td>";
-            $tableRow .= "<td>$CHA</td>";
-            $tableRow .= "<td>$Community</td>";
+            $tableRow .= "<td>$health_facility</td>";
+            $tableRow .= "<td>$cha</td>";
+            $tableRow .= "<td>$community</td>";
             $tableRow .= "<td>$deaths</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
