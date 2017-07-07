@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        
+        <title>CHSS Monthly Restock Form (Restock 0101)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            #meBox { position:relative; top:-17px; font-size: 96%; }
+            
+            #CMR { position:relative; top:-10px }
+            
+            /* Set font-size in thick box and household registration table to easily fit 30-plus rows in on form */
+            .thickBox { padding:3px; font-size: 100%; }
+            
+            /* Header Input Row 1*/
+            .header_row_1         { table-layout: fixed;              width: 7.25in; }
+            .header_row_1         { border-collapse: collapse;        border: none;   margin: 1px; padding: 1px; }
+            
+            .header_row_1_column_1  { width: 2.40in; margin-right: 1px;  margin-left: 1px; }
+            .header_row_1_column_2  { width: 2.40in; margin-right: 1px;  margin-left: 1px; }
+            .header_row_1_column_3  { width: 2.40in; margin-right: 1px;  margin-left: 1px; }
+
+            /* Header Input Row 2*/
+            .header_row_2         { table-layout:       fixed;      width: 7.25in; }
+            .header_row_2         { border-collapse:    collapse;   border: none; margin: 1px; padding: 1px; }
+            
+            .header_row_2_column_1  { width: 2.40in; margin-right: 1px; margin-left: 1px; }
+            .header_row_2_column_2  { width: 2.40in; margin-right: 1px; margin-left: 1px; }
+            .header_row_2_column_3  { width: 2.40in; margin-right: 1px; margin-left: 1px; }
+            
+            .commodity_table     { table-layout: fixed;      width: 7.25in;     font-size: 100%;           margin: 0px;     padding: 3px;        border-collapse: collapse; }
+            .commodity_table th  { border: 1px solid black;  padding: 3px;      text-align: center;  font-weight: bold;         }
+            .commodity_table td  { border: 1px solid black;  padding: 0px;      text-align: center;                             }
+
+            .column_1     { width:1.54in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_2     { width:1.54in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_3     { width:1.34in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_4     { width:1.34in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_5     { width:1.44in;     border:none; margin-right:1px; margin-left:1px; text-align: center; }
+      
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+       
+        <!-- START: PAGE 1 -->
+        <div class="page" style="height: 8.93in; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h2">CHSS: Monthly Restock (1.1)</span>
+                <img style="float:right" src="../images/logo_flag.png">
+                <div style="clear:both"></div>
+            </div>
+            <hr>
+            
+            <div class="thickBox">
+                
+                <table class="header_row_1">              
+                    <tr>
+                        <td class="header_row_1_column_1" style="text-align: left; padding-left: 3px; border: 1px solid black; border-bottom: none;                              " >CHSS:<input              class="stored"             name="chss_name"    data-lmd-valid-required data-lmd-valid-autoC="chss"                             style=" width:1.00in; border:none; "></td>
+                        <td class="header_row_1_column_2" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >CHSS ID:<input           class="stored"             name="chss_id"      data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"  style=" width:1.00in; border:none; "></td>
+                        <td class="header_row_1_column_3" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >Date (yyyy-mm-dd):<input class="stored datepicker"  name="restock_date" data-lmd-valid-required                                                             style=" width:1.00in; border:none; "></td>         
+                    </tr>              
+                </table>
+                <table class="header_row_2">              
+                    <tr>
+                        <td class="header_row_1_column_1" style="text-align: left; padding-left: 3px; border: 1px solid black;                    " >Restock Driver:<input class="stored"   name="restock_driver" data-lmd-valid-required style=" width:1.00in; border:none; "></td>
+                        <td class="header_row_1_column_2" style="text-align: left; padding-left: 3px; border: 1px solid black; border-left: none; " >Facility:<input        class="stored"  name="health_facility" data-lmd-valid-required data-lmd-valid-autoC="facilities"  data-lmd-valid-restrict     style=" width:1.00in; border:none; "></td>
+                        <td class="header_row_1_column_3" style="text-align: left; padding-left: 3px; border: 1px solid black; border-left: none; " >County:<input          class="stored" name="county" data-lmd-valid-required data-lmd-valid-autoC="county"  data-lmd-valid-restrict style=" width:1.00in; border:none; "></td>
+                        
+                    </tr>              
+                </table>
+                          
+            </div>
+            <!-- END: FORM HEADER -->
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="CMR">
+                
+                
+                <!-- START: Registration table -->
+                <table class='commodity_table'>
+
+                    <!-- Table header -->
+                    <tr>
+                        <th class="column_1" style="border-bottom: none;" >Commodity</th>
+                        <th class="column_2" style="border-bottom: none;" >Top Off Level</th>
+                        <th class="column_3" style="border-bottom: none;" >Current Stock</th>
+                        <th class="column_4" style="border-bottom: none;" >Restock amount</th>
+                        <th class="column_5" style="border-bottom: none;" >CHSS Signature</th>
+                    </tr>
+                    <tr>
+                        
+                        <th style="border-top: none; font-style: italic; font-weight:normal; height: 1.0in " ></th>
+                        <th style="border-top: none; font-style: italic; font-weight:normal; " >Number each CHSS needs per month</th>
+                        <th style="border-top: none; font-style: italic; font-weight:normal; " >How many of this item does the CHSS currently have?</th>
+                        <th style="border-top: none; font-style: italic; font-weight:normal; " >(Top off level) - (Current stock)</th>
+                        <th style="border-top: none; font-style: italic; font-weight:normal; " >CHSS should sign that they received the correct restock amount</th>
+                        
+                    </tr>
+                    
+                    <!-- 1. Microlut -->
+                    <tr>
+                        <td>Microlut</td>
+                        <td>30 packs of 3 strips</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; " name="microlut_chss_signature" value='Y' >Y/N</td>
+                        
+                    </tr>
+                    
+                     
+                    <!-- 2. Microgynon -->
+                    <tr>
+                        <td>Microgynon</td>
+                        <td>60 packs of 3 strips</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0" name="microgynon_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0" name="microgynon_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; " name="microgynon_chss_signature" value='Y' >Y/N</td>
+                        
+                    </tr>
+                    
+                    <!-- 3. Male Condoms -->
+                    <tr>
+                        <td>Male Condoms</td>
+                        <td>30 boxes</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="male_condoms_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="male_condoms_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="male_condoms_chss_signature" value='Y' >Y/N</td>
+                        
+                    </tr>
+                    
+                    <!-- 4. Female Condoms -->
+                    <tr>
+                        <td>Female Condoms</td>
+                        <td>60 pieces</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="female_condoms_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="female_condoms_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="female_condoms_chss_signature" value='Y' >Y/N</td>
+                        
+                    </tr>
+                    
+                    <!-- 5. Disposable gloves -->
+                    <tr>
+                        <td>Disposable gloves</td>
+                        <td>6 boxes</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="disposable_gloves_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="disposable_gloves_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="disposable_gloves_chss_signature"  value='Y' >Y/N</td>
+                        
+                    </tr>
+                    
+                    <!-- 6. ACT 25 -->
+                    <tr>
+                        <td>ACT 25</td>
+                        <td>50 strips of 3 tablets</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="act_25_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="act_25_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="act_25_chss_signature"  value='Y' >Y/N</td>
+                        
+                    </tr>
+                   
+                    <!-- 7. ACT 50 -->
+                    <tr>
+                        <td>ACT 50</td>
+                        <td>100 strips of 3 tablets</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="act_50_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="act_50_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="act_50_chss_signature" value='Y' >Y/N</td>
+                        
+                    </tr>
+                    
+                    <!-- 8. Artesunate suppository -->
+                    <tr>
+                        <td>Artesunate suppository</td>
+                        <td>5 units</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="artesunate_suppository_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="artesunate_suppository_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="artesunate_suppository_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                    
+                    <!-- 9. Amoxicillin 250-->
+                    <tr>
+                        <td>Amoxicillin 250</td>
+                        <td>4 bottles</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="amoxicillin_250_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="amoxicillin_250_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="amoxicillin_250_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+  
+                                        
+                    <!-- 10. -->
+                    <tr>
+                        <td>ORS</td>
+                        <td>120 sachets</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="ors_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="ors_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="ors_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+                    <!-- 11. -->
+                    <tr>
+                        <td>Zinc sulfate</td>
+                        <td>5 bottles</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="zinc_sulfate_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="zinc_sulfate_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="zinc_sulfate_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+                    <!-- 12. -->
+                    <tr>
+                        <td>Paracetamol</td>
+                        <td>4 bottles</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="paracetamol_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="paracetamol_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="paracetamol_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+                    <!-- 13. -->
+                    <tr>
+                        <td>RDT</td>
+                        <td>10 boxes</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="rdt_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="rdt_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="rdt_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+                    <!-- 14. -->
+                    <tr>
+                        <td>MUAC</td>
+                        <td>2 units</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="muac_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="muac_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="muac_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+                    <!-- 15. -->
+                    <tr>
+                        <td>Dispensing bags</td>
+                        <td>5 boxes</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="dispensing_bags_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                    name="dispensing_bags_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black; border-right: 2px solid black;" class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "  name="dispensing_bags_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+                    <!-- 16. -->
+                    <tr>
+                        <td>Safety boxes</td>
+                        <td>4 boxes</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                        name="safety_boxes_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 32px; width: 0.50in; " data-lmd-valid-intMin="0"                        name="safety_boxes_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid black; border-right: 2px solid black; " class="checkOption" ><input type="checkbox" class="stored" style="width: 0.50in; "     name="safety_boxes_chss_signature"  value='Y' >Y/N</td>  
+                    </tr>
+                     
+               </table>
+                <!-- END: Household Registration Table -->
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">CMR.01.01</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored" name="meta_de_init" style="width: 0.70in">
+                DE Date: <input     class="stored" name="meta_de_date" style="width: 0.75in">
+                QA Initials: <input class="stored" name="meta_qa_init" style="width: 0.35in">
+                QA Date: <input     class="stored" name="meta_qa_date" style="width: 0.75in">
+                <input name='meta_formVersion' class='stored' type='hidden' value='1.1'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="de_chss_monthly_restock">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
