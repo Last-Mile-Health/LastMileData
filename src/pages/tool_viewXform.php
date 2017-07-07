@@ -146,6 +146,10 @@
                 }
             }
             
+            // Bug fix (hack); without this code, the last element is incorrectly displayed
+            $lastElement = array_pop($dataArray);
+            array_push($dataArray,$lastElement);
+            
             // Echo out results
             echo "<hr><h1>Form title: <i>" . $xForm->xpath("/h:html/h:head/h:title")[0] . "</i></h1><hr>";
             $index = 1;
