@@ -1,6 +1,4 @@
 
-// !!!!! Consolidate all globals into a global object "G" !!!!!
-
 // Declare `map` global; default to view of Rivercess and Grand Gedeh
 var map = L.map('map',{
     center: [6.5, -8.9],
@@ -116,6 +114,7 @@ delete availability.community;
 
 // Set URLs global
 // contains URLs of sources for GIS coordinates and data
+// Data files are simplified using mapshaper.org ("Visvalingam / weighted area" algorithm, slider to ~8%)
 var urls = {
     coordinates: {
         communities_nearFacility: '../../php/scripts/LMD_REST.php/gis_communities_nearFacility/',
@@ -183,16 +182,16 @@ function GeoJSON(url) {
                     
                     // Handle communities (from MySQL)
                     // !!!!! This test should only be made once !!!!!
-                    if (data[key].communityID) {
-                        if (data[key].Y>-500 && data[key].Y<500 && data[key].X>-500 && data[key].X<500) {
+                    if (data[key].community_id) {
+                        if (data[key].y>-500 && data[key].y<500 && data[key].x>-500 && data[key].x<500) {
                             self.features.push({
                                 "type": "Feature",
                                 "geometry": {
                                     "type": "Point",
-                                    "coordinates": [Number(data[key].X), Number(data[key].Y)]
+                                    "coordinates": [Number(data[key].x), Number(data[key].y)]
                                 },
                                 "properties": {
-                                    "id": data[key]['communityID'],
+                                    "id": data[key]['community_id'],
                                     "name": data[key]['name']
                                 }
                             });
@@ -434,13 +433,20 @@ $(document).ready(function(){
             }
             
         },
-        open: function() { console.log('opened'); } // close, beforeopen, beforeclose
+        open: function() {
+            // !!!!!
+//            console.log('opened');
+        } // close, beforeopen, beforeclose
     });
     
     
     // Style #toggleMapItems multiselect
     $('#toggleMapItems_ms').addClass('btn btn-primary');
     $('#toggleMapItems_ms, .ui-multiselect-menu').css('width','');
+    
+    
+    // !!!!! Hack !!!!!
+    $('#select_indicator option[value=28]').text('Number of CHAs deployed (LMH)');
     
     
     // Handle selection of indicator / value combination

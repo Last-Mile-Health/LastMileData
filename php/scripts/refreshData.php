@@ -23,7 +23,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 2. Update "facilities" (array)
-$query = "SELECT health_facility FROM lastmile_cha.health_facility order by health_facility asc;";
+$query = "SELECT health_facility FROM lastmile_cha.health_facility ORDER BY health_facility ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_facilities = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -41,7 +41,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 4. Update "county" (array)
-$query = "SELECT county FROM lastmile_cha.county WHERE ( ( county_id = 6 ) or ( county_id = 14) ) order by county asc;";
+$query = "SELECT county FROM lastmile_cha.county WHERE ( ( county_id = 6 ) OR ( county_id = 14) ) ORDER BY county ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_county = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -50,7 +50,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 5. Update "chss" (array)
-$query = "select chss from lastmile_dataportal.view_php_refresh_data_chss order by chss asc;";
+$query = "SELECT CONCAT(first_name,' ',last_name) AS chss FROM lastmile_cha.view_position_chss_person WHERE person_id IS NOT NULL ORDER BY chss ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_chss = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {

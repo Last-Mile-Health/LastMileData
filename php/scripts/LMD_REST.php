@@ -32,9 +32,9 @@
      6      LMD_REST.php/staff                              lastmile_chwdb.admin_staff
      7      LMD_REST.php/narratives                         lastmile_dataportal.view_reportObjects
      8      LMD_REST.php/reports                            lastmile_dataportal.tbl_reports
-     9a     LMD_REST.php/gis_communities_remote             lastmile_chwdb.admin_community
-     9b     LMD_REST.php/gis_communities_nearFacility       lastmile_chwdb.admin_community
-     9c     LMD_REST.php/gis_communities_CHW                lastmile_chwdb.view_leaflet_communities_chw_2
+     9a     LMD_REST.php/gis_communities_remote             lastmile_cha.view_base_geo_community
+     9b     LMD_REST.php/gis_communities_nearFacility       lastmile_cha.view_base_geo_community
+     9c     LMD_REST.php/gis_communities_CHW                lastmile_cha.view_base_geo_community_primary
      9d     LMD_REST.php/gis_community_data                 lastmile_dataportal.tbl_leaflet_values
      9e     LMD_REST.php/gis_district_data                  lastmile_dataportal.tbl_leaflet_values
      9f     LMD_REST.php/gis_county_data                    lastmile_dataportal.tbl_leaflet_values
@@ -235,19 +235,19 @@ $app->delete('/reports/:id', function($id) {
 
 // Route 9a: Data Portal GIS: communities (remote)
 $app->get('/gis_communities_remote/(:id)',function($id='all') {
-    LMD_get($id, "communityID", "lastmile_chwdb.admin_community", "communityID, name, X, Y", "proximityHealthFacility='remote'");
+    LMD_get($id, "community_id", "lastmile_cha.view_base_geo_community", "community_id, community AS `name`, x, y", "health_facility_proximity='remote' AND archived<>1");
 });
 
 
 // Route 9b: Data Portal GIS: communities (near-facility)
 $app->get('/gis_communities_nearFacility/(:id)',function($id='all') {
-    LMD_get($id, "communityID", "lastmile_chwdb.admin_community", "communityID, name, X, Y", "proximityHealthFacility='near-facility'");
+    LMD_get($id, "community_id", "lastmile_cha.view_base_geo_community", "community_id, community AS `name`, x, y", "health_facility_proximity='near-facility' AND archived<>1");
 });
 
 
-// Route 9c: Data Portal GIS: communities (CHW-served)
+// Route 9c: Data Portal GIS: communities (CHW-served; primary)
 $app->get('/gis_communities_CHW/(:id)',function($id='all') {
-    LMD_get($id, "communityID", "lastmile_chwdb.view_leaflet_communities_chw_2", "*", 1);
+    LMD_get($id, "community_id", "lastmile_cha.view_base_geo_community_primary", "community_id, community AS `name`, x, y", 1);
 });
 
 
