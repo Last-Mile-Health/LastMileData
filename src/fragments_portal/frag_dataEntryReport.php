@@ -9,55 +9,27 @@ require_once("cxn.php");
 <h1>Data Entry Details</h1>
 <table class="table table-striped table-hover">
     <tr>
-        <th>DE Date</th>
-        <th>DE Initials</th>
+        <th>DE Year</th>
+        <th>DE Month</th>
+        <th>DE Clerk</th>
         <th>Table name</th>
         <th># Records</th>
         <th># Records QA'd</th>
     </tr>
     <?php
 
-        $queryString = "
-
-            SELECT 'Registration' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_chwdb.staging_registrationStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Training Results Record' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_chwdb.staging_trainingResultsRecordStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'CHW Monthly Service Report' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_chwdb.staging_chwMonthlyServiceReportStep1
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'CHW Monthly Service Report' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_upload.de_chaMonthlyServiceReport
-            GROUP BY meta_DE_init, meta_DE_date
-
-            UNION SELECT 'Registration' AS myTable,
-            meta_DE_init, meta_DE_date, COUNT(*) AS recordCount, SUM(meta_qa_init<>'') AS qaCount
-            FROM lastmile_upload.de_chaHouseholdRegistration
-            GROUP BY meta_DE_init, meta_DE_date
-
-            ORDER BY meta_DE_date DESC, meta_DE_init, myTable;
-
-        ";
-
+        $queryString = "SELECT * FROM lastmile_report.view_data_entry ORDER BY de_year DESC, de_month DESC, form_name";
 
         $result = mysqli_query($cxn, $queryString);
         while ( $row = mysqli_fetch_assoc($result) ) {
             extract($row);
             $tableRow = "<tr>";
-            $tableRow .= "<td>$meta_DE_date</td>";
-            $tableRow .= "<td>$meta_DE_init</td>";
-            $tableRow .= "<td>$myTable</td>";
-            $tableRow .= "<td>$recordCount</td>";
-            $tableRow .= "<td>$qaCount</td>";
+            $tableRow .= "<td>$de_year</td>";
+            $tableRow .= "<td>$de_month</td>";
+            $tableRow .= "<td>$de_name</td>";
+            $tableRow .= "<td>$form_name</td>";
+            $tableRow .= "<td>$num_records</td>";
+            $tableRow .= "<td>$num_qa</td>";
             $tableRow .= "</tr>";
             echo $tableRow;
         }
