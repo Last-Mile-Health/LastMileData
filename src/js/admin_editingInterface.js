@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     // Set variables here that are specific to each page ("edit indicators", "edit markdown", etc.)
     //      The "sw" variable is passed to admin_editingInterface.php as a GET parameter
-    //      The "ei" object is a container for configuration variables used on this page
+    //      The "ei" object is a container for configuration variables used on this page (ei = editing interface)
     //      ei.sortVars is an array of up to three fields; eDate is sorted by these three fields
     //      ei.filters is an array of objects that contain info on fields to use to filter the table (!!!!! can only handle one entry right now !!!!!)
     switch (sw) {
