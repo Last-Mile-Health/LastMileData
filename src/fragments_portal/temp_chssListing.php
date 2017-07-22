@@ -6,6 +6,12 @@ require_once("cxn.php");
 
 ?>
 
+<script>
+$(document).ready(function(){
+    $('.table').DataTable();
+});
+</script>
+
 <h1>CHSS Listing</h1>
 
 <?php
@@ -19,22 +25,26 @@ require_once("cxn.php");
 </h2>
 
 <table class="table table-striped table-hover">
-    <tr>
-        <th>Health Facility</th>
-        <th>CHSS</th>
-        <th>Number of CHAs assigned</th>
-    </tr>
-    <?php
-        while ( $row = mysqli_fetch_assoc($result) ) {
-            extract($row);
-            $tableRow = "<tr>";
-            $tableRow .= "<td>$health_facility</td>";
-            $tableRow .= "<td>$chss ($chss_id)</td>";
-            $tableRow .= "<td>$numCHAs</td>";
-            $tableRow .= "</tr>";
-            echo $tableRow;
-        }
-    ?>
+    <thead>
+        <tr>
+            <th>Health Facility</th>
+            <th>CHSS</th>
+            <th>Number of CHAs assigned</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            while ( $row = mysqli_fetch_assoc($result) ) {
+                extract($row);
+                $tableRow = "<tr>";
+                $tableRow .= "<td>$health_facility</td>";
+                $tableRow .= "<td>$chss ($chss_id)</td>";
+                $tableRow .= "<td>$numCHAs</td>";
+                $tableRow .= "</tr>";
+                echo $tableRow;
+            }
+        ?>
+    </tbody>
 </table>
 
 
@@ -49,20 +59,24 @@ require_once("cxn.php");
 </h2>
 
 <table class="table table-striped table-hover">
-    <tr>
-        <th>Health Facility</th>
-        <th>CHSS</th>
-        <th>Number of CHAs assigned</th>
-    </tr>
-    <?php
-        while ( $row = mysqli_fetch_assoc($result) ) {
-            extract($row);
-            $tableRow = "<tr>";
-            $tableRow .= "<td>$health_facility</td>";
-            $tableRow .= "<td>$chss ($chss_id)</td>";
-            $tableRow .= "<td>$numCHAs</td>";
-            $tableRow .= "</tr>";
-            echo $tableRow;
-        }
-    ?>
+    <thead>
+        <tr>
+            <th>Health Facility</th>
+            <th>CHSS</th>
+            <th>Number of CHAs assigned</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            while ( $row = mysqli_fetch_assoc($result) ) {
+                extract($row);
+                $tableRow = "<tr>";
+                $tableRow .= "<td>$health_facility</td>";
+                $tableRow .= "<td>$chss ($chss_id)</td>";
+                $tableRow .= "<td>$numCHAs</td>";
+                $tableRow .= "</tr>";
+                echo $tableRow;
+            }
+        ?>
+    </tbody>
 </table>
