@@ -578,7 +578,18 @@ $(document).ready(function(){
             pKey3_label: "CHA ID 1"
         });
     }); 
-    
+ 
+    $('#qa_CMR_0101').click(function() {
+        launchQAModal({
+            targetForm: "../forms/chss_restock0101_monthly.html",
+            qaFormName: "CHSS Form (CMR 1.1) - Monthly Restock Form",
+            pKey1_name: "chss_id",
+            pKey2_name: "restock_date",
+            pKey1_label: "CHSS ID",
+            pKey2_label: "Restock Date"
+        });
+    }); 
+
     $('#qa_TST').click(function() {
         launchQAModal({
             targetForm: "../forms/0_testDE.html",
@@ -590,7 +601,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-    
     
     // QA Click handlers (old forms).  Be sure to add "old/" to form path.
     $('#qa_TRL_03').click(function() {
