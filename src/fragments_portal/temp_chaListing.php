@@ -6,6 +6,12 @@ require_once("cxn.php");
 
 ?>
 
+<script>
+$(document).ready(function(){
+    $('.table').DataTable();
+});
+</script>
+
 <h1>CHA Listing</h1>
 
 <?php
@@ -19,27 +25,31 @@ require_once("cxn.php");
 </h2>
 
 <table class="table table-striped table-hover">
-    <tr>
-        <th>Health Facility</th>
-        <th>CHSS</th>
-        <th>CHA</th>
-        <th>Communities</th>
-        <th>Community IDs</th>
-    </tr>
-    <?php
-        while ( $row = mysqli_fetch_assoc($result) ) {
-            extract($row);
-            $chssPlusID = $chss!="" ? $chss . " (" . $chss_id . ")" : "unassigned";
-            $tableRow = "<tr>";
-            $tableRow .= "<td>$health_facility</td>";
-            $tableRow .= "<td>$chssPlusID</td>";
-            $tableRow .= "<td>$cha ($cha_id)</td>";
-            $tableRow .= "<td>$community_list</td>";
-            $tableRow .= "<td>$community_id_list</td>";
-            $tableRow .= "</tr>";
-            echo $tableRow;
-        }
-    ?>
+    <thead>
+        <tr>
+            <th>Health Facility</th>
+            <th>CHSS</th>
+            <th>CHA</th>
+            <th>Communities</th>
+            <th>Community IDs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            while ( $row = mysqli_fetch_assoc($result) ) {
+                extract($row);
+                $chssPlusID = $chss!="" ? $chss . " (" . $chss_id . ")" : "unassigned";
+                $tableRow = "<tr>";
+                $tableRow .= "<td>$health_facility</td>";
+                $tableRow .= "<td>$chssPlusID</td>";
+                $tableRow .= "<td>$cha ($cha_id)</td>";
+                $tableRow .= "<td>$community_list</td>";
+                $tableRow .= "<td>$community_id_list</td>";
+                $tableRow .= "</tr>";
+                echo $tableRow;
+            }
+        ?>
+    </tbody>
 </table>
 
 
@@ -54,25 +64,29 @@ require_once("cxn.php");
 </h2>
 
 <table class="table table-striped table-hover">
-    <tr>
-        <th>Health Facility</th>
-        <th>CHSS</th>
-        <th>CHA</th>
-        <th>Communities</th>
-        <th>Community IDs</th>
-    </tr>
-    <?php
-        while ( $row = mysqli_fetch_assoc($result) ) {
-            extract($row);
-            $chssPlusID = $chss!="" ? $chss . " (" . $chss_id . ")" : "unassigned";
-            $tableRow = "<tr>";
-            $tableRow .= "<td>$health_facility</td>";
-            $tableRow .= "<td>$chssPlusID</td>";
-            $tableRow .= "<td>$cha ($cha_id)</td>";
-            $tableRow .= "<td>$community_list</td>";
-            $tableRow .= "<td>$community_id_list</td>";
-            $tableRow .= "</tr>";
-            echo $tableRow;
-        }
-    ?>
+    <thead>
+        <tr>
+            <th>Health Facility</th>
+            <th>CHSS</th>
+            <th>CHA</th>
+            <th>Communities</th>
+            <th>Community IDs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            while ( $row = mysqli_fetch_assoc($result) ) {
+                extract($row);
+                $chssPlusID = $chss!="" ? $chss . " (" . $chss_id . ")" : "unassigned";
+                $tableRow = "<tr>";
+                $tableRow .= "<td>$health_facility</td>";
+                $tableRow .= "<td>$chssPlusID</td>";
+                $tableRow .= "<td>$cha ($cha_id)</td>";
+                $tableRow .= "<td>$community_list</td>";
+                $tableRow .= "<td>$community_id_list</td>";
+                $tableRow .= "</tr>";
+                echo $tableRow;
+            }
+        ?>
+    </tbody>
 </table>

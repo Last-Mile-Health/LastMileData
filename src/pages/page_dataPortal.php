@@ -21,7 +21,9 @@
         <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" type="text/css" />
         <link rel="stylesheet" href="../../lib/multiselect.css" type="text/css" />
         <link rel="stylesheet" href="../../lib/shepherd-1.8.1/shepherd-theme-lmd.css" type="text/css" />
+        <link rel="stylesheet" href="../../lib/DataTables/datatables.min.css" type="text/css" />
         <link rel="stylesheet" href="../css/page_dataPortal.css" type="text/css" />
+
         
         <?php
             // Echo username / userGroups (used by access control system)
@@ -44,7 +46,9 @@
             echo "</script>";
         ?>
         
+        <!-- Note: order matters; bugs are caused if the loading order of the first three libraries is changed -->
         <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/DataTables/datatables.min.js"></script>
         <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="../../lib/knockout/knockout-3.3.0.js"></script>
