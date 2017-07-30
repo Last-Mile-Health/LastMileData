@@ -579,10 +579,10 @@ $(document).ready(function(){
         });
     }); 
  
-    $('#qa_CMR_0101').click(function() {
+    $('#qa_CCD_0102').click(function() {
         launchQAModal({
-            targetForm: "../forms/chss_restock0101_monthly.html",
-            qaFormName: "CHSS Form (CMR 1.1) - Monthly Restock Form",
+            targetForm: "../forms/chss_commodity_distribution_0102.html",
+            qaFormName: "CHSS Form (CCD 1.2) - Commodity Distribution",
             pKey1_name: "chss_id",
             pKey2_name: "restock_date",
             pKey1_label: "CHSS ID",
