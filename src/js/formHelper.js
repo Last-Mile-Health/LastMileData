@@ -35,7 +35,7 @@ $(document).ready(function() {
             change: function(ev) {
                 if ( $(this)[0].attributes['data-lmd-valid-restrict']!==undefined ) {
                     var key = $(ev.target.attributes['data-lmd-valid-autoC']).val();
-                    var myList = JSON.parse(localStorage[key]);
+                    var myList = key.substring(0,1)=="[" ? JSON.parse(key) : JSON.parse(localStorage[key]);
                     if (myList.indexOf($(this)[0].value)===-1) {
                         alert('Please select an item from the list.')
                         $(this).val('');
@@ -44,6 +44,7 @@ $(document).ready(function() {
                 }
             }
         });
+        
     });
     
     
