@@ -9,7 +9,7 @@
 
     // Set instance IDs of all indicator instances used in the report (in either data tables or charts)
     $instIDString = "336,337,338,339,340,375,341,342,343,344,377,379,381,383,385,376,378,380,382,384,420,"
-            . "422,423,346,348,350,352,354,71,347,349,351,353,415,414,413,412,533,668,231,233,235,297,296,"
+            . "422,423,346,71,415,414,413,412,533,668,231,233,235,297,296,"
             . "364,365,366,367,368,369,370,371,372,373,374,389,390,391,392,393,394,395,396,406,407,408,"
             . "355,356,357,358,56,359,360,361,362,57,409,410,411,363,418,70,419,424,425,426,669,428,487,68";
 
@@ -65,8 +65,8 @@
                 definition: 'Number of people in target population living in a community that is served by an active CHA, based on LMH registration data.',
                 dataSource: 'LMH registration data',
                 groups: [
-                    { name: 'Grand Gedeh', instIDs: [346,419,348,350,352,354] },
-                    { name: 'Rivercess', instIDs: [71,70,347,349,351,353] }
+                    { name: 'Grand Gedeh', instIDs: [346,419] },
+                    { name: 'Rivercess', instIDs: [71,70] }
                 ]
             },
             {
