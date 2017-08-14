@@ -102,7 +102,6 @@ module.exports = function(grunt) {
                     src: [
                         'forms/*.html',
                         'forms/old/*.html',
-                        '!forms/fac_msh01_mesh.html', // !!!!! temporarily excluding because this file causes an error; debug !!!!!
                         'fragments_portal/*.html',
                         'pages/*.{php,html}'
                     ],
