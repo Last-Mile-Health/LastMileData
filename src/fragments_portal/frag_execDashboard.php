@@ -185,14 +185,15 @@
         // !!!!! Eventually, replace this with automated code (like in LMD_dataPortal.js !!!!!
         months: [
 //            { yearMonth: "2016-10", shortMonth: "Oct '16" },
-            { yearMonth: "2016-11", shortMonth: "Nov '16" },
+//            { yearMonth: "2016-11", shortMonth: "Nov '16" },
             { yearMonth: "2016-12", shortMonth: "Dec '16" },
             { yearMonth: "2017-1", shortMonth: "Jan '17" },
             { yearMonth: "2017-2", shortMonth: "Feb '17" },
             { yearMonth: "2017-3", shortMonth: "Mar '17" },
             { yearMonth: "2017-4", shortMonth: "Apr '17" },
             { yearMonth: "2017-5", shortMonth: "May '17" },
-            { yearMonth: "2017-6", shortMonth: "Jun '17" }
+            { yearMonth: "2017-6", shortMonth: "Jun '17" },
+            { yearMonth: "2017-7", shortMonth: "Jul '17" }
         ]
     };
     
