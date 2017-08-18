@@ -1101,7 +1101,7 @@ function sendRecordsAJAX(queryDebugging){
                         },
                         error: function(request, status, error) {
 
-                            // Change ajaxBlock to GREEN
+                            // Change ajaxBlock to RED
                             $("#ajaxBlock_" + JSON.parse(request.responseText).rKeyAJAX).css('background-color','#C12E2A');
 
                             // Log failure; increment AJAX failure counter
