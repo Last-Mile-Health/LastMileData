@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+     
+        <title>6.1 CHA Status Change Form (v.1.0)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            #meBox { position:relative; top:-5px; }
+                    
+            .table_generic     { table-layout: fixed; width: 7.25in; margin: 0px; padding: 0px; border-collapse: collapse; }
+            .table_generic td  { border: 1px solid black; padding: 0px; height: 25px; }
+
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <div class="page" style="height: 7.50in; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader" >
+                
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h4" style="font-size: 145%;" >6.1 CHA Status Change Form</span>
+                <span class="blackBox" style="float: right; ">v.1.0</span>
+        
+            </div>
+                      
+            <div class="thickBox" style="border: none; ">
+                              
+            <div>Use this form whenever a CHA enters or leaves the program</div>
+                
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                           
+            <!-- Beginning of CHA Status and Information -->
+            <div>
+                <table class="table_generic">
+                    <tr>
+                        <td style="width: 2.20in;">
+                            
+                            <!-- CHA Status -->
+                            <table style="border: none; ">
+                                
+                                <tr>                                   
+                                    <td style="width: 2.20in; text-align: center; font-weight: bold; background-color: lightgray; border: none; border-bottom: 1px solid black; ">CHA Status</td> 
+                                </tr>
+                                
+                                <tr>
+                                    <td style="width: 2.20in; position: relative; left: 4px; border-left: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_new" value='1' ><span style="position: relative; left: 4px; ">New CHA</span></div></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="width: 2.20in; position: relative; left: 4px; border-left: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program" value='1' ><span style="position: relative; left: 4px; ">Left Program (select below)</span></div></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="border: none; ">
+                                        <table style="border: none; ">
+                                            <tr>
+                                                   
+                                                <td style="width: 0.25in; border: none; background-color: lightgrey; ">
+                                                
+                                                    <table style="table-layout: fixed; width: 0.25in; ">
+                                                        <th style="-webkit-transform: rotate(-90deg) translate( -75px, 0px); "><div style=" font-size: 100%; text-align: center; width: 1.80in; white-space: nowrap; ">Reason for leaving</div></th>
+                                                    </table>
+                                                                                                                                                           
+                                                </td>
+ 
+                                                
+                                                <td style="width: 1.95in; border: none; ">
+                                                    
+                                                    <table style="border: none; ">
+                                                        
+                                                        <tr>
+                                                            <td style="width: 1.95in; position: relative; left: 4px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program_performance_issue" value='1' ><span style="position: relative; left: 4px; ">Performance Issues</span></div></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="width: 1.95in; position: relative; left: 4px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program_personal_reason" value='1' ><span style="position: relative; left: 4px; ">Left for Personal Reasons</span></div></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="width: 1.95in; position: relative; left: 4px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program_relocation" value='1' ><span style="position: relative; left: 4px; ">Relocation</span></div></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="width: 1.95in; position: relative; left: 4px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program_abandoned_post" value='1' ><span style="position: relative; left: 4px; ">Abandoned post</span></div></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="width: 1.95in; position: relative; left: 4px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program_promoted" value='1' ><span style="position: relative; left: 4px; ">Promoted</span></div></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="width: 1.95in; position: relative; left: 4px; border-top: none; border-right: none; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="cha_left_program_other" value='1' ><span style="position: relative; left: 4px; ">Other (write in below)</span></div></td>
+                                                        </tr>
+                                                     
+                                                    </table>
+                                                    
+                                                </td>                                
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    
+                                </tr>
+                                                                                                                    
+                            </table>
+                           
+                        </td>
+                        
+                        <td style="width: 0.05in; border: none; ">
+                            
+                        </td>
+
+                        <td style="width: 5.00in; ">
+                            
+                            <table>
+                                
+                                <tr>                                
+                                    <td style="border-left: none; border-right: none; ">
+                                        <table>
+                                            <tr>
+                                                <td style="width: 3.00in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >Today's Date (yyyy-mm-dd):<input class="stored datepicker"  name="today_date" data-lmd-valid-required style=" width:1.14in; border:none; text-align: center; "></td>                                     
+                                                <td style="width: 2.00in; text-align: left; padding-left: 3px; border: none; " >CHA ID:<input class="stored" name="cha_id" data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"  style=" width:1.42in; border:none; "></td>
+                                            </tr>
+                                        </table>
+                                    </td>                               
+                                </tr>
+
+                                <tr>                                
+                                    <td style="border-left: none; border-right: none; ">
+                                        <table>
+                                            <tr>    
+                                                <td style="width: 5.00in; text-align: left; padding-left: 3px; border: none; " >First Name:<input class="stored" name="cha_first_name" data-lmd-valid-required style=" width:4.20in; border:none; "></td>
+                                            </tr>
+                                        </table>
+                                    </td>                               
+                                </tr>
+                                 <tr>                                
+                                    <td style="border-left: none; border-right: none; ">
+                                        <table>
+                                            <tr>    
+                                                <td style="width: 5.00in; text-align: left; padding-left: 3px; border: none; " >Last Name:<input class="stored" name="cha_first_name" data-lmd-valid-required style=" width:4.20in; border:none; "></td>
+                                            </tr>
+                                        </table>
+                                    </td>                               
+                                </tr>
+ 
+                                
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>               
+                </table>
+            
+               
+            </div>
+            
+             <!-- end of thick box -->
+            </div>
+                                   
+            <!-- START: M&E Box -->  
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">ISF.0.20</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; ">
+                DE Date:        <input class="stored" name="meta_de_date" style="width: 0.78in; text-align: center; ">
+                QA Initials:    <input class="stored" name="meta_qa_init" style="width: 0.35in; text-align: center; ">
+                QA Date:        <input class="stored" name="meta_qa_date" style="width: 0.78in; text-align: center; ">
+                <input name='meta_form_version' class='stored' type='hidden' value='1.0'>
+            </div>
+            <!-- START: M&E Box -->   
+                                             
+        </div>
+        <!-- END: PAGE 1 -->
+ 
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+          
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="liberiad_upload">
+        <input type="hidden" class="stored" name="table" value="de_integrated_supervision_tool_facility">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
