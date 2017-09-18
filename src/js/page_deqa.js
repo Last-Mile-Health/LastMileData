@@ -578,6 +578,20 @@ $(document).ready(function(){
             pKey3_label: "CHA ID 1"
         });
     }); 
+    
+        $('#qa_CSC_0601').click(function() {
+        launchQAModal({
+            targetForm: "../forms/cha_status_change_form_06_01.html",
+            qaFormName: "CHA Form (CSC 6.1) - CHA Status Change Form",
+            pKey1_name: "cha_id",
+            pKey2_name: "first_name",
+            pKey3_name: "last_name",
+            pKey1_label: "CHA ID",
+            pKey2_label: "First Name",
+            pKey3_label: "Last Name"
+        });
+    }); 
+    
  
     $('#qa_CCD_0102').click(function() {
         launchQAModal({
