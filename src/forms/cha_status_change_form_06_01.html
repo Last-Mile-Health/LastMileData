@@ -40,7 +40,7 @@
         <!-- END: VALIDATION BOX -->
         
         <!-- START: PAGE 1 -->
-        <div class="page" style="height: 7.50in; ">
+        <div class="page" style="height: 5.75in; ">
             
             <!-- START: FORM HEADER -->
             <div class="formHeader" >
@@ -189,7 +189,7 @@
                                                     <table style="border: none; ">
                                                         
                                                         <tr>
-                                                            <td style="width: 3.95in; text-align: left; padding-left: 3px; border: none; border-bottom: 1px solid black; " >Birth Date (yyyy-mm-dd):<input class="stored datepicker"  name="cha_birth_date" style=" width:2.28in; border:none; text-align: center; "></td>                                              
+                                                            <td style="width: 3.95in; text-align: left; padding-left: 3px; border: none; border-bottom: 1px solid black; " >Birth Date (yyyy-mm-dd):<input class="stored datepicker"  name="cha_birth_date" style=" width:2.28in; border:none; "></td>                                              
                                                         </tr>
                                                         
                                                         <tr>
@@ -243,8 +243,8 @@
                                     <td style="border-left: none; border-right: none; ">
                                         <table>
                                             <tr>    
-                                                <td style="width: 2.20in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >County:<input class="stored" name="county" data-lmd-valid-required style=" width:1.64in; border:none; "></td>
-                                                <td style="width: 2.80in; text-align: left; padding-left: 3px; border: none; " >Health District:<input class="stored" name="health_district" data-lmd-valid-required style=" width:1.78in; border:none; "></td>                                           
+                                                <td style="width: 2.20in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >County:<input class="stored" name="county" data-lmd-valid-required data-lmd-valid-autoC="county" data-lmd-valid-restrict style=" width:1.64in; border:none; "></td>
+                                                <td style="width: 2.80in; text-align: left; padding-left: 3px; border: none; " >Health District:<input class="stored" name="health_district" data-lmd-valid-required data-lmd-valid-autoC="districts" data-lmd-valid-restrict style=" width:1.78in; border:none; "></td>                                           
                                             </tr>
                                         </table>
                                     </td>                               
@@ -254,8 +254,7 @@
                                     <td style="border-left: none; border-right: none; ">
                                         <table>
                                             <tr>    
-                                                <td style="width: 3.50in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >Health Facility:<input class="stored" name="health_facility" data-lmd-valid-required style=" width:2.49in; border:none; "></td>
-                                                <td style="width: 1.50in; text-align: left; padding-left: 3px; border: none; " >Facility ID:<input class="stored" name="health_facility_id" data-lmd-valid-required style=" width:0.76in; border:none; "></td>                                           
+                                                <td style="width: 5.00in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >Health Facility (ID):<input class="stored" name="health_facility_id_concat" data-lmd-valid-required data-lmd-valid-autoC="health_facility_id_concat" data-lmd-valid-restrict style=" width:3.69in; border:none; "></td>                                                                                        
                                             </tr>
                                         </table>
                                     </td>                               
@@ -265,8 +264,7 @@
                                     <td style="border-left: none; border-right: none; border-bottom: none; ">
                                         <table>
                                             <tr>    
-                                                <td style="width: 3.50in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHSS:<input class="stored" name="chss" style=" width:3.00in; border:none; "></td>
-                                                <td style="width: 1.50in; text-align: left; padding-left: 3px; border: none; " >CHSS ID:<input class="stored" name="chss_id" style=" width:0.81in; border:none; "></td>                                           
+                                                <td style="width: 5.00in; text-align: left; padding-left: 3px; border: none; border-right: 1px solid black; " >CHSS (ID):<input class="stored" name="chss_id_concat" data-lmd-valid-autoC="chss_id_concat" style=" width:4.20in; border:none; "></td>                                               
                                             </tr>
                                         </table>
                                     </td>                               
@@ -283,7 +281,7 @@
             <!-- Ending of CHA Status and Information -->
             
             <!-- White line spacers -->
-            <div style="height:5px"></div>   
+            <div style="height:10px"></div>   
             
             <!-- Notes -->
             <div>
@@ -300,7 +298,7 @@
             <!-- End of Notes -->
             
             <!-- White line spacers -->
-            <div style="height:5px"></div>
+            <div style="height:15px"></div>
             
             <div>
                 
