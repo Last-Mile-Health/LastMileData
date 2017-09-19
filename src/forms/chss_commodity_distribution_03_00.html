@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <title>CHSS Commodity Distribution Form (Restock 0300)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            #meBox { position:relative; top:-17px; font-size: 96%; }
+            
+            #CMR { position:relative; top:-10px }
+            
+            /* Set font-size in thick box and household registration table to easily fit 30-plus rows in on form */
+            .thickBox { padding:3px; font-size: 95%; }
+            
+            /* Header Input Row 1*/
+            .header_row         { table-layout: fixed;              width: 7.25in; }
+            .header_row         { border-collapse: collapse;        border: none;   margin: 1px; padding: 1px; }
+            
+            .header_row_column  { width: 2.40in; margin-right: 1px;  margin-left: 1px; }
+                
+            .commodity_table    { table-layout: fixed;      width: 7.25in;  font-size: 100%;     margin: 0px;           padding: 3px;        border-collapse: collapse; }
+            .commodity_table th { border: 1px solid black;  height: 40px;   padding: 3px;       text-align: center;  font-weight: bold;                                                 }
+            .commodity_table td { border: 1px solid black;  padding: 0px;   text-align: center;                                                                         }
+
+            .column_1     { width:1.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_2     { width:1.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_3     { width:0.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_4     { width:0.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_5     { width:0.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_6     { width:0.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_7     { width:0.75in;   border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+       
+        <!-- START: PAGE 1 -->
+        <div class="page" style="height: 9.0in; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h2">CHSS Commodity Distribution Form</span>
+                <span class="blackBox" style="float: right; font-size: 120%; ">v.3.0</span>
+                <span class="h6" style="font-size: 80%; float: left; position: relative; left: -10px; " >The Operations manager and/or restock driver is to fill in this form every time commodities or gasoline are given to the CHSS. Count each commodity with the CHSS present and then stock them up to the correct top off level.</span>                
+            </div>
+           
+            <hr>
+            
+            <div class="thickBox">
+                
+                <table class="header_row">              
+                    <tr>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black; border-bottom: none;                              " >CHSS:<input              class="stored"             name="chss_name"    data-lmd-valid-required data-lmd-valid-autoC="chss"                             style=" width:1.94in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >CHSS ID:<input           class="stored"             name="chss_id"      data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999"  style=" width:1.76in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >Date (yyyy-mm-dd):<input class="stored datepicker"  name="restock_date" data-lmd-valid-required                                                         style=" width:1.13in; border:none; "></td>         
+                    </tr>              
+                </table>
+                <table class="header_row">              
+                    <tr>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black;                    " >Restock Driver:<input  class="stored" name="restock_driver"    data-lmd-valid-required                                                             style=" width:1.41in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black; border-left: none; " >Facility:<input        class="stored" name="health_facility"   data-lmd-valid-required data-lmd-valid-autoC="facilities"   data-lmd-valid-restrict style=" width:1.90in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black; border-left: none; " >County:<input          class="stored" name="county"            data-lmd-valid-required data-lmd-valid-autoC="county"       data-lmd-valid-restrict style=" width:1.87in; border:none; "></td>
+                    </tr>              
+                </table>
+                          
+            </div>
+            <!-- END: FORM HEADER -->
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="CMR">
+                
+                <!-- START: Commodity table -->
+                <table class='commodity_table'>
+
+                    <!-- Table header -->
+                    <tr>
+                        <th class="column_1" style="border-bottom: none; " >Commodity</th>
+                        <th class="column_2" >Top Off Level</th>
+                        <th class="column_3" >Initial Stock On Hand</th>
+                        <th class="column_4" >Stock damaged/ expiring</th>
+                        <th class="column_5" >Amount Restocked</th>
+                        <th class="column_6" >Ending Balance</th>
+                        <th class="column_7" >Stock Returned</th>
+                        
+                    </tr>
+
+                    <!-- 1. Microlut -->
+                    <tr>
+                        <td>Microlut</td>
+                        <td>30 packs of 3 strips</td>
+                        
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_3" style="height: 20px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_current_stock"   data-lmd-valid-required></td>                       
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_4" style="height: 20px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_restock_amount"  data-lmd-valid-required></td>                                             
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_5" style="height: 20px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_6" style="height: 20px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_restock_amount"  data-lmd-valid-required></td>                      
+                        <td style="border: none; border-top: 2px solid black; border-left: 2px solid black;" ><input class="stored column_7" style="height: 20px; width: 0.50in; " data-lmd-valid-intMin="0" name="microlut_restock_amount"  data-lmd-valid-required></td>                                           
+                    </tr>
+                    
+                     
+               </table>
+                <!-- END: Commodity Table -->
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">CCD.03.00</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; ">
+                DE Date:        <input class="stored" name="meta_de_date" style="width: 0.78in; text-align: center; ">
+                QA Initials:    <input class="stored" name="meta_qa_init" style="width: 0.35in; text-align: center; ">
+                QA Date:        <input class="stored" name="meta_qa_date" style="width: 0.78in; text-align: center; ">
+                <input name='meta_form_version' class='stored' type='hidden' value='1.2'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="de_chss_commodity_distribution">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
