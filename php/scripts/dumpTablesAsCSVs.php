@@ -23,11 +23,18 @@ executeStatements('lastmile_upload','odk_chaRestock', $cxn);
 executeStatements('lastmile_upload','odk_routineVisit', $cxn);
 executeStatements('lastmile_upload','odk_supervisionVisitLog', $cxn);
 executeStatements('lastmile_upload','odk_vaccineTracker', $cxn);
+executeStatements('lastmile_upload','odk_OSFKAPSurvey', $cxn);
+executeStatements('lastmile_upload','odk_osf_routine', $cxn);
+
 
 executeStatements('lastmile_upload','de_chaHouseholdRegistration', $cxn);
 executeStatements('lastmile_upload','de_cha_monthly_service_report', $cxn);
 executeStatements('lastmile_upload','de_chss_monthly_service_report', $cxn);
+executeStatements('lastmile_upload','de_cha_status_change_form', $cxn);
+executeStatements('lastmile_upload','de_chss_commodity_distribution', $cxn);
+
 executeStatements('lastmile_temp','chss_training', $cxn);
+executeStatements('lastmile_temp','training_cha_all', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 

@@ -23,7 +23,7 @@ query7='select * from lastmile_cha.view_base_history_person_position'
 query8='select * from lastmile_cha.view_base_position'
 query9='select * from lastmile_cha.view_base_position_cha'
 query10='select * from lastmile_cha.view_base_position_chss'
-query11='select * from lastmile_program.view_train_cha'
+query11='select * from lastmile_report.view_base_msr'
 
 fileName1=view_base_cha
 fileName2=view_base_chss
@@ -35,7 +35,7 @@ fileName7=view_base_history_person_position
 fileName8=view_base_position
 fileName9=view_base_position_cha
 fileName10=view_base_position_chss
-fileName11=view_train_cha
+fileName11=view_base_msr
 
 mysql --batch --user=$user --password=$password -e "${query1}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName1}_$dateStamp.csv 
 mysql --batch --user=$user --password=$password -e "${query2}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName2}_$dateStamp.csv 
