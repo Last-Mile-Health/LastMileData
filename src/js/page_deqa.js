@@ -593,10 +593,10 @@ $(document).ready(function(){
     }); 
     
  
-    $('#qa_CCD_0102').click(function() {
+    $('#qa_CCD_0400').click(function() {
         launchQAModal({
-            targetForm: "../forms/chss_commodity_distribution_0102.html",
-            qaFormName: "CHSS Form (CCD 1.2) - Commodity Distribution",
+            targetForm: "../forms/chss_commodity_distribution_04_00.html",
+            qaFormName: "CHSS Form (CCD 4.0) - Commodity Distribution",
             pKey1_name: "chss_id",
             pKey2_name: "restock_date",
             pKey1_label: "CHSS ID",
