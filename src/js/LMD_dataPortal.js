@@ -138,6 +138,9 @@ var LMD_dataPortal = (function(){
             if ( d.ro_name == null || d.ro_name == '' ) {
                 d.ro_name = metadata.indName;
             }
+            if ( d.indSource == null || d.indSource == '' ) {
+                d.indSource = metadata.indSource;
+            }
             if ( d.ro_description == null || d.ro_description == '' ) { // !!!!! eventually phase this out !!!!!
                 d.ro_description = metadata.indDefinition;
             }
