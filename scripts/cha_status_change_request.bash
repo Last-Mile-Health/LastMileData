@@ -7,7 +7,8 @@ echo "--------------------------------------------------------------------------
 user=lastmile_admin
 password=LastMile14
 
-email_recipient=oeddins@lastmilehealth.org
+# email_recipient=oeddins@lastmilehealth.org
+email_recipient=LMD@lastmilehealth.org
 
 csv_file_directory=/home/lastmilehealth/public_html/LastMileData/backups/cha_status_change_request/
 file_name=cha_status_change_request
