@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Direct Observation Tool v0.4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        
+ <!-- Note to self: Something in bootstrap.min.css file is causing the matrix layout to chop off the right side of the last column. -->
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+ <!-- End of Note to self. -->       
+        
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap style sheet to override -->
+        
+        <style>
+            
+            #meBox  { position:relative; top:-23px; }
+            
+            #RRT   { position:relative; top:-13px; }
+            
+            .thickBox { padding: 0px; border: 1px solid black; }
+            
+            /* Header Input */
+            .box_head    { table-layout: fixed;          width: 7.25in; }
+            .box_head    { border-collapse: collapse;    border: none;      margin: 0px; padding: 0px; }
+           
+            .box_head_column   { width: 3.67in; border:none; margin-right: 0px; margin-left: 0px; }
+            
+            
+           
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <!-- Shrink page height to fit form layout.  Default is 9.9in. -->
+        <div class="page" style="height: 8.25in; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader" >
+                <img style="float: left" src="../images/logo_LMH.png">
+                <span class="h4" style="font-size: 145%; " >Direct Observation Tool</span>
+                <span class="blackBox" style="float: right; ">v.0.4</span> 
+            </div>
+     
+            <div style="text-align: center; position: relative; right: -13px; " >Correct Treatment Rate Assessment</div>
+            
+            <div style="text-align: left; font-style: italic; " >
+                <span>This form should be used by clinical quality assurance personnel in the field. This form should be filled out during a sick child consultation with a CHA.  Forms should be submitted to RM&E within 2 weeks of the assessment taking place.</span>
+            </div>
+             
+            <!-- New Form Header layout -->
+            <div class="thickBox" >
+                
+                <table class="box_head">
+                                  
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >County:<input class="stored"              name="county"         data-lmd-valid-required style="width: 3.14in; padding-left: 3px; border:none; " data-lmd-valid-autoC="county" ></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                " >Data collector name:<input class="stored" name="data_collector" data-lmd-valid-required style=" width:2.30in; padding-left: 3px; border:none; "                               ></td>    
+                    </tr>
+                    
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Health Facility:<input class="stored" name="health_facility"  data-lmd-valid-required data-lmd-valid-autoC="facilities" style=" width:2.69in; padding-left: 3px; border:none; "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                 border-top: 1px solid black; " >CHA name:<input class="stored"        name="cha"              data-lmd-valid-required                                   style=" width:2.88in; padding-left: 3px; border:none; "></td>
+                    </tr>
+                    
+                    <tr>               
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; border-top: 1px solid black; " >Community name:<input class="stored" name="community" data-lmd-valid-required style=" width:2.46in; padding-left: 3px; border:none;  "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black;                             " >CHA ID:<input class="stored"         name="cha_id"    data-lmd-valid-required style=" width:3.10in; padding-left: 3px; border:none; "></td>                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID:<input  class="stored" name="community_id" data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999" style=" width:2.67in; padding-left: 3px; border:none;  "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                 border-top: 1px solid black; " >CHSS name:<input class="stored"     name="chss"         data-lmd-valid-required                           data-lmd-valid-autoC="chss"  style=" width:2.78in; padding-left: 3px; border:none; "></td>
+                    </tr>
+                                                       
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " ><span>Date</span><span style="font-size: 87%"> (yyyy-mm-dd):</span><input class="stored datepicker" name="date_form" data-lmd-valid-required style=" width:2.49in; padding-left: 3px; border:none; "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black;                              " >CHSS ID:<input class="stored"                                                                       name="chss_id"   data-lmd-valid-required style=" width:3.00in; padding-left: 3px; border:none; "></td>                        
+                    </tr>
+                                          
+                </table>
+                  
+            </div>
+            
+            <div class="thickBox">
+                                   
+                <table class="box_head">
+                                  
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; border-top: 1px black; " >Child name:<input class="stored"              name="child_name"         data-lmd-valid-required style="width: 1.00in; padding-left: 3px; border:none; " data-lmd-valid-autoC="county" ></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                border-top: 1px black; " ><span>Child age</span><span style="font-size: 87%; ">(months/years):</span><input class="stored" name="child_age" data-lmd-valid-required style=" width:1.00in; padding-left: 3px; border:none; "                               ></td>    
+                    </tr>
+                      
+                </table>
+                
+            </div>    
+            
+            <!-- END: FORM HEADER -->
+            
+            <!-- White line spacers -->
+            <div style="height:10px"></div>
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="DOT" style="border: none; ">
+               
+              
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">DOT.0.4</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored"  name="meta_de_init" style="width: 0.55in">
+                DE Date: <input class="stored"      name="meta_de_date" style="width: 0.80in">
+                QA Initials: <input class="stored"  name="meta_qa_init" style="width: 0.45in">
+                QA Date: <input class="stored"      name="meta_qa_date" style="width: 0.80in">
+                <input name='meta_form_version' class='stored' type='hidden' value='0.4'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="de_direct_observation">
+       
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
