@@ -33,8 +33,8 @@ executeStatements('lastmile_upload','de_chss_monthly_service_report', $cxn);
 executeStatements('lastmile_upload','de_cha_status_change_form', $cxn);
 executeStatements('lastmile_upload','de_chss_commodity_distribution', $cxn);
 
-executeStatements('lastmile_temp','chss_training', $cxn);
-executeStatements('lastmile_temp','training_cha_all', $cxn);
+executeStatements('lastmile_program','train_cha', $cxn);
+executeStatements('lastmile_program','train_chss', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
