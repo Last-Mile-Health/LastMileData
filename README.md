@@ -6,6 +6,8 @@ Last Mile Data - README
 * COPYRIGHT:      Copyright 2017 Last Mile Health
 * LICENSE:        Distributed under the terms of the GNU General Public License
 
+![test Image](https://juststickers.in/wp-content/uploads/2016/12/hey.png)
+
 
 I. Overview
 -----------
