@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
     <head>
         <title>Direct Observation Tool v0.4</title>
         <meta charset="UTF-8">
@@ -30,6 +31,8 @@
             
             #RRT   { position:relative; top:-13px; }
             
+            .page { height: 7.67in; }
+            
             .thickBox { padding: 0px; border: 1px solid black; }
             
             /* Header Input */
@@ -50,15 +53,16 @@
         
     </head>
     
+
     <body>
-        
+
         <!-- START: VALIDATION BOX -->
         <div id="validationBox"></div>
         <!-- END: VALIDATION BOX -->
-        
-        <!-- START: PAGE 1 -->
-        <!-- Shrink page height to fit form layout.  Default is 9.9in. -->
-        <div class="page" style="height: 7.50in; ">
+
+        <!-- ----------------------------------------  Start: Page 1 ------------------------------------------------------- -->
+        <div class="page">
+
             
             <!-- START: FORM HEADER -->
             <div class="formHeader" >
@@ -66,14 +70,13 @@
                 <span class="h4" style="font-size: 145%; " >Direct Observation Tool</span>
                 <span class="blackBox" style="float: right; ">v.0.4</span> 
             </div>
-     
+            
             <div style="text-align: center; position: relative; right: -13px; " >Correct Treatment Rate Assessment</div>
             
             <div style="text-align: left; font-style: italic; " >
                 <span>This form should be used by clinical quality assurance personnel in the field. This form should be filled out during a sick child consultation with a CHA.  Forms should be submitted to RM&E within 2 weeks of the assessment taking place.</span>
             </div>
              
-            <!-- New Form Header layout -->
             <div class="thickBox" >
                 
                 <table class="box_head">
@@ -118,10 +121,10 @@
                       
                 </table>
                 
-            </div>  
-            
+            </div>
             <!-- END: FORM HEADER -->
             
+            <!-- Start: Page 1 Questions -->
             <div style="text-align: left; font-style: italic; " >
                 <span>Observe silently and do not interfere with the CHA’s consultation. Record what you hear and see, and write any other relevant notes on the back of the form. Once the CHA has finished their consultation, counsel the CHA on any errors they may have made. If necessary, ensure that the correct treatment is provided to the sick child. N/A means “not applicable”.</span>
             </div>
@@ -134,8 +137,8 @@
                 <table class="checkbox_table">
                                   
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="intro_ask_child_age_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="intro_ask_child_age_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="intro_child_age_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="intro_child_age_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
                         <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks the child’s age</span></td>
                     </tr>                 
@@ -160,23 +163,23 @@
                 <table class="checkbox_table">
                                   
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_child_diarrhea_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_child_diarrhea_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_diarrhea_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_diarrhea_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
                         <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has diarrhea/running stomach</span></td>
                     </tr>                 
                 
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_day_child_diarrhea_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_day_child_diarrhea_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_day_child_diarrhea_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_diarrhea_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_diarrhea_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_diarrhea_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks how many days the child has had diarrhea</span></td>
                     </tr>  
                     
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_loose_stool_24_hour_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_loose_stool_24_hour_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_loose_stool_24_hour_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_loose_stool_24_hour_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_loose_stool_24_hour_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_loose_stool_24_hour_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks how often in last 24 hours the child has passed loose stool</span></td>
                     </tr>  
   
@@ -191,30 +194,30 @@
                 <table class="checkbox_table">
                                   
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_child_cough_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_child_cough_n0" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_cough_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_cough_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
                         <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has a cough</span></td>
                     </tr>                 
                 
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_day_child_cough_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_day_child_cough_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_ask_number_day_child_cough_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_child_cough_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_child_cough_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_child_cough_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks how many days the child has had cough</span></td>
                     </tr>  
                     
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_use_timer_count_breath_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_use_timer_count_breath_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_use_timer_count_breath_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_use_timer_count_breath_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_use_timer_count_breath_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_use_timer_count_breath_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Uses a timer to count breathing</span></td>
                     </tr>  
  
                     <tr>
-                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_correct_assess_child_fast_breath_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_correct_assess_child_fast_breath_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
-                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_correct_assess_child_fast_breath_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_assess_child_fast_breath_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_assess_child_fast_breath_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_assess_child_fast_breath_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
                         <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Correctly assesses the child for fast breathing (+/- 3 of the actual rate)</span></td>
                     </tr>  
   
@@ -223,24 +226,325 @@
                 <table class="checkbox_table">
                     
                     <tr>
-                        <td class="column_checkbox" style="width: 1.65in; border-right: none; border-top: none; "><input class="stored" name="gather_info_breath_per_minute_cha" style=" width:1.62in; padding-left: 3px; border:none;  "></td>
+                        <td class="column_checkbox" style="width: 1.65in; border-right: none; border-top: none; "><input class="stored" name="gather_info_sick_child_breath_per_minute_cha" style=" width:1.62in; padding-left: 3px; border:none;  "></td>
                         <td class="column_description" style="border-top: none; "><span style="position: relative; left: 4px; bottom: -2px; ">Breaths per minute determined by CHA (write in)</span></td>
                     </tr> 
                     
                     <tr>
-                        <td class="column_checkbox" style="width: 1.65in; border-right: none; border-top: none; "><input class="stored" name="gather_info_breath_per_minute_observer" style=" width:1.62in; padding-left: 3px; border:none;  "></td>
+                        <td class="column_checkbox" style="width: 1.65in; border-right: none; border-top: none; "><input class="stored" name="gather_info_sick_child_breath_per_minute_observer" style=" width:1.62in; padding-left: 3px; border:none;  "></td>
                         <td class="column_description" style="border-top: none; "><span style="position: relative; left: 4px; bottom: -2px; ">Breaths per minute determined by Observer (write in)</span></td>
                     </tr>  
                                      
                 </table>
                 
-            </div>       
+            </div>
+            <!-- End: Page 1 Questions -->
+
+        </div>
+        <!-- ----------------------------------------  End: Page 1   ------------------------------------------------------- -->
+
+        <!-- ----------------------------------------  Start: Page 2 ------------------------------------------------------- -->
+        <div class="page">
+            
+            <!-- Start: Page 2 Questions -->
+
+            <div>
+         
+                <table class="checkbox_table">
+                                  
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_fever_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_fever_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has fever</span></td>
+                    </tr>                 
+                
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_child_fever_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_child_fever_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_number_day_child_fever_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks how many days the child has had fever</span></td>
+                    </tr>  
+                    
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_conduct_rdt_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_conduct_rdt_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_conduct_rdt_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Conducts an RDT</span></td>
+                    </tr>  
  
-            <!-- START: SECTION A -->
-            <div class="thickBox" id="DOT" style="border: none; ">   
-                          
-            <!-- White line spacers -->
-            <div style="height:5px"></div>
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_administer_rdt_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_administer_rdt_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_administer_rdt_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Correctly administers RDT</span></td>
+                    </tr>  
+ 
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_read_rdt_result_correct_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_read_rdt_result_correct_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_read_rdt_result_correct_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Reads RDT results correctly</span></td>
+                    </tr>  
+  
+                </table>
+                
+
+            </div>
+   
+            <div style="height: 10px; "></div> <!-- White line spacers -->
+          
+            <div>
+         
+                <table class="checkbox_table">
+                                  
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_take_medication_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_take_medication_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has already taken medication</span></td>
+                    </tr>                 
+                
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_which_medication_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_which_medication_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_which_medication_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks which medications</span></td>
+                    </tr>  
+                    
+                </table>
+                
+                 <table class="checkbox_table">
+                    
+                    <tr>
+                        <td class="column_description" style="width: 2.40in; border-top: none; border-bottom: none; border-right: none; "><span style="position: relative; left: 4px; bottom: -2px; ">If applicable, name medication here:</span></td>
+                        <td class="column_checkbox"    style="width: 4.85in; border-top: none; border-bottom: none; border-left: none; "><input class="stored" name="gather_info_sick_child_applicable_name_medication" style=" width:4.83in; padding-left: 3px; border:none;  "></td>
+                    </tr> 
+                                                       
+                </table>
+                
+                 <table class="checkbox_table">
+                                             
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_took_full_course_medication_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_took_full_course_medication_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_took_full_course_medication_na" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >N/A</span></div></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks which medications</span></td>
+                    </tr>  
+                    
+                </table>               
+                
+            </div>
+            
+    
+            <div style="height: 10px; "></div> <!-- White line spacers -->
+          
+            <div>
+        
+                <table class="checkbox_table">
+                                  
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_convulsion_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_convulsion_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has had any convulsions</span></td>
+                    </tr>                 
+
+                                                  
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_drink_breastfeed_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_drink_breastfeed_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child can drink or breastfeed</span></td>
+                    </tr>                 
+
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_blood_stool_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_blood_stool_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if there has been blood in the child’s stool</span></td>
+                    </tr>                 
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_vomiting_everything_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_vomiting_everything_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has been vomiting everything</span></td>
+                    </tr>                 
+
+                               
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_chest_in_drawing_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_chest_in_drawing_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Checks the child for chest in-drawing</span></td>
+                    </tr>                 
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_sleepy_unconscious_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_sleepy_unconscious_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has been very sleepy or unconscious</span></td>
+                    </tr>                 
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_muac_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_muac_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Checks the child’s MUAC</span></td>
+                    </tr>                 
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_read_muac_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_correct_read_muac_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Correctly reads the MUAC</span></td>
+                    </tr>                 
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_bilateral_pitting_oedema_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_bilateral_pitting_oedema_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Checks the child for bilateral pitting oedema</span></td>
+                    </tr>                 
+                              
+                    <tr>
+                        <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_other_problem_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="gather_info_sick_child_other_problem_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >NO</span></div></td> 
+                        <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                        <td class="column_description"><span style="position: relative; left: 4px; bottom: -2px; ">Asks if the child has any other problem</span></td>
+                    </tr>                 
+                                               
+                </table>
+    
+            </div>
+            
+            <div style="height: 10px; "></div> <!-- White line spacers -->
+            
+            <div style="text-align: left; font-style: italic; " >
+                <span>If the CHA does not ask or check for all items listed, you may ask once “Is there any additional information you need to make your diagnosis?”</span>
+            </div>
+            
+            <div style="height: 10px; "></div> <!-- White line spacers -->
+            
+            <div style="font-weight: bold; ">DIAGNOSIS</div>
+            
+            <div style="text-align: left; font-style: italic; " >
+                <span>When the CHA is done gathering information, if they have not already done so, ask him/her to clearly state the diagnosis/classification and any danger signs they have identified; write them below.</span>
+            </div>
+            
+            <div style="height: 10px; "></div> <!-- White line spacers -->
+            
+            <div>
+            
+                <table class="checkbox_table">
+                    
+                    <tr>
+                        <td style="width: 7.25in; border-bottom: none; "><span style="position: relative; left: 4px; bottom: -2px; ">CHA diagnosis (if multiple, list all):</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width: 7.25in; border-top: none; "><input class="stored" name="diagnosis_cha" style=" width:7.23in; padding-left: 3px; border:none;  "></td>
+                    </tr> 
+
+                    <tr>
+                        <td style="width: 7.25in; border-bottom: none; "><span style="position: relative; left: 4px; bottom: -2px; ">Danger signs identified by CHA (if multiple, list all):</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width: 7.25in; border-top: none; "><input class="stored" name="diagnosis_cha_danger_sign" style=" width:7.23in; padding-left: 3px; border:none;  "></td>
+                    </tr> 
+                           
+                </table>
+                
+            </div>
+  
+                 
+            <!-- End: Page 2 Questions -->
+
+        </div>
+        <!-- ----------------------------------------  End: Page 2   ------------------------------------------------------- -->
+        
+        
+        <!-- ----------------------------------------  Start: Page 3 ------------------------------------------------------- -->
+        
+        <div class="page">
+            <!-- Start: Page 3 Questions -->
+            <div style="text-align: left; font-style: italic; " >
+                <span>After the CHA has stated the diagnosis and danger signs, you may ask additional questions or perform any tasks needed for you to determine the correct diagnosis. Enter the correct diagnosis below. If the CHA has made an incorrect diagnosis, suggest you look at the job aid and guide them to the correct diagnosis.</span>
+            </div>
+            
+            <div style="height: 5px; "></div> <!-- White line spacers -->
+            
+            <div>
+                
+                <table style="border: 1px solid black; ">
+                    
+                    <tr>
+                        <td style="width: 5.50in; float: left;  padding-left: 3px; " ><span>Correct diagnosis determined by observer (if multiple, list all):</span></td>
+                        <td style="width: 1.75in;  padding-left: 3px; border-left: 1px solid black; " >Was the CHA’s diagnosis correct?</td>
+                        
+                    </tr>
+
+                    <tr style="border-bottom: 1px solid black; ">
+                        
+                        <td style="width: 5.50in; float: left;  padding-left: 3px; " ><input class="stored" name="diagnosis_observer_correct" style=" width:5.47in; padding-left: 3px; border: none; "></td>
+                        <td style="width: 1.75in;  padding-left: 3px; border-left: 1px solid black; ">
+                            
+                            <table>
+                                <tr>
+                                    <td class="column_checkbox" ><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diagnosis_cha_correct_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td>
+                                    <td class="column_checkbox" ><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diagnosis_cha_correct_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>
+
+                    <tr>
+                        <td style="width: 5.50in; float: left;  padding-left: 3px; " ><span>Danger signs identified by observer (if multiple, list all):</span></td>
+                        <td style="width: 1.75in;  padding-left: 3px; border-left: 1px solid black; " >Did the CHA correctly identify danger sign(s)?</td>
+                        
+                    </tr>
+
+                    <tr>
+                        
+                        <td style="width: 5.50in; float: left;  padding-left: 3px; " ><input class="stored" name="diagnosis_observer_danger_sign" style=" width:5.47in; padding-left: 3px; border: none; "></td>
+                        <td style="width: 1.75in;  padding-left: 3px; border-left: 1px solid black; ">
+                            
+                            <table>
+                                <tr>
+                                    <td class="column_checkbox" ><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diagnosis_observer_danger_sign_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td>
+                                    <td class="column_checkbox" ><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diagnosis_observer_danger_sign_no" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>
+                     
+                </table>
+                            
+          
+            </div>
+            
+            <!-- End: Page 3 Questions -->
+        
+        </div>
+        
+        <!-- ----------------------------------------  End: Page 3   ------------------------------------------------------- -->
+        
+        <!-- ----------------------------------------  Start: Page 4 ------------------------------------------------------- -->
+        <div class="page">
+            
+            <!-- Start: Page 4 Questions -->
+            
+            
+            
+            <!-- End: Page 4 Questions -->
+
             
             <!-- START: M&E Box -->
                         
@@ -254,10 +558,13 @@
                 QA Date: <input class="stored"      name="meta_qa_date" style="width: 0.80in">
                 <input name='meta_form_version' class='stored' type='hidden' value='0.4'>
             </div>
-            <!-- START: M&E Box -->          
- 
+            <!-- START: M&E Box -->  
+
+
+        <!-- Note: the last page always ends after the M&E box -->
         </div>
-        <!-- END: PAGE 2 -->
+        <!-- ----------------------------------------  End: Page 4   ------------------------------------------------------- -->
+
         
         <!-- START: S/C Buttons -->
         <div class="formButtons">
@@ -272,7 +579,7 @@
         <input type="hidden" class="stored" name="table" value="de_direct_observation">
        
         <!-- END: Hidden fields -->
-        
+
     </body>
-    
+
 </html>
