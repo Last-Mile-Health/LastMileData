@@ -14,23 +14,23 @@ I. Overview
 
 A typical report on the Data Portal contains a logically-grouped set of indicators, each of which is presented together with the indicator’s definition, a table showing data from the last few months, a visualization of historical trends, and buttons to download the raw data.
 
-![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_1.jpg)
+![Last Mile Data](https://www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_1.jpg)
 
 A Data Portal feature that we added recently allows users to dynamically plot data onto a map of Liberia at the county, district, or community level. This helps program managers to assess geospatial trends that might otherwise be difficult to notice.
 
-![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_2.jpg)
+![Last Mile Data](https://www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_2.jpg)
 
 Many reports are created with our field staff in mind. These reports typically disaggregate data at the level of the individual community health worker or supervisor, in order to enable data-driven performance management.
 
-![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_3.jpg)
+![Last Mile Data](https://www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_3.jpg)
 
 Staff on our M&E team often interact with the “data entry / quality assurance” page of Last Mile Data. Here, paper forms are entered and quality-checked, and mHealth data is uploaded. This section can be accessed offline when no internet connection is present.
 
-![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_4.jpg)
+![Last Mile Data](https://www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_4.jpg)
 
 We’re in the process of turning Last Mile Data into a complete business intelligence platform that can be managed and configured by non-technical staff. For example, this tool allows non-technical staff to create and edit data reports that show up in the Data Portal.
 
-![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_5.jpg)
+![Last Mile Data](https://www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_5.jpg)
 
 II. Basic system functioning
 ----------------------------
