@@ -2,7 +2,7 @@ Last Mile Data - README
 =======================
 
 * AUTHORS:        Avi Kenny, Owen Eddins
-* LAST UPDATED:   2017-01-03
+* LAST UPDATED:   2017-11-25
 * COPYRIGHT:      Copyright 2017 Last Mile Health
 * LICENSE:        Distributed under the terms of the GNU General Public License
 
@@ -10,8 +10,27 @@ Last Mile Data - README
 I. Overview
 -----------
 
-The purpose of this application is to allow the data entry clerks of Last Mile Health to enter data from paper program forms onto corresponding HTML forms. In fact, the paper forms are just the printed HTML forms, so the two are identical. Given the poor internet connectivity in rural Liberia, the system was created such that both the "data entry" and "quality assurance" (QA) processes can occur offline. Data entry is the process of taking a paper form, copying the information onto the HTML form, and submitting the form. Quality assurance is a process in which the data clerk's supervisor pulls up a record based on it's "primary key" and visually compares the paper form with the HTML form to check for and correct any data entry errors. After quality assurance, the supervisor can send all of the records to the MySQL database for permanent storage (if an internet connection is present). The application is hosted at <https://www.lastmiledata.org>.
+“Last Mile Data” is a web application used for all programmatic data collection and reporting within [Last Mile Health](www.lastmilehealth.org). Most internal staff primarily use the “Data Portal”, which provides a number of data reports on supervision, supply chain, CHW services, and programmatic scale.
 
+A typical report on the Data Portal contains a logically-grouped set of indicators, each of which is presented together with the indicator’s definition, a table showing data from the last few months, a visualization of historical trends, and buttons to download the raw data.
+
+![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_1.jpg)
+
+A Data Portal feature that we added recently allows users to dynamically plot data onto a map of Liberia at the county, district, or community level. This helps program managers to assess geospatial trends that might otherwise be difficult to notice.
+
+![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_2.jpg)
+
+Many reports are created with our field staff in mind. These reports typically disaggregate data at the level of the individual community health worker or supervisor, in order to enable data-driven performance management.
+
+![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_3.jpg)
+
+Staff on our M&E team often interact with the “data entry / quality assurance” page of Last Mile Data. Here, paper forms are entered and quality-checked, and mHealth data is uploaded. This section can be accessed offline when no internet connection is present.
+
+![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_4.jpg)
+
+We’re in the process of turning Last Mile Data into a complete business intelligence platform that can be managed and configured by non-technical staff. For example, this tool allows non-technical staff to create and edit data reports that show up in the Data Portal.
+
+![Last Mile Data](www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_5.jpg)
 
 II. Basic system functioning
 ----------------------------
