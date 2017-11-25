@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Register Review Tool v0.3</title>
+        <title>Register Review Tool v.1.0</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -36,8 +36,8 @@
             .box_head    { table-layout: fixed;          width: 9.75in; }
             .box_head    { border-collapse: collapse;    border: none;      margin: 0px; padding: 0px; }
             
-            .box_head_column_wide   { width: 3.75in; border:none; margin-right: 0px; margin-left: 0px; }
-            .box_head_column_narrow { width: 2.25in; border:none; margin-right: 0px; margin-left: 0px; }
+            .box_head_column_wide   { width: 3.75in; height: 24px; border:none; margin-right: 0px; margin-left: 0px; }
+            .box_head_column_narrow { width: 2.25in; height: 24px; border:none; margin-right: 0px; margin-left: 0px; }
             
             .register_table    { table-layout: fixed; width: 9.74in; font-size: 100%; margin: 0px; padding: 0px; border-collapse: collapse; }
             .register_table th { border: 1px solid black; height: 40px; padding: 0px; text-align: center; font-weight: bold; }
@@ -72,7 +72,8 @@
             <div class="formHeader">
                 <img style="float: left" src="../images/logo_LMH.png">
                 <span class="h4" style="font-size: 145%; " >Register Review Tool</span>
-                <span class="blackBox" style="float: right; ">v.0.3</span> 
+                <span class="blackBox" style="float: right; ">v.1.0</span> 
+                <div style="clear:both"></div>
             </div>
             
             <div style="text-align: center; position: relative; right: -13px; " >Correct Treatment Rate Assessment</div>
@@ -110,7 +111,7 @@
                 
                 <table class="box_head">
                     <tr>
-                        <td style="text-align: left; padding-left: 2px; border: none; border-top: 1px solid black; " >Data collector name:<input class="stored" name="data_collector" data-lmd-valid-required style=" width:8.36in; padding-left: 3px; border:none; "></td>       
+                        <td class="box_head_column_wide" style="text-align: left; width: 9.72in; padding-left: 2px; border: none; border-top: 1px solid black; " >Data collector name:<input class="stored" name="data_collector" data-lmd-valid-required style=" width:8.36in; padding-left: 3px; border:none; "></td>       
                     </tr>
                 </table>
 
@@ -302,13 +303,13 @@
                         
             <div id="meBox">
                 <span class="blackBox">M&E</span>
-                <span class="blackBox">RRT.0.3</span>
+                <span class="blackBox">RRT.1.0</span>
                 &nbsp;&nbsp;&nbsp;
                 DE Initials: <input class="stored"  name="meta_de_init" style="width: 1.0in">
                 DE Date: <input class="stored"      name="meta_de_date" style="width: 1.0in">
                 QA Initials: <input class="stored"  name="meta_qa_init" style="width: 1.0in">
                 QA Date: <input class="stored"      name="meta_qa_date" style="width: 1.0in">
-                <input name='meta_form_version' class='stored' type='hidden' value='0.3'>
+                <input name='meta_form_version' class='stored' type='hidden' value='1.0'>
             </div>
             <!-- START: M&E Box -->          
  
