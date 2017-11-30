@@ -592,7 +592,6 @@ $(document).ready(function(){
         });
     }); 
     
- 
     $('#qa_CCD_0400').click(function() {
         launchQAModal({
             targetForm: "../forms/chss_commodity_distribution_04_00.html",
@@ -602,7 +601,18 @@ $(document).ready(function(){
             pKey1_label: "CHSS ID",
             pKey2_label: "Restock Date"
         });
-    }); 
+    });
+
+    $('#qa_CST_0101').click(function() {
+        launchQAModal({
+            targetForm: "../forms/case_scenarios_1_1.html",
+            qaFormName: "(CST 1.0) - Case Scenarios",
+            pKey1_name: "cha_id",
+            pKey2_name: "date_form",
+            pKey1_label: "CHA ID",
+            pKey2_label: "Date"
+        });
+    });  
 
     $('#qa_TST').click(function() {
         launchQAModal({
