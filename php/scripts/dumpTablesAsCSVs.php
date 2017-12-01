@@ -33,6 +33,9 @@ executeStatements('lastmile_upload','de_chss_monthly_service_report', $cxn);
 executeStatements('lastmile_upload','de_cha_status_change_form', $cxn);
 executeStatements('lastmile_upload','de_chss_commodity_distribution', $cxn);
 
+executeStatements('lastmile_upload','de_direct_observation', $cxn);
+executeStatements('lastmile_upload','de_register_review', $cxn);
+
 executeStatements('lastmile_program','train_cha', $cxn);
 executeStatements('lastmile_program','train_chss', $cxn);
 

@@ -25,6 +25,8 @@ query9='select * from lastmile_cha.view_base_position_cha'
 query10='select * from lastmile_cha.view_base_position_chss'
 query11='select * from lastmile_report.view_base_msr'
 
+query12='select * from lastmile_upload.de_case_scenario'
+
 fileName1=view_base_cha
 fileName2=view_base_chss
 fileName3=view_base_geo_community
@@ -37,6 +39,8 @@ fileName9=view_base_position_cha
 fileName10=view_base_position_chss
 fileName11=view_base_msr
 
+fileName12=de_case_scenario
+
 mysql --batch --user=$user --password=$password -e "${query1}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName1}_$dateStamp.csv 
 mysql --batch --user=$user --password=$password -e "${query2}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName2}_$dateStamp.csv 
 mysql --batch --user=$user --password=$password -e "${query3}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName3}_$dateStamp.csv 
@@ -47,4 +51,6 @@ mysql --batch --user=$user --password=$password -e "${query7}"  | $replaceTab | 
 mysql --batch --user=$user --password=$password -e "${query8}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName8}_$dateStamp.csv 
 mysql --batch --user=$user --password=$password -e "${query9}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName9}_$dateStamp.csv 
 mysql --batch --user=$user --password=$password -e "${query10}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName10}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query11}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName11}_$dateStamp.csv 
+mysql --batch --user=$user --password=$password -e "${query11}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName11}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query12}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName12}_$dateStamp.csv
+
