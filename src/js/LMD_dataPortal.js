@@ -132,7 +132,7 @@ var LMD_dataPortal = (function(){
             d.chart_points = [];
 
             // If roMetadata fields are not specified, get them from instanceMetadata (only practical for report objects with a single indicator instance)
-            // !!!!! eventually phase this out !!!!!
+            // !!!!! eventually phase this out ?????
             var instID = d.instIDs[0];
             var metadata = instanceMetadata[instID];
             if ( d.ro_name == null || d.ro_name == '' ) {
@@ -320,7 +320,7 @@ var LMD_dataPortal = (function(){
                         colors: d.chart_colors || "default",
                         timeInterval: Math.ceil(d.uniqueDates.length/24),
                         size: { x:Number(d.chart_size_x), y:Number(d.chart_size_y) },
-                        xyVars: { x:"Month", y:"Value" },
+                        xyVars: { x:"Month", y:"Value" }, // !!!!! This is currently unnecessary !!!!!
         //                axisTitles: d.chartSpecs.axisTitles, // !!!!! new attribute for this (specified in edit "reports interface") ?????
                         cut: "Cut",
                         legend: d.chartMultiple ? "right" : "",
