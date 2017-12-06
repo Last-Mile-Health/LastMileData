@@ -138,7 +138,7 @@
                 definition: 'Percent completion of projected quarterly deadlines for activities required to successfully achieve annual targets.',
                 dataSource: 'Quarterly progress report',
                 groups: [
-                    { name: '', instIDs: [389,390,391,392,393,394,395,396,424] }
+                    { name: '', instIDs: [] }
                 ]
             },
             {
