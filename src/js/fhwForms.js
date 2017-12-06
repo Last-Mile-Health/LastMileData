@@ -124,7 +124,7 @@ $(document).ready(function() {
             }
             
             // Scroll to top; show validationBox
-            $("body").animate({ scrollTop: 0 }, 500, function() {
+            $("html,body").animate({ scrollTop: 0 }, 500, function() {
                 $('#validationBox').slideDown(500);
             });
             
@@ -162,7 +162,7 @@ $(document).ready(function() {
 
                     // Creates (or overwrite) the "data.lmd" file with stringified myRecordset object
                     LMD_fileSystemHelper.createOrOverwriteFile('data.lmd', JSON.stringify(myRecordset),function(){
-                        $("body").animate({ scrollTop: 0 }, 500, function(){
+                        $("html,body").animate({ scrollTop: 0 }, 500, function(){
                             $("body").fadeOut(500,function(){
                                 if(clicked == 'lmd_next') {
                                     // "Next" was clicked; reload page to enter new form; scroll to top
