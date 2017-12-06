@@ -33,18 +33,8 @@ We're in the process of turning *Last Mile Data* into a comprehensive business i
 ![Last Mile Data](https://www.lastmiledata.org/LastMileData/build/images/LMD_screenshot_5.jpg)
 
 
-II. Data Portal functionality
------------------------------
-
-#### Overview
-Text
-
-#### Organization
-The data portal 
-
-
-III. Data Entry / Quality Assurance functionality
--------------------------------------------------
+II. Data Entry / Quality Assurance functionality
+------------------------------------------------
 
 #### Overview
 
@@ -96,3 +86,23 @@ The purpose of this part of the application is to allow for data entry of data f
 1. The Application Cache is used to cache all application resources offline.
 2. If the manifest file (`lastmiledata.appcache`) changes, the browser will automatically download the new resources.
 3. Once the cache finishes download new resources, the application refreshes to "swap the cache" and load the new version of the application.
+
+
+III. Data Portal functionality
+------------------------------
+
+#### Overview
+
+The *Data Portal* is the centralized reporting mechanism for Last Mile Health. All data used across the organization is housed here.
+
+#### Organization
+
+The sidebar of the *Data Portal* is organized via a two-level hierarchy. The outer level is referred to as a "group" and the inner level is referred to as a "report". This structure allows for a relatively simple organization of content.
+
+#### Types of reports
+
+There are several types of reports contained within the *Data Portal*. Each serves a distinct purpose and is described below:
+
+* **Indicator reports.** These reports contain logically-grouped sets of indicators, each of which is presented together with the indicator's metadata (definition + data source), a table showing data from the last few months, a visualization of historical trends, and buttons to download the raw data. Examples include the *Executive Dashboard*, the *Scale Dashboard*, and the *Retention Report*.
+* **Markdown pages.** These reports leverage Markdown to display customized content, and can be edited with the "Edit markdown" tool (in the *Admin Panel* group). These "reports" are typically used for two different purposes. The first is for institutional knowledge management. Groups of links to documents (stored by LMH on Google Drive) are listed within these markdown pages, allowing for indexing and long-term archiving of content. Examples of this type include all reports in the *RM&E Documents* group. The second is for displaying customized content. An examples of this type is the *Approved Language* report in the *Customized Reports* group.
+* **PhP reports.** These reports (which are PhP files loaded as HTML fragments) interact directly with the MySQL database, and leverage the PhP language to dynamically display content to users. Examples include the *CHA listing* and the *CHSS listing* (both in the *Detailed program reports* group).
