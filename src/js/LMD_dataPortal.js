@@ -95,6 +95,7 @@ var LMD_dataPortal = (function(){
         for (var key in dataObject) {
             dataObject[key].instIDs = dataObject[key].instIDs.split(",");
             dataObject[key].chart_instIDs = dataObject[key].chart_instIDs.split(",");
+            dataObject[key].chart_instIDs_secondary = dataObject[key].chart_instIDs_secondary ? dataObject[key].chart_instIDs_secondary.split(",") : null;
             dataObject[key].instIDs_shortNames = dataObject[key].instIDs_shortNames ? dataObject[key].instIDs_shortNames.split(",") : null;
             dataObject[key].chart_instIDs_shortNames = dataObject[key].chart_instIDs_shortNames ? dataObject[key].chart_instIDs_shortNames.split(",") : null;
         }
@@ -161,24 +162,53 @@ var LMD_dataPortal = (function(){
 
                 var instID = d.chart_instIDs[key2];
                 var dataArray = chartData[instID];
+                var instID_secondary = d.chart_instIDs_secondary ? d.chart_instIDs_secondary[key2] : null;
+                var dataArray_secondary = d.chart_instIDs_secondary ? chartData[instID_secondary] : null; // !!!!! this is undefined if d.chart_instIDs_secondary is set but there is no data; this may causes errors down the road !!!!!
                 
                 if (dataArray) {
                     for(var i=0; i<dataArray.length; i++) {
                         
                         // Get instShortName from report object if it exists; otherwise, get it from instanceMetadata
                         var instShortName = d.chart_instIDs_shortNames ? d.chart_instIDs_shortNames[key2] : instanceMetadata[instID].instShortName;
+                        var value_secondary = null;
+
+                        // Get secondary value (if it exists)
+                        if (dataArray_secondary) {
+//                            console.log ('test ' + test + '..............');
+//                            console.log(dataArray_secondary);
+                            for (var key3 in dataArray_secondary) {
+                                if (dataArray[i].date === dataArray_secondary[key3].date) {
+//                                    console.log('made it in the loop!');
+//                                    console.log(dataArray[i].date);
+//                                    console.log(dataArray_secondary[key3]);
+                                    var value_secondary = dataArray_secondary[key3].value;
+                                }
+                            }
+                        }
                         
                         // Add chart point
                         // Chart point only added if its date is not "too new" (a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data)
                         var data_totalMonth = (12*Number(dataArray[i].date.split('-')[0]))+Number(dataArray[i].date.split('-')[1]);
                         var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < 15 ? 1 : 0 ),'months');
                         var latestAllowed_totalMonth = (12*latestAllowed_date.year())+(latestAllowed_date.month()+1);
-                        if (data_totalMonth <= latestAllowed_totalMonth) {
-                            d.chart_points.push({
-                                Month:dataArray[i].date,
-                                Value:dataArray[i].value,
-                                Cut: d.chartMultiple ? instShortName : '(none)'
-                            });
+                        
+                        if (d.chart_only_display_last_month == 1 && data_totalMonth === latestAllowed_totalMonth ||
+                            d.chart_only_display_last_month == 0 && data_totalMonth <=  latestAllowed_totalMonth) {
+                                // Primary value
+                                d.chart_points.push({
+                                    Month: dataArray[i].date,
+                                    Value: dataArray[i].value,
+                                    Cut: d.chartMultiple ? instShortName : '(none)',
+                                    Level: 'primary'
+                                });
+                                // Secondary value
+                                d.chart_points.push({
+                                    Month: dataArray[i].date,
+                                    Value: value_secondary,
+                                    Cut: d.chartMultiple ? instShortName : '(none)',
+                                    Level: 'secondary'
+                                });
+                        
                         }
                         
                         // Add date to date array (for CSV data)
@@ -317,14 +347,14 @@ var LMD_dataPortal = (function(){
                         type:d.chart_type,
                         targetDiv: d.chart_div,
                         data: d.chart_points,
+                        chart_only_display_last_month: d.chart_only_display_last_month,
                         colors: d.chart_colors || "default",
                         timeInterval: Math.ceil(d.uniqueDates.length/24),
                         size: { x:Number(d.chart_size_x), y:Number(d.chart_size_y) },
                         xyVars: { x:"Month", y:"Value" }, // !!!!! This is currently unnecessary !!!!!
-        //                axisTitles: d.chartSpecs.axisTitles, // !!!!! new attribute for this (specified in edit "reports interface") ?????
                         cut: "Cut",
                         legend: d.chartMultiple ? "right" : "",
-                        tickFormat: { y:d.chart_tickFormat },
+                        tickFormat: d.chart_tickFormat,
                         axisValues: { min:d.chart_yAxis_min, max:d.chart_yAxis_max }
                     });
                 }

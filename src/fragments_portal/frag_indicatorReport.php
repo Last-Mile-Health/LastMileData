@@ -21,6 +21,7 @@
     foreach (json_decode($json1) as $value) {
         $instIDString .= $value->instIDs. ",";
         $instIDString .= $value->chart_instIDs. ",";
+        $instIDString .= $value->chart_instIDs_secondary. ",";
     }
     $instIDString = trim($instIDString, ",");
 

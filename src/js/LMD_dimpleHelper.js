@@ -46,6 +46,7 @@ var LMD_dimpleHelper = (function(){
             x.timePeriod = d3.time.months;
             x.timeInterval = params.timeInterval;
             var y = myChart.addMeasureAxis("y", params.xyVars.y);
+            y.tickFormat = params.tickFormat
             var mySeries = myChart.addSeries(params.cut, dimple.plot.line);
             mySeries.addOrderRule(params.cut,true);
         }
@@ -56,6 +57,7 @@ var LMD_dimpleHelper = (function(){
             x.timePeriod = d3.time.months;
             x.timeInterval = params.timeInterval;
             var y = myChart.addMeasureAxis("y", params.xyVars.y);
+            y.tickFormat = params.tickFormat
             var mySeries = myChart.addSeries(params.cut, dimple.plot.bar);
             y.addOrderRule(params.cut,true);
         }
@@ -64,6 +66,7 @@ var LMD_dimpleHelper = (function(){
         else if (params.type==="bar") {
             var x = myChart.addCategoryAxis("x", "Cut");
             var y = myChart.addMeasureAxis("y", params.xyVars.y);
+            y.tickFormat = params.tickFormat
             var mySeries = myChart.addSeries(params.cut, dimple.plot.bar);
             x.addOrderRule(params.cut,true);
         }
@@ -71,8 +74,10 @@ var LMD_dimpleHelper = (function(){
         // Format bar charts (horizontal)
         else if (params.type==="horizontal bar") {
             var x = myChart.addMeasureAxis("x", params.xyVars.y);
+            x.tickFormat = params.tickFormat
             var y = myChart.addCategoryAxis("y", "Cut");
-            var mySeries = myChart.addSeries(params.cut, dimple.plot.bar);
+            var mySeries = myChart.addSeries(["Cut","Level"], dimple.plot.bar);
+            mySeries.stacked = false;
             y.addOrderRule(params.cut,true);
             myChart.x = myChart.x + 30;         // !!!!! Hack !!!!!
             myChart.width = myChart.width - 30; // !!!!! Hack !!!!!
@@ -89,25 +94,8 @@ var LMD_dimpleHelper = (function(){
             myChart.addLegend(140, 10, 330, 20, "right"); // !!!!! these parameters need to be variablized !!!!!
         }
         
-        // Add axis titles
-        if (params.axisTitles && params.axisTitles.x) {
-            x.title = params.axisTitles.x;
-        } else {
-            x.title = "";
-        }
-        if (params.axisTitles && params.axisTitles.y) {
-            y.title = params.axisTitles.y;
-        } else {
-            y.title = "";
-        }
-
-        // Add tick formats
-        if (params.tickFormat && params.tickFormat.x) {
-            x.tickFormat = params.tickFormat.x;
-        }
-        if (params.tickFormat && params.tickFormat.y) {
-            y.tickFormat = params.tickFormat.y;
-        }
+        // Add x-axis title
+        x.title = params.chart_only_display_last_month ? params.data[0].Month : "Date";
 
         // Add y-axis min/max
         if (params.axisValues && params.axisValues.min) {
