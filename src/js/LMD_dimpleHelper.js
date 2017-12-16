@@ -35,9 +35,11 @@ var LMD_dimpleHelper = (function(){
         // !!!!! Eventually, this should be set through some sort of interface !!!!!
         var myArr = [{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Bassa":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4BACC6"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"},{"Monrovia":"#202020"}];
         for (el in myArr) {
-            var cut = Object.keys(myArr[el])[0];
-            var color = myArr[el][cut];
-            myChart.assignColor(cut,color);
+            if (params.type!=="horizontal bar") {       // !!!!! Hack !!!!!
+                var cut = Object.keys(myArr[el])[0];
+                var color = myArr[el][cut];
+                myChart.assignColor(cut,color);
+            }                                           // !!!!! Hack !!!!!
         }
 
         // Format line charts
@@ -76,11 +78,23 @@ var LMD_dimpleHelper = (function(){
             var x = myChart.addMeasureAxis("x", params.xyVars.y);
             x.tickFormat = params.tickFormat
             var y = myChart.addCategoryAxis("y", "Cut");
+            var mySeries = myChart.addSeries("Cut", dimple.plot.bar);
+            y.addOrderRule(params.cut,true);
+            myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
+            myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
+        }
+        
+        // Format floating bar charts (horizontal)
+        // !!!!! Add vertical floating bar chars !!!!!
+        else if (params.type==="horizontal floating bar") {
+            var x = myChart.addMeasureAxis("x", params.xyVars.y);
+            x.tickFormat = params.tickFormat
+            var y = myChart.addCategoryAxis("y", "Cut");
             var mySeries = myChart.addSeries(["Cut","Level"], dimple.plot.bar);
             mySeries.stacked = false;
             y.addOrderRule(params.cut,true);
-            myChart.x = myChart.x + 30;         // !!!!! Hack !!!!!
-            myChart.width = myChart.width - 30; // !!!!! Hack !!!!!
+            myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
+            myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
         }
         
         // Format pie charts (!!!!! check this code; not currently used !!!!!)

@@ -174,13 +174,8 @@ var LMD_dataPortal = (function(){
 
                         // Get secondary value (if it exists)
                         if (dataArray_secondary) {
-//                            console.log ('test ' + test + '..............');
-//                            console.log(dataArray_secondary);
                             for (var key3 in dataArray_secondary) {
                                 if (dataArray[i].date === dataArray_secondary[key3].date) {
-//                                    console.log('made it in the loop!');
-//                                    console.log(dataArray[i].date);
-//                                    console.log(dataArray_secondary[key3]);
                                     var value_secondary = dataArray_secondary[key3].value;
                                 }
                             }
@@ -199,15 +194,17 @@ var LMD_dataPortal = (function(){
                                     Month: dataArray[i].date,
                                     Value: dataArray[i].value,
                                     Cut: d.chartMultiple ? instShortName : '(none)',
-                                    Level: 'primary'
+                                    Level: 'Actual' // !!!!! Level:'primary'; These need to be named dynamically !!!!!
                                 });
                                 // Secondary value
-                                d.chart_points.push({
-                                    Month: dataArray[i].date,
-                                    Value: value_secondary,
-                                    Cut: d.chartMultiple ? instShortName : '(none)',
-                                    Level: 'secondary'
-                                });
+                                if (value_secondary !== null) {
+                                    d.chart_points.push({
+                                        Month: dataArray[i].date,
+                                        Value: value_secondary,
+                                        Cut: d.chartMultiple ? instShortName : '(none)',
+                                        Level: 'Expected' // !!!!! Level:'secondary'; These need to be named dynamically !!!!!
+                                    });
+                                }
                         
                         }
                         
