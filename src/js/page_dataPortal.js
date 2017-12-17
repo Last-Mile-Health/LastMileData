@@ -12,7 +12,7 @@ $(document).ready(function(){
 
         var tabs = filteredSidebar[i].tabs;
         
-        // Loop BACKWARDS through tabs ot enable splicing
+        // Loop BACKWARDS through tabs to enable splicing
         for (var j=tabs.length-1; j>=0; j--) {
             
             var spliceTab = true;
