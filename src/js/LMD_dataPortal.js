@@ -49,20 +49,21 @@ var LMD_dataPortal = (function(){
     //          The single parameter comes from LMD_REST.php/instanceValues
     //          For chartData, keys are instance IDs and values are objects containing two properties, a MySQL-formatted date and the indicator value
     //          For tableData, keys are "instID-monthyear" hashes (e.g. "i_33_m_2015-4", for instID "33" on April, 2015) and values are indicator values
-    function setData(dataObject) {
-        for (var key in dataObject) {
+    function setData(instance_values) {
+        for (var key in instance_values) {
             
-            var d = dataObject[key];
+            var d = instance_values[key];
             
             // Set chart data
-            chartData[d.instID] = chartData[d.instID] || [];
-            chartData[d.instID].push({
+            var inst_id = d.ind_id + "-" + d.territory_id + "-" + d.territory_type + "-" + d.period_id;
+            chartData[inst_id] = chartData[inst_id] || [];
+            chartData[inst_id].push({
                 date: d.year + "-" + LMD_utilities.twoDigits(d.month) + "-01",
-                value: Number(d.instValue)
+                value: Number(d.value)
             });
             
             // Set table data
-            tableData["i_" + d.instID + "_m_" + d.year + "-" + d.month] = d.instValue;
+            tableData["i_" + inst_id + "_m_" + d.year + "-" + d.month] = d.value;
             
         }
     }
@@ -71,11 +72,11 @@ var LMD_dataPortal = (function(){
     // PUBLIC: Stores indicator instance metadata (in "instanceMetadata" object)
     //          Input object comes from LMD_REST.php/indicatorInstances
     //          Keys are instance IDs, values are objects containing metadata for a given indicator instance
-    function setMetadata(dataObject) {
-        for (var key in dataObject) {
-            var instID = dataObject[key].instID;
-            var metadata = dataObject[key];
-            instanceMetadata[instID] = metadata;
+    function setMetadata(indicatorInstances) {
+        for (var key in indicatorInstances) {
+            var inst_id = indicatorInstances[key].inst_id;
+            var metadata = indicatorInstances[key];
+            instanceMetadata[inst_id] = metadata;
         }
     }
     
@@ -89,19 +90,19 @@ var LMD_dataPortal = (function(){
     // PRIVATE: Configures the "report model" (i.e. a single report within the data portal)
     //          Input object comes from LMD_REST.php/reportobjects
     //          Must be called AFTER setData and setMetadata
-    function configureReportModel(dataObject) {
+    function configureReportModel(reportObjects) {
 
         // 1. Transform indicator strings into arrays
-        for (var key in dataObject) {
-            dataObject[key].instIDs = dataObject[key].instIDs.split(",");
-            dataObject[key].chart_instIDs = dataObject[key].chart_instIDs.split(",");
-            dataObject[key].chart_instIDs_secondary = dataObject[key].chart_instIDs_secondary ? dataObject[key].chart_instIDs_secondary.split(",") : null;
-            dataObject[key].instIDs_shortNames = dataObject[key].instIDs_shortNames ? dataObject[key].instIDs_shortNames.split(",") : null;
-            dataObject[key].chart_instIDs_shortNames = dataObject[key].chart_instIDs_shortNames ? dataObject[key].chart_instIDs_shortNames.split(",") : null;
+        for (var key in reportObjects) {
+            reportObjects[key].instances_table = reportObjects[key].instances_table.split(",");
+            reportObjects[key].instances_chart = reportObjects[key].instances_chart.split(",");
+            reportObjects[key].instances_chart_secondary = reportObjects[key].instances_chart_secondary ? reportObjects[key].instances_chart_secondary.split(",") : null;
+            reportObjects[key].labels_table = reportObjects[key].labels_table ? reportObjects[key].labels_table.split(",") : null;
+            reportObjects[key].labels_chart = reportObjects[key].labels_chart ? reportObjects[key].labels_chart.split(",") : null;
         }
 
         // 2. Sort by "displayOrder"
-        dataObject.sort(function(a,b){
+        reportObjects.sort(function(a,b){
             if (Number(a.displayOrder) < Number(b.displayOrder)) {
                 return -1;
             }
@@ -116,41 +117,41 @@ var LMD_dataPortal = (function(){
         csvData = [];
 
         // 4. Merge in data
-        for (var key in dataObject) {
+        for (var key in reportObjects) {
 
-            var d = dataObject[key];
+            var ro = reportObjects[key];
 
             // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators (for data tables; used by knockout)
-            d.multiple = d.instIDs.length > 1 ? true : false;
+            ro.multiple = ro.instances_table.length > 1 ? true : false;
 
             // Add "multiple" property, which denotes whether this report object contains a single indicator or multiple indicators (for charts)
-            d.chartMultiple = d.chart_instIDs.length > 1 ? true : false;
+            ro.chartMultiple = ro.instances_chart.length > 1 ? true : false;
 
             // Add "chart_div" property
-            d.chart_div = "chart_" + d.id;
+            ro.chart_div = "chart_" + ro.id;
 
             // Add chart_points array (for Dimple charts)
-            d.chart_points = [];
+            ro.chart_points = [];
 
             // If roMetadata fields are not specified, get them from instanceMetadata (only practical for report objects with a single indicator instance)
             // !!!!! eventually phase this out ?????
-            var instID = d.instIDs[0];
-            var metadata = instanceMetadata[instID];
-            if ( d.ro_name == null || d.ro_name == '' ) {
-                d.ro_name = metadata.indName;
+            var inst_id = ro.instances_table[0];
+            var metadata = instanceMetadata[inst_id];
+            if ( ro.ro_name == null || ro.ro_name == '' ) {
+                ro.ro_name = metadata.indName;
             }
-            if ( d.indSource == null || d.indSource == '' ) {
-                d.indSource = metadata.indSource;
+            if ( ro.indSource == null || ro.indSource == '' ) {
+                ro.indSource = metadata.indSource;
             }
-            if ( d.ro_description == null || d.ro_description == '' ) { // !!!!! eventually phase this out !!!!!
-                d.ro_description = metadata.indDefinition;
+            if ( ro.ro_description == null || ro.ro_description == '' ) { // !!!!! eventually phase this out !!!!!
+                ro.ro_description = metadata.indDefinition;
             }
             
-            // If d.instIDs_shortNames exists (from report object), overwrite instanceMetadata
-            if ( d.instIDs_shortNames != null) {
-                for (var key2 in d.instIDs_shortNames) {
-                    var instID2 = d.instIDs[key2];
-                    instanceMetadata[instID2].instShortName = d.instIDs_shortNames[key2];
+            // If ro.labels_table exists (from report object), overwrite instanceMetadata
+            if ( ro.labels_table != null) {
+                for (var key2 in ro.labels_table) {
+                    var inst_id2 = ro.instances_table[key2];
+                    instanceMetadata[inst_id2].label_table = ro.labels_table[key2];
                 }
             }
             
@@ -158,18 +159,18 @@ var LMD_dataPortal = (function(){
             var dates = [];
             
             // Populate chart_points array (for Dimple charts)
-            for (var key2 in d.chart_instIDs) {
+            for (var key2 in ro.instances_chart) {
 
-                var instID = d.chart_instIDs[key2];
-                var dataArray = chartData[instID];
-                var instID_secondary = d.chart_instIDs_secondary ? d.chart_instIDs_secondary[key2] : null;
-                var dataArray_secondary = d.chart_instIDs_secondary ? chartData[instID_secondary] : null; // !!!!! this is undefined if d.chart_instIDs_secondary is set but there is no data; this may causes errors down the road !!!!!
+                var inst_id = ro.instances_chart[key2];
+                var dataArray = chartData[inst_id];
+                var instID_secondary = ro.instances_chart_secondary ? ro.instances_chart_secondary[key2] : null;
+                var dataArray_secondary = ro.instances_chart_secondary ? chartData[instances_chart_secondary] : null; // !!!!! this is undefined if ro.instances_chart_secondary is set but there is no data; this may causes errors down the road !!!!!
                 
                 if (dataArray) {
                     for(var i=0; i<dataArray.length; i++) {
                         
-                        // Get instShortName from report object if it exists; otherwise, get it from instanceMetadata
-                        var instShortName = d.chart_instIDs_shortNames ? d.chart_instIDs_shortNames[key2] : instanceMetadata[instID].instShortName;
+                        // Get label_table from report object if it exists; otherwise, get it from instanceMetadata
+                        var label_table = ro.labels_chart ? ro.labels_chart[key2] : instanceMetadata[inst_id].label_table;
                         var value_secondary = null;
 
                         // Get secondary value (if it exists)
@@ -187,21 +188,21 @@ var LMD_dataPortal = (function(){
                         var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < 15 ? 1 : 0 ),'months');
                         var latestAllowed_totalMonth = (12*latestAllowed_date.year())+(latestAllowed_date.month()+1);
                         
-                        if (d.chart_only_display_last_month == 1 && data_totalMonth === latestAllowed_totalMonth ||
-                            d.chart_only_display_last_month == 0 && data_totalMonth <=  latestAllowed_totalMonth) {
+                        if (ro.chart_only_display_last_month == 1 && data_totalMonth === latestAllowed_totalMonth ||
+                            ro.chart_only_display_last_month == 0 && data_totalMonth <=  latestAllowed_totalMonth) {
                                 // Primary value
-                                d.chart_points.push({
+                                ro.chart_points.push({
                                     Month: dataArray[i].date,
                                     Value: dataArray[i].value,
-                                    Cut: d.chartMultiple ? instShortName : '(none)',
+                                    Cut: ro.chartMultiple ? label_table : '(none)',
                                     Level: 'Actual' // !!!!! Level:'primary'; These need to be named dynamically !!!!!
                                 });
                                 // Secondary value
                                 if (value_secondary !== null) {
-                                    d.chart_points.push({
+                                    ro.chart_points.push({
                                         Month: dataArray[i].date,
                                         Value: value_secondary,
-                                        Cut: d.chartMultiple ? instShortName : '(none)',
+                                        Cut: ro.chartMultiple ? label_table : '(none)',
                                         Level: 'Expected' // !!!!! Level:'secondary'; These need to be named dynamically !!!!!
                                     });
                                 }
@@ -216,26 +217,26 @@ var LMD_dataPortal = (function(){
             }
             
             // Remove duplicates from "dates" array; sort
-            d.uniqueDates = [];
+            ro.uniqueDates = [];
             $.each(dates, function(i, el){
-                if($.inArray(el, d.uniqueDates) === -1) d.uniqueDates.push(el);
+                if($.inArray(el, ro.uniqueDates) === -1) ro.uniqueDates.push(el);
             });
-            d.uniqueDates.sort();
+            ro.uniqueDates.sort();
             
             // Populate "CSV" object (for "download data" function)
-            var csvFile = '"' + d.ro_name + '"' + '\n' + 'month,';
-            for (var key2 in d.chart_instIDs) {
-                // Get instShortNames from report object if they exist; otherwise, get it from instanceMetadata
-                csvFile += d.chart_instIDs_shortNames ? d.chart_instIDs_shortNames[key2] + ',' : instanceMetadata[d.chart_instIDs[key2]].instShortName + ',';
+            var csvFile = '"' + ro.ro_name + '"' + '\n' + 'month,';
+            for (var key2 in ro.instances_chart) {
+                // Get label_tables from report object if they exist; otherwise, get it from instanceMetadata
+                csvFile += ro.labels_chart ? ro.labels_chart[key2] + ',' : instanceMetadata[ro.instances_chart[key2]].label_table + ',';
             }
             csvFile = csvFile.slice(0, -1);
             csvFile += '\n';
-            for (var key2 in d.uniqueDates) {
-                csvFile += d.uniqueDates[key2] + ',';
-                for (var key3 in d.chart_instIDs) {
-                    var yearMonth = d.uniqueDates[key2].slice(0,-3);
+            for (var key2 in ro.uniqueDates) {
+                csvFile += ro.uniqueDates[key2] + ',';
+                for (var key3 in ro.instances_chart) {
+                    var yearMonth = ro.uniqueDates[key2].slice(0,-3);
                     yearMonth = yearMonth.charAt(5)==='1' ? yearMonth : yearMonth.slice(0, 5) + yearMonth.slice(6);
-                    csvFile += tableData['i_' + d.chart_instIDs[key3] + '_m_' + yearMonth] + ',';
+                    csvFile += tableData['i_' + ro.instances_chart[key3] + '_m_' + yearMonth] + ',';
                 }
                 csvFile = csvFile.slice(0, -1);
                 csvFile += '\n';
@@ -247,36 +248,37 @@ var LMD_dataPortal = (function(){
         }
         
         // 5. Return transformed report object
-        return dataObject;
+        return reportObjects;
         
     };
 
 
     // PRIVATE: Dynamically populate instance values into html tables
-    //          Table cells must have the class "instValue" and the following data attributes:
-    //               data-instid:        indicator ID
+    //          Table cells must have the class "inst_value" and the following data attributes:
+    //               data-inst_id:        indicator ID
     //               data-yearmonth:    A string of the form "yyyy-m" (e.g. "2015-4", for April, 2015)
     //               data-format:       A number format, as specified in LMD_utilities.format_number()
     function populateTableData() {
-        $(".instValue").each(function(){
-            var instID = $(this).attr("data-instid");
+        $(".inst_value").each(function(){
+            var inst_id = $(this).attr("data-inst_id");
             var yearmonth = $(this).attr("data-yearmonth");
-            var format = instanceMetadata[instID].indFormat || 'integer';
-            var instValue = tableData["i_" + instID + "_m_" + yearmonth];
-            instValue = LMD_utilities.format_number(instValue, format);
-            $(this).html(instValue);
+            var format = instanceMetadata[inst_id].indFormat || 'integer'; // !!!!! DEV !!!!!
+            var inst_value = tableData["i_" + inst_id + "_m_" + yearmonth];
+            inst_value = LMD_utilities.format_number(inst_value, format); // !!!!! DEV !!!!!
+            $(this).html(inst_value);
         });
     }
 
 
     // PRIVATE: Dynamically populate indicator short names into html tables
-    //          Table cells must have the class "instShortName" and the "data-indid" data attribute:
+    //          Table cells must have the class "label_table" and the "data-indid" data attribute:
     //          !!!!! Potentially modify this in the future to populate other metadata !!!!!
     function populateTableMetadata() {
-        $(".instShortName").each(function(){
-            var instID = $(this).attr("data-instid");
-            var shortName = instanceMetadata[instID].instShortName;
-            $(this).html(shortName);
+        $(".label_table").each(function(){
+            var inst_id = $(this).attr("data-inst_id");
+            console.log(instanceMetadata[inst_id]);
+            var shortName = instanceMetadata[inst_id].label_table; // !!!!! DEV !!!!!
+            $(this).html(shortName); // !!!!! DEV !!!!!
         });
     }
 
@@ -337,22 +339,22 @@ var LMD_dataPortal = (function(){
         for(var key in reportObjects) {
             if (key >= 0) {
 
-                var d = reportObjects[key];
+                var ro = reportObjects[key];
 
-                if (d.chart_points.length > 0) {
+                if (ro.chart_points.length > 0) {
                     LMD_dimpleHelper.createChart({
-                        type:d.chart_type,
-                        targetDiv: d.chart_div,
-                        data: d.chart_points,
-                        chart_only_display_last_month: d.chart_only_display_last_month,
-                        colors: d.chart_colors || "default",
-                        timeInterval: Math.ceil(d.uniqueDates.length/24),
-                        size: { x:Number(d.chart_size_x), y:Number(d.chart_size_y) },
+                        type:ro.chart_type,
+                        targetDiv: ro.chart_div,
+                        data: ro.chart_points,
+                        chart_only_display_last_month: ro.chart_only_display_last_month,
+                        colors: ro.chart_colors || "default",
+                        timeInterval: Math.ceil(ro.uniqueDates.length/24),
+                        size: { x:Number(ro.chart_size_x), y:Number(ro.chart_size_y) },
                         xyVars: { x:"Month", y:"Value" }, // !!!!! This is currently unnecessary !!!!!
-                        cut: "Cut",
-                        legend: d.chartMultiple ? "right" : "",
-                        tickFormat: d.chart_tickFormat,
-                        axisValues: { min:d.chart_yAxis_min, max:d.chart_yAxis_max }
+                        cut: "Cut", // !!!!! This is currently unnecessary !!!!!
+                        legend: ro.chartMultiple ? "right" : "",
+                        tickFormat: ro.chart_tickFormat,
+                        axisValues: { min:ro.chart_yAxis_min, max:ro.chart_yAxis_max }
                     });
                 }
             }
@@ -370,13 +372,13 @@ var LMD_dataPortal = (function(){
 
     // PUBLIC:  Bootstrap the page
     //          This function is called from frag_indicatorReport.php
-    function bootstrap(instanceValues, indicatorInstances, reportObjects) {
+    function bootstrap(instance_values, indicatorInstances, reportObjects) {
         
         // Clear data
         clearData();
         
         // Set data and metadata
-        setData(instanceValues);
+        setData(instance_values);
         setMetadata(indicatorInstances);
 
         if (reportObjects) {

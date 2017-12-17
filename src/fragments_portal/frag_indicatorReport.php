@@ -34,6 +34,14 @@
     $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/instanceValues/$instIDString";
     curl_setopt($ch,CURLOPT_URL,$url3);
     $json3 = curl_exec($ch);
+    
+    // !!!!! DEV !!!!!
+    $ind_id_string = "28";
+    $territory_id_string = "14,16,17,18,26";
+    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/test_values/$ind_id_string/$territory_id_string";
+    curl_setopt($ch,CURLOPT_URL,$url4);
+    $json4 = curl_exec($ch);
+    // !!!!! DEV !!!!!
 
     // Echo report title
     $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
@@ -47,11 +55,16 @@
     echo "var reportObjects = $json1;". "\n\n";
     echo "var indicatorInstances = $json2;". "\n\n";
     echo "var instanceValues = $json3;". "\n\n";
+    // !!!!! DEV !!!!!
+    echo "var instance_values = $json4;". "\n\n";
+//    echo "console.log('indicatorInstances');";
+//    echo "console.log(indicatorInstances);";
+    // !!!!! DEV !!!!!
     
 ?>
 
     // Bootstrap the page
-    LMD_dataPortal.bootstrap(instanceValues, indicatorInstances, reportObjects);
+    LMD_dataPortal.bootstrap(instance_values, indicatorInstances, reportObjects);
 
 </script>
 
@@ -64,8 +77,8 @@
             <div class='col-md-5'>
                 <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + ro_name"></h3>
                 <p><b>Definition</b>: <span data-bind="text:ro_description"></span></p>
-                <p data-bind="if:indSource"><b>Data source</b>: <span data-bind="text: indSource"></span></p>
-                <p data-bind="if:ro_target"><b>Target</b>: <span data-bind="text: ro_target"></span></p>
+                <p data-bind="if:indSource"><b>Data source</b>: <span data-bind="text:indSource"></span></p>
+                <p data-bind="if:ro_target"><b>Target</b>: <span data-bind="text:ro_target"></span></p>
                 <table class='ptg_data'>
                     
                     <tr>
@@ -79,16 +92,16 @@
                         <!-- /ko -->
                     </tr>
                     
-                    <!-- ko foreach:instIDs -->
+                    <!-- ko foreach:instances_table -->
                     <tr>
-                        <!-- Indicator shortnames will be dynamically placed here -->
+                        <!-- Table labels will be dynamically placed here -->
                         <!-- ko if:ro.multiple -->
-                        <td class="instShortName" data-bind="attr: {'data-instid':$data}"></td>
+                        <td class="label_table" data-bind="attr: {'data-inst_id':$data}"></td>
                         <!-- /ko -->
                         
                         <!-- Indicator values will be dynamically placed here -->
                         <!-- ko foreach: $parents[1].lastFourMonths -->
-                        <td class="instValue" data-bind="attr: {'data-yearmonth':yearMonth, 'data-instid':$parentContext.$data}"></td>
+                        <td class="inst_value" data-bind="attr: {'data-yearmonth':yearMonth, 'data-inst_id':$parentContext.$data}"></td>
                         <!-- /ko -->
                     </tr>
                     <!-- /ko -->

@@ -42,7 +42,7 @@
     10      LMD_REST.php/geoCuts                            lastmile_dataportal.tbl_geocuts
     11      LMD_REST.php/indCategories                      lastmile_dataportal.view_categories
     12      LMD_REST.php/max                                various
-    13      LMD_REST.php/test_values                        !!!!! test_values !!!!!
+    13      LMD_REST.php/test_values                        !!!!! DEV test_values; replaces 1b !!!!!
 
 */
 
@@ -303,7 +303,7 @@ $app->get('/max/:schema/:table/:idFieldName',function($schema,$table,$idFieldNam
 });
 
 
-// Route 13: !!!!! TEST Indicator values !!!!!
+// Route 13: !!!!! DEV Indicator values !!!!!
 $app->get('/test_values/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
     LMD_get($ind_id, "ind_id", "lastmile_dataportal.test_values", "ind_id, month, year, territory_id, territory_type, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
 });
