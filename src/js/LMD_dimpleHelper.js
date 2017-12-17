@@ -33,12 +33,11 @@ var LMD_dimpleHelper = (function(){
         
         // Assign specific colors to specific "cuts" (defined by the "instShortName" property)
         // !!!!! Eventually, this should be set through some sort of interface !!!!!
-        var myArr = [{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Bassa":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4BACC6"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"},{"Monrovia":"#202020"}];
+        var myArr = [{"Actual":"#9BBB59"},{"Expected":"#F79646"},{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Bassa":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4BACC6"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"},{"Monrovia":"#202020"}];
         for (el in myArr) {
             if (params.type!=="horizontal bar") {       // !!!!! Hack !!!!!
                 var cut = Object.keys(myArr[el])[0];
                 var color = myArr[el][cut];
-                myChart.assignColor(cut,color);
             }                                           // !!!!! Hack !!!!!
         }
 
