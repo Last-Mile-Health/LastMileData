@@ -42,6 +42,10 @@ $(document).ready(function() {
     $de_date.attr('readonly','readonly');
     $de_init.val(sessionStorage.username);
     $de_init.attr('readonly','readonly');
+    $qa_init = $("input[name=qa_init]");
+    $qa_date = $("input[name=qa_date]");
+    $qa_date.attr('readonly','readonly');
+    $qa_init.attr('readonly','readonly');
     
     // Set timestamps, data source, UUID
     $("#meBox").append("<input name='meta_de_time_start' class='stored' type='hidden'>");
@@ -83,10 +87,10 @@ $(document).ready(function() {
                 }
             }
             
-            // Set qa_date; set to readonly
-            $qa_date = $("input[name=qa_date]");
+            // Set qa_init, qa_date; set de_init to readonly
+            $qa_init.val(sessionStorage.username);
             $qa_date.val(LMD_utilities.mysql_date());
-            $qa_date.attr('readonly','readonly');
+            $de_init.attr('readonly','readonly');
             
         });
         
