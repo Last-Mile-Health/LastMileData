@@ -82,7 +82,7 @@ $(document).ready(function() {
                         $("input[name=" + key + "][value='" + currentRecord[key] + "']").prop('checked', true);
                     // Set text inputs
                     } else {
-                        $("input[name=" + key + "]").val(currentRecord[key]);
+                        $("input[name=" + key + "],select[name=" + key + "]").val(currentRecord[key]);
                     }
                 }
             }
