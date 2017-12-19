@@ -75,7 +75,8 @@ $(document).ready(function() {
         }
 
         // Create select element
-        myNewInput = "<select class='dynamicSelect " + $(this).attr('class') + "' name='" + $(this).attr('name') + "' style='" + $(this).attr('name') + "'>";
+        var required = $(this).attr('data-lmd-valid-required') === undefined ? '' : 'data-lmd-valid-required';
+        myNewInput = "<select class='dynamicSelect " + $(this).attr('class') + "' name='" + $(this).attr('name') + "' " + required + ">";
         myNewInput += "<option value=''></option>";
         for (var i=0; i<myList.length; i++) {
             myNewInput += "<option value='" + myList[i] + "'>" + myList[i] + "</option>";

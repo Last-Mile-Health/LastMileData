@@ -124,7 +124,7 @@ $(document).ready(function() {
             
             // Highlight invalid fields in red
             for(var i=0; i<vResult.errorFields.length; i++) {
-                $('input[name=' + vResult.errorFields[i] + "]").css('background-color','#FFCCCC');
+                $('input[name=' + vResult.errorFields[i] + '],select[name=' + vResult.errorFields[i] + ']').css('background-color','#FFCCCC');
             }
             
             // Scroll to top; show validationBox
