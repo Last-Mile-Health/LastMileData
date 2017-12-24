@@ -40,6 +40,7 @@
      9f     LMD_REST.php/gis_county_data                    lastmile_dataportal.tbl_leaflet_values
      9g     LMD_REST.php/gis_data_availability              lastmile_dataportal.view_leaflet_availability_2
     10      LMD_REST.php/geoCuts                            lastmile_dataportal.tbl_geocuts
+    10b     LMD_REST.php/territories                        lastmile_dataportal.view_territories
     11      LMD_REST.php/indCategories                      lastmile_dataportal.view_categories
     12      LMD_REST.php/max                                various
     13      LMD_REST.php/test_values                        !!!!! DEV test_values; replaces 1b !!!!!
@@ -102,17 +103,21 @@ $app->delete('/instanceValues/:id', function($id) {
 });
 
 
+// !!!!! phase out !!!!!
 // Route 1c: Indicator instances (lastmile_dataportal.view_instances)
 $app->get('/indicatorInstances/:includeArchived/(:id)',function($includeArchived,$id='all') {
     LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1");
 });
+// !!!!! phase out !!!!!
 
 
+// !!!!! phase out !!!!!
 // Route 1d: Indicator/instance metadata (filtered by category and cut) (lastmile_dataportal.view_instances)
 $app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:geoName)',function($includeArchived,$category,$geoName='all') {
     $geo = $geoName=='all' ? 1 : "geoName = '$geoName'";
     LMD_get('all', "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1" . " AND indCategory='$category' AND $geo");
 });
+// !!!!! phase out !!!!!
 
 
 // Route 1e: Indicator/instance values (filtered by category, cut, and date range) (lastmile_dataportal.view_values)
@@ -291,6 +296,12 @@ $app->delete('/geoCuts/:id', function($id) {
 });
 
 
+// Route 10b: Territories (lastmile_dataportal.view_territories)
+$app->get('/territories/(:id)',function($id='all') {
+    LMD_get($id, "territory_id_unique", "lastmile_dataportal.view_territories", "*", 1);
+});
+
+
 // Route 11: Indicator/instance categories (lastmile_dataportal.view_categories)
 $app->get('/indCategories/(:id)',function($id='all') {
     LMD_get($id, "", "lastmile_dataportal.view_categories", "*", 1);
@@ -305,7 +316,8 @@ $app->get('/max/:schema/:table/:idFieldName',function($schema,$table,$idFieldNam
 
 // Route 13: !!!!! DEV Indicator values !!!!!
 $app->get('/test_values/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
-    LMD_get($ind_id, "ind_id", "lastmile_dataportal.test_values", "ind_id, month, year, territory_id, territory_type, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
+    $territory_id = "'" . str_replace(",","','",$territory_id) . "'";
+    LMD_get($ind_id, "ind_id", "lastmile_dataportal.test_values", "ind_id, month, year, territory_id, territory_type, CONCAT(territory_type,'_',territory_id) AS territory_id_unique, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "CONCAT(territory_type,'_',territory_id) IN ($territory_id)"));
 });
 //$app->post('/instanceValues/', function() {
 //    LMD_post("lastmile_dataportal.tbl_indicators");

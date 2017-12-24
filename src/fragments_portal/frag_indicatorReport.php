@@ -17,54 +17,84 @@
     if (substr($json1,0,1)!=="[") {
         $json1 = "[" . $json1 . "]";
     }
-    $instIDString = "";
+    $indicatorString = "";
+    $territoryString = "";
+    $indicatorArray = [];
+    $territoryArray = [];
     foreach (json_decode($json1) as $value) {
-        $instIDString .= $value->instIDs. ",";
-        $instIDString .= $value->chart_instIDs. ",";
-        $instIDString .= $value->chart_instIDs_secondary. ",";
+        
+        // Create array of indicators
+        $indicators = explode(",",$value->indicators_table);
+        $indicators = array_merge($indicators,explode(",",$value->indicators_chart));
+        $indicators = array_merge($indicators,explode(",",$value->indicators_chart_secondary));
+        foreach ($indicators as $value2) {
+            if (!in_array($value2,$indicatorArray) && $value2!=="") {
+                array_push($indicatorArray,$value2);
+            }
+        }
+        
+        // Create array of territories
+        $territories = explode(",",$value->territories_table);
+        $territories = array_merge($territories,explode(",",$value->territories_chart));
+        $territories = array_merge($territories,explode(",",$value->territories_chart_secondary));
+        foreach ($territories as $value2) {
+            if (!in_array($value2,$territoryArray) && $value2!=="") {
+                array_push($territoryArray,$value2);
+            }
+        }
+        
     }
-    $instIDString = trim($instIDString, ",");
-
-    // Echo JSON (indicator instance metadata)
-    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/1/$instIDString";
+    
+    // Parse indicator string
+    $indicatorString = "";
+    foreach ($indicatorArray as $value) {
+        $indicatorString .= $value . ",";
+    }
+    $indicatorString = trim($indicatorString, ",");
+    
+    // Parse territory string
+    $territoryString = "";
+    foreach ($territoryArray as $value) {
+        $territoryString .= $value . ",";
+    }
+    $territoryString = trim($territoryString, ",");
+    
+    // Echo JSON (indicator metadata)
+    $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicators/1/$indicatorString";
     curl_setopt($ch,CURLOPT_URL,$url2);
     $json2 = curl_exec($ch);
 
-    // Echo JSON (indicator instance data)
-    $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/instanceValues/$instIDString";
+    // Echo JSON (indicator values)
+    $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/test_values/$indicatorString/$territoryString";
     curl_setopt($ch,CURLOPT_URL,$url3);
     $json3 = curl_exec($ch);
-    
-    // !!!!! DEV !!!!!
-    $ind_id_string = "28";
-    $territory_id_string = "14,16,17,18,26";
-    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/test_values/$ind_id_string/$territory_id_string";
+//require_once("../../php/includes/PhpConsole.phar");
+//$handler = PhpConsole\Handler::getInstance();
+//$handler->start();
+//$handler->debug($url4);
+
+    // Echo JSON (indicator values)
+    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/territories/$territoryString";
     curl_setopt($ch,CURLOPT_URL,$url4);
     $json4 = curl_exec($ch);
-    // !!!!! DEV !!!!!
-
+    
     // Echo report title
-    $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
-    curl_setopt($ch,CURLOPT_URL,$url4);
+    $url5 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
+    curl_setopt($ch,CURLOPT_URL,$url5);
     $reportName = JSON_decode(curl_exec($ch))->reportName;
     $headerNote = JSON_decode(curl_exec($ch))->headerNote;
 
-    // Close CURL session and echo JSON
-    // JSON consists of 3 javascript objects: data_indicators, data_rawValues, [model_report]
+    // Close CURL session and echo JSON (to be used by LMD_dataPortal.js)
     curl_close($ch);
-    echo "var reportObjects = $json1;". "\n\n";
-    echo "var indicatorInstances = $json2;". "\n\n";
-    echo "var instanceValues = $json3;". "\n\n";
-    // !!!!! DEV !!!!!
-    echo "var instance_values = $json4;". "\n\n";
-//    echo "console.log('indicatorInstances');";
-//    echo "console.log(indicatorInstances);";
-    // !!!!! DEV !!!!!
+    echo "var arg_reportObjects = $json1;". "\n\n";
+    echo "var arg_indicatorMetadata = $json2;". "\n\n";
+    echo "var arg_indicatorValues = $json3;". "\n\n";
+    echo "var arg_territoryNames = $json4;". "\n\n";
     
 ?>
 
     // Bootstrap the page
-    LMD_dataPortal.bootstrap(instance_values, indicatorInstances, reportObjects);
+    LMD_dataPortal.bootstrap(arg_reportObjects, arg_indicatorMetadata, arg_indicatorValues, arg_territoryNames);
 
 </script>
 
@@ -96,12 +126,12 @@
                     <tr>
                         <!-- Table labels will be dynamically placed here -->
                         <!-- ko if:ro.multiple -->
-                        <td class="label_table" data-bind="attr: {'data-inst_id':$data}"></td>
+                        <td class="label_table" data-bind="text:label, attr: {'data-inst_id':$data.inst_id}"></td>
                         <!-- /ko -->
                         
                         <!-- Indicator values will be dynamically placed here -->
                         <!-- ko foreach: $parents[1].lastFourMonths -->
-                        <td class="inst_value" data-bind="attr: {'data-yearmonth':yearMonth, 'data-inst_id':$parentContext.$data}"></td>
+                        <td class="value" data-bind="attr: {'data-yearmonth':yearMonth, 'data-inst_id':$parentContext.$data.inst_id}"></td>
                         <!-- /ko -->
                     </tr>
                     <!-- /ko -->

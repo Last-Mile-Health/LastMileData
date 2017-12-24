@@ -31,7 +31,7 @@ var LMD_dimpleHelper = (function(){
             }
         }
         
-        // Assign specific colors to specific "cuts" (defined by the "instShortName" property)
+        // Assign specific colors to specific "cuts" (defined by chart labels)
         // !!!!! Eventually, this should be set through some sort of interface !!!!!
         var myArr = [{"Actual":"#9BBB59"},{"Expected":"#F79646"},{"Konobo":"#9BBB59"},{"Gboe-Ploe":"#C0504D"},{"Grand Bassa":"#C0504D"},{"Grand Gedeh":"#F79646"},{"Rivercess":"#4BACC6"},{"Rivercess c1":"#4BACC6"},{"Rivercess c2":"#8064A2"},{"Monrovia":"#202020"}];
         for (el in myArr) {
