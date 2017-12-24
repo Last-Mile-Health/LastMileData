@@ -38,6 +38,7 @@ var LMD_dimpleHelper = (function(){
             if (params.type!=="horizontal bar") {       // !!!!! Hack !!!!!
                 var cut = Object.keys(myArr[el])[0];
                 var color = myArr[el][cut];
+                myChart.assignColor(cut,color);
             }                                           // !!!!! Hack !!!!!
         }
 
