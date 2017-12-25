@@ -88,8 +88,8 @@ $app->delete('/indicators/:id', function($id) {
 
 // Route 1b: Indicator values (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
-// Route 13: !!!!! still need to build out other routes !!!!!
-$app->get('/tbl_values/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
+// !!!!! still need to build out other routes !!!!!
+$app->get('/indicatorValues/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
     $territory_id = "'" . str_replace(",","','",$territory_id) . "'";
     LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, territory_type, CONCAT(territory_type,'_',territory_id) AS territory_id_unique, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "CONCAT(territory_type,'_',territory_id) IN ($territory_id)"));
 });

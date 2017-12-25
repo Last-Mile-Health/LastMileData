@@ -135,8 +135,6 @@ var LMD_dataPortal = (function() {
                     ro.instances_table.push({inst_id: ro.indicators_table[key2] + "-" + ro.territories_table[key3] + "-" + ro.period_id});
                 }
             }
-            console.log('ro.instances_table')
-            console.log(ro.instances_table)
             
             // Generate "instance IDs" array (charts)
             ro.instances_chart = [];
