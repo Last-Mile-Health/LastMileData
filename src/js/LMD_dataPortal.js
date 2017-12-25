@@ -14,7 +14,7 @@ var LMD_dataPortal = (function() {
     var chartData = {};             // Used for Dimple charts
     var tableData = {};             // Used for data tables
     var csvData = [];               // Used for CSV-formatted data (for downloading)
-    var territoryNames = {};        // Holds list of territories (key = territory_id_unique)
+    var territoryNames = {};        // Holds list of territories (key = territory_id)
     var indicatorMetadata = {};     // Holds indicator metadata (key = ind_id)
     var reportObjects = [];         // Main object that holds report model
     
@@ -57,7 +57,7 @@ var LMD_dataPortal = (function() {
             var d = indicatorValues[key];
             
             // Set chart data
-            var inst_id = d.ind_id + "-" + d.territory_type + "_" + d.territory_id + "-" + d.period_id;
+            var inst_id = d.ind_id + "-" + d.territory_id + "-" + d.period_id;
             chartData[inst_id] = chartData[inst_id] || [];
             chartData[inst_id].push({
                 date: d.year + "-" + LMD_utilities.twoDigits(d.month) + "-01",
@@ -71,7 +71,7 @@ var LMD_dataPortal = (function() {
     }
 
 
-    // PUBLIC: Object storing territoryNames (associated with IDs, territory_id_unique)
+    // PUBLIC: Object storing territoryNames (associated with territory_id)
     //          Input object comes from LMD_REST.php/indicators
     function setTerritoryNames(territoryNames) {
         
@@ -79,7 +79,7 @@ var LMD_dataPortal = (function() {
         
         for (var key in territoryNames) {
             var t = territoryNames[key];
-            territoryNames_return[t.territory_id_unique] = t.territory_name;
+            territoryNames_return[t.territory_id] = t.territory_name;
         }
         
         return territoryNames_return;
@@ -206,8 +206,8 @@ var LMD_dataPortal = (function() {
                     ro.instances_table[key2].label = ro.labels_table[key2];
                 } else {
                     // If ro.labels_table is not set, get labels from territory IDs
-                    var territory_id_unique = ro.instances_table[key2].inst_id.split('-')[1];
-                    ro.instances_table[key2].label = territoryNames[territory_id_unique];
+                    var territory_id = ro.instances_table[key2].inst_id.split('-')[1];
+                    ro.instances_table[key2].label = territoryNames[territory_id];
                 }
             }
             
@@ -218,8 +218,8 @@ var LMD_dataPortal = (function() {
                     ro.instances_chart[key2].label = ro.labels_chart[key2];
                 } else {
                     // If ro.labels_chart is not set, get labels from territory IDs
-                    var territory_id_unique = ro.instances_chart[key2].inst_id.split('-')[1];
-                    ro.instances_chart[key2].label = territoryNames[territory_id_unique];
+                    var territory_id = ro.instances_chart[key2].inst_id.split('-')[1];
+                    ro.instances_chart[key2].label = territoryNames[territory_id];
                 }
             }
             

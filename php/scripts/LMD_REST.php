@@ -90,8 +90,8 @@ $app->delete('/indicators/:id', function($id) {
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 // !!!!! still need to build out other routes !!!!!
 $app->get('/indicatorValues/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
-    $territory_id = "'" . str_replace(",","','",$territory_id) . "'";
-    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, territory_type, CONCAT(territory_type,'_',territory_id) AS territory_id_unique, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "CONCAT(territory_type,'_',territory_id) IN ($territory_id)"));
+    $territory_id = $territory_id=='all' ? "all" : "'" . str_replace(",","','",$territory_id) . "'";
+    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
 });
 //$app->post('/instanceValues/', function() {
 //    LMD_post("lastmile_dataportal.tbl_indicators");
@@ -113,13 +113,15 @@ $app->get('/indicatorValues/:ind_id/(:territory_id)',function($ind_id,$territory
 
 
 // Route 1d: Indicator/instance metadata (filtered by category and cut) (lastmile_dataportal.view_instances)
-$app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:geoName)',function($includeArchived,$category,$territory_name='all') {
+// Used by "Edit Data" tool
+$app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:territory_name)',function($includeArchived,$category,$territory_name='all') {
     $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
     LMD_get('all', "instID", "lastmile_dataportal.view_instances_2", "*", $includeArchived==1 ? 1 : "archived <> 1 AND ind_category='$category' AND $territory");
 });
 
 
 // Route 1e: Indicator/instance values (filtered by category, cut, and date range) (lastmile_dataportal.view_values)
+// Used by "Edit Data" tool
 // minDate and maxDate should be specified in terms of "# of months since year 0" (i.e. year*12 + month)
 $app->get('/indicatorValuesFiltered/:category/:territory_name/:minDate/:maxDate',function($category,$territory_name,$minDate,$maxDate) {
     $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
@@ -304,7 +306,7 @@ $app->delete('/geoCuts/:id', function($id) {
 
 // Route 10b: Territories (lastmile_dataportal.view_territories)
 $app->get('/territories/(:id)',function($id='all') {
-    LMD_get($id, "territory_id_unique", "lastmile_dataportal.view_territories", "*", 1);
+    LMD_get($id, "territory_id", "lastmile_dataportal.view_territories", "*", 1);
 });
 
 

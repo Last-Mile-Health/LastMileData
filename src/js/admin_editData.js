@@ -130,12 +130,11 @@ $(document).ready(function(){
         var queryString = "";
         for(var key in adminModel.changedData.changed) {
             var x = adminModel.changedData.changed[key];
-            var ind_id = x.inst_id.split('-')[0];
-            var territory_type = x.inst_id.split('-')[1].split('_')[0];
-            var territory_id = x.inst_id.split('-')[1].split('_')[1];
-            var period_id = x.inst_id.split('-')[2];
-            queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`territory_type`,`period_id`,`month`,`year`,`value`) VALUES ";
-            queryString += "('" + ind_id + "','" + territory_id + "','" + territory_type + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
+            var ind_id =        x.inst_id.split('-')[0];
+            var territory_id =  x.inst_id.split('-')[1];
+            var period_id =     x.inst_id.split('-')[2];
+            queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`period_id`,`month`,`year`,`value`) VALUES ";
+            queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
         }
 
         var myData = {'queryString': queryString, 'transaction': true} ;
