@@ -20,10 +20,10 @@
     ---     -----                                           -----
      0      LMD_REST.php/test_rest                          lastmile_dataportal.test_rest
      1a     LMD_REST.php/indicators                         lastmile_dataportal.tbl_indicators
-     1b     LMD_REST.php/instanceValues                     lastmile_dataportal.tbl_values
-     1c     LMD_REST.php/indicatorInstances                 lastmile_dataportal.view_instances
-     1d     LMD_REST.php/indicatorInstancesFiltered         lastmile_dataportal.view_instances
-     1e     LMD_REST.php/instanceValuesFiltered             lastmile_dataportal.view_values
+     1b     LMD_REST.php/indicatorValues                    lastmile_dataportal.tbl_values
+     1c     LMD_REST.php/indicatorInstances                 lastmile_dataportal.view_instances ?????
+     1d     LMD_REST.php/indicatorInstancesFiltered         lastmile_dataportal.view_instances_2
+     1e     LMD_REST.php/indicatorValuesFiltered            lastmile_dataportal.view_values
      2      LMD_REST.php/json_objects                       lastmile_dataportal.tbl_json_objects
      3      LMD_REST.php/reportObjects                      lastmile_dataportal.reportobjects
      4a     LMD_REST.php/markdown                           lastmile_dataportal.markdown
@@ -43,7 +43,6 @@
     10b     LMD_REST.php/territories                        lastmile_dataportal.view_territories
     11      LMD_REST.php/indCategories                      lastmile_dataportal.view_categories
     12      LMD_REST.php/max                                various
-    13      LMD_REST.php/test_values                        !!!!! DEV test_values; replaces 1b !!!!!
 
 */
 
@@ -89,42 +88,49 @@ $app->delete('/indicators/:id', function($id) {
 
 // Route 1b: Indicator values (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
-$app->get('/instanceValues/(:id)',function($id='all') {
-    LMD_get($id, "instID", "lastmile_dataportal.tbl_values", "*", "instValue <> ''");
+// Route 13: !!!!! still need to build out other routes !!!!!
+$app->get('/tbl_values/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
+    $territory_id = "'" . str_replace(",","','",$territory_id) . "'";
+    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, territory_type, CONCAT(territory_type,'_',territory_id) AS territory_id_unique, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "CONCAT(territory_type,'_',territory_id) IN ($territory_id)"));
 });
-$app->post('/instanceValues/', function() {
-    LMD_post("lastmile_dataportal.tbl_indicators");
-});
-$app->put('/instanceValues/:id', function($id) {
-    LMD_put($id, "id", "lastmile_dataportal.tbl_values");
-});
-$app->delete('/instanceValues/:id', function($id) {
-    LMD_delete($id, "id", "lastmile_dataportal.tbl_values");
-});
+//$app->post('/instanceValues/', function() {
+//    LMD_post("lastmile_dataportal.tbl_indicators");
+//});
+//$app->put('/instanceValues/:id', function($id) {
+//    LMD_put($id, "id", "lastmile_dataportal.tbl_values");
+//});
+//$app->delete('/instanceValues/:id', function($id) {
+//    LMD_delete($id, "id", "lastmile_dataportal.tbl_values");
+//});
 
 
 // !!!!! phase out !!!!!
 // Route 1c: Indicator instances (lastmile_dataportal.view_instances)
-$app->get('/indicatorInstances/:includeArchived/(:id)',function($includeArchived,$id='all') {
-    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1");
-});
+//$app->get('/indicatorInstances/:includeArchived/(:id)',function($includeArchived,$id='all') {
+//    LMD_get($id, "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1");
+//});
 // !!!!! phase out !!!!!
 
 
-// !!!!! phase out !!!!!
 // Route 1d: Indicator/instance metadata (filtered by category and cut) (lastmile_dataportal.view_instances)
-$app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:geoName)',function($includeArchived,$category,$geoName='all') {
-    $geo = $geoName=='all' ? 1 : "geoName = '$geoName'";
-    LMD_get('all', "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1" . " AND indCategory='$category' AND $geo");
+$app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:geoName)',function($includeArchived,$category,$territory_name='all') {
+    $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
+    LMD_get('all', "instID", "lastmile_dataportal.view_instances_2", "*", $includeArchived==1 ? 1 : "archived <> 1 AND ind_category='$category' AND $territory");
 });
-// !!!!! phase out !!!!!
 
 
 // Route 1e: Indicator/instance values (filtered by category, cut, and date range) (lastmile_dataportal.view_values)
 // minDate and maxDate should be specified in terms of "# of months since year 0" (i.e. year*12 + month)
-$app->get('/instanceValuesFiltered/:category/:geoName/:startDate/:endDate',function($category,$geoName,$minDate,$maxDate) {
+$app->get('/indicatorValuesFiltered/:category/:territory_name/:minDate/:maxDate',function($category,$territory_name,$minDate,$maxDate) {
+    $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
+    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
+});
+
+
+// Route 1f: Editable indicators (lastmile_dataportal.tbl_values)
+$app->get('/editable_indicators/(:category)/(:geoName)',function($category,$geoName='all') {
     $geo = $geoName=='all' ? 1 : "geoName = '$geoName'";
-    LMD_get('all', "instID", "lastmile_dataportal.view_values", "month, year, instID, instValue", "archived <> 1 AND indCategory='$category' AND $geo AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
+    LMD_get('all', "instID", "lastmile_dataportal.view_instances", "*", $includeArchived==1 ? 1 : "archived <> 1" . " AND indCategory='$category' AND $geo");
 });
 
 
@@ -312,22 +318,6 @@ $app->get('/indCategories/(:id)',function($id='all') {
 $app->get('/max/:schema/:table/:idFieldName',function($schema,$table,$idFieldName) {
     LMD_get('all', '', "$schema.$table", "MAX($idFieldName) AS max", 1);
 });
-
-
-// Route 13: !!!!! DEV Indicator values !!!!!
-$app->get('/test_values/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
-    $territory_id = "'" . str_replace(",","','",$territory_id) . "'";
-    LMD_get($ind_id, "ind_id", "lastmile_dataportal.test_values", "ind_id, month, year, territory_id, territory_type, CONCAT(territory_type,'_',territory_id) AS territory_id_unique, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "CONCAT(territory_type,'_',territory_id) IN ($territory_id)"));
-});
-//$app->post('/instanceValues/', function() {
-//    LMD_post("lastmile_dataportal.tbl_indicators");
-//});
-//$app->put('/instanceValues/:id', function($id) {
-//    LMD_put($id, "id", "lastmile_dataportal.tbl_values");
-//});
-//$app->delete('/instanceValues/:id', function($id) {
-//    LMD_delete($id, "id", "lastmile_dataportal.tbl_values");
-//});
 
 
 // Run Slim

@@ -63,20 +63,25 @@
     $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicators/1/$indicatorString";
     curl_setopt($ch,CURLOPT_URL,$url2);
     $json2 = curl_exec($ch);
+    if (substr($json2,0,1)!=="[") {
+        $json2 = "[" . $json2 . "]";
+    }
 
     // Echo JSON (indicator values)
-    $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/test_values/$indicatorString/$territoryString";
+    $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorValues/$indicatorString/$territoryString";
     curl_setopt($ch,CURLOPT_URL,$url3);
     $json3 = curl_exec($ch);
-//require_once("../../php/includes/PhpConsole.phar");
-//$handler = PhpConsole\Handler::getInstance();
-//$handler->start();
-//$handler->debug($url4);
+    if (substr($json3,0,1)!=="[") {
+        $json3 = "[" . $json3 . "]";
+    }
 
     // Echo JSON (indicator values)
     $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/territories/$territoryString";
     curl_setopt($ch,CURLOPT_URL,$url4);
     $json4 = curl_exec($ch);
+    if (substr($json4,0,1)!=="[") {
+        $json4 = "[" . $json4 . "]";
+    }
     
     // Echo report title
     $url5 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
@@ -124,7 +129,7 @@
                     
                     <!-- ko foreach:instances_table -->
                     <tr>
-                        <!-- Table labels will be dynamically placed here -->
+                        <!-- Table labels -->
                         <!-- ko if:ro.multiple -->
                         <td class="label_table" data-bind="text:label, attr: {'data-inst_id':$data.inst_id}"></td>
                         <!-- /ko -->

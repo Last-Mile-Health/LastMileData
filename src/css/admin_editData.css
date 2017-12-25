@@ -59,6 +59,6 @@ th:nth-child(3), td:nth-child(3) { min-width:120px; width:120px }
 th:nth-child(n+4), td:nth-child(n+4) { min-width:70px; width:70px }
 
 .btn {
-    width:200px;
+    width:175px;
     margin:2px;
 }

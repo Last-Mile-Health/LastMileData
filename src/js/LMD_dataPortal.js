@@ -135,6 +135,8 @@ var LMD_dataPortal = (function() {
                     ro.instances_table.push({inst_id: ro.indicators_table[key2] + "-" + ro.territories_table[key3] + "-" + ro.period_id});
                 }
             }
+            console.log('ro.instances_table')
+            console.log(ro.instances_table)
             
             // Generate "instance IDs" array (charts)
             ro.instances_chart = [];
@@ -231,9 +233,8 @@ var LMD_dataPortal = (function() {
 
                     var inst_id = ro.instances_chart[key2].inst_id;
                     var dataArray = chartData[inst_id];
-                    // !!!!! check everything related to secondary indicators !!!!!
-                    var inst_id_secondary = ro.indicators_chart_secondary ? ro.indicators_chart_secondary[key2] + "-" + ro.territories_chart_secondary[key3] + "-" + ro.period_id : null;
-                    var dataArray_secondary = ro.indicators_chart_secondary ? chartData[inst_id_secondary] : null; // !!!!! this is undefined if ro.instances_chart_secondary is set but there is no data; this may causes errors down the road !!!!!
+                    var inst_id_secondary = ro.instances_chart_secondary.length > 0 ? ro.instances_chart_secondary[key2].inst_id : null;
+                    var dataArray_secondary = ro.instances_chart_secondary.length > 0 ? chartData[inst_id_secondary] : null;
 
                     if (dataArray) {
                         for(var i=0; i<dataArray.length; i++) {
@@ -256,22 +257,24 @@ var LMD_dataPortal = (function() {
 
                             if (ro.chart_only_display_last_month == 1 && data_totalMonth === latestAllowed_totalMonth ||
                                 ro.chart_only_display_last_month == 0 && data_totalMonth <=  latestAllowed_totalMonth) {
-                                    // Primary value
+                            
+                                // Primary value
+                                ro.chart_points.push({
+                                    Month: dataArray[i].date,
+                                    Value: dataArray[i].value,
+                                    Cut: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
+                                    Level: 'Actual' // !!!!! Level:'primary'; These labels should be named dynamically !!!!!
+                                });
+
+                                // Secondary value
+                                if (value_secondary !== null) {
                                     ro.chart_points.push({
                                         Month: dataArray[i].date,
-                                        Value: dataArray[i].value,
+                                        Value: value_secondary,
                                         Cut: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
-                                        Level: 'Actual' // !!!!! Level:'primary'; These labels should be named dynamically !!!!!
+                                        Level: 'Expected' // !!!!! Level:'primary'; These labels should be named dynamically !!!!!
                                     });
-                                    // Secondary value
-                                    if (value_secondary !== null) {
-                                        ro.chart_points.push({
-                                            Month: dataArray[i].date,
-                                            Value: value_secondary,
-                                            Cut: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
-                                            Level: 'Expected' // !!!!! Level:'primary'; These labels should be named dynamically !!!!!
-                                        });
-                                    }
+                                }
 
                             }
 
