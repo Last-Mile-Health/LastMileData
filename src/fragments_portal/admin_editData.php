@@ -19,7 +19,7 @@
                 <tr>
                     <th class="pad darkBlue">Category</th>
                     <th class="pad darkBlue">Indicator name</th>
-                    <th class="pad darkBlue">Geo-cut</th>
+                    <th class="pad darkBlue">Territory</th>
                     <!-- ko foreach:monthList.months -->
                     <th class="pad darkBlue" data-bind="text:string"></th>
                     <!-- /ko -->
@@ -27,12 +27,12 @@
             </thead>
             <tbody id="scrollContent" data-bind="foreach:indicators">
                 <tr class="filterRow">
-                    <td class="pad filterCategory" data-bind="text:indCategory"></td>
-                    <td class="pad" data-bind="text:indName"></td>
-                    <td class="pad filterCut" data-bind="text:geoName"></td>
+                    <td class="pad filterCategory" data-bind="text:ind_category"></td>
+                    <td class="pad" data-bind="text:ind_name"></td>
+                    <td class="pad filterCut" data-bind="text:territory_name"></td>
                     <!-- ko foreach: $root.monthList.months -->
                     <td>
-                        <input class="admin_input" data-bind="event: {click:$root.actions.aiClick, change:$root.actions.aiChange}, attr: {'data-instid':$parent.instID, 'data-month':month, 'data-year':year}">
+                        <input class="admin_input" data-bind="event: {click:$root.actions.aiClick, change:$root.actions.aiChange}, attr: {'data-inst_id':$parent.inst_id, 'data-month':month, 'data-year':year}">
                     </td>
                     <!-- /ko -->
                 </tr>
@@ -52,7 +52,7 @@
 
         <button id="btn_showThree" class="btn btn-primary">Show 3 more months</button>
         <button id="btn_submit" class="btn btn-primary">Submit changes</button>
-        <!--<button id="btn_revert" class="btn btn-danger">Revert changes</button>--> <!-- !!!!! Create "Revert changes" button !!!!! -->
+        <button id="btn_addNewIndicator" class="btn btn-primary">Add a new indicator</button>
     </div>
 
 </div>

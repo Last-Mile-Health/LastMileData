@@ -50,14 +50,14 @@ $(document).ready(function(){
         monthList: monthList,
         selects: {
             category: ko.observableArray(),
-            cut: ko.observableArray(["Geo-cut..."])
+            cut: ko.observableArray(["Territory..."])
         },
         // "changedData" object holds changed values
         changedData: {
             changed: {},
-            add: function(month, year, instID, value){
+            add: function(month, year, inst_id, value){
                 // Add data point to "data" object
-                this.changed[month + '-' + year + '-' + instID] = {month: month, year: year, instID: instID, value: value};
+                this.changed[month + '-' + year + '-' + inst_id] = {month: month, year: year, inst_id: inst_id, value: value};
                 // When data is changed, switch "DataPortal_GLOBALS.anyChanges" variable and activate submit button
                 DataPortal_GLOBALS.anyChanges = true;
                 $('#btn_submit').prop('disabled','');
@@ -77,9 +77,9 @@ $(document).ready(function(){
                 // When user changes a data value, add it to the changedData object
                 var month = $(event.currentTarget).attr('data-month');
                 var year = $(event.currentTarget).attr('data-year');
-                var instID = $(event.currentTarget).attr('data-instid');
+                var inst_id = $(event.currentTarget).attr('data-inst_id');
                 var value = $(event.currentTarget).val();
-                adminModel.changedData.add(month, year, instID, value); // !!!!! should this be a "this" reference ?????
+                adminModel.changedData.add(month, year, inst_id, value);
             }
         },
         loadData: loadData
@@ -94,7 +94,7 @@ $(document).ready(function(){
     ko.applyBindings(adminModel, $('#outerDiv')[0]);
 
 
-    // Click handler: SHOW 3 more months
+    // Click handler: Show 3 more months
     $('#btn_showThree').click(function(){
         
         // Warn user to save changes before loading more data
@@ -119,7 +119,7 @@ $(document).ready(function(){
     });
 
 
-    // Click handerl: SUBMIT
+    // Click handerl: Submit
     $('#btn_submit').click(function(){
 
         // Manipulate DOM
@@ -130,8 +130,11 @@ $(document).ready(function(){
         var queryString = "";
         for(var key in adminModel.changedData.changed) {
             var x = adminModel.changedData.changed[key];
-            queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`month`,`year`,`instID`,`instValue`) VALUES ";
-            queryString += "('" + x.month + "','" + x.year + "','" + x.instID + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
+            var ind_id =        x.inst_id.split('-')[0];
+            var territory_id =  x.inst_id.split('-')[1];
+            var period_id =     x.inst_id.split('-')[2];
+            queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`period_id`,`month`,`year`,`value`) VALUES ";
+            queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
         }
 
         var myData = {'queryString': queryString, 'transaction': true} ;
@@ -151,6 +154,16 @@ $(document).ready(function(){
             error: ajaxError
         });
     });
+    
+
+    // Click handler: Add new indicator
+    $('#btn_addNewIndicator').click(function(){
+
+        // !!!!! Add functionality; use a modal form !!!!!
+        // !!!!! Should take paramaters (dropdowns): (1) indicator, (2) territory, (3) period !!!!!
+
+    });
+
 
     // Change handler: FILTER TABLE BASED ON CUT
     $('.dataFilter').change(function() {
@@ -186,11 +199,11 @@ function loadData(options) {
         var filterCategory_default = "Programs (scale)";
         var filterCategory = options.initialLoad ? filterCategory_default : $('#filter_category').val();
         var filterCut = options.initialLoad ? "all" : $('#filter_cut').val();
-        filterCut = filterCut==="Geo-cut..." ? "all" : filterCut;
+        filterCut = filterCut==="Territory..." ? "all" : filterCut;
         var minDate = self.monthList.minDate;
         var maxDate = self.monthList.maxDate;
 
-        // Set up WHEN statement such that callback executes when both AJAX requests resolve
+        // Send out AJAX requests; run callback after they all resolve
         $.when(
                 
             // Send AJAX request #1 (indicator/instance metadata)
@@ -200,11 +213,11 @@ function loadData(options) {
                 dataType: "json",
                 error: ajaxError
             }),
-
+            
             // Send AJAX request #2 (indicator/instance data)
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/instanceValuesFiltered/" + filterCategory + "/" + filterCut + "/" + minDate + "/" + maxDate,
+                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorValuesFiltered/" + filterCategory + "/" + filterCut + "/" + minDate + "/" + maxDate,
                 dataType: "json",
                 error: ajaxError
             }),
@@ -225,22 +238,22 @@ function loadData(options) {
                 error: ajaxError
             })
 
-        ).done(function(metadata, data, geocuts, categories) {
+        ).done(function(metadata, values, geocuts, categories) {
             
             // Sort `metadata` (result of first AJAX request) by: indCategory, indName, geoName
             try {
                 metadata[0].sort(function(a,b){
                     // Sort 1: "Category"
-                    if (a.indCategory < b.indCategory) { return -1; }
-                    else if (a.indCategory > b.indCategory) { return 1; } 
+                    if (a.ind_category < b.ind_category) { return -1; }
+                    else if (a.ind_category > b.ind_category) { return 1; } 
                     else {
                         // Sort 2: "Indicator name"
-                        if (a.indName < b.indName) { return -1; }
-                        else if (a.indName > b.indName) { return 1; } 
+                        if (a.ind_name < b.ind_name) { return -1; }
+                        else if (a.ind_name > b.ind_name) { return 1; } 
                         else {
                             // Sort 3: "Cut"
-                            if (a.geoName < b.geoName || a.geoName===null) { return -1; }
-                            else if (a.geoName > b.geoName || b.geoName===null) { return 1; } 
+                            if (a.territory_name < b.territory_name || a.territory_name===null) { return -1; }
+                            else if (a.territory_name > b.territory_name || b.territory_name===null) { return 1; } 
                             else {
                                 return 0;
                             }
@@ -279,17 +292,17 @@ function loadData(options) {
             }
             
             // If there is only a single object in the response, stick it in an array
-            if (Array.isArray(data[0])===false) {
-                data[0] = [data[0]];
+            if (Array.isArray(values[0])===false) {
+                values[0] = [values[0]];
             }
             
-            // Insert `data` (result of second AJAX request) directly into table cells
-            for (var key in data[0]) {
-                var month = data[0][key].month;
-                var year = data[0][key].year;
-                var instID = data[0][key].instID;
-                var instValue = data[0][key].instValue;
-                $("input[data-instid=" + instID + "][data-month=" + month + "][data-year=" + year + "]").val(instValue);
+            // Insert `values` (result of second AJAX request) directly into table cells
+            for (var key in values[0]) {
+                var month = values[0][key].month;
+                var year = values[0][key].year;
+                var inst_id = values[0][key].inst_id;
+                var value = values[0][key].value;
+                $("input[data-inst_id=" + inst_id + "][data-month=" + month + "][data-year=" + year + "]").val(value);
             }
             
             // Reset changedData object; manipulate DOM
@@ -316,59 +329,3 @@ function ajaxError(response) {
     console.log('ajax error :/');
     console.log(response);
 }
-
-
-// !!!!! ARCHIVE: delete when done !!!!!
-
-//        $('.filterRow').each(function() {
-//
-//            $(this).removeClass('hide');
-//
-//            var rowCategory = $(this).find('.filterCategory')[0].textContent;
-//            var rowCut = $(this).find('.filterCut')[0].textContent;
-//
-//            if (filterCategory!=='Category...' && filterCategory !== rowCategory) {
-//                $(this).addClass('hide');
-//            }
-//
-//            if (filterCut!=='Geo-cut...' && filterCut !== rowCut) {
-//                $(this).addClass('hide');
-//            }
-//
-//        });
-
-
-// Populate data
-//function populateData() {
-//
-//    // Set stored data
-//    // !!!!! Phase out (used in WHEN statement above) ?????
-//    for (var key in instanceValues) {
-//        var month = instanceValues[key].month;
-//        var year = instanceValues[key].year;
-//        var instID = instanceValues[key].instID;
-//        var instValue = instanceValues[key].instValue;
-//        $("input[data-instid=" + instID + "][data-month=" + month + "][data-year=" + year + "]").val(instValue);
-//    }        
-//
-//    // Reset submitted data
-//    // !!!!! Phase out (unused) ?????
-//    for (var key in changedData.submitted) {
-//        var month = changedData.submitted[key].month;
-//        var year = changedData.submitted[key].year;
-//        var instID = changedData.submitted[key].instID;
-//        var instValue = changedData.submitted[key].value;
-//        $("input[data-instid=" + instID + "][data-month=" + month + "][data-year=" + year + "]").val(instValue);
-//    }
-//
-//    // Reset changed data
-//    // !!!!! Phase out (unused) ?????
-//    for (var key in changedData.changed) {
-//        var month = changedData.changed[key].month;
-//        var year = changedData.changed[key].year;
-//        var instID = changedData.changed[key].instID;
-//        var instValue = changedData.changed[key].value;
-//        $("input[data-instid=" + instID + "][data-month=" + month + "][data-year=" + year + "]").val(instValue);
-//    }
-//
-//}

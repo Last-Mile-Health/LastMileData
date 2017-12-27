@@ -153,7 +153,7 @@ table.ptg_data td {
     background-color: #eeeeee;
 }
 
-table.ptg_data td.instShortName {
+table.ptg_data td.label_table {
     text-align:left;
 }
 
