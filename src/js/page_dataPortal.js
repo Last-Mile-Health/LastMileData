@@ -17,10 +17,10 @@ $(document).ready(function(){
             
             var spliceTab = true;
             
-            // Test all userGroups to see if there are no matches
-            for (var key in sessionStorage.userGroups.split(',')) {
-                var userGroups = sessionStorage.userGroups.split(',')[key];
-                if (tabs[j].permissions.indexOf(userGroups) !== -1) {
+            // Test all user_groups to see if there are no matches
+            for (var key in sessionStorage.user_groups.split(',')) {
+                var user_groups = sessionStorage.user_groups.split(',')[key];
+                if (tabs[j].permissions.indexOf(user_groups) !== -1) {
                     spliceTab = false;
                 }
             }
@@ -100,7 +100,9 @@ $(document).ready(function(){
                             $(window).trigger('DP_loaded');
                         }
                         setTimeout(function(){
-                            $('#whitespaceContainer').slideUp(1000);
+                            $('#whitespaceContainer').slideUp(1000, function(){
+                                $(window).trigger('DP_up');
+                            });
                         },500);
                     });
 
@@ -129,7 +131,7 @@ $(document).ready(function(){
                             });
                             
                             // Apply rendered html to mainContainer DIV
-                            var html = converter.makeHtml(JSON.parse(responseText).mdText);
+                            var html = converter.makeHtml(JSON.parse(responseText).md_text);
                             $('#mainContainer').html(html);
                             
                             // Make links open in new tabs/windows
@@ -144,13 +146,17 @@ $(document).ready(function(){
                             $('#mainContainer table').addClass('table table-striped table-hover');
                             
                             setTimeout(function(){
-                                $('#whitespaceContainer').slideUp(1000);
+                                $('#whitespaceContainer').slideUp(1000,function(){
+                                    $(window).trigger('DP_up');
+                                });
                             },500);
                         },
                         error: function(){
                             $('#mainContainer').html("<h1>Error.</h1><h3>Please check your internet connection and try again later.</h3>");
                             setTimeout(function(){
-                                $('#whitespaceContainer').slideUp(1000);
+                                $('#whitespaceContainer').slideUp(1000,function(){
+                                    $(window).trigger('DP_up');
+                                });
                             },500);
                         }
                     });
@@ -177,7 +183,9 @@ $(document).ready(function(){
     document.getElementById("dashboard_iframe").onload = function() {
         var myHash = location.hash;
         location.href = "#"; location.href = "#spacer"; location.href = myHash; // to account for a scrolling bug
-        $('#whitespaceContainer').slideUp(1000);
+        $('#whitespaceContainer').slideUp(1000,function(){
+            $(window).trigger('DP_up');
+        });
         $(window).trigger('DP_loaded');
     };
 
@@ -212,3 +220,8 @@ $(document).ready(function(){
     $('#dp_sidebar, #mainContainer').fadeIn(1000);
 
 });
+
+
+function fireReadyEvent() {
+    alert('up!');
+}

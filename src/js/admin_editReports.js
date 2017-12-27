@@ -202,12 +202,12 @@ $(document).ready(function(){
                     url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/0/" + firstInstID,
                     dataType: "json",
                     success: function(data) {
-                        if (data.indName === undefined) {
+                        if (data.ind_name === undefined) {
                             alert('This instance ID is not defined.');
                         } else {
                             // Load metadata into corresponding fields
-                            self.ro_name(data.indName);
-                            self.ro_description(data.indDefinition);
+                            self.ro_name(data.ind_name);
+                            self.ro_description(data.ind_definition);
                         }
                     },
                     error: ajaxError

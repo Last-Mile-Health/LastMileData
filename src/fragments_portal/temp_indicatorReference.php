@@ -15,7 +15,7 @@ $(document).ready(function(){
 <h1>Indicator Reference</h1>
 
 <?php
-    $queryString = "SELECT indID, indName, indCategory, indDefinition, indSource FROM lastmile_dataportal.tbl_indicators where archived=0 AND indName NOT LIKE 'Numerator%' AND indName NOT LIKE 'Denominator%' ORDER BY indCategory, indName;";
+    $queryString = "SELECT ind_id, ind_name, ind_category, ind_definition, ind_source FROM lastmile_dataportal.tbl_indicators where archived=0 AND ind_name NOT LIKE 'Numerator%' AND ind_name NOT LIKE 'Denominator%' ORDER BY ind_category, ind_name;";
     $result = mysqli_query($cxn, $queryString);
 ?>
 
@@ -34,11 +34,11 @@ $(document).ready(function(){
             while ( $row = mysqli_fetch_assoc($result) ) {
                 extract($row);
                 $tableRow = "<tr>";
-                $tableRow .= "<td>$indID</td>";
-                $tableRow .= "<td>$indCategory</td>";
-                $tableRow .= "<td>$indName</td>";
-                $tableRow .= "<td>$indDefinition</td>";
-                $tableRow .= "<td>$indSource</td>";
+                $tableRow .= "<td>$ind_id</td>";
+                $tableRow .= "<td>$ind_category</td>";
+                $tableRow .= "<td>$ind_name</td>";
+                $tableRow .= "<td>$ind_definition</td>";
+                $tableRow .= "<td>$ind_source</td>";
                 $tableRow .= "</tr>";
                 echo $tableRow;
             }

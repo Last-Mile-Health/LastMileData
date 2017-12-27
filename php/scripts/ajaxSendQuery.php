@@ -33,7 +33,7 @@ if ( strpos( $queryString, 'lastmile_chwdb.staging_odk_routinevisit' ) !== false
        
 // Debug queries
 if ($queryDebugging=='true') {
-    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . $queryString . '")');
+    mysqli_query($cxn, 'INSERT INTO lastmile_dataportal.tbl_utility_data_upload_debugging (query_string) VALUES ("' . $queryString . '")');
 }
 
 if ($transaction) {

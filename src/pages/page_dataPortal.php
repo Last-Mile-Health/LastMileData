@@ -26,10 +26,10 @@
 
         
         <?php
-            // Echo username / userGroups (used by access control system)
+            // Echo username / user_groups (used by access control system)
             echo "<script>";
             echo "sessionStorage.username = '" . $_SESSION['username'] . "';";
-            echo "sessionStorage.userGroups = '" . $_SESSION['userGroups'] . "';";
+            echo "sessionStorage.user_groups = '" . $_SESSION['user_groups'] . "';";
 
             // Initiate/configure CURL session
             $ch = curl_init();
@@ -42,7 +42,7 @@
 
             // Close CURL session and echo JSON
             curl_close($ch);
-            echo "var model_sidebar = JSON.parse($json1.objectData);". "\n\n";
+            echo "var model_sidebar = JSON.parse($json1.object_data);". "\n\n";
             echo "</script>";
         ?>
         
@@ -54,8 +54,6 @@
         <script src="../../lib/knockout/knockout-3.3.0.js"></script>
         <script src="../../lib/knockout/knockout.mapping-latest.js"></script>
         <script src="../../lib/moment.min.js"></script>
-        <!--<script src="../../lib/underscore.min.js"></script>-->
-        <!--<script src="../../lib/backbone.min.js"></script>-->
         <script src="../../lib/showdown.min.js"></script>
         <script src="../../lib/multiselect.min.js"></script>
         <script src="../../lib/d3.min.js"></script>

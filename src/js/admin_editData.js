@@ -222,10 +222,11 @@ function loadData(options) {
                 error: ajaxError
             }),
 
-            // Send AJAX request #3 (indicator/instance geocuts)
+            // Send AJAX request #3 (active territories)
+            // !!!!! May need to modify the underlying view later on to filter out districts, facilities, etc. !!!!!
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/geoCuts/0/",
+                url: "/LastMileData/php/scripts/LMD_REST.php/view_territories_active/",
                 dataType: "json",
                 error: ajaxError
             }),
@@ -238,9 +239,9 @@ function loadData(options) {
                 error: ajaxError
             })
 
-        ).done(function(metadata, values, geocuts, categories) {
+        ).done(function(metadata, values, territories, categories) {
             
-            // Sort `metadata` (result of first AJAX request) by: indCategory, indName, geoName
+            // Sort `metadata` (result of first AJAX request) by: ind_category, ind_name, territory_name
             try {
                 metadata[0].sort(function(a,b){
                     // Sort 1: "Category"
@@ -271,8 +272,8 @@ function loadData(options) {
             }
             
             // Populate `adminModel.selects.cut` array (holds options for geoCut filter
-            for (var key in geocuts[0]) {
-                var cut = geocuts[0][key].geoName;
+            for (var key in territories[0]) {
+                var cut = territories[0][key].territory_name;
                 if (self.selects.cut.indexOf(cut)===-1) {
                     self.selects.cut.push(cut);
                 }

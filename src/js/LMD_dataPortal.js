@@ -190,13 +190,13 @@ var LMD_dataPortal = (function() {
             var ind_id = ro.indicators_table[0];
             var metadata = indicatorMetadata[ind_id];
             if ( ro.ro_name == null || ro.ro_name == '' ) {
-                ro.ro_name = metadata.indName; // !!!!! change in DB to ind_name !!!!!
+                ro.ro_name = metadata.ind_name;
             }
             if ( ro.indSource == null || ro.indSource == '' ) {
-                ro.indSource = metadata.indSource;
+                ro.indSource = metadata.ind_source;
             }
             if ( ro.ro_description == null || ro.ro_description == '' ) {
-                ro.ro_description = metadata.indDefinition;
+                ro.ro_description = metadata.ind_definition;
             }
             
             // Add labels to ro.instances_table

@@ -20,7 +20,7 @@ if( $input_username <> " AND $input_password <> " AND sha1($input_password) == $
     // Start session; set $_SESSION vars
     Session_start() ;
     $_SESSION['username'] = $row['username'];
-    $_SESSION['userGroups'] = $row['userGroups'];
+    $_SESSION['user_groups'] = $row['user_groups'];
     
     // Update login table
     updateLoginTable($input_username, $cxn);
@@ -51,7 +51,7 @@ function updateLoginTable($username, $cxn)
     $loginTime = date('Y-m-d H:i:s');
     
     // Run query to update login table
-    $query = "INSERT INTO lastmile_dataportal.tbl_utility_logins (username, loginTime) VALUES ('$username', '$loginTime');";
+    $query = "INSERT INTO lastmile_dataportal.tbl_utility_logins (username, login_time) VALUES ('$username', '$loginTime');";
     mysqli_query($cxn, $query) or die("failure");
 }
 

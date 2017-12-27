@@ -4,8 +4,6 @@
 // Dependencies:    Knockout.js, Knockout.mapping.js, jQuery
 
 // !!!!! Need to update variable names throughout so that "vm" represents the ViewModel, "vmData" is data table data, "vmOther" is other !!!!!
-// !!!!! Need to update variable names throughout so that "vm" represents the ViewModel, "vmData" is data table data, "vmOther" is other !!!!!
-// !!!!! Need to update variable names throughout so that "vm" represents the ViewModel, "vmData" is data table data, "vmOther" is other !!!!!
 
 var LMD_koREST = (function() {
 
@@ -23,7 +21,7 @@ var LMD_koREST = (function() {
     //          Params include: url, element (stored as private variables)
     function NewViewModel(params) {
         this.vm;                                //  A reference to the viewModel created by fetch() or reset()
-        this.url = params.url;                  //  Base URL of the REST service, set by newViewModel()
+//        this.url = params.url;                  //  Base URL of the REST service, set by newViewModel()
         this.element = params.element;          //  The element that knockout will bind to via applyBindings()
         this.idAttribute = params.idAttribute;  //  The attribute that uniquely identifies a row
         this.mysqlIgnore = params.mysqlIgnore;  //  An array of fields that should be ignored by all queries
@@ -39,37 +37,37 @@ var LMD_koREST = (function() {
         var self = this;
         
         // Request data from server
-        $.ajax({
-            url: self.url,
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                // Create observable from fetched data; bind to this.element
-                self.vm = ko.mapping.fromJS(data);
-                
-                // Assign client-side ID and REST attributes
-                for(var x in self.vm()) {
-                    self.vm()[x]._cid = self.assignID();
-                    self.vm()[x]._add = false;
-                    self.vm()[x]._change = false;
-                    self.vm()[x]._destroy = false;
-                }
-                
-                // Activate Knockout.js
-                ko.applyBindings({vmData:self.vm, other:self.other}, this.element);
-                
-                // Run success callback
-                if (typeof params.successCallback === 'function') {
-                    params.successCallback();
-                }
-            },
-            error: function(jqXHR) {
-                // Run error callback
-                if (typeof params.errorCallback === 'function') {
-                    params.errorCallback();
-                }
-            }
-        });
+//        $.ajax({
+//            url: self.url,
+//            method: 'GET',
+//            dataType: 'json',
+//            success: function(data) {
+//                // Create observable from fetched data; bind to this.element
+//                self.vm = ko.mapping.fromJS(data);
+//                
+//                // Assign client-side ID and REST attributes
+//                for(var key in self.vm()) {
+//                    self.vm()[key]._cid = self.assignID();
+//                    self.vm()[key]._add = false;
+//                    self.vm()[key]._change = false;
+//                    self.vm()[key]._destroy = false;
+//                }
+//                
+//                // Activate Knockout.js
+//                ko.applyBindings({vmData:self.vm, other:self.other}, this.element);
+//                
+//                // Run success callback
+//                if (typeof params.successCallback === 'function') {
+//                    params.successCallback();
+//                }
+//            },
+//            error: function(jqXHR) {
+//                // Run error callback
+//                if (typeof params.errorCallback === 'function') {
+//                    params.errorCallback();
+//                }
+//            }
+//        });
     };
 
 
@@ -83,11 +81,11 @@ var LMD_koREST = (function() {
         this.vm = ko.mapping.fromJS(data);
 
         // Assign client-side ID and REST attributes
-        for(var x in this.vm()) {
-            this.vm()[x]._cid = this.assignID();
-            this.vm()[x]._add = false;
-            this.vm()[x]._change = false;
-            this.vm()[x]._destroy = false;
+        for(var key in this.vm()) {
+            this.vm()[key]._cid = this.assignID();
+            this.vm()[key]._add = false;
+            this.vm()[key]._change = false;
+            this.vm()[key]._destroy = false;
         }
 
         // Activate Knockout.js
@@ -109,9 +107,9 @@ var LMD_koREST = (function() {
         };
         
         // Compile list of inserts, updates, and deletes
-        for (var x in this.vm()) {
+        for (var key in this.vm()) {
             
-            var item = this.vm()[x];
+            var item = this.vm()[key];
             
             // Get CIDs of objects that have been newly added (unless they've been deleted)
             if (item._add === true && item._destroy === false) {
@@ -138,9 +136,9 @@ var LMD_koREST = (function() {
         }
         
         // Process inserts, updates, and deletes
-        for (var x in requests) {
+        for (var key in requests) {
 
-            for (var y in requests[x]) {
+            for (var key2 in requests[key]) {
 
                 // Set attributes to ignore
                 var ignoreArray = ["_cid","_add","_change","_destroy"];
@@ -148,29 +146,29 @@ var LMD_koREST = (function() {
                 var mappingIgnore = { ignore: ignoreMerged };
 
                 // Set REST URL and data objects
-                switch(x) {
+                switch(key) {
                     case "POST":
                         var restURL = self.url;
-                        var cid = requests[x][y].cid;
-                        for (var z in this.vm()) {
-                            if (this.vm()[z]._cid == cid) {
-                                var myData = ko.mapping.toJS(self.vm()[z],mappingIgnore);
+                        var cid = requests[key][key2].cid;
+                        for (var key3 in this.vm()) {
+                            if (this.vm()[key3]._cid == cid) {
+                                var myData = ko.mapping.toJS(self.vm()[key3],mappingIgnore);
                             }
                         }
                         break;
                     
                     case "PUT":
-                        var restURL = self.url + requests[x][y].id;
-                        var cid = requests[x][y].cid;
-                        for (var z in this.vm()) {
-                            if (this.vm()[z]._cid == cid) {
-                                var myData = ko.mapping.toJS(self.vm()[z],mappingIgnore);
+                        var restURL = self.url + requests[key][key2].id;
+                        var cid = requests[key][key2].cid;
+                        for (var key3 in this.vm()) {
+                            if (this.vm()[key3]._cid == cid) {
+                                var myData = ko.mapping.toJS(self.vm()[key3],mappingIgnore);
                             }
                         }
                         break;
                     
                     case "DELETE":
-                        var restURL = self.url + requests[x][y].id;
+                        var restURL = self.url + requests[key][key2].id;
                         var myData = 1;
                         break;
                     
@@ -180,7 +178,7 @@ var LMD_koREST = (function() {
                 // !!!!! attach a deferred (using "when"); success/error handlers currently firing on each ajax request !!!!!
                 $.ajax({
                     url: restURL,
-                    method: x,
+                    method: key,
                     data: myData,
                     dataType: 'json',
                     success: function(data) {
@@ -245,9 +243,9 @@ var LMD_koREST = (function() {
 
     // Method (NewViewModel): Add new model (as defined by "defineModel()") to the end of the array
     NewViewModel.prototype.markAsChanged = function(myCID) {
-        for (var x in this.vm()) {
-            if (this.vm()[x]._cid == myCID) {
-                this.vm()[x]._change = true;
+        for (var key in this.vm()) {
+            if (this.vm()[key]._cid == myCID) {
+                this.vm()[key]._change = true;
             }
         }
     };
