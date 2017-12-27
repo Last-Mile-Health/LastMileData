@@ -223,11 +223,52 @@ var LMD_utilities = (function(){
                         + "`object`='" + LMD_utilities.addSlashes(object)
                         + "', `details`='" + LMD_utilities.addSlashes(details)
                         + "', `username`='" + sessionStorage.username
-                        + "', `accessDate`='" + LMD_utilities.mysql_date()
-                        + "', `accessTime`='" + LMD_utilities.mysql_time() + "';"
+                        + "', `access_date`='" + LMD_utilities.mysql_date()
+                        + "', `access_time`='" + LMD_utilities.mysql_time() + "';"
             },
             dataType: "json"
         });
+    }
+
+
+    // PUBLIC:  Make table columns resizable
+    //          http://jsfiddle.net/thrilleratplay/epcybL4v/
+    function makeTableColumnsResizable() {
+        (function () {
+            var thElm;
+            var startOffset;
+
+            Array.prototype.forEach.call(
+              document.querySelectorAll("table th"),
+              function (th) {
+                th.style.position = 'relative';
+
+                var grip = document.createElement('div');
+                grip.innerHTML = "&nbsp;";
+                grip.style.top = 0;
+                grip.style.right = 0;
+                grip.style.bottom = 0;
+                grip.style.width = '5px';
+                grip.style.position = 'absolute';
+                grip.style.cursor = 'col-resize';
+                grip.addEventListener('mousedown', function (e) {
+                    thElm = th;
+                    startOffset = th.offsetWidth - e.pageX;
+                });
+
+                th.appendChild(grip);
+              });
+
+            document.addEventListener('mousemove', function (e) {
+              if (thElm) {
+                thElm.style.width = startOffset + e.pageX + 'px';
+              }
+            });
+
+            document.addEventListener('mouseup', function () {
+                thElm = undefined;
+            });
+        })();
     }
 
 
@@ -244,7 +285,8 @@ var LMD_utilities = (function(){
         parseJSONIntoSQL: parseJSONIntoSQL,
         isNumeric: isNumeric,
         downloadStringAsFile: downloadStringAsFile,
-        logUsage: logUsage
+        logUsage: logUsage,
+        makeTableColumnsResizable: makeTableColumnsResizable
     };
     
 

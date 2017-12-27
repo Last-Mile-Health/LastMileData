@@ -1,31 +1,7 @@
 
-/* Set column widths here */
-.css_users th:nth-child(1), .css_users td:nth-child(1) { min-width:200px; width:200px }
-.css_users th:nth-child(2), .css_users td:nth-child(2) { min-width:400px; width:400px }
-.css_users th:nth-child(3), .css_users td:nth-child(3) { min-width:25px; width:25px }
-.css_markdown th:nth-child(1), .css_markdown td:nth-child(1) { min-width:200px; width:200px }
-.css_markdown th:nth-child(2), .css_markdown td:nth-child(2) { min-width:550px; width:550px }
-.css_markdown th:nth-child(3), .css_markdown td:nth-child(3) { min-width:25px; width:25px }
-.css_indicators th:nth-child(1), .css_indicators td:nth-child(1) { min-width:120px; width:120px }
-.css_indicators th:nth-child(2), .css_indicators td:nth-child(2) { min-width:300px; width:300px }
-.css_indicators th:nth-child(3), .css_indicators td:nth-child(3) { min-width:500px; width:500px }
-.css_indicators th:nth-child(4), .css_indicators td:nth-child(4) { min-width:25px; width:25px }
-.css_staff th:nth-child(1), .css_staff td:nth-child(1) { min-width:70px; width:70px }
-.css_staff th:nth-child(2), .css_staff td:nth-child(2) { min-width:150px; width:150px }
-.css_staff th:nth-child(3), .css_staff td:nth-child(3) { min-width:150px; width:150px }
-.css_staff th:nth-child(4), .css_staff td:nth-child(4) { min-width:120px; width:120px }
-.css_staff th:nth-child(5), .css_staff td:nth-child(5) { min-width:80px; width:80px }
-.css_staff th:nth-child(6), .css_staff td:nth-child(6) { min-width:25px; width:25px }
-.css_narratives th:nth-child(1), .css_narratives td:nth-child(1) { min-width:190px; width:190px }
-.css_narratives th:nth-child(2), .css_narratives td:nth-child(2) { min-width:30px; width:30px }
-.css_narratives th:nth-child(3), .css_narratives td:nth-child(3) { min-width:210px; width:210px }
-.css_narratives th:nth-child(4), .css_narratives td:nth-child(4) { min-width:550px; width:550px }
-/*.css_narratives th:nth-child(4), .css_narratives td:nth-child(4) { min-width:80px; width:80px }*/
-/*.css_narratives th:nth-child(5), .css_narratives td:nth-child(5) { min-width:500px; width:500px }*/
-
 .pad {
-    padding-left:10px;
-    padding-right:10px;
+    /*padding-left:10px;*/
+    /*padding-right:10px;*/
 }
 .admin_input {
     width:100%;
@@ -45,29 +21,35 @@
     background:lightblue;
 }
 
+#table_editing td {
+    padding:0px!important;
+}
+
 div.tableContainer {
-    border-top: 2px solid #eee;
+/*    border-top: 2px solid #eee;
     border-bottom: 2px solid #eee;
     clear: both;
+    height: 65vh;
     width:100%;
     overflow-x: scroll;
     overflow-y: auto;
-    padding-top:4px;
+    padding-top:4px;*/
 }
 div.tableContainer table {
-    width: 100%;
+    /* !!!!! somewhat problematic with column resize functionality; consider removing !!!!! */
+    /*width: 100%;*/
 }
 thead#adminHeader tr {
-    display: block
+    /*display: block*/
 }
 thead#adminHeader th {
-    padding-left:4px;
-    padding-right:4px;
-    border: 2px solid white;
-    color: white;
+    /*padding-left:4px;*/
+    /*padding-right:4px;*/
+    /*border: 2px solid white;*/
+    /*color: white;*/
 }
 #scrollContent {
-    display: block;
+    /*display: block;*/
     height: 60vh;
     overflow-x:hidden;
     overflow-y: auto;
@@ -84,4 +66,20 @@ thead#adminHeader th {
 
 textarea {
     resize:vertical;
+}
+
+.mainContainer {
+    overflow-y:hidden!important;
+}
+
+.innerContainer {
+    overflow-y:hidden!important;
+}
+
+body {
+    overflow-y:hidden!important;
+}
+
+.outerDiv {
+    overflow-y:hidden!important;
 }

@@ -13,7 +13,7 @@
     echo "var sw = '$sw';". "\n\n";
 
     // Echo JSON (indicator METADATA)
-    $url = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/$sw/1/";
+    $url = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/$sw/0/";
     curl_setopt($ch,CURLOPT_URL,$url);
     $json = curl_exec($ch);
 
@@ -31,26 +31,24 @@ $.getScript('../js/admin_editingInterface.js');
 
     <h2 data-bind="text:other.stringH2"></h2>
 
-    <div class="tableContainer">
-        <table>
-            <thead id="adminHeader">
-                <tr>
-                    <!-- ko foreach:other.tableHeaders -->
-                    <th class="pad darkBlue" data-bind="text:$data"></th>
-                    <!-- /ko -->
-                    <th id="deleteTH" class="pad darkBlue">&nbsp;X&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody id="scrollContent" data-bind="foreach:vmData">
-                <tr id="eiTR" class="filterRow">
-                    <!-- <td> elements are dynamically populated here by admin_editingInterface.js -->
-                    <td><button data-bind="click:$root.other.actions.delete, attr:{'data-cid':_cid}" class="btn btn-xs btn-danger btn_remove">X</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table id="table_editing" class="table compact">
+        <thead id="adminHeader">
+            <tr>
+                <!-- ko foreach:other.tableHeaders -->
+                <th data-bind="text:$data"></th>
+                <!-- /ko -->
+                <th id="deleteTH">&nbsp;Archive&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody id="scrollContent" data-bind="foreach:vmData">
+            <tr class="eiTR filterRow">
+                <!-- <td> elements are dynamically populated here by admin_editingInterface.js -->
+                <td data-bind="ifnot:_add"><button data-bind="click:$root.other.actions.delete, attr:{'data-cid':_cid}" class="btn btn-xs btn-danger btn_remove">Archive</button></td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div style="margin:5px; font-size:150%">
+    <div id="table_tools" style="margin-top:5px; font-size:150%">
         
         <!-- ko if: other.selectLists -->
         Filter:&nbsp;

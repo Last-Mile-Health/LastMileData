@@ -21,7 +21,7 @@ var LMD_koREST = (function() {
     //          Params include: url, element (stored as private variables)
     function NewViewModel(params) {
         this.vm;                                //  A reference to the viewModel created by fetch() or reset()
-//        this.url = params.url;                  //  Base URL of the REST service, set by newViewModel()
+        this.url = params.url;                  //  Base URL of the REST service, set by newViewModel()
         this.element = params.element;          //  The element that knockout will bind to via applyBindings()
         this.idAttribute = params.idAttribute;  //  The attribute that uniquely identifies a row
         this.mysqlIgnore = params.mysqlIgnore;  //  An array of fields that should be ignored by all queries
@@ -37,37 +37,37 @@ var LMD_koREST = (function() {
         var self = this;
         
         // Request data from server
-//        $.ajax({
-//            url: self.url,
-//            method: 'GET',
-//            dataType: 'json',
-//            success: function(data) {
-//                // Create observable from fetched data; bind to this.element
-//                self.vm = ko.mapping.fromJS(data);
-//                
-//                // Assign client-side ID and REST attributes
-//                for(var key in self.vm()) {
-//                    self.vm()[key]._cid = self.assignID();
-//                    self.vm()[key]._add = false;
-//                    self.vm()[key]._change = false;
-//                    self.vm()[key]._destroy = false;
-//                }
-//                
-//                // Activate Knockout.js
-//                ko.applyBindings({vmData:self.vm, other:self.other}, this.element);
-//                
-//                // Run success callback
-//                if (typeof params.successCallback === 'function') {
-//                    params.successCallback();
-//                }
-//            },
-//            error: function(jqXHR) {
-//                // Run error callback
-//                if (typeof params.errorCallback === 'function') {
-//                    params.errorCallback();
-//                }
-//            }
-//        });
+        $.ajax({
+            url: self.url,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Create observable from fetched data; bind to this.element
+                self.vm = ko.mapping.fromJS(data);
+                
+                // Assign client-side ID and REST attributes
+                for(var key in self.vm()) {
+                    self.vm()[key]._cid = self.assignID();
+                    self.vm()[key]._add = false;
+                    self.vm()[key]._change = false;
+                    self.vm()[key]._destroy = false;
+                }
+                
+                // Activate Knockout.js
+                ko.applyBindings({vmData:self.vm, other:self.other}, this.element);
+                
+                // Run success callback
+                if (typeof params.successCallback === 'function') {
+                    params.successCallback();
+                }
+            },
+            error: function(jqXHR) {
+                // Run error callback
+                if (typeof params.errorCallback === 'function') {
+                    params.errorCallback();
+                }
+            }
+        });
     };
 
 
@@ -235,13 +235,13 @@ var LMD_koREST = (function() {
     };
 
 
-    // Method (NewViewModel): Add new model (as defined by "defineModel()") to the end of the array
+    // Method (NewViewModel): Remove item from array
     NewViewModel.prototype.delete = function(myCID) {
         this.vm.destroy(function(item) { return item._cid == myCID; });
     };
 
 
-    // Method (NewViewModel): Add new model (as defined by "defineModel()") to the end of the array
+    // Method (NewViewModel): Mark item as changed
     NewViewModel.prototype.markAsChanged = function(myCID) {
         for (var key in this.vm()) {
             if (this.vm()[key]._cid == myCID) {

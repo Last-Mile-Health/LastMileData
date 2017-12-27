@@ -4,10 +4,12 @@ $(document).ready(function(){
 
 
     // !!!!! BUG: There is an error if you add a markdown page, submit it, and then try to edit it and submit it again !!!!!
+    // !!!!! BUG: Adding and then deleting a user (without refreshing) causes a bug !!!!!
 
     // Set variables here that are specific to each page ("edit indicators", "edit markdown", etc.)
     //      The "sw" variable is passed to admin_editingInterface.php as a GET parameter
     //      The "ei" object is a container for configuration variables used on this page (ei = editing interface)
+    //      Fields to inlcude should be specified in modelHeaders and modelDefaults
     //      ei.sortVars is an array of up to three fields; eDate is sorted by these three fields
     //      ei.filters is an array of objects that contain info on fields to use to filter the table (!!!!! can only handle one entry right now !!!!!)
     switch (sw) {
@@ -16,17 +18,22 @@ $(document).ready(function(){
             var ei = {
                 stringH2: 'Edit indicators',
                 stringAdd: 'Add a new indicator',
-                sortVars: ['indCategory','indName'],
+                sortVars: ['ind_category','ind_name'],
                 filters: [{
                     header: 'Category...',
-                    field: 'indCategory'
+                    field: 'ind_category'
                 }],
-                idAttribute: 'indID',
-                modelHeaders: ['Category','Indicator','Definition'],
+                idAttribute: 'ind_id',
+                modelHeaders: ['Category','Indicator','Definition','Source','Format'],
                 modelDefaults: {
-                    indCategory: '',
-                    indName: 'New indicator',
-                    indDefinition: ''
+                    ind_category: '',
+                    ind_name: 'New indicator',
+                    ind_definition: '',
+                    ind_source: '',
+                    ind_format: 'integer'
+                },
+                dropdowns: {
+                    ind_format: ['integer','decimal-1','decimal-2','percent','percent-1','percent-2','dollars']
                 }
             };
             break;
@@ -35,10 +42,10 @@ $(document).ready(function(){
             var ei = {
                 stringH2: 'Edit markdown',
                 stringAdd: 'Add a new markdown file',
-                sortVars: ['mdName'],
+                sortVars: ['md_name'],
                 filters: [],
                 idAttribute: 'id',
-                dupeField: 'mdName',
+                dupeField: 'md_name',
                 modelHeaders: ['Name','Markdown text'],
                 modelDefaults: {
                     mdName: "Enter a unique name here",
@@ -58,27 +65,7 @@ $(document).ready(function(){
                 modelHeaders: ['Username','User groups'],
                 modelDefaults: {
                     username: "new user",
-                    userGroups: "user"
-                }
-            };
-            break;
-        
-        // !!!!! Not currently being used !!!!!
-        case 'staff':
-            var ei = {
-                stringH2: 'Edit staff info (CHWs, CHWLs, CCSs)',
-                stringAdd: 'Add a new staff member',
-                sortVars: ['firstName'],
-                filters: [],
-                idAttribute: 'staffID',
-                readOnlyFields: ['staffID'],
-                modelHeaders: ['Staff ID','First name','Last name','Date of Birth','Gender'], // !!!!! 'Gender' should be a dropdown: M/F !!!!!
-                modelDefaults: {
-                    staffID: "",
-                    firstName: "First name",
-                    lastName: "Last name",
-                    dateOfBirth: "0000-00-00", // !!!!! This should leverage a datepicker !!!!!
-                    gender: ""
+                    user_groups: "user"
                 }
             };
             break;
@@ -88,14 +75,14 @@ $(document).ready(function(){
                 stringH2: 'Edit Data Portal narratives',
                 hideAddButton: true,
                 hideDeleteButtons: true,
-                sortVars: ['reportName','displayOrder'],
+                sortVars: ['report_name','display_order'],
                 filters: [{
                     header: 'Report...',
-                    field: 'reportName'
+                    field: 'report_name'
                 }],
                 idAttribute: 'id',
-                readOnlyFields: ['reportName','displayOrder','ro_name'],
-                mysqlIgnore: ['reportName','ro_name'],
+                readOnlyFields: ['report_name','display_order','ro_name'],
+                mysqlIgnore: ['report_name','ro_name'],
                 modelHeaders: ['Report name','#','Indicator name','Narrative'],
                 modelDefaults: {
                     reportName: "",
@@ -170,12 +157,12 @@ $(document).ready(function(){
         },
         delete: function(data,event) {
             // Delete the record
-            // !!!!! "Beautify" the confirm dialog !!!!!
-            var confirmed = confirm("Do you really want to delete this record?");
+            var confirmed = confirm("Do you really want to archive this record?");
             if (confirmed) {
                 myViewModel.delete(data._cid);
                 DataPortal_GLOBALS.anyChanges = true;
                 $submit.prop('disabled','');
+                DT.row( $(event.target).closest('tr') ).remove().draw();
             }
         },
         change: function(data,event) {
@@ -262,12 +249,28 @@ $(document).ready(function(){
     if (sw === 'markdown') {
         // Populate inputs (for markdown)
         // This requires special code because it leverages a textarea, which can handle special characters (accept-charset='ISO-8859-1') and corresponds with a MySQL LONGTEXT field
-        $('#eiTR').prepend("<td><textarea accept-charset='ISO-8859-1' class='admin_input pad filterCut' data-bind='value: mdText, attr:{\"data-field\":\"mdText\"}, event: {change:$root.other.actions.change}'></textarea></td>");
-        $('#eiTR').prepend("<td><input class='admin_input pad' data-bind='value: mdName, attr:{\"data-field\":\"mdText\"}, event: {change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
+        $('.eiTR').prepend("<td><textarea accept-charset='ISO-8859-1' class='admin_input pad filterCut' data-bind='value: mdText, attr:{\"data-field\":\"mdText\"}, event: {change:$root.other.actions.change}'></textarea></td>");
+        $('.eiTR').prepend("<td><input class='admin_input pad' data-bind='value: mdName, attr:{\"data-field\":\"mdText\"}, event: {change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
     } else {
+        
         // Populate inputs (for everything except markdown)
         for (var key in eiFields) {
-            $('#eiTR').prepend("<td><input class='admin_input pad" + addClass + "' data-bind='value:" + eiFields[key] + ", attr:{\"data-field\":\"" + eiFields[key] + "\"}, event: {click:$root.other.actions.click, change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
+            
+            // Handle text fields
+            if (ei.dropdowns[eiFields[key]] === undefined) {
+                $('.eiTR').prepend("<td><span style=display:none data-bind='text:" + eiFields[key] + "'></span><input class='admin_input pad" + addClass + "' data-bind='value:" + eiFields[key] + ", attr:{\"data-field\":\"" + eiFields[key] + "\"}, event: {click:$root.other.actions.click, change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
+                
+            // Handle dropdowns
+            } else {
+                
+                var htmlString = "<td><span style=display:none data-bind='text:" + eiFields[key] + "'></span><select class='admin_input pad" + addClass + "' data-bind='value:" + eiFields[key] + ", attr:{\"data-field\":\"" + eiFields[key] + "\"}, event: {click:$root.other.actions.click, change:$root.other.actions.change, blur:$root.other.actions.blur}'>";
+                for (var key2 in ei.dropdowns[eiFields[key]]) {
+                    htmlString += "<option>" + ei.dropdowns[eiFields[key]][key2] + "</option>";
+                }
+                htmlString += "</select></td>";
+                $('.eiTR').prepend(htmlString);
+            }
+            
         }
     }
 
@@ -311,15 +314,14 @@ $(document).ready(function(){
         DataPortal_GLOBALS.anyChanges = true;
         $submit.prop('disabled','');
         
-        // Scroll to bottom of table
-        var height = $("#scrollContent")[0].scrollHeight;
-        $("#scrollContent").animate({ scrollTop: height }, 1000);
-        
     });
 
 
     // Save changes to server
     $('#btn_submit').click(function() {
+        
+        // Check that all required fields are filled
+        // !!!!! Add this functionality !!!!!
         
         // Manipulate DOM
         LMD_utilities.ajaxButton($submit, 'ajaxLoader');
@@ -359,6 +361,29 @@ $(document).ready(function(){
             }
         });
     });
+    
+    // Apply DataTable function
+    var DT = $('.table').DataTable({
+        scrollY: '50vh',
+//        scrollX: '100%',
+        scrollCollapse: true,
+        paging: false,
+        dom: '<"top">rt<"bottom"flp><"clear">',
+        initComplete: function() {
+            $("#table_tools").detach().prependTo('div.bottom');
+            $("#table_editing_filter").detach().appendTo('#table_tools');
+            $("#table_editing_filter").css('font-size','80%');
+        }
+//        order: [[ 0, 'asc' ], [ 1, 'asc' ]]
+    });
+    
+    // Compensate for a formatting bug
+    $(window).on('DP_up',function(){
+        DT.draw();
+    });
+    
+//    !!!!! This is currently broken !!!!!
+//    LMD_utilities.makeTableColumnsResizable();
 
 });
 
