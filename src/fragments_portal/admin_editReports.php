@@ -40,7 +40,7 @@ $.getScript('../js/admin_editReports.js');
                 <td>Edit report: </td>
                 <td>
                     <select id="editReport_input" data-bind="foreach:reports" class="form-control">
-                        <option data-bind="{text:reportName, value:reportID}"></option>
+                        <option data-bind="{text:report_name, value:report_id}"></option>
                     </select>
                 </td>
                 <td><button id="editReport" data-bind="click:actions.editReport" class="repButton btn btn-s btn-warning">Go</button></td>
@@ -49,7 +49,7 @@ $.getScript('../js/admin_editReports.js');
                 <td>Delete report: </td>
                 <td>
                     <select id="deleteReport_input" data-bind="foreach:reports" class="form-control">
-                        <option data-bind="{text:reportName, value:reportID}"></option>
+                        <option data-bind="{text:report_name, value:report_id}"></option>
                     </select>
                 </td>
                 <td><button id="deleteReport" data-bind="click:actions.deleteReport" class="repButton btn btn-s btn-danger">Go</button></td>
@@ -90,7 +90,7 @@ $.getScript('../js/admin_editReports.js');
                             </tr>
                             <tr>
                                 <td>Instance IDs (table):&nbsp;</td>
-                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:instIDs, event:{blur:$root.actions.checkInstIDsTable}"></td>
+                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:indicators_table, event:{blur:$root.actions.checkIndIDsTable}"></td>
                             </tr>
                             <tr>
                                 <td>Name:</td>
@@ -120,7 +120,7 @@ $.getScript('../js/admin_editReports.js');
                             </tr>
                             <tr>
                                 <td>Instance IDs (chart):&nbsp;</td>
-                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:chart_instIDs, event:{blur:$root.actions.checkInstIDsChart}"></td>
+                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:indicators_chart, event:{blur:$root.actions.checkIndIDsChart}"></td>
                             </tr>
                             <tr>
                                 <td><button class="btn btn-xs btn-success btn_archive" data-bind="click:$root.actions.archiveToggle">Archive</button></td>
@@ -150,14 +150,14 @@ $.getScript('../js/admin_editReports.js');
                                 <td><input class="ui-state-default ui-corner-all" style='width:50px' data-bind="value:chart_size_x"></td>
                                 <td style='width:40px'></td>
                                 <td>Labels (data table):&nbsp;</td>
-                                <td><input class="labels_table ui-state-default ui-corner-all" style='width:400px' data-bind="value:instIDs_shortNames, event:{blur:$root.actions.checkInstIDsTable}" placeholder="Type a comma-separated list of labels..."></td>
+                                <td><input class="labels_table ui-state-default ui-corner-all" style='width:400px' data-bind="value:labels_table, event:{blur:$root.actions.checkIndIDsTable}" placeholder="Type a comma-separated list of labels..."></td>
                             </tr>
                             <tr>
                                 <td>Chart height (px):&nbsp;</td>
                                 <td><input class="ui-state-default ui-corner-all" style='width:50px' data-bind="value:chart_size_y"></td>
                                 <td style='width:40px'></td>
                                 <td>Labels (chart):&nbsp;</td>
-                                <td><input class="labels_chart ui-state-default ui-corner-all" style='width:400px' data-bind="value:chart_instIDs_shortNames, event:{blur:$root.actions.checkInstIDsChart}" placeholder="Type a comma-separated list of labels..."></td>
+                                <td><input class="labels_chart ui-state-default ui-corner-all" style='width:400px' data-bind="value:labels_chart, event:{blur:$root.actions.checkIndIDsChart}" placeholder="Type a comma-separated list of labels..."></td>
                             </tr>
                         </table>
                     </div>

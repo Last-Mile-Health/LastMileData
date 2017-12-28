@@ -212,7 +212,7 @@
                     instID: instID,
                     shortName: instanceMetadata[instID].instShortName,
                     months: edModel.months,
-                    target: LMD_utilities.format_number(instanceMetadata[instID].target, instanceMetadata[instID].indFormat)
+                    target: LMD_utilities.format_number(instanceMetadata[instID].target, instanceMetadata[instID].ind_format)
                 });
             }
         }

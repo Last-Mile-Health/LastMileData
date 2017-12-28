@@ -9,9 +9,9 @@ $pw_old = $_GET['pw_old'];
 $pw_new_1 = $_GET['pw_new_1'];
 $pw_new_2 = $_GET['pw_new_2'];
 
-// Run query to get current username, password, pk
+// Run query to get current username, password, id
 require_once("cxn.php");
-$query = "SELECT pk, username, password FROM lastmile_dataportal.tbl_utility_users WHERE username='$username';";
+$query = "SELECT id, username, password FROM lastmile_dataportal.tbl_utility_users WHERE username='$username';";
 $result = mysqli_query($cxn, $query) or die("failure");
 $row = mysqli_fetch_assoc($result);
 extract($row);
@@ -38,7 +38,7 @@ elseif ( $oldPasswordCorrect AND $newPasswordsMatch )
     $result_code = "pw_success";
     
     // Run query to update password
-    $query = "UPDATE lastmile_dataportal.tbl_utility_users SET password='$hashedPassword' WHERE pk='$pk'";
+    $query = "UPDATE lastmile_dataportal.tbl_utility_users SET password='$hashedPassword' WHERE id='$id'";
     mysqli_query($cxn, $query) or $result_code = "error";
 }
 

@@ -47,10 +47,10 @@ var LMD_dataPortal = (function() {
     }
 
 
-    // PRIVATE: Stores "instance value" data (in "chartData" and "tableData" objects), to be used in charts and tables
+    // PRIVATE: Stores indicator value data (in "chartData" and "tableData" objects), to be used in charts and tables
     //          The single parameter comes from LMD_REST.php/indicatorValues
-    //          For chartData, keys are instance IDs and values are objects containing two properties, a MySQL-formatted date and the indicator value
-    //          For tableData, keys are "instID-monthyear" hashes (e.g. "i_33_m_2015-4", for instID "33" on April, 2015) and values are indicator values
+    //          For chartData, keys are instance IDs (inst_id; a concatenation of ind_id, territory_id and period_id) and values are objects containing two properties, a MySQL-formatted date and the indicator value
+    //          For tableData, keys are "inst_id-monthyear" hashes (e.g. "i_28-6_16-1_m_2015-4", for inst_id "28-6_16-1" on April, 2015) and values are indicator values
     function setData(indicatorValues) {
         for (var key in indicatorValues) {
             
@@ -94,7 +94,7 @@ var LMD_dataPortal = (function() {
         var indicatorMetadata_return = {};
         
         for (var key in indicatorMetadata) {
-            var ind_id = indicatorMetadata[key].indID; // !!!!! change indID to ind_id in database table
+            var ind_id = indicatorMetadata[key].ind_id;
             var metadata = indicatorMetadata[key];
             indicatorMetadata_return[ind_id] = metadata;
         }
@@ -154,12 +154,12 @@ var LMD_dataPortal = (function() {
             
         }
 
-        // Sort by "displayOrder"
+        // Sort by "display_order"
         reportObjects.sort(function(a,b){
-            if (Number(a.displayOrder) < Number(b.displayOrder)) {
+            if (Number(a.display_order) < Number(b.display_order)) {
                 return -1;
             }
-            else if (Number(a.displayOrder) > Number(b.displayOrder)) {
+            else if (Number(a.display_order) > Number(b.display_order)) {
                 return 1;
             } else {
                 return 0;
@@ -192,8 +192,8 @@ var LMD_dataPortal = (function() {
             if ( ro.ro_name == null || ro.ro_name == '' ) {
                 ro.ro_name = metadata.ind_name;
             }
-            if ( ro.indSource == null || ro.indSource == '' ) {
-                ro.indSource = metadata.ind_source;
+            if ( ro.ind_source == null || ro.ind_source == '' ) {
+                ro.ind_source = metadata.ind_source;
             }
             if ( ro.ro_description == null || ro.ro_description == '' ) {
                 ro.ro_description = metadata.ind_definition;
@@ -330,7 +330,7 @@ var LMD_dataPortal = (function() {
         $(".value").each(function() {
             var inst_id = $(this).attr("data-inst_id");
             var yearmonth = $(this).attr("data-yearmonth");
-            var format = indicatorMetadata[inst_id.split("-")[0]].indFormat || 'integer';
+            var format = indicatorMetadata[inst_id.split("-")[0]].ind_format || 'integer';
             var value = tableData["i_" + inst_id + "_m_" + yearmonth];
             value = LMD_utilities.format_number(value, format);
             $(this).html(value);
@@ -408,8 +408,8 @@ var LMD_dataPortal = (function() {
                         xyVars: { x:"Month", y:"Value" }, // !!!!! This is currently unnecessary !!!!!
                         cut: "Cut", // !!!!! This is currently unnecessary !!!!!
                         legend: ro.chartMultiple ? "right" : "",
-                        tickFormat: ro.chart_tickFormat,
-                        axisValues: { min:ro.chart_yAxis_min, max:ro.chart_yAxis_max }
+                        tickFormat: ro.chart_tick_format,
+                        axisValues: { min:ro.chart_axis_y_min, max:ro.chart_axis_y_max }
                     });
                 }
             }

@@ -23,9 +23,9 @@ var legend = L.control({position: 'bottomright'});
 var currInd = {
     
     // Basic info
-    indID: null,
-    indName: null,
-    indFormat: null,
+    ind_id: null,
+    ind_name: null,
+    ind_format: null,
     
     // Reference to the relevant Leaflet layer
     indLayer: null,
@@ -102,10 +102,10 @@ var currInd = {
 // Uses 'availability_RAW' object returned via PHP/cURL, at the top of frag_leafletMap.php
 var availability = { county: [], district: [], community: [], communities_CHW: [] };
 for (var key1 in availability_RAW) {
-    var indID = availability_RAW[key1].indID;
+    var ind_id = availability_RAW[key1].ind_id;
     var indLevels = availability_RAW[key1].indLevels.split(',')
     for (var key2 in indLevels) {
-        availability[indLevels[key2]].push(Number(indID));
+        availability[indLevels[key2]].push(Number(ind_id));
     }
 }
 availability.communities_CHW = availability.community;
@@ -303,7 +303,7 @@ $(document).ready(function(){
     info.update = function (props) {
         this._div.innerHTML = '<h4>' + (props ? props.name : 'Liberia') + '</h4>' + 
                 (props && props.indVal ? currInd.indName + ': ' : '') + 
-                (props ? '<b>' + (props.indVal===null ? 'missing' : LMD_utilities.format_number(props.indVal, currInd.indFormat)) + '</b>' : 'Hover over a location');
+                (props ? '<b>' + (props.indVal===null ? 'missing' : LMD_utilities.format_number(props.indVal, currInd.ind_format)) + '</b>' : 'Hover over a location');
     };
     info.addTo(map);
 
@@ -487,9 +487,9 @@ $(document).ready(function(){
 
                 // Parse indicator metadata (data1); update currInd
                 var data1 = JSON.parse(ajaxManager_A.getData('data1'));
-                currInd.indID = data1.indID;
-                currInd.indFormat = data1.indFormat;
-                currInd.indName = data1.indName;
+                currInd.ind_id = data1.ind_id;
+                currInd.ind_format = data1.ind_format;
+                currInd.ind_name = data1.ind_name;
 
                 // Parse indicator data (data2)
                 var data2 = JSON.parse(ajaxManager_A.getData('data2'));
@@ -697,8 +697,8 @@ $(document).ready(function(){
                 label = '<i style="background:#FFF"></i> missing';
                 labels.push(label);
                 for (var i=0; i<5; i++) {
-                    from = LMD_utilities.format_number(currInd.indColors.scale[i+1].bottom, currInd.indFormat);
-                    to = LMD_utilities.format_number(currInd.indColors.scale[i+1].top, currInd.indFormat);
+                    from = LMD_utilities.format_number(currInd.indColors.scale[i+1].bottom, currInd.ind_format);
+                    to = LMD_utilities.format_number(currInd.indColors.scale[i+1].top, currInd.ind_format);
                         label = '<i style="background:' + currInd.indColors.returnColor(currInd.indColors.scale[i+1].bottom) + '"></i> ' +
                             (from===to ? from : from + '&nbsp;&ndash;&nbsp;' + to);
                     if (from!=='') {

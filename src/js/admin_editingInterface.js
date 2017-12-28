@@ -48,8 +48,8 @@ $(document).ready(function(){
                 dupeField: 'md_name',
                 modelHeaders: ['Name','Markdown text'],
                 modelDefaults: {
-                    mdName: "Enter a unique name here",
-                    mdText: "Copy and paste markdown text here"
+                    md_name: "Enter a unique name here",
+                    md_text: "Copy and paste markdown text here"
                 }
             };
             break;
@@ -60,7 +60,7 @@ $(document).ready(function(){
                 stringAdd: 'Add a new user',
                 sortVars: ['username'],
                 filters: [],
-                idAttribute: 'pk',
+                idAttribute: 'id',
                 dupeField: 'username',
                 modelHeaders: ['Username','User groups'],
                 modelDefaults: {
@@ -85,8 +85,8 @@ $(document).ready(function(){
                 mysqlIgnore: ['report_name','ro_name'],
                 modelHeaders: ['Report name','#','Indicator name','Narrative'],
                 modelDefaults: {
-                    reportName: "",
-                    displayOrder: "",
+                    report_name: "",
+                    display_order: "",
                     ro_name: "",
                     ro_narrative: ""
                 }
@@ -97,10 +97,6 @@ $(document).ready(function(){
             // code
             break;
     }
-    
-
-    // Set css class
-    $('#outerDiv').addClass("css_" + sw);
     
 
     // Sort eData by variables in ei.sortVars array, defined above
@@ -249,15 +245,15 @@ $(document).ready(function(){
     if (sw === 'markdown') {
         // Populate inputs (for markdown)
         // This requires special code because it leverages a textarea, which can handle special characters (accept-charset='ISO-8859-1') and corresponds with a MySQL LONGTEXT field
-        $('.eiTR').prepend("<td><textarea accept-charset='ISO-8859-1' class='admin_input pad filterCut' data-bind='value: mdText, attr:{\"data-field\":\"mdText\"}, event: {change:$root.other.actions.change}'></textarea></td>");
-        $('.eiTR').prepend("<td><input class='admin_input pad' data-bind='value: mdName, attr:{\"data-field\":\"mdText\"}, event: {change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
+        $('.eiTR').prepend("<td><textarea accept-charset='ISO-8859-1' class='admin_input pad filterCut' data-bind='value: md_text, attr:{\"data-field\":\"md_text\"}, event: {change:$root.other.actions.change}'></textarea></td>");
+        $('.eiTR').prepend("<td><span style=display:none data-bind='text:" + eiFields[key] + "'></span><input class='admin_input pad' data-bind='value: md_name, attr:{\"data-field\":\"md_text\"}, event: {change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
     } else {
         
         // Populate inputs (for everything except markdown)
         for (var key in eiFields) {
             
             // Handle text fields
-            if (ei.dropdowns[eiFields[key]] === undefined) {
+            if (ei.dropdowns === undefined || ei.dropdowns[eiFields[key]] === undefined) {
                 $('.eiTR').prepend("<td><span style=display:none data-bind='text:" + eiFields[key] + "'></span><input class='admin_input pad" + addClass + "' data-bind='value:" + eiFields[key] + ", attr:{\"data-field\":\"" + eiFields[key] + "\"}, event: {click:$root.other.actions.click, change:$root.other.actions.change, blur:$root.other.actions.blur}'></td>");
                 
             // Handle dropdowns
@@ -321,7 +317,7 @@ $(document).ready(function(){
     $('#btn_submit').click(function() {
         
         // Check that all required fields are filled
-        // !!!!! Add this functionality !!!!!
+        // !!!!! Add this functionality; use dupeField as a model !!!!!
         
         // Manipulate DOM
         LMD_utilities.ajaxButton($submit, 'ajaxLoader');

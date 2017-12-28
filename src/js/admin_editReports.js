@@ -1,11 +1,11 @@
 $(document).ready(function(){
     
     // !!!!! Add ajaxButton usage throughout; test on slow connection !!!!!
-    // !!!!! Add instIDs_shortNames and chart_instIDs_shortNames; ensure that # of IDs matches; write a note to user that short names can't contain commas !!!!!
+    // !!!!! Add labels_table and labels_chart; ensure that # of IDs matches; write a note to user that short names can't contain commas !!!!!
 
     // Add "Select report..." to beginning of array; initialize knockout.js; bind model to DIV ("top" model - add/edit/delete reports)
     // Note: `reports` comes from PHP CURL
-    reports.unshift({reportID:"0", reportName:"Select report..."});
+    reports.unshift({report_id:"0", report_name:"Select report..."});
 
 
     // Declare main model for editing sets of report objects
@@ -17,7 +17,7 @@ $(document).ready(function(){
         // Object to hold list of "report objects"
         reportObjects: ko.observableArray(),
         
-        // Holds reportID of current report
+        // Holds report_id of current report
         currentReportID: null,
         
         actions: {
@@ -27,11 +27,11 @@ $(document).ready(function(){
                 
                 // First, check to see if report name is already taken (case insensitive)
                 var newReportName = $('#addReport_input').val();
-                var reportNames = [];
+                var report_names = [];
                 for(var key in erModel.reports) {
-                    reportNames.push(erModel.reports[key].reportName.toLowerCase());
+                    report_names.push(erModel.reports[key].report_name.toLowerCase());
                 }
-                var isTaken = reportNames.indexOf(newReportName.toLowerCase())===-1 ? false : true;
+                var isTaken = report_names.indexOf(newReportName.toLowerCase())===-1 ? false : true;
 
                 // If report name is not already taken, proceed
                 if (isTaken) {
@@ -43,11 +43,11 @@ $(document).ready(function(){
                         type: "POST",
                         url: "/LastMileData/php/scripts/LMD_REST.php/reports/",
                         data: {
-                            reportName: newReportName
+                            report_name: newReportName
                         },
                         dataType: "json",
                         success: function(data) {
-                            // Clear report objects; display report name; set reportID; add one blank RO; unhide DIV
+                            // Clear report objects; display report name; set report_id; add one blank RO; unhide DIV
                             erModel.reportObjects.removeAll();
                             $('#currentReport').text($('#addReport_input').val());
                             erModel.currentReportID = data;
@@ -65,14 +65,14 @@ $(document).ready(function(){
             // Click handler: Edit a report
             editReport: function() {
                 
-                var reportID = $('#editReport_input').val();
+                var report_id = $('#editReport_input').val();
                 
                 // Load report objects
-                erModel.actions.loadReportObjects(reportID);
+                erModel.actions.loadReportObjects(report_id);
                 
                 // Display report name and set currentReportID
-                $('#currentReport').text($('#editReport_input option[value=' + reportID + ']')[0].outerText);
-                erModel.currentReportID = reportID;
+                $('#currentReport').text($('#editReport_input option[value=' + report_id + ']')[0].outerText);
+                erModel.currentReportID = report_id;
                 
                 // Unhide DIV
                 $('#editReports_bottom').removeClass('hide');
@@ -108,21 +108,21 @@ $(document).ready(function(){
             },
             
             // Load report objects for a given report into editor
-            loadReportObjects: function(reportID) {
+            loadReportObjects: function(report_id) {
                 
                 // Send AJAX request to retrieve report objects associated with that report
                 $.ajax({
                     type: "GET",
-                    url: "/LastMileData/php/scripts/LMD_REST.php/reportObjects/1/" + reportID,
+                    url: "/LastMileData/php/scripts/LMD_REST.php/reportObjects/1/" + report_id,
                     dataType: "json",
                     success: function(data) {
 
                         // !!!!! Be sure to handle cases with reports with zero/one objects !!!!!
 
-                        // Sort `reportObjects` array by displayOrder attribute
+                        // Sort `reportObjects` array by display_order attribute
                         data.sort(function(a,b){
-                            if (Number(a.displayOrder) < Number(b.displayOrder)) { return -1; }
-                            else if (Number(a.displayOrder) > Number(b.displayOrder)) { return 1; }
+                            if (Number(a.display_order) < Number(b.display_order)) { return -1; }
+                            else if (Number(a.display_order) > Number(b.display_order)) { return 1; }
                             else {
                                 return 0;
                             }
@@ -174,16 +174,16 @@ $(document).ready(function(){
                 
                 // Create new report object; load defaults
                 erModel.reportObjects.push(ko.mapping.fromJS({
-                    reportID: erModel.currentReportID,
-                    instIDs: '',
+                    report_id: erModel.currentReportID,
+                    inst_ids: '',
                     ro_name: '',
                     ro_description: '',
                     chart_type: 'line',
                     chart_size_x: 0,
                     chart_size_y: 0,
-                    chart_instIDs: '',
-                    instIDs_shortNames: '',
-                    chart_instIDs_shortNames: '',
+                    indicators_chart: '',
+                    labels_table: '',
+                    labels_chart: '',
                     archived: 0
                 }));
                 
@@ -194,12 +194,12 @@ $(document).ready(function(){
                 
                 // Reference to current RO
                 var self = this;
-                var firstInstID = this.instIDs().split(',')[0];
+                var first_inst_id = this.inst_ids().split(',')[0];
 
                 // Get metadata for first instance ID
                 $.ajax({
                     type: "GET",
-                    url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/0/" + firstInstID,
+                    url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/0/" + first_inst_id,
                     dataType: "json",
                     success: function(data) {
                         if (data.ind_name === undefined) {
@@ -234,13 +234,13 @@ $(document).ready(function(){
                 
             },
             
-            checkInstIDsTable: function() {
+            checkIndIDsTable: function() {
                 var length_1 = $(event.currentTarget).val().split(',').length;
                 console.log('table');
                 console.log(length_1);
             },
             
-            checkInstIDsChart: function() {
+            checkIndIDsChart: function() {
                 var string1 = $(event.currentTarget).val();
                 console.log('chart');
                 console.log($(event.currentTarget).val());
@@ -263,7 +263,7 @@ $(document).ready(function(){
             saveChanges: function() {
                 
                 // Begin query string
-                var queryString = "DELETE FROM lastmile_dataportal.tbl_reportobjects WHERE reportID=" + erModel.currentReportID + ";";
+                var queryString = "DELETE FROM lastmile_dataportal.tbl_report_objects WHERE report_id=" + erModel.currentReportID + ";";
                 
                 // Parse data back into regular JS array
                 var roData = ko.mapping.toJS(erModel.reportObjects);
@@ -271,14 +271,14 @@ $(document).ready(function(){
                 // Reset display order based on current array order
                 var i = 1;
                 for (var key in roData) {
-                    roData[key].displayOrder = i++;
-                    queryString += LMD_utilities.parseJSONIntoSQL(roData[key], "lastmile_dataportal", "tbl_reportobjects", ['id']);
+                    roData[key].display_order = i++;
+                    queryString += LMD_utilities.parseJSONIntoSQL(roData[key], "lastmile_dataportal", "tbl_report_objects", ['id']);
                 }
 
                 // If the report name has been changed, add an additional query to the queryString
                 if ($('#currentReport_input').length===1) {
                     var newReportName = $('#currentReport_input').val();
-                    queryString += "UPDATE lastmile_dataportal.tbl_reports SET reportName='" + LMD_utilities.addSlashes(newReportName) + "' WHERE reportID=" + erModel.currentReportID + ";";
+                    queryString += "UPDATE lastmile_dataportal.tbl_reports SET report_name='" + LMD_utilities.addSlashes(newReportName) + "' WHERE report_id=" + erModel.currentReportID + ";";
                 }
                 
                 // Send changes to database via AJAX; manipulate DOM on success

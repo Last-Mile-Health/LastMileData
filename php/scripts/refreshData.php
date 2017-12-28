@@ -15,7 +15,7 @@ require_once("cxn.php");
 
 // 1. Update "deqaUsers" (object)
 //  Note that the LOCATE('admin',`user_groups`)>0 clause will pick up both "admin" and "superadmin"
-$query = "SELECT username, password FROM lastmile_dataportal.tbl_utility_users WHERE LOCATE('admin',`user_groups`)>0 OR LOCATE('deqa',`user_groups`)>0;";
+$query = "SELECT username, password FROM lastmile_dataportal.tbl_utility_users WHERE archived<>1 AND (LOCATE('admin',`user_groups`)>0 OR LOCATE('deqa',`user_groups`)>0);";
 $result = mysqli_query($cxn, $query) or die("failure");
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
     $row = mysqli_fetch_assoc($result);

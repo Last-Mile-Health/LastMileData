@@ -1,15 +1,15 @@
 <script>
 <?php
 
-    // Extract 'reportID' and 'reportTitle' parameters
-    $reportID = $_GET['reportID'];
+    // Extract 'report_id' and 'report_title' parameters
+    $report_id = $_GET['report_id'];
     
     // Initiate/configure CURL session
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
     // Echo JSON (report model)
-    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reportObjects/0/$reportID";
+    $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reportObjects/0/$report_id";
     curl_setopt($ch,CURLOPT_URL,$url1);
     $json1 = curl_exec($ch);
     
@@ -84,10 +84,10 @@
     }
     
     // Echo report title
-    $url5 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$reportID";
+    $url5 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$report_id";
     curl_setopt($ch,CURLOPT_URL,$url5);
-    $reportName = JSON_decode(curl_exec($ch))->reportName;
-    $headerNote = JSON_decode(curl_exec($ch))->headerNote;
+    $report_name = JSON_decode(curl_exec($ch))->report_name;
+    $header_note = JSON_decode(curl_exec($ch))->header_note;
 
     // Close CURL session and echo JSON (to be used by LMD_dataPortal.js)
     curl_close($ch);
@@ -104,15 +104,15 @@
 </script>
 
 <div id='reportContent'>
-    <h1><?php echo $reportName; ?></h1>
-    <p><?php echo $headerNote; ?></p>
+    <h1><?php echo $report_name; ?></h1>
+    <p><?php echo $header_note; ?></p>
     <div data-bind="foreach: {data:reportObjects, as:'ro'}">
         <div class='row'>
             <hr style="margin:15px; border:1px solid #eee;">
             <div class='col-md-5'>
                 <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + ro_name"></h3>
                 <p><b>Definition</b>: <span data-bind="text:ro_description"></span></p>
-                <p data-bind="if:indSource"><b>Data source</b>: <span data-bind="text:indSource"></span></p>
+                <p data-bind="if:ind_source"><b>Data source</b>: <span data-bind="text:ind_source"></span></p>
                 <p data-bind="if:ro_target"><b>Target</b>: <span data-bind="text:ro_target"></span></p>
                 <table class='ptg_data'>
                     

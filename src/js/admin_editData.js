@@ -189,7 +189,7 @@ $(document).ready(function(){
 });
 
 
-// Loads data (indicator/instance metadata + values) from server, filtered by geoCut and indCategory
+// Loads data (indicator/instance metadata + values) from server, filtered by territory and ind_category
 function loadData(options) {
     
     var self = this;
@@ -226,7 +226,7 @@ function loadData(options) {
             // !!!!! May need to modify the underlying view later on to filter out districts, facilities, etc. !!!!!
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/view_territories_active/",
+                url: "/LastMileData/php/scripts/LMD_REST.php/territories_active/",
                 dataType: "json",
                 error: ajaxError
             }),
@@ -279,9 +279,9 @@ function loadData(options) {
                 }
             }
             
-            // Populate `adminModel.selects.category` array (holds options for indCategory filter
+            // Populate `adminModel.selects.category` array (holds options for ind_category filter
             for (var key in categories[0]) {
-                var category = categories[0][key].indCategory;
+                var category = categories[0][key].ind_category;
                 if (self.selects.category.indexOf(category)===-1) {
                     self.selects.category.push(category);
                 }

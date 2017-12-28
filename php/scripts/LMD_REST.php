@@ -29,7 +29,6 @@
      4a     LMD_REST.php/markdown                           lastmile_dataportal.markdown
      4b     LMD_REST.php/markdownByName                     lastmile_dataportal.markdown
      5      LMD_REST.php/users                              lastmile_dataportal.tbl_utility_users
-     6      LMD_REST.php/staff                              lastmile_chwdb.admin_staff
      7      LMD_REST.php/narratives                         lastmile_dataportal.view_report_objects
      8      LMD_REST.php/reports                            lastmile_dataportal.tbl_reports
      9a     LMD_REST.php/gis_communities_remote             lastmile_cha.view_base_geo_community
@@ -156,9 +155,10 @@ $app->delete('/reportObjects/:id', function($id) {
 
 
 // Route 4a: Markdown (lastmile_dataportal.tbl_markdown)
-// Note: the "/1/" in the URL is to enable admin_editingInterface to work
-$app->get('/markdown/1/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.tbl_markdown", "*", 1);
+// Note: the "/0/" in the URL is to enable admin_editingInterface to work
+// "Delete" is actually an "archive" via LMD_archive()
+$app->get('/markdown/0/(:id)',function($id='all') {
+    LMD_get($id, "id", "lastmile_dataportal.tbl_markdown", "*", "archived <> 1");
 });
 $app->post('/markdown/', function() {
     LMD_post("lastmile_dataportal.tbl_markdown");
@@ -167,7 +167,7 @@ $app->put('/markdown/:id', function($id) {
     LMD_put($id, "id", "lastmile_dataportal.tbl_markdown");
 });
 $app->delete('/markdown/:id', function($id) {
-    LMD_delete($id, "id", "lastmile_dataportal.tbl_markdown");
+    LMD_archive($id, "id", "lastmile_dataportal.tbl_markdown");
 });
 
 
@@ -178,9 +178,10 @@ $app->get('/markdownByName/:id',function($id) {
 
 
 // Route 5: LMD users (lastmile_dataportal.tbl_utility_users)
-// Note: the "/1/" in the URL is to enable admin_editingInterface to work
-$app->get('/users/1/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.tbl_utility_users", "id, username, user_groups", 1);
+// Note: the "/0/" in the URL is to enable admin_editingInterface to work
+// "Delete" is actually an "archive" via LMD_archive()
+$app->get('/users/0/(:id)',function($id='all') {
+    LMD_get($id, "id", "lastmile_dataportal.tbl_utility_users", "id, username, user_groups", "archived <> 1");
 });
 $app->post('/users/', function() {
     LMD_post("lastmile_dataportal.tbl_utility_users");
@@ -189,29 +190,13 @@ $app->put('/users/:id', function($id) {
     LMD_put($id, "id", "lastmile_dataportal.tbl_utility_users");
 });
 $app->delete('/users/:id', function($id) {
-    LMD_delete($id, "id", "lastmile_dataportal.tbl_utility_users");
+    LMD_archive($id, "id", "lastmile_dataportal.tbl_utility_users");
 });
 
 
-// Route 6: Program staff - CHWs, CHWLs, CCSs (lastmile_chwdb.admin_staff)
-// Note: the "/1/" in the URL is to enable admin_editingInterface to work
-//$app->get('/staff/1/(:id)',function($id='all') {
-//    LMD_get($id, "staffID", "lastmile_chwdb.admin_staff", "staffID, firstName, lastName, dateOfBirth, gender", 1);
-//});
-//$app->post('/staff/', function() {
-//    LMD_post("lastmile_chwdb.admin_staff");
-//});
-//$app->put('/staff/:id', function($id) {
-//    LMD_put($id, "staffID", "lastmile_chwdb.admin_staff");
-//});
-//$app->delete('/staff/:id', function($id) {
-//    LMD_delete($id, "staffID", "lastmile_chwdb.admin_staff");
-//});
-
-
 // Route 7: Data Portal narratives (lastmile_dataportal.view_report_objects)
-// Note: the "/1/" in the URL is to enable admin_editingInterface to work
-$app->get('/narratives/1/(:id)',function($id='all') {
+// Note: the "/0/" in the URL is to enable admin_editingInterface to work
+$app->get('/narratives/0/(:id)',function($id='all') {
     LMD_get($id, "id", "lastmile_dataportal.view_report_objects", "*", 1);
 });
 $app->post('/narratives/', function() {

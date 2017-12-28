@@ -78,8 +78,8 @@ $(document).ready(function(){
             }
             
             // Send usage data point to database (tracks sidebar link clicks)
-            var reportName = $(this).find('a span').text();
-            LMD_utilities.logUsage(reportName, linkURL);
+            var report_name = $(this).find('a span').text();
+            LMD_utilities.logUsage(report_name, linkURL);
 
             // Fade out current mainContainer
             $('#whitespaceContainer').slideDown(500, function(){
