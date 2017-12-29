@@ -46,7 +46,7 @@ $.getScript('../js/admin_editReports.js');
                 <td><button id="editReport" data-bind="click:actions.editReport" class="repButton btn btn-s btn-warning">Go</button></td>
             </tr>
             <tr>
-                <td>Delete report: </td>
+                <td>Archive report: </td>
                 <td>
                     <select id="deleteReport_input" data-bind="foreach:reports" class="form-control">
                         <option data-bind="{text:report_name, value:report_id}"></option>
@@ -85,20 +85,37 @@ $.getScript('../js/admin_editReports.js');
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <button class="btn btn-xs btn-success" data-bind="click:$root.actions.loadMetadata" style="top:0px;">Load metadata from first instance ID</button>
+                                    <input type="checkbox" data-bind="checked:use_metadata_from_indicator">Use metadata from (first) indicator
+                                    <!--<input type="checkbox" data-bind="checked:use_metadata_from_indicator, event:{click: $root.actions.loadMetadata}">Use metadata from (first) indicator-->
                                 </td>
                             </tr>
                             <tr>
-                                <td>Instance IDs (table):&nbsp;</td>
-                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:indicators_table, event:{blur:$root.actions.checkIndIDsTable}"></td>
+                                <td>Indicators (table):&nbsp;</td>
+                                <td>
+                                    <button class="btn btn-xs btn-success btn_select_indicators" data-bind="click:$root.actions.selectIndicators.bind($data,'table')">Select</button>
+                                    <input placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_table" style="width:141px">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Name:</td>
-                                <td><input placeholder="Type object name..." class="ui-state-default ui-corner-all" data-bind="value:ro_name"></td>
+                                <td>
+                                    <input class="ui-state-default ui-corner-all" data-bind="value:ro_name, visible:(!use_metadata_from_indicator())" placeholder="Type object name...">
+                                    <input class="ui-state-default ui-corner-all" data-bind="attr:{'data-ind_id':indicators_table}, visible:use_metadata_from_indicator" data-field="ind_name" disabled>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Description:</td>
-                                <td><input placeholder="Type object description..." class="ui-state-default ui-corner-all" data-bind="value:ro_description"></td>
+                                <td>
+                                    <input class="ui-state-default ui-corner-all" data-bind="value:ro_description, visible:(!use_metadata_from_indicator())" placeholder="Type object description...">
+                                    <input class="ui-state-default ui-corner-all" data-bind="attr:{'data-ind_id':indicators_table}, visible:use_metadata_from_indicator" data-field="ind_definition" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Source:</td>
+                                <td>
+                                    <input class="ui-state-default ui-corner-all" data-bind="value:ro_source, visible:(!use_metadata_from_indicator())" placeholder="Type object source...">
+                                    <input class="ui-state-default ui-corner-all" data-bind="attr:{'data-ind_id':indicators_table}, visible:use_metadata_from_indicator" data-field="ind_source" disabled>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -119,11 +136,15 @@ $.getScript('../js/admin_editReports.js');
                                 </td>
                             </tr>
                             <tr>
-                                <td>Instance IDs (chart):&nbsp;</td>
-                                <td><input placeholder="Type instance IDs..." class="ui-state-default ui-corner-all" data-bind="value:indicators_chart, event:{blur:$root.actions.checkIndIDsChart}"></td>
+                                <td>Indicators (chart):&nbsp;</td>
+                                <td>
+                                    <button class="btn btn-xs btn-success btn_select_indicators" data-bind="click:$root.actions.selectIndicators.bind($data,'chart')">Select</button>
+                                    <input placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_chart" style="width:141px">
+                                </td>
                             </tr>
                             <tr>
-                                <td><button class="btn btn-xs btn-success btn_archive" data-bind="click:$root.actions.archiveToggle">Archive</button></td>
+                                <td>
+                                    <button class="btn btn-xs btn-success btn_archive" data-bind="click:$root.actions.archiveToggle">Archive</button></td>
                             </tr>
                             <tr>
                                 <td><button class="btn btn-xs btn-success btn_advanced" data-bind="click:$root.actions.showAdvancedOptions">Show advanced options</button></td>
@@ -173,3 +194,44 @@ $.getScript('../js/admin_editReports.js');
     </div>
     
 </div>
+
+
+<!-- MODAL START: "Select indicators" -->
+<div id="selectIndicatorsModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Select indicators (table)</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>ID#</th>
+                            <th>Indicator Name</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:indicators">
+                        <tr>
+                            <td><input class="indCheckbox" type="checkbox" data-bind="attr:{'data-ind_id':ind_id}"></td>
+                            <td data-bind="text:ind_id"></td>
+                            <td data-bind="text:ind_name"></td>
+                        </tr>
+                    </tbody>
+                </table>
+<!--                <div data-bind="foreach:indicators">
+                    <div>
+                        <input type="checkbox">&nbsp;<span data-bind="text:ind_name"></span>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <button id="selectIndicators_submit" data-bind="click:actions.submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>        
+<!-- MODAL END: "Select indicators" -->

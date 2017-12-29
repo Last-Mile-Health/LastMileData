@@ -221,7 +221,7 @@ $app->put('/reports/:id', function($id) {
     LMD_put($id, "report_id", "lastmile_dataportal.tbl_reports");
 });
 $app->delete('/reports/:id', function($id) {
-    LMD_delete($id, "report_id", "lastmile_dataportal.tbl_reports");
+    LMD_archive($id, "report_id", "lastmile_dataportal.tbl_reports");
 });
 
 

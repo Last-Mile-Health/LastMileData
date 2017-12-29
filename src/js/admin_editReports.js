@@ -6,19 +6,78 @@ $(document).ready(function(){
     // Add "Select report..." to beginning of array; initialize knockout.js; bind model to DIV ("top" model - add/edit/delete reports)
     // Note: `reports` comes from PHP CURL
     reports.unshift({report_id:"0", report_name:"Select report..."});
+    
+    // Get indicator list (for indicators_table and indicators_chart selects)
+    // !!!!! New REST route to get only indicator names and ind_ids !!!!!
+    $.ajax({
+        type: "GET",
+        url: "/LastMileData/php/scripts/LMD_REST.php/indicators/0/",
+        dataType: "json",
+        success: function(data) {
+
+            // Initialize knockout.js; bind model to DIV; use DataTable()
+            var moModel = {
+                indicators: data,
+                actions: {
+                    submit: function() {
+                        
+                        // Get ind_ids
+                        var ind_id_string = '';
+                        $('input.indCheckbox').each(function(){
+                            if ($(this).prop('checked') === true) {
+                                ind_id_string += $(this).attr('data-ind_id') + ',';
+                            }
+                        });
+                        ind_id_string = ind_id_string.slice(0,-1);
+                        console.log(ind_id_string);
+                        
+                        
+                        // Set input value
+                        erModel.selectIndicators.current['indicators_' + erModel.selectIndicators.type](ind_id_string);
+                        
+                        // Close modal
+                        $('#selectIndicatorsModal').modal('hide');
+                        
+                        // Update metadata
+                        var first_ind_id = ind_id_string.split(',')[0];
+                        erModel.actions.loadIndicatorMetadata(first_ind_id);
+                        
+                    }
+                }
+            }
+            ko.applyBindings(moModel, $('#selectIndicatorsModal')[0]);
+            var DT = $('.table').DataTable({
+                scrollY: '35vh',
+                paging: false
+            });
+            $('body').on('shown.bs.modal',function(){
+                DT.draw();
+            });
+
+        },
+        error: ajaxError
+    });
+
+    
 
 
     // Declare main model for editing sets of report objects
     var erModel = {
         
-        // Object to hold list of reports
+        // Holds list of reports
         reports: reports,
         
-        // Object to hold list of "report objects"
+        // Holds list of "report objects"
         reportObjects: ko.observableArray(),
         
         // Holds report_id of current report
         currentReportID: null,
+        
+        // Holds information used by "select indicators" buttons
+        selectIndicators: {
+            type: '',
+            current: {}
+        },
         
         actions: {
             
@@ -26,6 +85,7 @@ $(document).ready(function(){
             addReport: function() {
                 
                 // First, check to see if report name is already taken (case insensitive)
+                // !!!!! test this code !!!!!
                 var newReportName = $('#addReport_input').val();
                 var report_names = [];
                 for(var key in erModel.reports) {
@@ -40,7 +100,7 @@ $(document).ready(function(){
 
                     // Send database request to add new report
                     $.ajax({
-                        type: "POST",
+                        method: "POST",
                         url: "/LastMileData/php/scripts/LMD_REST.php/reports/",
                         data: {
                             report_name: newReportName
@@ -84,7 +144,7 @@ $(document).ready(function(){
             deleteReport: function() {
 
                 // Prompt user with dialog box to confirm deletion
-                var confirm = window.confirm("Are you sure you want to delete this report?");
+                var confirm = window.confirm("Are you sure you want to archive this report?");
 
                 // Proceed with "deletion" (archiving)
                 if (confirm) {
@@ -93,12 +153,10 @@ $(document).ready(function(){
 
                     // Send database request to add new report
                     $.ajax({
-                        type: "PUT",
+                        method: "DELETE",
                         url: "/LastMileData/php/scripts/LMD_REST.php/reports/" + $('#deleteReport_input').val(),
-                        data: { archived: 1 },
-                        dataType: "json",
                         success: function() {
-                            window.location.reload();
+                            $("#deleteReport_input option[value=" + $('#deleteReport_input').val() + "]").remove();
                         },
                         error: ajaxError
                     });
@@ -134,6 +192,52 @@ $(document).ready(function(){
                             erModel.reportObjects.push(ko.mapping.fromJS(data[key]));
                         }
 
+                        // Load indicator metadata
+                        var ind_id_string = '';
+                        for (var key in erModel.reportObjects()) {
+                            var first_ind_id = erModel.reportObjects()[key].indicators_table().split(',')[0];
+                            ind_id_string += first_ind_id + ','
+                        }
+                        ind_id_string = ind_id_string.slice(0,-1);
+                        erModel.actions.loadIndicatorMetadata(ind_id_string);
+                
+                    },
+                    error: ajaxError
+                });
+                
+            },
+            
+            // Load indicator metadata (for "use metadata from (first) indicator" functionality)
+            loadIndicatorMetadata: function(ind_id_string) {
+
+                // Get metadata for first instance ID
+                $.ajax({
+                    type: "GET",
+                    url: "/LastMileData/php/scripts/LMD_REST.php/indicators/0/" + ind_id_string,
+                    dataType: "json",
+                    success: function(data) {
+                        
+                        // Populate metadata object, which assigns each object in the response array to an ind_id key
+                        var metadata = {};
+                        if (data.ind_id) {
+                            // Handle cases with one object in response
+                            metadata[data.ind_id] = data;
+                        } else {
+                            // Handle cases with an array of object in response
+                            for (var key in data) {
+                                metadata[data[key].ind_id] = data[key];
+                            }
+                        }
+                        
+                        // Populate fields (these are for display only; values are not stored in the database)
+                        $('input[data-ind_id]').each(function(){
+                            var first_ind_id = $(this).attr('data-ind_id').split(',')[0];
+                            var field = $(this).attr('data-field');
+                            if (metadata[first_ind_id]) {
+                                $(this).val(metadata[first_ind_id][field]);
+                            }
+                        });
+                        
                     },
                     error: ajaxError
                 });
@@ -182,6 +286,8 @@ $(document).ready(function(){
                     chart_size_x: 0,
                     chart_size_y: 0,
                     indicators_chart: '',
+                    use_metadata_from_indicator: true,
+                    // !!!!! add other properties (ind_source, etc.)
                     labels_table: '',
                     labels_chart: '',
                     archived: 0
@@ -189,61 +295,90 @@ $(document).ready(function(){
                 
             },
             
-            // Load metadata from first instance ID
+            // Load metadata from first indicator_id
             loadMetadata: function() {
-                
-                // Reference to current RO
-                var self = this;
-                var first_inst_id = this.inst_ids().split(',')[0];
 
-                // Get metadata for first instance ID
-                $.ajax({
-                    type: "GET",
-                    url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstances/0/" + first_inst_id,
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.ind_name === undefined) {
-                            alert('This instance ID is not defined.');
-                        } else {
-                            // Load metadata into corresponding fields
-                            self.ro_name(data.ind_name);
-                            self.ro_description(data.ind_definition);
-                        }
-                    },
-                    error: ajaxError
-                });
-                
+//                if (this.use_metadata_from_indicator() === true) {
+//
+//                    // Create reference to current report object; get first indicator ID
+//                    var self = this;
+//                    var first_ind_id = this.indicators_table().split(',')[0];
+//
+//                    // Get metadata for first instance ID
+//                    $.ajax({
+//                        type: "GET",
+//                        url: "/LastMileData/php/scripts/LMD_REST.php/indicators/0/" + first_ind_id,
+//                        dataType: "json",
+//                        success: function(data) {
+//                            // Load metadata into corresponding fields
+//                            self.ro_name(data.ind_name);
+//                            self.ro_description(data.ind_definition);
+//                        },
+//                        error: ajaxError
+//                    });
+//
+//                } else {
+//                    
+//                }
+//
+//                // Return true to enable checkbox to work properly
+//                return true;
+
             },
 
             // Archive or unarchive the report object (value is toggled based on current value)
-            archiveToggle: function() {
+            selectIndicators: function(type, data, event) {
                 
+                console.log(this);
+                
+                erModel.selectIndicators.type = type;
+                erModel.selectIndicators.current = data;
+                
+                if (type==='table') {
+                    // !!!!!
+                } else if (type==='chart') {
+                    // !!!!!
+                }
+                
+                var indArray = data.indicators_table().split(',');
+                
+                $('#selectIndicatorsModal').modal();
+                
+                // Check the checkboxes corresponding to the selected indicators
+                $('input.indCheckbox').each(function(){
+                    if (indArray.indexOf($(this).attr('data-ind_id')) !== -1) {
+                        $(this).prop('checked',true);
+                    } else {
+                        $(this).prop('checked',false);
+                    }
+                });
+                
+            },
+            
+            // Archive or unarchive the report object (value is toggled based on current value)
+            archiveToggle: function() {
                 var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
                 var archived = Number(erModel.reportObjects()[index].archived());
                 erModel.reportObjects()[index].archived(1-archived);
-                
             },
             
             // Archive or unarchive the report object (value is toggled based on current value)
             showAdvancedOptions: function() {
-                
-                console.log($(event.currentTarget).closest('.roContainer').find('.advancedOptions').removeClass('hide'));
-//                var index = Number($(event.currentTarget).closest('.roContainer').attr('index'));
-//                var archived = Number(erModel.reportObjects()[index].archived());
-//                erModel.reportObjects()[index].archived(1-archived);
-                
+                $(event.currentTarget).closest('.roContainer').find('.advancedOptions').removeClass('hide');
             },
             
             checkIndIDsTable: function() {
-                var length_1 = $(event.currentTarget).val().split(',').length;
+                var string1 = $(event.currentTarget).val();
                 console.log('table');
-                console.log(length_1);
+                console.log($(event.currentTarget).val());
+                // !!!!! build this out !!!!!
             },
             
             checkIndIDsChart: function() {
                 var string1 = $(event.currentTarget).val();
                 console.log('chart');
                 console.log($(event.currentTarget).val());
+                // !!!!! build this out !!!!!
             },
             
             // Archive or unarchive the report object (value is toggled based on current value)
@@ -267,6 +402,17 @@ $(document).ready(function(){
                 
                 // Parse data back into regular JS array
                 var roData = ko.mapping.toJS(erModel.reportObjects);
+                
+                // Change 'true/false' to '1/null' (for checkboxes)
+                for (var key in roData) {
+                    for (var key2 in roData[key]) {
+                        if (roData[key][key2] === true) {
+                            roData[key][key2] = 1;
+                        } else if (roData[key][key2] === false) {
+                            roData[key][key2] = null;
+                        }
+                    }
+                }
                 
                 // Reset display order based on current array order
                 var i = 1;
