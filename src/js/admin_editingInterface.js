@@ -258,7 +258,6 @@ $(document).ready(function(){
                 
             // Handle dropdowns
             } else {
-                
                 var htmlString = "<td><span style=display:none data-bind='text:" + eiFields[key] + "'></span><select class='admin_input pad" + addClass + "' data-bind='value:" + eiFields[key] + ", attr:{\"data-field\":\"" + eiFields[key] + "\"}, event: {click:$root.other.actions.click, change:$root.other.actions.change, blur:$root.other.actions.blur}'>";
                 for (var key2 in ei.dropdowns[eiFields[key]]) {
                     htmlString += "<option>" + ei.dropdowns[eiFields[key]][key2] + "</option>";

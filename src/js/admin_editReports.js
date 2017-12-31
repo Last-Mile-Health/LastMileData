@@ -15,7 +15,7 @@ $(document).ready(function(){
         dataType: "json",
         success: function(data) {
 
-            // Initialize knockout.js; bind model to DIV; use DataTable()
+            // Create model for indicator selection modal
             var moModel = {
                 indicators: data,
                 actions: {
@@ -29,8 +29,6 @@ $(document).ready(function(){
                             }
                         });
                         ind_id_string = ind_id_string.slice(0,-1);
-                        console.log(ind_id_string);
-                        
                         
                         // Set input value
                         erModel.selectIndicators.current['indicators_' + erModel.selectIndicators.type](ind_id_string);
@@ -45,11 +43,23 @@ $(document).ready(function(){
                     }
                 }
             }
+            
+            // Allow for sorting by checkboxes
+            // See this example as a reference: https://datatables.net/examples/plug-ins/dom_sort.html
+            $.fn.dataTable.ext.order['dom-checkbox'] = function(settings,col) {
+                return this.api().column( col, {order:'index'} ).nodes().map( function(td,i) {
+                    return $('input',td).prop('checked') ? '1' : '0';
+                } );
+            }
+            
+            // Initialize knockout.js; bind model to DIV; use DataTable()
             ko.applyBindings(moModel, $('#selectIndicatorsModal')[0]);
             var DT = $('.table').DataTable({
                 scrollY: '35vh',
-                paging: false
+                paging: false,
+                columns: [ {orderDataType:'dom-checkbox'}, null, null ]
             });
+            
             $('body').on('shown.bs.modal',function(){
                 DT.draw();
             });
@@ -329,29 +339,25 @@ $(document).ready(function(){
             // Archive or unarchive the report object (value is toggled based on current value)
             selectIndicators: function(type, data, event) {
                 
-                console.log(this);
-                
+                // `type` is either "table", "chart", or "chart_secondary"
+                // `data` holds a reference to the current report object
                 erModel.selectIndicators.type = type;
                 erModel.selectIndicators.current = data;
-                
-                if (type==='table') {
-                    // !!!!!
-                } else if (type==='chart') {
-                    // !!!!!
-                }
-                
-                var indArray = data.indicators_table().split(',');
-                
+
+                // Activate modal
                 $('#selectIndicatorsModal').modal();
-                
-                // Check the checkboxes corresponding to the selected indicators
-                $('input.indCheckbox').each(function(){
-                    if (indArray.indexOf($(this).attr('data-ind_id')) !== -1) {
-                        $(this).prop('checked',true);
-                    } else {
-                        $(this).prop('checked',false);
-                    }
-                });
+
+                // If field is not blank, check the checkboxes corresponding to the selected indicators
+                if (data['indicators_' + type]()) {
+                    var indArray = data['indicators_' + type]().split(',');
+                    $('input.indCheckbox').each(function(){
+                        if (indArray.indexOf($(this).attr('data-ind_id')) !== -1) {
+                            $(this).prop('checked',true);
+                        } else {
+                            $(this).prop('checked',false);
+                        }
+                    });
+                }
                 
             },
             

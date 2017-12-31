@@ -93,7 +93,7 @@ $.getScript('../js/admin_editReports.js');
                                 <td>Indicators (table):&nbsp;</td>
                                 <td>
                                     <button class="btn btn-xs btn-success btn_select_indicators" data-bind="click:$root.actions.selectIndicators.bind($data,'table')">Select</button>
-                                    <input placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_table" style="width:141px">
+                                    <input disabled placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_table" style="width:141px">
                                 </td>
                             </tr>
                             <tr>
@@ -139,7 +139,7 @@ $.getScript('../js/admin_editReports.js');
                                 <td>Indicators (chart):&nbsp;</td>
                                 <td>
                                     <button class="btn btn-xs btn-success btn_select_indicators" data-bind="click:$root.actions.selectIndicators.bind($data,'chart')">Select</button>
-                                    <input placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_chart" style="width:141px">
+                                    <input disabled placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_chart" style="width:141px">
                                 </td>
                             </tr>
                             <tr>
@@ -179,6 +179,14 @@ $.getScript('../js/admin_editReports.js');
                                 <td style='width:40px'></td>
                                 <td>Labels (chart):&nbsp;</td>
                                 <td><input class="labels_chart ui-state-default ui-corner-all" style='width:400px' data-bind="value:labels_chart, event:{blur:$root.actions.checkIndIDsChart}" placeholder="Type a comma-separated list of labels..."></td>
+                            </tr>
+                            <tr>
+                                <td></td><td></td><td></td>
+                                <td colspan="2">
+                                    Indicators (chart; secondary):&nbsp;
+                                    <button class="btn btn-xs btn-success btn_select_indicators" data-bind="click:$root.actions.selectIndicators.bind($data,'chart_secondary')">Select</button>
+                                    <input disabled placeholder="Select indicators..." class="ui-state-default ui-corner-all" data-bind="value:indicators_chart_secondary" style="width:141px">
+                                </td>
                             </tr>
                         </table>
                     </div>
