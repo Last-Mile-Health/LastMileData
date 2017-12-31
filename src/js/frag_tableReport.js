@@ -91,18 +91,44 @@ $(document).ready(function(){
             break;
 
         case '5':
-            options = {
-            };
+            options = [
+                {
+                    title: "Data Entry Details",
+                    query: "SELECT * FROM lastmile_report.view_data_entry;",
+                    defaultOrder: [[2, "desc"],[3, "desc"],[1, "asc"],[0, "asc"]]
+                }
+            ];
             break;
 
         case '6':
-            options = {
-            };
+            options = [
+                {
+                    title: "ODK Data Upload Details",
+                    query: "SELECT * FROM lastmile_report.view_odk_uploads;",
+                    defaultOrder: [[1, "desc"],[4, "asc"],[2, "desc"]]
+                }
+            ];
             break;
 
         case '7':
-            options = {
-            };
+            options = [
+                {
+                    title: "Indicator Reference",
+                    query: "SELECT ind_id AS `ID#`, ind_category AS `Category`, ind_name AS `Indicator name`, ind_definition AS `Definition`, ind_source AS `Data source` "
+                            + "FROM lastmile_dataportal.tbl_indicators where archived=0 AND ind_name NOT LIKE 'Numerator%' AND ind_name NOT LIKE 'Denominator%';",
+                    defaultOrder: [[0, "asc"],[1, "asc"]]
+                }
+            ];
+            break;
+
+        case '8':
+            options = [
+                {
+                    title: "",
+                    query: "",
+                    defaultOrder: []
+                }
+            ];
             break;
 
     }
