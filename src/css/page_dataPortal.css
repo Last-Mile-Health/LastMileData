@@ -231,3 +231,14 @@ table.ptg_data td.label_table {
 /*#select_basemap { width: 150px; }*/
 /*#select_level { width:205px; }*/
 /* Leaflet */
+
+
+/* Hide certain elements when printing */
+@media print
+{    
+    #dp_sidebar, .no-print *
+    {
+        /* !!!!! printing does not yet work properly !!!!! */
+        display:none !important;
+    }
+}

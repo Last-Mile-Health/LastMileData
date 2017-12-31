@@ -70,6 +70,12 @@ $app->delete('/test_rest/:id', function($id) {
 });
 
 
+// Route 0b: (generic query)
+$app->post('/query',function() {
+    LMD_query();
+});
+
+
 // Route 1a: Indicator metadata (lastmile_dataportal.tbl_indicators)
 // "Delete" is actually an "archive" via LMD_archive()
 $app->get('/indicators/:includeArchived/(:id)',function($includeArchived,$id='all') {
@@ -430,3 +436,38 @@ function LMD_archive($id, $idFieldName, $table) {
 }
 
 
+// Runs generic queries
+// !!!!! Consider refactoring LMD_get to return data like this for efficiency !!!!!
+function LMD_query() {
+    try {
+        
+        // Create object to hold results; run query
+        $resultObject = array('fields' => [], 'data' => []);
+        $query = $_POST['query'];
+        $cxn = getCXN();
+        $result = mysqli_query($cxn, $query);
+        
+        // Get table field names
+        foreach (mysqli_fetch_fields($result) as $value) {
+            array_push($resultObject['fields'],$value->name);
+        }
+        
+        // Get row data
+        while ($row = mysqli_fetch_assoc($result)) {
+            $resultSet = array();
+            foreach ($row as $value) {
+                array_push($resultSet,$value);
+            }
+            array_push($resultObject['data'],$resultSet);
+        }
+
+        // Echo out results
+        echo json_encode($resultObject);
+        mysqli_close($cxn);
+        
+    }
+    catch(ErrorException $e) {
+        // !!!!! Build out error handler !!!!!
+        echo '{"error":{"text":'. $e .'}}';
+    }
+}
