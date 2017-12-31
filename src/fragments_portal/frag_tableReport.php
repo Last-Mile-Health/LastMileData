@@ -27,9 +27,10 @@ $.getScript('../js/frag_tableReport.js');
 
         <div style="float:left">
             <h1 id="tableTitle"></h1>
+            <p id="headerNote"></p>
         </div>
 
-        <div style="float:right; font-size:120%; position:relative; top:20px;">
+        <div data-bind="if:options.length>1" style="float:right; font-size:120%; position:relative; top:20px;">
             <select id="tableSelector" data-bind="foreach:options, event:{change:actions.selectChange}">
                 <option data-bind="text:selectName, value:selectName"></option>
             </select>
