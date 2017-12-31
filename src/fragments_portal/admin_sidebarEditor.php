@@ -2,6 +2,7 @@
 
 <script>
 <?php
+
     // Initiate/configure CURL session
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
@@ -13,7 +14,8 @@
     
     // Close CURL session and echo JSON
     curl_close($ch);
-    echo "var sidebar_model_edit = JSON.parse($json1.objectData);";
+    echo "var sidebar_model_edit = JSON.parse($json1.object_data);";
+    
 ?>
 
 // Load main script
