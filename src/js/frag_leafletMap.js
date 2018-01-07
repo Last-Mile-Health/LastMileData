@@ -100,16 +100,16 @@ var currInd = {
 
 // Create "availability" object to deal with the fact that not all indicators are available at all levels
 // Uses 'availability_RAW' object returned via PHP/cURL, at the top of frag_leafletMap.php
-var availability = { county: [], district: [], community: [], communities_CHW: [] };
+// availability_key corresponds with lastmile_dataportal_tbl_territory_type and converts territory_type to territory_type_name
+var availability = { county: [], district: [], communities_CHW: [] };
+var availability_key = { 1:'county', 2:'district', 5:'communities_CHW' };
 for (var key1 in availability_RAW) {
     var ind_id = availability_RAW[key1].ind_id;
-    var indLevels = availability_RAW[key1].indLevels.split(',')
-    for (var key2 in indLevels) {
-        availability[indLevels[key2]].push(Number(ind_id));
+    var territory_types = availability_RAW[key1].territory_types.split(',')
+    for (var key2 in territory_types) {
+        availability[availability_key[territory_types[key2]]].push(Number(ind_id));
     }
 }
-availability.communities_CHW = availability.community;
-delete availability.community;
 
 
 // Set URLs global
@@ -164,11 +164,11 @@ function GeoJSON(url) {
         map.removeLayer(this.indLayer);
     };
     
-    // Add data to `features.indVal` property of each geoJSON feature
+    // Add data to `features.value` property of each geoJSON feature
     this.resetData = function(data) {
         for (var i=0; i<this.features.length; i++) {
             var id = this.features[i].properties['id'];
-            this.features[i].properties.indVal = (data[id]===undefined ? null : data[id]);
+            this.features[i].properties.value = (data[id]===undefined ? null : data[id]);
         }
     };
     
@@ -302,8 +302,8 @@ $(document).ready(function(){
     };
     info.update = function (props) {
         this._div.innerHTML = '<h4>' + (props ? props.name : 'Liberia') + '</h4>' + 
-                (props && props.indVal ? currInd.indName + ': ' : '') + 
-                (props ? '<b>' + (props.indVal===null ? 'missing' : LMD_utilities.format_number(props.indVal, currInd.ind_format)) + '</b>' : 'Hover over a location');
+                (props && props.value ? currInd.ind_name + ': ' : '') + 
+                (props ? '<b>' + (props.value===null ? 'missing' : LMD_utilities.format_number(props.value, currInd.ind_format)) + '</b>' : 'Hover over a location');
     };
     info.addTo(map);
 
@@ -497,7 +497,7 @@ $(document).ready(function(){
                 var dataArr = [];
                 for (var i=0; i<data2.length; i++) {
                     var key = data2[i]['id'];
-                    var value = data2[i]['indVal'];
+                    var value = data2[i]['value'];
                     dataObj[key] = value;
                     dataArr.push( value===null ? null : Number(value) ); // !!!!! this will have to be modified once categorical data is added !!!!!
                 }
@@ -532,7 +532,7 @@ $(document).ready(function(){
                             },
                             style: function(feature) {
                                 return {
-                                    color: currInd.indColors.returnColor(feature.properties.indVal)
+                                    color: currInd.indColors.returnColor(feature.properties.value)
                                 };
                             },
                             onEachFeature: function(feature,layer) {
@@ -546,12 +546,12 @@ $(document).ready(function(){
                         var options = {
                             style: function(feature) {
                                 return {
-                                    color: currInd.indColors.returnColor(feature.properties.indVal),
-                                    fillColor: currInd.indColors.returnColor(feature.properties.indVal),
+                                    color: currInd.indColors.returnColor(feature.properties.value),
+                                    fillColor: currInd.indColors.returnColor(feature.properties.value),
                                     weight: 1,
                                     opacity: 0.8,
                                     fill: true,
-                                    fillOpacity: currInd.indColors.returnColor(feature.properties.indVal)==='#ffffff' ? 0.1 : 0.8,
+                                    fillOpacity: currInd.indColors.returnColor(feature.properties.value)==='#ffffff' ? 0.1 : 0.8,
                                     dashArray: "3"
                                 };
                             },
@@ -721,7 +721,7 @@ $(document).ready(function(){
 // !!!!! To recycle !!!!!
 //onEachFeature: function (feature, layer) {
 //    // !!!!! Unused !!!!!
-//    layer.bindPopup(feature.properties.name + ': ' + feature.properties.indVal);
+//    layer.bindPopup(feature.properties.name + ': ' + feature.properties.value);
 //    
 //    layer.on({
 //        mouseover: function(e) {
@@ -760,7 +760,7 @@ $(document).ready(function(){
 //                color: 'grey',
 //                dashArray: '3',
 //                fillOpacity: 0.4,
-//                fillColor: currInd.indColors.returnColor(feature.properties.indVal)
+//                fillColor: currInd.indColors.returnColor(feature.properties.value)
 //            };
 //        },
 //        onEachFeature: function (feature, layer) {

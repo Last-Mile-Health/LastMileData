@@ -34,9 +34,9 @@
      9a     LMD_REST.php/gis_communities_remote             lastmile_cha.view_base_geo_community
      9b     LMD_REST.php/gis_communities_nearFacility       lastmile_cha.view_base_geo_community
      9c     LMD_REST.php/gis_communities_CHW                lastmile_cha.view_base_geo_community_primary
-     9d     LMD_REST.php/gis_community_data                 lastmile_dataportal.tbl_leaflet_values
-     9e     LMD_REST.php/gis_district_data                  lastmile_dataportal.tbl_leaflet_values
-     9f     LMD_REST.php/gis_county_data                    lastmile_dataportal.tbl_leaflet_values
+     9d     LMD_REST.php/gis_community_data                 lastmile_dataportal.view_values_leaflet
+     9e     LMD_REST.php/gis_district_data                  lastmile_dataportal.view_values_leaflet
+     9f     LMD_REST.php/gis_county_data                    lastmile_dataportal.view_values_leaflet
      9g     LMD_REST.php/gis_data_availability              lastmile_dataportal.view_leaflet_availability_2
     10      LMD_REST.php/geoCuts                            lastmile_dataportal.tbl_geocuts
     10b     LMD_REST.php/territories                        lastmile_dataportal.view_territories
@@ -251,25 +251,25 @@ $app->get('/gis_communities_CHW/(:id)',function($id='all') {
 
 // Route 9d: Data Portal GIS: community data
 $app->get('/gis_community_data/:period/:id',function($period,$id) {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='community' AND periodID IN ($period, 99)");
+    LMD_get($id, "ind_id", "lastmile_dataportal.view_values_leaflet", "territory_id AS `id`, `value`", "territory_type=5 AND period_id IN ($period,99)");
 });
 
 
 // Route 9e: Data Portal GIS: district data
 $app->get('/gis_district_data/:period/:id',function($period,$id) {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='district' AND periodID IN ($period, 99)");
+    LMD_get($id, "ind_id", "lastmile_dataportal.view_values_leaflet", "territory_id AS `id`, `value`", "territory_type=2 AND period_id IN ($period,99)");
 });
 
 
 // Route 9f: Data Portal GIS: county data
 $app->get('/gis_county_data/:period/:id',function($period,$id) {
-    LMD_get($id, "indID", "lastmile_dataportal.tbl_leaflet_values", "territoryID AS `id`, indVal", "territoryID<>0 AND indLevel='county' AND periodID IN ($period, 99)");
+    LMD_get($id, "ind_id", "lastmile_dataportal.view_values_leaflet", "territory_id AS `id`, `value`", "territory_type=1 AND period_id IN ($period,99)");
 });
 
 
 // Route 9g: Data Portal GIS: leaflet data availability
 $app->get('/gis_data_availability/',function($id='all') {
-    LMD_get($id, "indID", "lastmile_dataportal.view_leaflet_availability_2", "*", 1);
+    LMD_get($id, "ind_id", "lastmile_dataportal.view_leaflet_availability_2", "*", 1);
 });
 
 

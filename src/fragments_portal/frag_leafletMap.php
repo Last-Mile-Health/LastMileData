@@ -113,6 +113,7 @@
             <option>Select zoom</option>
             <option value='RC'>Rivercess</option>
             <option value='GG'>Grand Gedeh</option>
+            <!--<option value='GB'>Grand Bassa</option>--> <!-- !!!!! add !!!!! -->
             <option value='LIB'>Liberia</option>
         </select>
     </div>
@@ -151,7 +152,7 @@
         <select id="select_indicator" class="indChange form-control">
             <option value='1. Select indicator'>1. Select indicator</option>
             <!-- ko foreach: $root -->
-            <option data-bind="text:indName, value:indID">hey</option>
+            <option data-bind="text:ind_name, value:ind_id"></option>
             <!-- /ko -->
         </select>
     </div>
@@ -173,6 +174,7 @@
             <option value='1'>Last month</option>
             <option value='2'>Last 3 months</option>
             <option value='3'>Last 6 months</option>
+            <!-- !!!!! this should pull from database periods table !!!!! -->
         </select>
     </div>
     
