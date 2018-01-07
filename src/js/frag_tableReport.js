@@ -124,9 +124,17 @@ $(document).ready(function(){
         case '8':
             options = [
                 {
-                    title: "",
-                    query: "",
-                    defaultOrder: []
+                    title: "Health District reports",
+                    query: "SELECT health_district AS `Health District`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE month_reported=11 AND year_reported=2017;",
+                    // !!!!! need interface to generate where clause for (1) and (2) county !!!!!
+                    defaultOrder: [[0, "asc"]]
                 }
             ];
             break;
