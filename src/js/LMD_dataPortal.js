@@ -1,7 +1,7 @@
 // Module:          LMD_dataPortal.js
 // Author:          Avi Kenny
 // Last update:     2014-10-11
-// Dependencies:    LMD_utilities.js, LMD_dimpleHelper, Knockout.js, Dimple.js, D3.js
+// Dependencies:    LMD_utilities.js, LMD_dimpleHelper, Knockout.js, Dimple.js, D3.js, moment.js
 // Purpose:         Used by frag_indicatorReport.php to dynamically generate indicator reports
 // Notes:           An "indicator" is an individual metric that can be implemented repeatedly (e.g. ANC4+)
 //                  An "indicator instance" (II) is an "implementations" of an indicator in a specific geographic region (e.g. ANC4+ in Konobo)
@@ -25,14 +25,19 @@ var LMD_dataPortal = (function() {
     //              Before June 15th, the months would be Jan -- Apr
     //              After June 15th, the months would be Feb -- May
     //          This a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data
+    //          The "peek" functionality allows superadmins to see next month's data 7 days early; this can be easily extended if needed
     function setDates() {
+        
+        // If , enable "peek" functionality
+        // !!!!! In the future, configure this so that superadmins can turn the peek on and off !!!!!
+        var dayToShowData = sessionStorage.user_groups.includes('superadmin') ? 8 : 15;
         
         // Generate dates (last 4 months)
         var todayDay = moment().format('D'),
-            todayMinus1m = moment().subtract(1 + ( todayDay < 15 ? 1 : 0 ),'months'),
-            todayMinus2m = moment().subtract(2 + ( todayDay < 15 ? 1 : 0 ),'months'),
-            todayMinus3m = moment().subtract(3 + ( todayDay < 15 ? 1 : 0 ),'months'),
-            todayMinus4m = moment().subtract(4 + ( todayDay < 15 ? 1 : 0 ),'months');
+            todayMinus1m = moment().subtract(1 + ( todayDay < dayToShowData ? 1 : 0 ),'months'),
+            todayMinus2m = moment().subtract(2 + ( todayDay < dayToShowData ? 1 : 0 ),'months'),
+            todayMinus3m = moment().subtract(3 + ( todayDay < dayToShowData ? 1 : 0 ),'months'),
+            todayMinus4m = moment().subtract(4 + ( todayDay < dayToShowData ? 1 : 0 ),'months');
 
         // Create object to hold formatted dates
         var lastFourMonths = [
@@ -249,8 +254,10 @@ var LMD_dataPortal = (function() {
 
                             // Add chart point
                             // Chart point only added if its date is not "too new" (a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data)
+                            // "Peek" functionality also implemented here
+                            var dayToShowData = sessionStorage.user_groups.includes('superadmin') ? 8 : 15;
                             var data_totalMonth = (12*Number(dataArray[i].date.split('-')[0]))+Number(dataArray[i].date.split('-')[1]);
-                            var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < 15 ? 1 : 0 ),'months');
+                            var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < dayToShowData ? 1 : 0 ),'months');
                             var latestAllowed_totalMonth = (12*latestAllowed_date.year())+(latestAllowed_date.month()+1);
 
                             if (ro.chart_only_display_last_month == 1 && data_totalMonth === latestAllowed_totalMonth ||
