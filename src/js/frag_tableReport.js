@@ -4,9 +4,10 @@ $(document).ready(function(){
     var model = {};
     var DT;
     var blankTable = $('#tableReport').prop('outerHTML');
+    var reportMonth = moment().subtract(1 + ( moment().format('D') < 15 ? 1 : 0 ),'months');
     
     // SQL code should be placed here
-    // !!!!! Eventually, consider moving this to a database table !!!!!
+    // !!!!! Eventually, consider moving this to a database table and passing in the view name as a GET parameter !!!!!
     switch (sw) {
 
         case '1':
@@ -124,7 +125,8 @@ $(document).ready(function(){
         case '8':
             options = [
                 {
-                    title: "Health District reports",
+                    title: "Health District report: all counties",
+                    selectName: "All counties",
                     query: "SELECT health_district AS `Health District`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
                             "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
                             "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
@@ -132,8 +134,97 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE month_reported=11 AND year_reported=2017;",
-                    // !!!!! need interface to generate where clause for (1) and (2) county !!!!!
+                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "Health District report: Grand Gedeh",
+                    selectName: "Grand Gedeh",
+                    query: "SELECT health_district AS `Health District`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "Health District report: Rivercess",
+                    selectName: "Rivercess",
+                    query: "SELECT health_district AS `Health District`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "Health District report: Grand Bassa",
+                    selectName: "Grand Bassa",
+                    query: "SELECT health_district AS `Health District`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }
+            ];
+            break;
+
+        case '9':
+            options = [
+                {
+                    title: "Health Facility report: all counties",
+                    selectName: "All counties",
+                    query: "SELECT health_facility AS `Health Facility`, 'one' as `one`, 'two' as `two`, 'three' as `three`, 'four' as `four`, 'five' as `five`, 'six' as `six`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_facility WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "Health Facility report: Grand Gedeh",
+                    selectName: "Grand Gedeh",
+                    query: "SELECT health_facility AS `Health Facility`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_facility WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "Health Facility report: Rivercess",
+                    selectName: "Rivercess",
+                    query: "SELECT health_facility AS `Health Facility`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_facility WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "Health Facility report: Grand Bassa",
+                    selectName: "Grand Bassa",
+                    query: "SELECT health_facility AS `Health Facility`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.temp_view_base_msr_facility WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }
             ];
@@ -202,10 +293,14 @@ $(document).ready(function(){
                         scrollY: '42vh',
                         dom: '<fltip>',
                         order: options[selectIndex].defaultOrder,
-                        lengthMenu: [[10, 25, 100, -1], [10, 25, 100, "all"]]
-//                        scrollX: '100%',
-//                        scrollCollapse: true,
+                        lengthMenu: [[10, 25, 100, -1], [10, 25, 100, "all"]],
+                        scrollX: true
                     });
+                    
+                    // Activate "fixed columns" plugin
+                    new $.fn.dataTable.FixedColumns( DT, {
+                        leftColumns:1
+                    } );
 
                     // Set title, headerNote, and select value
                     $('#tableTitle').text(options[selectIndex].title);
