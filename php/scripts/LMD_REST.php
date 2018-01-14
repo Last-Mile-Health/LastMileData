@@ -95,9 +95,10 @@ $app->delete('/indicators/:id', function($id) {
 // Route 1b: Indicator values (lastmile_dataportal.tbl_values)
 // Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
 // !!!!! still need to build out other routes !!!!!
+// !!!!! make sure that the new "`month` IS NOT NULL" clause didn't break anything else !!!!!
 $app->get('/indicatorValues/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
     $territory_id = $territory_id=='all' ? "all" : "'" . str_replace(",","','",$territory_id) . "'";
-    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, period_id, value", "value <> '' AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
+    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, period_id, value", "value <> '' AND `month` IS NOT NULL AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
 });
 //$app->post('/instanceValues/', function() {
 //    LMD_post("lastmile_dataportal.tbl_indicators");

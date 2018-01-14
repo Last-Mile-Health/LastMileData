@@ -232,6 +232,9 @@ table.ptg_data td.label_table {
 /*#select_level { width:205px; }*/
 /* Leaflet */
 
+.DTFC_LeftHeadWrapper {
+    background-color:#000
+}
 
 /* Hide certain elements when printing */
 @media print

@@ -49,6 +49,7 @@
         <!-- Note: order matters; bugs are caused if the loading order of the first three libraries is changed -->
         <script src="../../lib/jquery.min.js"></script>
         <script src="../../lib/DataTables/datatables.min.js"></script>
+        <script src="../../lib/DataTables/dataTables.fixedColumns.min.js"></script>
         <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
         <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <script src="../../lib/knockout/knockout-3.3.0.js"></script>
