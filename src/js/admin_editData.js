@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    // Note that this tool excludes leaflet data. If manual edits are needed to leaflet data, they need to happen within the MySQL table (lastmile_dataportal.tbl_values) directly
+
     // !!!!! Incorporate two-way data formatting !!!!!
 
     // This object will warn the user if they try to navigate away from the page or load different data
