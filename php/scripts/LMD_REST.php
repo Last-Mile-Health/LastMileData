@@ -130,9 +130,10 @@ $app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:territory_na
 // Route 1e: Indicator/instance values (filtered by category, cut, and date range) (lastmile_dataportal.view_values)
 // Used by "Edit Data" tool
 // minDate and maxDate should be specified in terms of "# of months since year 0" (i.e. year*12 + month)
+// Note that this excludes leaflet data. Leaflet data CANNOT be edited via the "edit data" tool; if manual edits are needed, they need to happen within the MySQL table (lastmile_dataportal.tbl_values) directly
 $app->get('/indicatorValuesFiltered/:category/:territory_name/:minDate/:maxDate',function($category,$territory_name,$minDate,$maxDate) {
     $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
-    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
+    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND leaflet=0 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
 });
 
 
