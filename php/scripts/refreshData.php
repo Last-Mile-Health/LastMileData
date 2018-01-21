@@ -50,7 +50,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 5. Update "districts" (array)
-$query = "SELECT health_district FROM lastmile_cha.health_district WHERE (health_district_id BETWEEN 20 AND 32) OR (health_district_id=6)";
+$query = "SELECT health_district FROM lastmile_cha.health_district WHERE county_id IN (6,14)";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_districts = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {

@@ -26,7 +26,6 @@
         // Create array of indicators
         $indicators = explode(",",$value->indicators_table);
         $indicators = array_merge($indicators,explode(",",$value->indicators_chart));
-        $indicators = array_merge($indicators,explode(",",$value->indicators_chart_secondary));
         foreach ($indicators as $value2) {
             if (!in_array($value2,$indicatorArray) && $value2!=="") {
                 array_push($indicatorArray,$value2);
@@ -36,7 +35,6 @@
         // Create array of territories
         $territories = explode(",",$value->territories_table);
         $territories = array_merge($territories,explode(",",$value->territories_chart));
-        $territories = array_merge($territories,explode(",",$value->territories_chart_secondary));
         foreach ($territories as $value2) {
             if (!in_array($value2,$territoryArray) && $value2!=="") {
                 array_push($territoryArray,$value2);
@@ -114,6 +112,9 @@
                 <p><b>Definition</b>: <span data-bind="text:ro_description"></span></p>
                 <p data-bind="if:ind_source"><b>Data source</b>: <span data-bind="text:ind_source"></span></p>
                 <p data-bind="if:ro_target"><b>Target</b>: <span data-bind="text:ro_target"></span></p>
+                
+                <!-- If the `only_display_last_month_table` variable is set to 1, display default table (months across the top) -->
+                <!-- ko if:only_display_last_month_table==0 -->
                 <table class='ptg_data'>
                     
                     <tr>
@@ -141,6 +142,38 @@
                     </tr>
                     <!-- /ko -->
                 </table>
+                <!-- /ko -->
+                
+                <!-- If the `only_display_last_month_table` variable is set to 1, display alternate table (secondary cuts across the top) -->
+                <!-- ko if:only_display_last_month_table==1 -->
+                <table class='ptg_data'>
+                    
+                    <tr>
+                        <th>&nbsp;</th>
+                        
+                        <!-- Secondary cut labels -->
+                        <!-- ko foreach:labels_secondary_table -->
+                        <th data-bind="text:$data"></th>
+                        <!-- /ko -->
+                    </tr>
+                    
+                    <!-- ko foreach:instances_table -->
+                    <tr>
+                        <!-- Table labels -->
+                        <!-- ko if:ro.multiple -->
+                        <td class="label_table" data-bind="text:label, attr: {'data-inst_id':$data.inst_id}"></td>
+                        <!-- /ko -->
+                        
+                        <!-- Indicator values will be dynamically placed here -->
+                        <!-- ko foreach:ro.indicators_table -->
+                        <!-- !!!!! need to dynamically fill yearmonth !!!!! -->
+                        <td class="value" data-bind="attr: {'data-yearmonth':$parents[2].lastFourMonths[3].yearMonth, 'data-inst_id':($data + '-' + $parentContext.$data.inst_id.split('-')[1] + '-' + $parentContext.$data.inst_id.split('-')[2])}"></td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                </table>
+                <!-- /ko -->
+                
                 
                 <hr class='smallHR'>
                 

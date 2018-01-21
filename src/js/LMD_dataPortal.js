@@ -128,16 +128,22 @@ var LMD_dataPortal = (function() {
             ro.territories_table = ro.territories_table.split(",");
             ro.indicators_chart = ro.indicators_chart.split(",");
             ro.territories_chart = ro.territories_chart.split(",");
-            ro.indicators_chart_secondary = ro.indicators_chart_secondary ? ro.indicators_chart_secondary.split(",") : null;
-            ro.territories_chart_secondary = ro.territories_chart_secondary ? ro.territories_chart_secondary.split(",") : null;
             ro.labels_table = ro.labels_table ? ro.labels_table.split(",") : [];
             ro.labels_chart = ro.labels_chart ? ro.labels_chart.split(",") : [];
+            ro.labels_secondary_table = ro.labels_secondary_table ? ro.labels_secondary_table.split(",") : ro.indicators_table;
+            ro.labels_secondary_chart = ro.labels_secondary_chart ? ro.labels_secondary_chart.split(",") : ro.indicators_chart;
             
             // Generate "instance IDs" array (tables)
             ro.instances_table = [];
-            for (var key2 in ro.indicators_table) {
-                for (var key3 in ro.territories_table) {
-                    ro.instances_table.push({inst_id: ro.indicators_table[key2] + "-" + ro.territories_table[key3] + "-" + ro.period_id});
+            if (ro.only_display_last_month_table==0) {
+                for (var key2 in ro.indicators_table) {
+                    for (var key3 in ro.territories_table) {
+                        ro.instances_table.push({inst_id: ro.indicators_table[key2] + "-" + ro.territories_table[key3] + "-" + ro.period_id});
+                    }
+                }
+            } else {
+                for (var key2 in ro.territories_table) {
+                    ro.instances_table.push({inst_id: ro.indicators_table[0] + "-" + ro.territories_table[key2] + "-" + ro.period_id});
                 }
             }
             
@@ -146,14 +152,6 @@ var LMD_dataPortal = (function() {
             for (var key2 in ro.indicators_chart) {
                 for (var key3 in ro.territories_chart) {
                     ro.instances_chart.push({inst_id: ro.indicators_chart[key2] + "-" + ro.territories_chart[key3] + "-" + ro.period_id});
-                }
-            }
-            
-            // Generate "instance IDs" array (charts; secondary)
-            ro.instances_chart_secondary = [];
-            for (var key2 in ro.indicators_chart_secondary) {
-                for (var key3 in ro.territories_chart_secondary) {
-                    ro.instances_chart_secondary.push({inst_id: ro.indicators_chart_secondary[key2] + "-" + ro.territories_chart_secondary[key3] + "-" + ro.period_id});
                 }
             }
             
@@ -228,6 +226,16 @@ var LMD_dataPortal = (function() {
                 }
             }
             
+            // Set labels for secondary cut (if set)
+            ro.labels_secondary_table_object = {};
+            for (var key2 in ro.indicators_table) {
+                ro.labels_secondary_table_object[ro.indicators_table[key2]] = ro.labels_secondary_table[key2];
+            }
+            ro.labels_secondary_chart_object = {};
+            for (var key2 in ro.indicators_chart) {
+                ro.labels_secondary_chart_object[ro.indicators_chart[key2]] = ro.labels_secondary_chart[key2];
+            }
+            
             // Create "dates" array, for CSV data
             var dates = [];
             
@@ -235,22 +243,11 @@ var LMD_dataPortal = (function() {
             for (var key2 in ro.instances_chart) {
 
                     var inst_id = ro.instances_chart[key2].inst_id;
+                    var ind_id = inst_id.split('-')[0];
                     var dataArray = chartData[inst_id];
-                    var inst_id_secondary = ro.instances_chart_secondary.length > 0 ? ro.instances_chart_secondary[key2].inst_id : null;
-                    var dataArray_secondary = ro.instances_chart_secondary.length > 0 ? chartData[inst_id_secondary] : null;
 
                     if (dataArray) {
                         for(var i=0; i<dataArray.length; i++) {
-
-                            // Get secondary value (if it exists)
-                            var value_secondary = null;
-                            if (dataArray_secondary) {
-                                for (var key3 in dataArray_secondary) {
-                                    if (dataArray[i].date === dataArray_secondary[key3].date) {
-                                        var value_secondary = dataArray_secondary[key3].value;
-                                    }
-                                }
-                            }
 
                             // Add chart point
                             // Chart point only added if its date is not "too new" (a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data)
@@ -260,26 +257,16 @@ var LMD_dataPortal = (function() {
                             var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < dayToShowData ? 1 : 0 ),'months');
                             var latestAllowed_totalMonth = (12*latestAllowed_date.year())+(latestAllowed_date.month()+1);
 
-                            if (ro.chart_only_display_last_month == 1 && data_totalMonth === latestAllowed_totalMonth ||
-                                ro.chart_only_display_last_month == 0 && data_totalMonth <=  latestAllowed_totalMonth) {
+                            if (ro.only_display_last_month_chart == 1 && data_totalMonth === latestAllowed_totalMonth ||
+                                ro.only_display_last_month_chart == 0 && data_totalMonth <=  latestAllowed_totalMonth) {
                             
-                                // Primary value
+                                // Push chart point value
                                 ro.chart_points.push({
                                     Month: dataArray[i].date,
                                     Value: dataArray[i].value,
-                                    Cut: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
-                                    Level: 'Actual' // !!!!! Level:'primary'; These labels should be named dynamically !!!!!
+                                    Cut_primary: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
+                                    Cut_secondary: ro.labels_secondary_chart_object[ind_id] ? ro.labels_secondary_chart_object[ind_id] : ind_id
                                 });
-
-                                // Secondary value
-                                if (value_secondary !== null) {
-                                    ro.chart_points.push({
-                                        Month: dataArray[i].date,
-                                        Value: value_secondary,
-                                        Cut: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
-                                        Level: 'Expected' // !!!!! Level:'primary'; These labels should be named dynamically !!!!!
-                                    });
-                                }
 
                             }
 
@@ -337,9 +324,9 @@ var LMD_dataPortal = (function() {
         $(".value").each(function() {
             var inst_id = $(this).attr("data-inst_id");
             var yearmonth = $(this).attr("data-yearmonth");
-            var format = indicatorMetadata[inst_id.split("-")[0]].ind_format || 'integer';
+//            var format = indicatorMetadata[inst_id.split("-")[0]].ind_format || 'integer';
             var value = tableData["i_" + inst_id + "_m_" + yearmonth];
-            value = LMD_utilities.format_number(value, format);
+//            value = LMD_utilities.format_number(value, format);
             $(this).html(value);
         });
     }
@@ -408,12 +395,10 @@ var LMD_dataPortal = (function() {
                         type:ro.chart_type,
                         targetDiv: ro.chart_div,
                         data: ro.chart_points,
-                        chart_only_display_last_month: ro.chart_only_display_last_month,
+                        only_display_last_month_chart: ro.only_display_last_month_chart,
                         colors: ro.chart_colors || "default",
                         timeInterval: Math.ceil(ro.uniqueDates.length/24),
                         size: { x:Number(ro.chart_size_x), y:Number(ro.chart_size_y) },
-                        xyVars: { x:"Month", y:"Value" }, // !!!!! This is currently unnecessary !!!!!
-                        cut: "Cut", // !!!!! This is currently unnecessary !!!!!
                         legend: ro.chartMultiple ? "right" : "",
                         tickFormat: ro.chart_tick_format,
                         axisValues: { min:ro.chart_axis_y_min, max:ro.chart_axis_y_max }
@@ -446,7 +431,6 @@ var LMD_dataPortal = (function() {
         setData(arg_indicatorValues);
         indicatorMetadata = setMetadata(arg_indicatorMetadata);
         
-//        if (reportObjects) {
         // Configure report model
         reportObjects = configureReportModel(arg_reportObjects);
 
@@ -455,11 +439,9 @@ var LMD_dataPortal = (function() {
             reportObjects: reportObjects,
             lastFourMonths: setDates()
         }, $('#reportContent')[0]);
-//        }
 
         // Populate data tables
         populateTableData();
-//        populateTableMetadata();
 
         // Create charts
         if (reportObjects) {

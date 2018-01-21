@@ -339,7 +339,7 @@ $(document).ready(function(){
             // Archive or unarchive the report object (value is toggled based on current value)
             selectIndicators: function(type, data, event) {
                 
-                // `type` is either "table", "chart", or "chart_secondary"
+                // `type` is either "table" or "chart"
                 // `data` holds a reference to the current report object
                 erModel.selectIndicators.type = type;
                 erModel.selectIndicators.current = data;

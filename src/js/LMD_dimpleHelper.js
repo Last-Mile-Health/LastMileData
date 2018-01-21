@@ -8,6 +8,7 @@ var LMD_dimpleHelper = (function(){
 
     // Monthly line graph
     function createChart(params){
+//console.log(params.data);
         
         // If chart size is NULL or 0, set defaults
         params.size.x = params.size.x ? params.size.x : 590;
@@ -44,42 +45,71 @@ var LMD_dimpleHelper = (function(){
 
         // Format line charts
         if (params.type==="line") {
-            var x = myChart.addTimeAxis("x", params.xyVars.x, "%Y-%m-%d", "%b '%y");
+            var x = myChart.addTimeAxis("x", "Month", "%Y-%m-%d", "%b '%y");
             x.timePeriod = d3.time.months;
             x.timeInterval = params.timeInterval;
-            var y = myChart.addMeasureAxis("y", params.xyVars.y);
+            var y = myChart.addMeasureAxis("y", "Value");
             y.tickFormat = params.tickFormat
-            var mySeries = myChart.addSeries(params.cut, dimple.plot.line);
-            mySeries.addOrderRule(params.cut,true);
+            var mySeries = myChart.addSeries("Cut_primary", dimple.plot.line);
+            mySeries.addOrderRule("Cut_primary",true);
         }
         
-        // Format stacked bar charts
+        // Format stacked bar charts (vertical)
         if (params.type==="stacked bar") {
-            var x = myChart.addTimeAxis("x", params.xyVars.x, "%Y-%m-%d", "%b '%y");
-            x.timePeriod = d3.time.months;
-            x.timeInterval = params.timeInterval;
-            var y = myChart.addMeasureAxis("y", params.xyVars.y);
-            y.tickFormat = params.tickFormat
-            var mySeries = myChart.addSeries(params.cut, dimple.plot.bar);
-            y.addOrderRule(params.cut,true);
+            if (params.only_display_last_month_chart==1) {
+                var y = myChart.addMeasureAxis("y", "Value");
+                y.tickFormat = params.tickFormat
+                var x = myChart.addCategoryAxis("x", "Cut_primary");
+                var mySeries = myChart.addSeries(["Cut_primary","Cut_secondary"], dimple.plot.bar);
+                x.addOrderRule("Cut_primary",true);
+            } else {
+                var x = myChart.addTimeAxis("x", "Month", "%Y-%m-%d", "%b '%y");
+                x.timePeriod = d3.time.months;
+                x.timeInterval = params.timeInterval;
+                var y = myChart.addMeasureAxis("y", "Value");
+                y.tickFormat = params.tickFormat
+                var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
+                y.addOrderRule("Cut_primary",true);
+            }
+        }
+        
+        // Format stacked bar charts (horizontal)
+        else if (params.type==="horizontal stacked bar") {
+            if (params.only_display_last_month_chart==1) {
+                var x = myChart.addMeasureAxis("x", "Value");
+                x.tickFormat = params.tickFormat
+                var y = myChart.addCategoryAxis("y", "Cut_primary");
+                var mySeries = myChart.addSeries(["Cut_primary","Cut_secondary"], dimple.plot.bar);
+                y.addOrderRule("Cut_primary",true);
+                myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
+                myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
+            } else {
+                var y = myChart.addTimeAxis("y", "Month", "%Y-%m-%d", "%b '%y");
+                y.timePeriod = d3.time.months;
+                y.timeInterval = params.timeInterval;
+                var x = myChart.addMeasureAxis("x", "Value");
+                x.tickFormat = params.tickFormat
+                var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
+                x.addOrderRule("Cut_primary",true);
+            }
         }
         
         // Format bar charts (vertical)
         else if (params.type==="bar") {
-            var x = myChart.addCategoryAxis("x", "Cut");
-            var y = myChart.addMeasureAxis("y", params.xyVars.y);
+            var x = myChart.addCategoryAxis("x", "Cut_primary");
+            var y = myChart.addMeasureAxis("y", "Value");
             y.tickFormat = params.tickFormat
-            var mySeries = myChart.addSeries(params.cut, dimple.plot.bar);
-            x.addOrderRule(params.cut,true);
+            var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
+            x.addOrderRule("Cut_primary",true);
         }
         
         // Format bar charts (horizontal)
         else if (params.type==="horizontal bar") {
-            var x = myChart.addMeasureAxis("x", params.xyVars.y);
+            var x = myChart.addMeasureAxis("x", "Value");
             x.tickFormat = params.tickFormat
-            var y = myChart.addCategoryAxis("y", "Cut");
-            var mySeries = myChart.addSeries("Cut", dimple.plot.bar);
-            y.addOrderRule(params.cut,true);
+            var y = myChart.addCategoryAxis("y", "Cut_primary");
+            var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
+            y.addOrderRule("Cut_primary",true);
             myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
             myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
         }
@@ -87,29 +117,30 @@ var LMD_dimpleHelper = (function(){
         // Format floating bar charts (horizontal)
         // !!!!! Add vertical floating bar chars !!!!!
         else if (params.type==="horizontal floating bar") {
-            var x = myChart.addMeasureAxis("x", params.xyVars.y);
+            var x = myChart.addMeasureAxis("x", "Value");
             x.tickFormat = params.tickFormat
-            var y = myChart.addCategoryAxis("y", "Cut");
-            var mySeries = myChart.addSeries(["Cut","Level"], dimple.plot.bar);
+            var y = myChart.addCategoryAxis("y", "Cut_primary");
+            var mySeries = myChart.addSeries(["Cut_primary","Cut_secondary"], dimple.plot.bar);
             mySeries.stacked = false;
-            y.addOrderRule(params.cut,true);
+            y.addOrderRule("Cut_primary",true);
             myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
             myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
         }
         
         // Format pie charts (!!!!! check this code; not currently used !!!!!)
         else if (params.type==="pie") {
-            var x = myChart.addCategoryAxis("x", params.xyVars.x);
+            var x = myChart.addCategoryAxis("x", "Month");
             var y = null;
             myChart.addCategoryAxis("y", "");
             myChart.addMeasureAxis("p", "Value");
-            var pies = myChart.addSeries(params.cut, dimple.plot.pie);
+            var pies = myChart.addSeries("Cut_primary", dimple.plot.pie);
             pies.radius = 25;
             myChart.addLegend(140, 10, 330, 20, "right"); // !!!!! these parameters need to be variablized !!!!!
         }
         
-        // Add x-axis title
-        x.title = params.chart_only_display_last_month ? params.data[0].Month : "Date";
+        // Add x-axis title; hide y-axis title
+        x.title = params.only_display_last_month_chart==='1' ? moment(params.data[0].Month).format('MMMM YYYY') : "Month";
+        y.title = '';
 
         // Add y-axis min/max
         if (params.axisValues && params.axisValues.min) {
