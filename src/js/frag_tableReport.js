@@ -15,17 +15,17 @@ $(document).ready(function(){
                 {
                     title: "CHA Listing: Grand Gedeh",
                     selectName: "Grand Gedeh",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, CONCAT(cha,' (',cha_id,')') AS `CHA`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh';",
+                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, cha AS `CHA`, cha_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh';",
                     defaultOrder: [[0, "asc"],[1, "asc"],[2, "asc"]]
                 }, {
                     title: "CHA Listing: Rivercess",
                     selectName: "Rivercess",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, CONCAT(cha,' (',cha_id,')') AS `CHA`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Rivercess';",
+                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, cha AS `CHA`, cha_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Rivercess';",
                     defaultOrder: [[0, "asc"],[1, "asc"],[2, "asc"]]
                 }, {
                     title: "CHA Listing: Grand Bassa",
                     selectName: "Grand Bassa",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, CONCAT(cha,' (',cha_id,')') AS `CHA`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Bassa';",
+                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, cha AS `CHA`, cha_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Bassa';",
                     defaultOrder: [[0, "asc"],[1, "asc"],[2, "asc"]]
                 }
             ];
@@ -36,17 +36,17 @@ $(document).ready(function(){
                 {
                     title: "CHSS Listing: Grand Gedeh",
                     selectName: "Grand Gedeh",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh' and chss_id IS NOT NULL GROUP BY chss_id",
+                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh' and chss_id IS NOT NULL GROUP BY chss_id",
                     defaultOrder: [[0, "asc"],[1, "asc"]]
                 }, {
                     title: "CHSS Listing: Rivercess",
                     selectName: "Rivercess",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Rivercess' and chss_id IS NOT NULL GROUP BY chss_id",
+                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Rivercess' and chss_id IS NOT NULL GROUP BY chss_id",
                     defaultOrder: [[0, "asc"],[1, "asc"]]
                 }, {
                     title: "CHSS Listing: Grand Bassa",
                     selectName: "Grand Bassa",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Bassa' and chss_id IS NOT NULL GROUP BY chss_id",
+                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Bassa' and chss_id IS NOT NULL GROUP BY chss_id",
                     defaultOrder: [[0, "asc"],[1, "asc"]]
                }
             ];
@@ -55,28 +55,28 @@ $(document).ready(function(){
         case '3':
             options = [
                 {
-                    title: "CHSS Tool Completion: monthly",
-                    headerNote: "Note: Only active CHSSs are displayed.",
-                    selectName: "Monthly",
-                    query: "SELECT chss AS `CHSS`, chss_id AS `CHSS ID#`, `year` AS `Year`, `month` AS `Month`, num_supervision_visit_logs AS `# supervision visit logs`, "
-                            + "num_vaccine_trackers AS `# vaccine trackers`, num_chss_msrs AS `# CHSS MSRs`, num_cha_msrs AS `# CHA MSRs` FROM lastmile_report.view_base_chss_tool_completion;",
-                    defaultOrder: [[2, "desc"],[3, "desc"],[0, "asc"]]
-                }, {
                     title: "CHSS Tool Completion: last 3 months",
                     headerNote: "Note: Only active CHSSs are displayed.",
                     selectName: "Last 3 months",
-                    query: "SELECT chss AS `CHSS`, chss_id AS `CHSS ID#`, SUM(num_supervision_visit_logs) AS `# supervision visit logs`, "
-                            + "SUM(num_vaccine_trackers) AS `# vaccine trackers`, SUM(num_chss_msrs) AS `# CHSS MSRs`, SUM(num_cha_msrs) AS `# CHA MSRs` "
+                    query: "SELECT chss AS `CHSS`, chss_id AS `CHSS ID#`, SUM(num_supervision_visit_logs) AS `# supervision visit logs`, SUM(num_vaccine_trackers) AS `# vaccine trackers`, "
+                            + "SUM(num_chss_msrs) AS `# CHSS MSRs`, SUM(num_cha_msrs) AS `# CHA MSRs`, SUM(num_restock_forms) AS `# restock forms` "
                             + "FROM lastmile_report.view_base_chss_tool_completion WHERE (month(now())+(year(now())*12))-(`month`+(`year`*12))<=3 GROUP BY `chss_id`;",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "CHSS Tool Completion: last 6 months",
                     headerNote: "Note: Only active CHSSs are displayed.",
                     selectName: "Last 6 months",
-                    query: "SELECT chss AS `CHSS`, chss_id AS `CHSS ID#`, SUM(num_supervision_visit_logs) AS `# supervision visit logs`, "
-                            + "SUM(num_vaccine_trackers) AS `# vaccine trackers`, SUM(num_chss_msrs) AS `# CHSS MSRs`, SUM(num_cha_msrs) AS `# CHA MSRs` "
+                    query: "SELECT chss AS `CHSS`, chss_id AS `CHSS ID#`, SUM(num_supervision_visit_logs) AS `# supervision visit logs`, SUM(num_vaccine_trackers) AS `# vaccine trackers`, "
+                            + "SUM(num_chss_msrs) AS `# CHSS MSRs`, SUM(num_cha_msrs) AS `# CHA MSRs`, SUM(num_restock_forms) AS `# restock forms` "
                             + "FROM lastmile_report.view_base_chss_tool_completion WHERE (month(now())+(year(now())*12))-(`month`+(`year`*12))<=6 GROUP BY `chss_id`;",
                     defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "CHSS Tool Completion: monthly",
+                    headerNote: "Note: Only active CHSSs are displayed.",
+                    selectName: "Monthly",
+                    query: "SELECT chss AS `CHSS`, chss_id AS `CHSS ID#`, `year` AS `Year`, `month` AS `Month`, num_supervision_visit_logs AS `# supervision visit logs`, num_vaccine_trackers AS `# vaccine trackers`, "
+                            + "num_chss_msrs AS `# CHSS MSRs`, num_cha_msrs AS `# CHA MSRs`, num_restock_forms AS `# restock forms` FROM lastmile_report.view_base_chss_tool_completion;",
+                    defaultOrder: [[2, "desc"],[3, "desc"],[0, "asc"]]
                 }
             ];
             break;
@@ -134,7 +134,7 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_healthdistrict WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "Health District report: Grand Gedeh",
@@ -146,7 +146,7 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_healthdistrict WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "Health District report: Rivercess",
@@ -158,7 +158,7 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_healthdistrict WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "Health District report: Grand Bassa",
@@ -170,7 +170,7 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_healthdistrict WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_healthdistrict WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }
             ];
@@ -181,14 +181,14 @@ $(document).ready(function(){
                 {
                     title: "Health Facility report: all counties",
                     selectName: "All counties",
-                    query: "SELECT health_facility AS `Health Facility`, 'one' as `one`, 'two' as `two`, 'three' as `three`, 'four' as `four`, 'five' as `five`, 'six' as `six`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                    query: "SELECT health_facility AS `Health Facility`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
                             "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
                             "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
                             "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_facility WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_facility WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "Health Facility report: Grand Gedeh",
@@ -200,7 +200,7 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_facility WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_facility WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "Health Facility report: Rivercess",
@@ -212,7 +212,7 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_facility WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_facility WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
                     defaultOrder: [[0, "asc"]]
                 }, {
                     title: "Health Facility report: Grand Bassa",
@@ -224,7 +224,161 @@ $(document).ready(function(){
                             "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
                             "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
                             "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
-                            "FROM lastmile_report.temp_view_base_msr_facility WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                            "FROM lastmile_report.mart_view_base_msr_facility WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + ";",
+                    defaultOrder: [[0, "asc"]]
+                }
+            ];
+            break;
+
+        case '10':
+            options = [
+                {
+                    title: "CHSS report: all counties",
+                    selectName: "All counties",
+                    query: "SELECT chss_name AS `CHSS`, chss_id AS `CHSS ID#`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.mart_view_base_msr_chss WHERE month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + " AND chss_id IS NOT NULL;",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "CHSS report: Grand Gedeh",
+                    selectName: "Grand Gedeh",
+                    query: "SELECT chss_name AS `CHSS`, chss_id AS `CHSS ID#`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.mart_view_base_msr_chss WHERE county='Grand Gedeh' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + " AND chss_id IS NOT NULL;",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "CHSS report: Rivercess",
+                    selectName: "Rivercess",
+                    query: "SELECT chss_name AS `CHSS`, chss_id AS `CHSS ID#`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.mart_view_base_msr_chss WHERE county='Rivercess' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + " AND chss_id IS NOT NULL;",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "CHSS report: Grand Bassa",
+                    selectName: "Grand Bassa",
+                    query: "SELECT chss_name AS `CHSS`, chss_id AS `CHSS ID#`, ROUND(num_routine_visits/num_catchment_households,1) AS `Routine visits per HH`, " +
+                            "ROUND(1000*(num_tx_malaria/num_catchment_people_iccm),1) AS `Malaria cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_diarrhea/num_catchment_people_iccm),1) AS `Diarrhea cases Tx per 1,000 people`, " +
+                            "ROUND(1000*(num_tx_ari/num_catchment_people_iccm),1) AS `ARI cases Tx per 1,000 people`, " +
+                            "ROUND(1000*((num_muac_red+num_muac_yellow+num_muac_green)/num_catchment_people),1) AS `MUAC screens per 1,000 people`, " +
+                            "ROUND(1000*(num_pregnant_woman_visits/num_catchment_people),1) AS `Pregnant woman visits per 1,000 people`, " +
+                            "CONCAT(ROUND(100*(num_tx_malaria_under24/(num_tx_malaria_under24+num_tx_malaria_over24)),1),'%') AS `% Malaria cases treated within 24 hrs` " +
+                            "FROM lastmile_report.mart_view_base_msr_chss WHERE county='Grand Bassa' AND month_reported=" + reportMonth.format('M') + " AND year_reported=" + reportMonth.format('YYYY') + " AND chss_id IS NOT NULL;",
+                    defaultOrder: [[0, "asc"]]
+                }
+            ];
+            break;
+
+        case '11':
+            options = [
+                {
+                    title: "# logins, by user (last 30 days)",
+                    selectName: "# logins, by user (last 30 days)",
+                    query: "SELECT username AS `User`, COUNT(1) AS `# logins` FROM lastmile_dataportal.tbl_utility_logins WHERE DATEDIFF(NOW(),login_time)<=30 GROUP BY username;",
+                    defaultOrder: [[1, "desc"]]
+                }, {
+                    title: "# logins, by user (last 90 days)",
+                    selectName: "# logins, by user (last 90 days)",
+                    query: "SELECT username AS `User`, COUNT(1) AS `# logins` FROM lastmile_dataportal.tbl_utility_logins WHERE DATEDIFF(NOW(),login_time)<=90 GROUP BY username;",
+                    defaultOrder: [[1, "desc"]]
+                }, {
+                    title: "# page clicks, by user (last 30 days)",
+                    selectName: "# page clicks, by user (last 30 days)",
+                    query: "SELECT username AS `User`, COUNT(1) AS `# page clicks` FROM lastmile_dataportal.tbl_usage WHERE DATEDIFF(NOW(),access_date)<=30 GROUP BY username;",
+                    defaultOrder: [[1, "desc"]]
+                }, {
+                    title: "# page clicks, by user (last 90 days)",
+                    selectName: "# page clicks, by user (last 90 days)",
+                    query: "SELECT username AS `User`, COUNT(1) AS `# page clicks` FROM lastmile_dataportal.tbl_usage WHERE DATEDIFF(NOW(),access_date)<=90 GROUP BY username;",
+                    defaultOrder: [[1, "desc"]]
+                }, {
+                    title: "Most accessed pages (last 30 days)",
+                    selectName: "Most accessed pages (last 30 days)",
+                    query: "SELECT object AS `Page`, COUNT(1) AS `# page clicks` FROM lastmile_dataportal.tbl_usage WHERE DATEDIFF(NOW(),access_date)<=30 GROUP BY object;",
+                    defaultOrder: [[1, "desc"]]
+                }, {
+                    title: "Most accessed pages (last 90 days)",
+                    selectName: "Most accessed pages (last 90 days)",
+                    query: "SELECT object AS `Page`, COUNT(1) AS `# page clicks` FROM lastmile_dataportal.tbl_usage WHERE DATEDIFF(NOW(),access_date)<=90 GROUP BY object;",
+                    defaultOrder: [[1, "desc"]]
+                }
+            ];
+            break;
+
+        case '12':
+            options = [
+                {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }
+            ];
+            break;
+
+        case '13':
+            options = [
+                {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }
+            ];
+            break;
+
+        case '14':
+            options = [
+                {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }
+            ];
+            break;
+
+        case '15':
+            options = [
+                {
+                    title: "",
+                    selectName: "",
+                    query: "",
+                    defaultOrder: [[0, "asc"]]
+                }, {
+                    title: "",
+                    selectName: "",
+                    query: "",
                     defaultOrder: [[0, "asc"]]
                 }
             ];
