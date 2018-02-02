@@ -2,6 +2,7 @@
     padding-left:10px;
     padding-right:10px;
 }
+
 .admin_input {
     width:100%;
     height:100%;
@@ -12,10 +13,12 @@
     margin-left:1px;
     background:#eee;
 }
+
 .admin_input:hover {
     background:lightblue;
     cursor:pointer;
 }
+
 .admin_input:focus {
     background:lightblue;
 }
@@ -29,18 +32,22 @@ div.tableContainer {
     overflow-y: auto;
     padding-top:4px;
 }
+
 div.tableContainer table {
     width: 100%;
 }
+
 thead#adminHeader tr {
     display: block
 }
+
 thead#adminHeader th {
     padding-left:4px;
     padding-right:4px;
     border: 2px solid white;
     color: white;
 }
+
 #scrollContent {
     display: block;
     height: 60vh;
@@ -48,6 +55,7 @@ thead#adminHeader th {
     overflow-y: auto;
     width: 100%
 }
+
 #scrollContent td {
     border:2px solid white;
     background:#eee;

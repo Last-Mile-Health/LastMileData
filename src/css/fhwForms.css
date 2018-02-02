@@ -1,9 +1,3 @@
-/* 
-    Description:    Used for all FHW Forms
-    Last updated:   2014-12-03
-    By:             Avi
-*/
-
 body {
     color:black;
 }
@@ -196,9 +190,6 @@ input[name=sup_date] { width:75px; }
     .deBox { display:none; }
     
     /* Hide DE_Date and DE_Init inputs; these are replaced with dummy inputs #de_print_init and #de_print_date */
-/*
-    input[name=meta_DE_date], input[name=meta_DE_init] { display:none; }
-*/
     input[name=meta_de_date], input[name=meta_de_init] { display:none; }
     #de_print_init { display:inline; width:45px; }
     #de_print_date { display:inline; width:75px; }

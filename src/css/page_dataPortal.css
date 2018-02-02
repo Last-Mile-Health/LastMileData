@@ -93,7 +93,6 @@ th {
     overflow-x:hidden;
     cursor:pointer;
     margin-right: -16px;
-    /*margin-left: -16px;*/
 }
 .nav-sidebar div a {
     color:#555;
@@ -224,7 +223,6 @@ table.ptg_data td.label_table {
 .ui-multiselect-menu { background:#eee; opacity:0.8; border-radius: 6px; }
 #toggleMapItems_ms { height: 32px; width:240px; }
 .ui-multiselect-menu { width:240px; }
-/*.ui-multiselect-checkboxes, .ui-helper-reset { width:300px; }*/
 
 /* Leaflet */
 #select_indicator { width:240px; }
@@ -238,7 +236,7 @@ table.ptg_data td.label_table {
 
 /* Hide certain elements when printing */
 @media print
-{    
+{
     #dp_sidebar, .no-print *
     {
         /* !!!!! printing does not yet work properly !!!!! */
