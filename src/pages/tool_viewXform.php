@@ -27,7 +27,7 @@
             foreach($questions as $varName => $value) {
                 
                 // Nesting level 1
-                // !!!!! This can be implemented more succinctly, possibly through a recursive function !!!!!
+                // This can be implemented more succinctly, possibly through a recursive function
                 $xPath = '/data/';
                 $numChildren = count($value);
                 if ($numChildren===0) {
@@ -244,7 +244,7 @@
                 
                 $systemVariables = ['LMD-DATABASE', 'LMD-TABLE', 'LMD-VAL-meta_UUID', 'LMD-VAL-meta_dataSource', 'LMD-VAL-meta_formVersion', 'LMD-VAL-meta_deviceID','LMD-VAL-meta_autoDate','LMD-TIM-meta_dataEntry_startTime','LMD-TIM-meta_dataEntry_endTime'];
                 
-                // !!!!! Hack to account for sick child form
+                // Hack to account for sick child form
                 array_push($systemVariables, 'LMD-VAL-childHasDangerSign');
                 
                 if ( in_array($varName, $systemVariables) || substr($varName, 0, 4)=='VAR-' ) {

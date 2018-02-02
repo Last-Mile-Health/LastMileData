@@ -1,7 +1,3 @@
-
-<!-- !!!!! Datepicker CSS needs to be fixed; see page_dataPortal.css !!!!! -->
-<!--<link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />-->
-
 <style>
     .myTable { border-collapse:collapse; }
     .myTable th { border: 1px solid black; padding:5px; }

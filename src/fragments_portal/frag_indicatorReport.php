@@ -166,7 +166,6 @@
                         
                         <!-- Indicator values will be dynamically placed here -->
                         <!-- ko foreach:ro.indicators_table -->
-                        <!-- !!!!! need to dynamically fill yearmonth !!!!! -->
                         <td class="value" data-bind="attr: {'data-yearmonth':$parents[2].lastFourMonths[3].yearMonth, 'data-inst_id':($data + '-' + $parentContext.$data.inst_id.split('-')[1] + '-' + $parentContext.$data.inst_id.split('-')[2])}"></td>
                         <!-- /ko -->
                     </tr>

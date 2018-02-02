@@ -640,6 +640,10 @@ $(document).ready(function(){
                 map.setView([6.0, -8.1], 9);
                 break;
 
+            case 'GB':
+                map.setView([6.15, -9.8], 9);
+                break;
+
             case 'LIB':
                 map.setView([6.5, -8.9], 7);
                 break;

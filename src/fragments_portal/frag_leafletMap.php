@@ -113,7 +113,7 @@
             <option>Select zoom</option>
             <option value='RC'>Rivercess</option>
             <option value='GG'>Grand Gedeh</option>
-            <!--<option value='GB'>Grand Bassa</option>--> <!-- !!!!! add !!!!! -->
+            <option value='GB'>Grand Bassa</option>
             <option value='LIB'>Liberia</option>
         </select>
     </div>
@@ -168,13 +168,13 @@
     </div>
     
     <!-- Select indicator "period" -->
+    <!-- Corresponds with lastmile_dataportal.tbl_periodcuts -->
     <div style="float:left; margin-right:5px">
         <select id="select_period" class="indChange form-control" disabled>
             <option value='3. Select period'>3. Select period</option>
             <option value='1'>Last month</option>
             <option value='2'>Last 3 months</option>
             <option value='3'>Last 6 months</option>
-            <!-- !!!!! this should pull from database periods table !!!!! -->
         </select>
     </div>
     

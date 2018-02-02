@@ -220,6 +220,7 @@ $(document).ready(function(){
         collapsible: true,
         active: false
     });
+    $('.ui-icon-triangle-1-e').remove();
 
     // Routing for initial page load
     // If there's a hash fragment in the URL, redirect user to the appropriate page (if he/she has permission)
@@ -236,8 +237,3 @@ $(document).ready(function(){
     $('#dp_sidebar, #mainContainer').fadeIn(1000);
 
 });
-
-
-function fireReadyEvent() {
-    alert('up!');
-}

@@ -7,7 +7,7 @@ $(document).ready(function(){
     var reportMonth = moment().subtract(1 + ( moment().format('D') < 15 ? 1 : 0 ),'months');
     
     // SQL code should be placed here
-    // !!!!! Eventually, consider moving this to a database table and passing in the view name as a GET parameter !!!!!
+    // !!!!! Consider moving this to a database table and passing in the view name as a GET parameter !!!!!
     switch (sw) {
 
         case '1':

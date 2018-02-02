@@ -117,14 +117,6 @@ $(document).ready(function(){
                         }
                     }
                 };
-                
-                
-                // Test: !!!!! build character limit here !!!!!
-                if (1===0) {
-                    errorFields.push(myField);
-                    errorMessages.push('Field "' + myField + '" EM');
-                }
-                
             });
             
             return {

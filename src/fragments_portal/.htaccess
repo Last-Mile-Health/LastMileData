@@ -2,7 +2,6 @@
 # Last Mile Data - fragments_portal
 
 # Always revalidate files
-# !!!!! check this code !!!!!
 <IfModule mod_headers.c>
     Header set Cache-Control "must-revalidate"
 </IfModule>

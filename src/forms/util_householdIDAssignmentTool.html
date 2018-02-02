@@ -38,14 +38,10 @@
                     // Set memID variable
                     var memID = $('#memberID').val();
 
-//                    if ( "if it's not an integer" ) {     // !!!!! add error handling !!!!!
-//                        alert('wrong!')
-//                    } else {
-                        $('.memID_inner').each(function() {
-                            $(this).text(memID);
-                            memID++;
-                        });
-//                    }
+                    $('.memID_inner').each(function() {
+                        $(this).text(memID);
+                        memID++;
+                    });
 
 
                 });

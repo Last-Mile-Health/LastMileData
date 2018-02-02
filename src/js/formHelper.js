@@ -49,9 +49,8 @@ $(document).ready(function() {
     
     
     // Apply dynamic selects
-    // e.g.     (static)            <input data-lmd-valid-select='["one","two","three"]'>
-    //          (static, sorted)    <input data-lmd-valid-select='["one","two","three"]' data-lmd-valid-sortList="yes">
-    //          (dynamic)           <input data-lmd-valid-select='villages'> // !!!!! villages must be deifned in... !!!!!
+    // e.g.     (static, sorted)    <input data-lmd-valid-select='["one","two","three"]' data-lmd-valid-sortList="yes">
+    //          (dynamic)           <input data-lmd-valid-select='county'>
     $("input[data-lmd-valid-select]").each(function() {
         
         // Get source from data attribute
@@ -119,7 +118,7 @@ function readFieldsIntoObject($inputs){
     
     $($inputs).each(function() {
         if ($(this).attr('type') == 'checkbox') {
-            // Handle checkboxes; !!!!! if multiple checkboxes with the same name attribute are selected, only the last selected one is recorded; prevent double selection within formValidate.js !!!!!
+            // Note: if multiple checkboxes with the same name attribute are selected, only the last selected one is recorded
             if ( $(this).is(':checked') ) {
                 myRecord[$(this).attr('name')] = $(this).attr('value');
             }

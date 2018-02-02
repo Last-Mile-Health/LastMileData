@@ -182,11 +182,7 @@
                 ]
             }
         ],
-        // !!!!! Eventually, replace this with automated code (like in LMD_dataPortal.js !!!!!
         months: [
-//            { yearMonth: "2016-10", shortMonth: "Oct '16" },
-//            { yearMonth: "2016-11", shortMonth: "Nov '16" },
-//            { yearMonth: "2016-12", shortMonth: "Dec '16" },
             { yearMonth: "2017-1", shortMonth: "Jan '17" },
             { yearMonth: "2017-2", shortMonth: "Feb '17" },
             { yearMonth: "2017-3", shortMonth: "Mar '17" },
@@ -226,7 +222,7 @@
     // Bootstrap the page
     LMD_dataPortal.bootstrap(instanceValues, indicatorInstances, null);
     
-    // !!!!! Custom change: FY17-19 target for indicator #16 !!!!!
+    // Custom change: FY17-19 target for indicator #16
     $('#table_16 th:last-child').text('FY17-19 target');
 
 </script>
