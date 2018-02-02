@@ -1,6 +1,6 @@
 // Module:          LMD_shepherd.js
 // Author:          Avi Kenny
-// Last update:     2016-10-29
+// Last update:     2018-02-02
 // Dependencies:    Shepherd.js
 // Purpose:         Takes the user on a virtual tour of the data portal
 // Notes:           Called from page_dataPortal.js
@@ -30,10 +30,6 @@ var LMD_shepherd = (function(){
                     text: 'Start',
                     action: function(){
                         tour_main.next();
-//                        !!!!! stack buttons !!!!!
-//                        $('.shepherd-button').style('float','right');
-//                        $('.shepherd-button').after('<br><br>');
-//                        $('.shepherd-content').width('100px');
                     }
                 }
             ]
@@ -65,13 +61,6 @@ var LMD_shepherd = (function(){
                         LMD_utilities.logUsage('Programs tour', 'START');
                     }
                 }
-//                {
-//                    text: 'RM&E team',
-//                    action: function(){
-//                        tour_main.cancel();
-//                        tour_rme.start();
-//                    }
-//                }
             ]
         });
 
@@ -87,7 +76,7 @@ var LMD_shepherd = (function(){
         // Start tour
         tour_basics.addStep({
             title: 'Last Mile Data - basics tour',
-            text: 'Welcome to "Last Mile Data", the primary programmatic database platform for Last Mile Health. This is an interactive tour created by the RM&E team to introduce you to this powerful data platform. Go ahead and click NEXT to continue',
+            text: 'Welcome to <i>Last Mile Data</i>, the primary programmatic database platform for Last Mile Health. This is an interactive tour created by the RM&E team to introduce you to the platform. Go ahead and click NEXT to continue',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
@@ -118,7 +107,7 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'Last Mile Data - overview',
-            text: 'This is the Data Portal, where you can access information about LMH\'s programs. It\'s updated on the 15th of each month. Let\'s take a look...',
+            text: 'This is the <i>Data Portal</i>, where you can access information about LMH\'s programs. It\'s updated on the 15th of each month. Let\'s take a look...',
             attachTo: '#page_dataPortal bottom',
             classes: 'shepherd-theme-lmd shepherd-thin',
             buttons: [
@@ -135,15 +124,15 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'The sidebar',
-            text: 'This is the sidebar. Here, we\'ll look at some different sections that RM&E organizes LMH\'s reports and data.',
+            text: 'This is the sidebar. It organizes content into groups. This is the tool you will use to navigate through the Data Portal content.',
             attachTo: '#id_10 left',
             buttons: [
                 {
                     text: 'Next',
                     action: function(){
                         tour_basics.next();
-                        $('#id_1123').fadeOut().fadeIn().fadeOut().fadeIn(function(){
-                            $('#id_1123').click();
+                        $('#id_4').fadeOut().fadeIn().fadeOut().fadeIn(function(){
+                            $('#id_4').click();
                         });
                     }
                 }
@@ -152,14 +141,13 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'The sidebar',
-            text: 'When you click on a group on the sidebar, you will see a list of reports in that group. We\'re going to look at the Executive Dashboard first, which is in the Monthly Dashboards group.',
-            attachTo: '#id_1123 left',
+            text: 'When you click on a group on the sidebar, you will see a list of reports and tools in that group. We\'re going to look at the <i>Executive Dashboard</i> first, which is in the <i>Monthly Dashboards</i> group.',
+            attachTo: '#id_4 left',
             buttons: [
                 {
                     text: 'Next',
                     action: function(){
                         tour_basics.next();
-                        $('#id_4').click();
                         $('#id_5').click();
                     }
                 }
@@ -168,7 +156,7 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'Executive dashboard',
-            text: 'We are looking at Last Mile Health\'s most important indicators. Go ahead and scroll down to see the different indicators that the Executive Team uses',
+            text: 'The <i>Executive dashboard</i> contains some of Last Mile Health\'s most important organizational indicators. Go ahead and scroll down to get a sense of how the Executive Team tracks success.',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
@@ -183,7 +171,7 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'Scale dashboard',
-            text: 'Similar to the Executive Dashboard, there are many different data reports on Last Mile Data. We\'re not going to review them all now, but check them out when you have the time.',
+            text: 'There are many different data reports on Last Mile Data, such as the <i>Scale Dashboard</i>, which contains information on key scale indicators. We\'re not going to review them all now, but check them out when you have the time.',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
@@ -191,6 +179,7 @@ var LMD_shepherd = (function(){
                     action: function(){
                         tour_basics.next();
                         $("#mainContainer").animate({ scrollTop: 200 }, 500);
+                        $('.downloadData').fadeOut().fadeIn().fadeOut().fadeIn();
                     }
                 }
             ]
@@ -198,8 +187,23 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'Download data',
-            text: 'Think you can make a prettier graph than RM&E? Every chart has a "Download Data" button, which allows you to see the underlying data in MS Excel (in CSV format).',
-            attachTo: '#download_0 right',
+            text: 'Think you can make a prettier graph than RM&E? Every chart has a "Download Data" button, which allows you to access the underlying data in CSV format (open it with MS Excel).',
+            attachTo: '.downloadData right',
+            buttons: [
+                {
+                    text: 'Next',
+                    action: function(){
+                        tour_basics.next();
+                        $('.downloadChart').fadeOut().fadeIn().fadeOut().fadeIn();
+                    }
+                }
+            ]
+        });
+        
+        tour_basics.addStep({
+            title: 'Download chart',
+            text: 'You can also download the chart itself if you want to use it in a presentation or elsewhere.',
+            attachTo: '.downloadChart right',
             buttons: [
                 {
                     text: 'Next',
@@ -219,7 +223,7 @@ var LMD_shepherd = (function(){
                     action: function(){
                         tour_basics.next();
                         $('#id_688').click();
-                        $('#id_2088').click();
+                        $('#id_7940').click();
                     }
                 }
             ]
@@ -227,59 +231,16 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'Detailed program reports',
-            text: 'The Detailed Program reports have detailed information on our Program. Here\'s a report looking at our CHWs and CHSSs',
+            text: 'While the Monthly Dashboards group contains mostly high-level aggregated figures, the <i>Detailed Program Reports</i> group contains information disaggregated at lower levels. Here\'s a report showing basic information on active CHSSs.',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
                     text: 'Next',
                     action: function(){
                         tour_basics.next();
-                        $('#id_3695').click();
-                    }
-                }
-            ]
-        });
-        
-        tour_basics.addStep({
-            title: 'Detailed program reports',
-            text: 'We can also look at individual CHW restocks...',
-            attachTo: '#shepherdAnchor top',
-            buttons: [
-                {
-                    text: 'Next',
-                    action: function(){
-                        tour_basics.next();
-                        $('#id_10').click();
-                        $('#id_7022').click();
-                    }
-                }
-            ]
-        });
-        
-        tour_basics.addStep({
-            title: 'Last Mile Survey',
-            text: '...check out findings from our Last Mile Surveys...',
-            attachTo: '#shepherdAnchor top',
-            buttons: [
-                {
-                    text: 'Next',
-                    action: function(){
-                        tour_basics.next();
-                        $('#id_18').click();
-                        $('#id_20').click();
-                    }
-                }
-            ]
-        });
-        
-        tour_basics.addStep({
-            title: 'Liberia Stats',
-            text: '...see census and health information from different counties...',
-            attachTo: '#shepherdAnchor top',
-            buttons: [
-                {
-                    text: 'Next',
-                    action: function(){
+                        $('#id_26').click();
+                        $('#id_27').click();
+                        
                         // Hide the info box temporarily
                         var hideInfoBox = function(){
                             setTimeout(function(){
@@ -289,18 +250,14 @@ var LMD_shepherd = (function(){
                             },100);
                         };
                         $(window).bind('DP_loaded',hideInfoBox);
-                        
-                        tour_basics.next();
-                        $('#id_26').click();
-                        $('#id_27').click();
                     }
                 }
             ]
         });
         
         tour_basics.addStep({
-            title: 'Cartography (Maps)',
-            text: '...select data to be visualized on a map...',
+            title: 'Maps',
+            text: 'The <i>Maps</i> group contains both dynamic indicator maps and links to static PDF maps produced by RM&E...',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
@@ -308,21 +265,6 @@ var LMD_shepherd = (function(){
                     action: function(){
                         tour_basics.next();
                         $('#id_1123').click();
-                        $('#id_4373').click();
-                    }
-                }
-            ]
-        });
-        
-        tour_basics.addStep({
-            title: 'RM&E Documents',
-            text: '...always find the correct version of a program form...',
-            attachTo: '#shepherdAnchor top',
-            buttons: [
-                {
-                    text: 'Next',
-                    action: function(){
-                        tour_basics.next();
                         $('#id_7279').click();
                     }
                 }
@@ -331,26 +273,31 @@ var LMD_shepherd = (function(){
         
         tour_basics.addStep({
             title: 'RM&E Documents',
-            text: '...and find key RM&E strategic documents.',
+            text: 'All important documents produced by the RM&E team are stored in the <i>RM&E Documents</i> group.',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
                     text: 'Next',
                     action: function(){
                         tour_basics.next();
+                        $('#id_9690').click();
+                        $('#id_1735').click();
                     }
                 }
             ]
         });
         
         tour_basics.addStep({
-            text: 'And that\'s just skimming the surface of the tools that Last Mile Data has. We hope you spend some time digging deeper into the different reports and drilling into the data!',
+            title: 'LMH Documents',
+            text: 'Other teams have also started to use Last Mile Data to store documents for easy organization and access.',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
                     text: 'Next',
                     action: function(){
                         tour_basics.next();
+                        $('#id_1').click();
+                        $('#id_4').click();
                         
                         // Log tour usage
                         LMD_utilities.logUsage('Basics tour', 'FINISHED');
@@ -360,7 +307,7 @@ var LMD_shepherd = (function(){
         });
         
         tour_basics.addStep({
-            text: 'Thanks for completing the tour! If you\'ve made it this far, congratulations - you\'ve just won a free bowl of home-cooked palm butter from Nick Gordon! Email Nick to claim your prize...',
+            text: 'That\'s just skimming the surface of the tools that Last Mile Data has to offer. We hope you spend some time digging deeper into the different available tools and reports!<br><br>Thanks for completing the tour. If you\'ve made it this far, congratulations - you\'ve just won a free bowl of home-cooked palm butter from Nick Gordon! Email Nick to claim your prize...',
             attachTo: '#shepherdAnchor top',
             buttons: [
                 {
@@ -531,8 +478,6 @@ var LMD_shepherd = (function(){
                     action: function(){
                         tour_programs.next();
                         $('#id_3695').click();
-                        // !!!!! Flash on export data
-                        // !!!!! 'See the EXPORT DATA BUTTON? Click on this to download all of LMH\'s basic CHW data'
                     }
                 }
             ]
@@ -557,12 +502,6 @@ var LMD_shepherd = (function(){
                         $(window).bind('DP_loaded',hideInfoBox);
                         
                         tour_programs.next();
-                        // !!!!! flash on Parameters
-                        // !!!!! 'First, you'll want to filter, which CHWs you will want to see. In the parameters, choose which CHW-L and the dates that you want to see the restock data...'
-                        // !!!!! open BIRT report will ALL parameters selected
-                        // !!!!! 'When you click okay, you will be able to see the details of the restock including stock on hand, consumption, and current stock'
-                        // !!!!! flash on arrow keys
-                        // !!!!! 'to navigate to the next CHW's restock report, click on the blue arrows'
                         $('#id_26').click();
                         $('#id_27').click();
                     }
@@ -700,10 +639,6 @@ var LMD_shepherd = (function(){
         // End tour if it exists
         try {
             Shepherd.activeTour.cancel();
-//            tour_main.cancel();
-//            tour_basics.cancel();
-//            tour_programs.cancel();
-//            tour_rme.cancel();
         } catch(e) {}
         
     }
