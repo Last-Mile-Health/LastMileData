@@ -36,13 +36,22 @@
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
             // Echo JSON (sidebar contents)
+            // Sidebar can be modified via admin_sidebarEditor.php
             $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/json_objects/1";
             curl_setopt($ch,CURLOPT_URL,$url1);
             $json1 = curl_exec($ch);
 
+            // Echo JSON (configuration object)
+            // Object has the following boolean properties: "peek", "suppress", "maintenance"
+            // Properties can be modified via admin_adminTools.php
+            $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/json_objects/3";
+            curl_setopt($ch,CURLOPT_URL,$url2);
+            $json2 = curl_exec($ch);
+
             // Close CURL session and echo JSON
             curl_close($ch);
             echo "var model_sidebar = JSON.parse($json1.object_data);". "\n\n";
+            echo "var portal_config = JSON.parse($json2.object_data);". "\n\n";
             echo "</script>";
         ?>
         

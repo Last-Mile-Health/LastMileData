@@ -17,20 +17,33 @@ var LMD_dataPortal = (function() {
     var territoryNames = {};        // Holds list of territories (key = territory_id)
     var indicatorMetadata = {};     // Holds indicator metadata (key = ind_id)
     var reportObjects = [];         // Main object that holds report model
+    var dayToShowData;              // Variable that determines when to show the previous month's data
     
     
+    // PRIVATE: Sets the variable that determines when to show the previous month's data
+    //          Default is 15th, but this can be modified through the configuration settings
+    //          This a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data
+    //          E.g. May data will be displayed by defaul on June 15th
+    //          The "peek" and "suppress" configuration variables (set through admin_adminTools.php) allow superadmins to modify this
+    function setDayToShowData() {
+        
+        if ( portal_config.peek && sessionStorage.user_groups.includes('superadmin') ) {
+            dayToShowData = 8;
+        } else if ( portal_config.suppress ) {
+            dayToShowData = 22;
+        } else {
+            dayToShowData = 15;
+        }
+        
+    }
+
+
     // PRIVATE: Sets the dates for the Data Portal to display
     //          If it is the 15th of the month or later, display the previous 4 months; otherwise, display the four months before the previous month
     //          Example:
     //              Before June 15th, the months would be Jan -- Apr
     //              After June 15th, the months would be Feb -- May
-    //          This a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data
-    //          The "peek" functionality allows superadmins to see next month's data 7 days early; this can be easily extended if needed
     function setDates() {
-        
-        // If , enable "peek" functionality
-        // !!!!! In the future, configure this so that superadmins can turn the peek on and off !!!!!
-        var dayToShowData = sessionStorage.user_groups.includes('superadmin') ? 8 : 15;
         
         // Generate dates (last 4 months)
         var todayDay = moment().format('D'),
@@ -252,7 +265,6 @@ var LMD_dataPortal = (function() {
                             // Add chart point
                             // Chart point only added if its date is not "too new" (a business rule to account for the fact that the Data Portal is "updated" on the 15th of each month with the previous month's data)
                             // "Peek" functionality also implemented here
-                            var dayToShowData = sessionStorage.user_groups.includes('superadmin') ? 8 : 15;
                             var data_totalMonth = (12*Number(dataArray[i].date.split('-')[0]))+Number(dataArray[i].date.split('-')[1]);
                             var latestAllowed_date = todayMinus1m = moment().subtract(1 + ( moment().format('D') < dayToShowData ? 1 : 0 ),'months');
                             var latestAllowed_totalMonth = (12*latestAllowed_date.year())+(latestAllowed_date.month()+1);
@@ -324,9 +336,9 @@ var LMD_dataPortal = (function() {
         $(".value").each(function() {
             var inst_id = $(this).attr("data-inst_id");
             var yearmonth = $(this).attr("data-yearmonth");
-//            var format = indicatorMetadata[inst_id.split("-")[0]].ind_format || 'integer';
+            var format = indicatorMetadata[inst_id.split("-")[0]].ind_format || 'integer';
             var value = tableData["i_" + inst_id + "_m_" + yearmonth];
-//            value = LMD_utilities.format_number(value, format);
+            value = LMD_utilities.format_number(value, format);
             $(this).html(value);
         });
     }
@@ -421,8 +433,9 @@ var LMD_dataPortal = (function() {
     //          This function is called from frag_indicatorReport.php
     function bootstrap(arg_reportObjects, arg_indicatorMetadata, arg_indicatorValues, arg_territoryNames) {
         
-        // Clear data
+        // Clear data; set dayToShowData variable
         clearData();
+        setDayToShowData();
         
         // Set territoryNames object
         territoryNames = setTerritoryNames(arg_territoryNames);

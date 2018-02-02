@@ -85,9 +85,23 @@ $(document).ready(function(){
             $('#whitespaceContainer').slideDown(500, function(){
 
                 $('#mainContainer').scrollTop(0);
-
+                
+                // If Data Portal is down for maintenance (set in admin_adminTools.php), load a "down for maintenance" message
+                if ( portal_config.maintenance && !sessionStorage.user_groups.includes('superadmin') ) {
+                    
+                    $('#dashboard_iframe').hide();
+                    $('#mainContainer').show();
+                    $('#mainContainer').html("<h1>Maintenance.</h1><h3>The Data Portal is currently down for maintenance. Please try again in a few minutes or contact RM&E for more information.</h3>");
+                    $('.shepherd-content').hide();
+                    setTimeout(function(){
+                        $('#whitespaceContainer').slideUp(1000, function(){
+                            $(window).trigger('DP_up');
+                        });
+                    },500);
+                    
                 // Handle fragment loads
-                if (linkType === "frag") {
+                } else if (linkType === "frag") {
+                    
                     $('#dashboard_iframe').hide();
                     $('#mainContainer').show();
                     
@@ -108,12 +122,14 @@ $(document).ready(function(){
 
                 // Handle iframe loads
                 } else if (linkType === "frame") {
+                    
                     $('#mainContainer').hide();
                     $('#dashboard_iframe').show();
                     $('#dashboard_iframe').prop('src',linkURL);
 
                 // Handle markdown loads
                 } else if (linkType === "markdown") {
+                    
                     $('#dashboard_iframe').hide();
                     $('#mainContainer').show();
                     
