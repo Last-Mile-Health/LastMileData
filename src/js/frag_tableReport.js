@@ -323,15 +323,11 @@ $(document).ready(function(){
         case '12':
             options = [
                 {
-                    title: "",
-                    selectName: "",
-                    query: "",
-                    defaultOrder: [[0, "asc"]]
-                }, {
-                    title: "",
-                    selectName: "",
-                    query: "",
-                    defaultOrder: [[0, "asc"]]
+                    title: "Unserved Communities",
+                    headerNote: "Note: Only remote communities are eligible for the CHA program, and so only remote communities are displayed.",
+                    query: "SELECT county AS `County`, health_district AS `Health district`, community AS `Community`, health_facility_km AS `Distance to clinic (km)`, " + 
+                            "population AS `Population` FROM lastmile_cha.view_base_geo_community WHERE active_cha='N' AND health_facility_proximity='remote';",
+                    defaultOrder: [[4, "desc"]]
                 }
             ];
             break;
