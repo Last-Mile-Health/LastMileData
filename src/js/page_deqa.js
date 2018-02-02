@@ -945,8 +945,8 @@ function processLMD(inputKey, inputValue) {
             break;
         default:
             // !!!!! This error is not currently handled !!!!!
-            outputKey = "invalid LMD file";
-            outputValue = "invalid LMD file";
+            outputKey = "invalid LMD data element";
+            outputValue = "invalid LMD data element";
     }
 
     return {

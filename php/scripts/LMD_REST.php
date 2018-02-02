@@ -277,8 +277,9 @@ $app->get('/gis_data_availability/',function($id='all') {
 
 
 // Route 10: Active territories (lastmile_dataportal.view_territories_active)
+// Note: does not include communities
 $app->get('/territories_active/(:id)',function($id='all') {
-    LMD_get($id, "territory_id", "lastmile_dataportal.view_territories_active", "*", 1);
+    LMD_get($id, "territory_id", "lastmile_dataportal.view_territories_active", "*", "territory_type<>'community'");
 });
 
 

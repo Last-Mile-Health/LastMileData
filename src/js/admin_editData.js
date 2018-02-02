@@ -52,7 +52,8 @@ $(document).ready(function(){
         monthList: monthList,
         selects: {
             category: ko.observableArray(),
-            cut: ko.observableArray(["Territory..."])
+            territory: ko.observableArray([{territory_id:0, territory_name:"Territory..."}]),
+            indicator: ko.observableArray([{ind_id:0, ind_name:"Indicators..."}])
         },
         // "changedData" object holds changed values
         changedData: {
@@ -139,13 +140,11 @@ $(document).ready(function(){
             queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
         }
 
-        var myData = {'queryString': queryString, 'transaction': true} ;
-
         // Send AJAX request
         $.ajax({
             type: "POST",
             url: "/LastMileData/php/scripts/ajaxSendQuery.php",
-            data: myData,
+            data: {'queryString': queryString, 'transaction': true},
             dataType: "json",
             success: function() {
                 // Reset changedData object; manipulate DOM
@@ -159,15 +158,31 @@ $(document).ready(function(){
     
 
     // Click handler: Add new indicator
-    $('#btn_addNewIndicator').click(function(){
+    $('#modal_addInstance_submit').click(function() {
 
-        // !!!!! Add functionality; use a modal form !!!!!
-        // !!!!! Should take paramaters (dropdowns): (1) indicator, (2) territory, (3) period !!!!!
+        var ind_id = $('#addInstance_indicator').val();
+        var territory_id = $('#addInstance_territory').val();
+        
+        var queryString = "REPLACE INTO `lastmile_dataportal`.`tbl_values` (`ind_id`, `territory_id`, `period_id`, `month`, `year`, `value`, `leaflet`) " + 
+                "VALUES ('" + ind_id + "', '" + territory_id + "', '1', '0', '0', '0', '0');";
+        
+        // Send AJAX request
+        $.ajax({
+            type: "POST",
+            url: "/LastMileData/php/scripts/ajaxSendQuery.php",
+            data: {'queryString': queryString},
+            dataType: "json",
+            success: function() {
+                // Reset changedData object; manipulate DOM
+                    LMD_utilities.ajaxButton($('#modal_addInstance_submit'), 'alertSuccess', 'Submit');
+            },
+            error: ajaxError
+        });
 
     });
 
 
-    // Change handler: FILTER TABLE BASED ON CUT
+    // Change handler: FILTER TABLE
     $('.dataFilter').change(function() {
         
         // Warn user to save changes before loading more data
@@ -200,8 +215,8 @@ function loadData(options) {
         // Note: default value set manually here
         var filterCategory_default = "Programs (scale)";
         var filterCategory = options.initialLoad ? filterCategory_default : $('#filter_category').val();
-        var filterCut = options.initialLoad ? "all" : $('#filter_cut').val();
-        filterCut = filterCut==="Territory..." ? "all" : filterCut;
+        var filterTerritory = options.initialLoad ? "all" : $('#filter_territory').val();
+        filterTerritory = filterTerritory==="Territory..." ? "all" : filterTerritory;
         var minDate = self.monthList.minDate;
         var maxDate = self.monthList.maxDate;
 
@@ -211,7 +226,7 @@ function loadData(options) {
             // Send AJAX request #1 (indicator/instance metadata)
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstancesFiltered/0/" + filterCategory + "/" + filterCut,
+                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorInstancesFiltered/0/" + filterCategory + "/" + filterTerritory,
                 dataType: "json",
                 error: ajaxError
             }),
@@ -219,7 +234,7 @@ function loadData(options) {
             // Send AJAX request #2 (indicator/instance data)
             $.ajax({
                 type: "GET",
-                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorValuesFiltered/" + filterCategory + "/" + filterCut + "/" + minDate + "/" + maxDate,
+                url: "/LastMileData/php/scripts/LMD_REST.php/indicatorValuesFiltered/" + filterCategory + "/" + filterTerritory + "/" + minDate + "/" + maxDate,
                 dataType: "json",
                 error: ajaxError
             }),
@@ -239,22 +254,30 @@ function loadData(options) {
                 url: "/LastMileData/php/scripts/LMD_REST.php/indCategories/",
                 dataType: "json",
                 error: ajaxError
+            }),
+            
+            // Send AJAX request #5 (indicators)
+            $.ajax({
+                type: "GET",
+                url: "/LastMileData/php/scripts/LMD_REST.php/indicators/0/",
+                dataType: "json",
+                error: ajaxError
             })
 
-        ).done(function(metadata, values, territories, categories) {
+        ).done(function(metadata, values, territories, categories, indicators) {
             
             // Sort `metadata` (result of first AJAX request) by: ind_category, ind_name, territory_name
             try {
                 metadata[0].sort(function(a,b){
-                    // Sort 1: "Category"
+                    // Sort 1: Category
                     if (a.ind_category < b.ind_category) { return -1; }
                     else if (a.ind_category > b.ind_category) { return 1; } 
                     else {
-                        // Sort 2: "Indicator name"
+                        // Sort 2: Indicator name
                         if (a.ind_name < b.ind_name) { return -1; }
                         else if (a.ind_name > b.ind_name) { return 1; } 
                         else {
-                            // Sort 3: "Cut"
+                            // Sort 3: Territory
                             if (a.territory_name < b.territory_name || a.territory_name===null) { return -1; }
                             else if (a.territory_name > b.territory_name || b.territory_name===null) { return 1; } 
                             else {
@@ -273,11 +296,12 @@ function loadData(options) {
                 self.indicators.push(metadata[0][key]);
             }
             
-            // Populate `adminModel.selects.cut` array (holds options for geoCut filter
+            // Populate `adminModel.selects.territory` array (holds options for territory filter
             for (var key in territories[0]) {
-                var cut = territories[0][key].territory_name;
-                if (self.selects.cut.indexOf(cut)===-1) {
-                    self.selects.cut.push(cut);
+                var territory_id = territories[0][key].territory_id;
+                var territory_name = territories[0][key].territory_name;
+                if (self.selects.territory.indexOf({territory_id:territory_id, territory_name:territory_name})===-1) {
+                    self.selects.territory.push({territory_id:territory_id, territory_name:territory_name});
                 }
             }
             
@@ -287,6 +311,20 @@ function loadData(options) {
                 if (self.selects.category.indexOf(category)===-1) {
                     self.selects.category.push(category);
                 }
+            }
+            
+            // Sort indicators object by ind_name
+            indicators[0].sort(function(a,b){
+                if (a.ind_name < b.ind_name) { return -1; }
+                else if (a.ind_name > b.ind_name) { return 1; }
+                else { return 0; }
+            });
+            
+            // Populate `adminModel.selects.indicators` array (holds options for ind_category filter
+            for (var key in indicators[0]) {
+                var ind_id = indicators[0][key].ind_id;
+                var ind_name = indicators[0][key].ind_name;
+                self.selects.indicator.push({ind_id:ind_id, ind_name:ind_name});
             }
             
             // Set default category
