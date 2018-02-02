@@ -159,7 +159,7 @@ $(document).ready(function(){
         LMD_utilities.ajaxButton($self, 'ajaxLoader');
         
         var object_data = ko.mapping.toJSON(sidebar_model_obs);
-        var queryString = "UPDATE lastmile_dataportal.tbl_json_objects SET object_data='" + LMD_utilities.addSlashes(object_data) + "' WHERE object_name='Data Portal sidebar'";
+        var queryString = "UPDATE lastmile_dataportal.tbl_json_objects SET object_data='" + LMD_utilities.addSlashes(object_data) + "' WHERE id=1";
         var myData = {'queryString': queryString} ;
         $.ajax({
                 type: "POST",
