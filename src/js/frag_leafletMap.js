@@ -439,15 +439,11 @@ $(document).ready(function(){
         } // close, beforeopen, beforeclose
     });
     
-    
     // Style #toggleMapItems multiselect
     $('#toggleMapItems_ms').addClass('btn btn-primary');
     $('#toggleMapItems_ms, .ui-multiselect-menu').css('width','');
-    
-    
-    // !!!!! Hack !!!!!
-    $('#select_indicator option[value=28]').text('Number of CHAs deployed (LMH)');
-    
+    $('.ui-icon-triangle-1-s').remove();
+    $('#toggleMapItems_ms').removeClass('ui-state-default');
     
     // Handle selection of indicator / value combination
     $('.indChange').change(function(){
