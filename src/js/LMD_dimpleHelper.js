@@ -71,6 +71,7 @@ var LMD_dimpleHelper = (function(){
                 var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
                 y.addOrderRule("Cut_primary",true);
             }
+            mySeries.addOrderRule("Cut_secondary",false);    // !!!!! order should be configurable !!!!!
         }
         
         // Format stacked bar charts (horizontal)
@@ -80,7 +81,8 @@ var LMD_dimpleHelper = (function(){
                 x.tickFormat = params.tickFormat
                 var y = myChart.addCategoryAxis("y", "Cut_primary");
                 var mySeries = myChart.addSeries(["Cut_primary","Cut_secondary"], dimple.plot.bar);
-                y.addOrderRule("Cut_primary",true);
+                y.addOrderRule("Cut_primary",true);             // !!!!! order should be configurable !!!!!
+                mySeries.addOrderRule("Cut_secondary",false);    // !!!!! order should be configurable !!!!!
                 myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
                 myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
             } else {
@@ -101,6 +103,7 @@ var LMD_dimpleHelper = (function(){
             y.tickFormat = params.tickFormat
             var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
             x.addOrderRule("Cut_primary",true);
+            myChart.defaultColors = [new dimple.color("#F79646")];
         }
         
         // Format bar charts (horizontal)
@@ -112,6 +115,7 @@ var LMD_dimpleHelper = (function(){
             y.addOrderRule("Cut_primary",true);
             myChart.x = myChart.x + 40;         // !!!!! Hack !!!!!
             myChart.width = myChart.width - 40; // !!!!! Hack !!!!!
+            myChart.defaultColors = [new dimple.color("#F79646")];
         }
         
         // Format floating bar charts (horizontal)

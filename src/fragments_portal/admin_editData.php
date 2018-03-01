@@ -96,6 +96,3 @@
     <!-- MODAL END: "ADD A NEW INSTANCE" -->
 
 </div>
-
-
-

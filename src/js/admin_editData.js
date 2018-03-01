@@ -1,6 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
     // Note that this tool excludes leaflet data. If manual edits are needed to leaflet data, they need to happen within the MySQL table (lastmile_dataportal.tbl_values) directly
+    // This results in some indicator values (e.g. values for "Number of CHSSs deployed") being duplicated in `lastmile_dataportal`.`tbl_values`, where two rows have identical data aside from the `id` and `leaflet` columns.
 
     // !!!!! Incorporate two-way data formatting !!!!!
 
@@ -136,8 +137,14 @@ $(document).ready(function(){
             var ind_id =        x.inst_id.split('-')[0];
             var territory_id =  x.inst_id.split('-')[1];
             var period_id =     x.inst_id.split('-')[2];
-            queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`period_id`,`month`,`year`,`value`) VALUES ";
-            queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
+            if (x.value === '') {
+                queryString += "DELETE FROM lastmile_dataportal.tbl_values WHERE ";
+                queryString += "`ind_id`=" + ind_id + " AND `territory_id`='" + territory_id + "' AND `period_id`=" + period_id + " AND `month`=" + x.month + " AND `year`=" + x.year + ";";
+            } else {
+                queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`period_id`,`month`,`year`,`value`) VALUES ";
+                queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
+            }
+            console.log(queryString);
         }
 
         // Send AJAX request
@@ -241,28 +248,28 @@ function loadData(options) {
 
             // Send AJAX request #3 (active territories)
             // !!!!! May need to modify the underlying view later on to filter out districts, facilities, etc. !!!!!
-            $.ajax({
+            options.initialLoad ? $.ajax({
                 type: "GET",
                 url: "/LastMileData/php/scripts/LMD_REST.php/territories_active/",
                 dataType: "json",
                 error: ajaxError
-            }),
+            }) : {},
 
             // Send AJAX request #4 (indicator/instance categories)
-            $.ajax({
+            options.initialLoad ? $.ajax({
                 type: "GET",
                 url: "/LastMileData/php/scripts/LMD_REST.php/indCategories/",
                 dataType: "json",
                 error: ajaxError
-            }),
+            }) : {},
             
             // Send AJAX request #5 (indicators)
-            $.ajax({
+            options.initialLoad ? $.ajax({
                 type: "GET",
                 url: "/LastMileData/php/scripts/LMD_REST.php/indicators/0/",
                 dataType: "json",
                 error: ajaxError
-            })
+            }) : {}
 
         ).done(function(metadata, values, territories, categories, indicators) {
             
@@ -297,34 +304,42 @@ function loadData(options) {
             }
             
             // Populate `adminModel.selects.territory` array (holds options for territory filter
-            for (var key in territories[0]) {
-                var territory_id = territories[0][key].territory_id;
-                var territory_name = territories[0][key].territory_name;
-                if (self.selects.territory.indexOf({territory_id:territory_id, territory_name:territory_name})===-1) {
-                    self.selects.territory.push({territory_id:territory_id, territory_name:territory_name});
+            if (options.initialLoad) {
+                for (var key in territories[0]) {
+                    var territory_id = territories[0][key].territory_id;
+                    var territory_name = territories[0][key].territory_name;
+                    if (self.selects.territory.indexOf({territory_id:territory_id, territory_name:territory_name})===-1) {
+                        self.selects.territory.push({territory_id:territory_id, territory_name:territory_name});
+                    }
                 }
             }
             
             // Populate `adminModel.selects.category` array (holds options for ind_category filter
-            for (var key in categories[0]) {
-                var category = categories[0][key].ind_category;
-                if (self.selects.category.indexOf(category)===-1) {
-                    self.selects.category.push(category);
+            if (options.initialLoad) {
+                for (var key in categories[0]) {
+                    var category = categories[0][key].ind_category;
+                    if (self.selects.category.indexOf(category)===-1) {
+                        self.selects.category.push(category);
+                    }
                 }
             }
             
             // Sort indicators object by ind_name
-            indicators[0].sort(function(a,b){
-                if (a.ind_name < b.ind_name) { return -1; }
-                else if (a.ind_name > b.ind_name) { return 1; }
-                else { return 0; }
-            });
+            if (options.initialLoad) {
+                indicators[0].sort(function(a,b){
+                    if (a.ind_name < b.ind_name) { return -1; }
+                    else if (a.ind_name > b.ind_name) { return 1; }
+                    else { return 0; }
+                });
+            }
             
             // Populate `adminModel.selects.indicators` array (holds options for ind_category filter
-            for (var key in indicators[0]) {
-                var ind_id = indicators[0][key].ind_id;
-                var ind_name = indicators[0][key].ind_name;
-                self.selects.indicator.push({ind_id:ind_id, ind_name:ind_name});
+            if (options.initialLoad) {
+                for (var key in indicators[0]) {
+                    var ind_id = indicators[0][key].ind_id;
+                    var ind_name = indicators[0][key].ind_name;
+                    self.selects.indicator.push({ind_id:ind_id, ind_name:ind_name});
+                }
             }
             
             // Set default category

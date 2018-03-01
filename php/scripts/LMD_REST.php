@@ -98,7 +98,7 @@ $app->delete('/indicators/:id', function($id) {
 // !!!!! make sure that the new "`month` IS NOT NULL" clause didn't break anything else !!!!!
 $app->get('/indicatorValues/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
     $territory_id = $territory_id=='all' ? "all" : "'" . str_replace(",","','",$territory_id) . "'";
-    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, period_id, value", "value <> '' AND `month` IS NOT NULL AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
+    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values", "ind_id, month, year, territory_id, period_id, value", "value <> '' AND `month` IS NOT NULL AND `month`<>0 AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
 });
 //$app->post('/instanceValues/', function() {
 //    LMD_post("lastmile_dataportal.tbl_indicators");
@@ -134,7 +134,7 @@ $app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:territory_na
 // minDate and maxDate should be specified in terms of "# of months since year 0" (i.e. year*12 + month)
 $app->get('/indicatorValuesFiltered/:category/:territory_name/:minDate/:maxDate',function($category,$territory_name,$minDate,$maxDate) {
     $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
-    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND leaflet=0 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
+    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND `month`<>0 AND leaflet=0 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
 });
 
 

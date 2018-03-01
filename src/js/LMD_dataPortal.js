@@ -28,9 +28,9 @@ var LMD_dataPortal = (function() {
     function setDayToShowData() {
         
         if ( portal_config.peek && sessionStorage.user_groups.includes('superadmin') ) {
-            dayToShowData = 8;
+            dayToShowData = 1;
         } else if ( portal_config.suppress ) {
-            dayToShowData = 22;
+            dayToShowData = 29;
         } else {
             dayToShowData = 15;
         }

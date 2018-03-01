@@ -36,7 +36,7 @@ $.getScript('../js/frag_tableReport.js');
             </select>
         </div>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" style="margin:0; width:100%">
             <thead>
                 <tr data-bind="foreach:fields">
                     <th data-bind="text:$data"></th>

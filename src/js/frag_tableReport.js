@@ -15,17 +15,17 @@ $(document).ready(function(){
                 {
                     title: "CHA Listing: Grand Gedeh",
                     selectName: "Grand Gedeh",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, cha AS `CHA`, cha_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh';",
+                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_position_id,')') AS `CHSS`, cha AS `CHA`, position_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh';",
                     defaultOrder: [[0, "asc"],[1, "asc"],[2, "asc"]]
                 }, {
                     title: "CHA Listing: Rivercess",
                     selectName: "Rivercess",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, cha AS `CHA`, cha_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Rivercess';",
+                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_position_id,')') AS `CHSS`, cha AS `CHA`, position_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Rivercess';",
                     defaultOrder: [[0, "asc"],[1, "asc"],[2, "asc"]]
                 }, {
                     title: "CHA Listing: Grand Bassa",
                     selectName: "Grand Bassa",
-                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_id,')') AS `CHSS`, cha AS `CHA`, cha_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Bassa';",
+                    query: "SELECT health_facility AS `Health Facility`, CONCAT(COALESCE(chss,'Unassigned'),' (',chss_position_id,')') AS `CHSS`, cha AS `CHA`, position_id AS `CHA ID#`, community_list AS `Communities`, community_id_list AS `Community IDs` FROM lastmile_cha.view_base_cha where county='Grand Bassa';",
                     defaultOrder: [[0, "asc"],[1, "asc"],[2, "asc"]]
                 }
             ];
@@ -36,17 +36,17 @@ $(document).ready(function(){
                 {
                     title: "CHSS Listing: Grand Gedeh",
                     selectName: "Grand Gedeh",
-                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh' and chss_id IS NOT NULL GROUP BY chss_id",
+                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_position_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Gedeh' and position_id IS NOT NULL GROUP BY chss_position_id",
                     defaultOrder: [[0, "asc"],[1, "asc"]]
                 }, {
                     title: "CHSS Listing: Rivercess",
                     selectName: "Rivercess",
-                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Rivercess' and chss_id IS NOT NULL GROUP BY chss_id",
+                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_position_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Rivercess' and position_id IS NOT NULL GROUP BY chss_position_id",
                     defaultOrder: [[0, "asc"],[1, "asc"]]
                 }, {
                     title: "CHSS Listing: Grand Bassa",
                     selectName: "Grand Bassa",
-                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Bassa' and chss_id IS NOT NULL GROUP BY chss_id",
+                    query: "SELECT health_facility AS `Health Facility`, COALESCE(chss,'Unassigned') AS `CHSS`, chss_position_id AS `CHSS ID#`, COUNT(cha) AS `# of CHAs` FROM lastmile_cha.view_base_cha where county='Grand Bassa' and position_id IS NOT NULL GROUP BY chss_position_id",
                     defaultOrder: [[0, "asc"],[1, "asc"]]
                }
             ];
@@ -335,14 +335,9 @@ $(document).ready(function(){
         case '13':
             options = [
                 {
-                    title: "",
-                    selectName: "",
-                    query: "",
-                    defaultOrder: [[0, "asc"]]
-                }, {
-                    title: "",
-                    selectName: "",
-                    query: "",
+                    title: "Database documentation",
+                    headerNote: "For use by database administrators.",
+                    query: "SELECT * FROM lastmile_dataportal.database_documentation;",
                     defaultOrder: [[0, "asc"]]
                 }
             ];

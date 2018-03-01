@@ -34,7 +34,7 @@ $.getScript('../js/admin_adminTools.js');
         </tr>
         <tr>
             <td>Data peek</td>
-            <td>When enabled, superadmins can view the previous month's data one week early (i.e. on the 8th of the month instead of the 15th)</td>
+            <td>When enabled, superadmins can view the previous month's data two weeks early (i.e. on the 1st of the month instead of the 15th)</td>
             <td>
                 <span data-bind="if:config.peek">Enabled</span>
                 <span data-bind="ifnot:config.peek">Disabled</span>
@@ -43,7 +43,7 @@ $.getScript('../js/admin_adminTools.js');
         </tr>
         <tr>
             <td>Suppress data</td>
-            <td>When enabled, data from the previous month is suppressed for all users for up to one week (i.e. until the 22nd of the month). Peek overrides this for superadmins.</td>
+            <td>When enabled, data from the previous month is suppressed for all users for up to two weeks (i.e. until the 29th of the month). Peek overrides this for superadmins.</td>
             <td>
                 <span data-bind="if:config.suppress">Enabled</span>
                 <span data-bind="ifnot:config.suppress">Disabled</span>

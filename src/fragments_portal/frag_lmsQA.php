@@ -61,7 +61,7 @@ End date: <input id='endDate'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 //                ini_set('MAX_EXECUTION_TIME', 300);
 
         // Set queryString; run query; extract data (ALL AGES)
-        $queryString = "SELECT EnumeratorID, enumeratorName, sum(numHH) as numHH, sum(numFem) as numFem, sum(numGen) as numGen, sum(numChi) as numChi, sum(err_FBD) as err_FBD, sum(err_anyBirths) as err_anyBirths, sum(err_birthsNo5Yes2) as err_birthsNo5Yes2, sum(err_diffDOB) as err_diffDOB, sum(err_childDeath) as err_childDeath, sum(err_ebola1) as err_ebola1, sum(err_ebola2) as err_ebola2, sum(err_chiProvider) as err_chiProvider FROM lastmile_lms.view_qa_master WHERE AutoDate>='$startDate' && AutoDate<='$endDate' GROUP BY EnumeratorID;";
+        $queryString = "SELECT EnumeratorID, enumeratorName, sum(numHH) as numHH, sum(numFem) as numFem, sum(numGen) as numGen, sum(numChi) as numChi, CONCAT(ROUND(100*(sum(err_FBD)/sum(numFem)),1),'%') as err_FBD, CONCAT(ROUND(100*(sum(err_anyBirths)/sum(numFem)),1),'%') as err_anyBirths, CONCAT(ROUND(100*(sum(err_birthsNo5Yes2)/sum(numFem)),1),'%') as err_birthsNo5Yes2, CONCAT(ROUND(100*(sum(err_diffDOB)/sum(numFem)),1),'%') as err_diffDOB, CONCAT(ROUND(100*(sum(err_childDeath)/sum(numFem)),1),'%') as err_childDeath, CONCAT(ROUND(100*(sum(err_ebola1)/sum(numGen)),1),'%') as err_ebola1, CONCAT(ROUND(100*(sum(err_ebola2)/sum(numGen)),1),'%') as err_ebola2, CONCAT(ROUND(100*(sum(err_chiProvider)/sum(numChi)),1),'%') as err_chiProvider FROM lastmile_lms.view_qa_master WHERE AutoDate>='$startDate' && AutoDate<='$endDate' GROUP BY EnumeratorID;";
         $result = mysqli_query($cxn, $queryString);
 
         // Display header and report description
@@ -80,7 +80,7 @@ End date: <input id='endDate'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         echo "<li><b>Err: Child death</b>. Gave different answers for \"is your most recently birthed child still alive?\" question (recent birth section vs. birth history).</li>";
         echo "<li><b>Err: Ebola 1</b>. Said both \"refused to respond\" and another answer (Ebola knowledge questions).</li>";
         echo "<li><b>Err: Ebola 2</b>. Skipped a required question (Ebola transmission questions).</li>";
-        echo "<li><b>Err: Child Tx</b>. Said that the child received tratment FIRST from a provider that they did not see.</li>";
+        echo "<li><b>Err: Child Tx</b>. Said that the child received treatment FIRST from a provider that they did not see.</li>";
         echo "</ul><br>";
 
         // Parse into results
