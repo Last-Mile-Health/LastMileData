@@ -8,7 +8,18 @@ var LMD_dimpleHelper = (function(){
 
     // Monthly line graph
     function createChart(params){
-//console.log(params.data);
+        
+        // Extract min and max dates
+        var minDate = params.data[0].Month;
+        var maxDate = params.data[0].Month;
+        for (var key in params.data) {
+            if (params.data[key].Month > maxDate) {
+                maxDate = params.data[key].Month;
+            }
+            if (params.data[key].Month < minDate) {
+                minDate = params.data[key].Month;
+            }
+        }
         
         // If chart size is NULL or 0, set defaults
         params.size.x = params.size.x ? params.size.x : 590;
@@ -144,6 +155,16 @@ var LMD_dimpleHelper = (function(){
         
         // Add x-axis title; hide y-axis title
         x.title = params.only_display_last_month_chart==='1' ? moment(params.data[0].Month).format('MMMM YYYY') : "Month";
+        console.log(params.period_id_chart);
+        if (minDate === maxDate) {
+            if (params.period_id_chart==1) {
+                x.title = moment(minDate).format('MMMM YYYY');
+            } else if (params.period_id_chart==2) {
+                x.title = moment(minDate).subtract(2,'month').format('MMMM YYYY') + " -- " + moment(minDate).format('MMMM YYYY');
+            }
+        } else {
+            x.title = moment(minDate).format('MMMM YYYY') + " -- " + moment(maxDate).format('MMMM YYYY');
+        }
         y.title = '';
 
         // Add y-axis min/max

@@ -151,12 +151,12 @@ var LMD_dataPortal = (function() {
             if (ro.only_display_last_month_table==0) {
                 for (var key2 in ro.indicators_table) {
                     for (var key3 in ro.territories_table) {
-                        ro.instances_table.push({inst_id: ro.indicators_table[key2] + "-" + ro.territories_table[key3] + "-" + ro.period_id});
+                        ro.instances_table.push({inst_id: ro.indicators_table[key2] + "-" + ro.territories_table[key3] + "-" + ro.period_id_table});
                     }
                 }
             } else {
                 for (var key2 in ro.territories_table) {
-                    ro.instances_table.push({inst_id: ro.indicators_table[0] + "-" + ro.territories_table[key2] + "-" + ro.period_id});
+                    ro.instances_table.push({inst_id: ro.indicators_table[0] + "-" + ro.territories_table[key2] + "-" + ro.period_id_table});
                 }
             }
             
@@ -164,7 +164,7 @@ var LMD_dataPortal = (function() {
             ro.instances_chart = [];
             for (var key2 in ro.indicators_chart) {
                 for (var key3 in ro.territories_chart) {
-                    ro.instances_chart.push({inst_id: ro.indicators_chart[key2] + "-" + ro.territories_chart[key3] + "-" + ro.period_id});
+                    ro.instances_chart.push({inst_id: ro.indicators_chart[key2] + "-" + ro.territories_chart[key3] + "-" + ro.period_id_chart});
                 }
             }
             
@@ -408,6 +408,7 @@ var LMD_dataPortal = (function() {
                         targetDiv: ro.chart_div,
                         data: ro.chart_points,
                         only_display_last_month_chart: ro.only_display_last_month_chart,
+                        period_id_chart: ro.period_id_chart,
                         colors: ro.chart_colors || "default",
                         timeInterval: Math.ceil(ro.uniqueDates.length/24),
                         size: { x:Number(ro.chart_size_x), y:Number(ro.chart_size_y) },
