@@ -143,7 +143,6 @@ $(document).ready(function() {
                 queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`period_id`,`month`,`year`,`value`) VALUES ";
                 queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
             }
-            console.log(queryString);
         }
 
         // Send AJAX request
