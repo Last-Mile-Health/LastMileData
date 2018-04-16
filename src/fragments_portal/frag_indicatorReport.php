@@ -110,7 +110,7 @@
             <div class='col-md-5'>
                 <h3 data-bind="html: '<b>' + ($index()+1) + '</b>. ' + ro_name"></h3>
                 <p><b>Definition</b>: <span data-bind="text:ro_description"></span></p>
-                <p data-bind="if:ind_source"><b>Data source</b>: <span data-bind="text:ind_source"></span></p>
+                <p data-bind="if:ro_source"><b>Data source</b>: <span data-bind="text:ro_source"></span></p>
                 <p data-bind="if:ro_target"><b>Target</b>: <span data-bind="text:ro_target"></span></p>
                 
                 <!-- If the `only_display_last_month_table` variable is set to 1, display default table (months across the top) -->
