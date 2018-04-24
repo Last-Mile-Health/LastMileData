@@ -40,7 +40,9 @@ executeStatements('lastmile_program','train_cha', $cxn);
 executeStatements('lastmile_program','train_chss', $cxn);
 
 executeStatements('lastmile_liberiamohdata','federated_de_integrated_supervision_tool_facility', $cxn);
-
+executeStatements('lastmile_liberiamohdata','federated_de_integrated_supervision_tool_facility_spot_check', $cxn);
+executeStatements('lastmile_liberiamohdata','federated_de_integrated_supervision_tool_community', $cxn);
+executeStatements('lastmile_liberiamohdata','federated_de_integrated_supervision_tool_community_spot_check', $cxn);
 
 function executeStatements($schema, $table, $cxn) {
 
