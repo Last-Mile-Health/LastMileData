@@ -22,6 +22,8 @@ $db10   = "lastmile_report";
 $db11   = "lastmile_pilot";
 $db12   = "lastmile_develop";
 $db13   = "lastmile_temp";
+$db14   = "liberiad_upload";
+
 
 $backup_file1   = $db1      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file2   = $db2      . '_' . date("Y-m-d-H-i-s") . '.sql';
@@ -35,6 +37,7 @@ $backup_file10  = $db10     . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file11  = $db11     . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file12  = $db12     . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file13  = $db13     . '_' . date("Y-m-d-H-i-s") . '.sql';
+$backup_file14  = $db14     . '_' . date("Y-m-d-H-i-s") . '.sql';
 
 $logFile = 'dataBackup.log';
 
@@ -99,5 +102,8 @@ exec('mysqldump --skip-lock-tables --routines --events --force --add-drop-trigge
 
 exec( 'echo "dumping" ' . $db13 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 exec('mysqldump --skip-lock-tables --routines --events --force --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db13 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file13 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+
+exec( 'echo "dumping" ' . $db14 . ' >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
+exec('mysqldump --skip-lock-tables --routines --events --force --add-drop-trigger --user="' . $user . '" --password="' . $password . '" --host="' . $host . '" ' . $db14 . ' >' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $backup_file14 . ' 2>> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
 
 exec( 'echo "------------------------------------------------------" >> ' . '/home/lastmilehealth/public_html/LastMileData/backups/' . $logFile );
