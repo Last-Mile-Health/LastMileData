@@ -155,7 +155,6 @@ var LMD_dimpleHelper = (function(){
         
         // Add x-axis title; hide y-axis title
         x.title = params.only_display_last_month_chart==='1' ? moment(params.data[0].Month).format('MMMM YYYY') : "Month";
-        console.log(params.period_id_chart);
         if (minDate === maxDate) {
             if (params.period_id_chart==1) {
                 x.title = moment(minDate).format('MMMM YYYY');

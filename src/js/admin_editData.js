@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
-    // Note that this tool excludes leaflet data. If manual edits are needed to leaflet data, they need to happen within the MySQL table (lastmile_dataportal.tbl_values) directly
-    // This results in some indicator values (e.g. values for "Number of CHSSs deployed") being duplicated in `lastmile_dataportal`.`tbl_values`, where two rows have identical data aside from the `id` and `leaflet` columns.
+    // Note that this tool excludes leaflet data. If manual edits are needed to leaflet data, they need to happen within the MySQL table (lastmile_dataportal.tbl_values_leaflet) directly
 
     // !!!!! Incorporate two-way data formatting !!!!!
 
@@ -144,7 +143,6 @@ $(document).ready(function() {
                 queryString += "REPLACE INTO lastmile_dataportal.tbl_values (`ind_id`,`territory_id`,`period_id`,`month`,`year`,`value`) VALUES ";
                 queryString += "('" + ind_id + "','" + territory_id + "','" + period_id + "','" + x.month + "','" + + x.year + "','" + LMD_utilities.addSlashes(x.value) + "'" + ");";
             }
-            console.log(queryString);
         }
 
         // Send AJAX request
@@ -170,8 +168,8 @@ $(document).ready(function() {
         var ind_id = $('#addInstance_indicator').val();
         var territory_id = $('#addInstance_territory').val();
         
-        var queryString = "REPLACE INTO `lastmile_dataportal`.`tbl_values` (`ind_id`, `territory_id`, `period_id`, `month`, `year`, `value`, `leaflet`) " + 
-                "VALUES ('" + ind_id + "', '" + territory_id + "', '1', '0', '0', '0', '0');";
+        var queryString = "REPLACE INTO `lastmile_dataportal`.`tbl_values` (`ind_id`, `territory_id`, `period_id`, `month`, `year`, `value`) " + 
+                "VALUES ('" + ind_id + "', '" + territory_id + "', '1', '0', '0', '0');";
         
         // Send AJAX request
         $.ajax({

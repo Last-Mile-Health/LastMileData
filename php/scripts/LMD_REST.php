@@ -134,7 +134,7 @@ $app->get('/indicatorInstancesFiltered/:includeArchived/:category/(:territory_na
 // minDate and maxDate should be specified in terms of "# of months since year 0" (i.e. year*12 + month)
 $app->get('/indicatorValuesFiltered/:category/:territory_name/:minDate/:maxDate',function($category,$territory_name,$minDate,$maxDate) {
     $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
-    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND `month`<>0 AND leaflet=0 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
+    LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND `month`<>0 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
 });
 
 

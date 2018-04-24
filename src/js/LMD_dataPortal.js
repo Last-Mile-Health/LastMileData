@@ -208,8 +208,8 @@ var LMD_dataPortal = (function() {
             if ( ro.ro_name == null || ro.ro_name == '' ) {
                 ro.ro_name = metadata.ind_name;
             }
-            if ( ro.ind_source == null || ro.ind_source == '' ) {
-                ro.ind_source = metadata.ind_source;
+            if ( ro.ro_source == null || ro.ro_source == '' ) {
+                ro.ro_source = metadata.ind_source;
             }
             if ( ro.ro_description == null || ro.ro_description == '' ) {
                 ro.ro_description = metadata.ind_definition;
