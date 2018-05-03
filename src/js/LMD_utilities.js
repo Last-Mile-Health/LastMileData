@@ -90,11 +90,13 @@ var LMD_utilities = (function(){
             case 'ajaxLoader':
                 // Disable the button; load the "AJAX loader" GIF into it
                 $selector.prop('disabled','disabled');
+                $selector.attr('disabled','disabled');
                 $selector.html("<img src='/LastMileData/build/images/ajax_loader.gif'>");
                 break;
             case 'enable':
                 // Enable the button; optionally restore the buttonText
                 $selector.prop('disabled','');
+                $selector.removeAttr('disabled');
                 if(buttonText) {
                     $selector.html(buttonText);
                 }
@@ -102,6 +104,7 @@ var LMD_utilities = (function(){
             case 'disable':
                 // De-activate the button; optionally restore the buttonText
                 $selector.prop('disabled','disabled');
+                $selector.attr('disabled','disabled');
                 if(buttonText) {
                     $selector.html(buttonText);
                 }

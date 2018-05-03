@@ -162,12 +162,17 @@ $(document).ready(function() {
     });
     
 
-    // Click handler: Add new indicator
+    // Click handler: Add new indicator instance
     $('#modal_addInstance_submit').click(function() {
+        
+        // Switch button to AJAX loader
+        $button = $(this);
+        LMD_utilities.ajaxButton($button, 'ajaxLoader');
 
         var ind_id = $('#addInstance_indicator').val();
         var territory_id = $('#addInstance_territory').val();
         
+        // Add a "dummy row" to `lastmile_dataportal`.`tbl_values` so that the indicator instance shows up in the Edit Data interface
         var queryString = "REPLACE INTO `lastmile_dataportal`.`tbl_values` (`ind_id`, `territory_id`, `period_id`, `month`, `year`, `value`) " + 
                 "VALUES ('" + ind_id + "', '" + territory_id + "', '1', '0', '0', '0');";
         
@@ -178,10 +183,17 @@ $(document).ready(function() {
             data: {'queryString': queryString},
             dataType: "json",
             success: function() {
-                // Reset changedData object; manipulate DOM
-                    LMD_utilities.ajaxButton($('#modal_addInstance_submit'), 'alertSuccess', 'Submit');
+                LMD_utilities.ajaxButton($button, 'alertSuccess');
+                setTimeout(function() {
+                    LMD_utilities.ajaxButton($button, 'enable', 'Submit');
+                },2001);
             },
-            error: ajaxError
+            error: function() {
+                LMD_utilities.ajaxButton($button, 'alertError');
+                setTimeout(function() {
+                    LMD_utilities.ajaxButton($button, 'enable', 'Submit');
+                },2001);
+            }
         });
 
     });
