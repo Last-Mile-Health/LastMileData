@@ -143,8 +143,10 @@ var LMD_dataPortal = (function() {
             ro.territories_chart = ro.territories_chart.split(",");
             ro.labels_table = ro.labels_table ? ro.labels_table.split(",") : [];
             ro.labels_chart = ro.labels_chart ? ro.labels_chart.split(",") : [];
-            ro.labels_secondary_table = ro.labels_secondary_table ? ro.labels_secondary_table.split(",") : ro.indicators_table;
-            ro.labels_secondary_chart = ro.labels_secondary_chart ? ro.labels_secondary_chart.split(",") : ro.indicators_chart;
+            ro.labels_secondary_table = ro.labels_secondary_table ? ro.labels_secondary_table.split(",") : null;
+//            ro.labels_secondary_table = ro.labels_secondary_table ? ro.labels_secondary_table.split(",") : ro.indicators_table;
+            ro.labels_secondary_chart = ro.labels_secondary_chart ? ro.labels_secondary_chart.split(",") : null;
+//            ro.labels_secondary_chart = ro.labels_secondary_chart ? ro.labels_secondary_chart.split(",") : ro.indicators_chart;
             
             // Generate "instance IDs" array (tables)
             ro.instances_table = [];
@@ -242,11 +244,15 @@ var LMD_dataPortal = (function() {
             // Set labels for secondary cut (if set)
             ro.labels_secondary_table_object = {};
             for (var key2 in ro.indicators_table) {
-                ro.labels_secondary_table_object[ro.indicators_table[key2]] = ro.labels_secondary_table[key2];
+                if (ro.labels_secondary_table) {
+                    ro.labels_secondary_table_object[ro.indicators_table[key2]] = ro.labels_secondary_table[key2];
+                }
             }
             ro.labels_secondary_chart_object = {};
             for (var key2 in ro.indicators_chart) {
-                ro.labels_secondary_chart_object[ro.indicators_chart[key2]] = ro.labels_secondary_chart[key2];
+                if (ro.labels_secondary_chart) {
+                    ro.labels_secondary_chart_object[ro.indicators_chart[key2]] = ro.labels_secondary_chart[key2];
+                }
             }
             
             // Create "dates" array, for CSV data
@@ -277,7 +283,8 @@ var LMD_dataPortal = (function() {
                                     Month: dataArray[i].date,
                                     Value: dataArray[i].value,
                                     Cut_primary: ro.chartMultiple ? ro.instances_chart[key2].label : '(none)',
-                                    Cut_secondary: ro.labels_secondary_chart_object[ind_id] ? ro.labels_secondary_chart_object[ind_id] : ind_id
+                                    Cut_secondary: ro.labels_secondary_chart_object[ind_id] ? ro.labels_secondary_chart_object[ind_id] : null
+//                                    Cut_secondary: ro.labels_secondary_chart_object[ind_id] ? ro.labels_secondary_chart_object[ind_id] : ind_id
                                 });
 
                             }
@@ -303,6 +310,17 @@ var LMD_dataPortal = (function() {
             }
             csvFile = csvFile.slice(0, -1);
             csvFile += '\n';
+            
+            // Add header for secondary cut
+            if (ro.labels_secondary_chart !== null) {
+                csvFile += '"",';
+                for (var key2 in ro.instances_chart) {
+                    var ind_id = ro.instances_chart[key2].inst_id.split('-')[0];
+                    csvFile += ro.labels_secondary_chart_object[ind_id] + ',';
+                }
+                csvFile = csvFile.slice(0, -1);
+                csvFile += '\n';
+            }
             
             // Add data
             for (var key2 in ro.uniqueDates) {
