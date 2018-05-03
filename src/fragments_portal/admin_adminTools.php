@@ -61,6 +61,4 @@ $.getScript('../js/admin_adminTools.js');
         </tr>
     </table>
     
-    <button id="saveButton" data-bind="click:actions.saveChanges" class="btn btn-success" style="width:250px">Save configuration changes</button>
-    
 </div>
