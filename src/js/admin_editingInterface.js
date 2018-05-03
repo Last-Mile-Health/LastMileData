@@ -309,6 +309,9 @@ $(document).ready(function(){
         DataPortal_GLOBALS.anyChanges = true;
         $submit.prop('disabled','');
         
+        // Scroll to top of table
+        $('.dataTables_scrollBody').animate({ scrollTop: 0 }, 500);
+        
     });
 
 
