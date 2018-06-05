@@ -345,6 +345,29 @@ $(document).ready(function(){
 
         case '14':
             options = [
+
+                {
+                    title: "CHA Positions: Grand Gedeh",
+                    selectName: "Grand Gedeh",
+                    query: "SELECT health_facility AS `Facility`, chss_position_id as `CHSS Position ID`, coalesce( chss_person_id_lmh, 'N/A' ) as `CHSS LMH ID`, coalesce( chss, 'Unassigned' ) as `CHSS` , position_id as `CHA Position ID`, coalesce( position_id_lmh, 'N/A' )  as `LMH ID`, coalesce( cha, 'UNASSIGNED' ) as `CHA`, concat( coalesce( community_list, 'UNASSIGNED' ), ' (', coalesce( community_id_list, 'UNASSIGNED'), ')' ) as  `Communities (IDs)` FROM lastmile_cha.view_base_position_cha where county='Grand Gedeh';",
+                    defaultOrder: [ [0, "asc"],[1, "asc"], [4, "asc"] ]
+                }, {
+                    title: "CHA Positions: Rivercess",
+                    selectName: "Rivercess",
+                    query: "SELECT health_facility AS `Facility`, chss_position_id as `CHSS Position ID`, coalesce( chss_person_id_lmh, 'N/A' ) as `CHSS LMH ID`, coalesce( chss, 'Unassigned' ) as `CHSS` , position_id as `CHA Position ID`, coalesce( position_id_lmh, 'N/A' )  as `LMH ID`, coalesce( cha, 'UNASSIGNED' ) as `CHA`, concat( coalesce( community_list, 'UNASSIGNED' ), ' (', coalesce( community_id_list, 'UNASSIGNED'), ')' ) as  `Communities (IDs)` FROM lastmile_cha.view_base_position_cha where county='Rivercess';",
+                    defaultOrder: [ [0, "asc"],[1, "asc"], [4, "asc"] ]
+                }, {
+                    title: "CHA Positions: Grand Bassa",
+                    selectName: "Grand Bassa",
+                    query: "SELECT health_facility AS `Facility`, chss_position_id as `CHSS Position ID`, coalesce( chss_person_id_lmh, 'N/A' ) as `CHSS LMH ID`, coalesce( chss, 'Unassigned' ) as `CHSS` , position_id as `CHA Position ID`, coalesce( position_id_lmh, 'N/A' )  as `LMH ID`, coalesce( cha, 'UNASSIGNED' ) as `CHA`, concat( coalesce( community_list, 'UNASSIGNED' ), ' (', coalesce( community_id_list, 'UNASSIGNED'), ')' ) as  `Communities (IDs)` FROM lastmile_cha.view_base_position_cha where county='Grand Bassa';",
+                    defaultOrder: [ [0, "asc"],[1, "asc"], [4, "asc"] ]
+                }
+
+            ];
+            break;
+
+        case '15':
+            options = [
                 {
                     title: "",
                     selectName: "",
@@ -359,7 +382,7 @@ $(document).ready(function(){
             ];
             break;
 
-        case '15':
+        case '16':
             options = [
                 {
                     title: "",
