@@ -603,10 +603,10 @@ $(document).ready(function(){
         });
     });
 
-    $('#qa_CST_0101').click(function() {
+    $('#qa_CST_0105').click(function() {
         launchQAModal({
-            targetForm: "../forms/case_scenarios_1_1.html",
-            qaFormName: "(CST 1.1) - Case Scenarios",
+            targetForm: "../forms/case_scenarios_1_5.html",
+            qaFormName: "(CST 1.5) - Case Scenarios",
             pKey1_name: "cha_id",
             pKey2_name: "date_form",
             pKey1_label: "CHA ID",
