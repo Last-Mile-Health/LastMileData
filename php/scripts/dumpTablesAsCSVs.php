@@ -25,7 +25,7 @@ executeStatements('lastmile_upload','odk_supervisionVisitLog', $cxn);
 executeStatements('lastmile_upload','odk_vaccineTracker', $cxn);
 executeStatements('lastmile_upload','odk_OSFKAPSurvey', $cxn);
 executeStatements('lastmile_upload','odk_osf_routine', $cxn);
-
+executeStatements('lastmile_upload','odk_QAOSupervisionChecklistForm', $cxn);
 
 executeStatements('lastmile_upload','de_chaHouseholdRegistration', $cxn);
 executeStatements('lastmile_upload','de_cha_monthly_service_report', $cxn);
