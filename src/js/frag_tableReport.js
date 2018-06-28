@@ -435,10 +435,9 @@ $(document).ready(function(){
 
                     // Apply DataTable function
                     DT = $('.table').DataTable({
-                        scrollY: '42vh',
-                        dom: '<fltip>',
+                        dom: '<flti>',
                         order: options[selectIndex].defaultOrder,
-                        lengthMenu: [[10, 25, 100, -1], [10, 25, 100, "all"]],
+                        lengthMenu: [[5, 10, 25, 100, -1], [5, 10, 25, 100, "all"]],
                         scrollX: true
                     });
                     
