@@ -6,8 +6,8 @@ password=LastMile14
 csvFileDirectory=/home/lastmilehealth/public_html/LastMileData/backups/CSVs
 
 # sed commands to convert SQL output to CSV file format.
-replaceTab=\ sed\ 's/\t/\",\"/g'\ 
-replaceBeginOfLine=sed\ 's/^/\"/g' 
+replaceTab=\ sed\ 's/\t/\",\"/g'\
+replaceBeginOfLine=sed\ 's/^/\"/g'
 replaceEndOfLine=sed\ 's/$/\"/g'
 replaceNULL=sed\ 's/\"NULL\"/\"\"/g'
 
@@ -27,6 +27,8 @@ query11='select * from lastmile_report.view_base_msr'
 
 query12='select * from lastmile_upload.de_case_scenario'
 
+query13='select * from lastmile_report.view_history_person_position_cha_train'
+
 fileName1=view_base_cha
 fileName2=view_base_chss
 fileName3=view_base_geo_community
@@ -40,17 +42,18 @@ fileName10=view_base_position_chss
 fileName11=view_base_msr
 
 fileName12=de_case_scenario
+fileName13=view_history_person_position_cha_train
 
-mysql --batch --user=$user --password=$password -e "${query1}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName1}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query2}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName2}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query3}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName3}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query4}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName4}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query5}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName5}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query6}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName6}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query7}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName7}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query8}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName8}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query9}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName9}_$dateStamp.csv 
-mysql --batch --user=$user --password=$password -e "${query10}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName10}_$dateStamp.csv 
+mysql --batch --user=$user --password=$password -e "${query1}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName1}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query2}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName2}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query3}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName3}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query4}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName4}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query5}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName5}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query6}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName6}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query7}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName7}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query8}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName8}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query9}"  | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName9}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query10}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName10}_$dateStamp.csv
 mysql --batch --user=$user --password=$password -e "${query11}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName11}_$dateStamp.csv
 mysql --batch --user=$user --password=$password -e "${query12}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName12}_$dateStamp.csv
-
+mysql --batch --user=$user --password=$password -e "${query13}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName13}_$dateStamp.csv
