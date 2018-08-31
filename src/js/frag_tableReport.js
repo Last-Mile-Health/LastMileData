@@ -368,6 +368,29 @@ $(document).ready(function(){
 
         case '15':
             options = [
+
+                {
+                    title: "QAO Positions: Grand Gedeh",
+                    selectName: "Grand Gedeh",
+                    query: "select * from lastmile_report.view_position_qao_chss where county like 'Grand Gedeh';",
+                    defaultOrder: [ [0, "asc"] ]
+                }, {
+                    title: "QAO Positions: Rivercess",
+                    selectName: "Rivercess",
+                    query: "select * from lastmile_report.view_position_qao_chss where county like 'Rivercess';",
+                    defaultOrder: [ [0, "asc"] ]
+                }, {
+                    title: "QAO Positions: Grand Bassa",
+                    selectName: "Grand Bassa",
+                    query: "select * from lastmile_report.view_position_qao_chss where county like 'Grand Bassa';",
+                    defaultOrder: [ [0, "asc"] ]
+                }
+
+            ];
+            break;
+
+        case '16':
+            options = [
                 {
                     title: "",
                     selectName: "",
@@ -382,7 +405,8 @@ $(document).ready(function(){
             ];
             break;
 
-        case '16':
+
+        case '17':
             options = [
                 {
                     title: "",
