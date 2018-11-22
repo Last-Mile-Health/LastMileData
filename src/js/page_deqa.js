@@ -603,6 +603,17 @@ $(document).ready(function(){
         });
     });
 
+    $('#qa_CST_0107').click(function() {
+        launchQAModal({
+            targetForm: "../forms/case_scenarios_1_7.html",
+            qaFormName: "(CST 1.7) - Case Scenarios",
+            pKey1_name: "cha_id",
+            pKey2_name: "date_form",
+            pKey1_label: "CHA ID",
+            pKey2_label: "Form Date"
+        });
+    }); 
+
     $('#qa_CST_0105').click(function() {
         launchQAModal({
             targetForm: "../forms/case_scenarios_1_5.html",
@@ -613,6 +624,7 @@ $(document).ready(function(){
             pKey2_label: "Form Date"
         });
     }); 
+
 
     $('#qa_DOT_0100').click(function() {
         launchQAModal({
@@ -664,7 +676,6 @@ $(document).ready(function(){
             pKey_date: "pKey2"
         });
     });
-
 
     // CLICK HANDLER: Query debugging
     $('#toggleQueryDebugging').click(function(){

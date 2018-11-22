@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Case Scenarios v.1.7</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        
+ <!-- Note to self: Something in bootstrap.min.css file is causing the matrix layout to chop off the right side of the last column. -->
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+ <!-- End of Note to self. -->       
+        
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap style sheet to override -->
+        
+        <style>
+                    
+            #meBox  { position:relative; top: 550px; }
+           
+            #RRT   { position:relative; top:-13px; }
+            
+            .page { height: 7.75in; }
+            
+            .thickBox { padding: 0px; border: 1px solid black; }
+            
+            /* Header Input */
+            .box_head    { table-layout: fixed;          width: 7.25in; }
+            .box_head    { border-collapse: collapse;    border: none;      margin: 0px; padding: 0px; }
+           
+            .box_head_column   { width: 3.67in; height: 24px; border:none; margin-right: 0px; margin-left: 0px; }
+            
+            
+            .checkbox_table    { table-layout: fixed; width: 7.25in; font-size: 100%; margin: 0px; padding: 0px; border-collapse: collapse; }
+            .checkbox_table th { border: 1px solid black; height: 24px; padding: 0px; text-align: left; font-weight: bold; }
+            .checkbox_table td { border: 1px solid black; height: 24px; padding: 1px; text-align: left; }
+
+            .column_checkbox    { width:0.55in; height: 24px; border:none; margin-right:1px; margin-left:1px; text-align: left; }
+            .column_description { width:5.60in; height: 24px; border:none; margin-right:1px; margin-left:1px; text-align: left; }
+            .column_longtext    { width:5.50in; height: 32px; border:none; margin-right:1px; margin-left:1px; text-align: left; }
+            
+            .paragraph_indent   { margin-left: 50px }
+    
+           .footer { position: relative; bottom: 0px; text-align: right; padding-right: 10px; }   
+ 
+        </style>
+        
+    </head>
+    
+
+    <body>
+
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+
+        <!-- ----------------------------------------  Start: Page 1 ------------------------------------------------------- -->
+        <div class="page">
+
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader" >
+                <img style="float: left" src="../images/logo_LMH.png">
+                <span class="h4" style="font-size: 145%; " >Case Scenarios</span>
+                <span class="blackBox" style="float: right; ">v.1.7</span> 
+                <div style="clear:both"></div>
+            </div>
+            
+            <div style="text-align: center; position: relative; right: -13px; " >Correct Treatment Rate Assessment</div>
+            
+            <div style="text-align: left; font-style: italic; " >
+                <span>These scenarios should be used by clinical quality assurance personnel in the field. Case scenarios should be read word for word to the CHA, and no information should be given to the CHA unless they ask for it (or unless otherwise stated). Forms should be submitted to RM&E within 2 weeks of the assessment taking place.</span>
+            </div>
+            
+            <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+             
+            <div class="thickBox" >
+                
+                <table class="box_head">
+                                  
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; " >County:<input class="stored"              name="county"         data-lmd-valid-required style="width: 3.13in; padding-left: 3px; border:none; " data-lmd-valid-autoC="county" ></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                " >Data collector name:<input class="stored" name="data_collector" data-lmd-valid-required style=" width:2.29in; padding-left: 3px; border:none; "                               ></td>    
+                    </tr>
+                    
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Health Facility:<input class="stored" name="health_facility"  data-lmd-valid-required data-lmd-valid-autoC="facilities" style=" width:2.67in; padding-left: 3px; border:none; "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                 border-top: 1px solid black; " >CHA name:<input class="stored"        name="cha"              data-lmd-valid-required                                   style=" width:2.87in; padding-left: 3px; border:none; "></td>
+                    </tr>
+
+                    <tr>               
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; border-top: 1px solid black; " >
+                            
+                            <table>
+                                <tr>
+                                    <td>CHA or CHSS being evaluated:</td>
+                                    <td class="column_checkbox" style="border-right: none; width: 0.65in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="cha_evaluated_yes"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >CHA</span></div></td> 
+                                    <td class="column_checkbox" style="border-right: none; width: 0.65in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="chss_evaluated_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >CHSS</span></div></td>
+                                </tr> 
+                            </table>
+     
+                        </td>
+                                          
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black;                             " >CHA ID:<input class="stored"                       name="cha_id"    data-lmd-valid-required style=" width:3.09in; padding-left: 3px; border:none; "></td>                        
+                    </tr>
+                                      
+                    <tr>               
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right: 1px solid black; border-top: 1px solid black; " >Community name:<input class="stored" name="community" data-lmd-valid-required style=" width:2.45in; padding-left: 3px; border:none;  "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none;                                 border-top: 1px solid black; " >CHSS name:<input class="stored"     name="chss"         data-lmd-valid-required                           data-lmd-valid-autoC="chss"  style=" width:2.77in; padding-left: 3px; border:none; "></td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " >Community ID:<input  class="stored" name="community_id" data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="9999" style=" width:2.67in; padding-left: 3px; border:none;  "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black;                              " >CHSS ID:<input class="stored"       name="chss_id"   data-lmd-valid-required style=" width:2.99in; padding-left: 3px; border:none; "></td>                        
+                    </tr>
+                                                       
+                    <tr>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-right:  1px solid black; border-top: 1px solid black; " ><span>Date</span><span style="font-size: 87%"> (yyyy-mm-dd):</span><input class="stored datepicker" name="date_form" data-lmd-valid-required style=" width:2.48in; padding-left: 3px; border:none; "></td>
+                        <td class="box_head_column" style="text-align: left; padding-left: 2px; border: none; border-top:    1px solid black;                              " ></td>                        
+                    </tr>
+                                          
+                </table>
+                  
+            </div>
+            
+            <!-- END: FORM HEADER -->
+            
+            <!-- Start: Page 1 text -->
+
+            <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+            
+            <p style="font-style: italic; ">Read the following to the CHA:</p>
+            
+            <p class="paragraph_indent">“The reason for these cases we will be reading to you is for us to see how you can do your everyday work.</p>  
+
+            <p class="paragraph_indent">In each of the cases, the caregiver will tell you what happened to the child. From there na, you start asking all your questions. You can use your job aid, paper forms, DCT, and all the tools you have to help you do your work.</p>  
+
+            <p class="paragraph_indent">The same normal way you can do your work every day, that's how you should feel free in front of us. If you can always use the DCT first while asking the caregiver, do it. If that the paper forms first, do it.</p>  
+
+            <p class="paragraph_indent">Ask any questions you want ask about the sick child. If you want to check the child, tell me what exactly you looking for and I will show you or tell you.  We want you to know that you are in control and can decide whether to refer or not. All the drugs you need are in your box.</p> 
+
+            <p class="paragraph_indent">Take your own time on each of the case, because when you are finished with one you will not go back to it.”</p> 
+            
+            <p style="font-style: italic; ">Before beginning the case scenarios, answer any questions the CHA may have. If the CHA makes mistakes during a case scenario, please note the mistakes and go over them with the CHA after ALL case scenarios have been performed.</p>
+            
+            <!-- End: Page 1 text -->
+          
+        <div class="footer" style="bottom: -25px; " >1</div>  
+        </div> <!-- --------------------------------- End: Page 1   ------------------------------------------------------- -->
+
+   
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        <!-- ---------------------------------------- Start: Case Scenario 1 pages 2-4 ------------------------------------ -->
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        
+        <div class="page"> <!-- --------------------- Start: Page 2 ------------------------------------------------------- -->
+
+        <!-- Start: Scenario header --> 
+        
+        <div class="formHeader" style="background-color: lightgray; height: 34px; ">
+            <span class="h4" style="font-size: 160%; font-weight: bold; " >CASE SCENARIO 1</span>
+            <div style="clear:both"></div>
+        </div>
+        
+        <div style="height: 3px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-weight: bold; font-size: 125%; ">Read the following case scenario word-for-word to the CHA</p>
+                        
+        <hr style="width: 80%; height: 1px; background-color: black; ">
+        
+        <div style="width: 72%; position: relative; left: 95px; ">
+            <p style="text-align: center; ">“My daughter’s stomach is running. She is eight months old. What will you do?” </p>
+        </div>    
+        
+        <hr style="width: 80%; height: 1px; background-color: black; ">
+        
+        <div style="height: 3px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-style: italic; ">Give the CHA time to look over the job aid and the sick child form (and to fill out a form, if they would like).</p>
+        <p style="font-style: italic; ">Check the box for each diagnostic activity the CHA completes WITHOUT PROMPTING, and give the CHA the information each activity provides. They may ask the questions in any order.  If the CHA does not choose to complete certain activities, leave the checkbox blank.</p>
+        
+        <!-- End: Scenario header -->  
+        
+        
+        <!-- Start: Page 2 questions -->  
+        
+        <div style="height: 4px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div style="font-weight: bold; ">Gathering information about the sick child</div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-style: italic; ">If the CHA asks an open-ended question, such as “Any other thing happened to the child?” you may give one additional piece of information about the child. If the CHA asks an open-ended question, please check the box below for “Any other questions asked” and write in the CHA’s question.</p>
+        
+        <div style="height: 4px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_fever" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had fever?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_cough" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had cough?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_running_stomach" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >How long has the child had running stomach?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“She has had running stomach for 8 days.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_number_water_stool" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >How many poopoo in one day?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“Four water poopoo in one day.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_blood_stool" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any blood in the stool?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No, I don’t think so.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_drink_breastfeed" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Can the child drink or breastfeed?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“She can be eating small small.” </span></div></td>
+                </tr>
+            </table>
+        </div>
+                
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_vomit_everything" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child been vomiting everything?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No vomiting.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_convulsion" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child has had any convulsions?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>                
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_take_medication" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child already taken medication for this problem?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_gather_info_sick_child_other_question" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any other questions asked</span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " > (please write question asked here):</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="diarrhea_gather_info_sick_child_other_question_comment" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div style="font-weight: bold; ">Examining the sick child </div>
+            
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_look" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >How does the child look?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“She looking tired.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+                        
+        <!-- End: Page 2 Questions -->
+     
+        <div class="footer" style="bottom: -35px; " >2</div>
+        </div> <!-- --------------------------------- End: Page 2   ------------------------------------------------------- -->
+        
+        <div class="page"> <!-- --------------------- Start: Page 3 ------------------------------------------------------- -->
+
+
+        <!-- Start: Page 3 Questions -->
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_feel_hot" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Does the child feel hot?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No, not too hot.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+                           
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_sleepy_unconscious" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is the child very sleepy or unconscious?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No, just weak small.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+          
+       <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_chest_in_drawing" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there chest in-drawing?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >Show </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold; " >video 2 </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >normal breathing</span> </div></td>
+                </tr>
+            </table>
+        </div> 
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_chest_in_drawing_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_chest_in_drawing_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly identifies normal breathing</span></td>
+                </tr>   
+            </table>    
+        </div>            
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_respiratory_rate" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Asks for respiratory rate</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >Show </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold; " >video 2 </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >of normal breathing</span></div></td>
+                </tr>
+            </table>
+        </div>
+ 
+           
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 1.75in; " >
+                        <span style="position: relative; left: 5px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span>
+                        <span style="padding-left: 4px; "> RR counted by CHA is </span>                       
+                    </td>
+                    <td style="width: 0.50in; border: none; "><input class="stored" name="diarrhea_examine_sick_child_respiratory_rate_cha_count" data-lmd-valid-intMin="0" style=" width: 0.47in; padding-left: 3px; border:none; border-bottom: 2px solid black; text-align: center; "></td>
+                    <td style="width: 4.25in; "><span style="position: relative; left: 0px; bottom: 1px; font-style: italic; " >.</span></td>
+                </tr>
+            </table>
+        </div>
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_respiratory_rate_cha_count_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_respiratory_rate_cha_count_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly counted respiratory rate</span><span style="position: relative; left: 4px; bottom: -2px; font-weight: bold; "> (Correct RR is 36 +/- 3)</span></td>
+                </tr>   
+            </table>    
+        </div>        
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_check_muac" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Asks to check the child’s MUAC</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >ask for demonstration of skill if CHA has not already done</span> </div></td>                                                                                                   
+                </tr>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >so in prior case</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; " >report that the MUAC is in the red zone.</span> </div></td>                                                                                     
+                </tr>            
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_check_muac_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_check_muac_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly demonstrates MUAC</span></td>
+                </tr>   
+            </table>    
+        </div>        
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_swelling_feet" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there swelling in the feet?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No.”</span></div></td>
+                </tr>
+            </table>
+        </div> 
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_perform_rdt" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Wants to perform RDT</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >ask for demonstration of skill if CHA has not already done so in</span> </div></td>                                                                                                   
+                </tr>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >prior case</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; " >report that result is negative</span> </div></td>                                                                                     
+                </tr>            
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_perform_rdt_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_perform_rdt_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly demonstrates RDT</span></td>
+                </tr>   
+            </table>    
+        </div>        
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_other_question" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any other exam questions of diagnostic activity</span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " > (please write question asked here):</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="diarrhea_examine_sick_child_other_question_comment" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 2px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <hr style="width: 100%; height: 1px; background-color: black; ">
+        <div style="height: 2px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div style="font-weight: bold; font-size: 115%; ">Diagnosis</div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-style: italic; ">Ask the CHA what the diagnosis is. Check all boxes that the CHA mentions WITHOUT PROMPTING. If the CHA mentions there is a danger sign present, ask which one and write it down on the line provided.</p>
+         
+        <div style="height: 0px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div> 
+
+            <table style="border: 1px solid black; border-bottom :none; ">
+                <tr>
+                    <td class="column_checkbox" style="width: 1.69in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Danger Sign (write in):</span></div></td> 
+                    <td style="width: 5.54in; "><div><input class="stored" name="diarrhea_examine_sick_child_danger_sign_write_in" style=" width: 5.53in; padding-left: 3px; border:none; "></div></td>
+                </tr>
+            </table>
+            <table class="checkbox_table">
+                
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_diarrhea" value='1'     ><span style="position: relative; left: 4px; bottom: 1px; " >Diarrhea</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_simple_cough" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Simple Cough</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.41in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_pneumonia" value='1'    ><span style="position: relative; left: 4px; bottom: 1px; " >Pneumonia</span></div></td>  
+                </tr>  
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_simple_fever" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Simple Fever</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_malaria" value='1'      ><span style="position: relative; left: 4px; bottom: 1px; " >Malaria</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.41in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_malnutrition" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Malnutrition</span></div></td>  
+                </tr> 
+            </table>
+            <table style="border: 1px solid black; border-top :none; ">
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; border-right: 1px solid black; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_healthy" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Child is healthy</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.22in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_examine_sick_child_danger_sign_other" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Other (write in):</span></div></td> 
+                    <td style="width: 3.59in; "><div><input class="stored" name="diarrhea_examine_sick_child_danger_sign_other_write_in" style=" width: 3.58in; padding-left: 3px; border:none; "></div></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div style="height: 3px; "><div style="clear:both"></div></div> <!-- White line spacers -->        
+ 
+        <div style="text-align: center; font-weight: bold; ">**DO NOT CORRECT THE CHA IF HE/SHE MAKES THE WRONG DIAGNOSIS**</div>
+        <div style="text-align: center; font-weight: bold; font-style: italic; ">CORRECT DIAGNOSIS: DIARRHEA; DANGER SIGN: RED MUAC (MALNUTRITION)</div>  
+        
+        <div style="height: 3px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <hr style="width: 100%; height: 1px; background-color: black; ">
+        <div style="height: 3px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+
+     
+        <!-- End: Page 3 Questions -->
+
+        <div class="footer" style="bottom: -15px; " >3</div>
+        </div> <!-- --------------------------------- End: Page 3   ------------------------------------------------------- -->
+        
+        <div class="page"> <!-- --------------------- Start: Page 4 ------------------------------------------------------- -->
+
+        <!-- Start: Page 4 Questions -->
+        
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers --> 
+
+        <div>
+            <span style="font-style: italic;" >Ask the CHA how they would manage this child. Check all boxes that the CHA mentions WITHOUT PROMPTING. </span>
+            <span style="font-style: italic; font-weight: bold; "> Please write the dosage, frequency/schedule, and duration the CHA prescribes in the spaces provided next to the drug name</span>
+            <span style="font-style: italic;" > (it is okay to prompt the CHA for dose, frequency and duration if they do not tell you up front). The correct items are in </span>
+            <span style="font-style: italic; font-weight: bold; " > bold.</span>
+        </div>
+        
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers --> 
+    
+        <div style="font-weight: bold; ">Treatment activities</div>
+                    
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->  
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_refer_facility" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Refers to the facility</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 6.50in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_refer_facility_initiate_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Initiated referral as soon as a danger sign was mentioned OR</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+      
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 6.50in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_refer_facility_continue_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Continued evaluation when danger signs was mentioned, but later made referral</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+
+        <div>
+            <table>
+                <tr>
+                <td style="width: 0.50in; "></td>
+                <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_pre_referral" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Gives pre-referral treatment </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold; " >(mark the treatment they select below)</span></div></td>
+                </tr>
+            </table>
+        </div>
+ 
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_ors_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >ORS: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_ors_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_ors_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_ors_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+  
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 1.10in; "></td>
+                    <td style="width: 1.90in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_ors_correct_dosing_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Correct dosing for case</span></div></td>          
+                    <td style="width: 4.20in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_ors_dosing_error_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Dosing error made</span></div></td>          
+                </tr>
+            </table>
+        </div>    
+             
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_zinc_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Zinc: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_zinc_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_zinc_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_zinc_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_paracetamol_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Paracetamol: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_paracetamol_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_paracetamol_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_paracetamol_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+             
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_amoxicillin_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Amoxicillin: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_amoxicillin_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_amoxicillin_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_amoxicillin_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+                 
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_act_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Act: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_act_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_act_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_act_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+           
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_artesunate_suppository_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Artesunate suppository: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_artesunate_suppository_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_artesunate_suppository_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="diarrhea_treatment_artesunate_suppository_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+     
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div style="text-align: center; font-style: italic; font-size: 90%; font-weight: bold; "><span>CORRECT TREATMENT: ORS 1 SACHET, PREPARE 1 LITER AND REFER IMMEDIATELY TO FACILITY FOR</span></div>
+        <div style="text-align: center; font-style: italic; font-size: 90%; font-weight: bold; "><span>MALNUTRITION</span></div>
+                  
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA correctly counsel the caregiver in how to give the treatment?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_cha_correct_counsel_caregiver_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_cha_correct_counsel_caregiver_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>  
+                </tr>
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA discuss follow-up with the caregiver?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_cha_discuss_follow_up_caregiver_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_cha_discuss_follow_up_caregiver_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>    
+                </tr> 
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA provide preventative education?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_cha_provide_preventative_education_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_cha_provide_preventative_education_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>    
+                </tr>                   
+            </table>    
+        </div>            
+       
+                
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div><span style="font-style: italic;" >Did the CHA use their job aids, their DCT, or a paper form during the case scenario? Please check all that apply.</span></div>
+
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table class="checkbox_table">
+                
+                <tr>
+                    <td class="column_checkbox" style="width: 1.45in; border: none; "></td>
+                    <td class="column_checkbox" style="width: 1.45in; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_job_aid"    value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Job Aid(s)</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.45in; border-right: none; border-left: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_dct_form"   value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >DCT Form</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.45in; border-left: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="diarrhea_treatment_paper_form" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Paper Form</span></div></td>  
+                    <td class="column_checkbox" style="width: 1.45in; border: none; "></td>
+                </tr>  
+
+            </table>
+        </div>
+        
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div><span style="font-style: italic;" >Any other notes:</span></div>
+         
+       
+        <!-- End: Page 4 Questions -->
+
+        <div class="footer" style="bottom: -30px; " >4</div>
+        </div> <!-- --------------------------------- End: Page 4   ------------------------------------------------------- -->
+
+       
+        <div class="page"> <!-- --------------------- Start: Page 5 ------------------------------------------------------- -->
+
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="diarrhea_treatment_other_note" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        <!-- ---------------------------------------- End: Case Scenario 3 pages 2-4 ------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+            
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        <!-- ---------------------------------------- Start: Case Scenario 2 pages 5-7 ------------------------------------ -->
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+ 
+        
+        <!-- Start: Scenario header --> 
+        
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div class="formHeader" style="background-color: lightgray; height: 34px; ">
+            <span class="h4" style="font-size: 160%; font-weight: bold; " >CASE SCENARIO 2</span>
+            <div style="clear:both"></div>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-weight: bold; font-size: 125%; ">Read the following case scenario word-for-word to the CHA</p>
+                        
+        <hr style="width: 80%; height: 1px; background-color: black; ">
+        
+        <div style="width: 74%; position: relative; left: 95px; ">
+            <p style="text-align: center; ">“My grandson is coughing plenty. He is four years old. What will you do?”</p>
+        </div>    
+        
+        <hr style="width: 80%; height: 1px; background-color: black; ">
+        <br>     
+        <p style="font-style: italic; ">Give the CHA time to look over the job aid and the sick child form (and to fill out a form, if they would like).</p>
+        <p style="font-style: italic; ">Check the box for each diagnostic activity the CHA completes WITHOUT PROMPTING, and give the CHA the information each activity provides. They may ask the questions in any order.  If the CHA does not choose to complete certain activities, leave the checkbox blank.</p>
+        
+        <!-- End: Scenario header -->  
+        
+        
+        <!-- Start: Page 5 questions -->  
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div style="font-weight: bold; ">Gathering information about the sick child</div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers --> 
+        <p style="font-style: italic; ">If the CHA asks an open-ended question, such as “Any other thing happened to the child?” you may give one additional piece of information about the child. If the CHA asks an open-ended question, please check the box below for “Any other questions asked” and write in the CHA’s question.</p>
+             
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_fever" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had fever?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_running_stomach" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had running stomach?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_cough" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >How long the child been coughing now?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“For two weeks now.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_drinking_eating" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >He drinking or eating?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“Yes, he is drinking and eating.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_vomit_everything" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child been vomiting everything?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No, no vomiting.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_blood_stool" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there any blood in the child’s stool?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_convulsion" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child has had any convulsions?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>                
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_take_medication" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child already taken medication for this problem?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_gather_info_sick_child_other_question" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any other questions asked</span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " > (please write question asked here):</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="pneumonia_gather_info_sick_child_other_question_comment" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+     
+        <!-- End: Page 5 Questions -->
+        
+        <div class="footer" style="bottom: -45px; " >5</div>
+        </div> <!-- --------------------------------- End: Page 5   ------------------------------------------------------- -->
+        
+        <div class="page"> <!-- --------------------- Start: Page 6 ------------------------------------------------------- -->
+
+        <!-- Start: Page 6 Questions -->
+           
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div style="font-weight: bold; ">Examining the sick child </div>
+            
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_look" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >How does the child look?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“He is up and can look at you when you speak, but coughing fast, fast.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+      
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_sleepy_unconscious" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is the child very sleepy or unconscious?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“He is very weak, but still awake.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+          
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_feel_hot" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Does the child feel hot?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No, not too hot.”</span></div></td>
+                </tr>
+            </table>
+        </div> 
+   
+       <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_chest_in_drawing" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there chest in-drawing?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >Show </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold" >video 3 </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >of fast breathing, NO chest in-drawing, &gt 1yo</span> </div></td>
+                </tr>
+            </table>
+        </div> 
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_chest_in_drawing_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_chest_in_drawing_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly identifies normal breathing (NO in-drawing)</span></td>
+                </tr>   
+            </table>    
+        </div>            
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_respiratory_rate" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Asks for respiratory rate</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >Shows </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold;  " >video 3 </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >of fast breathing, NO chest in-drawing, &gt 1yo </span> </div></td>
+                </tr>
+            </table>
+        </div>    
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 1.75in; " >
+                        <span style="position: relative; left: 5px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span>
+                        <span style="padding-left: 4px; ">RR counted by CHA is</span>                       
+                    </td>
+                    <td style="width: 0.50in; border: none; "><input class="stored" name="pneumonia_examine_sick_child_respiratory_rate_cha_count" data-lmd-valid-intMin="0" style=" width: 0.47in; padding-left: 3px; border:none; border-bottom: 2px solid black; text-align: center; "></td>
+                    <td style="width: 4.25in; "><span style="position: relative; left: 0px; bottom: 1px; font-style: italic; " >. </span></td>
+                </tr>
+            </table>
+        </div>
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_respiratory_rate_cha_count_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_respiratory_rate_cha_count_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly counted respiratory rate. </span><span style="position: relative; left: 4px; bottom: -2px; font-weight: bold; ">(Correct RR is 92 +/- 3 (must be &gt 40)) </span></td>
+                </tr>   
+            </table>    
+        </div>
+                     
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_check_muac" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Asks to check the child’s MUAC</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >ask for demonstration of skill if CHA has not already done</span> </div></td>                                                                                                   
+                </tr>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >so in prior case</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; " >report that the MUAC is in the green zone.</span> </div></td>                                                                                     
+                </tr>            
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_check_muac_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_check_muac_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly demonstrates MUAC</span></td>
+                </tr>   
+            </table>    
+        </div>        
+   
+         <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_swelling_feet" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there swelling in the feet?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No.”</span></div></td>
+                </tr>
+            </table>
+        </div> 
+     
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_perform_rdt" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " ></span>Wants to perform RDT<span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >ask for demonstration of skill if CHA has not already done so in</span> </div></td>                                                                                                   
+                </tr>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >prior case</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; " >report that result is negative</span> </div></td>                                                                                     
+                </tr>            
+            </table>
+        </div> 
+ 
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_perform_rdt_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_perform_rdt_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly demonstrates RDT</span></td>
+                </tr>   
+            </table>    
+        </div>        
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_other_question" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any other exam questions of diagnostic activity</span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " > (please write question asked here):</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="pneumonia_examine_sick_child_other_question_comment" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <hr style="width: 100%; height: 1px; background-color: black; ">
+        <div style="height: 0px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div style="font-weight: bold; font-size: 115%; ">Diagnosis</div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+ 
+        <p style="font-style: italic; ">Ask the CHA what the diagnosis is. Check all boxes that the CHA mentions WITHOUT PROMPTING. If the CHA mentions there is a danger sign present, ask which one and write it down on the line provided.</p>
+         
+        <div style="height: 0px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div> 
+
+            <table style="border: 1px solid black; border-bottom :none; ">
+                <tr>
+                    <td class="column_checkbox" style="width: 1.69in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Danger Sign (write in):</span></div></td> 
+                    <td style="width: 5.54in; "><div><input class="stored" name="pneumonia_examine_sick_child_danger_sign_write_in" style=" width: 5.53in; padding-left: 3px; border:none; "></div></td>
+                </tr>
+            </table>
+            <table class="checkbox_table">
+                
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_diarrhea" value='1'     ><span style="position: relative; left: 4px; bottom: 1px; " >Diarrhea</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_simple_cough" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Simple Cough</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.41in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_pneumonia" value='1'    ><span style="position: relative; left: 4px; bottom: 1px; " >Pneumonia</span></div></td>  
+                </tr>  
+            </table>
+
+        </div>
+ 
+        <!-- End: Page 6 Questions -->
+
+        <div class="footer" style="bottom: -70px; " >6</div>
+        </div> <!-- --------------------------------- End: Page 6   ------------------------------------------------------- -->
+        
+        <div class="page"> <!-- --------------------- Start: Page 7 ------------------------------------------------------- -->
+  
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div> 
+            <table class="checkbox_table"> 
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_simple_fever" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Simple Fever</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_malaria" value='1'      ><span style="position: relative; left: 4px; bottom: 1px; " >Malaria</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.41in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_malnutrition" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Malnutrition</span></div></td>  
+                </tr> 
+            </table>
+            <table style="border: 1px solid black; border-top :none; ">
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; border-right: 1px solid black; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_healthy" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Child is healthy</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.22in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_examine_sick_child_danger_sign_other" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Other (write in):</span></div></td> 
+                    <td style="width: 3.59in; "><div><input class="stored" name="pneumonia_examine_sick_child_danger_sign_other_write_in" style=" width: 3.58in; padding-left: 3px; border:none; "></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->        
+ 
+        <div style="text-align: center; font-weight: bold; ">**DO NOT CORRECT THE CHA IF HE/SHE MAKES THE WRONG DIAGNOSIS**</div>
+        <div style="text-align: center; font-weight: bold; font-style: italic; ">CORRECT DIAGNOSIS: PNEUMONIA; DANGER SIGN: COUGH FOR 14 DAYS</div>
+   
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <hr style="width: 100%; height: 1px; background-color: black; ">
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+
+        <div>
+            <span style="font-style: italic;" >Ask the CHA how they would manage this child. Check all boxes that the CHA mentions WITHOUT PROMPTING. </span>
+            <span style="font-style: italic; font-weight: bold; "> Please write the dosage, frequency/schedule, and duration the CHA prescribes in the spaces provided</span>
+            <span style="font-style: italic; font-weight: bold; ">next to the drug name </span><span style="font-style: italic;" > (it is okay to prompt the CHA for dose, frequency and duration if they do not tell you up front). The correct items are in</span>
+            <span style="font-style: italic; font-weight: bold; " > bold.</span>
+        </div>
+   
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->  
+        <div style="font-weight: bold; ">Treatment activities</div>
+                    
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->  
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_refer_facility" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Refers to the facility</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 6.50in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_refer_facility_initiate_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Initiated referral as soon as a danger sign was mentioned OR</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+      
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 6.50in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_refer_facility_continue_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Continued evaluation when danger signs was mentioned, but later made referral</span></div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+     
+        <div>
+            <table>
+                <tr>
+                <td style="width: 0.50in; "></td>
+                <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_pre_referral" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Gives pre-referral treatment </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold; " >(mark the treatment they select below)</span></div></td>
+                </tr>
+            </table>
+        </div>
+     
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_ors_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >ORS: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_ors_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_ors_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_ors_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+  
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_zinc_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Zinc: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_zinc_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_zinc_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_zinc_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+             
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_paracetamol_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Paracetamol: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_paracetamol_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_paracetamol_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_paracetamol_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+      
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_amoxicillin_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Amoxicillin: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_amoxicillin_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_amoxicillin_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_amoxicillin_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+      
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 1.10in; "></td>
+                    <td style="width: 1.90in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_amoxicillin_correct_dosing_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Correct dosing for case</span></div></td>          
+                    <td style="width: 4.20in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_amoxicillin_dosing_error_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Dosing error made</span></div></td>          
+                </tr>
+            </table>
+        </div>    
+ 
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_act_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >ACT: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_act_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_act_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_act_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_artesunate_suppository_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Artesunate suppository: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_artesunate_suppository_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_artesunate_suppository_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="pneumonia_treatment_artesunate_suppository_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+        
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div style="text-align: center; font-style: italic; font-size: 90%; font-weight: bold; "><span>CORRECT TREATMENT: REFER TO HEALTH FACILITY AND</span></div>
+        <div style="text-align: center; font-style: italic; font-size: 90%; font-weight: bold; "><span>AMOXICILLIN 250MG, 2 TABLETS, ONCE PREREFERAL</span></div>
+                  
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA correctly counsel the caregiver in how to give the treatment?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_cha_correct_counsel_caregiver_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_cha_correct_counsel_caregiver_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>  
+                </tr>
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA discuss follow-up with the caregiver?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_cha_discuss_follow_up_caregiver_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_cha_discuss_follow_up_caregiver_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>    
+                </tr> 
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA provide preventative education?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_cha_provide_preventative_education_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_cha_provide_preventative_education_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>    
+                </tr>            
+            </table>    
+        </div>            
+            
+        <div style="height: 5px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div><span style="font-style: italic;" >Did the CHA use their job aids, their DCT, or a paper form during the case scenario? Please check all that apply.</span></div>
+
+        
+        <!-- End: Page 7 Questions -->
+
+        <div class="footer" style="bottom: 0px; " >7</div>
+        
+        </div> <!-- --------------------------------- End: Page 7   ------------------------------------------------------- -->
+
+        
+        <div class="page"> <!-- --------------------- Start: Page 8 ------------------------------------------------------- -->
+
+            
+            
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table class="checkbox_table">
+                
+                <tr>
+                    <td class="column_checkbox" style="width: 1.45in; border: none; "></td>
+                    <td class="column_checkbox" style="width: 1.45in; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_job_aid"    value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Job Aid(s)</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.45in; border-right: none; border-left: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_dct_form"   value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >DCT Form</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.45in; border-left: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="pneumonia_treatment_paper_form" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Paper Form</span></div></td>  
+                    <td class="column_checkbox" style="width: 1.45in; border: none; "></td>
+                </tr>  
+
+            </table>
+        </div>
+        
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div><span style="font-style: italic;" >Any other notes:</span></div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="pneumonia_treatment_other_note" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+               
+        
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        <!-- ---------------------------------------- End: Case Scenario 2 pages 5-7 -------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        
+                    
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        <!-- ---------------------------------------- Start: Case Scenario 3 pages 8-10 ------------------------------------ -->
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+    
+        
+        <!-- Start: Scenario header --> 
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div class="formHeader" style="background-color: lightgray; height: 34px; ">
+            <span class="h4" style="font-size: 160%; font-weight: bold; " >CASE SCENARIO 3</span>
+            <div style="clear:both"></div>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-weight: bold; font-size: 125%; ">Read the following case scenario word-for-word to the CHA</p>
+                        
+        <hr style="width: 80%; height: 1px; background-color: black; ">
+        
+        <div style="width: 72%; position: relative; left: 95px; ">
+            <p style="text-align: center; ">“My daughter is weak. She is two years old. What will you do?”</p>
+        </div>    
+        
+        <hr style="width: 80%; height: 1px; background-color: black; ">
+        <br>     
+        <p style="font-style: italic; ">Give the CHA time to look over the job aid and the sick child form (and to fill out a form, if they would like).</p>
+        <p style="font-style: italic; ">Check the box for each diagnostic activity the CHA completes WITHOUT PROMPTING, and give the CHA the information each activity provides. They may ask the questions in any order.  If the CHA does not choose to complete certain activities, leave the checkbox blank.</p>
+        
+        <!-- End: Scenario header -->  
+        
+        <!-- Start: Page 2 questions -->  
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div style="font-weight: bold; ">Gathering information about the sick child</div>
+        
+        <p style="font-style: italic; ">If the CHA asks an open-ended question, such as “Any other thing happened to the child?” you may give one additional piece of information about the child. If the CHA asks an open-ended question, please check the box below for “Any other questions asked” and write in the CHA’s question.</p>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_skin_hot" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is the child’s skin hot?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“Yes”</span></div></td>
+                </tr>
+            </table>
+        </div>
+     
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_running_stomach" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had running stomach?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+                <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_cough" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had cough?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_fever" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Ask how long the child has had a fever</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“Her skin been hot for 4 days now.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_drink_breastfeed" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Can the child drink or breastfeed?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“Yes, she is eating ok.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_vomit_everything" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child been vomiting everything?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No vomiting.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_blood_stool" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there any blood in the child’s stool?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_convulsion" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child had any convulsions?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                </tr>
+            </table>
+        </div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>                
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_take_medication" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Has the child already taken medication for this problem?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No”</span></div></td>
+                
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>            
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_gather_info_sick_child_other_question" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any other questions asked </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >(please write question asked here):</span></div></td>
+                </tr>
+            </table>
+        </div>
+         
+        
+        <!-- End: Page 8 Questions -->
+     
+        <div class="footer" style="bottom: -0px; " >8</div> 
+        </div> <!-- --------------------------------- End: Page 8   ------------------------------------------------------- -->
+        
+        
+        <div class="page"> <!-- --------------------- Start: Page 9 ------------------------------------------------------- -->
+
+        <!-- Start: Page 9 Questions -->
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="malaria_gather_info_sick_child_other_question_comment" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+            
+        <div style="font-weight: bold; ">Examining the sick child </div>
+            
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_feel_hot" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Does the child feel hot?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“Yes, the skin is very hot.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_look" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >How does the child look?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“She looking weak, but fine.”</span></div></td>
+                </tr>
+            </table>
+        </div>   
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_sleepy_unconscious" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is the child very sleepy or unconscious?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No, just very tired.”</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_chest_in_drawing" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there chest in-drawing?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >Show </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold; " >video 2 </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >of normal breathing</span> </div></td>
+                </tr>
+            </table>
+        </div> 
+              
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_chest_in_drawing_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_chest_in_drawing_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly identifies normal breathing</span></td>
+                </tr>   
+            </table>    
+        </div>            
+            
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_respiratory_rate" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Asks for respiratory rate</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >Show </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; font-weight: bold; " >video 2 </span> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >of normal breathing</span> </div></td>
+                </tr>
+            </table>
+        </div> 
+           
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 1.75in; " >
+                        <span style="position: relative; left: 5px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span>
+                        <span style="padding-left: 4px; "> RR counted by CHA is </span>                       
+                    </td>
+                    <td style="width: 0.50in; border: none; "><input class="stored" name="malaria_examine_sick_child_respiratory_rate_cha_count" data-lmd-valid-intMin="0" style=" width: 0.47in; padding-left: 3px; border:none; border-bottom: 2px solid black; text-align: center; "></td>
+                    <td style="width: 4.25in; "><span style="position: relative; left: 0px; bottom: 1px; font-style: italic; " >. </span></td>
+                </tr>
+            </table>
+        </div>
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_respiratory_rate_cha_count_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_respiratory_rate_cha_count_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly counted respiratory rate. </span><span style="position: relative; left: 4px; bottom: -2px; font-weight: bold; ">(Correct RR is 36 +/- 3)</span></td>
+                </tr>   
+            </table>    
+        </div>        
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_check_muac" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Asks to check the child’s MUAC</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >ask for demonstration of skill if CHA has not already done</span> </div></td>                                                                                                   
+                </tr>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >so in prior case</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; " >report that the MUAC is in the green zone.</span> </div></td>                                                                                     
+                </tr>            
+            </table>
+        </div>
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_check_muac_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_check_muac_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly demonstrates MUAC</span></td>
+                </tr>   
+            </table>    
+        </div>        
+       
+           
+  
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_swelling_feet" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Is there swelling in the feet?</span><span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; " >“No.”</span></div></td>
+                </tr>
+            </table>
+        </div> 
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_perform_rdt" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Wants to perform RDT</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >ask for demonstration of skill if CHA has not already done so in</span> </div></td>                                                                                                   
+                </tr>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div> <span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >prior case</span> <span style="position: relative; left: 4px; bottom: 2px; font-weight: bold; font-style: italic; " > –</span><span  style="position: relative; left: 4px; bottom: 1px; font-weight: bold; font-style: italic; " >> </span> <span style="position: relative; left: 4px; bottom: 1px; " >report that result is POSITIVE</span> </div></td>                                                                                     
+                </tr>            
+            </table>
+        </div> 
+          
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_checkbox" style="width: 0.50in; border: none; "></td>
+                    <td class="column_checkbox" style="                   border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_perform_rdt_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_perform_rdt_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none; border-right: none; "></td> 
+                    <td class="column_description" style="width: 5.1in; "><span style="position: relative; left: 4px; bottom: -2px; ">Correctly demonstrates RDT</span></td>
+                </tr>   
+            </table>    
+        </div>        
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_other_question" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Any other exam questions of diagnostic activity</span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; "> (please write question asked here):</span></div></td>
+       
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 4px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="malaria_examine_sick_child_other_question_comment" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="height: 4px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <hr style="width: 100%; height: 1px; background-color: black; ">
+        <div style="height: 4px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <div style="font-weight: bold; font-size: 115%; ">Diagnosis</div>
+        <div style="height: 4px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        
+        <p style="font-style: italic; ">Ask the CHA what the diagnosis is. Check all boxes that the CHA mentions WITHOUT PROMPTING. If the CHA mentions there is a danger sign present, ask which one and write it down on the line provided.</p>
+        <div> 
+
+            <table style="border: 1px solid black; border-bottom :none; ">
+                <tr>
+                    <td class="column_checkbox" style="width: 1.69in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Danger Sign (write in):</span></div></td> 
+                    <td style="width: 5.54in; "><div><input class="stored" name="malaria_examine_sick_child_danger_sign_write_in" style=" width: 5.53in; padding-left: 3px; border:none; "></div></td>
+                </tr>
+            </table>
+            <table class="checkbox_table">
+                
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_diarrhea" value='1'     ><span style="position: relative; left: 4px; bottom: 1px; " >Diarrhea</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_simple_cough" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Simple Cough</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.41in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_pneumonia" value='1'    ><span style="position: relative; left: 4px; bottom: 1px; " >Pneumonia</span></div></td>  
+                </tr>  
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_simple_fever" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Simple Fever</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.42in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_malaria" value='1'      ><span style="position: relative; left: 4px; bottom: 1px; " >Malaria</span></div></td> 
+                    <td class="column_checkbox" style="width: 2.41in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_malnutrition" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Malnutrition</span></div></td>  
+                </tr> 
+            </table>
+            <table style="border: 1px solid black; border-top :none; ">
+                <tr>
+                    <td class="column_checkbox" style="width: 2.42in; border-right: 1px solid black; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_healthy" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Child is healthy</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.22in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_examine_sick_child_danger_sign_other" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Other (write in):</span></div></td> 
+                    <td style="width: 3.59in; "><div><input class="stored" name="malaria_examine_sick_child_danger_sign_other_write_in" style=" width: 3.58in; padding-left: 3px; border:none; "></div></td>
+                </tr>
+            </table>
+            
+        </div>
+
+        <!-- End: Page 9 Questions -->
+
+        <div class="footer" style="bottom: -0px; " >9</div>
+        </div> <!-- --------------------------------- End: Page 9   ------------------------------------------------------- -->
+   
+        
+        <div class="page"> <!-- --------------------- Start: Page 10 ------------------------------------------------------- -->
+                         
+       
+        <div style="height: 5px; "><div style="clear:both"></div></div> <!-- White line spacers -->        
+ 
+        <div style="text-align: center; font-weight: bold; ">**DO NOT CORRECT THE CHA IF HE/SHE MAKES THE WRONG DIAGNOSIS**</div>
+        <div style="text-align: center; font-weight: bold; font-style: italic; ">CORRECT DIAGNOSIS: MALARIA; DANGER SIGN: NONE</div>  
+        
+        <div style="height: 0px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <hr style="width: 100%; height: 1px; background-color: black; ">
+        <div style="height: 5px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+
+        <div>
+            <span style="font-style: italic;" >Ask the CHA how they would manage this child. Check all boxes that the CHA mentions WITHOUT PROMPTING. </span>
+            <span style="font-style: italic; font-weight: bold; "> Please write the dosage, frequency/schedule, and duration the CHA prescribes in the spaces provided next to the drug name </span>
+            <span style="font-style: italic;" > (it is okay to prompt the CHA for dose, frequency, and duration if they do not tell you up front). The correct items are in</span>
+            <span style="font-style: italic; font-weight: bold; " > bold.</span>
+        </div>
+ 
+        <!-- Start: Page 10 Questions -->
+         <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div style="font-weight: bold; ">Treatment activities</div>
+                    
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->  
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_refer_facility" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Refers to the facility</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 6.50in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_refer_facility_initiate_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Initiated referral as soon as a danger sign was mentioned OR</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+      
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.75in; "></td>
+                    <td style="width: 6.50in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_refer_facility_continue_danger_sign" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Continued evaluation when danger signs was mentioned, but later made referral</span></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+
+        <div>
+            <table>
+                <tr>
+                <td style="width: 0.50in; "></td>
+                <td style="width: 6.75in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_pre_referral" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Gives pre-referral treatment </span><span style="position: relative; left: 4px; bottom: 1px; font-style: italic; " >(mark the treatment they select below)</span></div></td>
+                </tr>
+            </table>
+        </div>
+ 
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_ors_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >ORS: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_ors_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_ors_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_ors_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+       
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_zinc_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Zinc: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_zinc_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_zinc_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_zinc_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_paracetamol_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Paracetamol: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_paracetamol_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_paracetamol_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_paracetamol_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 1.10in; "></td>
+                    <td style="width: 1.90in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_paracetamol_correct_dosing_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Correct dosing for case</span></div></td>          
+                    <td style="width: 4.20in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_paracetamol_dosing_error_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Dosing error made</span></div></td>          
+                </tr>
+            </table>
+        </div>    
+ 
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_amoxicillin_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Amoxicillin: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_amoxicillin_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_amoxicillin_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_amoxicillin_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_act_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >ACT: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_act_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_act_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_act_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; font-weight: bold; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 1.10in; "></td>
+                    <td style="width: 1.90in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_act_correct_dosing_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; font-weight: bold; " >Correct dosing for case</span></div></td>          
+                    <td style="width: 4.20in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_act_dosing_error_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Dosing error made</span></div></td>          
+                </tr>
+            </table>
+        </div>  
+
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 1.80in; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_artesunate_suppository_check" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Artesunate Suppository: </span></div></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_artesunate_suppository_dose_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>        
+                    <td style="width: 0.50in; "><span style="position: relative; left: 4px; bottom: -3px; " >(dose)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_artesunate_suppository_frequency_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.80in; "><span style="position: relative; left: 4px; bottom: -3px; " >(frequency)</span></td>
+                    <td style="width: 1.00in; border-bottom: 1px solid black; "><input class="stored" name="malaria_treatment_artesunate_suppository_duration_value" style=" width:0.98in; text-align: center; padding-left: 3px; border:none; "><td>  
+                    <td style="width: 0.70in; "><span style="position: relative; left: 4px; bottom: -3px; " >(duration)</span></td>             
+                </tr>
+            </table>
+        </div>  
+        
+        
+        <div style="height: 15px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div style="text-align: center; font-style: italic; font-size: 90%; font-weight: bold; "><span>CORRECT TREATMENT: ACT 50, 1 TABLET 1x/DAY x 3 DAYS and</span></div>
+        <div style="text-align: center; font-style: italic; font-size: 90%; font-weight: bold; "><span>PARACETAMOL 100 MG 2 TABLETS 3x/DAY x 3 DAYS</span></div>
+                  
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>    
+            <table class="checkbox_table">
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA correctly counsel the caregiver in how to give the treatment?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_cha_correct_counsel_caregiver_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_cha_correct_counsel_caregiver_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>  
+                </tr>
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA discuss follow-up with the caregiver?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_cha_discuss_follow_up_caregiver_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_cha_discuss_follow_up_caregiver_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>    
+                </tr>
+                <tr>
+                    <td class="column_description" style="width: 6.05in; "><span style="position: relative; left: 4px; bottom: -2px; ">Did the CHA provide preventative education?</span></td>
+                    <td class="column_checkbox" style="border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_cha_provide_preventative_education_yes" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Yes</span></div></td> 
+                    <td class="column_checkbox" style="border-left: none;  "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_cha_provide_preventative_education_no"  value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >No</span></div></td>    
+                </tr> 
+            </table>    
+        </div>   
+        
+        <div class="footer" style="bottom: -60px; " >10</div> 
+       
+        
+        </div> <!-- --------------------------------- End: Page 10   ------------------------------------------------------ -->
+        
+        
+        <div class="page"> <!-- --------------------- Start: Page 11 ------------------------------------------------------- -->
+        
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div><span style="font-style: italic;" >Did the CHA use their job aids, their DCT, or a paper form during the case scenario? Please check all that apply.</span></div>
+
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div>
+            <table class="checkbox_table">
+                
+                <tr>
+                    <td class="column_checkbox" style="width: 1.45in; border: none; "></td>
+                    <td class="column_checkbox" style="width: 1.45in; border-right: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_job_aid"    value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Job Aid(s)</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.45in; border-right: none; border-left: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_dct_form"   value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >DCT Form</span></div></td> 
+                    <td class="column_checkbox" style="width: 1.45in; border-left: none; "><div class="checkOption" style="position: relative; left: 4px; bottom: -3px; " ><input type="checkbox" class="stored" name="malaria_treatment_paper_form" value='1' ><span style="position: relative; left: 4px; bottom: 1px; " >Paper Form</span></div></td>  
+                    <td class="column_checkbox" style="width: 1.45in; border: none; "></td>
+                </tr>  
+
+            </table>
+        </div>
+        
+        <div style="height: 10px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+        <div><span style="font-style: italic;" >Any other notes:</span></div>
+        <div style="height: 7px; "><div style="clear:both"></div></div> <!-- White line spacers -->   
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 0.50in; "></td>
+                    <td style="width: 6.75in; border: 1px solid black; "><input class="stored" name="malaria_treatment_other_note" style=" width: 6.73in; padding-left: 3px; border:none;  "></td>
+                </tr>
+            </table>
+        </div>
+                
+        <div class="footer" style="bottom: -540px; " >11</div> 
+        <!-- End: Page 11 Questions -->
+            
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+        <!-- ---------------------------------------- End: Case Scenario 3 pages 8 - 11 ------------------------------------ -->
+        <!-- -------------------------------------------------------------------------------------------------------------- -->
+                
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">CST.1.7</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials: <input class="stored"  name="meta_de_init" style="width: 0.55in">
+                DE Date: <input class="stored"      name="meta_de_date" style="width: 0.80in">
+                QA Initials: <input class="stored"  name="meta_qa_init" style="width: 0.45in">
+                QA Date: <input class="stored"      name="meta_qa_date" style="width: 0.80in">
+                <input name='meta_form_version' class='stored' type='hidden' value='1.7'>
+            </div>
+            <!-- START: M&E Box -->  
+
+
+        
+        </div> <!-- --------------------------------- End: Page 11   ------------------------------------------------------ -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="de_case_scenario">
+       
+        <!-- END: Hidden fields -->
+
+    </body>
+
+</html>
