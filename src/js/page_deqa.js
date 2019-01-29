@@ -625,25 +625,13 @@ $(document).ready(function(){
         });
     }); 
 
-
-    $('#qa_DOT_0100').click(function() {
+    $('#qa_SCT_0106').click(function() {
         launchQAModal({
-            targetForm: "../forms/direct_observation_1_0.html",
-            qaFormName: "(DOT 1.0) - Direct Observation Tool",
-            pKey1_name: "cha_id",
+            targetForm: "../forms/chss_case_scenarios_1_6.html",
+            qaFormName: "(SCT 1.6) - CHSS Case Scenarios",
+            pKey1_name: "chss_id",
             pKey2_name: "date_form",
-            pKey1_label: "CHA ID",
-            pKey2_label: "Form Date"
-        });
-    }); 
-
-    $('#qa_RRT_0100').click(function() {
-        launchQAModal({
-            targetForm: "../forms/register_review_1_0.html",
-            qaFormName: "(RRT 1.0) - Register Review Tool",
-            pKey1_name: "cha_id",
-            pKey2_name: "date_form",
-            pKey1_label: "CHA ID",
+            pKey1_label: "CHSS ID",
             pKey2_label: "Form Date"
         });
     }); 
