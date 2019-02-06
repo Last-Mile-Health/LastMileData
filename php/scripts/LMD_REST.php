@@ -24,6 +24,7 @@
      1c     LMD_REST.php/indicatorInstances                 lastmile_dataportal.view_instances ?????
      1d     LMD_REST.php/indicatorInstancesFiltered         lastmile_dataportal.view_instances_2
      1e     LMD_REST.php/indicatorValuesFiltered            lastmile_dataportal.view_values
+     1f     LMD_REST.php/indicatorValuesDiagnostic          lastmile_dataportal.tbl_values_diagnostic
      2      LMD_REST.php/json_objects                       lastmile_dataportal.tbl_json_objects
      3      LMD_REST.php/reportObjects                      lastmile_dataportal.reportobjects
      4a     LMD_REST.php/markdown                           lastmile_dataportal.markdown
@@ -136,6 +137,25 @@ $app->get('/indicatorValuesFiltered/:category/:territory_name/:minDate/:maxDate'
     $territory = $territory_name=='all' ? 1 : "territory_name = '$territory_name'";
     LMD_get('all', "inst_id", "lastmile_dataportal.view_values", "month, year, inst_id, value", "archived <> 1 AND `month`<>0 AND ind_category='$category' AND $territory AND ((year*12)+month) BETWEEN $minDate AND $maxDate");
 });
+
+// Route 1f: Indicator values diagnostic
+// Note: different ID field for GET requests vs. PUTs/DELETEs (non-standard behavior)
+// !!!!! still need to build out other routes !!!!!
+// !!!!! make sure that the new "`month` IS NOT NULL" clause didn't break anything else !!!!!
+
+$app->get('/indicatorValuesDiagnostic/:ind_id/(:territory_id)',function($ind_id,$territory_id='all') {
+    $territory_id = $territory_id=='all' ? "all" : "'" . str_replace(",","','",$territory_id) . "'";
+    LMD_get($ind_id, "ind_id", "lastmile_dataportal.tbl_values_diagnostic", "ind_id, month, year, territory_id, period_id, value", "value <> '' AND `month` IS NOT NULL AND `month`<>0 AND " . ($territory_id=='all' ? "1" : "territory_id IN ($territory_id)"));
+});
+//$app->post('/indicatorValuesDiagnostic/', function() {
+//    LMD_post("lastmile_dataportal.tbl_values_diagnostic");
+//});
+//$app->put('/indicatorValuesDiagnostic/:id', function($id) {
+//    LMD_put($id, "id", "lastmile_dataportal.tbl_values_diagnostic");
+//});
+//$app->delete('/indicatorValuesDiagnostic/:id', function($id) {
+//    LMD_delete($id, "id", "lastmile_dataportal.tbl_values_diagnostic");
+//});
 
 
 // Route 2: Data Portal sidebar (tbl_json_objects)
