@@ -392,6 +392,17 @@ $(document).ready(function(){
         case '16':
             options = [
                 {
+                    title: "Home births",
+                    query: "SELECT * FROM lastmile_report.view_home_birth;",
+                    defaultOrder: []
+                    // defaultOrder: [[0, "desc"],[1, "desc"],[2, "asc"],[3, "asc"]]
+                }
+            ];
+            break;
+
+        case '17':
+            options = [
+                {
                     title: "",
                     selectName: "",
                     query: "",
@@ -406,7 +417,7 @@ $(document).ready(function(){
             break;
 
 
-        case '17':
+        case '18':
             options = [
                 {
                     title: "",
