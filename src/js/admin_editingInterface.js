@@ -62,10 +62,21 @@ $(document).ready(function(){
                 filters: [],
                 idAttribute: 'id',
                 dupeField: 'username',
-                modelHeaders: ['Username','User groups'],
+                modelHeaders: ['Username','Groups','First_name', 'Last_name', 'Initials', 'Team', 'Email', 'Phone', 'Position', 'Org', 'Location' ],
+                
+                // These column names need to align with the LMD_get column names in Route 5 LMD users (lastmile_dataportal.tbl_utility_users) in LMD_REST.php
                 modelDefaults: {
                     username: "new user",
-                    user_groups: "user"
+                    user_groups: "user",
+                    first_name: "",
+                    last_name: "", 
+                    initials: "", 
+                    team: "",
+                    email: "", 
+                    phone: "",
+                    position: "",
+                    organization: "Last Mile Health", 
+                    location: ""
                 }
             };
             break;

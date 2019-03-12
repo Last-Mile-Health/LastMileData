@@ -210,7 +210,7 @@ $app->get('/markdownByName/:id',function($id) {
 // Note: the "/0/" in the URL is to enable admin_editingInterface to work
 // "Delete" is actually an "archive" via LMD_archive()
 $app->get('/users/0/(:id)',function($id='all') {
-    LMD_get($id, "id", "lastmile_dataportal.tbl_utility_users", "id, username, user_groups", "archived <> 1");
+    LMD_get($id, "id", "lastmile_dataportal.tbl_utility_users", "id, username, user_groups, first_name, last_name, initials, team, email, phone, position, organization, location", "archived <> 1");
 });
 $app->post('/users/', function() {
     LMD_post("lastmile_dataportal.tbl_utility_users");
