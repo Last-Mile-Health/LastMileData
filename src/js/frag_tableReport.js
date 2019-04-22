@@ -403,6 +403,18 @@ $(document).ready(function(){
         case '17':
             options = [
                 {
+                    title: "DCT device ID",
+                    query: "select id_type as `ID type`, meta_device_id as `device ID`, id_value as ID, number_instance as `number instances`, full_name as person, phone_number as phone, health_facility as facility, health_district as district, county from lastmile_report.view_diagnostic_device_id;",
+                    defaultOrder: []
+                    // defaultOrder: [[0, "asc"],[1, "asc"]]
+                }
+            ];
+            break;
+
+
+        case '18':
+            options = [
+                {
                     title: "",
                     selectName: "",
                     query: "",
@@ -417,7 +429,7 @@ $(document).ready(function(){
             break;
 
 
-        case '18':
+        case '19':
             options = [
                 {
                     title: "",
