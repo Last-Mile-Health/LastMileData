@@ -411,8 +411,30 @@ $(document).ready(function(){
             ];
             break;
 
-
         case '18':
+            options = [
+
+                {
+                    title: "HHR 2018 v. 2019: Grand Gedeh",
+                    selectName: "Grand Gedeh",
+                    query: "select * from lastmile_develop.view_hhr_2018_2019 where county like 'Grand Gedeh';",
+                    defaultOrder: [ [0, "asc"] ]
+                }, {
+                    title: "HHR 2018 v. 2019: Rivercess",
+                    selectName: "Rivercess",
+                    query: "select * from lastmile_develop.view_hhr_2018_2019 where county like 'Rivercess';",
+                    defaultOrder: [ [0, "asc"] ]
+                }, {
+                    title: "HHR 2018 v. 2019: Grand Bassa",
+                    selectName: "Grand Bassa",
+                    query: "select * from lastmile_develop.view_hhr_2018_2019 where county like 'Grand Bassa';",
+                    defaultOrder: [ [0, "asc"] ]
+                }
+
+            ];
+            break;
+
+        case '19':
             options = [
                 {
                     title: "",
@@ -429,7 +451,7 @@ $(document).ready(function(){
             break;
 
 
-        case '19':
+        case '20':
             options = [
                 {
                     title: "",
