@@ -2,6 +2,7 @@
 <?php
 
     // Extract 'report_id' and 'report_title' parameters
+    // report_id uniquely identifies a report in lastmile_dataportal.tbl_reports table.
     $report_id = $_GET['report_id'];
     
     // Initiate/configure CURL session
@@ -172,7 +173,40 @@
                     <!-- /ko -->
                 </table>
                 <!-- /ko -->
+ 
                 
+                <!-- If the `only_display_last_month_table` variable is set to 6, display last four fiscal years ) -->
+                <!-- ko if:only_display_last_month_table==7 -->
+                <table class='ptg_data'>
+                    
+                    <tr>
+                        <!-- ko if:multiple -->
+                        <th>&nbsp;</th>
+                        <!-- /ko -->
+                        
+                        <!-- Month names -->
+                        <!-- ko foreach:$parents[0].last_four_fiscal_year -->
+                        <th data-bind="text:shortMonth"></th>
+                        <!-- /ko -->
+                    </tr>
+                    
+                    <!-- ko foreach:instances_table -->
+                    <tr>
+                        <!-- Table labels -->
+                        <!-- ko if:ro.multiple -->
+                        <td class="label_table" data-bind="text:label, attr: {'data-inst_id':$data.inst_id}"></td>
+                        <!-- /ko -->
+                        
+                        <!-- Indicator values will be dynamically placed here -->
+                        <!-- ko foreach: $parents[1].last_four_fiscal_year -->
+                        <td class="value" data-bind="attr: {'data-yearmonth':yearMonth, 'data-inst_id':$parentContext.$data.inst_id}"></td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                </table>
+                <!-- /ko -->
+ 
+
                 
                 <hr class='smallHR'>
                 

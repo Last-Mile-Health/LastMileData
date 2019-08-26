@@ -37,7 +37,6 @@ var LMD_dataPortal = (function() {
         
     }
 
-
     // PRIVATE: Sets the dates for the Data Portal to display
     //          If it is the 15th of the month or later, display the previous 4 months; otherwise, display the four months before the previous month
     //          Example:
@@ -64,7 +63,138 @@ var LMD_dataPortal = (function() {
         
     }
 
+/*
+ *    PRIVATE For indicators that are being displayed annually, this function 
+ *           sets the last four fiscal years for the Data Portal to display.
+ *           Fiscal year begins July 1, but the portal updates on the
+ *           the 15th of each month.  This function alters the 4 
+ *           indicator month columns to display the last four years.
+ *           There's nothing special about four years, but having a
+ *           a common look and feel for the indicators, should make
+ *           interpreting them easier.
+ *         
+ *           This code would be a lot simpler, but there is the whole
+ *           peek and suppress feature of the portal to deal with.
+ * 
+ *           The way this was implemented is a bit of a hack.
+ *
+ *           First, the annual values for a indicator need to be
+ *           stored in the month of June for the fiscal year, the 
+ *           last month of the fiscal year being reported. 
+ *
+ *           We do not go back and alter the underlying structure
+ *           of lastmile_dataportal.tbl_values, which is 
+ *           essentially a month/year/ind_id/territory_id 
+ *           referenced system.
+ *
+ *           Next, in the tbl_report_objects table, the field
+ *           only_display_last_month_table.
+ *
+*/             
 
+function set_date_last_four_fiscal_year() {
+
+    // Debug string: 
+    // var this_moment_string = '2019-07-14';
+
+    // Insert this_moment_string in every instance of moment(), moment( this_moment_string ), in this function.
+    // Fools the function into thinking it's a different date to test the different code paths.
+
+    var fy_display_date_begin   = moment(), 
+        fy_display_date_end     = moment(),
+        
+        fy_minus_0 = moment(), 
+        fy_minus_1 = moment(), 
+        fy_minus_2 = moment(), 
+        fy_minus_3 = moment(),
+
+        fiscal_calendar_year_equal = 'Y';
+
+    switch ( moment().format('M' ) ) {
+        // Months 1 - 6
+        case 1: case 2: case 3: case 4: case 5: case 6:
+            fiscal_calendar_year_equal = 'Y';
+            break;
+        // Months 7 - 12
+        default: 
+            fiscal_calendar_year_equal = 'N';
+    }
+
+    // Peek dates, only gets set if user is superadmin
+    if ( dayToShowData == 1 ) {
+
+        if ( fiscal_calendar_year_equal == 'N' ) {
+
+                fy_display_date_begin   =  moment().format( 'YYYY' )                    + '-' + '07' + '-' +    dayToShowData;
+                fy_display_date_end     =  moment().add( 1, 'Y').format( 'YYYY' )       + '-' + '07' + '-' +    dayToShowData;
+            
+            } else {
+
+                    fy_display_date_begin   =   moment().subtract( 1, 'Y').format( 'YYYY' ) + '-' + '07' + '-' + dayToShowData;
+                    fy_display_date_end     =   moment().format( 'YYYY' )                   + '-' + '07' + '-' + dayToShowData;
+            
+            }
+    
+    // Suppress display of update
+    } else if ( dayToShowData == 29 ) {
+
+            if ( fiscal_calendar_year_equal == 'N' ) {
+
+                fy_display_date_begin   =  moment().format( 'YYYY' )                    + '-' + '07' + '-' +    dayToShowData;
+                fy_display_date_end     =  moment().add( 1, 'Y').format( 'YYYY' )       + '-' + '07' + '-' + (  dayToShowData);
+            
+            } else {
+
+                fy_display_date_begin   =   moment().subtract( 1, 'Y').format( 'YYYY' ) + '-' + '06' + '-' +    dayToShowData;
+                fy_display_date_end     =   moment().format( 'YYYY' )                   + '-' + '06' + '-' + (  dayToShowData );
+            
+            }
+    
+    // Normal display portal update on the 15th, not peeking or suppressing.
+    } else {
+
+            if ( fiscal_calendar_year_equal == 'N' ) {
+
+                fy_display_date_begin   =  moment().format( 'YYYY' )                    + '-' + '07' + '-' +    dayToShowData;
+                fy_display_date_end     =  moment().add( 1, 'Y').format( 'YYYY' )       + '-' + '07' + '-' + (  dayToShowData - 1 );
+            
+            } else {
+
+                fy_display_date_begin   =   moment().subtract( 1, 'Y').format( 'YYYY' ) + '-' + '07' + '-' +    dayToShowData;
+                fy_display_date_end     =   moment().format( 'YYYY' )                   + '-' + '07' + '-' + (  dayToShowData - 1 );
+            
+            }
+    };
+
+    if ( ( moment() >= moment( fy_display_date_begin ) ) && ( moment() <= moment( fy_display_date_end ) ) ) {
+
+        fy_minus_0 = moment( moment().add( 1, 'Y').format( 'YYYY' )         + '-07-01' );
+        fy_minus_1 = moment( moment().format( 'YYYY' )                      + '-07-01' );
+        fy_minus_2 = moment( moment().subtract( 1, 'Y').format( 'YYYY' )    + '-07-01' );
+        fy_minus_3 = moment( moment().subtract( 2, 'Y').format( 'YYYY' )    + '-07-01' );
+
+    } else {
+
+        fy_minus_0 = moment( moment().format( 'YYYY' )                      + '-07-01' );
+        fy_minus_1 = moment( moment().subtract( 1, 'Y').format( 'YYYY' )    + '-07-01' );
+        fy_minus_2 = moment( moment().subtract( 2, 'Y').format( 'YYYY' )    + '-07-01' );
+        fy_minus_3 = moment( moment().subtract( 3, 'Y').format( 'YYYY' )    + '-07-01' );
+
+    };
+
+    // Create object to hold formatted dates
+    var last_four_fiscal_year = [
+            { yearMonth:  fy_minus_3.format("YYYY-M"), shortMonth:  fy_minus_3.format("FY'YY") },
+            { yearMonth:  fy_minus_2.format("YYYY-M"), shortMonth:  fy_minus_2.format("FY'YY") },
+            { yearMonth:  fy_minus_1.format("YYYY-M"), shortMonth:  fy_minus_1.format("FY'YY") },
+            { yearMonth:  fy_minus_0.format("YYYY-M"), shortMonth:  fy_minus_0.format("FY'YY") }
+    ];    
+
+    return last_four_fiscal_year; 
+ 
+ } // end set_date_last_four_fiscal_year() 
+
+     
     // PRIVATE: Stores indicator value data (in "chartData" and "tableData" objects), to be used in charts and tables
     //          The single parameter comes from LMD_REST.php/indicatorValues
     //          For chartData, keys are instance IDs (inst_id; a concatenation of ind_id, territory_id and period_id) and values are objects containing two properties, a MySQL-formatted date and the indicator value
@@ -469,7 +599,8 @@ var LMD_dataPortal = (function() {
         // Initialize knockout.js; bind model to DIV
         ko.applyBindings({
             reportObjects: reportObjects,
-            lastFourMonths: setDates()
+            lastFourMonths: setDates(),
+            last_four_fiscal_year: set_date_last_four_fiscal_year()
         }, $('#reportContent')[0]);
 
         // Populate data tables
