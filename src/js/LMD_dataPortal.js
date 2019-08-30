@@ -63,6 +63,10 @@ var LMD_dataPortal = (function() {
         
     }
 
+
+
+
+
 /*
  *    PRIVATE For indicators that are being displayed annually, this function 
  *           sets the last four fiscal years for the Data Portal to display.
@@ -95,7 +99,7 @@ var LMD_dataPortal = (function() {
 function set_date_last_four_fiscal_year() {
 
     // Debug string: 
-    // var this_moment_string = '2019-07-14';
+    // var this_moment_string = moment();
 
     // Insert this_moment_string in every instance of moment(), moment( this_moment_string ), in this function.
     // Fools the function into thinking it's a different date to test the different code paths.
@@ -184,15 +188,28 @@ function set_date_last_four_fiscal_year() {
 
     // Create object to hold formatted dates
     var last_four_fiscal_year = [
+            { yearMonth:  fy_minus_3.subtract( 1, 'Y').format("YYYY-M"), shortMonth:  fy_minus_3.add( 1, 'Y').format("FY'YY") },
+            { yearMonth:  fy_minus_2.subtract( 1, 'Y').format("YYYY-M"), shortMonth:  fy_minus_2.add( 1, 'Y').format("FY'YY") },
+            { yearMonth:  fy_minus_1.subtract( 1, 'Y').format("YYYY-M"), shortMonth:  fy_minus_1.add( 1, 'Y').format("FY'YY") },
+            { yearMonth:  fy_minus_0.subtract( 1, 'Y').format("YYYY-M"), shortMonth:  fy_minus_0.add( 1, 'Y').format("FY'YY") }
+    ];    
+
+/*
+    // Create object to hold formatted dates
+    var last_four_fiscal_year = [
             { yearMonth:  fy_minus_3.format("YYYY-M"), shortMonth:  fy_minus_3.format("FY'YY") },
             { yearMonth:  fy_minus_2.format("YYYY-M"), shortMonth:  fy_minus_2.format("FY'YY") },
             { yearMonth:  fy_minus_1.format("YYYY-M"), shortMonth:  fy_minus_1.format("FY'YY") },
-            { yearMonth:  fy_minus_0.format("YYYY-M"), shortMonth:  fy_minus_0.format("FY'YY") }
+            { yearMonth:  fy_minus_0.subtract( 1, 'Y').format("YYYY-M"), shortMonth:  fy_minus_0.add( 1, 'Y').format("FY'YY") }
     ];    
+*/
 
     return last_four_fiscal_year; 
  
  } // end set_date_last_four_fiscal_year() 
+
+
+
 
      
     // PRIVATE: Stores indicator value data (in "chartData" and "tableData" objects), to be used in charts and tables

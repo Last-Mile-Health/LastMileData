@@ -175,7 +175,7 @@
                 <!-- /ko -->
  
                 
-                <!-- If the `only_display_last_month_table` variable is set to 6, display last four fiscal years ) -->
+                <!-- If the `only_display_last_month_table` variable is set to 7, display last four fiscal years ) -->
                 <!-- ko if:only_display_last_month_table==7 -->
                 <table class='ptg_data'>
                     
