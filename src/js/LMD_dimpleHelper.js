@@ -109,12 +109,17 @@ var LMD_dimpleHelper = (function(){
         
         // Format bar charts (vertical)
         else if (params.type==="bar") {
-            var x = myChart.addCategoryAxis("x", "Cut_primary");
+
+            var x = myChart.addTimeAxis("x", "Month", "%Y-%m-%d", "%b '%y");
+            x.timePeriod = d3.time.months;
+            x.timeInterval = params.timeInterval;
+
             var y = myChart.addMeasureAxis("y", "Value");
             y.tickFormat = params.tickFormat
+
             var mySeries = myChart.addSeries("Cut_primary", dimple.plot.bar);
-            x.addOrderRule("Cut_primary",true);
-            myChart.defaultColors = [new dimple.color("#F79646")];
+            mySeries.addOrderRule("Cut_primary",true);
+
         }
         
         // Format bar charts (horizontal)
