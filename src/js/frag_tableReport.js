@@ -437,21 +437,24 @@ $(document).ready(function(){
         case '19':
             options = [
                 {
-                    title: "",
-                    selectName: "",
-                    query: "",
-                    defaultOrder: [[0, "asc"]]
-                }, {
-                    title: "",
-                    selectName: "",
-                    query: "",
-                    defaultOrder: [[0, "asc"]]
+                    title: "DE records captured",
+                    query: "select `Year`, `Month`, `Form`, `#Records` from lastmile_report.view_diagnostic_de_capture;",
+                    defaultOrder: []
                 }
             ];
             break;
 
-
         case '20':
+            options = [
+                {
+                    title: "ODK records captured",
+                    query: "select `Year`, `Month`, `Form`, `#Records` from lastmile_report.view_diagnostic_odk_capture;",
+                    defaultOrder: []
+                }
+            ];
+            break;
+
+        case '21':
             options = [
                 {
                     title: "",
