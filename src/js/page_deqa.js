@@ -603,6 +603,25 @@ $(document).ready(function(){
         });
     });
 
+    $('#qa_CST_0200').click(function() {
+        launchQAModal({
+            targetForm: "../forms/case_scenarios_2.html",
+            qaFormName: "(CST 2.0) - Case Scenarios",
+
+            pKey1_name: "cha_id",
+            pKey2_name: "day_report",
+            pKey3_name: "month_report",
+            pKey4_name: "year_report",
+
+            pKey1_label: "CHA ID",
+            pKey2_label: "Day",
+            pKey3_label: "Month",
+            pKey4_label: "Year"
+
+        });
+    }); 
+
+
     $('#qa_CST_0107').click(function() {
         launchQAModal({
             targetForm: "../forms/case_scenarios_1_7.html",
@@ -616,7 +635,7 @@ $(document).ready(function(){
 
     $('#qa_CST_0105').click(function() {
         launchQAModal({
-            targetForm: "../forms/case_scenarios_1_5.html",
+            targetForm: "../forms/old/case_scenarios_1_5.html",
             qaFormName: "(CST 1.5) - Case Scenarios",
             pKey1_name: "cha_id",
             pKey2_name: "date_form",
