@@ -592,6 +592,17 @@ $(document).ready(function(){
         });
     }); 
     
+    $('#qa_CCD_0503').click(function() {
+        launchQAModal({
+            targetForm: "../forms/chss_commodity_distribution_05_03.html",
+            qaFormName: "CHSS Form (CCD 5.3) - Commodity Distribution",
+            pKey1_name: "chss_id",
+            pKey2_name: "restock_date",
+            pKey1_label: "CHSS ID",
+            pKey2_label: "Restock Date"
+        });
+    });
+
     $('#qa_CCD_0502').click(function() {
         launchQAModal({
             targetForm: "../forms/chss_commodity_distribution_05_02.html",
