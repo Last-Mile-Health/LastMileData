@@ -174,7 +174,15 @@ $(document).ready(function() {
                                 }
                                 else {
                                     // "Submit" was clicked; redirect back to DEQA
-                                    window.location.assign('../pages/page_deqa.html');
+
+                                    // case of build/forms/old
+                                    if( window.location.pathname.includes( "/old" ) ) {
+                                        window.location.assign('../../pages/page_deqa.html');                      
+                                    }
+                                    else {                                  
+                                        // case of build/forms
+                                        window.location.assign('../pages/page_deqa.html');
+                                    }
                                 }
                             })
                         });
@@ -189,7 +197,16 @@ $(document).ready(function() {
     $('#lmd_cancel').click(function() {
         $("body").fadeOut(500,function(){
             // Redirect back to main page
-            window.location.assign('../pages/page_deqa.html');
+         
+            // case of build/forms/old
+            if( window.location.pathname.includes( "/old" ) ) {              
+                window.location.assign('../../pages/page_deqa.html');           
+            }
+            else {                    
+                // case of build/forms
+                window.location.assign('../pages/page_deqa.html');
+            }
+
         });
     });
     
