@@ -64,6 +64,42 @@ var LMD_dataPortal = (function() {
     }
 
 
+    // PRIVATE: Sets the seven month dates for the Data Portal to display
+    //          If it is the 15th of the month or later, display the previous 4 months; otherwise, display the four months before the previous month
+    //          Example:
+    //              Before June 15th, the months would be Jan -- Apr
+    //              After June 15th, the months would be Feb -- May
+    function set_seven_month_date() {
+        
+        // Generate dates (last 7 months)
+        var todayDay = moment().format('D'),
+            todayMinus1m = moment().subtract(1 + ( todayDay < dayToShowData ? 1 : 0 ),'months'),
+            todayMinus2m = moment().subtract(2 + ( todayDay < dayToShowData ? 1 : 0 ),'months'),
+            todayMinus3m = moment().subtract(3 + ( todayDay < dayToShowData ? 1 : 0 ),'months'),
+            todayMinus4m = moment().subtract(4 + ( todayDay < dayToShowData ? 1 : 0 ),'months');
+
+            todayMinus5m = moment().subtract(5 + ( todayDay < dayToShowData ? 1 : 0 ),'months');
+            todayMinus6m = moment().subtract(6 + ( todayDay < dayToShowData ? 1 : 0 ),'months');
+            todayMinus7m = moment().subtract(7 + ( todayDay < dayToShowData ? 1 : 0 ),'months');
+
+        // Create object to hold formatted dates
+        var lastSevenMonths = [
+
+            { yearMonth: todayMinus7m.format("YYYY-M"), shortMonth: todayMinus7m.format("MMM 'YY") },
+            { yearMonth: todayMinus6m.format("YYYY-M"), shortMonth: todayMinus6m.format("MMM 'YY") },
+            { yearMonth: todayMinus5m.format("YYYY-M"), shortMonth: todayMinus5m.format("MMM 'YY") },
+
+            { yearMonth: todayMinus4m.format("YYYY-M"), shortMonth: todayMinus4m.format("MMM 'YY") },
+            { yearMonth: todayMinus3m.format("YYYY-M"), shortMonth: todayMinus3m.format("MMM 'YY") },
+            { yearMonth: todayMinus2m.format("YYYY-M"), shortMonth: todayMinus2m.format("MMM 'YY") },
+            { yearMonth: todayMinus1m.format("YYYY-M"), shortMonth: todayMinus1m.format("MMM 'YY") }
+        ];
+        
+        return lastSevenMonths;
+        
+    }
+
+
 
 
 
@@ -617,6 +653,7 @@ function set_date_last_four_fiscal_year() {
         ko.applyBindings({
             reportObjects: reportObjects,
             lastFourMonths: setDates(),
+            lastSevenMonths: set_seven_month_date(),
             last_four_fiscal_year: set_date_last_four_fiscal_year()
         }, $('#reportContent')[0]);
 
