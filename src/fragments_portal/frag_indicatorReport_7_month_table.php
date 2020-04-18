@@ -5,15 +5,20 @@
     // report_id uniquely identifies a report in lastmile_dataportal.tbl_reports table.
     $report_id = $_GET['report_id'];
     
-    // Initiate/configure CURL session
+    // Initiate/configure CURL session for json1
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
     // Echo JSON (report model)
     $url1 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reportObjects/0/$report_id";
+
     curl_setopt($ch,CURLOPT_URL,$url1);
+
     $json1 = curl_exec($ch);
-    
+
+    curl_close($ch);
+
+
     // Get instance IDs of all indicator instances used in the report (in either data tables or charts)
     if (substr($json1,0,1)!=="[") {
         $json1 = "[" . $json1 . "]";
@@ -57,39 +62,76 @@
         $territoryString .= $value . ",";
     }
     $territoryString = trim($territoryString, ",");
-    
+
+
+    // Initiate/configure CURL session for json2
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
     // Echo JSON (indicator metadata)
     $url2 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicators/1/$indicatorString";
+
     curl_setopt($ch,CURLOPT_URL,$url2);
+
     $json2 = curl_exec($ch);
+
+    curl_close($ch);
+
     if (substr($json2,0,1)!=="[") {
         $json2 = "[" . $json2 . "]";
     }
 
+
+    // Initiate/configure CURL session for json3
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
     // Echo JSON (indicator values)
     $url3 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/indicatorValues/$indicatorString/$territoryString";
+    
     curl_setopt($ch,CURLOPT_URL,$url3);
+    
     $json3 = curl_exec($ch);
+
+    curl_close($ch);
+
     if (substr($json3,0,1)!=="[") {
         $json3 = "[" . $json3 . "]";
     }
+    
+
+    // Initiate/configure CURL session for json4
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
     // Echo JSON (indicator values)
     $url4 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/territories/$territoryString";
+
     curl_setopt($ch,CURLOPT_URL,$url4);
+
     $json4 = curl_exec($ch);
+
+    curl_close($ch);
+
     if (substr($json4,0,1)!=="[") {
         $json4 = "[" . $json4 . "]";
     }
     
+
+    // Initiate/configure CURL session for report_name and header_note
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
     // Echo report title
     $url5 = $_SERVER['HTTP_HOST'] . "/LastMileData/php/scripts/LMD_REST.php/reports/0/$report_id";
+
     curl_setopt($ch,CURLOPT_URL,$url5);
     $report_name = JSON_decode(curl_exec($ch))->report_name;
     $header_note = JSON_decode(curl_exec($ch))->header_note;
 
     // Close CURL session and echo JSON (to be used by LMD_dataPortal.js)
     curl_close($ch);
+
     echo "var arg_reportObjects = $json1;". "\n\n";
     echo "var arg_indicatorMetadata = $json2;". "\n\n";
     echo "var arg_indicatorValues = $json3;". "\n\n";

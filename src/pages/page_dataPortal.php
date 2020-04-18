@@ -41,6 +41,14 @@
             curl_setopt($ch,CURLOPT_URL,$url1);
             $json1 = curl_exec($ch);
 
+            // Originally, we were not closing the curl session before calling json_objects/3
+            // I had to close the session and initialize it again to get it to work.
+            curl_close($ch);
+
+            $ch = curl_init();
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+
+            
             // Echo JSON (configuration object)
             // Object has the following boolean properties: "peek", "suppress", "maintenance"
             // Properties can be modified via admin_adminTools.php
@@ -48,8 +56,10 @@
             curl_setopt($ch,CURLOPT_URL,$url2);
             $json2 = curl_exec($ch);
 
-            // Close CURL session and echo JSON
+            // Close CURL session
             curl_close($ch);
+
+            // echo JSON
             echo "var model_sidebar = JSON.parse($json1.object_data);". "\n\n";
             echo "var portal_config = JSON.parse($json2.object_data);". "\n\n";
             echo "</script>";
