@@ -23,7 +23,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 2. Update "facilities" (array)
-$query = "SELECT health_facility FROM lastmile_cha.health_facility  where not ( health_facility_id like 'Rivercess' OR health_facility_id like 'Grand Gedeh' OR health_facility_id like 'Grand Bassa' ) ORDER BY health_facility ASC;";
+$query = "SELECT health_facility FROM lastmile_ncha.health_facility  where not ( health_facility_id like 'Rivercess' OR health_facility_id like 'Grand Gedeh' OR health_facility_id like 'Grand Bassa' ) ORDER BY health_facility ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_facilities = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -32,7 +32,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 3. Update "health_facility_id" (array)
-$query = "SELECT health_facility_id FROM lastmile_cha.health_facility where not ( health_facility_id like 'Rivercess' OR health_facility_id like 'Grand Gedeh' OR health_facility_id like 'Grand Bassa' ) ORDER BY health_facility_id ASC;";
+$query = "SELECT health_facility_id FROM lastmile_ncha.health_facility where not ( health_facility_id like 'Rivercess' OR health_facility_id like 'Grand Gedeh' OR health_facility_id like 'Grand Bassa' ) ORDER BY health_facility_id ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_health_facility_id = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -41,7 +41,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 4. Update "health_facility_id_concat" (array)
-$query = "SELECT concat( health_facility, ' (', health_facility_id, ')' ) as health_facility_id_concat FROM lastmile_cha.health_facility where not ( ( health_facility_id like 'Rivercess' ) OR ( health_facility_id like 'Grand Gedeh' ) OR ( health_facility_id like 'Grand Bassa' ) ) ORDER BY health_facility ASC;";
+$query = "SELECT concat( health_facility, ' (', health_facility_id, ')' ) as health_facility_id_concat FROM lastmile_ncha.health_facility where not ( ( health_facility_id like 'Rivercess' ) OR ( health_facility_id like 'Grand Gedeh' ) OR ( health_facility_id like 'Grand Bassa' ) ) ORDER BY health_facility ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_health_facility_id_concat = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -50,7 +50,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 5. Update "districts" (array)
-$query = "SELECT health_district FROM lastmile_cha.health_district WHERE ( county_id in ( 6, 14, 4 ) ) and not ( ( health_district like 'Rivercess' ) or ( health_district like 'Grand Gedeh' ) or ( health_district like 'Grand Bassa' ) ) order by health_district asc; ";
+$query = "SELECT health_district FROM lastmile_ncha.health_district WHERE ( county_id in ( 6, 14, 4 ) ) and not ( ( health_district like 'Rivercess' ) or ( health_district like 'Grand Gedeh' ) or ( health_district like 'Grand Bassa' ) ) order by health_district asc; ";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_districts = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -59,7 +59,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 6. Update "county" (array)
-$query = "SELECT county FROM lastmile_cha.county WHERE county_id IN ( 6, 14, 4 ) order by county asc;";
+$query = "SELECT county FROM lastmile_ncha.county WHERE county_id IN ( 6, 14, 4 ) order by county asc;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_county = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -68,7 +68,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 7. Update "chss" (array)
-$query = "SELECT CONCAT(first_name,' ',last_name) AS chss FROM lastmile_cha.view_position_chss_person WHERE person_id IS NOT NULL ORDER BY chss ASC;";
+$query = "SELECT CONCAT(first_name,' ',last_name) AS chss FROM lastmile_ncha.view_position_chss_person WHERE person_id IS NOT NULL ORDER BY chss ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_chss = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
@@ -77,7 +77,7 @@ for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
 }
 
 // 8. Update "chss_id_concat" (array)
-$query = "SELECT CONCAT( first_name,' ',last_name, ' (', person_id, ')' ) AS chss_id_concat FROM lastmile_cha.view_position_chss_person WHERE person_id IS NOT NULL ORDER BY chss_id_concat ASC;";
+$query = "SELECT CONCAT( first_name,' ',last_name, ' (', person_id, ')' ) AS chss_id_concat FROM lastmile_ncha.view_position_chss_person WHERE person_id IS NOT NULL ORDER BY chss_id_concat ASC;";
 $result = mysqli_query($cxn, $query) or die("failure");
 $json_chss_id_concat = array();
 for ($i = 1; $i <= mysqli_num_rows($result); $i++) {
