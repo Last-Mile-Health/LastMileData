@@ -49,7 +49,7 @@ query111='select * from lastmile_upload.de_cha_status_change_form'
 query112='select * from lastmile_upload.de_chss_commodity_distribution'
 query113='select * from lastmile_program.train_cha'
 query114='select * from lastmile_program.train_chss'
-
+query115='select * from lastmile_upload.odk_QCA_GPSForm'
 
 # View file names
 fileName1=view_base_cha
@@ -83,6 +83,7 @@ fileName111=de_cha_status_change_form
 fileName112=de_chss_commodity_distribution
 fileName113=train_cha
 fileName114=train_chss
+fileName115=odk_QCA_GPSForm
 
 
 
@@ -118,4 +119,6 @@ mysql --batch --user=$user --password=$password -e "${query111}" | $replaceTab |
 mysql --batch --user=$user --password=$password -e "${query112}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName112}_$dateStamp.csv
 mysql --batch --user=$user --password=$password -e "${query113}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName113}_$dateStamp.csv
 mysql --batch --user=$user --password=$password -e "${query114}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName114}_$dateStamp.csv
+
+mysql --batch --user=$user --password=$password -e "${query115}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName115}_$dateStamp.csv
 
