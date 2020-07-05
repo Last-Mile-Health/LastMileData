@@ -27,7 +27,7 @@ $db14   = "lastmile_liberiamohdata";
 
 $backup_file1   = $db1      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file2   = $db2      . '_' . date("Y-m-d-H-i-s") . '.sql';
-$backup_file2   = $db3      . '_' . date("Y-m-d-H-i-s") . '.sql';
+$backup_file3   = $db3      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file4   = $db4      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file5   = $db5      . '_' . date("Y-m-d-H-i-s") . '.sql';
 $backup_file6   = $db6      . '_' . date("Y-m-d-H-i-s") . '.sql';
