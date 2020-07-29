@@ -2,7 +2,7 @@
 
 $dir    = '../../backups/CSVs/';
 
-$files = glob( $dir . "{de_chss_commodity_distribution,odk_chaRestock}*.csv", GLOB_BRACE );
+$files = glob( $dir . "{de_chss_commodity_distribution,odk_chaRestock,view_restock_level}*.csv", GLOB_BRACE );
 
 echo "<br><h2>Village Reach Download Datasets</h2>";
 
