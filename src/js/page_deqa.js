@@ -591,19 +591,18 @@ $(document).ready(function(){
             pKey3_label: "Last Name"
         });
     }); 
-    
-    $('#qa_CCD_0503').click(function() {
+
+    $('#qa_CCD_0504').click(function() {
         launchQAModal({
-            targetForm: "../forms/chss_commodity_distribution_05_03.html",
-            qaFormName: "CHSS Form (CCD 5.3) - Commodity Distribution",
+            targetForm: "../forms/chss_commodity_distribution_05_04.html",
+            qaFormName: "CHSS Form (CCD 5.4) - Commodity Distribution",
             pKey1_name: "chss_id",
             pKey2_name: "restock_date",
             pKey1_label: "CHSS ID",
             pKey2_label: "Restock Date"
         });
     });
-
-
+ 
     $('#qa_CST_0200').click(function() {
         launchQAModal({
             targetForm: "../forms/case_scenarios_2.html",
@@ -637,6 +636,17 @@ $(document).ready(function(){
     
 
     // QA Click handlers (old forms).  Be sure to add "old/" to form path.
+
+    $('#qa_CCD_0503').click(function() {
+        launchQAModal({
+            targetForm: "../forms/old/chss_commodity_distribution_05_03.html",
+            qaFormName: "CHSS Form (CCD 5.3) - Commodity Distribution",
+            pKey1_name: "chss_id",
+            pKey2_name: "restock_date",
+            pKey1_label: "CHSS ID",
+            pKey2_label: "Restock Date"
+        });
+    });
 
     $('#qa_CCD_0502').click(function() {
         launchQAModal({

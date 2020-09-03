@@ -8,18 +8,18 @@
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
         <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
-        <script src="../../lib/jquery.min.js"></script>
-        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
-        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="../js/LMD_fileSystemHelper.js"></script>
-        <script src="../js/fhwForms.js"></script>
-        <script src="../js/LMD_utilities.js"></script>
-        <script src="../js/formHelper.js"></script>
-        <script src="../js/formValidate.js"></script>
-        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
-        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
-        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
-        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        <script src="../../../lib/jquery.min.js"></script>
+        <script src="../../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../../js/LMD_fileSystemHelper.js"></script>
+        <script src="../../js/fhwForms.js"></script>
+        <script src="../../js/LMD_utilities.js"></script>
+        <script src="../../js/formHelper.js"></script>
+        <script src="../../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
         
         <style>
             
@@ -36,7 +36,7 @@
             
             .header_row_column  { width: 2.40in; margin-right: 1px;  margin-left: 1px; }
                 
-            .commodity_table    { table-layout: fixed;      width: 7.25in;  font-size: 96%;     margin: 0px;           padding: 3px;        border-collapse: collapse; }
+            .commodity_table    { table-layout: fixed;      width: 7.25in;  font-size: 92%;     margin: 0px;           padding: 3px;        border-collapse: collapse; }
             .commodity_table th { border: 1px solid black;  height: 40px;   padding: 3px;       text-align: center;  font-weight: bold;                                                 }
             .commodity_table td { border: 1px solid black;  padding: 0px;   text-align: center;                                                                         }
 
@@ -63,14 +63,22 @@
             
             <!-- START: FORM HEADER -->
             <div class="formHeader">
-                <img style="float:left" src="../images/logo_liberia.png">
-                <span class="h2">CHSS Commodity Distribution Form</span>
-                <span class="blackBox" style="float: right; font-size: 120%; ">v.5.3</span>
+                <img style="float:left; height: 5%; width: 5%;" src="../images/logo_liberia.png" >
+                <span class="h3">CHSS Commodity Distribution Form</span>
+                <span class="blackBox" style="float: right; font-size: 100%; ">v.5.3</span>
                 <span class="h6" style="font-size: 80%; float: left; position: relative; left: -10px; " >The Operations manager and/or restock driver is to fill in this form every time commodities or gasoline are given to the CHSS. Count each commodity with the CHSS present and then stock them up to the correct top off level.</span>                
             </div>
-           
-            <hr>
             
+            <div>                
+                <table>              
+                    <tr>
+                        <td class="header_row_column" style="text-align: left; padding-left: 0px; padding-right: 3px; border: 3px solid red; color: red; font-weight: bold; width: 2.6in; " ><span style="font-weight: bold; font-size: 87%; float: right; " >Enter month and year to report restock: </span></td>     
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 3px solid red; color: red; font-weight: bold; width: 2.48in;" ><span style="font-weight: bold; font-size: 87%; ">Month Report:</span><input class="stored" name="month_reported" data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="12" style=" width:1.48in; border:none; text-align: center; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 3px solid red; color: red; font-weight: bold; width: 2.48in;" ><span style="font-weight: bold; font-size: 87%; ">Year Report:</span><input class="stored " name="year_reported"  data-lmd-valid-required data-lmd-valid-intMin="2020" style=" width:1.60in;  border:none; text-align: center; "></td>         
+                    </tr>              
+                </table>
+            </div>
+            <div style="height: 1px; "><div style="clear:both"></div></div> <!-- White line spacers -->
             <div class="thickBox">
                 
                 <table class="header_row">              

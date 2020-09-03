@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <title>CHSS Commodity Distribution Form (v5.4)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            #meBox { position:relative; top:-28px; font-size: 96%; }
+            
+            #CMR { position:relative; top:-14px }
+            
+            /* Set font-size in thick box and household registration table to easily fit 30-plus rows in on form */
+            .thickBox { padding:3px; font-size: 95%; }
+            
+            /* Header Input Row 1*/
+            .header_row         { table-layout: fixed;              width: 7.25in; }
+            .header_row         { border-collapse: collapse;        border: none;   margin: 1px; padding: 1px; }
+            
+            .header_row_column  { width: 2.40in; margin-right: 1px;  margin-left: 1px; }
+                
+            .commodity_table    { table-layout: fixed; width: 7.25in; font-size: 90%; margin: 0px; padding: 3px; border-collapse: collapse; }
+            .commodity_table th { border: 1px solid black; height: 40px; padding: 3px; text-align: center; font-weight: bold; }
+            .commodity_table td { border: 1px solid black; padding: 0px; text-align: center; height: 20px; }
+
+            .column_1     { height: 19px; width:1.75in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_2     { height: 19px; width:1.40in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_3     { height: 19px; width:0.82in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_4     { height: 19px; width:0.82in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_5     { height: 19px; width:0.82in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_6     { height: 19px; width:0.82in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_7     { height: 19px; width:0.82in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+       
+        <!-- START: PAGE 1 -->
+        <div class="page" style="height: 8.38in; ">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader">
+                <img style="float:left; height: 5%; width: 5%;" src="../images/logo_liberia.png" >
+                <span class="h3">CHSS Commodity Distribution Form</span>
+                <span class="blackBox" style="float: right; font-size: 100%; ">v.5.4</span>
+                <span class="h6" style="font-size: 80%; float: left; position: relative; left: -10px; " >The Operations manager and/or restock driver is to fill in this form every time commodities or gasoline are given to the CHSS. Count each commodity with the CHSS present and then stock them up to the correct top off level.</span>                
+            </div>
+            
+            <div>                
+                <table>              
+                    <tr>
+                        <td class="header_row_column" style="text-align: left; padding-left: 0px; padding-right: 3px; border: 3px solid red; color: red; font-weight: bold; width: 2.6in; " ><span style="font-weight: bold; font-size: 87%; float: right; " >Enter month and year to report restock: </span></td>     
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 3px solid red; color: red; font-weight: bold; width: 2.48in;" ><span style="font-weight: bold; font-size: 87%; ">Month Report:</span><input class="stored" name="month_reported" data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="12" style=" width:1.48in; border:none; text-align: center; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 3px solid red; color: red; font-weight: bold; width: 2.48in;" ><span style="font-weight: bold; font-size: 87%; ">Year Report:</span><input class="stored " name="year_reported"  data-lmd-valid-required data-lmd-valid-intMin="2020" style=" width:1.60in;  border:none; text-align: center; "></td>         
+                    </tr>              
+                </table>
+            </div>
+            <div style="height: 1px; "><div style="clear:both"></div></div> <!-- White line spacers -->
+            <div class="thickBox">
+                
+                <table class="header_row">              
+                    <tr>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black; border-bottom: none;                              " >CHSS:<input              class="stored"             name="chss"         data-lmd-valid-required data-lmd-valid-autoC="chss" style=" width:1.94in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >CHSS ID:<input           class="stored"             name="chss_id"      data-lmd-valid-required                             style=" width:1.76in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: none; border-top: 1px solid black; border-right: 1px solid black;  " >Date (yyyy-mm-dd):<input class="stored datepicker"  name="restock_date" data-lmd-valid-required                             style=" width:1.13in; border:none; "></td>         
+                    </tr>              
+                </table>
+                <table class="header_row">              
+                    <tr>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black;                    " >Restock Driver:<input  class="stored" name="restock_driver"    data-lmd-valid-required                                                             style=" width:1.41in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black; border-left: none; " >Facility:<input        class="stored" name="health_facility"   data-lmd-valid-required data-lmd-valid-autoC="facilities"   data-lmd-valid-restrict style=" width:1.90in; border:none; "></td>
+                        <td class="header_row_column" style="text-align: left; padding-left: 3px; border: 1px solid black; border-left: none; " >County:<input          class="stored" name="county"            data-lmd-valid-required data-lmd-valid-autoC="county"       data-lmd-valid-restrict style=" width:1.87in; border:none; "></td>
+                    </tr>              
+                </table>
+                          
+            </div>
+            <!-- END: FORM HEADER -->
+
+            <!-- START: SECTION A -->
+            <div class="thickBox" id="CMR">
+                
+                <!-- START: Commodity table -->
+                <table class='commodity_table'>
+
+                    <!-- Table header -->
+                    <tr>
+                        <th class="column_1" style="border-bottom: none; " >Commodity</th>
+                        <th class="column_2" >Top Off Level</th>
+                        <th class="column_3" >Initial Stock On Hand</th>
+                        <th class="column_4" >Stock damaged/ expiring</th>
+                        <th class="column_5" >Amount Restocked</th>
+                        <th class="column_6" >Ending Balance</th>
+                        <th class="column_7" >Stock Returned</th>
+                        
+                    </tr>
+
+                    <!-- 1. Microlut -->
+                    <tr>
+                        <td><span>Microlut</span></td>
+                        <td>30 packs of 3 strips</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microlut_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microlut_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microlut_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microlut_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microlut_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                    
+                    <!-- 2. Microgynon -->
+                    <tr>
+                        <td><span>Microgynon</span></td>
+                        <td>60 packs of 3 strips</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microgynon_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microgynon_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microgynon_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microgynon_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="microgynon_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                   
+                    <!-- 3. Male Condoms -->
+                    <tr>
+                        <td>Male Condoms</td>
+                        <td>30 boxes of 100</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="male_condom_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="male_condom_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="male_condom_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="male_condom_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="male_condom_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                    
+                    <!-- 4. Female Condoms -->
+                    <tr>
+                        <td>Female Condoms</td>
+                        <td>60 pieces</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="female_condom_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="female_condom_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="female_condom_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="female_condom_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="female_condom_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                 
+                    <!-- 5. Disposable gloves -->
+                    <tr>
+                        <td>Disposable gloves</td>
+                        <td>6 boxes of 100</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                
+                    <!-- 6. ACT 25 -->
+                    <tr>
+                        <td>ACT 25</td>
+                        <td>50 strips of 3 tablets</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_25_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_25_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_25_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_25_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_25_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+
+                    
+                    <!-- 7. ACT 50 -->
+                    <tr>
+                        <td>ACT 50</td>
+                        <td>100 strips of 3 tablets</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_50_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_50_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_50_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_50_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="act_50_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                   
+                    <!-- 8. Artesunate suppository -->
+                    <tr>
+                        <td>Artesunate suppository</td>
+                        <td>5 units</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="artesunate_suppository_5_unit_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="artesunate_suppository_5_unit_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="artesunate_suppository_5_unit_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="artesunate_suppository_5_unit_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="artesunate_suppository_5_unit_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                   
+                    <!-- 9. Amoxicillin 250 tablet -->
+                    <tr>
+                        <td>Amoxicillin 250 tablet</td>
+                        <td>2 bottles of 1000</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_2_bottle_1000_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_2_bottle_1000_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_2_bottle_1000_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_2_bottle_1000_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_2_bottle_1000_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+               
+                    <!-- 10. Amoxicillin 250 tablet -->
+                    <tr>
+                        <td>Amoxicillin 250 tablet</td>
+                        <td>200 strips of 10</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_200_strip_10_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_200_strip_10_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_200_strip_10_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_200_strip_10_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_tablet_200_strip_10_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+             
+                    <!-- 11. Amoxicillin 250 suspension -->
+                    <tr>
+                        <td>Amoxicillin 250 suspension</td>
+                        <td>120 bottles</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_suspension_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_suspension_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_suspension_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_suspension_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="amoxicillin_250_suspension_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                 
+                    <!-- 12. ORS -->
+                    <tr>
+                        <td>ORS</td>
+                        <td>120 sachets</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="ors_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="ors_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="ors_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="ors_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="ors_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                  
+                    <!-- 13. Zinc sulfate bottles -->
+                    <tr>
+                        <td>Zinc sulfate bottles</td>
+                        <td>5 bottles of 100</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_bottle_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_bottle_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_bottle_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_bottle_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_bottle_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                    
+                    <!-- 14. Zinc sulfate strips -->
+                    <tr>
+                        <td>Zinc sulfate strips</td>
+                        <td>120 strips of 10</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_strip_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_strip_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_strip_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_strip_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="zinc_sulfate_strip_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                   
+                    <!-- 15. Paracetamol tablets-->
+                    <tr>
+                        <td>Paracetamol tablets</td>
+                        <td>4 bottles of 1000</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_tablet_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_tablet_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_tablet_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_tablet_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_tablet_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                   
+                    <!-- 16. Paracetamol suspension -->
+                    <tr>
+                        <td>Paracetamol suspension</td>
+                        <td>120 bottles</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_suspension_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_suspension_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_suspension_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_suspension_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="paracetamol_suspension_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                   
+                    <!-- 17. RDT-->
+                    <tr>
+                        <td>RDT</td>
+                        <td>10 boxes of 25</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="RDT_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="RDT_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="RDT_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="RDT_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="RDT_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                  
+                    <!-- 18. MUAC -->
+                    <tr>
+                        <td>MUAC</td>
+                        <td>2 units</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="MUAC_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="MUAC_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="MUAC_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="MUAC_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="MUAC_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                
+                    <!-- 19. Dispensing bags -->
+                    <tr>
+                        <td>Dispensing bags</td>
+                        <td>5 boxes of 100</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="dispensing_bag_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="dispensing_bag_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="dispensing_bag_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="dispensing_bag_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="dispensing_bag_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+
+                    
+                    <!-- 20. Safety boxes-->
+                    <tr>
+                        <td>Safety boxes</td>
+                        <td>4 boxes</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="safety_box_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="safety_box_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="safety_box_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="safety_box_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="safety_box_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+
+                    
+                    <!-- 21. Gasoline -->
+                    <tr>
+                        <td style="border-bottom: none; " >Gasoline</td>
+                        <td style="border-bottom: none; ">12 Gallons</td>
+                        
+                        <td style="border-bottom: none; "><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="gasoline_initial_stock_on_hand"></td>                       
+                        <td style="background-color: lightgrey; border-bottom: none; ">X</td>                                             
+                        <td style="border-bottom: none; "><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="gasoline_amount_restocked"></td>                      
+                        <td style="border-bottom: none; "><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="gasoline_ending_balance"></td>                      
+                        <td style="border-bottom: none; "><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="gasoline_stock_returned"></td>                                           
+                    </tr>
+                    
+                  
+                    <!-- 22. Gloves [COVID stock] -->
+                    <tr>
+                        <td>Gloves [COVID stock]</td>
+                        <td>12 boxes of 100</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_covid_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_covid_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_covid_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_covid_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="disposable_glove_covid_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                  
+                    <!-- 23. Masks [COVID stock] -->
+                    <tr>
+                        <td>Masks [COVID stock]</td>
+                        <td>15 Packs of 50</td>
+                        
+                        <td><input class="stored column_3" style="width: 0.79in; " data-lmd-valid-intMin="0" name="mask_covid_initial_stock_on_hand"    data-lmd-valid-required></td>                       
+                        <td><input class="stored column_4" style="width: 0.79in; " data-lmd-valid-intMin="0" name="mask_covid_stock_damaged_expiring"   data-lmd-valid-required></td>                                             
+                        <td><input class="stored column_5" style="width: 0.79in; " data-lmd-valid-intMin="0" name="mask_covid_amount_restocked"         data-lmd-valid-required></td>                      
+                        <td><input class="stored column_6" style="width: 0.79in; " data-lmd-valid-intMin="0" name="mask_covid_ending_balance"           data-lmd-valid-required></td>                      
+                        <td><input class="stored column_7" style="width: 0.79in; " data-lmd-valid-intMin="0" name="mask_covid_stock_returned"           data-lmd-valid-required></td>                                           
+                    </tr>
+                                                                                    
+                </table>
+                              
+                <!-- END: Commodity Table -->
+                              
+            <!-- Create white space. -->
+            <!-- <div style="height:2px"></div> -->
+            
+                <table class='commodity_table' style="position: relative; top: -0px; ">
+                    
+                    <tr>
+                        <td style="width: 3.99in; text-align: left; padding-left: 3px; ">CHSS Signature:<input class="stored" style="width: 2.92in; border: none; padding-left: 3px; " name="chss_signature" data-lmd-valid-autoC="chss" ></td>                       
+                        <td style="width: 3.26in; text-align: left; padding-left: 3px; ">OIC Signature:<input  class="stored" style="width: 2.32in; border: none; padding-left: 3px; " name="oic_signature"></td>                      
+                    </tr>
+                    
+                    <tr>
+                        <td style="width: 3.99in; text-align: left; padding-left: 3px; ">Name of Person filling out form:<input class="stored" style="width: 2.06in; border: none; padding-left: 3px; " name="person_fill_form_name" ></td>                       
+                        <td style="width: 3.26in; text-align: left; padding-left: 3px; ">Role of Person filling out form:<input class="stored" style="width: 1.42in; border: none; padding-left: 3px; " name="person_fill_form_role" ></td>  
+                    </tr>
+                                   
+                </table>
+            
+                <table class='commodity_table' style="position: relative; top: -2px; ">
+                    
+                    <tr>
+                        <td style="width: 1.85in; text-aligh: left; padding-left: 3px; border-top: none; border-right: none; height: 23px; "><div style="text-align: left; ">Comments (reasons for stock outs, different amounts given):</div></td>
+                    
+                        <td style="width: 2.0in; border-left: none; border-top: none;  text-align: left; padding-left: 3px; height: 23px; "><input class="stored" name="comment" style="width:3.70in; padding: 1px; border: none; " ></td>                       
+                    </tr>
+                                   
+                </table>
+                
+            </div>
+            <!-- END: SECTION A -->
+            
+            <!-- START: M&E Box -->
+                        
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">CCD.05.04</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; ">
+                DE Date:        <input class="stored" name="meta_de_date" style="width: 0.78in; text-align: center; ">
+                QA Initials:    <input class="stored" name="meta_qa_init" style="width: 0.35in; text-align: center; ">
+                QA Date:        <input class="stored" name="meta_qa_date" style="width: 0.78in; text-align: center; ">
+                <input name='meta_form_version' class='stored' type='hidden' value='5.4'>
+            </div>
+            <!-- START: M&E Box -->          
+ 
+        </div>
+        <!-- END: PAGE 1 -->
+        
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+        
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="lastmile_upload">
+        <input type="hidden" class="stored" name="table" value="de_chss_commodity_distribution">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
