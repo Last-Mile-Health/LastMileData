@@ -478,6 +478,16 @@ $(document).ready(function(){
         case '22':
             options = [
                 {
+                    title: "PPE CHA Restock Forms (v4.0.0)",
+                    query: "select * from lastmile_report.mart_view_restock_cha_ppe_form;",
+                    defaultOrder: []
+                }
+            ];
+            break;
+
+        case '23':
+            options = [
+                {
                     title: "",
                     selectName: "",
                     query: "",
