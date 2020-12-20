@@ -32,6 +32,7 @@ query11='select * from lastmile_report.view_base_msr'
 query12='select * from lastmile_report.view_history_person_position_cha_train'
 query13='select * from lastmile_report.view_base_position_person_cha_chss_qao'
 query14='select * from lastmile_report.view_restock_level'
+query15='select * from lastmile_report.view_restock_cha_ppe_form'
 
 # Table queries 
 query100='select * from lastmile_upload.de_case_scenario'
@@ -66,6 +67,7 @@ fileName11=view_base_msr
 fileName12=view_history_person_position_cha_train
 fileName13=master_list_qao_chss_cha_position_person_community
 fileName14=view_restock_level
+fileName15=view_restock_cha_ppe_form
 
 
 # Table file names
@@ -103,6 +105,7 @@ mysql --batch --user=$user --password=$password -e "${query11}" | $replaceTab | 
 mysql --batch --user=$user --password=$password -e "${query12}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName12}_$dateStamp.csv
 mysql --batch --user=$user --password=$password -e "${query13}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName13}_$dateStamp.csv
 mysql --batch --user=$user --password=$password -e "${query14}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName14}_$dateStamp.csv
+mysql --batch --user=$user --password=$password -e "${query15}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName15}_$dateStamp.csv
 
 # Tables go here...
 mysql --batch --user=$user --password=$password -e "${query100}" | $replaceTab | $replaceBeginOfLine | $replaceEndOfLine | $replaceNULL >  ${csvFileDirectory}/${fileName100}_$dateStamp.csv
