@@ -6,8 +6,8 @@
 
 // --skip-lock-tables option to mysqldump helps clear up the problem of mysqld using excessive amounts of memory during the nightly backups.
 
-$user = "root";
-$password = "LastMile14";
+$user = "";
+$password = "";
 $host = "localhost";
 
 $db1    = "lastmile_archive";

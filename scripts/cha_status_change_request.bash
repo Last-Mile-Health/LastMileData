@@ -4,8 +4,8 @@ echo "--------------------------------------------------------------------------
 echo `date '+%B %d, %Y'`
 echo "----------------------------------------------------------------------------------------------------------------"
 
-user=lastmile_admin
-password=LastMile14
+user=
+password=
 
 # email_recipient=oeddins@lastmilehealth.org
 email_recipient=LMD@lastmilehealth.org

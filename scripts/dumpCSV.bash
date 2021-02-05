@@ -1,7 +1,7 @@
 #!/bin/bash
 
-user=lastmile_admin
-password=LastMile14
+user=
+password=
 
 # LMD MERL downloads
 csvFileDirectory=/home/lastmilehealth/public_html/LastMileData/backups/CSVs
